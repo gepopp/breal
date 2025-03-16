@@ -1,0 +1,163 @@
+@import url("https://use.typekit.net/chs7mgb.css");
+@import 'tailwindcss';
+@import '../../vendor/livewire/flux/dist/flux.css';
+@import "../../node_modules/aos/dist/aos.css";
+
+@source "../views";
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
+@source '../../vendor/livewire/flux/stubs/**/*.blade.php';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --color-logo: #002641;
+
+    --color-zinc-50: #fafafa;
+    --color-zinc-100: #f5f5f5;
+    --color-zinc-200: #e5e5e5;
+    --color-zinc-300: #d4d4d4;
+    --color-zinc-400: #a3a3a3;
+    --color-zinc-500: #737373;
+    --color-zinc-600: #525252;
+    --color-zinc-700: #404040;
+    --color-zinc-800: #262626;
+    --color-zinc-900: #171717;
+    --color-zinc-950: #0a0a0a;
+
+    --color-accent: var(--color-logo);
+    --color-accent-content: var(--color-logo);
+    --color-accent-foreground: var(--color-white);
+}
+
+@layer theme {
+    .dark {
+        --color-accent: var(--color-white);
+        --color-accent-content: var(--color-white);
+        --color-accent-foreground: var(--color-neutral-800);
+    }
+}
+
+@layer base {
+
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+}
+
+[data-flux-field] {
+    @apply grid gap-2;
+}
+
+[data-flux-label] {
+    @apply !mb-0 !leading-tight;
+}
+
+input:focus[data-flux-control],
+textarea:focus[data-flux-control],
+select:focus[data-flux-control] {
+    @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
+}
+
+/* \[:where(&)\]:size-4 {
+    @apply size-4;
+} */
+
+
+p{
+    @apply !text-lg;
+}
+
+
+.menu {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    user-select: none;
+}
+
+.menu-item {
+    position: relative;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.menu-item-text {
+    pointer-events: none;
+    display: block;
+    line-height: 1;
+    position: relative;
+    font-size: 2rem;
+}
+
+
+.menu-item > div:nth-child(1) span {
+    will-change: transform;
+    transform-style: preserve-3d;
+    transition: 0.5s;
+    transition-delay: calc(0.02s * var(--index));
+    transform-origin: bottom;
+    display: inline-block;
+    @apply dark:text-white;
+}
+
+.menu-item > div:nth-child(2) span {
+    will-change: transform;
+    transform-style: preserve-3d;
+    transition: 0.5s;
+    transition-delay: calc(0.02s * var(--index));
+    transform-origin: bottom;
+    display: inline-block;
+    transform: translate3d(0, 100%, 0) rotate(-90deg);
+    @apply text-logo/75 dark:text-white;
+}
+
+.menu-item:hover > div:nth-child(1) span {
+    transform: translate3d(0, -100%, 0) rotateX(-90deg);
+}
+
+.menu-item:hover > div:nth-child(2) span {
+    transform: translate3d(0, 0%, 0) rotateX(0deg);
+}
+
+
+.button-hover {
+    @apply overflow-hidden bg-transparent outline-1 outline-logo dark:outline-white outline-offset-2 px-14 py-2 m-1 leading-4 tracking-wider
+    text-logo dark:text-white relative cursor-pointer
+    text-base block rounded font-medium transition-all duration-300 ease-in-out transform;
+
+    span {
+        position: absolute;
+        display: block;
+        width: 10px;
+        height: 10px;
+        top: 0;
+        left: 50%;
+        transition: width 0.5s ease-in-out, height 0.5s ease-in-out;
+        transition-delay: 50ms;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        @apply bg-logo dark:bg-white;
+        border-radius: 50%;
+    }
+
+    &:hover {
+        @apply text-white dark:text-logo;
+
+        span {
+            width: 300%;
+            height: 300%;
+        }
+    }
+
+    &:active {
+        @apply bg-logo;
+    }
+}
