@@ -1,5 +1,5 @@
 <div>
-    <button class="button-hover" wire:loading.class="!bg-logo" wire:target="save">
+    <button class="button-hover" wire:loading.class="!bg-logo dark:bg-white" wire:target="save">
         <div>{{ $slot }}</div>
         <span></span>
         <div wire:loading.remove class="absolute inset-0 flex justify-center items-center">{{ $slot }}</div>
