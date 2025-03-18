@@ -88,28 +88,6 @@ p{
 }
 
 
-.menu {
-    position: absolute;
-    display: flex;
-    width: 100%;
-    justify-content: space-around;
-    user-select: none;
-}
-
-.menu-item {
-    position: relative;
-    text-transform: uppercase;
-    cursor: pointer;
-}
-
-.menu-item-text {
-    pointer-events: none;
-    display: block;
-    line-height: 1;
-    position: relative;
-    font-size: 2rem;
-}
-
 
 .menu-item > div:nth-child(1) span {
     will-change: transform;
@@ -142,9 +120,12 @@ p{
 
 
 .button-hover {
-    @apply overflow-hidden bg-transparent outline-1 outline-logo dark:outline-white outline-offset-2 px-14 py-2 m-1 leading-4 tracking-wider
+    @apply overflow-hidden bg-transparent outline-1 outline-logo dark:outline-white outline-offset-2
+    px-8 lg:px-14 py-2 m-1
+    leading-4 tracking-wider
     text-logo dark:text-white relative cursor-pointer
-    text-base block rounded font-medium transition-all duration-300 ease-in-out transform;
+    text-base block rounded font-medium transition-all duration-300
+    ease-in-out transform;
 
     span {
         position: absolute;
