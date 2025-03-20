@@ -7,9 +7,9 @@
     $classes = 'mt-2 text-xl font-bold text-logo dark:text-white';
 @endphp
 
-<div class="tagged-heading mb-12">
+<div class="tagged-heading mb-8">
     <div class="tagline flex items-center" data-aos="fade">
-        {{$tag}}
+        <span class="-mb-1.5">{{$tag}}</span>
     </div>
     <?php switch ((int)$level): case(1): ?>
     <h1 data-aos="fade" data-aos-delay="500" {{ $attributes->class($classes) }}>{{ $slot }}</h1>

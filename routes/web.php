@@ -7,7 +7,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Volt::route('impressum', 'imprint')->name('impressum');
+Route::get('impressum', \App\Livewire\Sites\Imprint::class)->name('impressum');
 Volt::route('datenschutz', 'policy')->name('datenschutz');
 
 
@@ -29,3 +29,8 @@ Route::get('mail-test', function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+Route::fallback(function () {
+    return view('404');
+});

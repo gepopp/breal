@@ -1,4 +1,4 @@
-@import url("https://use.typekit.net/chs7mgb.css");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import 'tailwindcss';
 @import '../../vendor/livewire/flux/dist/flux.css';
 @import "../../node_modules/aos/dist/aos.css";
@@ -159,16 +159,16 @@ p{
 
 
 section{
-    @apply pt-24 py-4 lg:max-w-4xl xl:max-w-6xl mx-auto;
+    @apply py-24 py-4 lg:max-w-4xl xl:max-w-6xl mx-auto;
 }
 
 .tagline:before{
     content: 'be';
-    @apply text-4xl md:text-6xl xl:text-7xl font-extrabold text-white dark:bg-logo rounded px-2 pt-2 xl:pt-3 mr-2 tracking-wide -mt-[9px] bg-logo dark:bg-white;
+    @apply text-4xl md:text-6xl xl:text-7xl font-extrabold text-white dark:bg-white leading-[36px] pt-px md:leading-[52px] xl:leading-[62px] xl:pt-[2px] align-baseline rounded px-2 -mb-2 tracking-wide -mt-[9px] bg-logo;
 }
 
 .tagline{
-    @apply text-4xl md:text-6xl xl:text-7xl font-extrabold text-logo lowercase rounded tracking-wide;
+    @apply text-4xl md:text-6xl xl:text-7xl font-extrabold leading-[36px] md:leading-[52px] xl:leading-[62px] align-baseline rounded tracking-wide -mt-[9px] text-logo dark:text-white lowercase;
 }
 
 .prose{
