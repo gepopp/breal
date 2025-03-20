@@ -53,10 +53,12 @@ state();
         <div class="lg:max-w-4xl xl:max-w-6xl w-full flex flex-col md:flex-row justify-between text-sm">
             <p class="!text-sm">&copy; {{ now()->format('Y') }} Bontus Eybel</p>
             <div class="flex justify-between md:space-x-6 lg:space-x-12 order-first md:order-last mb-4">
-                <a href="#">Datenschutz</a>
+                <a href="{{ route('datenschutz') }}" wire:navigate @class([ 'font-bold' => request()->is('datenschutz') ])>Datenschutz</a>
                 <a href="#">Barrierefreiheit</a>
                 <a href="#">AGB</a>
-                <a href="{{ route('impressum') }}" wire:navigate>Impressum</a>
+                <a href="{{ route('impressum') }}"
+                   @class([ 'font-bold' => request()->is('impressum') ])
+                   wire:navigate>Impressum</a>
             </div>
         </div>
     </div>

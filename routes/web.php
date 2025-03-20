@@ -8,6 +8,7 @@ Route::get('/', function () {
 })->name('home');
 
 Volt::route('impressum', 'imprint')->name('impressum');
+Volt::route('datenschutz', 'policy')->name('datenschutz');
 
 
 Route::view('dashboard', 'dashboard')

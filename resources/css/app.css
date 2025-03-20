@@ -179,8 +179,28 @@ section{
         @apply leading-tight text-3xl font-bold text-logo dark:text-white mt-4 mb-2;
     }
 
+    h3{
+        @apply leading-tight text-2xl font-bold text-logo dark:text-white mt-4 mb-2;
+    }
+
+    h4,h5,h6 {
+        @apply leading-tight text-xl font-bold text-logo dark:text-white mt-4 mb-2;
+    }
+
+    ul{
+        @apply list-disc list-outside text-lg font-light my-4;
+
+        li{
+            @apply ml-6 mb-2;
+        }
+    }
+
     a{
         @apply text-logo-300;
+    }
+
+    p{
+        @apply mb-2;
     }
 
     strong{
