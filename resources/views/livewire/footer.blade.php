@@ -56,6 +56,7 @@ state();
                 <a href="#">Datenschutz</a>
                 <a href="#">Barrierefreiheit</a>
                 <a href="#">AGB</a>
+                <a href="#">Impressum</a>
             </div>
         </div>
     </div>
