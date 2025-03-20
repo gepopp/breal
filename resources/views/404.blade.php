@@ -17,7 +17,7 @@
             </div>
             <div class="relative order-first lg:order-last">
 
-                <video  class="h-full min-w-full w-auto object-cover" controls="false" muted autoplay loop>
+                <video  class="h-full min-w-full w-auto object-cover" muted autoplay loop>
                     <source src="{{ asset('404-man.webm') }}" type="video/webm" />
                 </video>
 {{--                <img src="{{ asset('404-bg.jpg') }}" class="h-full min-w-full w-auto object-cover"/>--}}

@@ -207,3 +207,7 @@ section{
         @apply font-bold;
     }
 }
+
+video::-webkit-media-controls {
+    display: none;
+}
