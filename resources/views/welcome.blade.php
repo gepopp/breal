@@ -11,6 +11,8 @@
     @fluxAppearance
 </head>
 <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] min-h-screen">
+
+
 <livewire:navbar/>
 
 
@@ -138,10 +140,8 @@
 
     </main>
 </div>
+<livewire:footer/>
 
-@if (Route::has('login'))
-    <div class="h-14.5 hidden lg:block"></div>
-@endif
 
 @fluxScripts
 

@@ -84,7 +84,7 @@ select:focus[data-flux-control] {
 
 
 p{
-    @apply !text-lg;
+    @apply !text-lg font-light;
 }
 
 
@@ -109,6 +109,7 @@ p{
     transform: translate3d(0, 100%, 0) rotate(-90deg);
     @apply text-logo/75 dark:text-white;
 }
+
 
 .menu-item:hover > div:nth-child(1) span {
     transform: translate3d(0, -100%, 0) rotateX(-90deg);
