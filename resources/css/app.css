@@ -156,3 +156,34 @@ p{
         @apply bg-logo;
     }
 }
+
+
+section{
+    @apply pt-24 py-4 lg:max-w-4xl xl:max-w-6xl mx-auto;
+}
+
+.tagline:before{
+    content: 'be';
+    @apply text-4xl md:text-6xl xl:text-7xl font-extrabold text-white dark:bg-logo rounded px-2 pt-2 xl:pt-3 mr-2 tracking-wide -mt-[9px] bg-logo dark:bg-white;
+}
+
+.tagline{
+    @apply text-4xl md:text-6xl xl:text-7xl font-extrabold text-logo lowercase rounded tracking-wide;
+}
+
+.prose{
+
+    @apply text-logo dark:text-white;
+
+    h2{
+        @apply leading-tight text-3xl font-bold text-logo dark:text-white mt-4 mb-2;
+    }
+
+    a{
+        @apply text-logo-300;
+    }
+
+    strong{
+        @apply font-bold;
+    }
+}

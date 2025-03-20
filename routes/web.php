@@ -7,6 +7,9 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+Volt::route('impressum', 'imprint')->name('impressum');
+
+
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');

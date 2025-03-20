@@ -4,9 +4,10 @@ use function Livewire\Volt\{mount}
 
 ?>
 <div>
-    <div x-data="logoPlayer" class="relative">
+    <div x-data="logoPlayer" class="relative min-h-[132px]">
         <header class="p-4 flex justify-between bg-white dark:bg-logo-950 dark:text-white">
             <div>
+
                 <div x-cloak x-show="!$flux.dark" id="navbar-canvas" class="h-12 -ml-2 sm:ml-0"></div>
                 <div x-cloak x-show="$flux.dark" id="navbar-canvas-dark" class="h-12 -ml-2 sm:ml-0"></div>
             </div>

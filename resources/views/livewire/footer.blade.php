@@ -6,7 +6,7 @@ state();
 
 ?>
 
-<footer class="bg-logo-400 pt-24 flex flex-col items-center justify-center text-white px-4">
+<footer class="bg-logo-400 pt-24 mt-24 flex flex-col items-center justify-center text-white px-4">
     <div class="lg:max-w-4xl xl:max-w-6xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 w-full">
         <div>
             <a href="{{ route('home') }}">
@@ -56,7 +56,7 @@ state();
                 <a href="#">Datenschutz</a>
                 <a href="#">Barrierefreiheit</a>
                 <a href="#">AGB</a>
-                <a href="#">Impressum</a>
+                <a href="{{ route('impressum') }}" wire:navigate>Impressum</a>
             </div>
         </div>
     </div>
