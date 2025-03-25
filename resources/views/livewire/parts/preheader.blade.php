@@ -1,4 +1,8 @@
-<div class="bg-logo py-2 px-4">
+<div @class([ "py-2 px-4",
+"bg-logo" => \Illuminate\Support\Facades\Route::is('hausverwaltung.*'),
+ "bg-technik-500" => \Illuminate\Support\Facades\Route::is('technik.*'),
+ "bg-makler-500" => \Illuminate\Support\Facades\Route::is('immobilien.*'),
+ ])>
     <div class="lg:max-w-4xl xl:max-w-6xl mx-auto flex justify-between items-center text-white">
         <div class="flex items-center space-x-2">
             <svg class="size-6" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
