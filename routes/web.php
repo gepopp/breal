@@ -3,9 +3,22 @@
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::group(['as' => 'hausverwaltung.'], function (){
+    Route::get('/', \App\Livewire\Landing\FacilityManagment::class )->name('home');
+
+});
+
+
+Route::group(['prefix' => 'immobilien', 'as' => 'immobilien.'], function (){
+    Route::get('/immobilien', \App\Livewire\Landing\RealEstate::class )->name('home');
+
+});
+
+Route::group(['prefix' => 'technik', 'as' => 'technik.'], function (){
+    Route::get('/technik', \App\Livewire\Landing\Technik::class )->name('home');
+
+});
+
 
 Route::get('impressum', \App\Livewire\Sites\Imprint::class)->name('impressum');
 Volt::route('datenschutz', 'policy')->name('datenschutz');

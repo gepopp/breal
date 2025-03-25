@@ -13,8 +13,7 @@
 <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] min-h-screen">
 
 
-<livewire:navbar/>
-
+<livewire:parts.navbar/>
 
 <div class="flex items-center justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
     <main class="flex flex-col w-full lg:max-w-4xl space-y-48">
