@@ -5,18 +5,25 @@ use Livewire\Volt\Volt;
 
 Route::group(['as' => 'hausverwaltung.'], function (){
     Route::get('/', \App\Livewire\Landing\FacilityManagment::class )->name('home');
-
+    Route::get('/leistungen', \App\Livewire\Hausverwaltung\Leistungen::class)->name('leistungen');
+    Route::get('/service', \App\Livewire\Hausverwaltung\Service::class)->name('service');
+    Route::get('/karriere', \App\Livewire\Hausverwaltung\Karriere::class)->name('karriere');
+    Route::get('/kontakt', \App\Livewire\Hausverwaltung\Kontakt::class)->name('kontakt');
 });
 
 
 Route::group(['prefix' => 'immobilien', 'as' => 'immobilien.'], function (){
-    Route::get('/immobilien', \App\Livewire\Landing\RealEstate::class )->name('home');
-
+    Route::get('/start', \App\Livewire\Landing\RealEstate::class )->name('home');
+    Route::get('/immobiliensuche', \App\Livewire\Makler\Immobiliensuche::class )->name('immobiliensuche');
+    Route::get('/ueber-uns', \App\Livewire\Makler\Ueber::class)->name('ueber-uns');
+    Route::get('/karriere', \App\Livewire\Makler\Karriere::class)->name('karriere');
+    Route::get('/kontakt', \App\Livewire\Makler\Kontakt::class)->name('kontakt');
 });
 
 Route::group(['prefix' => 'technik', 'as' => 'technik.'], function (){
-    Route::get('/technik', \App\Livewire\Landing\Technik::class )->name('home');
-
+    Route::get('/start', \App\Livewire\Landing\Technik::class )->name('home');
+    Route::get('/karriere', \App\Livewire\Technik\Karriere::class)->name('karriere');
+    Route::get('/kontakt', \App\Livewire\Technik\Kontakt::class)->name('kontakt');
 });
 
 

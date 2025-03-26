@@ -4,14 +4,16 @@
     @include('partials.head')
 </head>
 <body class="bg-white dark:bg-logo-950 dark:text-white text-logo-950 min-h-screen">
-<livewire:parts.navbar/>
 
 <div class="overflow-hidden">
+    <livewire:parts.navbar/>
     <main data-aos="fade-up" data-aos-delay="1000">
         {{ $slot }}
     </main>
+    <livewire:footer/>
 </div>
-<livewire:footer/>
+
 @fluxScripts
+@include('components.dev-switsher')
 </body>
 </html>

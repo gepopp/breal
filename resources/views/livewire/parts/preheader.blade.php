@@ -1,9 +1,9 @@
-<div @class([ "py-2 px-4",
-"bg-logo" => \Illuminate\Support\Facades\Route::is('hausverwaltung.*'),
- "bg-technik-500" => \Illuminate\Support\Facades\Route::is('technik.*'),
- "bg-makler-500" => \Illuminate\Support\Facades\Route::is('immobilien.*'),
+<div @class([ "py-2 px-4 hidden md:block",
+ "bg-logo-900 dark:bg-logo-950" => \Illuminate\Support\Facades\Route::is('hausverwaltung.*'),
+ "bg-technik-900 dark:bg-technik-950" => \Illuminate\Support\Facades\Route::is('technik.*'),
+ "bg-makler-900 dark:bg-makler-950" => \Illuminate\Support\Facades\Route::is('immobilien.*'),
  ])>
-    <div class="lg:max-w-4xl xl:max-w-6xl mx-auto flex justify-between items-center text-white">
+    <div class="flex justify-between items-center text-white">
         <div class="flex items-center space-x-2">
             <svg class="size-6" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
                  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

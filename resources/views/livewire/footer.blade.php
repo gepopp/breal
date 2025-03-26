@@ -22,15 +22,15 @@ state();
 
         <div class="flex md:justify-center">
             <nav class="font-semibold text-white flex flex-col space-y-6">
-                <a href="#" class="uppercase cursor-pointer font-extrabold overflow-hidden text-2xl hover:tracking-wider transition-all duration-300">
+                <a href="{{ route('hausverwaltung.home') }}" wire:navigate class="uppercase cursor-pointer font-extrabold overflow-hidden text-2xl hover:tracking-wider transition-all duration-300">
                     verwaltung
                 </a>
 
-                <a href="#" class="uppercase cursor-pointer font-extrabold overflow-hidden text-2xl hover:tracking-wider transition-all duration-300">
+                <a href="{{ route('immobilien.home') }}" wire:navigate class="uppercase cursor-pointer font-extrabold overflow-hidden text-2xl hover:tracking-wider transition-all duration-300">
                     immobilien
                 </a>
 
-                <a href="#" class="uppercase cursor-pointer font-extrabold overflow-hidden text-2xl hover:tracking-wider transition-all duration-300">
+                <a href="{{ route('technik.home') }}" wire:navigate class="uppercase cursor-pointer font-extrabold overflow-hidden text-2xl hover:tracking-wider transition-all duration-300">
                     technik
                 </a>
 
@@ -52,12 +52,12 @@ state();
     <div class="border-t border-white py-4 w-full mt-16 flex justify-center">
         <div class="lg:max-w-4xl xl:max-w-6xl w-full flex flex-col md:flex-row justify-between text-sm">
             <p class="!text-sm">&copy; {{ now()->format('Y') }} Bontus Eybel</p>
-            <div class="flex justify-between md:space-x-6 lg:space-x-12 order-first md:order-last mb-4">
-                <a href="{{ route('datenschutz') }}" wire:navigate @class([ 'font-bold' => request()->is('datenschutz') ])>Datenschutz</a>
-                <a href="#">Barrierefreiheit</a>
-                <a href="#">AGB</a>
-                <a href="{{ route('impressum') }}"
-                   @class([ 'font-bold' => request()->is('impressum') ])
+            <div class="flex flex-col md:flex-row md:divide-x divide-white justify-between order-first md:order-last mb-4">
+                <a @class(['md:px-4']) href="{{ route('datenschutz') }}" wire:navigate @class([ 'font-bold' => request()->is('datenschutz') ])>Datenschutz</a>
+                <a @class(['md:px-4']) href="#">Barrierefreiheit</a>
+                <a @class(['md:px-4']) href="#">AGB</a>
+                <a @class(['md:px-4']) href="{{ route('impressum') }}"
+                   @class([ 'md:pl-4', 'font-bold' => request()->is('impressum') ])
                    wire:navigate>Impressum</a>
             </div>
         </div>
