@@ -198,11 +198,14 @@
             </div>
 
 
-            <div @class([ "py-2 px-4 flex justify-end",
+            <div @class([ "py-2 px-4 flex justify-between",
              "bg-logo-900 dark:bg-logo-950" => \Illuminate\Support\Facades\Route::is('hausverwaltung.*'),
              "bg-technik-900 dark:bg-technik-950" => \Illuminate\Support\Facades\Route::is('technik.*'),
              "bg-makler-900 dark:bg-makler-950" => \Illuminate\Support\Facades\Route::is('immobilien.*'),
              ])>
+                <div>
+                    <img src="{{ asset('logos/bereal_immobilien_icon_white.svg') }}" class="h-5">
+                </div>
                 <div class="flex items-center space-x-2 text-white">
                     <svg class="size-6" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
                          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
