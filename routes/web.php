@@ -51,6 +51,10 @@ Route::get('mail-test', function () {
    return new \App\Mail\VerificationEmail();
 });
 
+Route::get('mail-test-confirmed', function () {
+    return new \App\Mail\ContactRequestConfirmedMail();
+});
+
 Route::get('admins', function (){
     foreach (['gerhard@poppgerhard.at' => 'Gerhard', 'ronald@ivalu.eu' => 'Ronald', 'katharina@ivalu.eu' => 'Katharina'] as $email => $name) {
         \App\Models\User::updateOrCreate(['email' => $email], [
