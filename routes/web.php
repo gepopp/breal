@@ -48,9 +48,22 @@ Route::get('mail-test', function () {
    return new \App\Mail\VerificationEmail();
 });
 
+Route::get('admins', function (){
+    foreach (['gerhard@poppgerhard.at' => 'Gerhard', 'ronald@ivalu.eu' => 'Ronald', 'katharina@ivalu.eu' => 'Katharina'] as $email => $name) {
+        \App\Models\User::updateOrCreate(['email' => $email], [
+            'name' => $name,
+            'password' => \Illuminate\Support\Facades\Hash::make($name),
+            'admin' => true
+        ]);
+    }
+});
+
+
 require __DIR__.'/auth.php';
 
 
 Route::fallback(function () {
     return view('404');
 });
+
+
