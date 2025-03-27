@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
+Route::get('/welcome', function () { return view('welcome'); });
+
+
 Route::group(['as' => 'hausverwaltung.'], function (){
     Route::get('/', \App\Livewire\Landing\FacilityManagment::class )->name('home');
     Route::get('/leistungen', \App\Livewire\Hausverwaltung\Leistungen::class)->name('leistungen');
@@ -56,6 +59,8 @@ Route::get('admins', function (){
             'admin' => true
         ]);
     }
+
+
 });
 
 
