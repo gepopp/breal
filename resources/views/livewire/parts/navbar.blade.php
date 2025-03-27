@@ -10,48 +10,54 @@
 ])>
             <div class="flex items-center">
                 @if( \Illuminate\Support\Facades\Route::is('hausverwaltung.*') )
-                    <a href="{{ route('hausverwaltung.home') }}" wire:navigate>
+                    <a href="{{ route('hausverwaltung.home') }}">
                         <img src="{{ asset('logos/bereal_immobilien.svg') }}" class="h-6 sm:h-8 md:h-10 dark:hidden"/>
-                        <img src="{{ asset('logos/bereal_immobilien_white.svg') }}" class="h-6 sm:h-8 md:h-10 hidden dark:block"/>
+                        <img src="{{ asset('logos/bereal_immobilien_white.svg') }}"
+                             class="h-6 sm:h-8 md:h-10 hidden dark:block"/>
                     </a>
                 @endif
 
                 @if( \Illuminate\Support\Facades\Route::is('immobilien.*') )
-                    <a href="{{ route('immobilien.home') }}" wire:navigate>
+                    <a href="{{ route('immobilien.home') }}">
                         <img src="{{ asset('logos/bereal_makler.svg') }}" class="h-6 sm:h-8 md:h-10 dark:hidden"/>
-                        <img src="{{ asset('logos/bereal_makler_white.svg') }}" class="h-6 sm:h-8 md:h-10 hidden dark:block"/>
+                        <img src="{{ asset('logos/bereal_makler_white.svg') }}"
+                             class="h-6 sm:h-8 md:h-10 hidden dark:block"/>
                     </a>
                 @endif
 
 
                 @if( \Illuminate\Support\Facades\Route::is('technik.*') )
-                    <a href="{{ route('technik.home') }}" wire:navigate>
+                    <a href="{{ route('technik.home') }}">
                         <img src="{{ asset('logos/bereal_technik.svg') }}" class="h-6 sm:h-8 md:h-10 dark:hidden"/>
-                        <img src="{{ asset('logos/bereal_technik_white.svg') }}" class="h-6 sm:h-8 md:h-10 hidden dark:block"/>
+                        <img src="{{ asset('logos/bereal_technik_white.svg') }}"
+                             class="h-6 sm:h-8 md:h-10 hidden dark:block"/>
                     </a>
                 @endif
             </div>
 
 
-
             <nav class="hidden lg:flex mb-px space-x-12 justify-between items-center overflow-hidden font-bold text-logo-500 dark:text-white">
                 @if( \Illuminate\Support\Facades\Route::is('hausverwaltung.*') )
-                    <a href="{{ route('hausverwaltung.leistungen') }}" class="menu-item relative uppercase cursor-pointer text-logo-600">
+                    <a href="{{ route('hausverwaltung.leistungen') }}" wire:navigate
+                       class="menu-item relative uppercase cursor-pointer text-logo-600">
                         <div @class(["font-black" => \Illuminate\Support\Facades\Route::is('hausverwaltung.leistungen')])>
                             <span class="menu-item-text pointer-events-none block relative">Leistungen</span>
                         </div>
                     </a>
-                    <a href="{{ route('hausverwaltung.service') }}" class="menu-item relative uppercase cursor-pointer text-logo-600 ">
+                    <a href="{{ route('hausverwaltung.service') }}" wire:navigate
+                       class="menu-item relative uppercase cursor-pointer text-logo-600 ">
                         <div @class(["font-black" => \Illuminate\Support\Facades\Route::is('hausverwaltung.service')])>
                             <span class="menu-item-text pointer-events-none block relative">Service</span>
                         </div>
                     </a>
-                    <a href="{{ route('hausverwaltung.karriere') }}" class="menu-item relative uppercase cursor-pointer text-logo-600 ">
+                    <a href="{{ route('hausverwaltung.karriere') }}" wire:navigate
+                       class="menu-item relative uppercase cursor-pointer text-logo-600 ">
                         <div @class(["font-black" => \Illuminate\Support\Facades\Route::is('hausverwaltung.karriere')])>
                             <span class="menu-item-text pointer-events-none block relative">Karriere</span>
                         </div>
                     </a>
-                    <a href="{{ route('hausverwaltung.kontakt') }}" class="menu-item relative uppercase cursor-pointer text-logo-600 ">
+                    <a href="{{ route('hausverwaltung.kontakt') }}" wire:navigate
+                       class="menu-item relative uppercase cursor-pointer text-logo-600 ">
                         <div @class(["font-black" => \Illuminate\Support\Facades\Route::is('hausverwaltung.kontakt')])>
                             <span class="menu-item-text pointer-events-none block relative">Kontakt</span>
                         </div>
@@ -59,43 +65,48 @@
                 @endif
 
                 @if( \Illuminate\Support\Facades\Route::is('immobilien.*') )
-                        <a href="{{ route('immobilien.immobiliensuche') }}" class="menu-item relative uppercase cursor-pointer text-logo-600">
-                            <div @class(["font-black" => \Illuminate\Support\Facades\Route::is('immobilien.immobiliensuche')])>
-                                <span class="menu-item-text pointer-events-none block relative">Immobiliensuche</span>
-                            </div>
-                        </a>
-                        <a href="{{ route('immobilien.ueber-uns') }}" class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                            <div @class(["font-black" => \Illuminate\Support\Facades\Route::is('immobilien.ueber-uns')])>
-                                <span class="menu-item-text pointer-events-none block relative">Über uns</span>
-                            </div>
-                        </a>
-                        <a href="{{ route('immobilien.karriere') }}" class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                            <div @class(["font-black" => \Illuminate\Support\Facades\Route::is('immobilien.karriere')])>
-                                <span class="menu-item-text pointer-events-none block relative">Karriere</span>
-                            </div>
-                        </a>
-                        <a href="{{ route('immobilien.kontakt') }}" class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                            <div @class(["font-black" => \Illuminate\Support\Facades\Route::is('immobilien.kontakt')])>
-                                <span class="menu-item-text pointer-events-none block relative">Kontakt</span>
-                            </div>
-                        </a>
+                    <a href="{{ route('immobilien.immobiliensuche') }}" wire:navigate
+                       class="menu-item relative uppercase cursor-pointer text-logo-600">
+                        <div @class(["font-black" => \Illuminate\Support\Facades\Route::is('immobilien.immobiliensuche')])>
+                            <span class="menu-item-text pointer-events-none block relative">Immobiliensuche</span>
+                        </div>
+                    </a>
+                    <a href="{{ route('immobilien.ueber-uns') }}" wire:navigate
+                       class="menu-item relative uppercase cursor-pointer text-logo-600 ">
+                        <div @class(["font-black" => \Illuminate\Support\Facades\Route::is('immobilien.ueber-uns')])>
+                            <span class="menu-item-text pointer-events-none block relative">Über uns</span>
+                        </div>
+                    </a>
+                    <a href="{{ route('immobilien.karriere') }}" wire:navigate
+                       class="menu-item relative uppercase cursor-pointer text-logo-600 ">
+                        <div @class(["font-black" => \Illuminate\Support\Facades\Route::is('immobilien.karriere')])>
+                            <span class="menu-item-text pointer-events-none block relative">Karriere</span>
+                        </div>
+                    </a>
+                    <a href="{{ route('immobilien.kontakt') }}" wire:navigate
+                       class="menu-item relative uppercase cursor-pointer text-logo-600 ">
+                        <div @class(["font-black" => \Illuminate\Support\Facades\Route::is('immobilien.kontakt')])>
+                            <span class="menu-item-text pointer-events-none block relative">Kontakt</span>
+                        </div>
+                    </a>
                 @endif
 
 
                 @if( \Illuminate\Support\Facades\Route::is('technik.*') )
-                        <a href="{{ route('technik.karriere') }}" class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                            <div @class(["font-black" => \Illuminate\Support\Facades\Route::is('technik.karriere')])>
-                                <span class="menu-item-text pointer-events-none block relative">Karriere</span>
-                            </div>
-                        </a>
-                        <a href="{{ route('technik.kontakt') }}" class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                            <div @class(["font-black" => \Illuminate\Support\Facades\Route::is('technik.kontakt')])>
-                                <span class="menu-item-text pointer-events-none block relative">Kontakt</span>
-                            </div>
-                        </a>
+                    <a href="{{ route('technik.karriere') }}" wire:navigate
+                       class="menu-item relative uppercase cursor-pointer text-logo-600 ">
+                        <div @class(["font-black" => \Illuminate\Support\Facades\Route::is('technik.karriere')])>
+                            <span class="menu-item-text pointer-events-none block relative">Karriere</span>
+                        </div>
+                    </a>
+                    <a href="{{ route('technik.kontakt') }}" wire:navigate
+                       class="menu-item relative uppercase cursor-pointer text-logo-600 ">
+                        <div @class(["font-black" => \Illuminate\Support\Facades\Route::is('technik.kontakt')])>
+                            <span class="menu-item-text pointer-events-none block relative">Kontakt</span>
+                        </div>
+                    </a>
                 @endif
             </nav>
-
 
 
             <div class="lg:hidden">
@@ -185,6 +196,22 @@
                     </a>
                 @endif
             </div>
+
+
+            <div @class([ "py-2 px-4 flex justify-end",
+             "bg-logo-900 dark:bg-logo-950" => \Illuminate\Support\Facades\Route::is('hausverwaltung.*'),
+             "bg-technik-900 dark:bg-technik-950" => \Illuminate\Support\Facades\Route::is('technik.*'),
+             "bg-makler-900 dark:bg-makler-950" => \Illuminate\Support\Facades\Route::is('immobilien.*'),
+             ])>
+                <div class="flex items-center space-x-2 text-white">
+                    <svg class="size-6" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
+                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"></path>
+                    </svg>
+                    <a href="https://realonline.bontus-eybel.at" class="font-bold uppercase" target="_blank">Kundenlogin</a>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
@@ -194,6 +221,22 @@
         return {
             open: false
         }
+    })
+
+
+    const menuItems = [...document.querySelectorAll(".menu-item")];
+
+    menuItems.forEach(item => {
+        let word = item.children[0].children[0].innerText.split('');
+        item.children[0].innerHTML = '';
+        word.forEach((letter, idx) => {
+            item.children[0].innerHTML += `<span style="--index: ${idx};">${letter}</span>`;
+        })
+        let cloneDiv = item.children[0].cloneNode(true);
+        cloneDiv.style.position = "absolute";
+        cloneDiv.style.top = "0px";
+        cloneDiv.style.left = "0px";
+        item.appendChild(cloneDiv);
     })
 </script>
 @endscript

@@ -25,23 +25,6 @@ import lottieWeb from "lottie-web";
 import elements from "aos/src/js/helpers/elements.js";
 window.lottie = lottieWeb;
 
-
-const menuItems = [...document.querySelectorAll(".menu-item")];
-
-menuItems.forEach(item => {
-    let word = item.children[0].children[0].innerText.split('');
-    item.children[0].innerHTML = '';
-    word.forEach((letter, idx) => {
-        item.children[0].innerHTML += `<span style="--index: ${idx};">${letter}</span>`;
-    })
-    let cloneDiv = item.children[0].cloneNode(true);
-    cloneDiv.style.position = "absolute";
-    cloneDiv.style.top = "0px";
-    cloneDiv.style.left = "0px";
-    item.appendChild(cloneDiv);
-})
-
-
 document.addEventListener('DOMContentLoaded', function() {
     const buttons = document.querySelectorAll('.button-hover');
 

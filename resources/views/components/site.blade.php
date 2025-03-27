@@ -7,7 +7,7 @@
 
 <div class="overflow-hidden">
     <livewire:parts.navbar/>
-    <main data-aos="fade-up" data-aos-delay="1000">
+    <main>
         {{ $slot }}
     </main>
     <livewire:footer/>
