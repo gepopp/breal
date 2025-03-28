@@ -1,3 +1,6 @@
+@php
+    use Illuminate\Support\Facades\Route;
+@endphp
 @props([
     'level' => null,
     'tag' => 'real'
@@ -10,9 +13,9 @@
 <div class="tagged-heading mb-8">
     <div @class([
         "tagline flex items-center",
-        "text-logo-500" => \Illuminate\Support\Facades\Route::is('hausverwaltung.*'),
-        "text-technik-500" => \Illuminate\Support\Facades\Route::is('technik.*'),
-        "text-makler-500" => \Illuminate\Support\Facades\Route::is('immobilien.*'),
+        "text-logo-500" => !Route::is('technik.*', 'immobilien.*'),
+        "text-technik-500" => Route::is('technik.*'),
+        "text-makler-500" => Route::is('immobilien.*'),
         ])
          data-aos="fade">
         <span class="-mb-1.5">{{$tag}}</span>

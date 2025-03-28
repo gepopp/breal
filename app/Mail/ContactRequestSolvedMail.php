@@ -4,34 +4,34 @@ namespace App\Mail;
 
 use App\Models\ContactRequest;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\URL;
 
-class VerificationEmail extends Mailable
+class ContactRequestSolvedMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public string $verificationLink = '';
+
+    public string $link = '';
 
     /**
      * Create a new message instance.
      */
-    public function __construct(?ContactRequest $contactRequest = null)
+    public function __construct( public ?ContactRequest $contactRequest = null)
     {
         if (!is_null($contactRequest)) {
-            $this->verificationLink = URL::temporarySignedRoute(
-                'confirm',
-                now()->addMinutes(60),
+            $this->link = URL::signedRoute(
+                'solve',
                 [
                     'formRequest' => $contactRequest,
                     'token'   => $contactRequest->token,
                 ]
             );
         }
-
     }
 
     /**
@@ -40,7 +40,7 @@ class VerificationEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Bestätigen Sie Ihre E-Mail-Adresse',
+            subject: 'Neue Kontaktanfrage wurde bestätigt',
         );
     }
 
@@ -50,7 +50,7 @@ class VerificationEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'email.email-verification',
+            view: 'email.contact-request-solved',
         );
     }
 

@@ -29,7 +29,7 @@
             </div>
             <div class="bg-logo text-white p-4 flex flex-col justify-center items-center">
                 <div class="max-w-xs text-center">
-                    <h5 class="text-2xl font-bold">vielen dank</h5>
+                    <h5 class="text-2xl font-bold">Vielen Dank!</h5>
                     <p class="!text-sm font-thin">
                         Bitte prüfen Sie ihren Posteingang,
                         wir haben Ihnen ein E-Mail zum Bestätigen Ihrer Anmeldung gesendet.

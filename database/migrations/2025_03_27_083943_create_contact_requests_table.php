@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('contact_requests', function (Blueprint $table) {
             $table->id();
+            $table->string('token')->nullable();
             $table->string('firstname');
             $table->string('lastname');
             $table->string('email');
             $table->string('phone');
-            $table->string('message');
+            $table->text('message');
             $table->string('company')->nullable();
-            $table->boolean('solved')->default(false);
-            $table->dateTime('confirmed_at')->nullable();
+            $table->dateTime('solved_at')->nullable();
+            $table->dateTime('verified_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -3,6 +3,7 @@
 namespace App\Enums;
 
 use Filament\Support\Contracts\HasLabel;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
 enum CompaniesEnum: string implements HasLabel
@@ -16,21 +17,21 @@ enum CompaniesEnum: string implements HasLabel
     }
 
 
-    public function getByRoute()
+    public static function getByRoute()
     {
-        if(Route::is('hausverwaltung.*'))
+        if(Request::routeIs('hausverwaltung.*'))
         {
-           return self::Hausverwaltung;
+           return self::Hausverwaltung->name;
         }
 
-        if(Route::is('immobilien.*'))
+        if(Request::routeIs('immobilien.*'))
         {
-            return self::Makler;
+            return self::Makler->name;
         }
 
-        if(Route::is('technik.*'))
+        if(Request::routeIs('technik.*'))
         {
-            return self::Technik;
+            return self::Technik->name;
         }
 
         return null;

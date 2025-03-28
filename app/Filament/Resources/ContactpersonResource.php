@@ -31,7 +31,7 @@ class ContactpersonResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('department_id')
-                    ->relationship('department', 'search_label', fn (Builder $query) => $query->withoutGlobalScopes()->whereNotNull('department_id'))
+                    ->relationship('department', 'search_label', fn (Builder $query) => $query->withoutGlobalScopes())
                     ->searchable()
                     ->required(),
                 Forms\Components\TextInput::make('name')

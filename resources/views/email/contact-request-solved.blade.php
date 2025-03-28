@@ -18,7 +18,7 @@
     <meta name="format-detection" content="address=no"> <!-- disable auto address linking in iOS -->
     <meta name="format-detection" content="email=no"> <!-- disable auto email linking in iOS -->
     <meta name="color-scheme" content="only">
-    <title></title>
+    <title>Neue Kontaktanfrage wurde bestätigt</title>
 
     <link rel="stylesheet" href="https://use.typekit.net/chs7mgb.css">
 
@@ -513,7 +513,7 @@
                 <tr data-element="black-intro-2-headline" data-label="Intro Headline">
                     <td class="type48" data-text-style="Intro Headline" align="center"
                         style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:48px;line-height:64px;font-weight:700;font-style:normal;color:#1b1b18;text-decoration:none;letter-spacing:0px;text-transform: lowercase">
-                        bestätigen sie ihre <br class="hide-mobile"> E-Mail-Adresse
+                        neue Kontaktanfrage<br class="hide-mobile">bestätigt!
                     </td>
                 </tr>
                 <tr data-element="black-intro-2-headline" data-label="Intro Headline">
@@ -524,7 +524,51 @@
                 <tr data-element="black-intro-2-paragraph" data-label="Intro Paragraph">
                     <td data-text-style="Intro Paragraph" align="center"
                         style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:18px;line-height:32px;font-weight:400;font-style:normal;color:#1b1b18;text-decoration:none;letter-spacing:0px;">
-                        Damit Ihre Anmeldung gültig wird, müssen wir Sie bitten, durch Klicken auf den unten stehenden Button die von Ihnen eingegebene E-Mail-Adresse zu bestätigen.
+                        Anfrage von:
+                    </td>
+                </tr>
+                <tr data-element="black-intro-2-paragraph" data-label="Intro Paragraph">
+                    <td height="40" style="font-size:40px;line-height:40px;"
+                        data-height="Spacing under paragraph">&nbsp;
+                    </td>
+                </tr>
+                <tr data-element="black-intro-2-paragraph" data-label="Intro Paragraph">
+                    <td data-text-style="Intro Paragraph" align="center"
+                        style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:18px;line-height:32px;font-weight:400;font-style:normal;color:#1b1b18;text-decoration:none;letter-spacing:0px;">
+                        {{ $contactRequest->firstname }} {{ $contactRequest->lastname }}
+                    </td>
+                </tr>
+                <tr data-element="black-intro-2-paragraph" data-label="Intro Paragraph">
+                    <td height="40" style="font-size:40px;line-height:40px;"
+                        data-height="Spacing under paragraph">&nbsp;
+                    </td>
+                </tr>
+                <tr data-element="black-intro-2-paragraph" data-label="Intro Paragraph">
+                    <td data-text-style="Intro Paragraph" align="center"
+                        style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:18px;line-height:32px;font-weight:400;font-style:normal;color:#1b1b18;text-decoration:none;letter-spacing:0px;">
+                        {{ $contactRequest->email }}
+                    </td>
+                </tr>
+                <tr data-element="black-intro-2-paragraph" data-label="Intro Paragraph">
+                    <td height="40" style="font-size:40px;line-height:40px;"
+                        data-height="Spacing under paragraph">&nbsp;
+                    </td>
+                </tr>
+                <tr data-element="black-intro-2-paragraph" data-label="Intro Paragraph">
+                    <td data-text-style="Intro Paragraph" align="center"
+                        style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:18px;line-height:32px;font-weight:400;font-style:normal;color:#1b1b18;text-decoration:none;letter-spacing:0px;">
+                        {{ $contactRequest->phone }}
+                    </td>
+                </tr>
+                <tr data-element="black-intro-2-paragraph" data-label="Intro Paragraph">
+                    <td height="40" style="font-size:40px;line-height:40px;"
+                        data-height="Spacing under paragraph">&nbsp;
+                    </td>
+                </tr>
+                <tr data-element="black-intro-2-paragraph" data-label="Intro Paragraph">
+                    <td data-text-style="Intro Paragraph" align="center"
+                        style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:18px;line-height:32px;font-weight:400;font-style:normal;color:#1b1b18;text-decoration:none;letter-spacing:0px;">
+                        {!! $contactRequest->message !!}
                     </td>
                 </tr>
                 <tr data-element="black-intro-2-paragraph" data-label="Intro Paragraph">
@@ -547,8 +591,8 @@
                                             <td align="center" height="60" style="height:60px;">
                                     <![endif]-->
                                     <singleline>
-                                        <a href="{{ $verificationLink ?? '#' }}" mc:edit data-button data-text-style="Intro Button"
-                                           style="font-family:'Poppins',Arial,Helvetica,sans-serif;text-transform:lowercase;font-size:18px;line-height:28px;font-weight:700;font-style:normal;color:#ffffff;text-decoration:none;letter-spacing:0px;padding: 16px 38px 16px 38px;display: inline-block;"><span>anmeldung abschließen</span></a>
+                                        <a href="{{ $link ?? '#' }}" mc:edit data-button data-text-style="Intro Button"
+                                           style="font-family:'Poppins',Arial,Helvetica,sans-serif;text-transform:lowercase;font-size:18px;line-height:28px;font-weight:700;font-style:normal;color:#ffffff;text-decoration:none;letter-spacing:0px;padding: 16px 38px 16px 38px;display: inline-block;"><span>als gelöst markieren</span></a>
                                     </singleline>
                                     <!--[if (gte mso 9)|(IE)]>
                                     </td>
@@ -573,7 +617,6 @@
                 <tr>
                     <td height="30" style="font-size:30px;line-height:30px;" data-height="Spacing bottom">&nbsp;</td>
                 </tr>
-                <!-- black-intro-2 -->
             </table>
 
             <table data-outer-table border="0" align="center" cellpadding="0" cellspacing="0" class="outer-table row"

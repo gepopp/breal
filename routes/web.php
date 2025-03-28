@@ -2,12 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
+use Illuminate\Support\Facades\Mail;
 
-Route::get('/welcome', function () { return view('welcome'); });
+Route::get('/welcome', function () {
+    return view('welcome');
+});
 
 
-Route::group(['as' => 'hausverwaltung.'], function (){
-    Route::get('/', \App\Livewire\Landing\FacilityManagment::class )->name('home');
+Route::group(['as' => 'hausverwaltung.'], function () {
+    Route::get('/', \App\Livewire\Landing\FacilityManagment::class)->name('home');
     Route::get('/leistungen', \App\Livewire\Hausverwaltung\Leistungen::class)->name('leistungen');
     Route::get('/service', \App\Livewire\Hausverwaltung\Service::class)->name('service');
     Route::get('/karriere', \App\Livewire\Hausverwaltung\Karriere::class)->name('karriere');
@@ -15,16 +18,16 @@ Route::group(['as' => 'hausverwaltung.'], function (){
 });
 
 
-Route::group(['prefix' => 'immobilien', 'as' => 'immobilien.'], function (){
-    Route::get('/start', \App\Livewire\Landing\RealEstate::class )->name('home');
-    Route::get('/immobiliensuche', \App\Livewire\Makler\Immobiliensuche::class )->name('immobiliensuche');
+Route::group(['prefix' => 'immobilien', 'as' => 'immobilien.'], function () {
+    Route::get('/start', \App\Livewire\Landing\RealEstate::class)->name('home');
+    Route::get('/immobiliensuche', \App\Livewire\Makler\Immobiliensuche::class)->name('immobiliensuche');
     Route::get('/ueber-uns', \App\Livewire\Makler\Ueber::class)->name('ueber-uns');
     Route::get('/karriere', \App\Livewire\Makler\Karriere::class)->name('karriere');
     Route::get('/kontakt', \App\Livewire\Makler\Kontakt::class)->name('kontakt');
 });
 
-Route::group(['prefix' => 'technik', 'as' => 'technik.'], function (){
-    Route::get('/start', \App\Livewire\Landing\Technik::class )->name('home');
+Route::group(['prefix' => 'technik', 'as' => 'technik.'], function () {
+    Route::get('/start', \App\Livewire\Landing\Technik::class)->name('home');
     Route::get('/karriere', \App\Livewire\Technik\Karriere::class)->name('karriere');
     Route::get('/kontakt', \App\Livewire\Technik\Kontakt::class)->name('kontakt');
 });
@@ -32,6 +35,51 @@ Route::group(['prefix' => 'technik', 'as' => 'technik.'], function (){
 
 Route::get('impressum', \App\Livewire\Sites\Imprint::class)->name('impressum');
 Volt::route('datenschutz', 'policy')->name('datenschutz');
+
+Route::view('confirm-test', 'confirmed')->name('confirm-test');
+Route::get('confirm/{formRequest}/{token}', function (\App\Models\ContactRequest $formRequest, $token) {
+    if (!request()->hasValidSignature() || $formRequest->token !== $token) {
+        abort(401);
+    }
+
+    if(is_null($formRequest->verified_at)) {
+        $formRequest->update(['verified_at' => now()]);
+
+        Mail::to($formRequest->email)->send(new \App\Mail\ContactRequestConfirmedMail());
+        Mail::to(\App\Livewire\ContactForm::RECIPIENT)->send(new \App\Mail\ContactRequestSolvedMail($formRequest));
+    }
+
+    return view('confirmed');
+})->name('confirm');
+
+
+
+
+
+
+Route::get('solve-test', function (){
+
+    $request = \App\Models\ContactRequest::inRandomOrder()->first();
+    return view('solved', compact('request'));
+
+})->name('solve-test');
+
+Route::get('solve/{request}/{token}', function (\App\Models\ContactRequest $request, $token) {
+    if (!$request->hasValidSignature() || $request->token !== $token) {
+        abort(401);
+    }
+
+    if(is_null($request->solved_at)) {
+        $request->update(['solved' => now()]);
+    }
+
+    return view('solved', compact('request'));
+
+})->name('solve');
+
+
+
+
 
 
 Route::view('dashboard', 'dashboard')
@@ -48,19 +96,19 @@ Route::middleware(['auth'])->group(function () {
 
 
 Route::get('mail-test', function () {
-   return new \App\Mail\VerificationEmail();
+    return new \App\Mail\VerificationEmail();
 });
 
 Route::get('mail-test-confirmed', function () {
     return new \App\Mail\ContactRequestConfirmedMail();
 });
 
-Route::get('admins', function (){
+Route::get('admins', function () {
     foreach (['gerhard@poppgerhard.at' => 'Gerhard', 'ronald@ivalu.eu' => 'Ronald', 'katharina@ivalu.eu' => 'Katharina'] as $email => $name) {
         \App\Models\User::updateOrCreate(['email' => $email], [
-            'name' => $name,
+            'name'     => $name,
             'password' => \Illuminate\Support\Facades\Hash::make($name),
-            'admin' => true
+            'admin'    => true
         ]);
     }
 
@@ -68,7 +116,7 @@ Route::get('admins', function (){
 });
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 
 Route::fallback(function () {

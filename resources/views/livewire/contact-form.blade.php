@@ -1,8 +1,8 @@
 <section>
 
-    <div class="flex flex-col">
-        <div class="w-full">
-            <h3 data-aos="fade" @class([
+    <div class="flex flex-col sm:flex-row sm:space-x-8">
+        <div class="w-full sm:w-1/3">
+            <h3 data-aos="fade" data-aos-once="true" @class([
         "text-2xl font-bold mb-8",
         "text-logo-950" => \Illuminate\Support\Facades\Route::is('hausverwaltung.*'),
         "text-technik-950" => \Illuminate\Support\Facades\Route::is('technik.*'),
@@ -15,22 +15,55 @@
         "text-technik-900" => \Illuminate\Support\Facades\Route::is('technik.*'),
         "text-makler-900" => \Illuminate\Support\Facades\Route::is('immobilien.*'),
                 ])>
-                <li data-aos="fade" data-aos-delay="600">
-                    <a href="tel:+43 1 535 36 19" class="underline underline-offset-4" onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'tel': '+43 1 535 36 19' });">
+                <li data-aos="fade" data-aos-delay="600" data-aos-once="true">
+                    <a href="tel:+43 1 535 36 19" class="underline underline-offset-4"
+                       onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'tel': '+43 1 535 36 19' });">
                         +43 1 535 36 19
                     </a>
                 </li>
-                <li data-aos="fade" data-aos-delay="900">
-                    <a href="mailto:office@bontus-eybel.at" class="underline underline-offset-4" onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'email': 'office@bontus-eybel.at' });">
+                <li data-aos="fade" data-aos-delay="900" data-aos-once="true">
+                    <a href="mailto:office@bontus-eybel.at" class="underline underline-offset-4"
+                       onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'email': 'office@bontus-eybel.at' });">
                         office@bontus-eybel.at
                     </a>
                 </li>
-                <li data-aos="fade" data-aos-delay="1200">
+                <li data-aos="fade" data-aos-delay="1200" data-aos-once="true">
                     Franz Josefs Kai 65, 1010 Wien
                 </li>
             </ul>
+        </div>
 
+        <div x-data="{ is_sent: @entangle('is_sent').live }" class="overflow-hidden sm:w-2/3">
+{{--                        <p @click="is_sent = !is_sent">toggle</p>--}}
+            <div class="w-[200%] min-h-full grid grid-cols-2 gap-x-4 pl-2 transition-all duration-500 ease-in-out"
+                 :class="is_sent ? '-translate-x-1/2' : 'transalte-x-0'">
+
+
+                <form wire:submit="save"
+                      class="space-y-4 mt-24 sm:mt-0 grid grid-cols-1 md:grid-cols-2 gap-y-4 md:gap-x-4">
+                    <flux:input wire:model="data.firstname" label="Vorname" required badge="Pflichtfeld"/>
+                    <flux:input wire:model="data.lastname" label="Nachname" required badge="Pflichtfeld"/>
+                    <flux:input wire:model="data.email" label="E-Mail-Adresse" type="email" required
+                                badge="Pflichtfeld"/>
+                    <flux:input wire:model="data.phone" label="Telefonnummer" type="tel" required
+                                badge="Pflichtfeld"/>
+                    <div class="md:col-span-2 space-y-4">
+                        <flux:editor wire:model="data.message" label="Nachricht" required badge="Pflichtfeld"/>
+                        <flux:checkbox wire:model="data.terms"
+                                       label="Ich bin mit der Verarbeitung und Speicherung meiner Daten, sowie mit der Kontaktaufnahme via E-Mail oder Telefon im Zuge der Bearbeitung meiner Anfrage einverstanden."/>
+                    </div>
+                    <x-button>absenden</x-button>
+                </form>
+                <div class="bg-logo text-white p-4 flex flex-col justify-center items-center">
+                    <div class="max-w-xs text-center">
+                        <h5 class="text-2xl font-bold">Vielen Dank!</h5>
+                        <p class="!text-sm font-thin">
+                            Bitte prüfen Sie ihren Posteingang,
+                            wir haben Ihnen ein E-Mail zum Bestätigen Ihrer Anmeldung gesendet.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
 </section>

@@ -3,15 +3,20 @@
             <div class="flex justify-center items-center min-h-[70vh]">
                 <div class="max-w-md">
                     <x-headings>
-                        <x-slot name="tag">confirmed</x-slot>
-                        Vielen, Dank!
+                        <x-slot name="tag">solved</x-slot>
+                        Neue Kontaktanfrage als gelöst markiert!
                     </x-headings>
-                    <p>Ihre E-Mail-Adresse ist nun bestätigt, und wir bearbeiten Ihre Anfrage so schnell wie möglich. Besuchen Sie einstweilen einen unserer Unternehmensbereiche:</p>
+
+                    <ul>
+                        <li>{{ $request->firstname }} {{ $request->lastname }}</li>
+                        <li>{{ $request->email }}</li>
+                        <li>{{ $request->phone }}</li>
+                        <li>{!! $request->message !!}</li>
+                        <li>{{ $request->created_at->format('d.m.Y H:i') }}</li>
+                    </ul>
 
                     <div class="mt-8 space-y-8">
-                        <x-button class="w-full">Hausverwaltung</x-button>
-                        <x-button class="w-full">Immobilien</x-button>
-                        <x-button class="w-full">Technik</x-button>
+                        <x-button href="/admin" class="w-full">backend</x-button>
                     </div>
                 </div>
             </div>

@@ -3,21 +3,28 @@
 namespace App\Livewire;
 
 use App\Enums\CompaniesEnum;
+use App\Mail\VerificationEmail;
 use App\Models\ContactRequest;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
 class ContactForm extends Component
 {
-    const RECIPIENT = 'l.eybel@bontus-eybel.at';
+    const RECIPIENT = 'gerhard@weloveinteraction.com'; // 'l.eybel@bontus-eybel.at';
 
+    public bool $is_sent = false;
+
+
+    protected string $company = '';
 
     public array $data = [
-        'firstname' => '',
-        'lastname'  => '',
-        'email'     => '',
-        'phone'     => '',
-        'message'   => '',
+        'firstname' => 'Gerhard',
+        'lastname'  => 'Popp',
+        'email'     => 'gerhard@weloveinteraction.com',
+        'phone'     => '0676335203',
+        'message'   => 'Hello World',
         'company'   => null,
         'terms'     => false
     ];
@@ -25,12 +32,12 @@ class ContactForm extends Component
     public function getValidationAttributes()
     {
         return [
-            'firstname' => 'Vorname',
-            'lastname'  => 'Nachname',
-            'email'     => 'E-Mail-Adresse',
-            'phone'     => 'Telefonnummer',
-            'message'   => 'Nachricht',
-            'terms'     => 'Verarbeitung'
+            'data.firstname' => 'Vorname',
+            'data.lastname'  => 'Nachname',
+            'data.email'     => 'E-Mail-Adresse',
+            'data.phone'     => 'Telefonnummer',
+            'data.message'   => 'Nachricht',
+            'data.terms'     => 'Verarbeitung'
         ];
     }
 
@@ -38,24 +45,36 @@ class ContactForm extends Component
     public function rules()
     {
         return [
-            'firstname' => ['required', 'string', 'max:255'],
-            'lastname'  => ['required', 'string', 'max:255'],
-            'email'     => ['required', 'string', 'email:rfc,dns', 'max:255'],
-            'phone'     => ['required', 'string', 'max:255'],
-            'message'   => ['required', 'string'],
-            'terms'     => ['required', 'accepted']
+            'data.firstname' => ['required', 'string', 'max:255'],
+            'data.lastname'  => ['required', 'string', 'max:255'],
+            'data.email'     => ['required', 'string', 'email:rfc,dns', 'max:255'],
+            'data.phone'     => ['required', 'string', 'max:255'],
+            'data.message'   => ['required', 'string'],
+            'data.terms'     => ['required', 'accepted']
         ];
     }
 
 
+
+    public function mount()
+    {
+        $this->company = CompaniesEnum::getByRoute();
+    }
+
     public function save()
     {
         $data = $this->validate();
-        $data['data']['company'] = CompaniesEnum::getByRoute();
+        $data['data']['company'] = $this->company;
+        $data['data']['token'] = Str::uuid();
         unset($data['data']['terms']);
 
-        ContactRequest::create($data);
+        $request = ContactRequest::create($data['data']);
 
+        Mail::to($data['data']['email'])->send(new VerificationEmail($request));
+
+        $this->reset();
+
+        $this->is_sent = true;
     }
 
 

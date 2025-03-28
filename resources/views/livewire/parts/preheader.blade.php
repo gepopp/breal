@@ -1,7 +1,10 @@
+@php
+    use Illuminate\Support\Facades\Route;
+@endphp
 <div @class([ "py-2 px-4 hidden md:block",
- "bg-logo-900 dark:bg-logo-950" => \Illuminate\Support\Facades\Route::is('hausverwaltung.*'),
- "bg-technik-900 dark:bg-technik-950" => \Illuminate\Support\Facades\Route::is('technik.*'),
- "bg-makler-900 dark:bg-makler-950" => \Illuminate\Support\Facades\Route::is('immobilien.*'),
+ "bg-logo-900 dark:bg-logo-950" => !Route::is('technik.*', 'immobilien.*'),
+ "bg-technik-900 dark:bg-technik-950" => Route::is('technik.*'),
+ "bg-makler-900 dark:bg-makler-950" => Route::is('immobilien.*'),
  ])>
     <div class="flex justify-between items-center text-white">
         <div class="flex items-center space-x-2">
@@ -14,20 +17,20 @@
         </div>
 
         <div class="flex items-center divide-x-2 divide-white">
-            @if( ! \Illuminate\Support\Facades\Route::is('hausverwaltung.*') )
+            @if( ! Route::is('hausverwaltung.*') )
                 <a href="{{ route('hausverwaltung.home') }}" class="px-4" wire:navigate>
                     <img src="{{ asset('logos/bereal_immobilien_white.svg') }}" class="h-5"/>
                 </a>
             @endif
 
-            @if( ! \Illuminate\Support\Facades\Route::is('immobilien.*') )
+            @if( ! Route::is('immobilien.*') )
                 <a href="{{ route('immobilien.home') }}" class="px-4" wire:navigate>
                     <img src="{{ asset('logos/bereal_makler_white.svg') }}" class="h-5"/>
                 </a>
             @endif
 
 
-            @if( ! \Illuminate\Support\Facades\Route::is('technik.*') )
+            @if( ! Route::is('technik.*') )
                 <a href="{{ route('technik.home') }}" class="px-4" wire:navigate>
                     <img src="{{ asset('logos/bereal_technik_white.svg') }}" class="h-5"/>
                 </a>
