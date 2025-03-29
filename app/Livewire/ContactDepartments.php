@@ -2,12 +2,25 @@
 
 namespace App\Livewire;
 
+use App\Enums\CompaniesEnum;
+use App\Models\Department;
 use Livewire\Component;
 
 class ContactDepartments extends Component
 {
+    public string $comapny = CompaniesEnum::Hausverwaltung->name;
+
+
+    public function mount()
+    {
+        $this->comapny = CompaniesEnum::getByRoute();
+    }
+
+
     public function render()
     {
-        return view('livewire.contact-departments');
+        $departments = Department::where('company', $this->comapny)->get();
+
+        return view('livewire.contact-departments', compact('departments'));
     }
 }
