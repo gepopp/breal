@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Livewire\Hausverwaltung;
+namespace App\Livewire\Pages;
 
 use App\Enums\CompaniesEnum;
 use Livewire\Component;
 
-class Kontakt extends Component
+class Contact extends Component
 {
     public string $company = CompaniesEnum::Hausverwaltung->name;
 
@@ -17,6 +17,6 @@ class Kontakt extends Component
 
     public function render()
     {
-        return view('livewire.hausverwaltung.kontakt');
+        return view('livewire.pages.contact');
     }
 }
