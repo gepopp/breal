@@ -15,4 +15,7 @@
     </section>
 
     <livewire:contact-form/>
+
+    <livewire:contact-departments/>
+
 </div>

@@ -36,7 +36,7 @@ Route::group(['prefix' => 'technik', 'as' => 'technik.'], function () {
 Route::get('impressum', \App\Livewire\Sites\Imprint::class)->name('impressum');
 Volt::route('datenschutz', 'policy')->name('datenschutz');
 
-Route::view('confirm-test', 'confirmed')->name('confirm-test');
+Route::view('/confirm-test', 'confirmed')->name('confirm-test');
 Route::get('confirm/{formRequest}/{token}', function (\App\Models\ContactRequest $formRequest, $token) {
     if (!request()->hasValidSignature() || $formRequest->token !== $token) {
         abort(401);

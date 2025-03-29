@@ -1,12 +1,14 @@
 <section>
-
+    @php
+        use Illuminate\Support\Facades\Route;
+    @endphp
     <div class="flex flex-col sm:flex-row sm:space-x-8">
         <div class="w-full sm:w-1/3">
             <h3 data-aos="fade" data-aos-once="true" @class([
         "text-2xl font-bold mb-8",
-        "text-logo-950" => \Illuminate\Support\Facades\Route::is('hausverwaltung.*'),
-        "text-technik-950" => \Illuminate\Support\Facades\Route::is('technik.*'),
-        "text-makler-950" => \Illuminate\Support\Facades\Route::is('immobilien.*'),
+        "text-logo-950" => !Route::is('technik.*', 'immobilien.*'),
+        "text-technik-950" => Route::is('technik.*'),
+        "text-makler-950" => Route::is('immobilien.*'),
         ])>Sagen Sie uns Hallo!</h3>
 
             <ul @class([

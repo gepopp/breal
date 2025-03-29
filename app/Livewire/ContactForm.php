@@ -12,7 +12,7 @@ use Livewire\Component;
 
 class ContactForm extends Component
 {
-    const RECIPIENT = 'gerhard@weloveinteraction.com'; // 'l.eybel@bontus-eybel.at';
+    const RECIPIENT = 'ronald@ivalu.eu';// 'gerhard@weloveinteraction.com'; // 'l.eybel@bontus-eybel.at';
 
     public bool $is_sent = false;
 
@@ -20,11 +20,11 @@ class ContactForm extends Component
     protected string $company = '';
 
     public array $data = [
-        'firstname' => 'Gerhard',
-        'lastname'  => 'Popp',
-        'email'     => 'gerhard@weloveinteraction.com',
-        'phone'     => '0676335203',
-        'message'   => 'Hello World',
+        'firstname' => '',
+        'lastname'  => '',
+        'email'     => '',
+        'phone'     => '',
+        'message'   => '',
         'company'   => null,
         'terms'     => false
     ];
