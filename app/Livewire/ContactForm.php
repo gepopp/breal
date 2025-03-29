@@ -8,6 +8,7 @@ use App\Models\ContactRequest;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
+use Livewire\Attributes\Lazy;
 use Livewire\Component;
 
 class ContactForm extends Component
@@ -52,13 +53,6 @@ class ContactForm extends Component
             'data.message'   => ['required', 'string'],
             'data.terms'     => ['required', 'accepted']
         ];
-    }
-
-
-
-    public function mount()
-    {
-        $this->company = CompaniesEnum::getByRoute();
     }
 
     public function save()

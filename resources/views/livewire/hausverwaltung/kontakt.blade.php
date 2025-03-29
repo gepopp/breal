@@ -14,8 +14,8 @@
         </div>
     </section>
 
-    <livewire:contact-form/>
+    <livewire:contact-form lazy company="$company"/>
 
-    <livewire:contact-departments/>
+    <livewire:contact-departments lazy company="$company"/>
 
 </div>

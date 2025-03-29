@@ -11,12 +11,6 @@ class ContactDepartments extends Component
     public string $comapny = CompaniesEnum::Hausverwaltung->name;
 
 
-    public function mount()
-    {
-        $this->comapny = CompaniesEnum::getByRoute();
-    }
-
-
     public function render()
     {
         $departments = Department::where('company', $this->comapny)->get();
