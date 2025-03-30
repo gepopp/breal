@@ -20,7 +20,7 @@ class JobVacancyFactory extends Factory
         return [
             'company'       => $this->faker->randomElement(CompaniesEnum::class),
             'title'         => $this->faker->sentence(),
-            'description'   => $this->faker->text(),
+            'description'   => $this->faker->realText(1200, 4),
             'job_title'     => $this->faker->jobTitle(),
             'contract_type' => $this->faker->randomElement([
                 'Freiberuflich' => 'Freiberuflich',
