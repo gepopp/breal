@@ -10,17 +10,15 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class SubRelationManager extends RelationManager
+class ContactsRelationManager extends RelationManager
 {
-    protected static string $relationship = 'sub';
+    protected static string $relationship = 'contacts';
 
-    protected static ?string $label = 'Unterabteilung';
+    protected static ?string $label = 'Kontakt';
 
-    protected static ?string $pluralLabel = 'Unterabteilungen';
+    protected static ?string $pluralLabel = 'Kontakte';
 
-
-    protected static ?string $title = 'Unterabteilungen';
-
+    protected static ?string $title = 'Kontakte';
 
     public function form(Form $form): Form
     {
@@ -29,9 +27,16 @@ class SubRelationManager extends RelationManager
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('order')
+                Forms\Components\TextInput::make('postition')
                     ->required()
-                    ->numeric()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('phone')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('email')
+                    ->required()
+                    ->email()
+                    ->maxLength(255),
             ]);
     }
 
@@ -40,8 +45,7 @@ class SubRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
-                Tables\Columns\TextInputColumn::make('name'),
-                Tables\Columns\TextInputColumn::make('order')->rules(['required', 'numeric']),
+                Tables\Columns\TextColumn::make('name'),
             ])
             ->filters([
                 //
@@ -50,15 +54,13 @@ class SubRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
-                Tables\Actions\DeleteAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ])
-            ->modifyQueryUsing(fn($query) => $query->withoutGlobalScopes(['main']));
+            ]);
     }
-
 }

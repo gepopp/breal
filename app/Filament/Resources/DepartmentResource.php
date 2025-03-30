@@ -5,11 +5,13 @@ namespace App\Filament\Resources;
 use App\Enums\CompaniesEnum;
 use App\Filament\Resources\DepartmentResource\Pages;
 use App\Filament\Resources\DepartmentResource\RelationManagers;
+use App\Filament\Resources\DepartmentResource\RelationManagers\ContactsRelationManager;
 use App\Models\Department;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -58,12 +60,17 @@ class DepartmentResource extends Resource
                     ->sortable()
                     ->searchable(),
 
+                Tables\Columns\TextColumn::make('main.name')
+                    ->label('Hauptabteilung')
+                    ->sortable(),
+
                 Tables\Columns\TextColumn::make('name'),
 
                 Tables\Columns\TextInputColumn::make('order')->rules(['numeric', 'integer', 'nullable'])
             ])
             ->filters([
-                //
+                SelectFilter::make('company')
+                    ->options(CompaniesEnum::class),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -72,14 +79,14 @@ class DepartmentResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ])
-            ->modifyQueryUsing(fn($query) => $query->whereNull('department_id'));
+            ]);
     }
 
     public static function getRelations(): array
     {
         return [
-            RelationManagers\SubRelationManager::class
+            RelationManagers\SubRelationManager::class,
+            ContactsRelationManager::class,
         ];
     }
 
