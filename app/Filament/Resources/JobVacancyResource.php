@@ -34,6 +34,7 @@ class JobVacancyResource extends Resource
                     ->schema([
 
                         Forms\Components\SpatieMediaLibraryFileUpload::make('titleimage')
+                            ->collection('title')
                             ->rule(['required', 'max:1024', 'mimes:jpg,jpeg,png'])
                             ->hint('jpg, jpeg, png mit max. 1MB')
                             ->downloadable()

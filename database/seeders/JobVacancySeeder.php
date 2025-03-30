@@ -19,7 +19,8 @@ class JobVacancySeeder extends Seeder
         $jobs = JobVacancy::factory()->count(16)->create();
 
         foreach ($jobs as $job) {
-            $job->addMediaFromDisk( public_path('job-default.jpg') );
+            $job->addMediaFromUrl(asset('job-default.jpg'))
+                ->toMediaCollection('title');
         }
     }
 }
