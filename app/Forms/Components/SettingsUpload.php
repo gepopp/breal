@@ -68,7 +68,7 @@ class SettingsUpload extends FileUpload
             $name = $component->getName();
             $setting = Settings::whereName($name)->first();
 
-            $this->clearSettingMedia($this);
+            SettingsUpload::clearSettingMedia($name);
 
             $media = $setting->addMedia($file)
                 ->withResponsiveImages()
@@ -80,17 +80,16 @@ class SettingsUpload extends FileUpload
         });
 
 
-        $this->deleteUploadedFileUsing(function (array|string|null $state) {
-            $this->clearSettingMedia($this);
+        $this->deleteUploadedFileUsing(function (array|string|null $state, $component) {
+           SettingsUpload::clearSettingMedia($component->getName());
         });
 
 
     }
 
 
-    protected function clearSettingMedia(SettingsUpload $component): void
+    public static function clearSettingMedia($name): void
     {
-        $name = $component->getName();
         $setting = Settings::whereName($name)->first();
 
         foreach ($setting->getMedia($name) as $media) {

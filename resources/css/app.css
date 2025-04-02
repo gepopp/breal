@@ -193,11 +193,11 @@ section{
 
 .tagline:before{
     content: 'be';
-    @apply text-4xl md:text-6xl xl:text-7xl font-extrabold text-white dark:bg-white leading-[36px] pt-px md:leading-[52px] xl:leading-[62px] xl:pt-[2px] align-baseline rounded px-2 -mb-2 tracking-wide -mt-[9px] bg-logo mr-2;
+    @apply   text-white dark:bg-white pt-px xl:pt-[2px] align-baseline rounded px-2 -mb-2 tracking-wide  bg-logo mr-2 -mt-1.5;
 }
 
 .tagline{
-    @apply text-4xl md:text-6xl xl:text-7xl font-extrabold leading-[36px] md:leading-[52px] xl:leading-[62px] align-baseline rounded tracking-wide -mt-[9px] dark:text-white lowercase;
+    @apply text-3xl md:text-4xl xl:text-7xl font-extrabold leading-[30px] md:leading-[40px] xl:leading-[62px] align-baseline rounded tracking-wide  dark:text-white lowercase;
 }
 
 .prose{
