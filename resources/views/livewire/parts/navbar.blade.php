@@ -137,7 +137,7 @@
                 </svg>
             </div>
         </div>
-        <div x-show="open" x-collapse.duration.500ms x-cloak class="absolute top-full w-full shadow-xl lg:hidden">
+        <div x-show="open" x-collapse.duration.500ms x-cloak class="absolute top-full w-full shadow-xl lg:hidden bg-white z-[9999]">
             <div @class([
         "border-b-2 shadow lg:max-w-4xl xl:max-w-6xl mx-auto flex justify-between items-center p-4 w-full",
         "bg-white dark:bg-logo-950 border-logo-900 dark:border-logo-50 text-logo-950 dark:text-logo-50 dark:border-logo-50" => Route::is('hausverwaltung.*'),
@@ -186,7 +186,7 @@
                 @endif
 
                 @if( ! Route::is('immobilien.*') )
-                    <a href="{{ route('immobilien.home') }}" class="aspect-square flex items-center justify-center"
+                    <a href="{{ route('immobilien.home') }}" class="aspect-square sm:aspect-[4/3] flex items-center justify-center"
                        wire:navigate>
                         <img src="{{ asset('logos/bereal_makler_vertical.svg') }}" class="h-10 dark:hidden"/>
                         <img src="{{ asset('logos/bereal_makler_vertical_white.svg') }}"
@@ -196,7 +196,7 @@
 
 
                 @if( ! Route::is('technik.*') )
-                    <a href="{{ route('technik.home') }}" class="aspect-square flex items-center justify-center"
+                    <a href="{{ route('technik.home') }}" class="aspect-square sm:aspect-[4/3] flex items-center justify-center"
                        wire:navigate>
                         <img src="{{ asset('logos/bereal_technik_vertical.svg') }}" class="h-10 dark:hidden"/>
                         <img src="{{ asset('logos/bereal_technik_vertical_white.svg') }}"

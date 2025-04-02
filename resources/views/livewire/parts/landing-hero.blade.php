@@ -2,12 +2,12 @@
         "mx-auto grid grid-cols-1 md:grid-cols-2 relative min-h-[70vh] w-full mb-24"
 ])>
     <div @class(['flex justify-center items-center'])>
-        <div @class(['md:max-w-sm'])>
+        <div @class(['md:max-w-sm lg:max-w-lg'])>
             <x-headings>
                 <x-slot name="tag">{{ $header }}</x-slot>
                 {{ $subheader }}
             </x-headings>
-            <div data-aos="fade" data-aos-delay="600">
+            <div data-aos="fade" data-aos-delay="600" class="prose">
                 {!! html_entity_decode( $intro ) !!}
             </div>
         </div>
