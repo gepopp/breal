@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Enums\CompaniesEnum;
 use App\Mail\VerificationEmail;
 use App\Models\ContactRequest;
+use App\Settings\PagesSettings;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -72,8 +73,8 @@ class ContactForm extends Component
     }
 
 
-    public function render()
+    public function render( PagesSettings $pagesSettings)
     {
-        return view('livewire.contact-form');
+        return view('livewire.contact-form', compact('pagesSettings'));
     }
 }

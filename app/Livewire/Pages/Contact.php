@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages;
 
 use App\Enums\CompaniesEnum;
+use App\Settings\PagesSettings;
 use Livewire\Component;
 
 class Contact extends Component
@@ -15,8 +16,8 @@ class Contact extends Component
         $this->company = CompaniesEnum::getByRoute();
     }
 
-    public function render()
+    public function render( PagesSettings $pagesSettings )
     {
-        return view('livewire.pages.contact');
+        return view('livewire.pages.contact', compact('pagesSettings'));
     }
 }

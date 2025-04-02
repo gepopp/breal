@@ -9,7 +9,7 @@
         "text-logo-950" => !Route::is('technik.*', 'immobilien.*'),
         "text-technik-950" => Route::is('technik.*'),
         "text-makler-950" => Route::is('immobilien.*'),
-        ])>Sagen Sie uns Hallo!</h3>
+        ])>{{ $pagesSettings->contactform_heading }}</h3>
 
             <ul @class([
                  "text-lg font-light space-y-4",
@@ -18,19 +18,19 @@
         "text-makler-900" => \Illuminate\Support\Facades\Route::is('immobilien.*'),
                 ])>
                 <li data-aos="fade" data-aos-delay="600" data-aos-once="true">
-                    <a href="tel:+43 1 535 36 19" class="underline underline-offset-4"
-                       onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'tel': '+43 1 535 36 19' });">
-                        +43 1 535 36 19
+                    <a href="tel:{{ $pagesSettings->contactform_phone }}" class="underline underline-offset-4"
+                       onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'tel': '{{ $pagesSettings->contactform_phone }}' });">
+                        {{ $pagesSettings->contactform_phone }}
                     </a>
                 </li>
                 <li data-aos="fade" data-aos-delay="900" data-aos-once="true">
-                    <a href="mailto:office@bontus-eybel.at" class="underline underline-offset-4"
-                       onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'email': 'office@bontus-eybel.at' });">
-                        office@bontus-eybel.at
+                    <a href="mailto:{{ $pagesSettings->contactform_email }}" class="underline underline-offset-4"
+                       onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'email': 'o{{ $pagesSettings->contactform_email }}' });">
+                        {{ $pagesSettings->contactform_email }}
                     </a>
                 </li>
                 <li data-aos="fade" data-aos-delay="1200" data-aos-once="true">
-                    Franz Josefs Kai 65, 1010 Wien
+                    {{ $pagesSettings->contactform_address }}
                 </li>
             </ul>
         </div>

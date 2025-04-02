@@ -5,8 +5,10 @@
         "text-logo-950" => !Route::is('technik.*', 'immobilien.*'),
         "text-technik-950" => Route::is('technik.*'),
         "text-makler-950" => Route::is('immobilien.*'),
-    ]) data-aos="fade">Ihre Ansprechpartner</h2>
-        <p data-aos="fade" data-aos-delay="500">Zusammenarbeit funktioniert am besten, wenn sie wissen, wer am anderen Ende der Leitung sitzt. Hier dürfen wir Ihnen die zuständigen MitarbeiterInnen vorstellen.</p>
+    ]) data-aos="fade">{{ $pagesSettings->contactpersons_heading }}</h2>
+        <p data-aos="fade" data-aos-delay="500">
+            {{ $pagesSettings->contactpersons_introtext }}
+        </p>
     </div>
 
     <div @class(["mt-24"])>

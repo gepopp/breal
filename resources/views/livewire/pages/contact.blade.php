@@ -1,5 +1,4 @@
 <div>
-
     <section @class([
         "text-logo-950" => \Illuminate\Support\Facades\Route::is('hausverwaltung.*'),
         "text-technik-950" => \Illuminate\Support\Facades\Route::is('technik.*'),
@@ -7,10 +6,12 @@
     ])>
         <div class="max-w-md">
             <x-headings>
-                <x-slot name="tag">together</x-slot>
-                Ihr Kontakt zu Bontus Eybel Immobilien
+                <x-slot name="tag">{{ $pagesSettings->contact_header }}</x-slot>
+                {{ $pagesSettings->contact_subheader }}
             </x-headings>
-            <p data-aos="fade" data-aos-delay="600">Am liebsten sprechen wir persönlich mit Ihnen über Ihre Anliegen. Wir freuen uns, von Ihnen zu hören und gemeinsam Großartiges zu schaffen.</p>
+            <div data-aos="fade" data-aos-delay="600">
+                {!! $pagesSettings->contact_introtext !!}
+            </div>
         </div>
     </section>
 
