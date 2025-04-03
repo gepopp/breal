@@ -1,4 +1,7 @@
-<div>
+@props([
+    'ondark' => false
+])
+<div @class(["button-ondark" => $ondark])>
     @if($attributes->has('href'))
         <a {{ $attributes->merge(['class' => 'button-hover block flex justify-center']) }}>
             <div class="lowercase flex justify-center">{{ $slot }}</div>
@@ -20,5 +23,4 @@
             </div>
         </button>
     @endif
-
 </div>

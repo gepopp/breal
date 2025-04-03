@@ -186,6 +186,43 @@ p{
     }
 }
 
+.button-ondark > .button-hover {
+    @apply overflow-hidden bg-transparent outline-1 outline-white outline-offset-2
+    px-8 lg:px-14 py-2 m-1
+    leading-4 tracking-wider
+    text-white relative cursor-pointer
+    text-base block rounded font-medium transition-all duration-300
+    ease-in-out transform;
+
+    span {
+        position: absolute;
+        display: block;
+        width: 10px;
+        height: 10px;
+        top: 0;
+        left: 50%;
+        transition: width 0.5s ease-in-out, height 0.5s ease-in-out;
+        transition-delay: 50ms;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        @apply bg-white;
+        border-radius: 50%;
+    }
+
+    &:hover {
+        @apply text-logo;
+
+        span {
+            width: 300%;
+            height: 300%;
+        }
+    }
+
+    &:active {
+        @apply bg-white;
+    }
+}
+
 
 section{
     @apply py-24 px-4 lg:max-w-4xl xl:max-w-6xl mx-auto;
@@ -197,7 +234,16 @@ section{
 }
 
 .tagline{
-    @apply text-3xl md:text-4xl xl:text-7xl font-extrabold leading-[30px] md:leading-[40px] xl:leading-[62px] align-baseline rounded tracking-wide  dark:text-white lowercase;
+    @apply text-3xl md:text-4xl xl:text-7xl font-extrabold leading-[30px] md:leading-[36px] xl:leading-[62px] align-baseline rounded tracking-wide  dark:text-white lowercase;
+}
+
+.tagline-ondark:before{
+    content: 'be';
+    @apply   text-logo bg-white pt-px xl:pt-[2px] align-baseline rounded px-2 -mb-2 tracking-wide mr-2 -mt-1.5;
+}
+
+.tagline-ondark{
+    @apply text-3xl md:text-4xl xl:text-7xl font-extrabold leading-[30px] md:leading-[36px] xl:leading-[62px] align-baseline rounded tracking-wide  dark:text-white lowercase;
 }
 
 .prose{

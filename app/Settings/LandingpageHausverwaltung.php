@@ -22,8 +22,12 @@ class LandingpageHausverwaltung extends Settings
     public string $text_image_alt = 'Bontus Eybel Intro Bild';
 
 
-
-
+    public string $about_header = 'with us';
+    public string $about_subheader = 'Warum be real?';
+    public string $about_text = '<p>Als Familienunternehmen wissen wir, dass viele Menschen unter einem Dach auch viele Meinungen bedeuten können. Nicht nur das, auch die individuellen Bedürfnisse und Wünsche an eine Immobilie können höchst unterschiedlich sein.</p><p>Unser Ansatz: wir verknüpfen Tradition und Moderne sowie unsere Menschenkenntnis, um die passenden Lösungen zu finden. Denn für uns ist Hausverwaltung eine Herzensangelegenheit, die wir mit Engagement und Begeisterung in jedem Projekt leben.</p>';
+    public int $about_image = 0;
+    public string $about_image_alt = 'Bontus Eybel Intro Bild';
+    public ?string $about_video_embed_code = '';
 
 
     public static function group(): string

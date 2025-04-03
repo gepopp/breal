@@ -5,6 +5,7 @@ namespace App\Filament\Pages;
 use App\Forms\Components\SettingsUpload;
 use App\Settings\LandingpageHausverwaltung as Setting;
 use Filament\Forms;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
 use Filament\Pages\SettingsPage;
 
@@ -30,7 +31,16 @@ class LandingpageHausverwaltung extends SettingsPage
                                 Forms\Components\RichEditor::make('text')->required(),
                                 SettingsUpload::make('text_image')->required(),
                                 Forms\Components\TextInput::make('text_image_alt')->required(),
-                            ])
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Über uns')
+                        ->schema([
+                            Forms\Components\TextInput::make('about_header')->required(),
+                            Forms\Components\TextInput::make('about_subheader')->required(),
+                            Forms\Components\RichEditor::make('about_text')->required(),
+                            SettingsUpload::make('about_image')->required(),
+                            Forms\Components\TextInput::make('about_image_alt')->required(),
+                            Textarea::make('about_video_embed_code'),
+                        ])
                     ]),
 
 

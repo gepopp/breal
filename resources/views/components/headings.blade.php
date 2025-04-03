@@ -3,19 +3,22 @@
 @endphp
 @props([
     'level' => null,
-    'tag' => 'real'
+    'tag' => 'real',
+    'ondark' => false
 ])
 
 @php
     $classes = 'mt-4 text-xl font-bold text-logo dark:text-white';
 @endphp
 
-<div class="tagged-heading mb-8">
+<div @class(["tagged-heading mb-8"])>
     <div @class([
-        "tagline flex items-center",
-        "text-logo-500" => !Route::is('technik.*', 'immobilien.*'),
-        "text-technik-500" => Route::is('technik.*'),
-        "text-makler-500" => Route::is('immobilien.*'),
+        "flex items-center",
+        "text-logo-500" => !Route::is('technik.*', 'immobilien.*') && !$ondark,
+        "text-technik-500" => Route::is('technik.*') && !$ondark,
+        "text-makler-500" => Route::is('immobilien.*') && !$ondark,
+        "text-white tagline-ondark" => $ondark,
+        "tagline" => !$ondark
         ])
          data-aos="fade">
         <span class="-mb-1.5">{{$tag}}</span>
