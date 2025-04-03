@@ -1,8 +1,8 @@
 <div class="my-12 relative">
     <div x-data>
         <ul x-ref="list" class="grid grid-cols-1 lg:grid-cols-2 lg:gap-12 max-h-[600px] overflow-y-auto pb-48 scroll-smooth">
-            @foreach($timeline as $entry)
-                <li @class(['flex space-x-4 py-4 border-b-2 border-logo'])>
+            @foreach($timeline as $key => $entry)
+                <li data-aos="fade-up" data-aos-delay="{{ $key * 50 }}" @class(['flex space-x-4 py-4 border-b-2 border-logo'])>
                     <div class="flex justify-center items-center">
                         <p @class(['bg-logo text-white !text-3xl !font-bold font-extrabold leading-[32px] px-1.5 align-baseline rounded tracking-wide'])>{{ $entry->year }}</p>
                     </div>
