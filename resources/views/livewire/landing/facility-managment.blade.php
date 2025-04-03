@@ -7,4 +7,10 @@
             image="{{ $settings->hero_image }}"
             alt="{{ $settings->hero_image_alt }}"
     />
+
+    <livewire:parts.image-text
+            text="{{ $settings->text }}"
+            image="{{ $settings->text_image }}"
+            alt="{{ $settings->text_image_alt }}"
+    />
 </div>
