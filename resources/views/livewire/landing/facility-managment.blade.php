@@ -24,5 +24,10 @@
             alt="{{ $settings->about_image_alt }}"
     />
 
-
+    <livewire:parts.timeline
+            company="$company"
+            header="{{ $settings->timeline_header }}"
+            subheader="{{ $settings->timeline_subheader }}"
+            text="{{ $settings->timeline_intro }}"
+    />
 </div>

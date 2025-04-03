@@ -40,8 +40,15 @@ class LandingpageHausverwaltung extends SettingsPage
                             SettingsUpload::make('about_image')->required(),
                             Forms\Components\TextInput::make('about_image_alt')->required(),
                             Textarea::make('about_video_embed_code'),
-                        ])
-                    ]),
+                        ]),
+                        Forms\Components\Tabs\Tab::make('Timeline')
+                            ->schema([
+                                Forms\Components\TextInput::make('timeline_header')->required(),
+                                Forms\Components\TextInput::make('timeline_subheader')->required(),
+                                Forms\Components\RichEditor::make('timeline_intro')->required(),
+                            ])
+                    ])
+                ->persistTabInQueryString(true),
 
 
             ])->columns(1);

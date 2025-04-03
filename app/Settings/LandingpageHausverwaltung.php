@@ -30,6 +30,10 @@ class LandingpageHausverwaltung extends Settings
     public ?string $about_video_embed_code = '';
 
 
+    public string $timeline_header = 'now';
+    public string $timeline_subheader = 'Die Geschichte von be real';
+    public string $timeline_intro = "<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>";
+
     public static function group(): string
     {
         return 'hausverwaltung';
