@@ -1,4 +1,4 @@
-<div @class(['bg-logo dark:bg-logo-950 py-24'])>
+<div @class(['bg-logo dark:bg-logo-950 py-24 -mx-4 px-4'])>
     <div @class([
         "mx-auto grid grid-cols-1 md:grid-cols-2 relative w-full"
 ])>
@@ -16,11 +16,11 @@
         <div @class(['order-first md:order-last -mx-4 md:mx-0 md:ml-0 relative overflow-hidden flex items-center p-4'])>
             @if(!is_null($media))
                 <img src="{{ $media?->getUrl() }}" srcset="{{ $media?->getSrcset() }}" alt="{{ $alt }}" data-aos="fade"
-                     data-aos-delay="600" class="aspect-video max-w-2/3 object-cover rounded-xl shadow-lg shadow-white/10"/>
+                     data-aos-delay="600" class="aspect-video md:max-w-2/3 object-cover rounded-xl shadow-lg shadow-white/10"/>
             @endif
         </div>
     </div>
-    <div class="flex justify-center">
+    <div class="flex justify-center mt-8">
         <x-button href="{{ route('hausverwaltung.kontakt') }}" :ondark="true">kontakt</x-button>
     </div>
 

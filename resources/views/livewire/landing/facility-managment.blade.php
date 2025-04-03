@@ -30,4 +30,11 @@
             subheader="{{ $settings->timeline_subheader }}"
             text="{{ $settings->timeline_intro }}"
     />
+
+    <livewire:parts.service
+            company="$company"
+            header="{{ $settings->service_heading }}"
+            subheader="{{ $settings->service_subheading }}"
+            text="{{ $settings->service_introtext }}"
+    />
 </div>

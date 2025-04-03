@@ -1,6 +1,6 @@
 <div class="">
     <div @class([
-        "mx-auto grid grid-cols-1 md:grid-cols-2 relative min-h-[70vh] w-full"
+        "mx-auto grid grid-cols-1 md:grid-cols-2 relative min-h-[70vh] w-full mb-24"
 ])>
         <div @class(['flex justify-center items-center md:min-h-[70vh]'])>
             <div @class(['md:max-w-sm lg:max-w-lg'])>
@@ -9,7 +9,7 @@
                 </div>
             </div>
         </div>
-        <div @class(['order-last md:order-first relative overflow-hidden'])>
+        <div @class(['order-first relative overflow-hidden my-8'])>
 
             @if(!is_null($media))
                 <img src="{{ $media?->getUrl() }}" srcset="{{ $media?->getSrcset() }}" alt="{{ $alt }}" data-aos="fade"

@@ -46,6 +46,12 @@ class LandingpageHausverwaltung extends SettingsPage
                                 Forms\Components\TextInput::make('timeline_header')->required(),
                                 Forms\Components\TextInput::make('timeline_subheader')->required(),
                                 Forms\Components\RichEditor::make('timeline_intro')->required(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Service')
+                            ->schema([
+                                Forms\Components\TextInput::make('service_heading')->required(),
+                                Forms\Components\TextInput::make('service_subheading')->required(),
+                                Forms\Components\RichEditor::make('service_introtext')->required(),
                             ])
                     ])
                 ->persistTabInQueryString(true),

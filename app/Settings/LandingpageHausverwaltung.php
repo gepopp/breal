@@ -34,6 +34,12 @@ class LandingpageHausverwaltung extends Settings
     public string $timeline_subheader = 'Die Geschichte von be real';
     public string $timeline_intro = "<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>";
 
+
+    public string $service_heading = 'trusted';
+    public string $service_subheading = 'Unser Service';
+    public string $service_introtext = '<p>Partnerschaftliche Zusammenarbeit steht für uns an erster Stelle! Wir wissen, dass Vertrauen und gegenseitiges Verständnis die Basis ist, um Ihre Immobilien bestmöglich zu verwalten. Umfangreiche Beratung, persönliche Betreuung und individuelle Lösungen sind die Grundpfeiler, damit Sie sich rundum gut betreut fühlen.</p>';
+
+
     public static function group(): string
     {
         return 'hausverwaltung';
