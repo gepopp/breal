@@ -1,8 +1,8 @@
 <div @class([
-        "mx-auto grid grid-cols-1 md:grid-cols-2 relative w-full px-4"
+        "mx-auto grid grid-cols-1 md:grid-cols-2 relative w-full"
 ])>
     <div @class(['flex justify-center items-center md:min-h-[70vh] mt-12 md:mt-0'])>
-        <div @class(['md:max-w-sm lg:max-w-lg lg:my-48'])>
+        <div @class(['md:max-w-sm lg:max-w-lg lg:my-48 px-4'])>
             <x-headings>
                 <x-slot name="tag">{{ $header }}</x-slot>
                 {{ $subheader }}
