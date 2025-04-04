@@ -27,7 +27,9 @@ class LandingpageHausverwaltung extends SettingsPage
                                 Forms\Components\TextInput::make('hero_image_alt')->required(),
                                 Forms\Components\TextInput::make('hero_header')->required(),
                                 Forms\Components\TextInput::make('hero_subheader')->required(),
-                                Forms\Components\RichEditor::make('hero_introtext')->required(),
+                                Forms\Components\RichEditor::make('hero_introtext')
+                                    ->rules(['required', 'max:320', 'min:160'])
+                                    ->required(),
 
                                 Forms\Components\ToggleButtons::make('intro_layout')
                                     ->grouped()
