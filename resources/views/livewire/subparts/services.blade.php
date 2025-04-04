@@ -3,7 +3,7 @@
         @foreach($services as $service)
             <div data-aos="fade-up" class="border-2 border-logo rounded-2xl p-4 lg:p-6 relative overflow-hidden group">
                 <h5 class="font-bold text-xl">{{ $service->name }}</h5>
-                <ul class="text-logo-950 opacity-75 font-light">
+                <ul class="text-logo-950 dark:text-white opacity-75 dark:opacity-100 font-light">
                     @foreach($service->points as $point)
                         <li class="flex items-center space-x-2">
                             <svg class="size-4" data-slot="icon" fill="none" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

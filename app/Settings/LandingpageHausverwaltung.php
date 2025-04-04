@@ -40,6 +40,17 @@ class LandingpageHausverwaltung extends Settings
     public string $service_introtext = '<p>Partnerschaftliche Zusammenarbeit steht für uns an erster Stelle! Wir wissen, dass Vertrauen und gegenseitiges Verständnis die Basis ist, um Ihre Immobilien bestmöglich zu verwalten. Umfangreiche Beratung, persönliche Betreuung und individuelle Lösungen sind die Grundpfeiler, damit Sie sich rundum gut betreut fühlen.</p>';
 
 
+
+    public string $contact_header = 'in touch';
+    public string $contact_subheader = 'Wir freuen uns auf Ihre Anfrage!';
+    public string $contact_introtext = '<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>';
+
+    public string $reference_header = 'on';
+    public string $reference_subheader = 'Aktuelle Kundenstimmen und Referenzen';
+    public string $reference_introtext = '<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>';
+
+
+
     public static function group(): string
     {
         return 'hausverwaltung';

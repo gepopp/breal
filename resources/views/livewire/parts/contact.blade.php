@@ -1,4 +1,4 @@
-<div class="py-24 px-4 lg:px-0 lg:max-w-4xl mx-auto">
+<section>
     <div @class(['md:max-w-sm lg:max-w-lg'])>
         <x-headings>
             <x-slot name="tag">{{ $header }}</x-slot>
@@ -9,8 +9,8 @@
         </div>
     </div>
 
-    <div>
-        <livewire:subparts.timeline/>
+    <div class="py-12">
+        <livewire:contact-form/>
     </div>
 
-</div>
+</section>

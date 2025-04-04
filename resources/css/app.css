@@ -113,7 +113,7 @@ select:focus[data-flux-control] {
 
 
 p{
-    @apply !text-lg font-light;
+    @apply text-base md:text-lg font-light;
 }
 
 
@@ -225,7 +225,7 @@ p{
 
 
 section{
-    @apply py-24 px-4 lg:px-0 lg:max-w-4xl xl:max-w-6xl mx-auto;
+    @apply py-24 px-4 lg:max-w-4xl xl:max-w-6xl mx-auto;
 }
 
 .tagline:before{
@@ -243,7 +243,7 @@ section{
 }
 
 .tagline-ondark{
-    @apply text-3xl md:text-4xl xl:text-7xl font-extrabold leading-[30px] md:leading-[36px] xl:leading-[62px] align-baseline rounded tracking-wide  dark:text-white lowercase;
+    @apply text-3xl md:text-4xl xl:text-7xl font-extrabold leading-[30px] md:leading-[36px] xl:leading-[62px] align-baseline rounded tracking-wide  text-white lowercase;
 }
 
 .prose{
@@ -263,7 +263,7 @@ section{
     }
 
     ul{
-        @apply list-disc list-outside text-lg font-light my-4;
+        @apply list-disc list-outside md:text-lg font-light my-4;
 
         li{
             @apply ml-6 mb-2;
@@ -285,4 +285,13 @@ section{
 
 video::-webkit-media-controls {
     display: none;
+}
+
+
+.breakout-right-only {
+    width: calc(100vw - (50vw - 36rem));
+    /* Berechnet die Breite vom linken Rand des Parents bis zum rechten Bildschirmrand */
+    position: relative;
+    left: 0;
+    box-sizing: border-box;
 }

@@ -33,14 +33,14 @@ class LandingpageHausverwaltung extends SettingsPage
                                 Forms\Components\TextInput::make('text_image_alt')->required(),
                             ]),
                         Forms\Components\Tabs\Tab::make('Über uns')
-                        ->schema([
-                            Forms\Components\TextInput::make('about_header')->required(),
-                            Forms\Components\TextInput::make('about_subheader')->required(),
-                            Forms\Components\RichEditor::make('about_text')->required(),
-                            SettingsUpload::make('about_image')->required(),
-                            Forms\Components\TextInput::make('about_image_alt')->required(),
-                            Textarea::make('about_video_embed_code'),
-                        ]),
+                            ->schema([
+                                Forms\Components\TextInput::make('about_header')->required(),
+                                Forms\Components\TextInput::make('about_subheader')->required(),
+                                Forms\Components\RichEditor::make('about_text')->required(),
+                                SettingsUpload::make('about_image')->required(),
+                                Forms\Components\TextInput::make('about_image_alt')->required(),
+                                Textarea::make('about_video_embed_code'),
+                            ]),
                         Forms\Components\Tabs\Tab::make('Timeline')
                             ->schema([
                                 Forms\Components\TextInput::make('timeline_header')->required(),
@@ -52,9 +52,21 @@ class LandingpageHausverwaltung extends SettingsPage
                                 Forms\Components\TextInput::make('service_heading')->required(),
                                 Forms\Components\TextInput::make('service_subheading')->required(),
                                 Forms\Components\RichEditor::make('service_introtext')->required(),
-                            ])
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Referenzen')
+                            ->schema([
+                                Forms\Components\TextInput::make('reference_header')->required(),
+                                Forms\Components\TextInput::make('reference_subheader')->required(),
+                                Forms\Components\RichEditor::make('reference_introtext')->required(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Kontakt')
+                            ->schema([
+                                Forms\Components\TextInput::make('contact_header')->required(),
+                                Forms\Components\TextInput::make('contact_subheader')->required(),
+                                Forms\Components\RichEditor::make('contact_introtext')->required(),
+                            ]),
                     ])
-                ->persistTabInQueryString(true),
+                    ->persistTabInQueryString(true),
 
 
             ])->columns(1);

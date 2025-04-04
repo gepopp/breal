@@ -8,16 +8,22 @@
 ])
 
 @php
-    $classes = 'mt-4 text-xl font-bold text-logo dark:text-white';
+    $classes = 'mt-4 text-xl font-bold dark:text-white';
 @endphp
 
-<div @class(["tagged-heading mb-8"])>
+<div @class([
+        "tagged-heading mb-8",
+        "!text-white" => $ondark,
+        "text-logo-500" => !Route::is('technik.*', 'immobilien.*') && !$ondark,
+        "text-technik-500" => Route::is('technik.*') && !$ondark,
+        "text-makler-500" => Route::is('immobilien.*') && !$ondark,
+])>
     <div @class([
         "flex items-center",
         "text-logo-500" => !Route::is('technik.*', 'immobilien.*') && !$ondark,
         "text-technik-500" => Route::is('technik.*') && !$ondark,
         "text-makler-500" => Route::is('immobilien.*') && !$ondark,
-        "text-white tagline-ondark" => $ondark,
+        "!text-white tagline-ondark" => $ondark,
         "tagline" => !$ondark
         ])
          data-aos="fade">
@@ -42,7 +48,5 @@
     <?php default: ?>
     <div {{ $attributes->class($classes) }} data-aos="fade" data-aos-delay="500">{{ $slot }}</div>
     <?php endswitch; ?>
-
-
 </div>
 

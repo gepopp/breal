@@ -1,4 +1,4 @@
-<div class="px-4 md:px-0">
+<div>
     <livewire:parts.landing-hero
             company="$company"
             header="{{ $settings->hero_header }}"
@@ -36,5 +36,19 @@
             header="{{ $settings->service_heading }}"
             subheader="{{ $settings->service_subheading }}"
             text="{{ $settings->service_introtext }}"
+    />
+
+    <livewire:parts.references
+            company="$company"
+            header="{{ $settings->reference_header }}"
+            subheader="{{ $settings->reference_subheader }}"
+            text="{{ $settings->reference_introtext }}"
+    />
+
+    <livewire:parts.contact
+            company="$company"
+            header="{{ $settings->contact_header }}"
+            subheader="{{ $settings->contact_subheader }}"
+            text="{{ $settings->contact_introtext }}"
     />
 </div>

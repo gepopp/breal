@@ -1,8 +1,8 @@
-<div class="my-12 relative">
-    <div x-data>
+<div class="mt-12 relative">
+    <div x-data class="mt-12">
         <ul x-ref="list"
             data-aos="fade-up"
-            class="grid grid-cols-1 lg:grid-cols-2 lg:gap-12 max-h-[600px] overflow-y-auto pb-48 scroll-smooth">
+            class="grid grid-cols-1 lg:grid-cols-2 lg:gap-12 max-h-[600px] overflow-y-auto scroll-smooth">
             @foreach($timeline as $key => $entry)
                 <li @class(['flex space-x-4 py-4 border-b-2 border-logo'])>
                     <div class="flex justify-center items-center">
@@ -16,7 +16,7 @@
             @endforeach
         </ul>
 
-        <div class="absolute w-full h-48 bottom-0 left-0 bg-linear-to-b from-transparent via-white to-white flex justify-center items-end pb-24">
+        <div class="absolute w-full h-12 bottom-0 left-0 bg-linear-to-b from-transparent via-white dark:via-logo-950 to-white dark:to-logo-950 flex justify-center items-end">
             <svg class="size-12 text-logo cursor-pointer pointer-events-auto" x-on:click="$refs.list.scrollTop = 0"
                  data-slot="icon" fill="none" stroke-width="2" stroke="currentColor"
                  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -24,5 +24,10 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 7.5-7.5 7.5 7.5"></path>
             </svg>
         </div>
+
+        <div class="absolute w-full top-0 left-0  flex justify-center items-end">
+            <div class="relative z-[9999] w-full h-12 bg-linear-to-b from-white dark:from-logo-950 to-transparent to-95% flex-1">&nbsp;</div>
+        </div>
+
     </div>
 </div>
