@@ -3,7 +3,7 @@
         "mx-auto grid grid-cols-1 md:grid-cols-2 relative min-h-[70vh] w-full mb-24 md:mb-0"
 ])>
         <div @class(['flex justify-center items-center md:min-h-[70vh]'])>
-            <div @class(['md:max-w-sm lg:max-w-lg px-4'])>
+            <div @class(['md:max-w-sm lg:max-w-lg px-4 my-24'])>
                 <div data-aos="fade" class="prose">
                     {!! html_entity_decode( $text ) !!}
                 </div>

@@ -2,7 +2,7 @@
         "mx-auto grid grid-cols-1 md:grid-cols-2 relative w-full px-4"
 ])>
     <div @class(['flex justify-center items-center md:min-h-[70vh] mt-12 md:mt-0'])>
-        <div @class(['md:max-w-sm lg:max-w-lg'])>
+        <div @class(['md:max-w-sm lg:max-w-lg my-48'])>
             <x-headings>
                 <x-slot name="tag">{{ $header }}</x-slot>
                 {{ $subheader }}
