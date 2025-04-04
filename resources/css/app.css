@@ -113,7 +113,7 @@ select:focus[data-flux-control] {
 
 
 p{
-    @apply text-base md:text-lg font-light;
+    @apply text-base xl:text-lg font-light;
 }
 
 

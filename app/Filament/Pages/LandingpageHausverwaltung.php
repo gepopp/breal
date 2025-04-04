@@ -28,9 +28,27 @@ class LandingpageHausverwaltung extends SettingsPage
                                 Forms\Components\TextInput::make('hero_header')->required(),
                                 Forms\Components\TextInput::make('hero_subheader')->required(),
                                 Forms\Components\RichEditor::make('hero_introtext')->required(),
-                                Forms\Components\RichEditor::make('text')->required(),
-                                SettingsUpload::make('text_image')->required(),
-                                Forms\Components\TextInput::make('text_image_alt')->required(),
+
+                                Forms\Components\ToggleButtons::make('intro_layout')
+                                    ->grouped()
+                                    ->reactive()
+                                    ->options(['two_columns' => 'two_columns', 'text_image' => 'text_image']),
+
+                                Forms\Components\Section::make('two_columns')
+                                    ->schema([
+                                        Forms\Components\RichEditor::make('hero_text_column_one')->required(),
+                                        Forms\Components\RichEditor::make('hero_text_column_two')->required(),
+                                    ])
+                                    ->visible(fn($get) => $get('intro_layout') === 'two_columns'),
+
+                                Forms\Components\Section::make('text_image')
+                                    ->schema([
+                                        Forms\Components\RichEditor::make('text')->required(),
+                                        SettingsUpload::make('text_image')->required(),
+                                        Forms\Components\TextInput::make('text_image_alt')->required(),
+                                    ])
+                                    ->visible(fn($get) => $get('intro_layout') === 'text_image'),
+
                             ]),
                         Forms\Components\Tabs\Tab::make('Über uns')
                             ->schema([

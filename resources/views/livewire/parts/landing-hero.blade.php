@@ -2,7 +2,7 @@
         "mx-auto grid grid-cols-1 md:grid-cols-2 relative w-full px-4"
 ])>
     <div @class(['flex justify-center items-center md:min-h-[70vh] mt-12 md:mt-0'])>
-        <div @class(['md:max-w-sm lg:max-w-lg my-48'])>
+        <div @class(['md:max-w-sm lg:max-w-lg lg:my-48'])>
             <x-headings>
                 <x-slot name="tag">{{ $header }}</x-slot>
                 {{ $subheader }}
@@ -15,7 +15,7 @@
     <div @class(['order-first md:order-last relative overflow-hidden'])>
 
         @if(!is_null($media))
-            <img src="{{ $media?->getUrl() }}" srcset="{{ $media?->getSrcset() }}" alt="{{ $alt }}" data-aos="fade"
+            <img src="{{ $media?->getUrl('layout') }}" srcset="{{ $media?->getSrcset() }}" alt="{{ $alt }}" data-aos="fade"
                  data-aos-delay="600" class="h-full w-auto object-cover"/>
         @endif
 

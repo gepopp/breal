@@ -8,11 +8,22 @@
             alt="{{ $settings->hero_image_alt }}"
     />
 
-    <livewire:parts.image-text
-            text="{{ $settings->text }}"
-            image="{{ $settings->text_image }}"
-            alt="{{ $settings->text_image_alt }}"
-    />
+    @if($settings->intro_layout == 'text_image')
+        <livewire:parts.image-text
+                text="{{ $settings->text }}"
+                image="{{ $settings->text_image }}"
+                alt="{{ $settings->text_image_alt }}"
+        />
+    @endif
+
+
+    @if($settings->intro_layout == 'two_columns')
+        <livewire:parts.two-column-text
+                company="$company"
+                columnLeft="{{ $settings->hero_text_column_one }}"
+                columnRight="{{ $settings->hero_text_column_two }}"
+        />
+    @endif
 
 
     <livewire:parts.about

@@ -1,4 +1,4 @@
-<div @class(['bg-logo dark:bg-logo-950 pb-24 px-4'])>
+<div @class(['bg-logo dark:bg-logo-950 py-24 px-4'])>
     <div @class([
         "mx-auto grid grid-cols-1 md:grid-cols-2 relative w-full"
 ])>

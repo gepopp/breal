@@ -25,7 +25,7 @@
                 <h5 class="font-semibold !text-base">
                     {{ $ref->client_name }}
                 </h5>
-                <p class="!text-sm">{{ $ref->testimonial }}</p>
+                <p class="!text-sm !text-light">{{ $ref->testimonial }}</p>
             </div>
         </div>
     </div>
