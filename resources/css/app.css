@@ -239,6 +239,10 @@ p{
     @apply   text-logo bg-white pt-px xl:pt-[2px] align-baseline rounded px-2 -mb-2 tracking-wide mr-2 -mt-1.5;
 }
 
+.tagline{
+    @apply text-3xl md:text-4xl xl:text-7xl font-extrabold leading-[30px] md:leading-[36px] xl:leading-[62px] align-baseline rounded tracking-wide lowercase;
+}
+
 .tagline-ondark{
     @apply text-3xl md:text-4xl xl:text-7xl font-extrabold leading-[30px] md:leading-[36px] xl:leading-[62px] align-baseline rounded tracking-wide  text-white lowercase;
 }
