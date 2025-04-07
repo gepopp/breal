@@ -16,7 +16,7 @@
             @endforeach
         </ul>
 
-        <div class="absolute w-full h-12 bottom-0 left-0 bg-linear-to-b from-transparent via-white dark:via-logo-950 to-white dark:to-logo-950 flex justify-center items-end">
+        <div class="absolute md:hidden w-full h-12 bottom-0 left-0 bg-linear-to-b from-transparent via-white dark:via-logo-950 to-white dark:to-logo-950 flex justify-center items-end">
             <svg class="size-12 text-logo cursor-pointer pointer-events-auto" x-on:click="$refs.list.scrollTop = 0"
                  data-slot="icon" fill="none" stroke-width="2" stroke="currentColor"
                  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -25,7 +25,7 @@
             </svg>
         </div>
 
-        <div class="absolute w-full top-0 left-0  flex justify-center items-end">
+        <div class="absolute md:hidden w-full top-0 left-0  flex justify-center items-end">
             <div class="relative z-[9999] w-full h-12 bg-linear-to-b from-white dark:from-logo-950 to-transparent to-95% flex-1">&nbsp;</div>
         </div>
 
