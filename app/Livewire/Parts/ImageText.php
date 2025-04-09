@@ -9,7 +9,7 @@ class ImageText extends Component
 {
     public string $text;
 
-    public int  $image;
+    public int|array  $image;
 
     public string $alt;
 

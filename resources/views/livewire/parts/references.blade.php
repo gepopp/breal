@@ -1,18 +1,16 @@
-<div @class(['bg-logo dark:bg-logo-950 pb-24'])>
-    <div class="px-4 py-24 lg:max-w-4xl xl:max-w-6xl mx-auto">
-        <div @class(['flex items-center mt-12 md:mt-0'])>
-            <div @class(['md:max-w-sm lg:max-w-lg'])>
-                <x-headings :ondark="true">
-                    <x-slot name="tag">{{ $header }}</x-slot>
-                    {{ $subheader }}
-                </x-headings>
-                <div data-aos="fade" data-aos-delay="600" class="prose !text-white">
-                    {!! html_entity_decode( $text ) !!}
-                </div>
+<x-section class="bg-logo">
+    <div @class(['flex items-center mt-12 md:mt-0'])>
+        <div @class(['md:max-w-sm lg:max-w-lg'])>
+            <x-headings :ondark="true">
+                <x-slot name="tag">{{ $header }}</x-slot>
+                {{ $subheader }}
+            </x-headings>
+            <div data-aos="fade" data-aos-delay="600" class="prose !text-white">
+                {!! html_entity_decode( $text ) !!}
             </div>
         </div>
     </div>
-    <div class="lg:max-w-4xl xl:max-w-6xl mx-auto min-h-[60vh] px-4">
+    <div class="lg:max-w-4xl xl:max-w-6xl mx-auto min-h-[60vh] mt-12">
         <div class="min-h-[60vh] box-border hidden xl:block relative left-0 w-[calc(100vw-(50vw-36rem))] pr-6">
             <div class="swiper swiperXl">
                 <div class="swiper-wrapper">
@@ -102,7 +100,8 @@
             </script>
         </div>
     </div>
-</div>
+</x-section>
+
 @assets
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

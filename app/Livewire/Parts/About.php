@@ -15,9 +15,12 @@ class About extends Component
 
     public string $text;
 
-    public int $image;
+    public int|array $image;
 
     public string $alt;
+
+
+    public ?string $video;
 
 
     public function render()
