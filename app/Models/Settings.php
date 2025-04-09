@@ -17,5 +17,9 @@ class Settings extends SettingsProperty implements HasMedia
     {
         $this->addMediaConversion('layout')
             ->width(1920);
+
+        $this->addMediaConversion('slider')
+            ->width(1600)
+            ->height(1200);
     }
 }

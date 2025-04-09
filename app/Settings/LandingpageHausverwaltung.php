@@ -6,7 +6,7 @@ use Spatie\LaravelSettings\Settings;
 
 class LandingpageHausverwaltung extends Settings
 {
-    public int $hero_image = 0;
+    public ?array $hero_image = null;
 
     public string $hero_image_alt = 'Bontus Eybel Intro Bild';
 

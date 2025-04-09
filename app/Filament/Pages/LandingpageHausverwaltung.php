@@ -23,7 +23,7 @@ class LandingpageHausverwaltung extends SettingsPage
                     ->schema([
                         Forms\Components\Tabs\Tab::make('Intro')
                             ->schema([
-                                SettingsUpload::make('hero_image')->required(),
+                                SettingsUpload::make('hero_image')->multiple()->reorderable()->panelLayout('grid')->required(),
                                 Forms\Components\TextInput::make('hero_image_alt')->required(),
                                 Forms\Components\TextInput::make('hero_header')->required(),
                                 Forms\Components\TextInput::make('hero_subheader')->required(),
