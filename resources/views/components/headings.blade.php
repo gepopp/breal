@@ -8,23 +8,24 @@
 ])
 
 @php
-    $classes = 'text-xl font-logo font-bold dark:text-white';
+    $classes = 'text-xl font-bold dark:text-white';
 @endphp
 
 <div @class([
-        "tagged-heading mb-4 font-logo",
+        "tagged-heading mb-4",
         "!text-white" => $ondark,
         "text-logo-500" => !Route::is('technik.*', 'immobilien.*') && !$ondark,
         "text-technik-500" => Route::is('technik.*') && !$ondark,
         "text-makler-500" => Route::is('immobilien.*') && !$ondark,
 ])>
     <div @class([
-        "flex items-center font-logo",
+        "flex items-center font-logo text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-extrabold rounded tracking-wide lowercase",
+        "before:content-['be'] before:h-[32px] before:mb-[6px] before:md:h-[36px] before:lg:h-[42px] before:xl:h-[62px] before:align-baseline before:rounded before:px-2 before:tracking-wide  before:bg-logo before:mr-2",
         "text-logo-500" => !Route::is('technik.*', 'immobilien.*') && !$ondark,
         "text-technik-500" => Route::is('technik.*') && !$ondark,
         "text-makler-500" => Route::is('immobilien.*') && !$ondark,
-        "!text-white tagline-ondark" => $ondark,
-        "tagline" => !$ondark
+        "before:bg-white before:text-logo" => $ondark,
+        "before:text-white before:bg-logo" => !$ondark
         ])
          data-aos="fade">
         <span class="font-logo">{{$tag}}</span>

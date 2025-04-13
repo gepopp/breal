@@ -238,21 +238,6 @@ p{
     @apply py-24 px-4 lg:max-w-4xl xl:max-w-6xl mx-auto;
 }
 
-
-.tagline, .tagline-ondark{
-    @apply text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-extrabold rounded tracking-wide lowercase;
-}
-
-
-.tagline:before, .tagline-ondark:before{
-    content: 'be';
-    @apply   text-white dark:bg-white align-baseline rounded px-2 tracking-wide  bg-logo mr-2 h-[32px] mb-[6px] md:h-[36px] lg:h-[42px] xl:h-[62px];
-}
-
-.tagline-ondark:before{
-    @apply !text-logo !bg-white;
-}
-
 .prose{
 
     @apply text-logo dark:text-white;
