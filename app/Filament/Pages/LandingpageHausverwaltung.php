@@ -46,7 +46,7 @@ class LandingpageHausverwaltung extends SettingsPage
                                 Forms\Components\Section::make('text_image')
                                     ->schema([
                                         Forms\Components\RichEditor::make('text')->required(),
-                                        SettingsUpload::make('text_image')->required(),
+                                        SettingsUpload::make('text_image')->multiple()->reorderable()->panelLayout('grid')->required(),
                                         Forms\Components\TextInput::make('text_image_alt')->required(),
                                     ])
                                     ->visible(fn($get) => $get('intro_layout') === 'text_image'),

@@ -13,7 +13,7 @@
     @if($settings->intro_layout == 'text_image')
         <livewire:parts.image-text
                 text="{{ $settings->text }}"
-                image="{{ $settings->text_image }}"
+                :image="$settings->text_image"
                 alt="{{ $settings->text_image_alt }}"
         />
     @endif

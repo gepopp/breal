@@ -1,8 +1,25 @@
 <div>
     <div x-data x-on:setheight.window="$refs.gridcon.style.minHeight = `${$event.detail}px`">
-        <div x-ref="gridcon" @class([
+        <div
+                x-data="{
+        init(){
+            var height = $refs.textCol.clientHeight;
+            $refs.wrapper.style.height = `${height}px`;
+
+            setTimeout(() => $dispatch('setheight', height), 500);
+
+            window.addEventListener('resize', () => {
+                var height = $refs.textCol.clientHeight;
+                $refs.wrapper.style.height = `${height}px`
+                $dispatch('setheight', height);
+            })
+
+        }
+    }"
+                x-ref="textCol"
+                @class([
         "mx-auto grid grid-cols-1 md:grid-cols-2 relative min-h-[70vh] w-full mb-24 md:mb-0"
-])>
+        ])>
             <div @class(['flex justify-center items-center md:min-h-[70vh]'])>
                 <div @class(['md:max-w-sm lg:max-w-lg px-4 my-24'])>
                     <div data-aos="fade" class="prose">
@@ -12,11 +29,37 @@
             </div>
             <div @class(['order-first relative overflow-hidden my-8 md:my-0'])>
 
-                @if(!is_null($media))
-                    <img src="{{ $media?->getUrl() }}" srcset="{{ $media?->getSrcset() }}" alt="{{ $alt }}"
-                         data-aos="fade"
+                @if($media?->count() == 1)
+                    @php
+                        $media = $media->first();
+                    @endphp
+                    <img src="{{ $media?->getUrl('layout') }}" srcset="{{ $media?->getSrcset() }}" alt="{{ $alt }}" data-aos="fade"
                          data-aos-delay="600" class="h-full w-auto object-cover"/>
+
+                @elseif($media?->count() > 1)
+
+                    <div x-ref="swiper" class="swiper swiperSecond min-h-full">
+                        <div x-ref="wrapper" class="swiper-wrapper min-h-full flex-1">
+                            @foreach($media as $image)
+                                <div class="swiper-slide min-h-full">
+                                    <img scr="{{ $image->getUrl('slider') }}" alt="{{ $alt }}" srcset="{{ $image->getSrcset() }}" class="h-full w-auto object-cover"/>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <script>
+                        const swiperSecond = new Swiper('.swiperSecond', {
+                            // Optional parameters
+                            loop: true,
+                            slidesPerView: 1,
+                            speed: 800,
+                            autoplay: {
+                                delay: 2500
+                            }
+                        });
+                    </script>
                 @endif
+
 
                 <div class="absolute top-0 right-0 h-full hidden md:block flex justify-end">
                     <svg @class(['text-white dark:text-logo-950 h-full w-auto shadow ml-auto -mr-px relative z-[9999]']) fill="currentColor"
