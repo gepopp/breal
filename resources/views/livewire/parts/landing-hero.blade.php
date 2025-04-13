@@ -12,7 +12,7 @@
             </div>
         </div>
     </div>
-    <div @class(['order-first md:order-last relative overflow-hidden'])>
+    <div @class(['order-first md:order-last relative overflow-hidden font-logo'])>
 
         @if($media?->count() == 1)
             @php
@@ -23,7 +23,7 @@
 
         @elseif($media?->count() > 1)
 
-            <div class="swiper">
+            <div class="swiper swiperSolo">
                 <div class="swiper-wrapper">
                     @foreach($media as $image)
                         <div class="swiper-slide">
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <script>
-                const swiperXS = new Swiper('.swiper', {
+                const swiperSolo = new Swiper('.swiperSolo', {
                     // Optional parameters
                     loop: true,
                     slidesPerView: 1,

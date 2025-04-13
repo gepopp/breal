@@ -1,8 +1,24 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-BcIbfcGz.css",
+    "file": "assets/app-Ck510BWh.css",
     "src": "resources/css/app.css",
     "isEntry": true
+  },
+  "resources/fonts/BontusEybelLogoFont.otf": {
+    "file": "assets/BontusEybelLogoFont-Cyj7U-wE.otf",
+    "src": "resources/fonts/BontusEybelLogoFont.otf"
+  },
+  "resources/fonts/EmBauhaus-W00-Bold.ttf": {
+    "file": "assets/EmBauhaus-W00-Bold-DQbWzHOJ.ttf",
+    "src": "resources/fonts/EmBauhaus-W00-Bold.ttf"
+  },
+  "resources/fonts/EmBauhaus-W00-Bold.woff": {
+    "file": "assets/EmBauhaus-W00-Bold-BvlV_mxs.woff",
+    "src": "resources/fonts/EmBauhaus-W00-Bold.woff"
+  },
+  "resources/fonts/EmBauhaus-W00-Bold.woff2": {
+    "file": "assets/EmBauhaus-W00-Bold-B6-9Qoxx.woff2",
+    "src": "resources/fonts/EmBauhaus-W00-Bold.woff2"
   },
   "resources/js/app.js": {
     "file": "assets/app-Bu_0GteW.js",
