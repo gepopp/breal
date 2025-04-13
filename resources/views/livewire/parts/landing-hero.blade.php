@@ -4,11 +4,14 @@
     <div x-data="{
         init(){
             var height = $refs.textCol.clientHeight;
-            $refs.wrapper.style.height = `${height}px`
+            $refs.wrapper.style.height = `${height}px`;
 
-            window.on('resize', () => {
+            setTimeout(() => $dispatch('setheight', height), 500);
+
+            window.addEventListener('resize', () => {
                 var height = $refs.textCol.clientHeight;
                 $refs.wrapper.style.height = `${height}px`
+                $dispatch('setheight', height);
             })
 
         }
@@ -51,6 +54,9 @@
                     loop: true,
                     slidesPerView: 1,
                     speed: 800,
+                    autoplay: {
+                        delay: 2500
+                    }
                 });
             </script>
         @endif

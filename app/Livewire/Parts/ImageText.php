@@ -8,9 +8,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 class ImageText extends Component
 {
     public string $text;
-
     public int|array  $image;
-
     public string $alt;
 
     public function render()
