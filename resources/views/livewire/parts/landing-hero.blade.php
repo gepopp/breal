@@ -1,7 +1,20 @@
 <div @class([
         "mx-auto grid grid-cols-1 md:grid-cols-2 relative w-full"
 ])>
-    <div @class(['flex justify-center items-center md:min-h-[70vh] mt-12 md:mt-0'])>
+    <div x-data="{
+        init(){
+            var height = $refs.textCol.clientHeight;
+            $refs.wrapper.style.height = `${height}px`
+
+            window.on('resize', () => {
+                var height = $refs.textCol.clientHeight;
+                $refs.wrapper.style.height = `${height}px`
+            })
+
+        }
+    }"
+         x-ref="textCol"
+            @class(['flex justify-center items-center md:min-h-[70vh] mt-12 md:mt-0'])>
         <div @class(['md:max-w-sm lg:max-w-lg lg:my-48 px-4'])>
             <x-headings>
                 <x-slot name="tag">{{ $header }}</x-slot>
@@ -23,10 +36,10 @@
 
         @elseif($media?->count() > 1)
 
-            <div class="swiper swiperSolo">
-                <div class="swiper-wrapper">
+            <div x-ref="swiper" class="swiper swiperSolo min-h-full">
+                <div x-ref="wrapper" class="swiper-wrapper min-h-full flex-1">
                     @foreach($media as $image)
-                        <div class="swiper-slide">
+                        <div class="swiper-slide min-h-full">
                             <img scr="{{ $image->getUrl('slider') }}" alt="{{ $alt }}" srcset="{{ $image->getSrcset() }}" class="h-full w-auto object-cover"/>
                         </div>
                     @endforeach
@@ -38,9 +51,6 @@
                     loop: true,
                     slidesPerView: 1,
                     speed: 800,
-                    autoplay: {
-                        delay: 2000
-                    }
                 });
             </script>
         @endif
