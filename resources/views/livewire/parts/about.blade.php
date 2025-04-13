@@ -11,18 +11,37 @@
                 </div>
             </div>
         </div>
-        <div @class(['order-first md:order-last -mx-4 md:mx-0 md:ml-0 relative overflow-hidden flex items-center p-4'])>
-            @if(!is_null($media) && is_null($video))
+        <div @class(['order-first md:order-last -mx-4 md:mx-0 md:ml-0 relative overflow-hidden flex items-center p-4 md:p-0 relative'])>
+            @if(!is_null($media))
                 <img src="{{ $media?->getUrl() }}" srcset="{{ $media?->getSrcset() }}" alt="{{ $alt }}" data-aos="fade"
                      data-aos-delay="600"
-                     class="aspect-video xl:max-w-3/4 xl:mx-auto object-cover rounded-xl shadow-lg shadow-white/10"/>
+                     class="aspect-video object-cover rounded-xl shadow-lg shadow-white/10"/>
+
+                @if(!is_null($video))
+
+                    <div class="absolute inset-0 flex justify-center items-center text-logo">
+                        <flux:modal.trigger name="video">
+                            <svg class="size-24" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
+                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z"></path>
+                            </svg>
+                        </flux:modal.trigger>
+                    </div>
+
+                    <flux:modal name="video" class="!p-0 !border-logo-950 !w-[1080px] !max-w-full !overflow-hidden !bg-logo-950">
+                        <div class="aspect-video w-[1080px] max-w-full object-cover overflow-hidden z-[9999]">
+                            {!! html_entity_decode( $video ) !!}
+                        </div>
+                    </flux:modal>
+
+                @endif
+
             @endif
 
-            @if(!is_null($video))
-                <div class="aspect-video w-full xl:mx-auto object-cover rounded-xl shadow-lg shadow-white/10 overflow-hidden z-[9999]">
-                    {!! html_entity_decode( $video ) !!}
-                </div>
-            @endif
+
         </div>
     </div>
     <div class="flex justify-center mt-8">

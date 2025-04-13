@@ -3,17 +3,26 @@
         <div
                 x-data="{
         init(){
-            var height = $refs.textCol.clientHeight;
-            $refs.wrapper.style.height = `${height}px`;
+             if(window.innerWidth > 767){
+                 var height = $refs.textCol.clientHeight;
+                 $refs.wrapper.style.height = `${height}px`;
+                 setTimeout(() => $dispatch('setheight', height), 500);
+            }else{
+               $refs.wrapper.style.height = `auto`;
+               setTimeout(() => $dispatch('setheight', height), 500);
+            }
 
-            setTimeout(() => $dispatch('setheight', height), 500);
 
             window.addEventListener('resize', () => {
-                var height = $refs.textCol.clientHeight;
-                $refs.wrapper.style.height = `${height}px`
-                $dispatch('setheight', height);
+                 if(window.innerWidth > 767){
+                     var height = $refs.textCol.clientHeight;
+                     $refs.wrapper.style.height = `${height}px`;
+                     setTimeout(() => $dispatch('setheight', height), 500);
+                }else{
+                   $refs.wrapper.style.height = `auto`;
+                   setTimeout(() => $dispatch('setheight', height), 500);
+                }
             })
-
         }
     }"
                 x-ref="textCol"
@@ -21,7 +30,7 @@
         "mx-auto grid grid-cols-1 md:grid-cols-2 relative min-h-[70vh] w-full mb-24 md:mb-0"
         ])>
             <div @class(['flex justify-center items-center md:min-h-[70vh]'])>
-                <div @class(['md:max-w-sm lg:max-w-lg px-4 my-24'])>
+                <div @class(['md:max-w-sm lg:max-w-lg px-4 lg:my-24'])>
                     <div data-aos="fade" class="prose">
                         {!! html_entity_decode( $text ) !!}
                     </div>

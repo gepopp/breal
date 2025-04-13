@@ -3,15 +3,26 @@
 ])>
     <div x-data="{
         init(){
-            var height = $refs.textCol.clientHeight;
-            $refs.wrapper.style.height = `${height}px`;
 
-            setTimeout(() => $dispatch('setheight', height), 500);
+            if(window.innerWidth > 767){
+                 var height = $refs.textCol.clientHeight;
+                 $refs.wrapper.style.height = `${height}px`;
+                 setTimeout(() => $dispatch('setheight', height), 500);
+            }else{
+               $refs.wrapper.style.height = `auto`;
+               setTimeout(() => $dispatch('setheight', height), 500);
+            }
+
 
             window.addEventListener('resize', () => {
-                var height = $refs.textCol.clientHeight;
-                $refs.wrapper.style.height = `${height}px`
-                $dispatch('setheight', height);
+                 if(window.innerWidth > 767){
+                     var height = $refs.textCol.clientHeight;
+                     $refs.wrapper.style.height = `${height}px`;
+                     setTimeout(() => $dispatch('setheight', height), 500);
+                }else{
+                   $refs.wrapper.style.height = `auto`;
+                   setTimeout(() => $dispatch('setheight', height), 500);
+                }
             })
 
         }
