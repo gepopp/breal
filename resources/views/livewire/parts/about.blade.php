@@ -40,8 +40,6 @@
                 @endif
 
             @endif
-
-
         </div>
     </div>
     <div class="flex justify-center mt-8">

@@ -291,3 +291,7 @@ video::-webkit-media-controls {
 iframe{
     @apply aspect-video w-full h-auto;
 }
+
+.swiper-pagination-bullet-active{
+    @apply !bg-logo;
+}

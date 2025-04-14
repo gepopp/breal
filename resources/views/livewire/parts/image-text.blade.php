@@ -1,5 +1,5 @@
 <div>
-    <div x-data x-on:setheight.window="$refs.gridcon.style.minHeight = `${$event.detail}px`">
+    <div>
         <div
                 x-data="{
         init(){

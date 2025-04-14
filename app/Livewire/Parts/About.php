@@ -2,11 +2,14 @@
 
 namespace App\Livewire\Parts;
 
+use App\Traits\SplitsHtmlText;
 use Livewire\Component;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class About extends Component
 {
+    use SplitsHtmlText;
+
     public string $company;
 
     public string $header;

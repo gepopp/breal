@@ -17,7 +17,7 @@ class TimelineFactory extends Factory
     public function definition(): array
     {
         return [
-            'year' => $this->faker->randomNumber(2, true),
+            'year' => $this->faker->randomNumber(4, true),
             'title' => $this->faker->sentence(),
             'description' => $this->faker->paragraph(),
         ];

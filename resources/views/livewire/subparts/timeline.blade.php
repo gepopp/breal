@@ -1,33 +1,60 @@
 <div class="mt-12 relative">
-    <div x-data class="mt-12">
-        <ul x-ref="list"
-            data-aos="fade-up"
-            class="grid grid-cols-1 lg:grid-cols-2 lg:gap-12 max-h-[600px] overflow-y-auto scroll-smooth">
-            @foreach($timeline as $key => $entry)
-                <li @class(['flex space-x-4 py-4 border-b-2 border-logo'])>
-                    <div class="flex justify-center items-center">
-                        <p @class(['bg-logo text-white !text-3xl !font-bold font-extrabold leading-[32px] px-1.5 align-baseline rounded tracking-wide'])>{{ $entry->year }}</p>
-                    </div>
-                    <div>
-                        <h5 class="font-bold text-xl">{{ $entry->title }}</h5>
-                        <p>{{ $entry->description }}</p>
-                    </div>
-                </li>
-            @endforeach
-        </ul>
+    <div data-aos="fade" class="mt-12 md:mt-24">
 
-        <div class="absolute md:hidden w-full h-12 bottom-0 left-0 bg-linear-to-b from-transparent via-white dark:via-logo-950 to-white dark:to-logo-950 flex justify-center items-end">
-            <svg class="size-12 text-logo cursor-pointer pointer-events-auto" x-on:click="$refs.list.scrollTop = 0"
-                 data-slot="icon" fill="none" stroke-width="2" stroke="currentColor"
-                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 18.75 7.5-7.5 7.5 7.5"></path>
-                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 7.5-7.5 7.5 7.5"></path>
-            </svg>
-        </div>
+        <div class="inset-shadow-sm inset-shadow-logo/50 border border-logo relative">
+            <div class="swiper timelineswiper max-h-[60vh]">
+                <div class="swiper-wrapper  md:aspect-video">
+                    @foreach($timeline as $key => $entry)
+                        <div class="swiper-slide bg-transparent">
+                            <div class="w-full h-full md:aspect-video flex justify-center items-center">
+                                <div class="flex flex-col justify-center items-center max-w-3/4">
+                                <span @class(['text-logo font-logo text-4xl md:text-7xl font-extrabold px-1.5 align-baseline rounded tracking-wide'])>
+                                    {{ $entry->year }}
+                                </span>
+                                    <div>
+                                        <h5 class="font-bold text-sm md:text-xl text-center text-logo">{{ $entry->title }}</h5>
+                                        <p class="text-center mt-4 text-xs">{{ $entry->description }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+            <div class="prev-slide cursor-pointer absolute top-0 left-1/2 -translate-y-1/2 -translate-x-1/2 w-12 aspect-square rounded-full bg-logo text-white flex justify-center items-center z-[9999] shadow-lg">
+                <svg class="size-10 mb-1" data-slot="icon" fill="none" stroke-width="2" stroke="currentColor"
+                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"></path>
+                </svg>
+            </div>
 
-        <div class="absolute md:hidden w-full top-0 left-0  flex justify-center items-end">
-            <div class="relative z-[9999] w-full h-12 bg-linear-to-b from-white dark:from-logo-950 to-transparent to-95% flex-1">&nbsp;</div>
+            <div class="next-slide cursor-pointer absolute bottom-0 left-1/2 translate-y-1/2 -translate-x-1/2 w-12 right-0 aspect-square rounded-full bg-logo text-white flex justify-center items-center z-[9999] shadow-lg">
+                <svg class="size-10 mt-1" data-slot="icon" fill="none" stroke-width="2" stroke="currentColor"
+                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"></path>
+                </svg>
+            </div>
+
         </div>
+        <script>
+            const timelineSwiper = new Swiper('.timelineswiper', {
+                loop: true,
+                slidesPerView: 1,
+                speed: 800,
+                direction: "vertical",
+                spaceBetween: 30,
+                navigation: {
+                    nextEl: ".next-slide",
+                    prevEl: ".prev-slide",
+                    clickable: true
+                },
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+            })
+        </script>
 
     </div>
 </div>

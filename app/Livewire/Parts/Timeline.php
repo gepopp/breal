@@ -2,10 +2,15 @@
 
 namespace App\Livewire\Parts;
 
+use App\Traits\SplitsHtmlText;
+use DragonCode\Support\Facades\Helpers\Str;
 use Livewire\Component;
 
 class Timeline extends Component
 {
+    use SplitsHtmlText;
+
+
     public string $company;
 
     public string $header;
@@ -17,6 +22,7 @@ class Timeline extends Component
 
     public function render()
     {
-        return view('livewire.parts.timeline');
+        $preparedText = $this->prepareText();
+        return view('livewire.parts.timeline', compact('preparedText'));
     }
 }
