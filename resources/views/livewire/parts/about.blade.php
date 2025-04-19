@@ -4,7 +4,7 @@
             <div @class(['md:max-w-sm lg:max-w-lg'])>
                 <x-headings :ondark="true">
                     <x-slot name="tag">{{ $header }}</x-slot>
-                    {{ $subheader }}
+                    {!! $subheader !!}
                 </x-headings>
                 <div data-aos="fade" data-aos-delay="600" class="prose !text-white">
                     {!! html_entity_decode( $text ) !!}

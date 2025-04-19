@@ -1,16 +1,24 @@
 <x-section class="bg-logo">
     <div @class(['flex items-center mt-12 md:mt-0'])>
-        <div @class(['md:max-w-sm lg:max-w-lg'])>
+        <div @class(['md:max-w-sm lg:max-w-lg' => $preparedText, 'max-w-full'])>
             <x-headings :ondark="true">
                 <x-slot name="tag">{{ $header }}</x-slot>
-                {{ $subheader }}
+                {!! $subheader !!}
             </x-headings>
-            <div data-aos="fade" data-aos-delay="600" class="prose !text-white">
-                {!! html_entity_decode( $text ) !!}
+            <div data-aos="fade" data-aos-delay="600" class="prose max-w-full !text-white">
+
+                @if(!is_array($preparedText))
+                    {!! html_entity_decode( $preparedText ) !!}
+                @else
+                    <div class="grid grid-cols-1 md:grid-cols-2 md:gap-12 w-full">
+                        <div>{!! $preparedText['firstHalf'] !!}</div>
+                        <div>{!! $preparedText['secondHalf'] !!}</div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
-    <div class="lg:max-w-4xl xl:max-w-6xl mx-auto min-h-[60vh] mt-12">
+    <div class="lg:max-w-4xl xl:max-w-6xl mx-auto min-h-[60vh] mt-12 md:mt-24">
         <div class="min-h-[60vh] box-border hidden xl:block relative left-0 w-[calc(100vw-(50vw-36rem))] pr-6">
             <div class="swiper swiperXl">
                 <div class="swiper-wrapper">
