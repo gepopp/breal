@@ -81,7 +81,7 @@ class AdminPanelProvider extends PanelProvider
                     // (optional) Override the panel slug to be used in the oauth routes. Defaults to the panel ID.
                     ->slug('admin')
                     // (optional) Enable/disable registration of new (socialite-) users.
-                    ->registration(false)
+                    ->registration(true)
                     // (optional) Enable/disable registration of new (socialite-) users using a callback.
                     // In this example, a login flow can only continue if there exists a user (Authenticatable) already.
                     //->registration(fn (string $provider, SocialiteUserContract $oauthUser, ?Authenticatable $user) => (bool) $user)
