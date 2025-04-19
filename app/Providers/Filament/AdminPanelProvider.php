@@ -70,8 +70,13 @@ class AdminPanelProvider extends PanelProvider
                             ->color(Color::hex('#2f2a6b'))
                             ->outlined(false)
                             ->stateless(false)
-                            ->scopes(['...'])
-                            ->with(['...']),
+                            ->scopes( [
+                                'w_member_social',
+                                'r_basicprofile',
+                                'r_emailaddress',
+                                'rw_organization_admin',
+                                'w_organization_social',
+                            ] ),
                     ])
                     // (optional) Override the panel slug to be used in the oauth routes. Defaults to the panel ID.
                     ->slug('admin')
