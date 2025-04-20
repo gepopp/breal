@@ -1,4 +1,4 @@
-<section>
+<x-section>
     <div @class("pb-24 border-b border-gray-200")>
         <h2 @class([
         "font-bold text-3xl sm:text-5xl lg:text-7xl mb-8",
@@ -50,4 +50,4 @@
 
     </div>
 
-</section>
+</x-section>

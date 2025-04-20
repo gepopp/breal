@@ -24,10 +24,10 @@
 
         <div x-intersect.once="initSlider" class="relative max-w-full overflow-hidden">
             <div class="swiper max-w-screen timelineswiper max-h-[60vh]">
-                <div class="swiper-wrapper w-full  md:aspect-video">
+                <div class="swiper-wrapper w-full">
                     @foreach($timeline as $key => $entry)
                         <div class="swiper-slide max-w-screen bg-transparent">
-                            <div class="inset-0 md:aspect-video flex justify-center items-center px-4 sm:px-8">
+                            <div class="inset-0 flex justify-center items-center px-4 sm:px-8">
                                 <div class="flex md:max-w-3/4 relative">
                                     <div class="w-1/3 lg:w-1/2">
                                         <img lazy src="{{ $entry->getFirstMediaUrl('*') }}" class="aspect-square w-full object-cover" alt="{{ $entry->title }}"/>
@@ -102,8 +102,6 @@
             // Container-Element abrufen
             const container = this.$refs.indices;
             const element = container.children[index + 1];
-
-            console.log(element);
 
             if (!element) return;
 

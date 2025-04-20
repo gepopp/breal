@@ -45,7 +45,7 @@
             text="{{ $settings->timeline_intro }}"
     />
 
-    <livewire:parts.service
+    <livewire:parts.service-v2
             company="$company"
             header="{{ $settings->service_heading }}"
             subheader="{{ $settings->service_subheading }}"

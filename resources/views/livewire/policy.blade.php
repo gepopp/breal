@@ -8,7 +8,7 @@ title('Bontus Eybel Immobilien - Datenschutzerklärung');
 state();
 
 ?>
-<section >
+<x-section>
     <div >
         <span ></span>
         <div >
@@ -134,4 +134,4 @@ state();
             </div>
         </div>
     </div>
-</section>
+</x-section>

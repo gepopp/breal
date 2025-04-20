@@ -1,3 +1,7 @@
+import Fuse from 'fuse.js';
+window.Fuse = Fuse;
+
+
 import.meta.glob([
     '../fonts/**',
 ]);
@@ -50,3 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
         span.style.left = `${relX}px`;
     }
 });
+
+
+import SimpleParallax from "simple-parallax-js/vanilla";
+window.SimpleParallax = SimpleParallax;

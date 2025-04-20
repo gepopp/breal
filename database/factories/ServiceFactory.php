@@ -19,7 +19,7 @@ class ServiceFactory extends Factory
     {
         return [
             'order'      => $this->faker->numberBetween(1, 100),
-            'name'       => $this->faker->word(),
+            'name'       => $this->faker->sentence(3),
             'points'     => [$this->faker->word(), $this->faker->word(), $this->faker->word()],
             'company'    => $this->faker->randomElement(CompaniesEnum::class),
             'on_landing' => true
