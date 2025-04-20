@@ -59,6 +59,9 @@
             text="{{ $settings->reference_introtext }}"
     />
 
+
+    <livewire:parts.linke-in-wall/>
+
     <livewire:parts.contact
             company="$company"
             header="{{ $settings->contact_header }}"

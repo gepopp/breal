@@ -42,7 +42,6 @@
                 loop: true,
                 slidesPerView: 1,
                 speed: 800,
-                direction: "vertical",
                 spaceBetween: 30,
                 navigation: {
                     nextEl: ".next-slide",
@@ -53,6 +52,9 @@
                     el: ".swiper-pagination",
                     clickable: true,
                 },
+                autoplay: {
+                    delay: 2000
+                }
             })
         </script>
 

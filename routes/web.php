@@ -42,7 +42,7 @@ Route::get('confirm/{formRequest}/{token}', function (\App\Models\ContactRequest
         abort(401);
     }
 
-    if(is_null($formRequest->verified_at)) {
+    if (is_null($formRequest->verified_at)) {
         $formRequest->update(['verified_at' => now()]);
 
         Mail::to($formRequest->email)->send(new \App\Mail\ContactRequestConfirmedMail());
@@ -53,11 +53,7 @@ Route::get('confirm/{formRequest}/{token}', function (\App\Models\ContactRequest
 })->name('confirm');
 
 
-
-
-
-
-Route::get('solve-test', function (){
+Route::get('solve-test', function () {
 
     $request = \App\Models\ContactRequest::inRandomOrder()->first();
     return view('solved', compact('request'));
@@ -69,17 +65,13 @@ Route::get('solve/{request}/{token}', function (\App\Models\ContactRequest $requ
         abort(401);
     }
 
-    if(is_null($request->solved_at)) {
+    if (is_null($request->solved_at)) {
         $request->update(['solved' => now()]);
     }
 
     return view('solved', compact('request'));
 
 })->name('solve');
-
-
-
-
 
 
 Route::view('dashboard', 'dashboard')
@@ -113,6 +105,39 @@ Route::get('admins', function () {
     }
 
 
+});
+
+Route::get('/auth/redirect', function () {
+    return Socialite::driver('linkedin')
+        ->scopes([
+            'w_member_social',
+            'r_basicprofile',
+            'r_emailaddress',
+            'rw_organization_admin',
+            'r_organization_social',
+            'w_organization_social',
+            'w_organization_social'
+        ])
+        ->redirect();
+});
+
+Route::get('/admin/oauth/callback/linkedin', function () {
+    $user = Socialite::driver('linkedin')->user();
+
+    $data = [
+            'id' => $user->getId(),
+            'name' => $user->getName(),
+            'email' => $user->getEmail(),
+            'token' => $user->token,
+            'refreshToken' => $user->refreshToken,
+            'expiresIn' => now()->addSeconds($user->expiresIn)->format('Y-m-d H:i:s'),
+        ];
+
+    $user = \App\Models\User::where('email', $user->getEmail())->first();
+
+    $user->update(['linkedin' => $data]);
+
+    return redirect('/admin/users/' . $user->id . '/edit');
 });
 
 
