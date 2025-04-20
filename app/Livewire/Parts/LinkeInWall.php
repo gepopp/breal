@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Http;
 
 class LinkeInWall extends Component
 {
-    public ?User $user;
+    public ?User $user = null;
 
 
     public function mount()
