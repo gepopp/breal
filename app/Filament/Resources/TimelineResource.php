@@ -23,6 +23,11 @@ class TimelineResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\SpatieMediaLibraryFileUpload::make('titleimage')
+                    ->required()
+                    ->image()
+                    ->downloadable()
+                    ->collection('titleimage'),
                 Forms\Components\TextInput::make('year')
                     ->required()
                     ->numeric(),
@@ -75,9 +80,9 @@ class TimelineResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTimelines::route('/'),
+            'index'  => Pages\ListTimelines::route('/'),
             'create' => Pages\CreateTimeline::route('/create'),
-            'edit' => Pages\EditTimeline::route('/{record}/edit'),
+            'edit'   => Pages\EditTimeline::route('/{record}/edit'),
         ];
     }
 }

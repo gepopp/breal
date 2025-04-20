@@ -3,6 +3,9 @@
 @import '../../vendor/livewire/flux/dist/flux.css';
 @import "../../node_modules/aos/dist/aos.css";
 
+@plugin 'tailwind-scrollbar';
+
+
 @font-face {
     font-family: "EmBauhaus W00 Bold";
     src: url("@/fonts/EmBauhaus-W00-Bold.ttf")format("ttf"),

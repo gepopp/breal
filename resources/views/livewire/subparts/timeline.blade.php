@@ -1,19 +1,44 @@
 <div class="mt-12 relative">
-    <div data-aos="fade" class="mt-12 md:mt-24">
+    <div x-data="timeline" data-aos="fade" class="mt-12 md:mt-24">
 
-        <div class="inset-shadow-sm inset-shadow-logo/50 border border-logo relative">
+        <div class="relative">
+            <div x-ref="indices"
+                 class="flex items-center overflow-x-scroll scrollbar scrollbar-none w-2/3 ml-auto">
+                <span class="w-full h-[2px] bg-logo shrink-0 mx-2"></span>
+                @foreach($timeline as $key => $entry)
+                    <span class="flex items-center">
+                     <span class="text-xl font-logo shrink-0 mx-2 rounded transition-all duration-300"
+                           :class="active == {{ $key }} ? 'bg-logo text-white px-1.5' : 'bg-transparent text-logo'">{{ $entry->year }}</span>
+                    @if($key < count($timeline) - 1 )
+                            <span class="w-12 h-[2px] bg-logo shrink-0 mx-2"></span>
+                        @endif
+                </span>
+                @endforeach
+                <span class="w-full h-[2px] bg-logo shrink-0 mx-2"></span>
+            </div>
+
+            <div class="absolute inset-0 bg-linear-to-r from-transparent via-transparent via-80% to-white"></div>
+
+        </div>
+
+
+        <div x-intersect.once="initSlider" class="relative">
             <div class="swiper timelineswiper max-h-[60vh]">
                 <div class="swiper-wrapper  md:aspect-video">
                     @foreach($timeline as $key => $entry)
                         <div class="swiper-slide bg-transparent">
-                            <div class="w-full h-full md:aspect-video flex justify-center items-center">
-                                <div class="flex flex-col justify-center items-center max-w-3/4">
-                                <span @class(['text-logo font-logo text-4xl md:text-7xl font-extrabold px-1.5 align-baseline rounded tracking-wide'])>
-                                    {{ $entry->year }}
-                                </span>
-                                    <div>
-                                        <h5 class="font-bold text-sm md:text-xl text-center text-logo">{{ $entry->title }}</h5>
-                                        <p class="text-center mt-4 text-xs">{{ $entry->description }}</p>
+                            <div class="inset-0 md:aspect-video flex justify-center items-center">
+                                <div class="grid grid-cols-1 md:grid-cols-2 md:gap-12 max-w-3/4 relative">
+                                    <div class="aspect-square w-full overflow-hidden">
+                                        <img lazy src="{{ $entry->getFirstMediaUrl('*') }}" class="aspect-square w-full object-cover" alt="{{ $entry->title }}"/>
+                                    </div>
+                                    <div class="flex flex-col justify-center">
+                                        <div class="relative">
+                                            <h5 class="font-bold text-sm md:text-xl text-logo">{{ $entry->title }}</h5>
+                                            <div class="absolute top-1/2 left-0 -ml-20 w-24 h-[3px] bg-logo"></div>
+                                        </div>
+                                        <p class="mt-4 text-xs">{{ $entry->description }}</p>
+
                                     </div>
                                 </div>
                             </div>
@@ -22,23 +47,32 @@
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
-            <div class="prev-slide cursor-pointer absolute top-0 left-1/2 -translate-y-1/2 -translate-x-1/2 w-12 aspect-square rounded-full bg-logo text-white flex justify-center items-center z-[9999] shadow-lg">
-                <svg class="size-10 mb-1" data-slot="icon" fill="none" stroke-width="2" stroke="currentColor"
+            <div class="prev-slide cursor-pointer absolute top-1/2 left-0 -translate-x-1/2 w-12 aspect-square rounded-full bg-logo text-white flex justify-center items-center z-[9999] shadow-lg">
+                <svg class="size-10" data-slot="icon" fill="none" stroke-width="2" stroke="currentColor"
                      viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"></path>
                 </svg>
             </div>
 
-            <div class="next-slide cursor-pointer absolute bottom-0 left-1/2 translate-y-1/2 -translate-x-1/2 w-12 right-0 aspect-square rounded-full bg-logo text-white flex justify-center items-center z-[9999] shadow-lg">
-                <svg class="size-10 mt-1" data-slot="icon" fill="none" stroke-width="2" stroke="currentColor"
+            <div class="next-slide cursor-pointer absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-12 right-0 aspect-square rounded-full bg-logo text-white flex justify-center items-center z-[9999] shadow-lg">
+                <svg class="size-10" data-slot="icon" fill="none" stroke-width="2" stroke="currentColor"
                      viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"></path>
+
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"></path>
                 </svg>
             </div>
 
         </div>
-        <script>
-            const timelineSwiper = new Swiper('.timelineswiper', {
+    </div>
+</div>
+@script
+<script>
+    Alpine.data('timeline', () => ({
+        slider: null,
+        active: 0,
+        init() {
+            this.slider = new Swiper('.timelineswiper', {
+                init: false,
                 loop: true,
                 slidesPerView: 1,
                 speed: 800,
@@ -46,17 +80,42 @@
                 navigation: {
                     nextEl: ".next-slide",
                     prevEl: ".prev-slide",
-                    clickable: true
-                },
-                pagination: {
-                    el: ".swiper-pagination",
-                    clickable: true,
-                },
-                autoplay: {
-                    delay: 2000
                 }
-            })
-        </script>
+            });
 
-    </div>
-</div>
+            this.slider.on('afterInit', () => {
+                setTimeout(() => {
+                    this.scrollItemToCenter(1);
+                }, 2000)
+            })
+
+            this.slider.on('slideChange', () => {
+                this.active = this.slider.realIndex;
+                this.scrollItemToCenter(this.active);
+            });
+        },
+        initSlider() {
+            this.slider.init();
+        },
+        scrollItemToCenter(index) {
+            // Container-Element abrufen
+            const container = this.$refs.indices;
+            const element = container.children[index + 1];
+
+            console.log(element);
+
+            if (!element) return;
+
+            // Position des Elements innerhalb des Containers berechnen
+            const scrollLeft = element.offsetLeft - container.offsetLeft -
+                (container.clientWidth / 2) + (element.offsetWidth / 2);
+
+            // Nur horizontales Scrollen innerhalb des Containers
+            container.scrollTo({
+                left: scrollLeft,
+                behavior: 'smooth'
+            });
+        }
+    }))
+</script>
+@endscript

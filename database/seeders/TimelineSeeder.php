@@ -16,6 +16,12 @@ class TimelineSeeder extends Seeder
     {
         DB::table('timelines')->truncate();
 
-        Timeline::factory()->count(20)->create();
+        $timelines = Timeline::factory()->count(20)->create();
+
+        foreach ($timelines as $timeline) {
+            $timeline->addMediaFromUrl(asset('modern-villa.jpg'))
+                ->withResponsiveImages()
+                ->toMediaCollection('titleimage');
+        }
     }
 }
