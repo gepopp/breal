@@ -67,6 +67,10 @@
                             spaceBetween: 30,
                         }
                     },
+                    autoplay: {
+                        delay: 5000,
+                        disableOnInteraction: true,
+                    }
                 });
             </script>
         </div>
