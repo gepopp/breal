@@ -20,7 +20,7 @@
 ])>
     <div @class([
         "flex items-center font-logo text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-extrabold rounded tracking-wide lowercase",
-        "before:content-['be'] before:h-[32px] before:mb-[6px] before:md:h-[36px] before:lg:h-[42px] before:xl:h-[62px] before:align-baseline before:rounded before:px-2 before:tracking-wide  before:bg-logo before:mr-2",
+        "before:content-['be'] before:h-[32px] before:mb-[6px] before:md:h-[36px] before:lg:h-[42px] before:xl:h-[62px] before:align-baseline before:rounded before:px-2 before:tracking-wide dark:before:bg-white before:bg-logo dark:before:text-logo before:mr-2",
         "text-logo-500" => !Route::is('technik.*', 'immobilien.*') && !$ondark,
         "text-technik-500" => Route::is('technik.*') && !$ondark,
         "text-makler-500" => Route::is('immobilien.*') && !$ondark,
@@ -28,7 +28,7 @@
         "before:text-white before:bg-logo" => !$ondark
         ])
          data-aos="fade">
-        <span class="font-logo">{{$tag}}</span>
+        <span class="font-logo dark:text-white">{{$tag}}</span>
     </div>
     <?php switch ((int)$level): case(1): ?>
     <h1 data-aos="fade" data-aos-delay="750" {{ $attributes->class($classes) }}>{{ $slot }}</h1>

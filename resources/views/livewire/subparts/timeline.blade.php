@@ -1,23 +1,23 @@
 <div class="mt-12 relative max-w-screen">
     <div x-data="timeline" data-aos="fade" class="mt-12 md:mt-24">
 
-        <div class="relative">
+        <div class="relative w-3/4 lg:w-1/2 mb-4 ml-auto mb-8">
             <div x-ref="indices"
-                 class="flex items-center overflow-x-scroll scrollbar scrollbar-none w-3/4 lg:w-1/2 mb-4 ml-auto">
-                <span class="w-full h-[2px] bg-logo shrink-0 mx-2"></span>
+                 class="relative flex items-center overflow-x-scroll scrollbar scrollbar-none">
+                <span class="w-full h-[2px] bg-logo dark:bg-white shrink-0 mx-2"></span>
                 @foreach($timeline as $key => $entry)
                     <span class="flex items-center">
-                     <span class="text-xl font-logo shrink-0 mx-2 rounded transition-all duration-300"
-                           :class="active == {{ $key }} ? 'bg-logo text-white px-1.5' : 'bg-transparent text-logo'">{{ $entry->year }}</span>
+                     <span class="font-logo shrink-0 mx-2 rounded transition-all duration-300"
+                           :class="active == {{ $key }} ? 'bg-logo dark:bg-white dark:text-logo-950 text-white px-1.5 text-xl scale-110' : 'bg-transparent text-logo dark:text-white text-base'">{{ $entry->year }}</span>
                     @if($key < count($timeline) - 1 )
-                            <span class="w-12 h-[2px] bg-logo shrink-0 mx-2"></span>
+                            <span class="w-12 h-[2px] bg-logo dark:bg-white shrink-0 mx-2"></span>
                         @endif
                 </span>
                 @endforeach
                 <span class="w-full h-[2px] bg-logo shrink-0 mx-2"></span>
-            </div>
 
-            <div class="absolute inset-0 bg-linear-to-r from-transparent via-transparent via-80% to-white"></div>
+            </div>
+            <div class="absolute inset-0 bg-linear-to-r from-white dark:from-logo-950 via-transparent to-white dark:to-logo-950"></div>
 
         </div>
 
@@ -30,12 +30,13 @@
                             <div class="inset-0 flex justify-center items-center px-4 sm:px-8">
                                 <div class="flex md:max-w-3/4 relative">
                                     <div class="w-1/3 lg:w-1/2">
-                                        <img lazy src="{{ $entry->getFirstMediaUrl('*') }}" class="aspect-square w-full object-cover" alt="{{ $entry->title }}"/>
+                                        <img lazy src="{{ $entry->getFirstMediaUrl('*') }}"
+                                             class="aspect-square w-full object-cover" alt="{{ $entry->title }}"/>
                                     </div>
                                     <div class="w-2/3 lg:w-1/2 flex flex-col justify-center ml-4 mt-6">
                                         <div class="relative">
-                                            <h5 class="font-bold text-sm md:text-xl text-logo">{{ $entry->title }}</h5>
-                                            <div class="hidden sm:block absolute top-0 -mt-6 left-0 -ml-20 w-36 h-[3px] bg-logo text-right">
+                                            <h5 class="font-bold text-sm md:text-xl text-logo dark:text-white">{{ $entry->title }}</h5>
+                                            <div class="hidden sm:block absolute top-0 -mt-6 left-0 -ml-20 w-36 h-[3px] bg-logo dark:bg-white text-right">
                                                 <span class="ml-auto pt-1">{{ $entry->year }}</span>
                                             </div>
                                         </div>
