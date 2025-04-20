@@ -139,7 +139,9 @@ class LinkeInWall extends Component
 
     public function render()
     {
-        $posts = $this->linkedin_posts();
+        if(!is_null($this->user)){
+            $posts = $this->linkedin_posts();
+        }
 
         return view('livewire.parts.linke-in-wall');
     }
