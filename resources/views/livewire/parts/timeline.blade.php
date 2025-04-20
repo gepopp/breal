@@ -1,5 +1,5 @@
 <x-section>
-    <div @class(['md:max-w-sm lg:max-w-lg' => !is_array($preparedText), 'max-w-full'])>
+    <div @class(['md:max-w-sm lg:max-w-lg' => !is_array($preparedText), 'max-w-screen px-8 md:px-0'])>
         <x-headings>
             <x-slot name="tag">{{ $header }}</x-slot>
             {!! $subheader !!}
