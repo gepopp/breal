@@ -85,6 +85,13 @@ class LandingpageHausverwaltung extends SettingsPage
                                 Forms\Components\TextInput::make('contact_subheader')->required(),
                                 Forms\Components\RichEditor::make('contact_introtext')->required(),
                             ]),
+
+                        Forms\Components\Tabs\Tab::make('Kompetenzen')
+                            ->schema([
+                                Forms\Components\TextInput::make('competence_header')->required(),
+                                Forms\Components\TextInput::make('competence_subheader')->required(),
+                                Forms\Components\RichEditor::make('competence_introtext')->required(),
+                            ]),
                     ])
                     ->persistTabInQueryString(true),
 

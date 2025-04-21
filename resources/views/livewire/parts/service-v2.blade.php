@@ -1,4 +1,4 @@
-<x-section class="bg-logo-500/15 dark:bg-logo-500/15">
+<x-section class="bg-logo-500/3 dark:bg-logo-500/3">
     <div x-data="parallax" class="px-4 py-24 lg:px-0 lg:max-w-4xl xl:max-w-6xl mx-auto">
         <div @class(['md:max-w-sm lg:max-w-lg' => !is_array($preparedText), 'max-w-full'])>
             <x-headings>
@@ -18,7 +18,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-24">
                     <div class="relative order-last md:order-first min-h-[400px]">
                         <div x-data="serviceFilter"
-                             class="absolute inset-0 bg-white -mt-12 p-6 flex flex-col shadow">
+                             class="absolute inset-0 bg-white -mt-12 p-6 flex flex-col">
                             <flux:input x-model="searchterm" class="border-logo" icon:trailing="funnel"
                                         placeholder="Filtern Sie aus {{ count($services) }} Services"/>
 

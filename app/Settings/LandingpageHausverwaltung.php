@@ -56,6 +56,11 @@ class LandingpageHausverwaltung extends Settings
     public string $reference_introtext = '<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>';
 
 
+    public string $competence_header = 'on';
+    public string $competence_subheader = 'Unsere Kompentenzen';
+    public string $competence_introtext = '<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>';
+
+
 
     public static function group(): string
     {

@@ -52,6 +52,13 @@
             text="{{ $settings->service_introtext }}"
     />
 
+    <livewire:parts.competences
+            company="$company"
+            header="{{ $settings->competence_header }}"
+            subheader="{{ $settings->competence_subheader }}"
+            text="{{ $settings->competence_introtext }}"
+    />
+
     <livewire:parts.references
             company="$company"
             header="{{ $settings->reference_header }}"
