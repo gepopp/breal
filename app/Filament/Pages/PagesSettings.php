@@ -46,12 +46,8 @@ class PagesSettings extends SettingsPage
                             ]),
                         Forms\Components\Tabs\Tab::make('Karriereseite')
                             ->schema([
-
-
-                                SettingsUpload::make('vacancies_image')
-                                    ->image()
-                                    ->downloadable(),
-
+                                Forms\Components\TextInput::make('vacancies_header')->label('Introtext')->required(),
+                                Forms\Components\TextInput::make('vacancies_subheader')->label('Introtext')->required(),
                                 Forms\Components\RichEditor::make('vacancies_introtext')->label('Introtext')->required(),
                                 Forms\Components\RichEditor::make('cold_application_cta_text')->label('Text für Initiativbewerbungs-CTA"')->required(),
                             ]),
@@ -62,8 +58,22 @@ class PagesSettings extends SettingsPage
                                 Forms\Components\TextInput::make('team_header')->label('Introtext')->required(),
                                 Forms\Components\TextInput::make('team_subheader')->label('Introtext')->required(),
                                 Forms\Components\RichEditor::make('team_introtext')->label('Text für Initiativbewerbungs-CTA"')->required(),
-                            ])
+                            ]),
 
+                        Forms\Components\Tabs\Tab::make('Impressum')
+                            ->schema([
+                                Forms\Components\RichEditor::make('imprint_text')->label('Text für Initiativbewerbungs-CTA"')->required(),
+                            ]),
+
+                        Forms\Components\Tabs\Tab::make('Datenschutz')
+                            ->schema([
+                                Forms\Components\RichEditor::make('dpgr_text')->label('Text für Initiativbewerbungs-CTA"')->required(),
+                            ]),
+
+                        Forms\Components\Tabs\Tab::make('Barrierefreiheit')
+                            ->schema([
+                                Forms\Components\RichEditor::make('accessability_text')->label('Text für Initiativbewerbungs-CTA"')->required(),
+                            ]),
 
                     ])->persistTabInQueryString()
 

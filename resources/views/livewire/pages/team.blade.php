@@ -9,9 +9,17 @@
                 <x-slot name="tag">{{ $pagesSettings->team_header }}</x-slot>
                 {{ $pagesSettings->team_subheader }}
             </x-headings>
-            <div data-aos="fade" data-aos-delay="600">
-                {!! $pagesSettings->team_introtext !!}
-            </div>
+        </div>
+        <div data-aos="fade" data-aos-delay="600" class="prose max-w-full">
+
+            @if(!is_array($preparedText))
+                {!! html_entity_decode( $preparedText ) !!}
+            @else
+                <div class="grid grid-cols-1 md:grid-cols-2 md:gap-12 w-full">
+                    <div>{!! $preparedText['firstHalf'] !!}</div>
+                    <div>{!! $preparedText['secondHalf'] !!}</div>
+                </div>
+            @endif
         </div>
     </section>
 

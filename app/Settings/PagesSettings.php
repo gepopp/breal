@@ -21,6 +21,25 @@ class PagesSettings extends Settings
     public string $team_introtext = '<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>';
 
 
+    public string $vacancies_header = 'with us';
+
+    public string $vacancies_subheader = 'Werde Teil des BeReal Teams';
+
+    public string $vacancies_introtext = '<p>
+                be real bietet ihnen nicht nur eine berufliche Herausforderung, sondern
+                eine Gemeinschaft, die für Teamgeist und Zusammenarbeit steht. Die
+                Arbeit in der Hausverwaltung ist ein vielseitiger Job, der aufregend und
+                erfüllend ist. Jeder Tag ist anders und bringt viele neue Wege, sich
+                kreativ auszuleben. Ein Job in der Immobilienverwaltung bedeutet
+                Problemlöser, Kratzbürste und Kummerkasten in einem zu sein.
+                Menschenkenntnis und die Leidenschaft für Kundennähe sind uns
+                deshalb besonders wichtig.
+            </p><p>
+                Klingt spannend? Entdecken Sie unsere Möglichkeiten, um in einem
+                inspirierenden Umfeld zu wachsen und die Immobilienbranche aktiv
+                mitzugestalten.
+            </p>';
+
 
     public string $contactform_heading = 'Sagen Sie uns Hallo!';
 
@@ -36,12 +55,13 @@ class PagesSettings extends Settings
 
     public string $contactpersons_introtext;
 
-    public string $vacancies_introtext;
-
-    public ?int $vacancies_image;
-
     public string $cold_application_cta_text;
 
+    public string $imprint_text = "<p>Impressum</p>";
+
+    public string $dpgr_text = "<p>Datenschutz</p>";
+
+    public string $accessability_text = "<p>Barrierefreiheit</p>";
 
     public static function group(): string
     {

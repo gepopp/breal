@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Sites;
 
+use App\Settings\PagesSettings;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -9,8 +10,8 @@ use Livewire\Component;
 #[Layout('components.site')]
 class Imprint extends Component
 {
-    public function render()
+    public function render( PagesSettings $pagesSettings )
     {
-        return view('livewire.sites.imprint');
+        return view('livewire.sites.imprint', compact('pagesSettings'));
     }
 }
