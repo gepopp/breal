@@ -30,8 +30,6 @@
         ]) data-aos="fade" data-aos-delay="{{ $index * 100 }}">
 
 
-
-
                 @php
                     $firstLetter = \Illuminate\Support\Str::limit($competence->name, 1, '');
                     $files = \Illuminate\Support\Facades\File::allFiles(public_path('homes'));

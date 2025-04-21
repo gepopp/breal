@@ -1,12 +1,12 @@
 <x-section class="bg-logo-500/3 dark:bg-logo-500/3">
-    <div x-data="parallax" class="px-4 py-24 lg:px-0 lg:max-w-4xl xl:max-w-6xl mx-auto">
+    <div x-data="parallax" class="py-24 lg:px-0 lg:max-w-4xl xl:max-w-6xl mx-auto">
         <div @class(['md:max-w-sm lg:max-w-lg' => !is_array($preparedText), 'max-w-full'])>
             <x-headings>
                 <x-slot name="tag">{{ $header }}</x-slot>
                 {!! $subheader !!}
             </x-headings>
             <div data-aos="fade"
-                 class="my-8 max-w-1/2">{!! is_array($preparedText) ? $preparedText['firstHalf'] : html_entity_decode($preparedText) !!}</div>
+                 class="my-8 md:max-w-1/2">{!! is_array($preparedText) ? $preparedText['firstHalf'] : html_entity_decode($preparedText) !!}</div>
 
             <div data-aos="fade" class="relative ml-[calc(-50vw+50%)] mr-0 w-[calc(50vw+50%)]">
                 <img x-ref="image" src="{{ asset('team-parallax.jpg') }}" alt=""
@@ -15,12 +15,11 @@
 
             <div data-aos="fade" data-aos-delay="600" class="max-w-full">
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-24">
-                    <div class="relative order-last md:order-first min-h-[400px]">
+                <div class="grid grid-cols-1 md:grid-cols-2 md:gap-24">
+                    <div class="relative  min-h-[400px]">
                         <div x-data="serviceFilter"
                              class="absolute inset-0 bg-white -mt-12 p-6 flex flex-col">
-                            <flux:input x-model="searchterm" class="border-logo" icon:trailing="funnel"
-                                        placeholder="Filtern Sie aus {{ count($services) }} Services"/>
+                            <flux:input x-model="searchterm" class="border-logo" icon:trailing="funnel" placeholder="Filtern Sie aus {{ count($services) }} Services"/>
 
                             <div class="border-t border-logo mt-4 pt-4 flex-grow relative">
                                 <ul class="absolute inset-0 overflow-y-auto scrollbar scrollbar-thin  !list-none">

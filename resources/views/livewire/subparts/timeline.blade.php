@@ -22,7 +22,7 @@
         </div>
 
 
-        <div x-intersect.once="initSlider" class="relative max-w-full overflow-hidden">
+        <div x-intersect.once="initSlider" class="relative max-w-full">
             <div class="swiper max-w-screen timelineswiper max-h-[60vh]">
                 <div class="swiper-wrapper w-full">
                     @foreach($timeline as $key => $entry)
@@ -49,14 +49,14 @@
                     @endforeach
                 </div>
             </div>
-            <div class="prev-slide cursor-pointer absolute top-1/2 left-2 w-6 md:w-12 aspect-square rounded-full bg-logo text-white flex justify-center items-center z-[9999] shadow-lg">
+            <div class="prev-slide cursor-pointer absolute top-1/2 left-0 w-6 md:w-12 -translate-x-1/2 -translate-y-1/2  aspect-square rounded-full bg-logo text-white flex justify-center items-center z-[9999] shadow-lg">
                 <svg class="size-5 md:size-10" data-slot="icon" fill="none" stroke-width="2" stroke="currentColor"
                      viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"></path>
                 </svg>
             </div>
 
-            <div class="next-slide cursor-pointer absolute right-2 top-1/2 -translate-y-1/2 w-6 md:w-12 right-0 aspect-square rounded-full bg-logo text-white flex justify-center items-center z-[9999] shadow-lg">
+            <div class="next-slide cursor-pointer absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-6 md:w-12 right-0 aspect-square rounded-full bg-logo text-white flex justify-center items-center z-[9999] shadow-lg">
                 <svg class="size-5 md:size-10" data-slot="icon" fill="none" stroke-width="2" stroke="currentColor"
                      viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 

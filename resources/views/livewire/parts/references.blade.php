@@ -1,6 +1,6 @@
 <x-section class="bg-logo">
     <div @class(['flex items-center mt-12 md:mt-0 max-w-full'])>
-        <div @class(['md:max-w-sm lg:max-w-lg' => !is_array($preparedText), 'max-w-full px-8 lg:px-0'])>
+        <div @class(['md:max-w-sm lg:max-w-lg' => !is_array($preparedText), 'max-w-full'])>
             <x-headings :ondark="true">
                 <x-slot name="tag">{{ $header }}</x-slot>
                 {!! $subheader !!}

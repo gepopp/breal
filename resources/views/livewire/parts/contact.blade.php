@@ -1,5 +1,5 @@
 <x-section>
-    <div @class(['md:max-w-sm lg:max-w-lg lg:my-48 px-4'])>
+    <div @class(['md:max-w-sm lg:max-w-lg lg:my-48'])>
         <x-headings>
             <x-slot name="tag">{{ $header }}</x-slot>
             {!! $subheader !!}
