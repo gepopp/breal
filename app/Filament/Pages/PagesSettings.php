@@ -54,7 +54,16 @@ class PagesSettings extends SettingsPage
 
                                 Forms\Components\RichEditor::make('vacancies_introtext')->label('Introtext')->required(),
                                 Forms\Components\RichEditor::make('cold_application_cta_text')->label('Text für Initiativbewerbungs-CTA"')->required(),
+                            ]),
+
+
+                        Forms\Components\Tabs\Tab::make('Teamseite')
+                            ->schema([
+                                Forms\Components\TextInput::make('team_header')->label('Introtext')->required(),
+                                Forms\Components\TextInput::make('team_subheader')->label('Introtext')->required(),
+                                Forms\Components\RichEditor::make('team_introtext')->label('Text für Initiativbewerbungs-CTA"')->required(),
                             ])
+
 
                     ])->persistTabInQueryString()
 

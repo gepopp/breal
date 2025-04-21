@@ -12,6 +12,8 @@ class ContactDepartments extends Component
     public string $comapny = CompaniesEnum::Hausverwaltung->name;
 
 
+    public bool $withIntro = true;
+
     public function render( PagesSettings $pagesSettings)
     {
         $departments = Department::where('company', $this->comapny)->get();

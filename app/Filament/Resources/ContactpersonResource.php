@@ -30,8 +30,19 @@ class ContactpersonResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\SpatieMediaLibraryFileUpload::make('avatar')
+                    ->maxSize(521)
+                    ->collection('avatar')
+                    ->responsiveImages()
+                    ->rules(['nullable', 'image', 'max:521'])
+                    ->downloadable()
+                    ->image()
+                    ->imageEditor()
+                    ->imageEditorAspectRatios(['1:1']),
+
+
                 Forms\Components\Select::make('department_id')
-                    ->relationship('department', 'search_label', fn (Builder $query) => $query->withoutGlobalScopes())
+                    ->relationship('department', 'search_label', fn(Builder $query) => $query->withoutGlobalScopes())
                     ->searchable()
                     ->required(),
                 Forms\Components\TextInput::make('name')
@@ -84,9 +95,9 @@ class ContactpersonResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListContactpeople::route('/'),
+            'index'  => Pages\ListContactpeople::route('/'),
             'create' => Pages\CreateContactperson::route('/create'),
-            'edit' => Pages\EditContactperson::route('/{record}/edit'),
+            'edit'   => Pages\EditContactperson::route('/{record}/edit'),
         ];
     }
 }

@@ -11,7 +11,16 @@ class PagesSettings extends Settings
 
     public string $contact_subheader = 'Ihr Kontakt zu Bontus Eybel';
 
-    public string $contact_introtext;
+    public string $contact_introtext = '';
+
+
+    public string $team_header = 'team';
+
+    public string $team_subheader = 'Das Team von Bontus Eybel';
+
+    public string $team_introtext = '<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>';
+
+
 
     public string $contactform_heading = 'Sagen Sie uns Hallo!';
 

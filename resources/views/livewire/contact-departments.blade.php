@@ -1,17 +1,20 @@
 <x-section>
-    <div @class("pb-24 border-b border-gray-200")>
-        <h2 @class([
-        "font-bold text-3xl sm:text-5xl lg:text-7xl mb-8",
+
+    @if($withIntro)
+        <div @class("pb-24 border-b border-gray-200")>
+            <h2 @class([
+        "font-bold text-3xl sm:text-5xl lg:text-7xl",
         "text-logo-950" => !Route::is('technik.*', 'immobilien.*'),
         "text-technik-950" => Route::is('technik.*'),
         "text-makler-950" => Route::is('immobilien.*'),
     ]) data-aos="fade">{{ $pagesSettings->contactpersons_heading }}</h2>
-        <p data-aos="fade" data-aos-delay="500">
-            {{ $pagesSettings->contactpersons_introtext }}
-        </p>
-    </div>
+            <p data-aos="fade" data-aos-delay="500">
+                {{ $pagesSettings->contactpersons_introtext }}
+            </p>
+        </div>
+    @endif
 
-    <div @class(["mt-24"])>
+    <div @class(["mt-24" => $withIntro])>
         @foreach($departments as $department)
             <div @class(['mb-12']) data-aos="fade">
                 <h3 @class([

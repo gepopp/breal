@@ -6,9 +6,11 @@
                  class="relative flex items-center overflow-x-scroll scrollbar scrollbar-none">
                 <span class="w-full h-[2px] bg-logo dark:bg-white shrink-0 mx-2"></span>
                 @foreach($timeline as $key => $entry)
-                    <span class="flex items-center">
+                    <span class="flex items-center" x-on:click="goto({{ $key }})">
                      <span class="font-logo shrink-0 mx-2 rounded transition-all duration-300"
-                           :class="active == {{ $key }} ? 'bg-logo dark:bg-white dark:text-logo-950 text-white px-1.5 text-xl scale-110' : 'bg-transparent text-logo dark:text-white text-base'">{{ $entry->year }}</span>
+                           :class="active == {{ $key }} ? 'bg-logo dark:bg-white dark:text-logo-950 text-white px-1.5 text-xl scale-110' : 'bg-transparent text-logo dark:text-white text-base'">
+                         {{ $entry->year }}
+                     </span>
                     @if($key < count($timeline) - 1 )
                             <span class="w-12 h-[2px] bg-logo dark:bg-white shrink-0 mx-2"></span>
                         @endif
@@ -17,7 +19,7 @@
                 <span class="w-full h-[2px] bg-logo shrink-0 mx-2"></span>
 
             </div>
-            <div class="absolute inset-0 bg-linear-to-r from-white dark:from-logo-950 via-transparent to-white dark:to-logo-950"></div>
+            <div class="absolute pointer-events-none inset-0 bg-linear-to-r from-white dark:from-logo-950 via-transparent to-white dark:to-logo-950"></div>
 
         </div>
 
@@ -115,6 +117,10 @@
                 left: scrollLeft,
                 behavior: 'smooth'
             });
+        },
+        goto(index) {
+            console.log(index);
+            this.slider.slideTo(index);
         }
     }))
 </script>
