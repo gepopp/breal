@@ -22,6 +22,12 @@ class JobVacancy extends Model implements HasMedia
         'to'   => 'datetime',
     ];
 
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
