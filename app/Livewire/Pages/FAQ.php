@@ -25,7 +25,7 @@ class FAQ extends Component
 
         $this->text = $pagesSettings->team_introtext;
 
-        $this->faqs = \App\Models\Faq::all()->toArray();
+        $this->faqs = \App\Models\FAQ::all()->toArray();
     }
 
 
