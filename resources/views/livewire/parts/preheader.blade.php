@@ -16,17 +16,19 @@
             <a href="https://realonline.bontus-eybel.at" class="font-bold uppercase" target="_blank">Kundenlogin</a>
         </div>
 
-        <div class="flex items-center divide-x-2 divide-white">
+        <div class="flex items-center">
             @if( ! Route::is('hausverwaltung.*') )
-                <a href="{{ route('hausverwaltung.home') }}" class="px-4" wire:navigate>
+                <a href="{{ route('hausverwaltung.home') }}" class="px-4 block" wire:navigate>
                     <img src="{{ asset('logos/bereal_immobilien_white.svg') }}" class="h-5"/>
                 </a>
+                <div class="w-2 h-2 bg-white rounded last:hidden"></div>
             @endif
 
             @if( ! Route::is('immobilien.*') )
                 <a href="{{ route('immobilien.home') }}" class="px-4" wire:navigate>
                     <img src="{{ asset('logos/bereal_makler_white.svg') }}" class="h-5"/>
                 </a>
+                <div class="w-2 h-2 bg-white rounded last:hidden"></div>
             @endif
 
 
@@ -34,6 +36,7 @@
                 <a href="{{ route('technik.home') }}" class="px-4" wire:navigate>
                     <img src="{{ asset('logos/bereal_technik_white.svg') }}" class="h-5"/>
                 </a>
+                <div class="w-2 h-2 bg-white rounded last:hidden"></div>
             @endif
         </div>
 

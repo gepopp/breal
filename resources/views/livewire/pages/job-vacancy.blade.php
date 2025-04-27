@@ -31,5 +31,8 @@
                 </ul>
             </div>
         </div>
+        <div class="mt-12 flex justify-center">
+            <x-button href="mailto:{{ $jobVacancy->email }}" data-aos="fade-up" data-aos-delay="500">Jetzt bewerben</x-button>
+        </div>
     </div>
 </x-section>
