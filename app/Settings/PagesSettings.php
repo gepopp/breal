@@ -63,6 +63,13 @@ class PagesSettings extends Settings
 
     public string $accessability_text = "<p>Barrierefreiheit</p>";
 
+
+    public string $services_header = 'secure';
+
+    public string $services_subheader = 'Unser Versprechen';
+
+    public string $services_introtext = '<p>Oft muss es schnell und einfach gehen - hier finden Sie alle wichtigen Unterlagen sowie nützliche Tipps für einen reibungslosen und effizienten Betrieb Ihres Gebäudes.</p>';
+
     public static function group(): string
     {
         return 'pages';

@@ -25,7 +25,7 @@
 
     <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-24">
         @foreach($vacancies as $index => $vacancy)
-            <a href="{{ route('stellenanzeige', $vacancy) }}" wire:link  @class([
+            <a href="{{ route('stellenanzeige', $vacancy) }}" wire:navigate  @class([
         "relative p-12 flex justify-center items-center border-logo",
         "border-b-2 last:border-b-transparent last:border-r-transparent",
         "sm:border-b-transparent" => $index > ($vacancies->count() - 3),
