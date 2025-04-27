@@ -39,7 +39,6 @@
                         <img src="{{ asset('logos/bereal_white.svg') }}"
                              class="h-6 sm:h-8 md:h-10 hidden dark:block"/>
                     </a>
-
                 @endif
             </div>
 
@@ -95,7 +94,7 @@
 
                     <div class="relative">
                         <div class="overflow-hidden">
-                            <a href="#" wire:navigate
+                            <a href="{{ route('hausverwaltung.faq') }}" wire:navigate
                                class="menu-item relative uppercase cursor-pointer text-logo-600 ">
                                 <div @class(["font-black" => Route::is('hausverwaltung.team')])>
                                     <span class="menu-item-text pointer-events-none block relative">FAQ</span>
@@ -106,48 +105,99 @@
                 @endif
 
                 @if( Route::is('immobilien.*') )
-                    <a href="{{ route('immobilien.immobiliensuche') }}" wire:navigate
-                       class="menu-item relative uppercase cursor-pointer text-logo-600">
-                        <div @class(["font-black" => Route::is('immobilien.immobiliensuche')])>
-                            <span class="menu-item-text pointer-events-none block relative">Immobiliensuche</span>
+                    <div class="relative">
+                        <div class="overflow-hidden">
+                            <a href="{{ route('immobilien.immobiliensuche') }}" wire:navigate
+                               class="menu-item relative uppercase cursor-pointer text-logo-600">
+                                <div @class(["font-black" => Route::is('immobilien.immobiliensuche')])>
+                                    <span class="menu-item-text pointer-events-none block relative">Immobiliensuche</span>
+                                </div>
+                            </a>
                         </div>
-                    </a>
-                    <a href="{{ route('immobilien.ueber-uns') }}" wire:navigate
-                       class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                        <div @class(["font-black" => Route::is('immobilien.ueber-uns')])>
-                            <span class="menu-item-text pointer-events-none block relative">Über uns</span>
-                        </div>
-                    </a>
-                    <a href="{{ route('immobilien.karriere') }}" wire:navigate
-                       class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                        <div @class(["font-black" => Route::is('immobilien.karriere')])>
-                            <span class="menu-item-text pointer-events-none block relative">Karriere</span>
-                        </div>
-                    </a>
+                    </div>
 
-                    <a href="{{ route('immobilien.team') }}" wire:navigate
-                       class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                        <div @class(["font-black" => Route::is('immobilien.team')])>
-                            <span class="menu-item-text pointer-events-none block relative">Team</span>
+                    <div class="relative">
+                        <div class="overflow-hidden">
+                            <a href="{{ route('immobilien.ueber-uns') }}" wire:navigate
+                               class="menu-item relative uppercase cursor-pointer text-logo-600 ">
+                                <div @class(["font-black" => Route::is('immobilien.ueber-uns')])>
+                                    <span class="menu-item-text pointer-events-none block relative">Über uns</span>
+                                </div>
+                            </a>
                         </div>
-                    </a>
+                    </div>
+
+                    <div class="relative">
+                        <div class="overflow-hidden">
+                            <a href="{{ route('immobilien.karriere') }}" wire:navigate
+                               class="menu-item relative uppercase cursor-pointer text-logo-600 ">
+                                <div @class(["font-black" => Route::is('immobilien.karriere')])>
+                                    <span class="menu-item-text pointer-events-none block relative">Karriere</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+
+                    <div class="relative">
+                        <div class="overflow-hidden">
+                            <a href="{{ route('immobilien.team') }}" wire:navigate
+                               class="menu-item relative uppercase cursor-pointer text-logo-600 ">
+                                <div @class(["font-black" => Route::is('immobilien.team')])>
+                                    <span class="menu-item-text pointer-events-none block relative">Team</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+
+                    <div class="relative">
+                        <div class="overflow-hidden">
+                            <a href="{{ route('immobilien.faq') }}" wire:navigate
+                               class="menu-item relative uppercase cursor-pointer text-logo-600 ">
+                                <div @class(["font-black" => Route::is('immobilien.team')])>
+                                    <span class="menu-item-text pointer-events-none block relative">FAQ</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
                 @endif
 
 
                 @if( Route::is('technik.*') )
-                    <a href="{{ route('technik.karriere') }}" wire:navigate
-                       class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                        <div @class(["font-black" => Route::is('technik.karriere')])>
-                            <span class="menu-item-text pointer-events-none block relative">Karriere</span>
+                    <div class="relative">
+                        <div class="overflow-hidden">
+                            <a href="{{ route('technik.karriere') }}" wire:navigate
+                               class="menu-item relative uppercase cursor-pointer text-logo-600 ">
+                                <div @class(["font-black" => Route::is('technik.karriere')])>
+                                    <span class="menu-item-text pointer-events-none block relative">Karriere</span>
+                                </div>
+                            </a>
                         </div>
-                    </a>
+                    </div>
 
-                    <a href="{{ route('technik.team') }}" wire:navigate
-                       class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                        <div @class(["font-black" => Route::is('technik.team')])>
-                            <span class="menu-item-text pointer-events-none block relative">Team</span>
+
+                    <div class="relative">
+                        <div class="overflow-hidden">
+                            <a href="{{ route('technik.team') }}" wire:navigate
+                               class="menu-item relative uppercase cursor-pointer text-logo-600 ">
+                                <div @class(["font-black" => Route::is('technik.team')])>
+                                    <span class="menu-item-text pointer-events-none block relative">Team</span>
+                                </div>
+                            </a>
                         </div>
-                    </a>
+                    </div>
+
+                    <div class="relative">
+                        <div class="overflow-hidden">
+                            <a href="{{ route('technik.faq') }}" wire:navigate
+                               class="menu-item relative uppercase cursor-pointer text-logo-600 ">
+                                <div @class(["font-black" => Route::is('technik.team')])>
+                                    <span class="menu-item-text pointer-events-none block relative">FAQ</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
                 @endif
             </nav>
 

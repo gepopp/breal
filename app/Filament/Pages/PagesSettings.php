@@ -68,6 +68,13 @@ class PagesSettings extends SettingsPage
                                 Forms\Components\RichEditor::make('services_introtext')->label('Text für Initiativbewerbungs-CTA"')->required(),
                             ]),
 
+                        Forms\Components\Tabs\Tab::make('FAQ Seite')
+                            ->schema([
+                                Forms\Components\TextInput::make('faq_header')->label('Introtext')->required(),
+                                Forms\Components\TextInput::make('faq_subheader')->label('Introtext')->required(),
+                                Forms\Components\RichEditor::make('faq_introtext')->label('Text für Initiativbewerbungs-CTA"')->required(),
+                            ]),
+
                         Forms\Components\Tabs\Tab::make('Impressum')
                             ->schema([
                                 Forms\Components\RichEditor::make('imprint_text')->label('Text für Initiativbewerbungs-CTA"')->required(),

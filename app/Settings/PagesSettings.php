@@ -70,6 +70,12 @@ class PagesSettings extends Settings
 
     public string $services_introtext = '<p>Oft muss es schnell und einfach gehen - hier finden Sie alle wichtigen Unterlagen sowie nützliche Tipps für einen reibungslosen und effizienten Betrieb Ihres Gebäudes.</p>';
 
+    public string $faq_header = 'informed';
+
+    public string $faq_subheader = 'Antworten auf häufig gestellte Fragen';
+
+    public string $faq_introtext = '<p>Hausverwaltung ist ein komplexes Thema. Da kann es schon mal zu Fragen kommen. Wir beantworten Ihre Fragen rund um das Thema Immobilienmanagement und Hausverwaltung.</p>';
+
     public static function group(): string
     {
         return 'pages';

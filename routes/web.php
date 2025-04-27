@@ -16,6 +16,7 @@ Route::group(['as' => 'hausverwaltung.'], function () {
     Route::get('/karriere', \App\Livewire\Pages\Vacancies::class)->name('karriere');
     Route::get('/kontakt', \App\Livewire\Pages\Contact::class)->name('kontakt');
     Route::get('/team', \App\Livewire\Pages\Team::class)->name('team');
+    Route::get('/faq', \App\Livewire\Pages\FAQ::class)->name('faq');
 });
 
 
@@ -26,6 +27,7 @@ Route::group(['prefix' => 'immobilien', 'as' => 'immobilien.'], function () {
     Route::get('/karriere', \App\Livewire\Pages\Vacancies::class)->name('karriere');
     Route::get('/kontakt', \App\Livewire\Pages\Contact::class)->name('kontakt');
     Route::get('/team', \App\Livewire\Pages\Team::class)->name('team');
+    Route::get('/faq', \App\Livewire\Pages\FAQ::class)->name('faq');
 });
 
 Route::group(['prefix' => 'technik', 'as' => 'technik.'], function () {
@@ -33,6 +35,7 @@ Route::group(['prefix' => 'technik', 'as' => 'technik.'], function () {
     Route::get('/karriere', \App\Livewire\Pages\Vacancies::class)->name('karriere');
     Route::get('/kontakt', \App\Livewire\Pages\Contact::class)->name('kontakt');
     Route::get('/team', \App\Livewire\Pages\Team::class)->name('team');
+    Route::get('/faq', \App\Livewire\Pages\FAQ::class)->name('faq');
 });
 
 
