@@ -32,6 +32,7 @@ class ServiceSeeder extends Seeder
                     [
                         'name' => fake()->sentence(),
                         'path' => $path,
+                        'url'  => Storage::url($path),
                     ],
                 ],
                 'list'  => [

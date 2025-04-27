@@ -15,6 +15,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Storage;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class ServiceResource extends Resource
 {
@@ -29,10 +31,6 @@ class ServiceResource extends Resource
                 Forms\Components\TextInput::make('order')
                     ->required()
                     ->numeric(),
-                Forms\Components\Toggle::make('on_landing')
-                    ->label('Auf Startseite anzeigen')
-                    ->default(true)
-                    ->required(),
                 Forms\Components\TextInput::make('name')
                     ->label('Bezeichnung auf der Startseite')
                     ->required(),
@@ -45,12 +43,17 @@ class ServiceResource extends Resource
                 Forms\Components\RichEditor::make('description'),
 
                 Forms\Components\Repeater::make('links')
+                    ->label('Dokumente')
                     ->schema([
                         FileUpload::make('path')
                             ->required()
                             ->downloadable()
                             ->preserveFilenames()
-                            ->acceptedFileTypes(['application/pdf'])
+                            ->afterStateUpdated(function (TemporaryUploadedFile $state, callable $set) {
+                                // Generieren der URL und Speichern als zusätzliches Attribut
+                                $url = Storage::url($state->getRealPath());
+                                $set('url', $url);
+                            })
                             ->label('Dokument'),
 
                         Forms\Components\TextInput::make('name')
