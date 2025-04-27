@@ -24,7 +24,13 @@ class Service extends Component
     {
         $this->text = $pagesSettings->services_introtext;
         $this->services = \App\Models\Service::all()->toArray();
-        $this->tab = $this->services[0]['slug'];
+
+        if(request()->has('tab')){
+            $this->tab = request()->get('tab');
+        }else{
+            $this->tab = $this->services[0]['slug'];
+        }
+
     }
 
 

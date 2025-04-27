@@ -13,28 +13,28 @@
 ])>
             <div class="flex items-center">
                 @if( Route::is('hausverwaltung.*') )
-                    <a href="{{ route('hausverwaltung.home') }}">
+                    <a href="{{ route('hausverwaltung.home') }}" wire:navigate>
                         <img src="{{ asset('logos/bereal_immobilien.svg') }}" class="h-6 sm:h-8 md:h-10 dark:hidden"/>
                         <img src="{{ asset('logos/bereal_immobilien_white.svg') }}"
                              class="h-6 sm:h-8 md:h-10 hidden dark:block"/>
                     </a>
 
                 @elseif( Route::is('immobilien.*') )
-                    <a href="{{ route('immobilien.home') }}">
+                    <a href="{{ route('immobilien.home') }}" wire:navigate>
                         <img src="{{ asset('logos/bereal_makler.svg') }}" class="h-6 sm:h-8 md:h-10 dark:hidden"/>
                         <img src="{{ asset('logos/bereal_makler_white.svg') }}"
                              class="h-6 sm:h-8 md:h-10 hidden dark:block"/>
                     </a>
 
                 @elseif( Route::is('technik.*') )
-                    <a href="{{ route('technik.home') }}">
+                    <a href="{{ route('technik.home') }}" wire:navigate>
                         <img src="{{ asset('logos/bereal_technik.svg') }}" class="h-6 sm:h-8 md:h-10 dark:hidden"/>
                         <img src="{{ asset('logos/bereal_technik_white.svg') }}"
                              class="h-6 sm:h-8 md:h-10 hidden dark:block"/>
                     </a>
 
                 @else
-                    <a href="{{ route('immobilien.home') }}">
+                    <a href="{{ route('immobilien.home') }}" wire:navigate>
                         <img src="{{ asset('logos/bereal.svg') }}" class="h-6 sm:h-8 md:h-10 dark:hidden"/>
                         <img src="{{ asset('logos/bereal_white.svg') }}"
                              class="h-6 sm:h-8 md:h-10 hidden dark:block"/>
@@ -88,6 +88,17 @@
                                class="menu-item relative uppercase cursor-pointer text-logo-600 ">
                                 <div @class(["font-black" => Route::is('hausverwaltung.team')])>
                                     <span class="menu-item-text pointer-events-none block relative">Team</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <div class="overflow-hidden">
+                            <a href="#" wire:navigate
+                               class="menu-item relative uppercase cursor-pointer text-logo-600 ">
+                                <div @class(["font-black" => Route::is('hausverwaltung.team')])>
+                                    <span class="menu-item-text pointer-events-none block relative">FAQ</span>
                                 </div>
                             </a>
                         </div>

@@ -25,8 +25,9 @@
                                 <ul class="absolute inset-0 overflow-y-auto scrollbar scrollbar-thin  !list-none">
                                     <template x-for="service in services" :key="service.id">
                                         <li class="border-b border-logo p-2 !ml-0">
-                                            <p class="!font-bold !mb-0 !dark:text-logo !text-logo"
-                                               x-text="service.name"></p>
+                                            <a :href="service.link" wire:navigate>
+                                                <p class="!font-bold !mb-0 !dark:text-logo !text-logo" x-text="service.name"></p>
+                                            </a>
                                             <div class="flex space-x-2">
                                                 <template x-for="point in service.points">
                                                     <div class="flex space-x-px items-center !text-logo !dark:text-logo/50">
@@ -47,9 +48,9 @@
                                 </ul>
                             </div>
 
-                                <div class="mt-4 pt-4 border-t border-logo">
-                                    <x-button href="https://realonline.bontus-eybel.at">Kundenlogin</x-button>
-                                </div>
+                            <div class="mt-4 pt-4 border-t border-logo">
+                                <x-button href="https://realonline.bontus-eybel.at">Kundenlogin</x-button>
+                            </div>
 
 
                         </div>
