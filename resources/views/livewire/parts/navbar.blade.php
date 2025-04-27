@@ -81,16 +81,7 @@
                         </div>
                     </div>
 
-                    <div class="relative">
-                        <div class="overflow-hidden">
-                            <a href="{{ route('hausverwaltung.kontakt') }}" wire:navigate
-                               class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                                <div @class(["font-black" => Route::is('hausverwaltung.kontakt')])>
-                                    <span class="menu-item-text pointer-events-none block relative">Kontakt</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+
                     <div class="relative">
                         <div class="overflow-hidden">
                             <a href="{{ route('hausverwaltung.team') }}" wire:navigate
@@ -122,12 +113,7 @@
                             <span class="menu-item-text pointer-events-none block relative">Karriere</span>
                         </div>
                     </a>
-                    <a href="{{ route('immobilien.kontakt') }}" wire:navigate
-                       class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                        <div @class(["font-black" => Route::is('immobilien.kontakt')])>
-                            <span class="menu-item-text pointer-events-none block relative">Kontakt</span>
-                        </div>
-                    </a>
+
                     <a href="{{ route('immobilien.team') }}" wire:navigate
                        class="menu-item relative uppercase cursor-pointer text-logo-600 ">
                         <div @class(["font-black" => Route::is('immobilien.team')])>
@@ -144,12 +130,7 @@
                             <span class="menu-item-text pointer-events-none block relative">Karriere</span>
                         </div>
                     </a>
-                    <a href="{{ route('technik.kontakt') }}" wire:navigate
-                       class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                        <div @class(["font-black" => Route::is('technik.kontakt')])>
-                            <span class="menu-item-text pointer-events-none block relative">Kontakt</span>
-                        </div>
-                    </a>
+
                     <a href="{{ route('technik.team') }}" wire:navigate
                        class="menu-item relative uppercase cursor-pointer text-logo-600 ">
                         <div @class(["font-black" => Route::is('technik.team')])>

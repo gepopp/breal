@@ -15,6 +15,11 @@
                         </template>
                     </ul>
                 </div>
+
+                <div class="mt-4 pt-4 border-t border-logo">
+                    <x-button href="https://realonline.bontus-eybel.at">Kundenlogin</x-button>
+                </div>
+
             </div>
         </div>
     </div>
