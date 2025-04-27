@@ -15,7 +15,7 @@ class Service extends Component
 
     public $text;
 
-    public ?Collection $services = null;
+    public ?array $services = null;
 
     #[Url]
     public ?string $tab = '';
@@ -23,8 +23,8 @@ class Service extends Component
     public function mount(PagesSettings $pagesSettings): void
     {
         $this->text = $pagesSettings->services_introtext;
-        $this->services = \App\Models\Service::all();
-        $this->tab = $this->services->first()->slug;
+        $this->services = \App\Models\Service::all()->toArray();
+        $this->tab = $this->services[0]['slug'];
     }
 
 

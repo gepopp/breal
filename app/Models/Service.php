@@ -20,8 +20,8 @@ class Service extends Model implements HasMedia
         'points'     => 'array',
         'on_landing' => 'boolean',
         'links'      => 'array',
+        'list'       => 'array'
     ];
-
 
 
     protected static function booted(): void
@@ -31,7 +31,7 @@ class Service extends Model implements HasMedia
         });
     }
 
-    public function getSlugOptions() : SlugOptions
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom('name')

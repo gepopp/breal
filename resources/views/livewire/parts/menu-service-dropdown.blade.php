@@ -11,20 +11,6 @@
                         <template x-for="service in services" :key="`menu-${service.id}`">
                             <li class="border-b border-logo p-2 !ml-0">
                                 <p class="!font-bold !mb-0 !dark:text-logo !text-logo !text-sm" x-text="service.name"></p>
-                                <div class="flex space-x-2">
-                                    <template x-for="point in service.points">
-                                        <div class="flex space-x-px items-center !text-logo !dark:text-logo/50 !text-xs">
-                                            <svg class="size-3" data-slot="icon" fill="none"
-                                                 stroke-width="2" stroke="currentColor"
-                                                 viewBox="0 0 24 24"
-                                                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 4.5v15m7.5-7.5h-15"></path>
-                                            </svg>
-                                            <span class="text-xs" x-text="point"></span>
-                                        </div>
-                                    </template>
-                                </div>
                             </li>
                         </template>
                     </ul>

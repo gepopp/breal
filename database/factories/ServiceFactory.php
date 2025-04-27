@@ -18,12 +18,11 @@ class ServiceFactory extends Factory
     public function definition(): array
     {
         return [
-            'order'      => $this->faker->numberBetween(1, 100),
-            'name'       => $this->faker->sentence(3),
-            'points'     => [$this->faker->word(), $this->faker->word(), $this->faker->word()],
-            'company'    => $this->faker->randomElement(CompaniesEnum::class),
-            'on_landing' => true
-
+            'order'       => $this->faker->numberBetween(1, 100),
+            'name'        => $this->faker->sentence(3),
+            'points'      => [$this->faker->word(), $this->faker->word(), $this->faker->word()],
+            'company'     => $this->faker->randomElement(CompaniesEnum::class),
+            "description" => $this->faker->realTextBetween(800, 1200),
         ];
     }
 }

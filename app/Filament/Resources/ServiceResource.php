@@ -7,6 +7,8 @@ use App\Filament\Resources\ServiceResource\Pages;
 use App\Filament\Resources\ServiceResource\RelationManagers;
 use App\Models\Service;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -40,10 +42,36 @@ class ServiceResource extends Resource
                 Forms\Components\Select::make('company')
                     ->options(CompaniesEnum::class),
 
-                //                Forms\Components\TextInput::make('title'),
-                //                Forms\Components\TextInput::make('description'),
-                //                Forms\Components\Textarea::make('links')
-                //                    ->columnSpanFull(),
+                Forms\Components\RichEditor::make('description'),
+
+                Forms\Components\Repeater::make('links')
+                    ->schema([
+                        FileUpload::make('path')
+                            ->required()
+                            ->downloadable()
+                            ->preserveFilenames()
+                            ->acceptedFileTypes(['application/pdf'])
+                            ->label('Dokument'),
+
+                        Forms\Components\TextInput::make('name')
+                            ->required()
+
+                    ]),
+
+                Forms\Components\Repeater::make('list')
+                    ->schema([
+                        Forms\Components\Select::make('icon')
+                            ->options([
+                                'none'       => 'Keines',
+                                'rufzeichen' => 'Rufzeichen',
+                                'stern'      => 'Stern',
+                                'arrow'      => 'Pfeil',
+                            ]),
+                        Forms\Components\Repeater::make('list')
+                            ->simple(TextInput::make('list'))
+                    ])
+
+
             ])
             ->columns(1);
     }

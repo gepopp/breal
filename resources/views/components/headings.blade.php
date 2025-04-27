@@ -27,27 +27,27 @@
         "before:bg-white before:text-logo" => $ondark,
         "before:text-white before:bg-logo" => !$ondark
         ])
-         data-aos="fade">
+         data-aos="fade" data-aos-once="true">
         <span class="font-logo dark:text-white">{{$tag}}</span>
     </div>
     <?php switch ((int)$level): case(1): ?>
-    <h1 data-aos="fade" data-aos-delay="750" {{ $attributes->class($classes) }}>{{ $slot }}</h1>
+    <h1 data-aos="fade" data-aos-once="true" data-aos-delay="750" {{ $attributes->class($classes) }}>{{ $slot }}</h1>
 
     @break
     <?php case(2): ?>
-    <h2 {{ $attributes->class($classes) }} data-aos="fade" data-aos-delay="500" data-flux-heading>{{ $slot }}</h2>
+    <h2 {{ $attributes->class($classes) }} data-aos-once="true" data-aos="fade" data-aos-delay="500" data-flux-heading>{{ $slot }}</h2>
 
     @break
     <?php case(3): ?>
-    <h3 {{ $attributes->class($classes) }} data-aos="fade" data-aos-delay="500">{{ $slot }}</h3>
+    <h3 {{ $attributes->class($classes) }} data-aos-once="true" data-aos="fade" data-aos-delay="500">{{ $slot }}</h3>
 
     @break
     <?php case(4): ?>
-    <h4 {{ $attributes->class($classes) }} data-aos="fade" data-aos-delay="500">{{ $slot }}</h4>
+    <h4 {{ $attributes->class($classes) }} data-aos-once="true" data-aos="fade" data-aos-delay="500">{{ $slot }}</h4>
 
     @break
     <?php default: ?>
-    <div {{ $attributes->class($classes) }} data-aos="fade" data-aos-delay="500">{{ $slot }}</div>
+    <div {{ $attributes->class($classes) }} data-aos-once="true" data-aos="fade" data-aos-delay="500">{{ $slot }}</div>
     <?php endswitch; ?>
 </div>
 
