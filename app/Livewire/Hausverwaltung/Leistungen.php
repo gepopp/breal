@@ -2,12 +2,34 @@
 
 namespace App\Livewire\Hausverwaltung;
 
+use App\Enums\CompaniesEnum;
+use App\Models\Competence;
+use App\Settings\PagesSettings;
+use App\Traits\SplitsHtmlText;
+use Illuminate\Support\Collection;
 use Livewire\Component;
 
 class Leistungen extends Component
 {
-    public function render()
+    use SplitsHtmlText;
+
+    public string $company = CompaniesEnum::Hausverwaltung->name;
+
+    public string $text = '';
+    public ?Collection $leistungen = null;
+
+    public function mount( PagesSettings $pagesSettings)
     {
-        return view('livewire.hausverwaltung.leistungen');
+        $this->company = CompaniesEnum::getByRoute();
+
+        $this->text = $pagesSettings->team_introtext;
+
+        $this->leistungen = Competence::where('company', $this->company)->get();
+    }
+
+    public function render(PagesSettings $pagesSettings)
+    {
+        $preparedText = $this->prepareText();
+        return view('livewire.hausverwaltung.leistungen', compact('pagesSettings', 'preparedText'));
     }
 }

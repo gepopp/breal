@@ -46,8 +46,8 @@ class PagesSettings extends SettingsPage
                             ]),
                         Forms\Components\Tabs\Tab::make('Karriereseite')
                             ->schema([
-                                Forms\Components\TextInput::make('vacancies_header')->label('Introtext')->required(),
-                                Forms\Components\TextInput::make('vacancies_subheader')->label('Introtext')->required(),
+                                Forms\Components\TextInput::make('vacancies_header')->label('Überschrift')->required(),
+                                Forms\Components\TextInput::make('vacancies_subheader')->label('Unterzeile')->required(),
                                 Forms\Components\RichEditor::make('vacancies_introtext')->label('Introtext')->required(),
                                 Forms\Components\RichEditor::make('cold_application_cta_text')->label('Text für Initiativbewerbungs-CTA"')->required(),
                             ]),
@@ -55,24 +55,31 @@ class PagesSettings extends SettingsPage
 
                         Forms\Components\Tabs\Tab::make('Teamseite')
                             ->schema([
-                                Forms\Components\TextInput::make('team_header')->label('Introtext')->required(),
-                                Forms\Components\TextInput::make('team_subheader')->label('Introtext')->required(),
-                                Forms\Components\RichEditor::make('team_introtext')->label('Text für Initiativbewerbungs-CTA"')->required(),
+                                Forms\Components\TextInput::make('team_header')->label('Überschrift')->required(),
+                                Forms\Components\TextInput::make('team_subheader')->label('Unterzeile')->required(),
+                                Forms\Components\RichEditor::make('team_introtext')->label('Introtext"')->required(),
                             ]),
 
 
                         Forms\Components\Tabs\Tab::make('Service Seite')
                             ->schema([
-                                Forms\Components\TextInput::make('services_header')->label('Introtext')->required(),
-                                Forms\Components\TextInput::make('services_subheader')->label('Introtext')->required(),
-                                Forms\Components\RichEditor::make('services_introtext')->label('Text für Initiativbewerbungs-CTA"')->required(),
+                                Forms\Components\TextInput::make('services_header')->label('Überschrift')->required(),
+                                Forms\Components\TextInput::make('services_subheader')->label('Unterzeile')->required(),
+                                Forms\Components\RichEditor::make('services_introtext')->label('Introtext"')->required(),
                             ]),
 
                         Forms\Components\Tabs\Tab::make('FAQ Seite')
                             ->schema([
-                                Forms\Components\TextInput::make('faq_header')->label('Introtext')->required(),
-                                Forms\Components\TextInput::make('faq_subheader')->label('Introtext')->required(),
-                                Forms\Components\RichEditor::make('faq_introtext')->label('Text für Initiativbewerbungs-CTA"')->required(),
+                                Forms\Components\TextInput::make('faq_header')->label('Überschrift')->required(),
+                                Forms\Components\TextInput::make('faq_subheader')->label('Unterzeile')->required(),
+                                Forms\Components\RichEditor::make('faq_introtext')->label('Introtext"')->required(),
+                            ]),
+
+                        Forms\Components\Tabs\Tab::make('Leistungen Seite')
+                            ->schema([
+                                Forms\Components\TextInput::make('leistungen_header')->label('Überschrift')->required(),
+                                Forms\Components\TextInput::make('leistungen_subheader')->label('Unterzeile')->required(),
+                                Forms\Components\RichEditor::make('leistungen_introtext')->label('Introtext"')->required(),
                             ]),
 
                         Forms\Components\Tabs\Tab::make('Impressum')

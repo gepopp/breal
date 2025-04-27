@@ -34,6 +34,6 @@ enum CompaniesEnum: string implements HasLabel
             return self::Technik->name;
         }
 
-        return null;
+        return self::Hausverwaltung->name;
     }
 }

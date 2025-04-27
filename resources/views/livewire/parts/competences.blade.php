@@ -32,22 +32,19 @@
 
                 @php
                     $firstLetter = \Illuminate\Support\Str::limit($competence->name, 1, '');
-                    $files = \Illuminate\Support\Facades\File::allFiles(public_path('homes'));
-                    $images = [];
-                    foreach($files as $file){
-                        $images[] = asset('homes/' . $file->getFilename());
-                    }
                 @endphp
 
                 <div data-aos="fade-up" data-aos-delay="{{ $index * 200 }}" class="absolute top-2 left-2">
                     <div class="relative opacity-50 z-10">
-                        <span @class(["text-8xl font-logo text-transparent bg-clip-text bg-center"]) style="background-image: url({{ \Illuminate\Support\Arr::random($images) }})">{{ $firstLetter }}</span>
+                        <span @class(["text-8xl font-logo text-transparent bg-clip-text bg-center"]) style="background-image: url({{ $competence->getFirstMediaUrl('titleimage', 'thumb') }})">{{ $firstLetter }}</span>
                     </div>
                 </div>
 
                 <div @class(["z-20"])>
                     <h5 class="font-bold line-clamp-1">{{ $competence->name }}</h5>
                     <p class="!text-sm line-clamp-5">{{ $competence->description }}</p>
+
+                    <a href="{{ route('leistung', ['competence' => $competence ] ) }}" class="mt-4 text-right w-full block">weiterlesen</a>
                 </div>
 
             </div>

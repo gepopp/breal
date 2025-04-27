@@ -76,6 +76,14 @@ class PagesSettings extends Settings
 
     public string $faq_introtext = '<p>Hausverwaltung ist ein komplexes Thema. Da kann es schon mal zu Fragen kommen. Wir beantworten Ihre Fragen rund um das Thema Immobilienmanagement und Hausverwaltung.</p>';
 
+
+    public string $leistungen_header = 'competent';
+
+    public string $leistungen_subheader = 'Unsere Leistungen';
+
+    public string $leistungen_introtext = '<p>Wir brennen für Hausverwaltung - von Wohneigentumsverwaltung und Mietrechtsgesetz bis zu Bauverwaltung und allgemeiner Beratung – wir kümmern uns darum, dass Sie sich rundum gut betreut fühlen. Dabei stehen partnerschaftliche Zusammenarbeit, individuelle Lösungen und umfangreiche Beratung an erster Stelle.</p>';
+
+
     public static function group(): string
     {
         return 'pages';

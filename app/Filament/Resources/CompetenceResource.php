@@ -20,26 +20,41 @@ class CompetenceResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationLabel = 'Kompetenzen';
-    protected static ?string $label = 'Kompetenz';
-    protected static ?string $pluralLabel = 'Kompetenzen';
-    protected static ?string $title = 'Kompetenzen';
+    protected static ?string $navigationLabel = 'Leistungen';
+    protected static ?string $label = 'Leistung';
+    protected static ?string $pluralLabel = 'Leistungen';
+    protected static ?string $title = 'Leistungen';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
+                Forms\Components\SpatieMediaLibraryFileUpload::make('titleimage')
+                    ->image()
+                    ->collection('titleimage')
+                    ->downloadable()
+                    ->responsiveImages()
+                    ->preserveFilenames()
+                    ->required(),
+
+
                 Forms\Components\TextInput::make('order')
                     ->required()
                     ->numeric(),
                 Forms\Components\Select::make('company')
                     ->options(CompaniesEnum::class)
                     ->required(),
+                Forms\Components\TextInput::make('keyword')
+                    ->required(),
                 Forms\Components\TextInput::make('name')
                     ->required(),
                 Forms\Components\Textarea::make('description')
+                    ->label('Introtext')
                     ->required()
                     ->columnSpanFull(),
+                Forms\Components\RichEditor::make('body')
+                    ->label('Langtext')
+                    ->required()
             ])->columns(1);
     }
 
@@ -86,9 +101,9 @@ class CompetenceResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCompetences::route('/'),
+            'index'  => Pages\ListCompetences::route('/'),
             'create' => Pages\CreateCompetence::route('/create'),
-            'edit' => Pages\EditCompetence::route('/{record}/edit'),
+            'edit'   => Pages\EditCompetence::route('/{record}/edit'),
         ];
     }
 }

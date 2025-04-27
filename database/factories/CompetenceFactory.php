@@ -18,10 +18,14 @@ class CompetenceFactory extends Factory
     public function definition(): array
     {
         return [
-            'order' => $this->faker->numberBetween(1, 100),
-            'company' => $this->faker->randomElement( CompaniesEnum::class),
-            'name' => $this->faker->sentence(),
+            'order'       => $this->faker->numberBetween(1, 100),
+            'keyword'     => $this->faker->word(),
+            'company'     => $this->faker->randomElement(CompaniesEnum::class),
+            'name'        => $this->faker->sentence(),
             'description' => $this->faker->paragraph(),
+            'body'        => $this->faker->realText(1200, 4),
+            'on_landing'  => $this->faker->boolean(),
+            'on_dropdown' => $this->faker->boolean(),
         ];
     }
 }

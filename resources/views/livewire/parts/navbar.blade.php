@@ -45,7 +45,7 @@
 
             <nav class="hidden lg:flex mb-px space-x-12 justify-between items-center font-bold text-logo-500 dark:text-white">
                 @if( !Route::is('immobilien.*', 'technik.*') )
-                    <div class="relative">
+                    <div class="relative group">
                         <div class="overflow-hidden">
                             <a href="{{ route('hausverwaltung.leistungen') }}" wire:navigate
                                class="menu-item relative uppercase cursor-pointer text-logo-600">
@@ -53,6 +53,9 @@
                                     <span class="menu-item-text pointer-events-none block relative">Leistungen</span>
                                 </div>
                             </a>
+                        </div>
+                        <div class="group-hover:block hidden transition-all duration-300">
+                            <livewire:parts.competence-dropdown/>
                         </div>
                     </div>
                     <div class="relative group">

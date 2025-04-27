@@ -40,6 +40,7 @@ Route::group(['prefix' => 'technik', 'as' => 'technik.'], function () {
 
 
 Route::get('/stellenanzeige/{JobVacancy}', \App\Livewire\Pages\JobVacancy::class)->name('stellenanzeige');
+Route::get('/leistung/{competence}', \App\Livewire\Pages\Compentence::class)->name('leistung');
 
 
 Route::get('impressum', \App\Livewire\Sites\Imprint::class)->name('impressum');
