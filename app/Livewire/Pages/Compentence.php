@@ -9,9 +9,11 @@ class Compentence extends Component
 {
     public Competence $competence;
 
+    public string $company = '';
 
     public function mount(Competence $competence){
         $this->competence = $competence;
+        $this->company = $this->competence->company->name;
     }
 
 

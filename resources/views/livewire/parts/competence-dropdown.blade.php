@@ -3,7 +3,7 @@
         <ul class="w-84 p-4 space-y-2">
             @foreach($competences as $competence)
                 <li>
-                    <a href="{{ route('leistung', $competence) }}" wire:navigate class="block text-sm text-gray-700 hover:bg-gray-100 px-2">
+                    <a href="{{ route( strtolower($company . '.leistung' ), $competence) }}" wire:navigate class="block text-sm text-gray-700 hover:bg-gray-100 px-2">
                         <p class="line-clamp-1 !font-bold !text-base">{{ $competence->name }}</p>
                     </a>
                 </li>
