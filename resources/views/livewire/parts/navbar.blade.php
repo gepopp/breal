@@ -44,38 +44,63 @@
             </div>
 
 
-            <nav class="hidden lg:flex mb-px space-x-12 justify-between items-center overflow-hidden font-bold text-logo-500 dark:text-white">
+            <nav class="hidden lg:flex mb-px space-x-12 justify-between items-center font-bold text-logo-500 dark:text-white">
                 @if( !Route::is('immobilien.*', 'technik.*') )
-                    <a href="{{ route('hausverwaltung.leistungen') }}" wire:navigate
-                       class="menu-item relative uppercase cursor-pointer text-logo-600">
-                        <div @class(["font-black" => Route::is('hausverwaltung.leistungen')])>
-                            <span class="menu-item-text pointer-events-none block relative">Leistungen</span>
+                    <div class="relative">
+                        <div class="overflow-hidden">
+                            <a href="{{ route('hausverwaltung.leistungen') }}" wire:navigate
+                               class="menu-item relative uppercase cursor-pointer text-logo-600">
+                                <div @class(["font-black" => Route::is('hausverwaltung.leistungen')])>
+                                    <span class="menu-item-text pointer-events-none block relative">Leistungen</span>
+                                </div>
+                            </a>
                         </div>
-                    </a>
-                    <a href="{{ route('hausverwaltung.service') }}" wire:navigate
-                       class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                        <div @class(["font-black" => Route::is('hausverwaltung.service')])>
-                            <span class="menu-item-text pointer-events-none block relative">Service</span>
+                    </div>
+                    <div class="relative group">
+                        <div class="overflow-hidden">
+                            <a href="{{ route('hausverwaltung.service') }}" wire:navigate
+                               class="menu-item relative uppercase cursor-pointer text-logo-600">
+                                <div @class(["font-black" => Route::is('hausverwaltung.service')])>
+                                    <span class="menu-item-text pointer-events-none block relative">Service</span>
+                                </div>
+                            </a>
+                            <div class="group-hover:block hidden transition-all duration-300">
+                                <livewire:parts.menu-service-dropdown/>
+                            </div>
                         </div>
-                    </a>
-                    <a href="{{ route('hausverwaltung.karriere') }}" wire:navigate
-                       class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                        <div @class(["font-black" => Route::is('hausverwaltung.karriere')])>
-                            <span class="menu-item-text pointer-events-none block relative">Karriere</span>
+                    </div>
+
+                    <div class="relative">
+                        <div class="overflow-hidden">
+                            <a href="{{ route('hausverwaltung.karriere') }}" wire:navigate
+                               class="menu-item relative uppercase cursor-pointer text-logo-600 ">
+                                <div @class(["font-black" => Route::is('hausverwaltung.karriere')])>
+                                    <span class="menu-item-text pointer-events-none block relative">Karriere</span>
+                                </div>
+                            </a>
                         </div>
-                    </a>
-                    <a href="{{ route('hausverwaltung.kontakt') }}" wire:navigate
-                       class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                        <div @class(["font-black" => Route::is('hausverwaltung.kontakt')])>
-                            <span class="menu-item-text pointer-events-none block relative">Kontakt</span>
+                    </div>
+
+                    <div class="relative">
+                        <div class="overflow-hidden">
+                            <a href="{{ route('hausverwaltung.kontakt') }}" wire:navigate
+                               class="menu-item relative uppercase cursor-pointer text-logo-600 ">
+                                <div @class(["font-black" => Route::is('hausverwaltung.kontakt')])>
+                                    <span class="menu-item-text pointer-events-none block relative">Kontakt</span>
+                                </div>
+                            </a>
                         </div>
-                    </a>
-                    <a href="{{ route('hausverwaltung.team') }}" wire:navigate
-                       class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                        <div @class(["font-black" => Route::is('hausverwaltung.team')])>
-                            <span class="menu-item-text pointer-events-none block relative">Team</span>
+                    </div>
+                    <div class="relative">
+                        <div class="overflow-hidden">
+                            <a href="{{ route('hausverwaltung.team') }}" wire:navigate
+                               class="menu-item relative uppercase cursor-pointer text-logo-600 ">
+                                <div @class(["font-black" => Route::is('hausverwaltung.team')])>
+                                    <span class="menu-item-text pointer-events-none block relative">Team</span>
+                                </div>
+                            </a>
                         </div>
-                    </a>
+                    </div>
                 @endif
 
                 @if( Route::is('immobilien.*') )
