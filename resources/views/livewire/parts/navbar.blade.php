@@ -1,7 +1,7 @@
 @php
     use Illuminate\Support\Facades\Route;
 @endphp
-<div class="relative">
+<div class="relative" id="navbar">
     <livewire:parts.preheader/>
     <div x-data="navControl">
         <div @class([
@@ -110,17 +110,6 @@
                 @if( Route::is('immobilien.*') )
                     <div class="relative">
                         <div class="overflow-hidden">
-                            <a href="{{ route('immobilien.immobiliensuche') }}" wire:navigate
-                               class="menu-item relative uppercase cursor-pointer text-logo-600">
-                                <div @class(["font-black" => Route::is('immobilien.immobiliensuche')])>
-                                    <span class="menu-item-text pointer-events-none block relative">Immobiliensuche</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="relative">
-                        <div class="overflow-hidden">
                             <a href="{{ route('immobilien.ueber-uns') }}" wire:navigate
                                class="menu-item relative uppercase cursor-pointer text-logo-600 ">
                                 <div @class(["font-black" => Route::is('immobilien.ueber-uns')])>
@@ -153,17 +142,6 @@
                         </div>
                     </div>
 
-
-                    <div class="relative">
-                        <div class="overflow-hidden">
-                            <a href="{{ route('immobilien.faq') }}" wire:navigate
-                               class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                                <div @class(["font-black" => Route::is('immobilien.team')])>
-                                    <span class="menu-item-text pointer-events-none block relative">FAQ</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
                 @endif
 
 
