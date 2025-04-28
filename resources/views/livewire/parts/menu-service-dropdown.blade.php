@@ -10,6 +10,7 @@
                     <ul class="absolute inset-0 overflow-y-auto scrollbar scrollbar-thin  !list-none">
                         <template x-for="service in services" :key="`menu-${service.id}`">
                             <li class="border-b border-logo p-2 !ml-0">
+                                <a :href="service.link">
                                     <p class="!font-bold !mb-0 !dark:text-logo !text-logo !text-sm" x-text="service.name"></p>
                                 </a>
                             </li>
