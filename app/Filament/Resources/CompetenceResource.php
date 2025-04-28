@@ -54,7 +54,11 @@ class CompetenceResource extends Resource
                     ->columnSpanFull(),
                 Forms\Components\RichEditor::make('body')
                     ->label('Langtext')
-                    ->required()
+                    ->required(),
+
+                Forms\Components\Toggle::make('on_landing'),
+                Forms\Components\Toggle::make('on_dropdown')
+
             ])->columns(1);
     }
 
