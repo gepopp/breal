@@ -24,7 +24,10 @@
         "text-logo-500" => !Route::is('technik.*', 'immobilien.*') && !$ondark,
         "text-technik-500" => Route::is('technik.*') && !$ondark,
         "text-makler-500" => Route::is('immobilien.*') && !$ondark,
-        "before:bg-white before:text-logo" => $ondark,
+        "before:text-logo-500" => !Route::is('technik.*', 'immobilien.*') && $ondark,
+        "before:text-technik-500" => Route::is('technik.*') && $ondark,
+        "before:text-makler-500" => Route::is('immobilien.*') && $ondark,
+        "before:bg-white " => $ondark,
         "before:text-white before:bg-logo" => !$ondark
         ])
          data-aos="fade" data-aos-once="true">

@@ -1,16 +1,27 @@
-<div x-data="hero" class="w-full relative bg-makler-500" :style="{ height: `${heroHeight}px` }">
+<div x-data="hero" class="w-full relative bg-makler-500">
     <div class="swiper hero-swiper">
         <div class="swiper-wrapper">
             @foreach ($images as $image)
                 <div class="swiper-slide">
-                    <img src="{{ $image->getUrl() }}" alt="" class="w-full object-cover" :style="{ height: `${heroHeight}px` }">
+                    <img src="{{ $image->getUrl() }}" srcset="{{ $image->getSrcset() }}" alt="bereal Makler Image" class="w-full object-cover" :style="{ height: `${heroHeight}px` }">
                 </div>
             @endforeach
         </div>
     </div>
-    <script>
-
-    </script>
+    <x-section class="bg-makler-500">
+        <x-headings ondark="true">
+            <x-slot name="tag">realtor</x-slot>
+            Keine Immobilie gleicht der anderen und jede hat ihre eigene Geschichte.
+        </x-headings>
+        <div class="grid grid-cols-2 gap-12 mt-8">
+            <div>
+                <p class="!text-white"> Bei uns dreht sich alles um die Immobilienvermittlung im Bereich Wohnen und Gewerbe, sei es in Miete oder Eigentum. </p>
+            </div>
+            <div>
+                <p class="!text-white">Gerne stehen wir Ihnen neben der Immobilienvermittlung einzelner Objekte auch für Vermarktungsfragen oder mit einer auf Sie und Ihr Projekt angepasste Vermarktungsstrategie gerne zur Verfügung.</p>
+            </div>
+        </div>
+    </x-section>
     <div class="absolute top-0 md:right-[5%] inset-0 flex items-center justify-end px-4">
         <div class="relative  p-6 bg-white/50 backdrop-blur-sm   rounded-xl z-20">
             <h2 class="text-2xl font-logo font-bold">Immobiliensuche</h2>
@@ -55,7 +66,7 @@
         calcHeight(){
             var navbar = document.querySelector('#navbar').offsetHeight;
             var screenHeight = window.innerHeight;
-            this.heroHeight = screenHeight - navbar;
+            this.heroHeight = (( screenHeight - navbar ) / 4) * 3 ;
         }
     }))
 </script>
