@@ -23,7 +23,7 @@
         </div>
     </x-section>
     <div class="absolute top-0 md:right-[5%] inset-0 flex items-center justify-end px-4">
-        <div class="relative  p-6 bg-white/50 backdrop-blur-sm   rounded-xl z-20">
+        <div class="relative  p-6 bg-white/50 backdrop-blur-sm  -translate-y-1/4 rounded-xl z-20 shadow-lg">
             <h2 class="text-2xl font-logo font-bold">Immobiliensuche</h2>
             <div class="grid grid-cols-2 gap-4 mt-4">
                 <flux:input type="number" label="Preis von"/>
