@@ -51,7 +51,7 @@ state();
 
     <div class="border-t border-white py-4 w-full mt-16 flex justify-center">
         <div class="lg:max-w-4xl xl:max-w-6xl w-full flex flex-col md:flex-row justify-between text-sm">
-            <p class="!text-sm">&copy; {{ now()->format('Y') }} Bontus Eybel</p>
+            <p class="!text-sm">&copy; {{ now()->format('Y') }} be real immobilien</p>
             <div class="flex flex-col md:flex-row md:divide-x divide-white justify-between order-first md:order-last mb-4">
                 <a @class(['md:px-4']) href="{{ route('datenschutz') }}" wire:navigate @class([ 'font-bold' => request()->is('datenschutz') ])>Datenschutz</a>
                 <a @class(['md:px-4']) href="#">Barrierefreiheit</a>
