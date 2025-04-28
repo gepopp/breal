@@ -71,7 +71,7 @@
 
 
                 <div class="absolute top-0 right-0 h-full hidden md:block flex justify-end">
-                    <svg @class(['text-white dark:text-logo-950 h-full w-auto shadow ml-auto -mr-px relative z-[9999]']) fill="currentColor"
+                    <svg @class(['text-white dark:text-logo-950 h-full w-auto ml-auto -mr-px relative z-[9999]']) fill="currentColor"
                          xmlns="http://www.w3.org/2000/svg"
                          version="1.1" viewBox="0 0 85.3 501">
                         <polygon class="st0" points="85.3 0 85.3 0 85.3 501 0 501 85.3 0"/>
