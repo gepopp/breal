@@ -56,8 +56,8 @@ class CompetenceResource extends Resource
                     ->label('Langtext')
                     ->required(),
 
-                Forms\Components\Toggle::make('on_landing'),
-                Forms\Components\Toggle::make('on_dropdown')
+                Forms\Components\Toggle::make('on_landing')->label('Auf der Landingpage anzeigen'),
+                Forms\Components\Toggle::make('on_dropdown')->label('Im Dropdown Menü anzeigen'),
 
             ])->columns(1);
     }
