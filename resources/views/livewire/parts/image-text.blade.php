@@ -69,7 +69,6 @@
                     </script>
                 @endif
 
-
                 <div class="absolute top-0 right-0 h-full hidden md:block flex justify-end">
                     <svg @class(['text-white dark:text-logo-950 h-full w-auto ml-auto -mr-px relative z-[9999]']) fill="currentColor"
                          xmlns="http://www.w3.org/2000/svg"
