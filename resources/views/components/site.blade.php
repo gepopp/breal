@@ -7,7 +7,7 @@
 
 <div class="overflow-hidden">
     <livewire:parts.navbar/>
-    <main>
+    <main class="z-[8888]">
         {{ $slot }}
     </main>
     <livewire:footer/>

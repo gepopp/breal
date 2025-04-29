@@ -1,11 +1,11 @@
 <x-section>
     <div @class(['md:max-w-sm lg:max-w-lg lg:my-48'])>
         <x-headings>
-            <x-slot name="tag">{{ $header }}</x-slot>
-            {!! $subheader !!}
+            <x-slot name="tag">{{ $settings->contact_header }}</x-slot>
+            {!! $settings->contact_subheader !!}
         </x-headings>
         <div data-aos="fade" data-aos-delay="600" class="prose">
-            {!! html_entity_decode( $text ) !!}
+            {!! $settings->contact_introtext !!}
         </div>
     </div>
 

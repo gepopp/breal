@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Parts;
 
+use App\Settings\LandingpageHausverwaltung;
 use Livewire\Component;
 
 class Contact extends Component
@@ -15,8 +16,8 @@ class Contact extends Component
     public string $text;
 
 
-    public function render()
+    public function render( LandingpageHausverwaltung $settings )
     {
-        return view('livewire.parts.contact');
+        return view('livewire.parts.contact', compact( 'settings') );
     }
 }

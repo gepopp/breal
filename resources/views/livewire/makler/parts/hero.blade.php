@@ -8,7 +8,7 @@
             @endforeach
         </div>
     </div>
-    <x-section class="bg-makler-500 !text-white">
+    <x-section class="bg-makler-500 dark:bg-makler-950 !text-white">
         <x-headings ondark="true">
             <x-slot name="tag">realtor</x-slot>
             Keine Immobilie gleicht der anderen und jede hat ihre eigene Geschichte.

@@ -108,16 +108,6 @@
                 @endif
 
                 @if( Route::is('immobilien.*') )
-                    <div class="relative">
-                        <div class="overflow-hidden">
-                            <a href="{{ route('immobilien.ueber-uns') }}" wire:navigate
-                               class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                                <div @class(["font-black" => Route::is('immobilien.ueber-uns')])>
-                                    <span class="menu-item-text pointer-events-none block relative">Über uns</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
 
                     <div class="relative">
                         <div class="overflow-hidden">

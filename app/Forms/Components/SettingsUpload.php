@@ -52,7 +52,7 @@ class SettingsUpload extends FileUpload
 
         $this->dehydrated(false);
 
-        $this->saveUploadedFileUsing(static function (SettingsUpload $component, TemporaryUploadedFile $file): ?string {
+        $this->saveUploadedFileUsing(static function (SettingsUpload $component, TemporaryUploadedFile $file, $livewire ): ?string {
 
 
             try {
@@ -63,9 +63,9 @@ class SettingsUpload extends FileUpload
                 return null;
             }
 
-
+            $settingsClass = $livewire->getSettings();
             $name = $component->getName();
-            $setting = Settings::whereName($name)->first();
+            $setting = Settings::whereName($name)->where('group', $settingsClass::group())->first();
 
             $media = $setting->addMedia($file)
                 ->withResponsiveImages()
@@ -81,27 +81,28 @@ class SettingsUpload extends FileUpload
             return $media->id;
         });
 
-        $this->reorderUploadedFilesUsing(function (SettingsUpload $component, $state) {
+        $this->reorderUploadedFilesUsing(function (SettingsUpload $component, $state, $livewire) {
             $ids = array_values(array_values($state));
             Media::setNewOrder( $ids );
-            $setting = Settings::whereName($component->getName())->first();
+            $settingsClass = $livewire->getSettings();
+            $setting = Settings::whereName($component->getName())->where('group', $settingsClass::group())->first();
             $setting->update(['payload' => $ids ]);
 
             return $state;
         });
 
-        $this->deleteUploadedFileUsing(function (array|string|null $state, $component) {
-           SettingsUpload::clearSettingMedia($component->getName(), $state);
+        $this->deleteUploadedFileUsing(function (array|string|null $state, $component, $livewire) {
+           SettingsUpload::clearSettingMedia($component->getName(), $state, $livewire);
         });
 
 
     }
 
 
-    public static function clearSettingMedia($name, $state): void
+    public static function clearSettingMedia($name, $state, $livewire): void
     {
-
-        $setting = Settings::whereName($name)->first();
+        $settingsClass = $livewire->getSettings();
+        $setting = Settings::whereName($name)->where('group', $settingsClass::group())->first();
 
         $payload = Arr::flatten($state);
 

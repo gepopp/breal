@@ -42,7 +42,7 @@ class settingsMigration extends Command
 
         $properties = $this->getPublicProperties($settingsClass);
 
-        $unmigrated = $this->unMigratedProperties($properties);
+        $unmigrated = $this->unMigratedProperties($properties, $group);
 
         if(empty($unmigrated)){
             $this->error('No Settings to migrate!');
@@ -84,10 +84,10 @@ class settingsMigration extends Command
     }
 
 
-    public function unMigratedProperties($properties)
+    public function unMigratedProperties($properties, $group)
     {
-        return array_filter($properties, function ($value, $property) {
-           return !Settings::where('name', $property)->exists();
+        return array_filter($properties, function ($value, $property) use ($group) {
+           return !Settings::where('name', $property)->where('group', $group)->exists();
         }, ARRAY_FILTER_USE_BOTH);
     }
 

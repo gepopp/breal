@@ -1,8 +1,8 @@
 <div>
     @env(['local', 'development'])
         <div class="fixed bottom-0 right-0 text-5xl p-4">
-            <div x-data>
-                <p x-on:click="$flux.dark = ! $flux.dark" class="!text-xs">Dark/Light</p>
+            <div x-data class="z-[9999] relative">
+                <p x-on:click="$flux.dark = ! $flux.dark" class="!text-xs relative z-[9999]">Dark/Light</p>
             </div>
             <span class="sm:hidden">xs</span>
             <span class="hidden sm:block md:hidden">sm</span>
