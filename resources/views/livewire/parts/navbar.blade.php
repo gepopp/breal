@@ -1,7 +1,7 @@
 @php
     use Illuminate\Support\Facades\Route;
 @endphp
-<div class="relative" id="navbar">
+<div class="relative z-50" id="navbar">
     <livewire:parts.preheader/>
     <div x-data="navControl">
         <div @class([
@@ -235,7 +235,7 @@
                         <a href="{{ route('technik.home') }}" wire:navigate>Start</a>
                         <a href="{{ route('technik.karriere') }}" wire:navigate>Karriere</a>
                         <a href="{{ route('technik.kontakt') }}" wire:navigate>Kontakt</a>
-                        <a href="{{ route('technik.tean') }}" wire:navigate>Team</a>
+                        <a href="{{ route('technik.team') }}" wire:navigate>Team</a>
                     @endif
                 </ul>
             </div>
