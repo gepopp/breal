@@ -5,6 +5,8 @@ namespace App\Filament\Pages;
 use App\Forms\Components\SettingsUpload;
 use App\Settings\MaklerSettings;
 use Filament\Forms;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Pages\SettingsPage;
 
@@ -26,6 +28,11 @@ class LandingpageMaklerSettings extends SettingsPage
                     ->reorderable()
                     ->panelLayout('grid')
                     ->required(),
+
+                TextInput::make('intro_title'),
+                TextInput::make('intro_subtitle'),
+                Forms\Components\RichEditor::make('intro_description'),
+
             ])->columns(1);
     }
 }

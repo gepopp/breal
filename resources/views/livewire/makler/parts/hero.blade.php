@@ -8,48 +8,53 @@
             @endforeach
         </div>
     </div>
-    <x-section class="bg-makler-500">
+    <x-section class="bg-makler-500 !text-white">
         <x-headings ondark="true">
             <x-slot name="tag">realtor</x-slot>
             Keine Immobilie gleicht der anderen und jede hat ihre eigene Geschichte.
         </x-headings>
-        <div class="grid grid-cols-2 gap-12 mt-8">
-            <div>
-                <p class="!text-white"> Bei uns dreht sich alles um die Immobilienvermittlung im Bereich Wohnen und Gewerbe, sei es in Miete oder Eigentum. </p>
-            </div>
-            <div>
-                <p class="!text-white">Gerne stehen wir Ihnen neben der Immobilienvermittlung einzelner Objekte auch für Vermarktungsfragen oder mit einer auf Sie und Ihr Projekt angepasste Vermarktungsstrategie gerne zur Verfügung.</p>
-            </div>
+        <div data-aos="fade" data-aos-delay="200">
+            @if(!is_array($preparedText))
+                {!! html_entity_decode( $preparedText ) !!}
+            @else
+                <div class="grid grid-cols-1 md:grid-cols-2 md:gap-12 w-full">
+                    <div>{!! $preparedText['firstHalf'] !!}</div>
+                    <div>{!! $preparedText['secondHalf'] !!}</div>
+                </div>
+            @endif
         </div>
     </x-section>
-    <div class="absolute top-0 md:right-[5%] inset-0 flex items-center justify-end px-4">
-        <div class="relative  p-6 bg-white/50 backdrop-blur-sm  -translate-y-1/4 rounded-xl z-20 shadow-lg">
-            <h2 class="text-2xl font-logo font-bold">Immobiliensuche</h2>
-            <div class="grid grid-cols-2 gap-4 mt-4">
-                <flux:input type="number" label="Preis von"/>
-                <flux:input type="number" label="Preis bis"/>
-                <flux:input type="number" label="Fläche von"/>
-                <flux:input type="number" label="Fläche bis"/>
-                <flux:input type="number" label="Zimmer von"/>
-                <flux:input type="number" label="Zimmer bis"/>
+    @if($realEstates->count())
+        <div class="absolute top-0 md:right-[5%] inset-0 flex items-center justify-end px-4">
+            <div class="relative  p-6 bg-white/50 backdrop-blur-sm  -translate-y-1/4 rounded-xl z-20 shadow-lg">
+                <h2 class="text-2xl font-logo font-bold">Immobiliensuche</h2>
+                <div class="grid grid-cols-2 gap-4 mt-4">
+                    <flux:input type="number" label="Preis von"/>
+                    <flux:input type="number" label="Preis bis"/>
+                    <flux:input type="number" label="Fläche von"/>
+                    <flux:input type="number" label="Fläche bis"/>
+                    <flux:input type="number" label="Zimmer von"/>
+                    <flux:input type="number" label="Zimmer bis"/>
 
-                <h5 class="col-span-2 font-bold text-sm">Suchen in</h5>
+                    <h5 class="col-span-2 font-bold text-sm">Suchen in</h5>
 
-                <x-button class="w-full bg-white">Miete</x-button>
-                <x-button class="w-full">Kauf</x-button>
+                    <x-button class="w-full bg-white">Miete</x-button>
+                    <x-button class="w-full">Kauf</x-button>
+                </div>
+                <div class="mt-4">
+                    <x-button class="w-full">büro & Gewerbe</x-button>
+                </div>
+
             </div>
-            <div class="mt-4">
-                <x-button class="w-full">büro & Gewerbe</x-button>
-            </div>
-
         </div>
-    </div>
+    @endif
+
 </div>
 @script
 <script>
     Alpine.data('hero', () => ({
         heroHeight: 0,
-        init(){
+        init() {
             this.calcHeight();
 
             var heroswiper = new Swiper('.hero-swiper', {
@@ -63,10 +68,10 @@
 
             window.addEventListener('resize', this.calcHeight);
         },
-        calcHeight(){
+        calcHeight() {
             var navbar = document.querySelector('#navbar').offsetHeight;
             var screenHeight = window.innerHeight;
-            this.heroHeight = (( screenHeight - navbar ) / 4) * 3 ;
+            this.heroHeight = ((screenHeight - navbar) / 4) * 3;
         }
     }))
 </script>
