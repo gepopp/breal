@@ -3,11 +3,11 @@
         <div @class(['flex justify-center items-center md:min-h-[70vh] mt-12 md:mt-0'])>
             <div @class(['md:max-w-sm lg:max-w-lg'])>
                 <x-headings :ondark="true">
-                    <x-slot name="tag">{{ $header }}</x-slot>
-                    {!! $subheader !!}
+                    <x-slot name="tag">{{ $settings->about_header }}</x-slot>
+                    {!! $settings->about_subheader !!}
                 </x-headings>
                 <div data-aos="fade" data-aos-delay="600" class="prose !text-white">
-                    {!! html_entity_decode( $text ) !!}
+                    {!! html_entity_decode( $settings->about_text ) !!}
                 </div>
             </div>
         </div>
