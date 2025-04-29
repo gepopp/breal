@@ -1,5 +1,4 @@
 <div>
-    {!! dd($settings->about_header) !!}
 
         <livewire:parts.landing-hero
                 company="$company"
@@ -27,6 +26,9 @@
                 columnRight="{{ $settings->hero_text_column_two }}"
         />
     @endif
+
+
+        {!! dd($settings->about_header) !!}
 
 
     <livewire:parts.about
