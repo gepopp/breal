@@ -1,5 +1,5 @@
 <div>
-    {!! dd($settings) !!}
+{{--    {!! dd($settings) !!}--}}
 
         <livewire:parts.landing-hero
                 company="$company"
@@ -29,15 +29,15 @@
     @endif
 
 
-    <livewire:parts.about
-            company="$company"
-            header="{{ $settings->about_header }}"
-            subheader="{{ $settings->about_subheader }}"
-            text="{{ $settings->about_text }}"
-            image="{{ $settings->about_image }}"
-            alt="{{ $settings->about_image_alt }}"
-            video="{{ $settings->about_video_embed_code }}"
-    />
+{{--    <livewire:parts.about--}}
+{{--            company="$company"--}}
+{{--            header="{{ $settings->about_header }}"--}}
+{{--            subheader="{{ $settings->about_subheader }}"--}}
+{{--            text="{{ $settings->about_text }}"--}}
+{{--            image="{{ $settings->about_image }}"--}}
+{{--            alt="{{ $settings->about_image_alt }}"--}}
+{{--            video="{{ $settings->about_video_embed_code }}"--}}
+{{--    />--}}
 
     <livewire:parts.timeline
             company="$company"
