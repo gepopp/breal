@@ -30,7 +30,7 @@
 
     <livewire:parts.about
             company="$company"
-            header="{{ $settings->about_header }}"
+            header=""
             subheader="{{ $settings->about_subheader }}"
             text="{{ $settings->about_text }}"
             image="{{ $settings->about_image }}"
