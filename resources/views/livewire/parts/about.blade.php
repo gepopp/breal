@@ -17,7 +17,7 @@
                      data-aos-delay="600"
                      class="aspect-video object-cover rounded-xl shadow-lg shadow-white/10"/>
 
-                @if(!is_null($video))
+                @if(!empty($settings->about_video_embed_code))
 
                     <div class="absolute inset-0 flex justify-center items-center text-logo">
                         <flux:modal.trigger name="video">
@@ -33,7 +33,7 @@
 
                     <flux:modal name="video" class="!p-0 !border-logo-950 !w-[1080px] !max-w-full !overflow-hidden !bg-logo-950">
                         <div class="aspect-video w-[1080px] max-w-full object-cover overflow-hidden z-[9999]">
-                            {!! html_entity_decode( $video ) !!}
+                            {!! $settings->about_video_embed_code !!}
                         </div>
                     </flux:modal>
 
