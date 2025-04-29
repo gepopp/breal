@@ -15,7 +15,7 @@ class About extends Component
 
     public function render( LandingpageHausverwaltung $settings )
     {
-        $media = Media::whereId($this->image)->first();
+        $media = Media::whereId($settings->about_image)->first();
 
         return view('livewire.parts.about', compact('media', 'settings'));
     }

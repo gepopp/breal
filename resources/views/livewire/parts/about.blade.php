@@ -13,7 +13,7 @@
         </div>
         <div @class(['order-first md:order-last -mx-4 md:mx-0 md:ml-0 relative overflow-hidden flex items-center p-4 md:p-0 relative'])>
             @if(!is_null($media))
-                <img src="{{ $media?->getUrl() }}" srcset="{{ $media?->getSrcset() }}" alt="{{ $alt }}" data-aos="fade"
+                <img src="{{ $media?->getUrl() }}" srcset="{{ $media?->getSrcset() }}" alt="{{ $settings->about_image_alt }}" data-aos="fade"
                      data-aos-delay="600"
                      class="aspect-video object-cover rounded-xl shadow-lg shadow-white/10"/>
 
