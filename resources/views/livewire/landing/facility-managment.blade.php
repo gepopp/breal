@@ -1,4 +1,5 @@
 <div>
+    {!! dd($settings) !!}
 
         <livewire:parts.landing-hero
                 company="$company"
@@ -30,7 +31,7 @@
 
     <livewire:parts.about
             company="$company"
-            header=""
+            header="{{ $settings->about_header }}"
             subheader="{{ $settings->about_subheader }}"
             text="{{ $settings->about_text }}"
             image="{{ $settings->about_image }}"
