@@ -76,7 +76,7 @@ class SettingsUpload extends FileUpload
             $payload = is_null($payload) ? [] : Arr::wrap( $payload );
             $payload[] = $media->id;
 
-            $setting->update(['payload' => $payload]);
+            $setting->update(['payload' => array_filter($payload)]);
 
             return $media->id;
         });

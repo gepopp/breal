@@ -14,6 +14,8 @@ class ImageText extends Component
 
     public function render()
     {
+        $media = [];
+
         if(!blank($this->image)){
             $media = Media::whereIn('id', Arr::wrap($this->image))->get();
         }

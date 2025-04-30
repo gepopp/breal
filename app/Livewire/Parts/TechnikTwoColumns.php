@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Livewire\Landing;
+namespace App\Livewire\Parts;
 
 use App\Settings\LandingpageTechnikSettings;
 use Livewire\Component;
 
-class Technik extends Component
+class TechnikTwoColumns extends Component
 {
     public function render( LandingpageTechnikSettings $settings)
     {
-        return view('livewire.landing.technik', compact('settings'));
+        return view('livewire.parts.technik-two-columns', compact('settings'));
     }
 }
