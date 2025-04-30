@@ -678,7 +678,7 @@
                             <tr>
                                 <td class="center-text" data-text-style="Paragraphs" align="center"
                                     style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:14px;line-height:24px;font-weight:400;font-style:normal;color:#999999;text-decoration:none;letter-spacing:0px;">
-                                    {{ now()->format('Y') }} bontus-eybl. Alle Rechte vorbehalten.<br>
+                                    {{ now()->format('Y') }} be real. Alle Rechte vorbehalten.<br>
                                     Franz Josefs Kai 65, 1010 Wien
                                 </td>
                             </tr>

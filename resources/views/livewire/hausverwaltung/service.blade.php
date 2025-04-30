@@ -90,6 +90,22 @@
         </div>
         <div>
             <div class="p-4 pt-0 prose grow" x-html="selectedService.description"></div>
+
+            <template x-if="selectedService.form == 'form'">
+                <div  @class(['p-4 bg-logo-100/10'])>
+                    <livewire:contact-form :sidebar="false"/>
+                </div>
+            </template>
+
+
+            <template x-if="selectedService.form == 'address'">
+                <div  @class(['p-4 bg-logo-100/10'])>
+                    <livewire:contact-form :sidebar="false" :address="true"/>
+                </div>
+            </template>
+
+
+
             <template x-if="selectedService.list.length > 0">
                 <template x-for="list in selectedService.list">
                     <div class="pt-8 mt-8 border-t-4 border-logo/50">

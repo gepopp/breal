@@ -42,6 +42,15 @@ class ServiceResource extends Resource
 
                 Forms\Components\RichEditor::make('description'),
 
+
+                Forms\Components\Select::make('form')
+                    ->options([
+                        'form'    => 'Kontaktformular',
+                        'address' => 'mit Adressfeld',
+                    ])
+                    ->nullable(),
+
+
                 Forms\Components\Repeater::make('links')
                     ->label('Dokumente')
                     ->schema([

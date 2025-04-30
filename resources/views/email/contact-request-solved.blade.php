@@ -568,6 +568,17 @@
                 <tr data-element="black-intro-2-paragraph" data-label="Intro Paragraph">
                     <td data-text-style="Intro Paragraph" align="center"
                         style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:18px;line-height:32px;font-weight:400;font-style:normal;color:#1b1b18;text-decoration:none;letter-spacing:0px;">
+                        {!! $contactRequest->address !!}
+                    </td>
+                </tr>
+                <tr data-element="black-intro-2-paragraph" data-label="Intro Paragraph">
+                    <td height="40" style="font-size:40px;line-height:40px;"
+                        data-height="Spacing under paragraph">&nbsp;
+                    </td>
+                </tr>
+                <tr data-element="black-intro-2-paragraph" data-label="Intro Paragraph">
+                    <td data-text-style="Intro Paragraph" align="center"
+                        style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:18px;line-height:32px;font-weight:400;font-style:normal;color:#1b1b18;text-decoration:none;letter-spacing:0px;">
                         {!! $contactRequest->message !!}
                     </td>
                 </tr>
@@ -721,7 +732,7 @@
                             <tr>
                                 <td class="center-text" data-text-style="Paragraphs" align="center"
                                     style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:14px;line-height:24px;font-weight:400;font-style:normal;color:#999999;text-decoration:none;letter-spacing:0px;">
-                                    {{ now()->format('Y') }} bontus-eybl. Alle Rechte vorbehalten.<br>
+                                    {{ now()->format('Y') }} be real. Alle Rechte vorbehalten.<br>
                                     Franz Josefs Kai 65, 1010 Wien
                                 </td>
                             </tr>

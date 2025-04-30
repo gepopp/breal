@@ -18,6 +18,9 @@ class ContactForm extends Component
 
     public bool $is_sent = false;
 
+    public bool $sidebar = true;
+
+    public bool $address = false;
 
     protected string $company = '';
 
@@ -28,7 +31,8 @@ class ContactForm extends Component
         'phone'     => '',
         'message'   => '',
         'company'   => null,
-        'terms'     => false
+        'terms'     => false,
+        'address'   => null,
     ];
 
     public function getValidationAttributes()
@@ -39,7 +43,8 @@ class ContactForm extends Component
             'data.email'     => 'E-Mail-Adresse',
             'data.phone'     => 'Telefonnummer',
             'data.message'   => 'Nachricht',
-            'data.terms'     => 'Verarbeitung'
+            'data.terms'     => 'Verarbeitung',
+            'data.address'   => 'Adresse',
         ];
     }
 
@@ -52,7 +57,8 @@ class ContactForm extends Component
             'data.email'     => ['required', 'string', 'email:rfc,dns', 'max:255'],
             'data.phone'     => ['required', 'string', 'max:255'],
             'data.message'   => ['required', 'string'],
-            'data.terms'     => ['required', 'accepted']
+            'data.terms'     => ['required', 'accepted'],
+            'data.address'   => $this->address ? ['required', 'string', 'max:255'] : ['nullable'],
         ];
     }
 

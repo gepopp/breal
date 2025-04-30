@@ -43,6 +43,9 @@ class ContactRequestResource extends Resource
                 Forms\Components\TextInput::make('phone')
                     ->tel()
                     ->required(),
+                Forms\Components\TextInput::make('address')
+                    ->tel()
+                    ->required(),
                 Forms\Components\TextInput::make('message')
                     ->required(),
                 Forms\Components\Select::make('company')
@@ -66,6 +69,10 @@ class ContactRequestResource extends Resource
                 Tables\Columns\TextColumn::make('phone')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('message')
+                    ->html()
+                    ->wrap()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('address')
                     ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('solved_at')
