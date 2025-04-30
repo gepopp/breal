@@ -158,17 +158,6 @@
                             </a>
                         </div>
                     </div>
-
-                    <div class="relative">
-                        <div class="overflow-hidden">
-                            <a href="{{ route('technik.faq') }}" wire:navigate
-                               class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                                <div @class(["font-black" => Route::is('technik.team')])>
-                                    <span class="menu-item-text pointer-events-none block relative">FAQ</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
                 @endif
             </nav>
 
