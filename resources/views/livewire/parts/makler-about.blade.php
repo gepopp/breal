@@ -11,7 +11,4 @@
             </div>
         </div>
     </div>
-
-
-
 </x-section>
