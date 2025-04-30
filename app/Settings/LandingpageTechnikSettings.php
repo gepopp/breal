@@ -4,7 +4,7 @@ namespace App\Settings;
 
 use Spatie\LaravelSettings\Settings;
 
-class LandingpageTechnik extends Settings
+class LandingpageTechnikSettings extends Settings
 {
 
     public static function group(): string
