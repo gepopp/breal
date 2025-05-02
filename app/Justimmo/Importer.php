@@ -2,6 +2,7 @@
 
 namespace App\Justimmo;
 
+use App\Jobs\CleanupRealtiesJob;
 use App\Jobs\ImportRealtyChunkJob;
 use App\Models\Realty;
 use Carbon\Carbon;
@@ -48,6 +49,8 @@ class Importer
         }
 
         Bus::batch($jobs)->dispatch();
+
+        CleanupRealtiesJob::delay(now()->addHours(2))->dispatch();
 
         Notification::make()->title('Import gestartet! Es werden ' . count($files) . ' Objekte aktualisiert!')->sendToDatabase(auth()->user());
 
