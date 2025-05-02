@@ -80,7 +80,7 @@
                     <flux:table.cell class="w-1/3 whitespace-normal">{{ \Illuminate\Support\Str::words($realty->title, 8, '...') }}</flux:table.cell>
                     <flux:table.cell class="whitespace-nowrap text-right">{{ $realty->zimmer }}</flux:table.cell>
 
-                    <flux:table.cell class="text-right">{{ is_null($realty->wohnflaeche) ? 'Auf Anfrage' : \Illuminate\Support\Number::format( $realty->wohnflaeche, 2, null, 'de'  ) }} m²</flux:table.cell>
+                    <flux:table.cell class="text-right">{{ is_null($realty->wohnflaeche) ? 'Auf Anfrage' : \Illuminate\Support\Number::format( $realty->wohnflaeche, 2, null, 'de'  ) . ' m²' }}</flux:table.cell>
 
                     <flux:table.cell variant="strong" class="text-right">{{ is_null($realty->preis) ? 'Auf Anfrage' : Number::currency($realty->preis, 'EUR', 'de') }}</flux:table.cell>
 
