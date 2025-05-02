@@ -75,11 +75,13 @@ class Immobiliensuche extends Component
 
     public function resetFilters()
     {
+        $this->resetPage();
         $this->reset('filters');;
     }
 
     public function sort($column)
     {
+        $this->resetPage();
         if ($this->sortBy === $column) {
             $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
         } else {
@@ -92,6 +94,8 @@ class Immobiliensuche extends Component
     #[Computed]
     public function realties()
     {
+        $this->resetPage();
+
         $query = Realty::query()
             ->tap(fn($query) => $this->sortBy ? $query->orderBy($this->sortBy, $this->sortDirection) : $query);
 
