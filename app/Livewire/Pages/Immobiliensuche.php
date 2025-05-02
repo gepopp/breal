@@ -91,10 +91,14 @@ class Immobiliensuche extends Component
     }
 
 
+    public function updatedFilters(){
+        $this->resetPage();
+    }
+
+
     #[Computed]
     public function realties()
     {
-        $this->resetPage();
 
         $query = Realty::query()
             ->tap(fn($query) => $this->sortBy ? $query->orderBy($this->sortBy, $this->sortDirection) : $query);
