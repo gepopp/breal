@@ -68,6 +68,7 @@
             <flux:table.column class="text-right" sortable :sorted="$sortBy === 'preis'" :direction="$sortDirection" wire:click="sort('preis')">Preis</flux:table.column>
             <flux:table.column sortable :sorted="$sortBy === 'nutzungsart'" :direction="$sortDirection" wire:click="sort('nutzungsart')">Nutzungsart</flux:table.column>
             <flux:table.column sortable :sorted="$sortBy === 'vermarktungsart'" :direction="$sortDirection" wire:click="sort('vermarktungsart')">Miete / Kauf</flux:table.column>
+            <flux:table.column sortable :sorted="$sortBy === 'plz'" :direction="$sortDirection" wire:click="sort('plz')">Postleitzahl</flux:table.column>
         </flux:table.columns>
 
         <flux:table.rows>
@@ -86,6 +87,7 @@
 
                     <flux:table.cell>{{ ucfirst(strtolower($realty->nutzungsart)) }}</flux:table.cell>
                     <flux:table.cell>{{ ucfirst($realty->vermarktungsart) }}</flux:table.cell>
+                    <flux:table.cell>{{ $realty->plz }} {{ $realty->ort }}</flux:table.cell>
                 </flux:table.row>
             @empty
                 <flux:table.row>
