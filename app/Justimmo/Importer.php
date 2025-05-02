@@ -22,12 +22,9 @@ class Importer
         $zipFile = $instance->findZipFile();
 
         if(is_null($zipFile)) {
-           $n = Notification::make()
+           Notification::make()
                 ->title('Keine neuen Dateien gefunden.')
                 ->sendToDatabase($recipient);
-
-           dd($n);
-
            return;
         }
 
@@ -63,7 +60,7 @@ class Importer
         $files = $this->getSortedFilesWithFileFacade('imports');
         $zipFile = null;
         foreach ($files as $file) {
-            if (str_contains($file['filename'], '.zip') && Carbon::parse($file['modified_date'])->gt($last_import->updated_at)) {
+            if (str_contains($file['filename'], '.zip') && Carbon::parse($file['modified_date'])->gt($last_import?->updated_at ?? now()->subDays(1))) {
                 $zipFile = $file;
             }
         }
