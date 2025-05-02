@@ -2,7 +2,7 @@
     <section @class([
         "text-logo-950" => \Illuminate\Support\Facades\Route::is('hausverwaltung.*'),
         "text-technik-950" => \Illuminate\Support\Facades\Route::is('technik.*'),
-        "text-makler-950" => \Illuminate\Support\Facades\Route::is('immobilien.*'),
+        "text-makler-950" => \Illuminate\Support\Facades\Route::is('makler.*'),
     ])>
         <div class="max-w-md">
             <x-headings>

@@ -82,6 +82,13 @@ class PagesSettings extends SettingsPage
                                 Forms\Components\RichEditor::make('leistungen_introtext')->label('Introtext"')->required(),
                             ]),
 
+                        Forms\Components\Tabs\Tab::make('Immobiliensuche')
+                            ->schema([
+                                Forms\Components\TextInput::make('search_header')->label('Überschrift')->required(),
+                                Forms\Components\TextInput::make('search_subheader')->label('Unterzeile')->required(),
+                                Forms\Components\RichEditor::make('search_introtext')->label('Introtext"')->required(),
+                            ]),
+
                         Forms\Components\Tabs\Tab::make('Impressum')
                             ->schema([
                                 Forms\Components\RichEditor::make('imprint_text')->label('Text für Initiativbewerbungs-CTA"')->required(),

@@ -43,7 +43,7 @@
         </div>
     </div>
     <div class="flex justify-center mt-8">
-        <x-button href="{{ route('immobilien.kontakt') }}" :ondark="true">kontakt</x-button>
+        <x-button href="{{ route('makler.kontakt') }}" :ondark="true">kontakt</x-button>
     </div>
 </x-section>
 

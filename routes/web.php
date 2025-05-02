@@ -22,7 +22,7 @@ Route::group(['as' => 'hausverwaltung.'], function () {
 });
 
 
-Route::group(['prefix' => 'immobilien', 'as' => 'immobilien.'], function () {
+Route::group(['prefix' => 'makler', 'as' => 'makler.'], function () {
     Route::get('/start', \App\Livewire\Landing\RealEstate::class)->name('home');
     Route::get('/immobiliensuche', \App\Livewire\Makler\Immobiliensuche::class)->name('immobiliensuche');
     Route::get('/ueber-uns', \App\Livewire\Makler\Ueber::class)->name('ueber-uns');
@@ -30,7 +30,9 @@ Route::group(['prefix' => 'immobilien', 'as' => 'immobilien.'], function () {
     Route::get('/kontakt', \App\Livewire\Pages\Contact::class)->name('kontakt');
     Route::get('/team', \App\Livewire\Pages\Team::class)->name('team');
     Route::get('/faq', \App\Livewire\Pages\FAQ::class)->name('faq');
+    Route::get('/leistungen', \App\Livewire\Hausverwaltung\Leistungen::class)->name('leistungen');
     Route::get('/leistung/{competence}', \App\Livewire\Pages\Compentence::class)->name('leistung');
+    Route::get('immobiliensuche', \App\Livewire\Pages\Immobiliensuche::class)->name('immobiliensuche');
 });
 
 Route::group(['prefix' => 'technik', 'as' => 'technik.'], function () {
@@ -39,6 +41,7 @@ Route::group(['prefix' => 'technik', 'as' => 'technik.'], function () {
     Route::get('/kontakt', \App\Livewire\Pages\Contact::class)->name('kontakt');
     Route::get('/team', \App\Livewire\Pages\Team::class)->name('team');
     Route::get('/faq', \App\Livewire\Pages\FAQ::class)->name('faq');
+    Route::get('/leistungen', \App\Livewire\Hausverwaltung\Leistungen::class)->name('leistungen');
     Route::get('/leistung/{competence}', \App\Livewire\Pages\Compentence::class)->name('leistung');
 });
 
@@ -47,6 +50,7 @@ Route::get('/stellenanzeige/{JobVacancy}', \App\Livewire\Pages\JobVacancy::class
 
 
 Route::get('impressum', \App\Livewire\Sites\Imprint::class)->name('impressum');
+Route::get('barrierefreiheit', \App\Livewire\Pages\AccessabilityDeclaration::class)->name('barrierefreiheit');
 Volt::route('datenschutz', 'policy')->name('datenschutz');
 
 Route::view('/confirm-test', 'confirmed')->name('confirm-test');
@@ -152,6 +156,12 @@ Route::get('/admin/oauth/callback/linkedin', function () {
     $user->update(['linkedin' => $data]);
 
     return redirect('/admin/users/' . $user->id . '/edit');
+});
+
+
+
+Route::get('import', function (){
+   \App\Justimmo\Importer::import();
 });
 
 

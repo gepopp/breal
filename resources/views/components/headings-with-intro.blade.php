@@ -5,9 +5,9 @@
 ])
 <div @class([
     "md:max-w-sm lg:max-w-lg",
-    "text-logo-500" => !Route::is('technik.*', 'immobilien.*'),
+    "text-logo-500" => !Route::is('technik.*', 'makler.*'),
     "text-technik-500" => Route::is('technik.*'),
-    "text-makler-500" => Route::is('immobilien.*'),
+    "text-makler-500" => Route::is('makler.*'),
 ])>
     <x-tagline>{{ $header }}</x-tagline>
     <x-subheading>{{ $subheader }}</x-subheading>

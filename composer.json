@@ -9,7 +9,7 @@
   ],
   "license": "MIT",
   "require": {
-    "php": "^8.2",
+    "php": "^8.4",
     "ext-dom": "*",
     "ext-libxml": "*",
     "filament/filament": "^3.3",
@@ -26,7 +26,12 @@
     "spatie/laravel-medialibrary": "^11.12",
     "spatie/laravel-sluggable": "^3.7",
     "symfony/http-client": "^7.2",
-    "symfony/mailgun-mailer": "^7.2"
+    "symfony/mailgun-mailer": "^7.2",
+    "ext-xml": "*",
+    "ext-xmlreader": "*",
+    "ext-xmlwriter": "*",
+    "ext-simplexml": "*",
+    "ext-zip": "*"
   },
   "require-dev": {
     "fakerphp/faker": "^1.23",

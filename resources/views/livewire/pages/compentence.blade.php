@@ -21,7 +21,10 @@
         </div>
 
         <div class="mt-12 flex justify-center">
-            <x-button href="{{ route( strtolower( $competence->company->value . '.leistungen' )) }}" wire:navigate data-aos="fade-up" data-aos-delay="500">Alle Leistungen</x-button>
+            @php
+                $company = strtolower($competence->company->value);
+            @endphp
+            <x-button href="{{ route( $company == 'makler' ? 'immobilien.leistungen' : $company . '.leistungen' ) }}" wire:navigate data-aos="fade-up" data-aos-delay="500">Alle Leistungen</x-button>
         </div>
     </div>
 </x-section>

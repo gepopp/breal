@@ -8,6 +8,8 @@ class LandingpageHausverwaltung extends Settings
 {
     public array|int|null $hero_image = null;
 
+    public int $hero_speed = 4000;
+
     public string $hero_image_alt = 'Bontus Eybel Intro Bild';
 
     public string $hero_header = 'welcome';
@@ -40,6 +42,7 @@ class LandingpageHausverwaltung extends Settings
     public string $timeline_subheader = 'Die Geschichte von be real';
     public string $timeline_intro = "<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>";
 
+    public int $timeline_speed = 4000;
 
     public string $service_heading = 'trusted';
     public string $service_subheading = 'Unser Service';

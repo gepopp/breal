@@ -2,7 +2,7 @@
     <section @class([
         "text-logo-950" => \Illuminate\Support\Facades\Route::is('hausverwaltung.*'),
         "text-technik-950" => \Illuminate\Support\Facades\Route::is('technik.*'),
-        "text-makler-950" => \Illuminate\Support\Facades\Route::is('immobilien.*'),
+        "text-makler-950" => \Illuminate\Support\Facades\Route::is('makler.*'),
     ])>
         <div class="max-w-md w-full">
             <x-headings>
@@ -51,7 +51,12 @@
                     <h5 class="font-bold line-clamp-1">{{ $competence->name }}</h5>
                     <p class="!text-sm line-clamp-5">{{ $competence->description }}</p>
 
-                    <a href="{{ route( strtolower( $company . '.leistung'), ['competence' => $competence ] ) }}" class="mt-4 text-right w-full block">weiterlesen</a>
+                    @php
+                        $company = strtolower($competence->company->value);
+                        $company = $company == 'makler' ? 'immobilien' : $company;
+                    @endphp
+
+                    <a href="{{ route(  $company . '.leistung', ['competence' => $competence ] ) }}" class="mt-4 text-right w-full block">weiterlesen</a>
                 </div>
 
             </div>

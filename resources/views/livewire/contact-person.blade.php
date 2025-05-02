@@ -9,9 +9,9 @@
     <div>
         <h5 @class([
         "text-xl font-semibold",
-        "text-logo-950" => !Route::is('technik.*', 'immobilien.*'),
+        "text-logo-950" => !Route::is('technik.*', 'makler.*'),
         "text-technik-950" => Route::is('technik.*'),
-        "text-makler-950" => Route::is('immobilien.*'),
+        "text-makler-950" => Route::is('makler.*'),
 ])>{{ $contactperson->name }}</h5>
         <p @class([ "!text-base" ])>
             {{ $contactperson->position }}

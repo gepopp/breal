@@ -84,6 +84,12 @@ class PagesSettings extends Settings
     public string $leistungen_introtext = '<p>Wir brennen für Hausverwaltung - von Wohneigentumsverwaltung und Mietrechtsgesetz bis zu Bauverwaltung und allgemeiner Beratung – wir kümmern uns darum, dass Sie sich rundum gut betreut fühlen. Dabei stehen partnerschaftliche Zusammenarbeit, individuelle Lösungen und umfangreiche Beratung an erster Stelle.</p>';
 
 
+    public string $search_header = 'home';
+    public string $search_subheader = 'Immobiliensuche der be real makler';
+
+    public string $search_introtext = '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet hic incidunt, inventore ipsa iste minima nemo officia similique veniam vero. Aliquid aspernatur cumque dolore, eveniet facilis iusto laborum nihil similique?</p>';
+
+
     public static function group(): string
     {
         return 'pages';

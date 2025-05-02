@@ -2,19 +2,13 @@
 
 namespace App\Livewire\Parts;
 
+use App\Settings\LandingpageHausverwaltung;
 use Livewire\Component;
 
 class TwoColumnText extends Component
 {
-    public string $company;
-
-    public string $columnLeft;
-
-    public string $columnRight;
-
-
-    public function render()
+    public function render( LandingpageHausverwaltung $settings )
     {
-        return view('livewire.parts.two-column-text');
+        return view('livewire.parts.two-column-text', compact('settings'));
     }
 }

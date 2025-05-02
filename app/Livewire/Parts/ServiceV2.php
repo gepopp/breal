@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Parts;
 
+use App\Settings\LandingpageHausverwaltung;
 use App\Traits\SplitsHtmlText;
 use Illuminate\Support\Collection;
 use Livewire\Component;
@@ -9,14 +10,6 @@ use Livewire\Component;
 class ServiceV2 extends Component
 {
     use SplitsHtmlText;
-
-    public string $company;
-
-    public string $header;
-
-    public string $subheader;
-
-    public string $text;
 
 
     public ?array $services = null;
@@ -27,10 +20,10 @@ class ServiceV2 extends Component
         $this->services = \App\Models\Service::all()->toArray();
     }
 
-    public function render()
+    public function render( LandingpageHausverwaltung $settings)
     {
-        $preparedText = $this->prepareText();
+        $preparedText = $this->prepareText($settings->service_introtext);
 
-        return view('livewire.parts.service-v2', compact('preparedText'));
+        return view('livewire.parts.service-v2', compact('preparedText', 'settings'));
     }
 }

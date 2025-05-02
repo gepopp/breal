@@ -6,6 +6,7 @@ use App\Forms\Components\SettingsUpload;
 use App\Settings\LandingpageHausverwaltung as Setting;
 use Filament\Forms;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Pages\SettingsPage;
 
@@ -25,6 +26,7 @@ class LandingpageHausverwaltung extends SettingsPage
                             ->schema([
                                 SettingsUpload::make('hero_image')->multiple()->reorderable()->panelLayout('grid')->required(),
                                 Forms\Components\TextInput::make('hero_image_alt')->required(),
+                                Forms\Components\TextInput::make('hero_speed')->numeric()->required(),
                                 Forms\Components\TextInput::make('hero_header')->required(),
                                 Forms\Components\TextInput::make('hero_subheader')->required(),
                                 Forms\Components\RichEditor::make('hero_introtext')
@@ -66,6 +68,7 @@ class LandingpageHausverwaltung extends SettingsPage
                                 Forms\Components\TextInput::make('timeline_header')->required(),
                                 Forms\Components\TextInput::make('timeline_subheader')->required(),
                                 Forms\Components\RichEditor::make('timeline_intro')->required(),
+                                Forms\Components\TextInput::make('timeline_speed')->numeric()->required(),
                             ]),
                         Forms\Components\Tabs\Tab::make('Service')
                             ->schema([

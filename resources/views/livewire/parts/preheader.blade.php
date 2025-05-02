@@ -2,9 +2,9 @@
     use Illuminate\Support\Facades\Route;
 @endphp
 <div @class([ "py-2 px-4 hidden md:block",
- "bg-logo-900 dark:bg-logo-950" => !Route::is('technik.*', 'immobilien.*'),
+ "bg-logo-900 dark:bg-logo-950" => !Route::is('technik.*', 'makler.*'),
  "bg-technik-900 dark:bg-technik-950" => Route::is('technik.*'),
- "bg-makler-900 dark:bg-makler-950" => Route::is('immobilien.*'),
+ "bg-makler-900 dark:bg-makler-950" => Route::is('makler.*'),
  ])>
     <div class="flex justify-between items-center text-white">
         <div class="flex items-center space-x-2">
@@ -23,8 +23,8 @@
                 <div class="w-2 h-2 bg-white rounded last:hidden"></div>
             @endif
 
-            @if( ! Route::is('immobilien.*') )
-                <a href="{{ route('immobilien.home') }}" class="px-4" wire:navigate>
+            @if( ! Route::is('makler.*') )
+                <a href="{{ route('makler.home') }}" class="px-4" wire:navigate>
                     <img src="{{ asset('logos/bereal_makler_white.svg') }}" class="h-5"/>
                 </a>
                 <div class="w-2 h-2 bg-white rounded last:hidden"></div>

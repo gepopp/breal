@@ -5,7 +5,7 @@
                 <div>
                     <x-headings level="1">
                         <x-slot name="tag">Informed</x-slot>
-                        Impressum der Bontus Eybel Immobilienmanagment GmbH
+                        Impressum der be real Immobilienmanagment GmbH
                     </x-headings>
                 </div>
             </div>

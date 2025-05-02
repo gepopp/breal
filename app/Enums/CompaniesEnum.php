@@ -24,7 +24,7 @@ enum CompaniesEnum: string implements HasLabel
            return self::Hausverwaltung->name;
         }
 
-        if(Request::routeIs('immobilien.*'))
+        if(Request::routeIs('makler.*'))
         {
             return self::Makler->name;
         }

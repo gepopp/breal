@@ -9,9 +9,9 @@ use DragonCode\Support\Facades\Helpers\Str;
 
 trait SplitsHtmlText
 {
-    public function prepareText(): string|array
+    public function prepareText(string|null $text = null): string|array
     {
-        $text = html_entity_decode($this->text);
+        $text = html_entity_decode($text ?? $this->text);
         $plain_text = strip_tags($text);
 
         $count = Str::length($plain_text);

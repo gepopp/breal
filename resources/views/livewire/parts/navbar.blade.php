@@ -7,9 +7,9 @@
         <div @class([
         "relative",
         "border-b-2 shadow flex justify-between items-end text-white p-4",
-        "border-logo-900 dark:border-logo-50" => !Route::is('immobilien.*', 'technik.*'),
+        "border-logo-900 dark:border-logo-50" => !Route::is('makler.*', 'technik.*'),
         "border-technik-900 dark:border-technik-50" => Route::is('technik.*'),
-        "border-makler-900 dark:border-makler-50" => Route::is('immobilien.*'),
+        "border-makler-900 dark:border-makler-50" => Route::is('makler.*'),
 ])>
             <div class="flex items-center">
                 @if( Route::is('hausverwaltung.*') )
@@ -19,8 +19,8 @@
                              class="h-6 sm:h-8 md:h-10 hidden dark:block"/>
                     </a>
 
-                @elseif( Route::is('immobilien.*') )
-                    <a href="{{ route('immobilien.home') }}" wire:navigate>
+                @elseif( Route::is('makler.*') )
+                    <a href="{{ route('makler.home') }}" wire:navigate>
                         <img src="{{ asset('logos/bereal_makler.svg') }}" class="h-6 sm:h-8 md:h-10 dark:hidden"/>
                         <img src="{{ asset('logos/bereal_makler_white.svg') }}"
                              class="h-6 sm:h-8 md:h-10 hidden dark:block"/>
@@ -34,7 +34,7 @@
                     </a>
 
                 @else
-                    <a href="{{ route('immobilien.home') }}" wire:navigate>
+                    <a href="{{ route('makler.home') }}" wire:navigate>
                         <img src="{{ asset('logos/bereal.svg') }}" class="h-6 sm:h-8 md:h-10 dark:hidden"/>
                         <img src="{{ asset('logos/bereal_white.svg') }}"
                              class="h-6 sm:h-8 md:h-10 hidden dark:block"/>
@@ -44,7 +44,7 @@
 
 
             <nav class="hidden lg:flex mb-px space-x-12 justify-between items-center font-bold text-logo-500 dark:text-white">
-                @if( !Route::is('immobilien.*', 'technik.*') )
+                @if( !Route::is('makler.*', 'technik.*') )
                     <div class="relative group">
                         <div class="overflow-hidden">
                             <a href="{{ route('hausverwaltung.leistungen') }}" wire:navigate
@@ -107,13 +107,37 @@
                     </div>
                 @endif
 
-                @if( Route::is('immobilien.*') )
+                @if( Route::is('makler.*') )
+
+                    @if(\App\Models\Realty::count())
+                        <div class="relative">
+                            <div class="overflow-hidden">
+                                <a href="{{ route('makler.immobiliensuche') }}" wire:navigate
+                                   class="menu-item relative uppercase cursor-pointer text-logo-600 ">
+                                    <div @class(["font-black" => Route::is('makler.immobiliensuche')])>
+                                        <span class="menu-item-text pointer-events-none block relative">Immobiliensuche</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    @endif
 
                     <div class="relative">
                         <div class="overflow-hidden">
-                            <a href="{{ route('immobilien.karriere') }}" wire:navigate
+                            <a href="{{ route('makler.leistungen') }}" wire:navigate
                                class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                                <div @class(["font-black" => Route::is('immobilien.karriere')])>
+                                <div @class(["font-black" => Route::is('makler.leistung')])>
+                                    <span class="menu-item-text pointer-events-none block relative">Leistungen</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <div class="overflow-hidden">
+                            <a href="{{ route('makler.karriere') }}" wire:navigate
+                               class="menu-item relative uppercase cursor-pointer text-logo-600 ">
+                                <div @class(["font-black" => Route::is('makler.karriere')])>
                                     <span class="menu-item-text pointer-events-none block relative">Karriere</span>
                                 </div>
                             </a>
@@ -123,9 +147,9 @@
 
                     <div class="relative">
                         <div class="overflow-hidden">
-                            <a href="{{ route('immobilien.team') }}" wire:navigate
+                            <a href="{{ route('makler.team') }}" wire:navigate
                                class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                                <div @class(["font-black" => Route::is('immobilien.team')])>
+                                <div @class(["font-black" => Route::is('makler.team')])>
                                     <span class="menu-item-text pointer-events-none block relative">Team</span>
                                 </div>
                             </a>
@@ -136,6 +160,19 @@
 
 
                 @if( Route::is('technik.*') )
+
+                    <div class="relative">
+                        <div class="overflow-hidden">
+                            <a href="{{ route('technik.leistungen') }}" wire:navigate
+                               class="menu-item relative uppercase cursor-pointer text-logo-600 ">
+                                <div @class(["font-black" => Route::is('technik.leistung')])>
+                                    <span class="menu-item-text pointer-events-none block relative">Leistungen</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+
                     <div class="relative">
                         <div class="overflow-hidden">
                             <a href="{{ route('technik.karriere') }}" wire:navigate
@@ -188,7 +225,7 @@
         "border-b-2 shadow lg:max-w-4xl xl:max-w-6xl mx-auto flex justify-between items-center p-4 w-full",
         "bg-white dark:bg-logo-950 border-logo-900 dark:border-logo-50 text-logo-950 dark:text-logo-50 dark:border-logo-50" => Route::is('hausverwaltung.*'),
         "bg-white dark:bg-technik-950 border-technik-900 dark:border-technik-50 text-technik-950 dark:text-technik-50 dark:border-technik-50" => Route::is('technik.*'),
-        "bg-white dark:bg-makler-950 border-makler-900 dark:border-makler-50 text-makler-950 dark:text-makler-50 dark:border-makler-50" => Route::is('immobilien.*'),
+        "bg-white dark:bg-makler-950 border-makler-900 dark:border-makler-50 text-makler-950 dark:text-makler-50 dark:border-makler-50" => Route::is('makler.*'),
 ])>
                 <ul class="flex flex-col space-y-8 text-lg font-bold uppercase">
                     @if( Route::is('hausverwaltung.*') )
@@ -200,13 +237,13 @@
                         <a href="{{ route('hausverwaltung.team') }}" wire:navigate>Team</a>
                     @endif
 
-                    @if( Route::is('immobilien.*') )
-                        <a href="{{ route('immobilien.home') }}" wire:navigate>Start</a>
-                        <a href="{{ route('immobilien.immobiliensuche') }}" wire:navigate>Immobiliensuche</a>
-                        <a href="{{ route('immobilien.ueber-uns') }}" wire:navigate>Über uns</a>
-                        <a href="{{ route('immobilien.karriere') }}" wire:navigate>Karriere</a>
-                        <a href="{{ route('immobilien.kontakt') }}" wire:navigate>Kontakt</a>
-                        <a href="{{ route('immobilien.team') }}" wire:navigate>Team</a>
+                    @if( Route::is('makler.*') )
+                        <a href="{{ route('makler.home') }}" wire:navigate>Start</a>
+                        <a href="{{ route('makler.immobiliensuche') }}" wire:navigate>Immobiliensuche</a>
+                        <a href="{{ route('makler.ueber-uns') }}" wire:navigate>Über uns</a>
+                        <a href="{{ route('makler.karriere') }}" wire:navigate>Karriere</a>
+                        <a href="{{ route('makler.kontakt') }}" wire:navigate>Kontakt</a>
+                        <a href="{{ route('makler.team') }}" wire:navigate>Team</a>
                     @endif
 
 
@@ -223,7 +260,7 @@
         "grid grid-cols-2 w-full border-b-2 bg-white",
         "border-logo-900 dark:border-logo-50 dark:bg-logo-950" => Route::is('hausverwaltung.*'),
         "border-technik-900 dark:border-technik-50 dark:bg-technik-950" => Route::is('technik.*'),
-        "border-makler-900 dark:border-makler-50 dark:bg-makler-950" => Route::is('immobilien.*'),
+        "border-makler-900 dark:border-makler-50 dark:bg-makler-950" => Route::is('makler.*'),
 ])>
                 @if( ! Route::is('hausverwaltung.*') )
                     <a href="{{ route('hausverwaltung.home') }}" class="aspect-square flex items-center justify-center"
@@ -234,8 +271,8 @@
                     </a>
                 @endif
 
-                @if( ! Route::is('immobilien.*') )
-                    <a href="{{ route('immobilien.home') }}"
+                @if( ! Route::is('makler.*') )
+                    <a href="{{ route('makler.home') }}"
                        class="aspect-square sm:aspect-[4/3] flex items-center justify-center"
                        wire:navigate>
                         <img src="{{ asset('logos/bereal_makler_vertical.svg') }}" class="h-10 dark:hidden"/>
@@ -260,7 +297,7 @@
             <div @class([ "py-2 px-4 flex justify-between",
              "bg-logo-900 dark:bg-logo-950" => Route::is('hausverwaltung.*'),
              "bg-technik-900 dark:bg-technik-950" => Route::is('technik.*'),
-             "bg-makler-900 dark:bg-makler-950" => Route::is('immobilien.*'),
+             "bg-makler-900 dark:bg-makler-950" => Route::is('makler.*'),
              ])>
                 <div>
                     <img src="{{ asset('logos/bereal_immobilien_icon_white.svg') }}" class="h-5">

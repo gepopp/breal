@@ -5,6 +5,7 @@ namespace App\Livewire\Makler\Parts;
 use App\Models\Realty;
 use App\Settings\LandingpageMaklerSettings;
 use App\Traits\SplitsHtmlText;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
@@ -14,9 +15,15 @@ class Hero extends Component
 
     public string $text = '';
 
+    public array $arten = [];
+
+    public array $typen = [];
+
     public function mount(LandingpageMaklerSettings $settings)
     {
         $this->text = $settings->intro_description;
+        $this->arten = DB::table('realties')->select('nutzungsart')->distinct()->get()->toArray();
+        $this->typen = DB::table('realties')->select('vermarktungsart')->distinct()->get()->toArray();
     }
 
     public function render(LandingpageMaklerSettings $settings)

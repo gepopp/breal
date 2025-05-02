@@ -3,7 +3,7 @@
         "mb-12",
         "text-logo-950" => \Illuminate\Support\Facades\Route::is('hausverwaltung.*'),
         "text-technik-950" => \Illuminate\Support\Facades\Route::is('technik.*'),
-        "text-makler-950" => \Illuminate\Support\Facades\Route::is('immobilien.*'),
+        "text-makler-950" => \Illuminate\Support\Facades\Route::is('makler.*'),
     ])>
         <div class="max-w-md w-full mb-24">
             <x-headings>

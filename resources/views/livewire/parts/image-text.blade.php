@@ -32,7 +32,7 @@
             <div @class(['flex justify-center items-center md:min-h-[70vh]'])>
                 <div @class(['md:max-w-sm lg:max-w-lg px-4 lg:my-24'])>
                     <div data-aos="fade" class="prose">
-                        {!! html_entity_decode( $text ) !!}
+                        {!! $settings->text !!}
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                     @php
                         $media = $media->first();
                     @endphp
-                    <img src="{{ $media?->getUrl('layout') }}" srcset="{{ $media?->getSrcset() }}" alt="{{ $alt }}" data-aos="fade"
+                    <img src="{{ $media?->getUrl('layout') }}" srcset="{{ $media?->getSrcset() }}" alt="{{ $settings->text_image_alt }}" data-aos="fade"
                          data-aos-delay="600" class="h-full w-auto object-cover"/>
 
                 @elseif($media?->count() > 1)
@@ -51,7 +51,7 @@
                         <div x-ref="wrapper" class="swiper-wrapper min-h-full flex-1">
                             @foreach($media as $image)
                                 <div class="swiper-slide min-h-full">
-                                    <img scr="{{ $image->getUrl('slider') }}" alt="{{ $alt }}" srcset="{{ $image->getSrcset() }}" class="h-full w-auto object-cover"/>
+                                    <img scr="{{ $image->getUrl('slider') }}" alt="{{ $settings->text_image_alt }}" srcset="{{ $image->getSrcset() }}" class="h-full w-auto object-cover"/>
                                 </div>
                             @endforeach
                         </div>

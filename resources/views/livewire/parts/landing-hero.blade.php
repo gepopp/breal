@@ -31,11 +31,11 @@
             @class(['flex justify-center items-center md:min-h-[70vh] mt-12 md:mt-0'])>
         <div @class(['md:max-w-sm lg:max-w-lg lg:my-48 px-4'])>
             <x-headings>
-                <x-slot name="tag">{{ $header }}</x-slot>
-                {{ $subheader }}
+                <x-slot name="tag">{{ $settings->hero_header }}</x-slot>
+                {{ $settings->hero_subheader }}
             </x-headings>
             <div data-aos="fade" data-aos-delay="600" class="prose">
-                {!! html_entity_decode( $intro ) !!}
+                {!! $settings->hero_introtext !!}
             </div>
         </div>
     </div>
@@ -45,7 +45,7 @@
             @php
                 $media = $media->first();
             @endphp
-            <img src="{{ $media?->getUrl('layout') }}" srcset="{{ $media?->getSrcset() }}" alt="{{ $alt }}" data-aos="fade"
+            <img src="{{ $media?->getUrl('layout') }}" srcset="{{ $media?->getSrcset() }}" alt="{{ $settings->hero_image_alt }}" data-aos="fade"
                  data-aos-delay="600" class="h-full w-auto object-cover"/>
 
         @elseif($media?->count() > 1)
@@ -54,7 +54,7 @@
                 <div x-ref="wrapper" class="swiper-wrapper min-h-full flex-1">
                     @foreach($media as $image)
                         <div class="swiper-slide min-h-full">
-                            <img scr="{{ $image->getUrl('slider') }}" alt="{{ $alt }}" srcset="{{ $image->getSrcset() }}" class="h-full w-auto object-cover"/>
+                            <img scr="{{ $image->getUrl('slider') }}" alt="{{ $settings->hero_image_alt }}" srcset="{{ $image->getSrcset() }}" class="h-full w-auto object-cover"/>
                         </div>
                     @endforeach
                 </div>
@@ -66,7 +66,7 @@
                     slidesPerView: 1,
                     speed: 800,
                     autoplay: {
-                        delay: 2500
+                        delay: {{ $settings->hero_speed }}
                     }
                 });
             </script>

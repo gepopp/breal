@@ -2,24 +2,22 @@
 
 namespace App\Livewire\Parts;
 
+use App\Settings\LandingpageHausverwaltung;
 use Illuminate\Support\Arr;
 use Livewire\Component;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ImageText extends Component
 {
-    public string $text;
-    public int|array|null  $image;
-    public string $alt;
 
-    public function render()
+    public function render( LandingpageHausverwaltung $settings )
     {
         $media = [];
 
-        if(!blank($this->image)){
-            $media = Media::whereIn('id', Arr::wrap($this->image))->get();
+        if(!blank($settings->text_image)){
+            $media = Media::whereIn('id', Arr::wrap($settings->text_image))->get();
         }
 
-        return view('livewire.parts.image-text', compact('media'));
+        return view('livewire.parts.image-text', compact('media', 'settings'));
     }
 }

@@ -28,21 +28,32 @@
         <div class="absolute top-0 md:right-[5%] inset-0 flex items-center justify-end px-4">
             <div class="relative  p-6 bg-white/50 backdrop-blur-sm  -translate-y-1/4 rounded-xl z-20 shadow-lg">
                 <h2 class="text-2xl font-logo font-bold">Immobiliensuche</h2>
-                <div class="grid grid-cols-2 gap-4 mt-4">
-                    <flux:input type="number" label="Preis von"/>
-                    <flux:input type="number" label="Preis bis"/>
-                    <flux:input type="number" label="Fläche von"/>
-                    <flux:input type="number" label="Fläche bis"/>
-                    <flux:input type="number" label="Zimmer von"/>
-                    <flux:input type="number" label="Zimmer bis"/>
+                <form method="get" action="{{ route('makler.immobiliensuche') }}" class="grid grid-cols-2 gap-4 mt-4">
+                    <flux:input name="filters[price_min]" type="number" label="Preis von"/>
+                    <flux:input name="filters[price_max]" type="number" label="Preis bis"/>
+                    <flux:input name="filters[space_min]" type="number" label="Fläche von"/>
+                    <flux:input name="filters[space_max]" type="number" label="Fläche bis"/>
+                    <flux:input name="filters[rooms_min]" type="number" label="Zimmer von"/>
+                    <flux:input name="filters[rooms_max]" type="number" label="Zimmer bis"/>
 
-                    <h5 class="col-span-2 font-bold text-sm">Suchen in</h5>
+                    <div>
+                        <flux:radio.group name="filters.nutzungsart" label="Nutzungsart">
+                            @foreach ($arten as $art )
+                                <flux:radio value="{{ $art->nutzungsart }}" label="{{ ucfirst($art->nutzungsart) }}"/>
+                            @endforeach
+                        </flux:radio.group>
+                    </div>
 
-                    <x-button class="w-full bg-white">Miete</x-button>
-                    <x-button class="w-full">Kauf</x-button>
-                </div>
+                    <div>
+                        <flux:radio.group name="filters.typ" label="Miete oder Kauf">
+                            @foreach ($typen as $art )
+                                <flux:radio value="{{ $art->vermarktungsart }}" label="{{ ucfirst($art->vermarktungsart) }}"/>
+                            @endforeach
+                        </flux:radio.group>
+                    </div>
+                </form>
                 <div class="mt-4">
-                    <x-button class="w-full">büro & Gewerbe</x-button>
+                    <x-button type="submit" class="w-full">suchen</x-button>
                 </div>
 
             </div>

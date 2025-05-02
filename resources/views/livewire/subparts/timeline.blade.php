@@ -81,6 +81,10 @@
                 slidesPerView: 1,
                 speed: 800,
                 spaceBetween: 30,
+                pauseOnMouseenter: true,
+                autoplay: {
+                    delay: {{ app( \App\Settings\LandingpageHausverwaltung::class )->timeline_speed }},
+                },
                 navigation: {
                     nextEl: ".next-slide",
                     prevEl: ".prev-slide",
