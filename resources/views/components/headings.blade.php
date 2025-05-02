@@ -66,7 +66,14 @@
 
                 @break
                 <?php default: ?>
-                <div {{ $attributes->class($classes) }} data-aos-once="true" data-aos="fade" data-aos-delay="500">{{ $slot }}</div>
+            @if($animate)
+                    <div {{ $attributes->class($classes) }} data-aos-once="true" data-aos="fade" data-aos-delay="500">{{ $slot }}</div>
+
+            @else
+                    <div {{ $attributes->class($classes) }}>{{ $slot }}</div>
+
+            @endif
+
                 <?php endswitch; ?>
         </div>
 
