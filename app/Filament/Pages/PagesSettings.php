@@ -77,9 +77,26 @@ class PagesSettings extends SettingsPage
 
                         Forms\Components\Tabs\Tab::make('Leistungen Seite')
                             ->schema([
-                                Forms\Components\TextInput::make('leistungen_header')->label('Überschrift')->required(),
-                                Forms\Components\TextInput::make('leistungen_subheader')->label('Unterzeile')->required(),
-                                Forms\Components\RichEditor::make('leistungen_introtext')->label('Introtext"')->required(),
+
+                                Forms\Components\Section::make('Hausverwaltung')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('hausverwaltung_leistungen_header')->label('Überschrift')->required(),
+                                        Forms\Components\TextInput::make('hausverwaltung_leistungen_subheader')->label('Unterzeile')->required(),
+                                        Forms\Components\RichEditor::make('hausverwaltung_leistungen_introtext')->label('Introtext"')->required(),
+                                    ]),
+
+                                Forms\Components\Section::make('Makler')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('immobilien_leistungen_header')->label('Überschrift')->required(),
+                                        Forms\Components\TextInput::make('immobilien_leistungen_subheader')->label('Unterzeile')->required(),
+                                        Forms\Components\RichEditor::make('immobilien_leistungen_introtext')->label('Introtext"')->required(),
+                                    ]),
+                                Forms\Components\Section::make('Technik')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('technik_leistungen_header')->label('Überschrift')->required(),
+                                        Forms\Components\TextInput::make('technik_leistungen_subheader')->label('Unterzeile')->required(),
+                                        Forms\Components\RichEditor::make('technik_leistungen_introtext')->label('Introtext"')->required(),
+                                    ])
                             ]),
 
                         Forms\Components\Tabs\Tab::make('Immobiliensuche')

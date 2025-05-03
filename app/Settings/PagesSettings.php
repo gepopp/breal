@@ -77,11 +77,27 @@ class PagesSettings extends Settings
     public string $faq_introtext = '<p>Hausverwaltung ist ein komplexes Thema. Da kann es schon mal zu Fragen kommen. Wir beantworten Ihre Fragen rund um das Thema Immobilienmanagement und Hausverwaltung.</p>';
 
 
-    public string $leistungen_header = 'competent';
+    public string $hausverwaltung_leistungen_header = 'competent';
 
-    public string $leistungen_subheader = 'Unsere Leistungen';
+    public string $hausverwaltung_leistungen_subheader = 'Unsere Leistungen';
 
-    public string $leistungen_introtext = '<p>Wir brennen für Hausverwaltung - von Wohneigentumsverwaltung und Mietrechtsgesetz bis zu Bauverwaltung und allgemeiner Beratung – wir kümmern uns darum, dass Sie sich rundum gut betreut fühlen. Dabei stehen partnerschaftliche Zusammenarbeit, individuelle Lösungen und umfangreiche Beratung an erster Stelle.</p>';
+    public string $hausverwaltung_leistungen_introtext = '<p>Wir brennen für Hausverwaltung - von Wohneigentumsverwaltung und Mietrechtsgesetz bis zu Bauverwaltung und allgemeiner Beratung – wir kümmern uns darum, dass Sie sich rundum gut betreut fühlen. Dabei stehen partnerschaftliche Zusammenarbeit, individuelle Lösungen und umfangreiche Beratung an erster Stelle.</p>';
+
+
+    public string $immobilien_leistungen_header = 'competent';
+
+    public string $immobilien_leistungen_subheader = 'Unsere Leistungen';
+
+    public string $immobilien_leistungen_introtext = '<p>Wir brennen für Hausverwaltung - von Wohneigentumsverwaltung und Mietrechtsgesetz bis zu Bauverwaltung und allgemeiner Beratung – wir kümmern uns darum, dass Sie sich rundum gut betreut fühlen. Dabei stehen partnerschaftliche Zusammenarbeit, individuelle Lösungen und umfangreiche Beratung an erster Stelle.</p>';
+
+
+
+    public string $technik_leistungen_header = 'competent';
+
+    public string $technik_leistungen_subheader = 'Unsere Leistungen';
+
+    public string $technik_leistungen_introtext = '<p>Wir brennen für Hausverwaltung - von Wohneigentumsverwaltung und Mietrechtsgesetz bis zu Bauverwaltung und allgemeiner Beratung – wir kümmern uns darum, dass Sie sich rundum gut betreut fühlen. Dabei stehen partnerschaftliche Zusammenarbeit, individuelle Lösungen und umfangreiche Beratung an erster Stelle.</p>';
+
 
 
     public string $search_header = 'home';

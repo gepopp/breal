@@ -11,8 +11,8 @@ class TechnikHero extends Component
 {
     public function render(LandingpageTechnikSettings $settings)
     {
-        $media = Media::whereIn('id', Arr::wrap($settings->hero_image))->get();
 
+        $media = Media::whereIn('id', Arr::wrap($settings->hero_image))->get();
 
         return view('livewire.parts.technik-hero', compact('settings', 'media'));
     }

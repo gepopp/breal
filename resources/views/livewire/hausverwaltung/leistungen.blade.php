@@ -5,9 +5,13 @@
         "text-makler-950" => \Illuminate\Support\Facades\Route::is('makler.*'),
     ])>
         <div class="max-w-md w-full">
+            @php
+                $header = strtolower($company) . '_leistungen_header';
+                $subheader = strtolower($company) . '_leistungen_subheader';
+            @endphp
             <x-headings>
-                <x-slot name="tag">{{ $pagesSettings->leistungen_header }}</x-slot>
-                {{ $pagesSettings->leistungen_subheader }}
+                <x-slot name="tag">{{ $pagesSettings->$header }}</x-slot>
+                {{ $pagesSettings->$subheader }}
             </x-headings>
         </div>
         <div data-aos="fade" data-aos-delay="600" class="prose max-w-full">

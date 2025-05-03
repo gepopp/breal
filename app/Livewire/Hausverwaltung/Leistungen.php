@@ -28,7 +28,8 @@ class Leistungen extends Component
 
     public function render(PagesSettings $pagesSettings)
     {
-        $preparedText = $this->prepareText($pagesSettings->leistungen_introtext);
+        $text = strtolower( $this->company ) . '_leistungen_introtext';
+        $preparedText = $this->prepareText($pagesSettings->$text);
         return view('livewire.hausverwaltung.leistungen', compact('pagesSettings', 'preparedText'));
     }
 }
