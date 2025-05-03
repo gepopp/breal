@@ -2,8 +2,8 @@
     <div x-data="parallax" class="py-24 lg:px-0 lg:max-w-4xl xl:max-w-6xl mx-auto">
         <div @class(['md:max-w-sm lg:max-w-lg' => !is_array($preparedText), 'max-w-full'])>
             <x-headings>
-                <x-slot name="tag">{{ $settings->timeline_header }}</x-slot>
-                {!! $settings->timeline_subheader !!}
+                <x-slot name="tag">{{ $settings->service_heading }}</x-slot>
+                {!! $settings->service_subheading !!}
             </x-headings>
             <div data-aos="fade"
                  class="my-8 md:max-w-1/2">{!! is_array($preparedText) ? $preparedText['firstHalf'] : html_entity_decode($preparedText) !!}</div>
