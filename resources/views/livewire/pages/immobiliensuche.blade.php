@@ -20,7 +20,7 @@
 
 
     <form wire:submit class="mt-12 !bg-technik-200/25 p-4 rounded">
-        <div @class(['grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8'])>
+        <div @class(['grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4'])>
             <div>
                 <flux:radio.group wire:model.live="filters.nutzungsart" label="Nutzungsart">
                     @foreach ($arten as $art )
@@ -36,6 +36,16 @@
                     @endforeach
                 </flux:radio.group>
             </div>
+
+            <div>
+                <flux:select variant="listbox" label="Postleitzahl" wire:model.blur="filters.plz" size="sm" searchable multiple clear="close">
+                    @foreach($plz as $p)
+                        <flux:select.option>{{ $p->plz }}</flux:select.option>
+                    @endforeach
+                </flux:select>
+            </div>
+
+
             <div class="space-y-2">
                 <flux:input size="sm" type="number" min="{{ $min_rooms }}" max="{{ $max_rooms }}" step="1" label="Zimmer von" placeholder="{{ $min_rooms }}" wire:model.blur="filters.rooms_min"></flux:input>
                 <flux:input size="sm" type="number" min="{{ $min_rooms }}" max="{{ $max_rooms }}" step="1" label="Zimmer bis" placeholder="{{ $max_rooms }}" wire:model.blur="filters.rooms_max"></flux:input>

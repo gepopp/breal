@@ -23,6 +23,8 @@ class Immobiliensuche extends Component
 
     public array $typen = [];
 
+    public array $plz = [];
+
     public int $min_rooms = 0;
     public int $max_rooms = 0;
     public int $min_price = 0;
@@ -41,6 +43,7 @@ class Immobiliensuche extends Component
         'price_max'   => null,
         'space_min'   => null,
         'space_max'   => null,
+        'plz'         => [],
     ];
 
 
@@ -56,6 +59,7 @@ class Immobiliensuche extends Component
             'filters.price_max'   => 'nullable|integer|min:' . $this->min_price . '|max:' . $this->max_price . '|gt:filters.price_min',
             'filters.space_min'   => 'nullable|integer|min:' . $this->min_space . '|max:' . $this->max_space . '|gt:filters.space_min',
             'filters.space_max'   => 'nullable|integer|min:' . $this->min_space . '|max:' . $this->max_space . '|gt:filters.space_min',
+            'filters.plz'         => 'nullable|array|min:1'
         ];
     }
 
@@ -64,12 +68,13 @@ class Immobiliensuche extends Component
     {
         $this->arten = DB::table('realties')->select('nutzungsart')->distinct()->get()->toArray();
         $this->typen = DB::table('realties')->select('vermarktungsart')->distinct()->get()->toArray();
+        $this->plz = DB::table('realties')->select('plz')->distinct()->get()->toArray();
         $this->min_rooms = DB::table('realties')->min('zimmer');
         $this->max_rooms = DB::table('realties')->max('zimmer');
-        $this->min_price = (int) DB::table('realties')->min('preis');
-        $this->max_price = (int) DB::table('realties')->max('preis');
-        $this->min_space = (int) DB::table('realties')->min('wohnflaeche');
-        $this->max_space = (int) DB::table('realties')->max('wohnflaeche');
+        $this->min_price = (int)DB::table('realties')->min('preis');
+        $this->max_price = (int)DB::table('realties')->max('preis');
+        $this->min_space = (int)DB::table('realties')->min('wohnflaeche');
+        $this->max_space = (int)DB::table('realties')->max('wohnflaeche');
     }
 
 
@@ -91,7 +96,8 @@ class Immobiliensuche extends Component
     }
 
 
-    public function updatedFilters(){
+    public function updatedFilters()
+    {
         $this->resetPage();
     }
 
@@ -111,35 +117,39 @@ class Immobiliensuche extends Component
             $query->where('vermarktungsart', $this->filters['typ']);
         }
 
-        if($this->filters['rooms_min']){
+        if ($this->filters['rooms_min']) {
             $query->where('zimmer', '>=', $this->filters['rooms_min']);
         }
 
-        if($this->filters['rooms_max']){
+        if ($this->filters['rooms_max']) {
             $query->where('zimmer', '<=', $this->filters['rooms_max']);
         }
 
-        if($this->filters['price_min']){
+        if ($this->filters['price_min']) {
             $query->where('preis', '>=', $this->filters['price_min']);
         }
 
-        if($this->filters['price_max']){
+        if ($this->filters['price_max']) {
             $query->where('preis', '<=', $this->filters['price_max']);
         }
 
-        if($this->filters['space_min']){
+        if ($this->filters['space_min']) {
             $query->where('wohnflaeche', '>=', $this->filters['space_min']);
         }
 
-        if($this->filters['space_max']){
+        if ($this->filters['space_max']) {
             $query->where('wohnflaeche', '<=', $this->filters['space_max']);
+        }
+
+        if(count($this->filters['plz']) > 0){
+            $query->whereIn('plz', $this->filters['plz']);
         }
 
         return $query->paginate(25);
     }
 
 
-    public function render( PagesSettings $settings)
+    public function render(PagesSettings $settings)
     {
         $preparedText = $this->prepareText($settings->search_introtext);
         return view('livewire.pages.immobiliensuche', compact('settings', 'preparedText'));

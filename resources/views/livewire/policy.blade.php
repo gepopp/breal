@@ -16,7 +16,7 @@ state();
                 <div>
                     <x-headings level="1">
                         <x-slot name="tag">secure</x-slot>
-                        Datenschutzerklärung der Bontus Eybel Immobilienmanagment GmbH
+                        Datenschutzerklärung der be real Immobilienmanagment GmbH
                     </x-headings>
                 </div>
             </div>
