@@ -19,7 +19,7 @@
     </div>
 
 
-    <form wire:submit="filter" class="mt-12 !bg-technik-200/25 p-4 rounded">
+    <form wire:submit class="mt-12 !bg-technik-200/25 p-4 rounded">
         <div @class(['grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8'])>
             <div>
                 <flux:radio.group wire:model.live="filters.nutzungsart" label="Nutzungsart">
