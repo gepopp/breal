@@ -2,8 +2,10 @@
     <div class="swiper">
         <div class="swiper-wrapper">
             @foreach($this->realtyImages as $image_url)
-                <div class="swiper-slide">
-                    <img src="{{ $image_url }}" alt="{{ $realty->title }}"/>
+                <div class="swiper-slide bg-technik-500/50 aspect-[4/3] flex items-center justify-center">
+                    <div data-src="{{ $image_url }}" class="spotlight aspect-[4/3]" data-spotlight-title="{{ $realty->title }}">
+                        <img src="{{ $image_url }}" alt="{{ $realty->title }}" class="object-cover w-auto h-full"/>
+                    </div>
                 </div>
             @endforeach
         </div>
@@ -26,4 +28,5 @@
 @assets
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://rawcdn.githack.com/nextapps-de/spotlight/0.7.8/dist/spotlight.bundle.js"></script>
 @endassets
