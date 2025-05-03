@@ -15,7 +15,6 @@ class Leistungen extends Component
 
     public string $company = CompaniesEnum::Hausverwaltung->name;
 
-    public string $text = '';
     public ?Collection $leistungen = null;
 
     public function mount( PagesSettings $pagesSettings)
@@ -29,7 +28,7 @@ class Leistungen extends Component
 
     public function render(PagesSettings $pagesSettings)
     {
-        $preparedText = $this->prepareText();
+        $preparedText = $this->prepareText($pagesSettings->leistungen_introtext);
         return view('livewire.hausverwaltung.leistungen', compact('pagesSettings', 'preparedText'));
     }
 }
