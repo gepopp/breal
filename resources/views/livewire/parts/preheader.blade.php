@@ -17,14 +17,14 @@
 
         <div class="flex items-center">
             @if( ! Route::is('hausverwaltung.*') )
-                <a href="{{ route('hausverwaltung.home') }}" class="px-4 block" wire:navigate>
+                <a href="{{ route('hausverwaltung.home') }}" class="px-4 block" >
                     <img src="{{ asset('logos/bereal_immobilien_white.svg') }}" class="h-5"/>
                 </a>
                 <div class="w-2 h-2 bg-white rounded last:hidden"></div>
             @endif
 
             @if( ! Route::is('makler.*') )
-                <a href="{{ route('makler.home') }}" class="px-4" wire:navigate>
+                <a href="{{ route('makler.home') }}" class="px-4" >
                     <img src="{{ asset('logos/bereal_makler_white.svg') }}" class="h-5"/>
                 </a>
                 <div class="w-2 h-2 bg-white rounded last:hidden"></div>
@@ -32,7 +32,7 @@
 
 
             @if( ! Route::is('technik.*') )
-                <a href="{{ route('technik.home') }}" class="px-4" wire:navigate>
+                <a href="{{ route('technik.home') }}" class="px-4" >
                     <img src="{{ asset('logos/bereal_technik_white.svg') }}" class="h-5"/>
                 </a>
                 <div class="w-2 h-2 bg-white rounded last:hidden"></div>
