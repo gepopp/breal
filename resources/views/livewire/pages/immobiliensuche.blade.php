@@ -38,9 +38,9 @@
             </div>
 
             <div>
-                <flux:select variant="listbox" label="Postleitzahl" wire:model.blur="filters.plz" size="sm" searchable multiple clear="close">
+                <flux:select variant="listbox" label="Orte" wire:model.live="filters.plz" size="sm" searchable multiple clear="close">
                     @foreach($plz as $p)
-                        <flux:select.option>{{ $p->plz }}</flux:select.option>
+                        <flux:select.option value="{{ $p->plz }}">{{ $p->plz }} - {{ $p->ort }}</flux:select.option>
                     @endforeach
                 </flux:select>
             </div>

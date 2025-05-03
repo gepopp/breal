@@ -68,7 +68,7 @@ class Immobiliensuche extends Component
     {
         $this->arten = DB::table('realties')->select('nutzungsart')->distinct()->get()->toArray();
         $this->typen = DB::table('realties')->select('vermarktungsart')->distinct()->get()->toArray();
-        $this->plz = DB::table('realties')->select('plz')->distinct()->get()->toArray();
+        $this->plz = DB::table('realties')->select('plz', 'ort')->distinct()->get()->toArray();
         $this->min_rooms = DB::table('realties')->min('zimmer');
         $this->max_rooms = DB::table('realties')->max('zimmer');
         $this->min_price = (int)DB::table('realties')->min('preis');
@@ -105,7 +105,6 @@ class Immobiliensuche extends Component
     #[Computed]
     public function realties()
     {
-
         $query = Realty::query()
             ->tap(fn($query) => $this->sortBy ? $query->orderBy($this->sortBy, $this->sortDirection) : $query);
 
