@@ -85,10 +85,14 @@
             @forelse ($this->realties as $realty)
                 <flux:table.row :key="$realty->id">
                     <flux:table.cell class="flex items-center gap-3 w-24">
-                        <livewire:subparts.realty-thumbnail :realty="$realty" :key="'image_' . $realty->id" />
+                        <livewire:subparts.realty-thumbnail :realty="$realty" :key="'image_' . $realty->id"/>
                     </flux:table.cell>
 
-                    <flux:table.cell class="w-1/3 whitespace-normal">{{ \Illuminate\Support\Str::words($realty->title, 8, '...') }}</flux:table.cell>
+                    <flux:table.cell class="w-1/3 whitespace-normal">
+                        <a href="{{ route('makler.immobilie', $realty) }}" wire:navigate class="hover:underline">
+                            {{ \Illuminate\Support\Str::words($realty->title, 8, '...') }}
+                        </a>
+                    </flux:table.cell>
                     <flux:table.cell class="whitespace-nowrap text-right">{{ $realty->zimmer }}</flux:table.cell>
 
                     <flux:table.cell class="text-right">{{ is_null($realty->wohnflaeche) ? 'Auf Anfrage' : \Illuminate\Support\Number::format( $realty->wohnflaeche, 2, null, 'de'  ) . ' m²' }}</flux:table.cell>

@@ -33,6 +33,7 @@ Route::group(['prefix' => 'makler', 'as' => 'makler.'], function () {
     Route::get('/leistungen', \App\Livewire\Hausverwaltung\Leistungen::class)->name('leistungen');
     Route::get('/leistung/{competence}', \App\Livewire\Pages\Compentence::class)->name('leistung');
     Route::get('immobiliensuche', \App\Livewire\Pages\Immobiliensuche::class)->name('immobiliensuche');
+    Route::get('immobilie/{realty}', \App\Livewire\Pages\Immobilie::class)->name('immobilie');
 });
 
 Route::group(['prefix' => 'technik', 'as' => 'technik.'], function () {

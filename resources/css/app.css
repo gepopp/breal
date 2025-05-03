@@ -298,3 +298,8 @@ iframe{
 .swiper-pagination-bullet-active{
     @apply !bg-logo;
 }
+
+.swiper-button-prev,
+.swiper-button-next{
+    @apply !text-logo !z-[9999];
+}
