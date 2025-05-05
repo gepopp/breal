@@ -26,7 +26,7 @@
     </x-section>
     @if($realEstates->count())
         <div class="absolute top-0 md:right-[5%] inset-0 flex items-center justify-end px-4">
-            <div class="relative  p-6 bg-white/50 backdrop-blur-sm  -translate-y-1/4 rounded-xl z-20 shadow-lg">
+            <div class="relative  p-6 bg-white/50 dark:bg-makler-950/50 backdrop-blur-sm  -translate-y-1/4 rounded-xl z-20 shadow-lg">
                 <h2 class="text-2xl font-logo font-bold">Immobiliensuche</h2>
                 <form method="get" action="{{ route('makler.immobiliensuche') }}" class="grid grid-cols-2 gap-4 mt-4">
                     <flux:input name="filters[price_min]" type="number" label="Preis von"/>
@@ -39,23 +39,31 @@
                     <div>
                         <flux:radio.group name="filters.nutzungsart" label="Nutzungsart">
                             @foreach ($arten as $art )
-                                <flux:radio value="{{ $art->nutzungsart }}" label="{{ ucfirst($art->nutzungsart) }}"/>
+                                @if($art->nutzungsart == 'WOHNEN')
+                                    <flux:radio value="{{ $art->nutzungsart }}" label="{{ ucfirst( strtolower( $art->nutzungsart )) }}" checked />
+                                @else
+                                    <flux:radio value="{{ $art->nutzungsart }}" label="{{ ucfirst( strtolower( $art->nutzungsart )) }}"/>
+                                @endif
                             @endforeach
                         </flux:radio.group>
                     </div>
 
                     <div>
                         <flux:radio.group name="filters.typ" label="Miete oder Kauf">
-                            @foreach ($typen as $art )
-                                <flux:radio value="{{ $art->vermarktungsart }}" label="{{ ucfirst($art->vermarktungsart) }}"/>
+                            @foreach ($typen as $index => $art )
+                                @if($art->vermarktungsart == 'kauf')
+                                    <flux:radio value="{{ $art->vermarktungsart }}" label="{{ ucfirst( strtolower( $art->vermarktungsart )) }}" checked/>
+                                @else
+                                    <flux:radio value="{{ $art->vermarktungsart }}" label="{{ ucfirst( strtolower( $art->vermarktungsart )) }}"/>
+                                @endif
+
                             @endforeach
                         </flux:radio.group>
                     </div>
+                    <div class="mt-4 col-span-2">
+                        <x-button type="submit" class="w-full">suchen</x-button>
+                    </div>
                 </form>
-                <div class="mt-4">
-                    <x-button type="submit" class="w-full">suchen</x-button>
-                </div>
-
             </div>
         </div>
     @endif

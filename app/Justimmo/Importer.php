@@ -50,7 +50,7 @@ class Importer
 
         Bus::batch($jobs)->dispatch();
 
-        CleanupRealtiesJob::delay(now()->addHours(2))->dispatch();
+        CleanupRealtiesJob::dispatch();
 
         Notification::make()->title('Import gestartet! Es werden ' . count($files) . ' Objekte aktualisiert!')->sendToDatabase(auth()->user());
 
