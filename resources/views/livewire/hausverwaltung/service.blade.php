@@ -93,14 +93,14 @@
 
             <template x-if="selectedService.form == 'form'">
                 <div class="px-3">
-                    <livewire:contact-form :sidebar="false"/>
+                    <livewire:contact-form :sidebar="false" wire:key="form_without_address" />
                 </div>
             </template>
 
 
             <template x-if="selectedService.form == 'address'">
                 <div class="px-3">
-                    <livewire:contact-form :sidebar="false" :address="true"/>
+                    <livewire:contact-form :sidebar="false" :address="true" wire:key="form_with_address"/>
                 </div>
             </template>
 
