@@ -44,7 +44,7 @@
                     </span>
                 </p>
                 <div x-show="current == {{ $index }}" x-collapse>
-                    <div>
+                    <div class="prose">
                         {!! $faq['answer'] !!}
                     </div>
                 </div>
