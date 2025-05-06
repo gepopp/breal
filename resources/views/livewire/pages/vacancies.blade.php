@@ -25,7 +25,8 @@
 
     <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-24">
         @foreach($vacancies as $index => $vacancy)
-            <a href="{{ route('stellenanzeige', $vacancy) }}" wire:navigate  @class([
+
+            <div @class([
         "relative p-12 flex justify-center items-center border-logo",
         "border-b-2 last:border-b-transparent last:border-r-transparent",
         "sm:border-b-transparent" => $index > ($vacancies->count() - 3),
@@ -42,7 +43,7 @@
         ])>
                     <h5 class="font-bold">{{ $vacancy->title }}</h5>
 
-                    <div class="flex items-center justify-end">
+                    <a href="{{ route('stellenanzeige', $vacancy) }}" class="flex items-center justify-end">
                         <span @class(["group-hover:mr-2"])>Jetzt bewerben</span>
                         <svg class="size-4 invisible -translate-x-full group-hover:visible group-hover:translate-x-none group-hover:ml-2 transition-all duration-300"
                              data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
@@ -50,8 +51,9 @@
                             <path stroke-linecap="round" stroke-linejoin="round"
                                   d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"></path>
                         </svg>
-                    </div>
+                    </a>
                 </div>
+            </div>
         @endforeach
     </div>
 </x-section>
