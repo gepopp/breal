@@ -27,7 +27,7 @@
     <section x-data="{ current: 0 }" class="mt-12">
         @foreach($faqs as $index => $faq)
             <div class="py-4 border-b border-logo">
-                <p class="!text-lg !font-bold flex justify-between items-center cursor-pointer" x-on:click="current = {{ $index }}">
+                <p class="!text-lg !font-bold flex justify-between items-center cursor-pointer !text-logo" x-on:click="current = {{ $index }}">
                     <span>{{ $faq['question'] }}</span>
                     <span>
                         <template x-if="current != {{ $index }}">
@@ -43,7 +43,7 @@
 
                     </span>
                 </p>
-                <div x-show="current == {{ $index }}" x-collapse class="p-4">
+                <div x-show="current == {{ $index }}" x-collapse>
                     <div>
                         {!! $faq['answer'] !!}
                     </div>

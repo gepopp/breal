@@ -1,5 +1,5 @@
 <x-section>
-    <div @class(['md:max-w-sm lg:max-w-lg lg:my-48'])>
+    <div @class(['md:max-w-sm lg:max-w-lg'])>
         <x-headings>
             <x-slot name="tag">{{ $settings->contact_header }}</x-slot>
             {!! $settings->contact_subheader !!}

@@ -1,4 +1,4 @@
-<x-section>
+<div class="mt-8">
 
     @if($withIntro)
         <div @class("pb-24 border-b border-gray-200")>
@@ -53,4 +53,4 @@
 
     </div>
 
-</x-section>
+</div>

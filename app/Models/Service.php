@@ -45,7 +45,6 @@ class Service extends Model implements HasMedia
     {
         return SlugOptions::create()
             ->generateSlugsFrom('name')
-            ->doNotGenerateSlugsOnUpdate()
             ->saveSlugsTo('slug');
     }
 }

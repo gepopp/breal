@@ -9,7 +9,7 @@
 
 
         <div class="flex flex-col md:flex-row mt-12">
-            <div class="w-full md:w-3/4" data-aos="fade-up">
+            <div class="w-full md:w-3/4 prose" data-aos="fade-up">
                 {!! $jobVacancy->description !!}
             </div>
             <div class="w-full mt-12 md:mt-0 md:w-1/4 md:ml-6 md:pl-6 md:border-l-2 md:border-logo">
@@ -22,7 +22,7 @@
                     <li data-aos="fade-up" data-aos-delay="300">
                         {{ \Illuminate\Support\Number::currency( $jobVacancy->salary, 'EUR') }}
                          <span class="text-xs"> / {{ $jobVacancy->unit_text }}</span></li>
-                    <li data-aos="fade-up" data-aos-delay="350" class="text-xl font-medium mt-4">Bewerbunben an:</li>
+                    <li data-aos="fade-up" data-aos-delay="350" class="text-xl font-medium mt-4">Bewerbungen an:</li>
                     <li data-aos="fade-up" data-aos-delay="400">
                         <a href="mailto:{{ $jobVacancy->email }}">
                             {{ $jobVacancy->email }}

@@ -56,21 +56,7 @@ Volt::route('datenschutz', 'policy')->name('datenschutz');
 
 Route::view('/confirm-test', 'confirmed')->name('confirm-test');
 
-Route::get('confirm/{formRequest}/{token}', function (\App\Models\ContactRequest $formRequest, $token) {
-    if (!request()->hasValidSignature() || $formRequest->token !== $token) {
-        abort(401);
-    }
-
-    if (is_null($formRequest->verified_at)) {
-        $formRequest->update(['verified_at' => now()]);
-
-        Mail::to($formRequest->email)->send(new \App\Mail\ContactRequestConfirmedMail());
-        Mail::to(\App\Livewire\ContactForm::RECIPIENT)->send(new \App\Mail\ContactRequestSolvedMail($formRequest));
-    }
-
-    return view('confirmed');
-})->name('confirm');
-
+Route::get('confirmation/{id?}/{token?}', [\App\Http\Controllers\ContactRequestController::class, 'confirmation'])->name('confirm');
 
 Route::get('solve-test', function () {
 

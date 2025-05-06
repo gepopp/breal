@@ -245,12 +245,8 @@ p{
 
     @apply text-logo dark:text-white;
 
-    h2{
+    h2, h3{
         @apply leading-tight text-3xl font-bold text-logo dark:text-white mt-4 mb-2;
-    }
-
-    h3{
-        @apply leading-tight text-2xl font-bold text-logo dark:text-white mt-4 mb-2;
     }
 
     h4,h5,h6 {
@@ -258,7 +254,7 @@ p{
     }
 
     ul{
-        @apply list-disc list-outside md:text-lg font-light my-4;
+        @apply list-disc list-outside md:text-lg my-4;
 
         li{
             @apply ml-6 mb-2;

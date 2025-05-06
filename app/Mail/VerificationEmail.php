@@ -22,11 +22,10 @@ class VerificationEmail extends Mailable
     public function __construct(?ContactRequest $contactRequest = null)
     {
         if (!is_null($contactRequest)) {
-            $this->verificationLink = URL::temporarySignedRoute(
+            $this->verificationLink = URL::signedRoute(
                 'confirm',
-                now()->addMinutes(60),
                 [
-                    'formRequest' => $contactRequest,
+                    'id' => $contactRequest->id,
                     'token'   => $contactRequest->token,
                 ]
             );
