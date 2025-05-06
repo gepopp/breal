@@ -92,14 +92,14 @@
             <div class="p-4 pt-0 prose grow" x-html="selectedService.description"></div>
 
             <template x-if="selectedService.form == 'form'">
-                <div  @class(['p-4'])>
+                <div>
                     <livewire:contact-form :sidebar="false"/>
                 </div>
             </template>
 
 
             <template x-if="selectedService.form == 'address'">
-                <div  @class(['p-4'])>
+                <div>
                     <livewire:contact-form :sidebar="false" :address="true"/>
                 </div>
             </template>

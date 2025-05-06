@@ -254,10 +254,10 @@ p{
     }
 
     ul{
-        @apply list-disc list-outside md:text-lg my-4;
+        @apply list-disc list-outside my-4;
 
         li{
-            @apply ml-6 mb-2;
+            @apply ml-6 mb-2 font-medium;
         }
     }
 
