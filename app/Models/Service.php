@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Observers\ServiceObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,6 +13,8 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
+
+#[ObservedBy([ServiceObserver::class])]
 class Service extends Model implements HasMedia
 {
     use HasFactory;

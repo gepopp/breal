@@ -58,11 +58,6 @@ class ServiceResource extends Resource
                             ->required()
                             ->downloadable()
                             ->preserveFilenames()
-                            ->afterStateUpdated(function (TemporaryUploadedFile $state, callable $set) {
-                                // Generieren der URL und Speichern als zusätzliches Attribut
-                                $url = Storage::url($state->getRealPath());
-                                $set('url', $url);
-                            })
                             ->label('Dokument'),
 
                         Forms\Components\TextInput::make('name')
