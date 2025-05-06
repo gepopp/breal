@@ -91,19 +91,14 @@
         <div>
             <div class="p-4 pt-0 prose grow" x-html="selectedService.description"></div>
 
-            <template x-if="selectedService.form == 'form'">
-                <div class="px-3">
-                    <livewire:contact-form :sidebar="false" wire:key="form_without_address" />
-                </div>
-            </template>
+            <div class="px-3" x-show="selectedService.form == 'form'">
+                <livewire:contact-form :sidebar="false" wire:key="form_without_address"/>
+            </div>
 
 
-            <template x-if="selectedService.form == 'address'">
-                <div class="px-3">
-                    <livewire:contact-form :sidebar="false" :address="true" wire:key="form_with_address"/>
-                </div>
-            </template>
-
+            <div class="px-3" x-show="selectedService.form == 'address'">
+                <livewire:contact-form :sidebar="false" :address="true" wire:key="form_with_address"/>
+            </div>
 
 
             <template x-if="selectedService.list.length > 0">
