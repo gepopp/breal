@@ -2,6 +2,7 @@
 
     <livewire:parts.landing-hero/>
 
+{{--    <h1 class="font-logo text-7xl font-extrabold  text-white px-8">i</h1>--}}
 
     @if($settings->intro_layout == 'text_image')
         <livewire:parts.image-text/>
@@ -19,12 +20,12 @@
 
     <livewire:parts.competences/>
 
-    <livewire:parts.references
-            company="$company"
-            header="{{ $settings->reference_header }}"
-            subheader="{{ $settings->reference_subheader }}"
-            text="{{ $settings->reference_introtext }}"
-    />
+    {{--    <livewire:parts.references--}}
+    {{--            company="$company"--}}
+    {{--            header="{{ $settings->reference_header }}"--}}
+    {{--            subheader="{{ $settings->reference_subheader }}"--}}
+    {{--            text="{{ $settings->reference_introtext }}"--}}
+    {{--    />--}}
 
 
     <livewire:parts.linke-in-wall/>

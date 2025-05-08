@@ -1,6 +1,6 @@
 <x-section class="bg-makler-500">
     <div @class(["mx-auto grid grid-cols-1 md:grid-cols-2 md:gap-12 lg:gap-24 relative w-full"])>
-        <div @class(['flex justify-center items-center md:min-h-[70vh] mt-12 md:mt-0'])>
+        <div @class(['flex justify-center items-center mt-12 md:mt-0'])>
             <div @class(['md:max-w-sm lg:max-w-lg'])>
                 <x-headings :ondark="true">
                     <x-slot name="tag">{{ $settings->cta_header }}</x-slot>

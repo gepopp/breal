@@ -99,7 +99,7 @@
                         <div class="overflow-hidden">
                             <a href="{{ route('hausverwaltung.faq') }}"
                                class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                                <div @class(["font-black" => Route::is('hausverwaltung.team')])>
+                                <div @class(["font-black" => Route::is('hausverwaltung.faq')])>
                                     <span class="menu-item-text pointer-events-none block relative">FAQ</span>
                                 </div>
                             </a>

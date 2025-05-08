@@ -27,8 +27,8 @@
     <section x-data="{ current: 0 }" class="mt-12">
         @foreach($faqs as $index => $faq)
             <div class="py-4 border-b border-logo">
-                <p class="!text-lg !font-bold flex justify-between items-center cursor-pointer !text-logo" x-on:click="current = {{ $index }}">
-                    <span>{{ $faq['question'] }}</span>
+                <p class="!text-lg !font-bold flex justify-between items-center cursor-pointer !text-logo !dark:text-white" x-on:click="current = {{ $index }}">
+                    <span class="dark:text-white">{{ $faq['question'] }}</span>
                     <span>
                         <template x-if="current != {{ $index }}">
                              <svg class="size-8" data-slot="icon" fill="none" stroke-width="4" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
