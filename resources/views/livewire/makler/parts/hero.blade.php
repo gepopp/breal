@@ -17,7 +17,7 @@
             @if(!is_array($preparedText))
                 {!! html_entity_decode( $preparedText ) !!}
             @else
-                <div class="grid grid-cols-1 md:grid-cols-2 md:gap-12 w-full">
+                <div class="grid grid-cols-1 md:grid-cols-2 md:gap-12 w-full mb-24">
                     <div>{!! $preparedText['firstHalf'] !!}</div>
                     <div>{!! $preparedText['secondHalf'] !!}</div>
                 </div>
