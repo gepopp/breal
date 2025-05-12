@@ -49,6 +49,22 @@ class PagesSettings extends Settings
 
     public string $contactform_address = 'Franz Josefs Kai 65, 1010 Wien';
 
+
+
+    public string $makler_contactform_email = 'office@bontus-eybel.at';
+
+    public string $makler_contactform_phone = '+43 1 535 36 19';
+
+    public string $makler_contactform_address = 'Franz Josefs Kai 65, 1010 Wien';
+
+
+    public string $technik_contactform_email = 'office@bontus-eybel.at';
+
+    public string $technik_contactform_phone = '+43 1 535 36 19';
+
+    public string $technik_contactform_address = 'Franz Josefs Kai 65, 1010 Wien';
+
+
     public string $contactform_terms = 'Ich bin mit der Verarbeitung und Speicherung meiner Daten, sowie mit der Kontaktaufnahme via E-Mail oder Telefon im Zuge der Bearbeitung meiner Anfrage einverstanden.';
 
     public string $contactpersons_heading = 'Ihre Ansprechpartner!';

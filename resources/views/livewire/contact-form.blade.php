@@ -18,27 +18,67 @@
         "text-technik-900" => \Illuminate\Support\Facades\Route::is('technik.*'),
         "text-makler-900" => \Illuminate\Support\Facades\Route::is('makler.*'),
                 ])>
-                    <li data-aos="fade" data-aos-delay="600" data-aos-once="true">
-                        <a href="tel:{{ $pagesSettings->contactform_phone }}" class="underline underline-offset-4"
-                           onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'tel': '{{ $pagesSettings->contactform_phone }}' });">
-                            {{ $pagesSettings->contactform_phone }}
-                        </a>
-                    </li>
-                    <li data-aos="fade" data-aos-delay="900" data-aos-once="true">
-                        <a href="mailto:{{ $pagesSettings->contactform_email }}" class="underline underline-offset-4"
-                           onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'email': 'o{{ $pagesSettings->contactform_email }}' });">
-                            {{ $pagesSettings->contactform_email }}
-                        </a>
-                    </li>
-                    <li data-aos="fade" data-aos-delay="1200" data-aos-once="true">
-                        {{ $pagesSettings->contactform_address }}
-                    </li>
+                    @switch(\App\Enums\CompaniesEnum::getByRoute())
+                        @case('makler')
+                            <li data-aos="fade" data-aos-delay="600" data-aos-once="true">
+                                <a href="tel:{{ $pagesSettings->makler_contactform_phone }}" class="underline underline-offset-4"
+                                   onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'tel': '{{ $pagesSettings->makler_contactform_phone }}' });">
+                                    {{ $pagesSettings->makler_contactform_phone }}
+                                </a>
+                            </li>
+                            <li data-aos="fade" data-aos-delay="900" data-aos-once="true">
+                                <a href="mailto:{{ $pagesSettings->contactform_email }}" class="underline underline-offset-4"
+                                   onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'email': 'o{{ $pagesSettings->makler_contactform_email }}' });">
+                                    {{ $pagesSettings->makler_contactform_email }}
+                                </a>
+                            </li>
+                            <li data-aos="fade" data-aos-delay="1200" data-aos-once="true">
+                                {{ $pagesSettings->makler_contactform_address }}
+                            </li>
+                            @break
+
+                        @case('technik')
+                            <li data-aos="fade" data-aos-delay="600" data-aos-once="true">
+                                <a href="tel:{{ $pagesSettings->makler_contactform_phone }}" class="underline underline-offset-4"
+                                   onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'tel': '{{ $pagesSettings->makler_contactform_phone }}' });">
+                                    {{ $pagesSettings->makler_contactform_phone }}
+                                </a>
+                            </li>
+                            <li data-aos="fade" data-aos-delay="900" data-aos-once="true">
+                                <a href="mailto:{{ $pagesSettings->makler_contactform_email }}" class="underline underline-offset-4"
+                                   onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'email': 'o{{ $pagesSettings->makler_contactform_email }}' });">
+                                    {{ $pagesSettings->makler_contactform_email }}
+                                </a>
+                            </li>
+                            <li data-aos="fade" data-aos-delay="1200" data-aos-once="true">
+                                {{ $pagesSettings->makler_contactform_address }}
+                            </li>
+                            @break
+
+                        @default
+                            <li data-aos="fade" data-aos-delay="600" data-aos-once="true">
+                                <a href="tel:{{ $pagesSettings->contactform_phone }}" class="underline underline-offset-4"
+                                   onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'tel': '{{ $pagesSettings->contactform_phone }}' });">
+                                    {{ $pagesSettings->contactform_phone }}
+                                </a>
+                            </li>
+                            <li data-aos="fade" data-aos-delay="900" data-aos-once="true">
+                                <a href="mailto:{{ $pagesSettings->contactform_email }}" class="underline underline-offset-4"
+                                   onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'email': 'o{{ $pagesSettings->contactform_email }}' });">
+                                    {{ $pagesSettings->contactform_email }}
+                                </a>
+                            </li>
+                            <li data-aos="fade" data-aos-delay="1200" data-aos-once="true">
+                                {{ $pagesSettings->contactform_address }}
+                            </li>
+                            @break
+                    @endswitch
                 </ul>
             </div>
         @endif
 
         <div x-data="{ is_sent: @entangle('is_sent').live }" @class(["overflow-hidden", "sm:w-2/3" => $sidebar])>
-{{--                        <p @click="is_sent = !is_sent">toggle</p>--}}
+            {{--                        <p @click="is_sent = !is_sent">toggle</p>--}}
             <div class="w-[200%] min-h-full grid grid-cols-2 gap-x-4 pl-2 transition-all duration-500 ease-in-out"
                  :class="is_sent ? '-translate-x-1/2' : 'transalte-x-0'">
 

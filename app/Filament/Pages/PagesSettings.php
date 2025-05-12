@@ -37,9 +37,31 @@ class PagesSettings extends SettingsPage
                                 Forms\Components\RichEditor::make('contact_introtext')->label('Introtext')->required(),
 
                                 Forms\Components\TextInput::make('contactform_heading')->label('Überschrift Kontaktformular')->required(),
-                                Forms\Components\TextInput::make('contactform_phone')->label('Telefonnummer')->required(),
-                                Forms\Components\TextInput::make('contactform_email')->label('E-Mail-Adresse')->email()->required(),
-                                Forms\Components\TextInput::make('contactform_address')->label('Adresse')->required(),
+
+                                Forms\Components\Section::make('Kontaktdaten Hausverwaltung')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('contactform_phone')->label('Telefonnummer')->required(),
+                                        Forms\Components\TextInput::make('contactform_email')->label('E-Mail-Adresse')->email()->required(),
+                                        Forms\Components\TextInput::make('contactform_address')->label('Adresse')->required(),
+
+                                    ]),
+
+                                Forms\Components\Section::make('Kontaktdaten Makler')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('makler_contactform_phone')->label('Telefonnummer')->required(),
+                                        Forms\Components\TextInput::make('makler_contactform_email')->label('E-Mail-Adresse')->email()->required(),
+                                        Forms\Components\TextInput::make('makler_contactform_address')->label('Adresse')->required(),
+
+                                    ]),
+
+
+                                Forms\Components\Section::make('Kontaktdaten Technik')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('technik_contactform_phone')->label('Telefonnummer')->required(),
+                                        Forms\Components\TextInput::make('technik_contactform_email')->label('E-Mail-Adresse')->email()->required(),
+                                        Forms\Components\TextInput::make('technik_contactform_address')->label('Adresse')->required(),
+
+                                    ]),
 
                                 Forms\Components\TextInput::make('contactpersons_heading')->label('Kontaktpersonen Überschrift')->required(),
                                 Forms\Components\RichEditor::make('contactpersons_introtext')->label('Introtext')->required(),
