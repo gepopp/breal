@@ -20,13 +20,13 @@
 
     <livewire:parts.competences/>
 
-    {{--    <livewire:parts.references--}}
-    {{--            company="$company"--}}
-    {{--            header="{{ $settings->reference_header }}"--}}
-    {{--            subheader="{{ $settings->reference_subheader }}"--}}
-    {{--            text="{{ $settings->reference_introtext }}"--}}
-    {{--    />--}}
-
+        <livewire:parts.references
+                company="$company"
+                header="{{ $settings->reference_header }}"
+                subheader="{{ $settings->reference_subheader }}"
+                text="{{ $settings->reference_introtext }}"
+        />
+{{----}}
 
     <livewire:parts.linke-in-wall/>
 
