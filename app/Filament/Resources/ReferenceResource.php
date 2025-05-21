@@ -37,12 +37,9 @@ class ReferenceResource extends Resource
                 Forms\Components\SpatieMediaLibraryFileUpload::make('avatar')
                     ->image()
                     ->avatar()
-                    ->required()
                     ->collection('avatar'),
-                Forms\Components\TextInput::make('client_name')
-                    ->required(),
-                Forms\Components\Textarea::make('testimonial')
-                    ->required(),
+                Forms\Components\TextInput::make('client_name'),
+                Forms\Components\Textarea::make('testimonial'),
             ])
             ->columns(1);
     }
