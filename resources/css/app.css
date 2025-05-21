@@ -299,3 +299,18 @@ iframe{
 .swiper-button-next{
     @apply !text-logo !z-[9999];
 }
+
+.cookiesBtn__link {
+    @apply !bg-logo !text-white !p-2 !rounded-md !shadow-lg !outline-none !border-none !cursor-pointer;
+}
+
+.cookies__details{
+    @apply !text-logo;
+}
+.cookies__label::after{
+    @apply !bg-logo;
+}
+
+#cookies-policy .cookies__category input:checked+.cookies__box:after{
+    @apply !bg-logo;
+}
