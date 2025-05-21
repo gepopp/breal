@@ -18,61 +18,56 @@
         "text-technik-900" => \Illuminate\Support\Facades\Route::is('technik.*'),
         "text-makler-900" => \Illuminate\Support\Facades\Route::is('makler.*'),
                 ])>
-                    @switch(\App\Enums\CompaniesEnum::getByRoute())
-                        @case('Makler')
-                            <li data-aos="fade" data-aos-delay="600" data-aos-once="true">
-                                <a href="tel:{{ $pagesSettings->makler_contactform_phone }}" class="underline underline-offset-4"
-                                   onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'tel': '{{ $pagesSettings->makler_contactform_phone }}' });">
-                                    {{ $pagesSettings->makler_contactform_phone }}
-                                </a>
-                            </li>
-                            <li data-aos="fade" data-aos-delay="900" data-aos-once="true">
-                                <a href="mailto:{{ $pagesSettings->contactform_email }}" class="underline underline-offset-4"
-                                   onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'email': 'o{{ $pagesSettings->makler_contactform_email }}' });">
-                                    {{ $pagesSettings->makler_contactform_email }}
-                                </a>
-                            </li>
-                            <li data-aos="fade" data-aos-delay="1200" data-aos-once="true">
-                                {{ $pagesSettings->makler_contactform_address }}
-                            </li>
-                            @break
+                    @if(request()->routeIs('makler.*'))
+                        <li data-aos="fade" data-aos-delay="600" data-aos-once="true">
+                            <a href="tel:{{ $pagesSettings->makler_contactform_phone }}" class="underline underline-offset-4"
+                               onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'tel': '{{ $pagesSettings->makler_contactform_phone }}' });">
+                                {{ $pagesSettings->makler_contactform_phone }}
+                            </a>
+                        </li>
+                        <li data-aos="fade" data-aos-delay="900" data-aos-once="true">
+                            <a href="mailto:{{ $pagesSettings->contactform_email }}" class="underline underline-offset-4"
+                               onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'email': 'o{{ $pagesSettings->makler_contactform_email }}' });">
+                                {{ $pagesSettings->makler_contactform_email }}
+                            </a>
+                        </li>
+                        <li data-aos="fade" data-aos-delay="1200" data-aos-once="true">
+                            {{ $pagesSettings->makler_contactform_address }}
+                        </li>
 
-                        @case('Technik')
-                            <li data-aos="fade" data-aos-delay="600" data-aos-once="true">
-                                <a href="tel:{{ $pagesSettings->makler_contactform_phone }}" class="underline underline-offset-4"
-                                   onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'tel': '{{ $pagesSettings->makler_contactform_phone }}' });">
-                                    {{ $pagesSettings->makler_contactform_phone }}
-                                </a>
-                            </li>
-                            <li data-aos="fade" data-aos-delay="900" data-aos-once="true">
-                                <a href="mailto:{{ $pagesSettings->makler_contactform_email }}" class="underline underline-offset-4"
-                                   onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'email': 'o{{ $pagesSettings->makler_contactform_email }}' });">
-                                    {{ $pagesSettings->makler_contactform_email }}
-                                </a>
-                            </li>
-                            <li data-aos="fade" data-aos-delay="1200" data-aos-once="true">
-                                {{ $pagesSettings->makler_contactform_address }}
-                            </li>
-                            @break
-
-                        @default
-                            <li data-aos="fade" data-aos-delay="600" data-aos-once="true">
-                                <a href="tel:{{ $pagesSettings->contactform_phone }}" class="underline underline-offset-4"
-                                   onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'tel': '{{ $pagesSettings->contactform_phone }}' });">
-                                    {{ $pagesSettings->contactform_phone }}
-                                </a>
-                            </li>
-                            <li data-aos="fade" data-aos-delay="900" data-aos-once="true">
-                                <a href="mailto:{{ $pagesSettings->contactform_email }}" class="underline underline-offset-4"
-                                   onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'email': 'o{{ $pagesSettings->contactform_email }}' });">
-                                    {{ $pagesSettings->contactform_email }}
-                                </a>
-                            </li>
-                            <li data-aos="fade" data-aos-delay="1200" data-aos-once="true">
-                                {{ $pagesSettings->contactform_address }}
-                            </li>
-                            @break
-                    @endswitch
+                    @elseif(request()->routeIs('technik.*'))
+                        <li data-aos="fade" data-aos-delay="600" data-aos-once="true">
+                            <a href="tel:{{ $pagesSettings->makler_contactform_phone }}" class="underline underline-offset-4"
+                               onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'tel': '{{ $pagesSettings->makler_contactform_phone }}' });">
+                                {{ $pagesSettings->makler_contactform_phone }}
+                            </a>
+                        </li>
+                        <li data-aos="fade" data-aos-delay="900" data-aos-once="true">
+                            <a href="mailto:{{ $pagesSettings->makler_contactform_email }}" class="underline underline-offset-4"
+                               onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'email': 'o{{ $pagesSettings->makler_contactform_email }}' });">
+                                {{ $pagesSettings->makler_contactform_email }}
+                            </a>
+                        </li>
+                        <li data-aos="fade" data-aos-delay="1200" data-aos-once="true">
+                            {{ $pagesSettings->makler_contactform_address }}
+                        </li>
+                    @else
+                        <li data-aos="fade" data-aos-delay="600" data-aos-once="true">
+                            <a href="tel:{{ $pagesSettings->contactform_phone }}" class="underline underline-offset-4"
+                               onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'tel': '{{ $pagesSettings->contactform_phone }}' });">
+                                {{ $pagesSettings->contactform_phone }}
+                            </a>
+                        </li>
+                        <li data-aos="fade" data-aos-delay="900" data-aos-once="true">
+                            <a href="mailto:{{ $pagesSettings->contactform_email }}" class="underline underline-offset-4"
+                               onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'email': 'o{{ $pagesSettings->contactform_email }}' });">
+                                {{ $pagesSettings->contactform_email }}
+                            </a>
+                        </li>
+                        <li data-aos="fade" data-aos-delay="1200" data-aos-once="true">
+                            {{ $pagesSettings->contactform_address }}
+                        </li>
+                    @endif
                 </ul>
             </div>
         @endif
