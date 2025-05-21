@@ -1,19 +1,24 @@
 <x-section>
+
+    <div class="w-2/3">
+        <h5 class="text-opacity-50 mb-4">
+            {{ $realty->strasse }} {{ $realty->hausnummer }}, {{ $realty->plz }} {{ $realty->ort }}
+            | {{ ucfirst(strtolower( $realty-> type)) }}
+            | Objektnummer: {{ $realty->objektnr_extern }}
+        </h5>
+        <h1 class="text-2xl font-bold">{{ $realty->title }}</h1>
+    </div>
+
     <div class="flex space-x-8">
         <div class="w-2/3">
-            <h5 class="text-opacity-50 mb-4">
-                {{ $realty->strasse }} {{ $realty->hausnummer }}, {{ $realty->plz }} {{ $realty->ort }}
-                | {{ ucfirst(strtolower( $realty-> type)) }}
-                | Objektnummer: {{ $realty->objektnr_extern }}
-            </h5>
-            <h1 class="text-2xl font-bold">{{ $realty->title }}</h1>
+
             <livewire:subparts.realty-slider :realty="$realty"/>
 
             <div class="prose">
                 {!! $realty->beschreibung !!}
             </div>
         </div>
-        <div class="w-1/3">
+        <div class="w-1/3 mt-8">
             <div class="prose">
                 @php
                     $contact = $realty->data['kontaktperson'];
@@ -70,6 +75,14 @@
                         <span>{!! $settings->makler_contactform_address !!}</span>
                     </span>
                     </p>
+                </div>
+
+                @php
+                    dump($realty->data['flaechen'])
+                @endphp
+
+                <div class="pt-4 mt-4 border-t border-gray-200">
+                    <h3>Eckdaten</h3>
                 </div>
             </div>
         </div>

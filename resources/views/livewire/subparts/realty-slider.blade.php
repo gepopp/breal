@@ -67,7 +67,7 @@
             @foreach($this->realtyImages as $image_url)
                 <div class="swiper-slide bg-technik-500/50 aspect-[4/3] flex items-center justify-center">
                     <div data-src="{{ $image_url }}" class="spotlight aspect-[4/3]" data-spotlight-title="{{ $realty->title }}">
-                        <img src="{{ $image_url }}" alt="{{ $realty->title }}" class="object-cover w-auto h-full"/>
+                        <img src="{{ $image_url }}" alt="{{ $realty->title }}" class="object-cover w-auto h-full select-none"/>
                     </div>
                 </div>
             @endforeach
@@ -79,7 +79,7 @@
         <div class="swiper-wrapper">
             @foreach($this->realtyImages as $image_url)
                 <div class="swiper-slide">
-                    <img src="{{ $image_url }}" alt="{{ $realty->title }}" class="object-cover aspect-square"/>
+                    <img src="{{ $image_url }}" alt="{{ $realty->title }}" class="object-cover aspect-square select-none"/>
                 </div>
             @endforeach
         </div>
