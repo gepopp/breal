@@ -19,7 +19,7 @@
         "text-makler-900" => \Illuminate\Support\Facades\Route::is('makler.*'),
                 ])>
                     @switch(\App\Enums\CompaniesEnum::getByRoute())
-                        @case('makler')
+                        @case('Makler')
                             <li data-aos="fade" data-aos-delay="600" data-aos-once="true">
                                 <a href="tel:{{ $pagesSettings->makler_contactform_phone }}" class="underline underline-offset-4"
                                    onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'tel': '{{ $pagesSettings->makler_contactform_phone }}' });">
@@ -37,7 +37,7 @@
                             </li>
                             @break
 
-                        @case('technik')
+                        @case('Technik')
                             <li data-aos="fade" data-aos-delay="600" data-aos-once="true">
                                 <a href="tel:{{ $pagesSettings->makler_contactform_phone }}" class="underline underline-offset-4"
                                    onclick="gtag('event', 'email_click', {'event_category': 'engagement', 'event_label': 'Contact', 'tel': '{{ $pagesSettings->makler_contactform_phone }}' });">
