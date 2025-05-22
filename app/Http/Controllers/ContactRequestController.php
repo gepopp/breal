@@ -20,10 +20,12 @@ class ContactRequestController extends Controller
 
         if(!is_null($formRequest) && !is_null($formRequest->verified_at)){
             $formRequest->update(['verified_at' => now()]);
+
             $recipeint = $formRequest->email;
             $office = \App\Livewire\ContactForm::RECIPIENT;
-            $mail1 = Mail::to($recipeint)->send(new \App\Mail\ContactRequestConfirmedMail());
-            $mail2 = Mail::to($office)->send(new \App\Mail\ContactRequestSolvedMail($formRequest));
+
+            Mail::to($recipeint)->send(new \App\Mail\ContactRequestConfirmedMail());
+            Mail::to($office)->send(new \App\Mail\ContactRequestSolvedMail($formRequest));
         }
 
 
