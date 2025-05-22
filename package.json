@@ -6,6 +6,7 @@
         "dev": "vite"
     },
     "dependencies": {
+        "@googlemaps/js-api-loader": "^1.16.8",
         "@lottiefiles/dotlottie-web": "^0.41.0",
         "@tailwindcss/vite": "^4.0.7",
         "aos": "^3.0.0-beta.6",

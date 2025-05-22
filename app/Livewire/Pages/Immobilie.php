@@ -10,8 +10,10 @@ class Immobilie extends Component
     public Realty $realty;
 
 
+
     public function render()
     {
-        return view('livewire.pages.immobilie');
+        $data = $this->realty->data;
+        return view('livewire.pages.immobilie', compact('data'));
     }
 }

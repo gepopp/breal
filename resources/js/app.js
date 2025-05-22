@@ -1,3 +1,12 @@
+import {Loader} from "@googlemaps/js-api-loader"
+window.loader = new Loader({
+    apiKey: "AIzaSyCHGK2awBTZjdOELEp1Phs1adi5r0xhnY4",
+    version: "weekly",
+    libraries: ['marker'],
+});
+
+
+
 import Fuse from 'fuse.js';
 window.Fuse = Fuse;
 

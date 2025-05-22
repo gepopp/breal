@@ -15,18 +15,18 @@
                 #{{ $tag }}
             @endforeach
         </div>
-        <div class="flex space-x-4 mt-auto mb-12">
-            <div class="w-16 shrink-0">
-                <img src="{{ $ref->getFirstMediaUrl('avatar') }}"
-                     class="w-16 aspect-square rounded-full shrink-0"
-                     alt="{{ $ref->client_name }}"/>
-            </div>
-            <div class="text-white">
-                <h5 class="font-semibold !text-base">
-                    {{ $ref->client_name }}
-                </h5>
-                <p class="!text-sm !text-light">{{ $ref->testimonial }}</p>
-            </div>
-        </div>
+{{--        <div class="flex space-x-4 mt-auto mb-12">--}}
+{{--            <div class="w-16 shrink-0">--}}
+{{--                <img src="{{ $ref->getFirstMediaUrl('avatar') }}"--}}
+{{--                     class="w-16 aspect-square rounded-full shrink-0"--}}
+{{--                     alt="{{ $ref->client_name }}"/>--}}
+{{--            </div>--}}
+{{--            <div class="text-white">--}}
+{{--                <h5 class="font-semibold !text-base">--}}
+{{--                    {{ $ref->client_name }}--}}
+{{--                </h5>--}}
+{{--                <p class="!text-sm !text-light">{{ $ref->testimonial }}</p>--}}
+{{--            </div>--}}
+{{--        </div>--}}
     </div>
 </a>
