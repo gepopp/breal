@@ -513,7 +513,7 @@
                 <tr data-element="black-intro-2-headline" data-label="Intro Headline">
                     <td class="type48" data-text-style="Intro Headline" align="center"
                         style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:48px;line-height:64px;font-weight:700;font-style:normal;color:#1b1b18;text-decoration:none;letter-spacing:0px;text-transform: lowercase">
-                        neue Kontaktanfrage<br class="hide-mobile">bestätigt!
+                        Neue Kontaktanfrage<br class="hide-mobile">bestätigt!
                     </td>
                 </tr>
                 <tr data-element="black-intro-2-headline" data-label="Intro Headline">
@@ -586,47 +586,6 @@
                     <td height="40" style="font-size:40px;line-height:40px;"
                         data-height="Spacing under paragraph">&nbsp;
                     </td>
-                </tr>
-                <tr data-element="black-intro-2-button" data-label="Intro Button">
-                    <td align="center">
-                        <!-- Button -->
-                        <table border="0" cellspacing="0" cellpadding="0" role="presentation" align="center">
-                            <tr>
-                                <td align="center" data-border-radius-default="0,6,36"
-                                    data-border-radius-custom="Intro Button" data-bgcolor="Intro Button"
-                                    bgcolor="#002641" style="border-radius: 6px;">
-                                    <!--[if (gte mso 9)|(IE)]>
-                                    <table border="0" cellpadding="0" cellspacing="0" align="center">
-                                        <tr>
-                                            <td align="center" width="38"></td>
-                                            <td align="center" height="60" style="height:60px;">
-                                    <![endif]-->
-                                    <singleline>
-                                        <a href="{{ $link ?? '#' }}" mc:edit data-button data-text-style="Intro Button"
-                                           style="font-family:'Poppins',Arial,Helvetica,sans-serif;text-transform:lowercase;font-size:18px;line-height:28px;font-weight:700;font-style:normal;color:#ffffff;text-decoration:none;letter-spacing:0px;padding: 16px 38px 16px 38px;display: inline-block;"><span>als gelöst markieren</span></a>
-                                    </singleline>
-                                    <!--[if (gte mso 9)|(IE)]>
-                                    </td>
-                                    <td align="center" width="38"></td>
-                                    </tr>
-                                    </table>
-                                    <![endif]-->
-                                </td>
-                            </tr>
-                            <tr>
-                                <td height="15" style="font-size:15px;line-height:15px;">&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td align="center" style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:8px;line-height:12px;font-weight:400;font-style:normal;color:#1b1b18;text-decoration:none;letter-spacing:0px;">
-                                    Dieser Link ist 60 Minuten lang gültig.
-                                </td>
-                            </tr>
-                        </table>
-                        <!-- Buttons -->
-                    </td>
-                </tr>
-                <tr>
-                    <td height="30" style="font-size:30px;line-height:30px;" data-height="Spacing bottom">&nbsp;</td>
                 </tr>
             </table>
 

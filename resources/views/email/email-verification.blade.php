@@ -513,7 +513,7 @@
                 <tr data-element="black-intro-2-headline" data-label="Intro Headline">
                     <td class="type48" data-text-style="Intro Headline" align="center"
                         style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:48px;line-height:64px;font-weight:700;font-style:normal;color:#1b1b18;text-decoration:none;letter-spacing:0px;text-transform: lowercase">
-                        bestätigen sie ihre <br class="hide-mobile"> E-Mail-Adresse
+                        Bestätigen sie ihre <br class="hide-mobile"> E-Mail-Adresse
                     </td>
                 </tr>
                 <tr data-element="black-intro-2-headline" data-label="Intro Headline">

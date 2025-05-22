@@ -11,7 +11,7 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\URL;
 
-class ContactRequestSolvedMail extends Mailable
+class ContactRequestSolvedMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
@@ -23,15 +23,7 @@ class ContactRequestSolvedMail extends Mailable
      */
     public function __construct( public ?ContactRequest $contactRequest = null)
     {
-        if (!is_null($contactRequest)) {
-            $this->link = URL::signedRoute(
-                'solve',
-                [
-                    'formRequest' => $contactRequest,
-                    'token'   => $contactRequest->token,
-                ]
-            );
-        }
+
     }
 
     /**

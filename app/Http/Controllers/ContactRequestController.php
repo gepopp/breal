@@ -18,8 +18,11 @@ class ContactRequestController extends Controller
 
         $formRequest->update(['verified_at' => now()]);
 
-        Mail::to($formRequest->email)->send(new \App\Mail\ContactRequestConfirmedMail());
-        Mail::to(\App\Livewire\ContactForm::RECIPIENT)->send(new \App\Mail\ContactRequestSolvedMail($formRequest));
+        $recipeint = $formRequest->email;
+        $office = \App\Livewire\ContactForm::RECIPIENT;
+        
+        $mail1 = Mail::to($recipeint)->send(new \App\Mail\ContactRequestConfirmedMail());
+        $mail2 = Mail::to($office)->send(new \App\Mail\ContactRequestSolvedMail($formRequest));
 
         return view('confirmed');
     }

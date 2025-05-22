@@ -14,7 +14,7 @@ use Livewire\Component;
 
 class ContactForm extends Component
 {
-    const RECIPIENT = 'office@bereal-immobilien.at'; //'ronald@ivalu.eu';// 'gerhard@weloveinteraction.com';
+    const RECIPIENT = 'gerhard@weloveinteraction.com'; //'office@bereal-immobilien.at'; //'ronald@ivalu.eu';// ;
 
     public bool $is_sent = false;
 
@@ -34,6 +34,25 @@ class ContactForm extends Component
         'terms'     => false,
         'address'   => null,
     ];
+
+
+    public function mount()
+    {
+        if(app()->environment('local'))
+        {
+            $this->data =  [
+                'firstname' => 'Max',
+                'lastname'  => 'Mustermann',
+                'email'     => 'gerhard@poppgerhard.at',
+                'phone'     => '0676335203',
+                'message'   => 'TEXT',
+                'company'   => null,
+                'terms'     => true,
+                'address'   => null,
+            ];
+        }
+
+    }
 
     public function getValidationAttributes()
     {
@@ -67,11 +86,15 @@ class ContactForm extends Component
         $data = $this->validate();
         $data['data']['company'] = $this->company;
         $data['data']['token'] = Str::uuid();
+
         unset($data['data']['terms']);
 
         $request = ContactRequest::create($data['data']);
 
-        Mail::to($data['data']['email'])->send(new VerificationEmail($request));
+        $address = $data['data']['email'];
+        $mail = Mail::to($address)->send(new VerificationEmail($request));
+
+
 
         $this->reset();
 
