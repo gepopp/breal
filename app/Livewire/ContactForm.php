@@ -14,7 +14,7 @@ use Livewire\Component;
 
 class ContactForm extends Component
 {
-    const RECIPIENT = 'l.eybel@bontus-eybel.at'; //'ronald@ivalu.eu';// 'gerhard@weloveinteraction.com';
+    const RECIPIENT = 'office@bereal-immobilien.at'; //'ronald@ivalu.eu';// 'gerhard@weloveinteraction.com';
 
     public bool $is_sent = false;
 
