@@ -99,6 +99,8 @@
                         <h5 class="text-2xl font-bold">Vielen Dank!</h5>
                         <p class="!text-sm font-thin">
                             Damit wir Ihre Anfrage bearbeiten können, bestätigen Sie bitte Ihre E-Mail-Adresse.
+                        </p>
+                        <p class="!text-sm font-thin">
                             Dazu haben wir Ihnen eine E-Mail mit einem Bestätigungslink gesendet.
                         </p>
                     </div>
