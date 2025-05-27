@@ -31,4 +31,19 @@ class ContactRequestController extends Controller
 
         return view('confirmed');
     }
+
+
+
+    public function solve(ContactRequest $contactRequest, string|null $token = null)
+    {
+        if (!request()->hasValidSignature() || $contactRequest->token !== $token) {
+            abort(401);
+        }
+
+        if (is_null($contactRequest->solved_at)) {
+            $contactRequest->update(['solved' => now()]);
+        }
+
+        return view('solved', compact('contactRequest'));
+    }
 }

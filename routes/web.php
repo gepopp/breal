@@ -65,18 +65,7 @@ Route::get('solve-test', function () {
 
 })->name('solve-test');
 
-Route::get('solve/{request}/{token}', function (\App\Models\ContactRequest $contactRequest, $token) {
-    if (!request()->hasValidSignature() || $contactRequest->token !== $token) {
-        abort(401);
-    }
-
-    if (is_null($contactRequest->solved_at)) {
-        $contactRequest->update(['solved' => now()]);
-    }
-
-    return view('solved', compact('contactRequest'));
-
-})->name('solve');
+Route::get('solve/{request}/{token}', [\App\Http\Controllers\ContactRequestController::class, 'solve'])->name('solve');
 
 
 Route::view('dashboard', 'dashboard')
