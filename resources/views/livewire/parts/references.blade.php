@@ -19,14 +19,14 @@
         </div>
     </div>
     <div class="lg:max-w-4xl xl:max-w-6xl max-w-full mx-auto mt-12 md:mt-24">
-        <div class="min-h-[60vh] box-border relative left-0 w-screen sm:w-screen md:w-screen lg:w-[calc(100vw-(50vw-28rem))] xl:w-[calc(100vw-(50vw-36rem))] pl-8 lg:pl-0 lg:pr-6">
+        <div class="min-h-[60vh] box-border relative left-0 w-screen lg:w-[calc(100vw-(50vw-28rem))] xl:w-[calc(100vw-(50vw-36rem))] sm:pl-8 lg:pl-0 lg:pr-6">
             <div class="swiper swiperXl">
                 <div class="swiper-wrapper">
                     @foreach($references as $ref)
                         <x-swiper-slide :ref="$ref"/>
                     @endforeach
                 </div>
-                <div class="absolute flex inset-0 bg-linear-to-r from-transparent to-logo to-[98%] z-10  justify-end items-center pointer-events-none mr-2 lg:mr-0">
+                <div class="hidden absolute md:flex inset-0 md:bg-linear-to-r from-transparent from-[75%] to-logo z-10  justify-end items-center pointer-events-none mr-8 lg:mr-0">
                     <div class="flex flex-col bg-white rounded-l-full bg-white shadow shadow-white -translate-y-1/2">
                         <div class="button-next w-8 h-16 flex items-center pointer-events-auto cursor-pointer">
                             <svg class="sitze-4 text-logo" data-slot="icon" fill="none" stroke-width="3"
