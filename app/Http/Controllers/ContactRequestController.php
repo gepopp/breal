@@ -34,16 +34,16 @@ class ContactRequestController extends Controller
 
 
 
-    public function solve(ContactRequest $contactRequest, string|null $token = null)
+    public function solve(ContactRequest $request, string|null $token = null)
     {
-        if (!request()->hasValidSignature() || $contactRequest->token !== $token) {
+        if (!request()->hasValidSignature() || $request->token !== $token) {
             abort(401);
         }
 
-        if (is_null($contactRequest->solved_at)) {
-            $contactRequest->update(['solved' => now()]);
+        if (is_null($request->solved_at)) {
+            $request->update(['solved' => now()]);
         }
 
-        return view('solved', compact('contactRequest'));
+        return view('solved', compact('request'));
     }
 }

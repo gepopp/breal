@@ -57,6 +57,8 @@ Volt::route('datenschutz', 'policy')->name('datenschutz');
 Route::view('/confirm-test', 'confirmed')->name('confirm-test');
 
 Route::get('confirmation/{id?}/{token?}', [\App\Http\Controllers\ContactRequestController::class, 'confirmation'])->name('confirm');
+Route::get('solve/{request}/{token}', [\App\Http\Controllers\ContactRequestController::class, 'solve'])->name('solve');
+
 
 Route::get('solve-test', function () {
 
@@ -65,7 +67,6 @@ Route::get('solve-test', function () {
 
 })->name('solve-test');
 
-Route::get('solve/{request}/{token}', [\App\Http\Controllers\ContactRequestController::class, 'solve'])->name('solve');
 
 
 Route::view('dashboard', 'dashboard')
