@@ -16,8 +16,6 @@ class ContactRequestController extends Controller
 
         $formRequest = ContactRequest::withoutGlobalScopes()->whereId($id)->first();
 
-
-
         if(!is_null($formRequest) && !is_null($formRequest->verified_at)){
             $formRequest->update(['verified_at' => now()]);
 
