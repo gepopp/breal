@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Livewire\ContactForm;
 use App\Models\ContactRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -25,7 +26,7 @@ class ContactRequestController extends Controller
             $formRequest->update(['verified_at' => now()]);
 
             $recipeint = $formRequest->email;
-            $office = \App\Livewire\ContactForm::RECIPIENT;
+            $office = ContactForm::RECIPIENT;
 
             Mail::to($recipeint)->send(new \App\Mail\ContactRequestConfirmedMail());
             Mail::to($office)->send(new \App\Mail\ContactRequestSolvedMail($formRequest));
