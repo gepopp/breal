@@ -66,7 +66,7 @@ Route::get('solve-test', function () {
 })->name('solve-test');
 
 Route::get('solve/{request}/{token}', function (\App\Models\ContactRequest $request, $token) {
-    if (!$request->hasValidSignature() || $request->token !== $token) {
+    if (!request()->hasValidSignature() || $request->token !== $token) {
         abort(401);
     }
 
