@@ -16,6 +16,10 @@ class ContactRequestController extends Controller
 
         $formRequest = ContactRequest::withoutGlobalScopes()->whereId($id)->first();
 
+        if($formRequest->token != $token) {
+            abort(401);
+        }
+
         if(!is_null($formRequest) && is_null($formRequest->verified_at)){
 
             $formRequest->update(['verified_at' => now()]);
@@ -41,7 +45,7 @@ class ContactRequestController extends Controller
         }
 
         if (is_null($request->solved_at)) {
-            $request->update(['solved' => now()]);
+            $request->update(['solved_at' => now()]);
         }
 
         return view('solved', compact('request'));
