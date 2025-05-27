@@ -23,7 +23,11 @@ class ContactRequestSolvedMail extends Mailable implements ShouldQueue
      */
     public function __construct( public ?ContactRequest $contactRequest = null)
     {
-
+        $this->link = Url::signedRoute('solve',
+            [
+                'request' => $contactRequest,
+                'token' => $contactRequest?->token
+            ]);
     }
 
     /**
