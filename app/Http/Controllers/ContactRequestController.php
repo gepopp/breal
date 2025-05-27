@@ -16,13 +16,17 @@ class ContactRequestController extends Controller
 
         $formRequest = ContactRequest::withoutGlobalScopes()->whereId($id)->first();
 
-        $formRequest->update(['verified_at' => now()]);
+        if(!is_null($formRequest) && is_null($formRequest->verified_at)){
 
-        $recipeint = $formRequest->email;
-        $office = \App\Livewire\ContactForm::RECIPIENT;
+            $formRequest->update(['verified_at' => now()]);
 
-        Mail::to($recipeint)->send(new \App\Mail\ContactRequestConfirmedMail());
-        Mail::to($office)->send(new \App\Mail\ContactRequestSolvedMail($formRequest));
+            $recipeint = $formRequest->email;
+            $office = \App\Livewire\ContactForm::RECIPIENT;
+
+            Mail::to($recipeint)->send(new \App\Mail\ContactRequestConfirmedMail());
+            Mail::to($office)->send(new \App\Mail\ContactRequestSolvedMail($formRequest));
+
+        }
 
 
         return view('confirmed');
