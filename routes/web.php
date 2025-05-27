@@ -65,16 +65,16 @@ Route::get('solve-test', function () {
 
 })->name('solve-test');
 
-Route::get('solve/{request}/{token}', function (\App\Models\ContactRequest $request, $token) {
-    if (!request()->hasValidSignature() || $request->token !== $token) {
+Route::get('solve/{request}/{token}', function (\App\Models\ContactRequest $contactRequest, $token) {
+    if (!request()->hasValidSignature() || $contactRequest->token !== $token) {
         abort(401);
     }
 
-    if (is_null($request->solved_at)) {
-        $request->update(['solved' => now()]);
+    if (is_null($contactRequest->solved_at)) {
+        $contactRequest->update(['solved' => now()]);
     }
 
-    return view('solved', compact('request'));
+    return view('solved', compact('contactRequest'));
 
 })->name('solve');
 
