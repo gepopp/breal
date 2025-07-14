@@ -39,8 +39,8 @@
     </section>
 
 
-    <section class="mt-12 flex space-x-8" x-data="siteServiceFilter">
-        <div class="relative  min-h-screen w-full md:w-84 shrink-0">
+    <section class="mt-12 flex flex-col md:flex-row space-x-8" x-data="siteServiceFilter">
+        <div class="relative  md:min-h-screen w-full md:w-84 shrink-0">
             <div class="absolute inset-0 bg-white flex flex-col">
                 <flux:input x-model="searchterm" class="border-logo" icon:trailing="funnel" placeholder="Filtern Sie aus {{ count($services) }} Services"/>
                 <div class="mt-4 pt-4 flex-grow relative">
