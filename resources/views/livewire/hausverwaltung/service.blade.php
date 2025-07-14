@@ -88,7 +88,7 @@
                 </div>
             </div>
         </div>
-        <div class="w-full md:w-auto">
+        <div class="w-full md:w-auto mt-10 md:mt-0">
             <div class="p-4 pt-0 prose grow" x-html="selectedService.description"></div>
 
             <div class="px-3" x-show="selectedService.form == 'form'">
