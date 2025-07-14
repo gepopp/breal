@@ -40,7 +40,7 @@
 
 
     <section class="mt-12 flex space-x-8" x-data="siteServiceFilter">
-        <div class="relative  min-h-screen w-84 shrink-0">
+        <div class="relative  min-h-screen w-full md:w-84 shrink-0">
             <div class="absolute inset-0 bg-white flex flex-col">
                 <flux:input x-model="searchterm" class="border-logo" icon:trailing="funnel" placeholder="Filtern Sie aus {{ count($services) }} Services"/>
                 <div class="mt-4 pt-4 flex-grow relative">
@@ -88,7 +88,7 @@
                 </div>
             </div>
         </div>
-        <div>
+        <div class="w-full md:w-auto">
             <div class="p-4 pt-0 prose grow" x-html="selectedService.description"></div>
 
             <div class="px-3" x-show="selectedService.form == 'form'">
