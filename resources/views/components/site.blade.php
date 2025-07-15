@@ -3,16 +3,14 @@
 <head>
     @include('partials.head')
 </head>
-<!-- Google tag (gtag.js) -->
-{{--<script async src="https://www.googletagmanager.com/gtag/js?id=G-H3QQKE1XTQ"></script>--}}
-{{--<script> window.dataLayer = window.dataLayer || [];--}}
-
-{{--    function gtag() {--}}
-{{--        dataLayer.push(arguments);--}}
-{{--    }--}}
-
-{{--    gtag('js', new Date());--}}
-{{--    gtag('config', 'G-H3QQKE1XTQ'); </script>--}}
+<!-- Event snippet for Seitenaufruf conversion page -->
+<script>
+    gtag('event', 'conversion', {
+        'send_to': 'AW-17344076990/lKL_CLe4mvEaEL65ps5A',
+        'value': 1.0,
+        'currency': 'EUR'
+    });
+</script>
 <body class="bg-white dark:bg-logo-950 dark:text-white text-logo-950 min-h-screen">
 
 <div class="overflow-hidden">
