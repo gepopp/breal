@@ -72,7 +72,7 @@
             </div>
         @endif
 
-        <div x-data="{ is_sent: @entangle('is_sent').live }" @class(["overflow-hidden", "sm:w-2/3" => $sidebar])>
+        <div x-data="{ is_sent: @entangle('is_sent').live }" @class(["overflow-hidden", "sm:w-2/3" => $sidebar]) wire:key="contact-form">
             {{--                        <p @click="is_sent = !is_sent">toggle</p>--}}
             <div class="w-[200%] min-h-full grid grid-cols-2 gap-x-4 pl-2 transition-all duration-500 ease-in-out"
                  :class="is_sent ? '-translate-x-1/2' : 'transalte-x-0'">
@@ -93,9 +93,10 @@
                     </div>
 
 
-                    <div class="col-span-full">
+                    <div class="col-span-full" wire:key="contact-form-upload-container">
                         <flux:label>Bis zu 5 Dateien hochladen</flux:label>
                         <livewire:dropzone
+                                wire:key="dropzone"
                                 wire:model="uploads"
                                 :rules="['mimes:png,jpeg,pdf','max:5210']"
                                 :multiple="true"/>
