@@ -74,10 +74,7 @@ class ContactRequestResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('phone')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('message')
-                    ->html()
-                    ->wrap()
-                    ->searchable(),
+
                 Tables\Columns\TextColumn::make('address')
                     ->wrap()
                     ->searchable(),
