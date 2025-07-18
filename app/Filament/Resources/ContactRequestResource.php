@@ -46,7 +46,7 @@ class ContactRequestResource extends Resource
                 Forms\Components\TextInput::make('address')
                     ->tel()
                     ->required(),
-                Forms\Components\TextInput::make('message')
+                Forms\Components\RichEditor::make('message')
                     ->required(),
                 Forms\Components\Select::make('company')
                     ->options(CompaniesEnum::class),
