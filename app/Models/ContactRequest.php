@@ -21,6 +21,10 @@ class ContactRequest extends Model implements HasMedia
 
     protected static function booted(): void
     {
+        static::addGlobalScope('latest', function (Builder $builder) {
+            $builder->orderBy('verified_at', 'DESC');
+        });
+
         static::addGlobalScope('verified', function (Builder $builder) {
             $builder->whereNotNull('verified_at');
         });
