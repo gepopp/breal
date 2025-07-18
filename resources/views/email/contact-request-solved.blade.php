@@ -587,6 +587,19 @@
                         data-height="Spacing under paragraph">&nbsp;
                     </td>
                 </tr>
+                @if($contactRequest->hasMedia('*'))
+                    <tr data-element="black-intro-2-paragraph" data-label="Intro Paragraph">
+                        <td data-text-style="Intro Paragraph" align="center"
+                            style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:18px;line-height:32px;font-weight:400;font-style:normal;color:#1b1b18;text-decoration:none;letter-spacing:0px;">
+                            {!! $contactRequest->media()->count() !!} Dateien hochgeladen
+                        </td>
+                    </tr>
+                    <tr data-element="black-intro-2-paragraph" data-label="Intro Paragraph">
+                        <td height="40" style="font-size:40px;line-height:40px;"
+                            data-height="Spacing under paragraph">&nbsp;
+                        </td>
+                    </tr>
+                @endif
             </table>
 
             <table data-outer-table border="0" align="center" cellpadding="0" cellspacing="0" class="outer-table row"

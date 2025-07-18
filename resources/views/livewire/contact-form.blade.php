@@ -89,12 +89,35 @@
                             <flux:input wire:model="data.address" label="Adresse" required badge="Pflichtfeld"/>
                         @endif
                         <flux:editor wire:model="data.message" label="Nachricht" required badge="Pflichtfeld"/>
+
+                    </div>
+
+
+                    <div class="col-span-full">
+                        <flux:label>Bis zu 5 Dateien hochladen</flux:label>
+                        <livewire:dropzone
+                                wire:model="uploads"
+                                :rules="['mimes:png,jpeg,pdf','max:5210']"
+                                :multiple="true"/>
+                        <flux:error name="uploads"/>
+                    </div>
+
+                    <div class="md:col-span-2 space-y-4">
                         <flux:checkbox wire:model="data.terms"
                                        label="Ich bin mit der Verarbeitung und Speicherung meiner Daten, sowie mit der Kontaktaufnahme via E-Mail oder Telefon im Zuge der Bearbeitung meiner Anfrage einverstanden."/>
                     </div>
-                    <x-button>absenden</x-button>
+
+
+                    <div x-data="{ isLoading: false }"
+                         x-on:upload.window="isLoading = $event.detail"
+                         wire:ignore
+                    >
+                        <div :class="isLoading ? 'opacity-0' : 'opacity-100'" class="transition-all duration-500 ease-in-out delay-[1s]">
+                            <x-button>absenden</x-button>
+                        </div>
+                    </div>
                 </form>
-                <div class="bg-logo text-white p-4 flex flex-col justify-center items-center">
+                <div class="bg-logo text-white p-4 flex flex-col justify-center items-center delay-[1s]">
                     <div class="max-w-xs text-center">
                         <h5 class="text-2xl font-bold">Vielen Dank!</h5>
                         <p class="!text-sm font-thin">

@@ -8,6 +8,7 @@ use App\Models\ContactRequest;
 use App\Settings\PagesSettings;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Lazy;
 use Livewire\Component;
@@ -24,6 +25,9 @@ class ContactForm extends Component
 
     protected string $company = '';
 
+    public array $uploads = [];
+
+
     public array $data = [
         'firstname' => '',
         'lastname'  => '',
@@ -38,9 +42,8 @@ class ContactForm extends Component
 
     public function mount()
     {
-        if(app()->environment('local'))
-        {
-            $this->data =  [
+        if (app()->environment('local')) {
+            $this->data = [
                 'firstname' => 'Max',
                 'lastname'  => 'Mustermann',
                 'email'     => 'gerhard@poppgerhard.at',
@@ -64,6 +67,8 @@ class ContactForm extends Component
             'data.message'   => 'Nachricht',
             'data.terms'     => 'Verarbeitung',
             'data.address'   => 'Adresse',
+            'uploads.*'      => 'Datei',
+            'uploads'        => 'Dateien',
         ];
     }
 
@@ -78,12 +83,14 @@ class ContactForm extends Component
             'data.message'   => ['required', 'string'],
             'data.terms'     => ['required', 'accepted'],
             'data.address'   => $this->address ? ['required', 'string', 'max:255'] : ['nullable'],
+            'uploads'        => ['nullable', 'array', 'max:5'],
         ];
     }
 
     public function save()
     {
         $data = $this->validate();
+
         $data['data']['company'] = $this->company;
         $data['data']['token'] = Str::uuid();
 
@@ -91,9 +98,28 @@ class ContactForm extends Component
 
         $request = ContactRequest::create($data['data']);
 
+        /**
+         * 0 => array:6 [▼
+         * "tmpFilename" => "T6bYJq4DlWul6UOBNGwEvRV3twywsx-metaZ2VsYmVyIGtvZmZlci5qcGVn-.jpeg"
+         * "name" => "gelber koffer.jpeg"
+         * "extension" => "jpg"
+         * "path" => "/home/vagrant/code/breal/storage/app/private/livewire-tmp/T6bYJq4DlWul6UOBNGwEvRV3twywsx-metaZ2VsYmVyIGtvZmZlci5qcGVn-.jpeg"
+         * "temporaryUrl" => "http://breal.test/livewire/preview-file/T6bYJq4DlWul6UOBNGwEvRV3twywsx-metaZ2VsYmVyIGtvZmZlci5qcGVn-.jpeg?expires=1752854399&signature=816d96bdb12a65b3f36a45ae5 ▶"
+         * "size" => 426682
+         * ]
+         */
+        foreach ($data['uploads'] as $upload) {
+            $contents = file_get_contents($upload['path']);
+            Storage::disk('public')->put( $upload['name'], $contents );
+
+            $request->addMediaFromDisk($upload['name'], 'public')
+                ->toMediaCollection('uploads', 'local');
+
+            Storage::disk('public')->delete($upload['name']);
+        }
+
         $address = $data['data']['email'];
         $mail = Mail::to($address)->send(new VerificationEmail($request));
-
 
 
         $this->reset();
@@ -102,7 +128,7 @@ class ContactForm extends Component
     }
 
 
-    public function render( PagesSettings $pagesSettings)
+    public function render(PagesSettings $pagesSettings)
     {
         return view('livewire.contact-form', compact('pagesSettings'));
     }

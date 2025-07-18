@@ -62,7 +62,7 @@ Route::get('solve/{request}/{token}', [\App\Http\Controllers\ContactRequestContr
 
 Route::get('solve-test', function () {
 
-    $request = \App\Models\ContactRequest::inRandomOrder()->first();
+    $request = \App\Models\ContactRequest::inRandomOrder()->whereHas('media')->first();
     return view('solved', compact('request'));
 
 })->name('solve-test');

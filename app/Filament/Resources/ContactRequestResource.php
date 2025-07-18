@@ -52,6 +52,12 @@ class ContactRequestResource extends Resource
                     ->options(CompaniesEnum::class),
                 Forms\Components\DateTimePicker::make('solved_at'),
                 Forms\Components\DateTimePicker::make('verified_at')->readonly(),
+
+                Forms\Components\SpatieMediaLibraryFileUpload::make('uploads')
+                    ->multiple()
+                    ->downloadable()
+                    ->collection('uploads')
+
             ])->columns(1);
     }
 
