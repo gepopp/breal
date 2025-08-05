@@ -12,6 +12,11 @@ class JobVacancy extends Component
     public function mount(\App\Models\JobVacancy $JobVacancy){
 
         $this->jobVacancy = $JobVacancy;
+
+        if($this->jobVacancy->from > now() || $this->jobVacancy->to < now()){
+            abort(403);
+        }
+
     }
 
 

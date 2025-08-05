@@ -29,7 +29,7 @@ class Vacancies extends Component
     public function render(PagesSettings $pagesSettings)
     {
         $preparedText = $this->prepareText();
-        $vacancies = JobVacancy::all();
+        $vacancies = JobVacancy::where('from', '<',  now())->where('to', '>', now())->get();
 
         return view('livewire.pages.vacancies', compact('pagesSettings', 'preparedText', 'vacancies'));
     }
