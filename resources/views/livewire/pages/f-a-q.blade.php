@@ -47,6 +47,13 @@
                     <div class="prose">
                         {!! $faq['answer'] !!}
                     </div>
+                    <div class="h-px w-full bg-logo mt-8"></div>
+                    <div class="prose bg-logo p-4 text-white flex flex-col items-center justify-center">
+                        <h5 class="!text-lg !font-bold !text-white">Sie haben Fragen oder Anregungen zu diesem Thema?</h5>
+                        <div class="max-w-xs mt-4">
+                            <x-button href="{{ $faq['link'] }}" :ondark="true">kontaktieren sie uns</x-button>
+                        </div>
+                    </div>
                 </div>
             </div>
 

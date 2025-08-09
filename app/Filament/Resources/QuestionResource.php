@@ -55,7 +55,11 @@ class QuestionResource extends Resource
                 Tables\Columns\TextColumn::make('company')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('question')
+                    ->wrap()
                     ->searchable(),
+                Tables\Columns\TextColumn::make('link')
+                    ->wrap()
+                    ->copyable(),
             ])
             ->filters([
                 //

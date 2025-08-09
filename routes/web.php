@@ -46,6 +46,7 @@ Route::group(['prefix' => 'technik', 'as' => 'technik.'], function () {
     Route::get('/leistung/{competence}', \App\Livewire\Pages\Compentence::class)->name('leistung');
 });
 
+Route::get('/faq/{slug}', \App\Livewire\FAQSingle::class)->name('faq.single');
 
 Route::get('/stellenanzeige/{JobVacancy}', \App\Livewire\Pages\JobVacancy::class)->name('stellenanzeige');
 
@@ -141,6 +142,12 @@ Route::get('import', function (){
    \App\Justimmo\Importer::import();
 });
 
+
+Route::get('faqslug', function (){
+   foreach (\App\Models\Question::all() as $faq) {
+        $faq->update(['updated_at' => now()]);
+    }
+});
 
 require __DIR__ . '/auth.php';
 
