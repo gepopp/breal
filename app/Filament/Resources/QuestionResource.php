@@ -52,6 +52,10 @@ class QuestionResource extends Resource
                 Tables\Columns\TextInputColumn::make('order')
                     ->rules(['required', 'numeric', 'integer'])
                     ->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime('d.m.Y')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('company')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('question')
