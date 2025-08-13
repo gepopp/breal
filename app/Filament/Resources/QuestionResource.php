@@ -7,6 +7,7 @@ use App\Filament\Resources\QuestionResource\Pages;
 use App\Filament\Resources\QuestionResource\RelationManagers;
 use App\Models\Question;
 use Filament\Forms;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -31,6 +32,15 @@ class QuestionResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\SpatieMediaLibraryFileUpload::make('image')
+                    ->image()
+                    ->collection('image')
+                    ->downloadable()
+                    ->responsiveImages()
+                    ->rules(['nullable', 'image', 'max:2024'])
+                    ->required()
+                    ->preserveFilenames(),
+
                 Forms\Components\TextInput::make('order')
                     ->required()
                     ->numeric()
@@ -39,6 +49,7 @@ class QuestionResource extends Resource
                     ->options(CompaniesEnum::class),
                 Forms\Components\TextInput::make('question')
                     ->required(),
+                Textarea::make('excerpt')->required(),
                 Forms\Components\RichEditor::make('answer')
                     ->required()
                     ->columnSpanFull(),

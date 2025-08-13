@@ -7,14 +7,18 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
-class Question extends Model
+class Question extends Model implements HasMedia
 {
     use HasFactory;
     use SoftDeletes;
     use HasSlug;
+    use InteractsWithMedia;
 
     protected $appends = ['link'];
 
@@ -36,5 +40,12 @@ class Question extends Model
         return SlugOptions::create()
             ->generateSlugsFrom('question')
             ->saveSlugsTo('slug');
+    }
+
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        $this->addMediaConversion('for_og')
+            ->width(1200)
+            ->height(627);
     }
 }
