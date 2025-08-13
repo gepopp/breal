@@ -49,11 +49,11 @@ class QuestionResource extends Resource
                     ->options(CompaniesEnum::class),
                 Forms\Components\TextInput::make('question')
                     ->required(),
-                Textarea::make('excerpt')->required(),
+                Textarea::make('excerpt')->columnSpanFull()->required(),
                 Forms\Components\RichEditor::make('answer')
                     ->required()
                     ->columnSpanFull(),
-            ]);
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table
