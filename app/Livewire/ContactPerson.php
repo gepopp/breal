@@ -10,15 +10,6 @@ class ContactPerson extends Component
     public \App\Models\Contactperson $contactperson;
 
 
-    /**
-     * The "booted" method of the model.
-     */
-    protected static function booted(): void
-    {
-        static::addGlobalScope('sort', function (Builder $builder) {
-            $builder->orderByDesc('sort');
-        });
-    }
 
     public function render()
     {
