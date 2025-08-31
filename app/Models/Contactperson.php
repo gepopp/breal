@@ -25,7 +25,7 @@ class Contactperson extends Model implements HasMedia
     protected static function booted(): void
     {
         static::addGlobalScope('sort', function (Builder $builder) {
-            $builder->orderByDesc('sort');
+            $builder->orderBy('sort');
         });
     }
 
