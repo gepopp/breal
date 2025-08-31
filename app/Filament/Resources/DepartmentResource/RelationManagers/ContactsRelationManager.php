@@ -44,6 +44,7 @@ class ContactsRelationManager extends RelationManager
     {
         return $table
             ->recordTitleAttribute('name')
+            ->reorderable('sort')
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
             ])
