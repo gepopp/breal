@@ -157,11 +157,15 @@ Route::fallback(function () {
 });
 
 
-Route::get('test', function () {
-    $request = \App\Models\ContactRequest::whereHas('media')->inRandomOrder()->first();
+Route::get('mail-test', function () {
+    if(auth()->check()){
+        $request = \App\Models\ContactRequest::whereHas('media')->inRandomOrder()->first();
 
-    Mail::to('gerhard@weloveinteraction.com')->send( new \App\Mail\NewContactRequestAdminMail( $request ) );
+        Mail::to('gerhard@weloveinteraction.com')->send( new \App\Mail\NewContactRequestAdminMail( $request ) );
 
 
-    return new \App\Mail\NewContactRequestAdminMail( $request );
+        return new \App\Mail\NewContactRequestAdminMail( $request );
+    }
+
+    return 'Bitte erst im Backend einloggen';
 });
