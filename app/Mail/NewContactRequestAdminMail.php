@@ -53,9 +53,9 @@ class NewContactRequestAdminMail extends Mailable
     {
        $paths = [];
        foreach ($this->contactRequest->getMedia('*') ?? [] as $media) {
-           if(Storage::disk('local')->exists($media->getPath()))
+           if(Storage::disk('local')->exists($media->id . '/' . $media->file_name))
            {
-               $paths[] = Attachment::fromStorageDisk('local', $media->getPath());
+               $paths[] = Attachment::fromStorageDisk('local', $media->id . '/' . $media->file_name);
            }
        }
 
