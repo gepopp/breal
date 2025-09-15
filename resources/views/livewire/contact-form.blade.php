@@ -94,7 +94,7 @@
 
 
                     <div class="col-span-full" wire:key="contact-form-upload-container">
-                        <flux:label>Bis zu 5 Dateien hochladen</flux:label>
+                        <flux:label>Bis zu 5 Dateien à 5 MB hochladen</flux:label>
                         <livewire:dropzone
                                 wire:key="dropzone"
                                 wire:model="uploads"
