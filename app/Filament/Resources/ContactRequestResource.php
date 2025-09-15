@@ -64,6 +64,7 @@ class ContactRequestResource extends Resource
                 Forms\Components\SpatieMediaLibraryFileUpload::make('uploads')
                     ->multiple()
                     ->downloadable()
+                    ->disk('local')
                     ->collection('uploads')
 
             ])->columns(1);
