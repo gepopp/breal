@@ -161,7 +161,7 @@ Route::get('mail-test', function () {
     if(auth()->check()){
         $request = \App\Models\ContactRequest::whereHas('media')->inRandomOrder()->first();
 
-        Mail::to('gerhard@weloveinteraction.com')->send( new \App\Mail\NewContactRequestAdminMail( $request ) );
+        Mail::to(auth()->user())->send( new \App\Mail\NewContactRequestAdminMail( $request ) );
 
 
         return new \App\Mail\NewContactRequestAdminMail( $request );
