@@ -98,7 +98,7 @@
                         <livewire:dropzone
                                 wire:key="dropzone"
                                 wire:model="uploads"
-                                :rules="['mimes:png,jpeg,pdf','max:5210']"
+                                :rules="['mimes:png,jpeg,pdf','max:5000']"
                                 :multiple="true"/>
                         <flux:error name="uploads"/>
                     </div>
