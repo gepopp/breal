@@ -65,6 +65,7 @@ class ContactRequestResource extends Resource
                     ->multiple()
                     ->downloadable()
                     ->disk('local')
+                    ->visibility('private')
                     ->collection('uploads')
 
             ])->columns(1);
