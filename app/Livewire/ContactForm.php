@@ -110,12 +110,14 @@ class ContactForm extends Component
          */
         foreach ($data['uploads'] as $upload) {
             $contents = file_get_contents($upload['path']);
-            Storage::disk('public')->put( $upload['name'], $contents );
+            $store = Storage::disk('public')->put($upload['name'], $contents);
+            dd($store);
 
-            $request->addMediaFromDisk($upload['name'], 'public')
-                ->toMediaCollection('uploads', 'local');
 
-            Storage::disk('public')->delete($upload['name']);
+//            $request->addMediaFromDisk($upload['name'], 'public')
+//                ->toMediaCollection('uploads', 'local');
+//
+//            Storage::disk('public')->delete($upload['name']);
         }
 
         $address = $data['data']['email'];
