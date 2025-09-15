@@ -29,6 +29,13 @@ class ContactRequestResource extends Resource
     protected static ?string $navigationLabel = 'Kontaktanfragen';
 
 
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->withoutGlobalScopes();
+    }
+
+
+
     public static function form(Form $form): Form
     {
         return $form
@@ -50,6 +57,7 @@ class ContactRequestResource extends Resource
                     ->required(),
                 Forms\Components\Select::make('company')
                     ->options(CompaniesEnum::class),
+
                 Forms\Components\DateTimePicker::make('solved_at'),
                 Forms\Components\DateTimePicker::make('verified_at')->readonly(),
 
@@ -65,6 +73,7 @@ class ContactRequestResource extends Resource
     {
         return $table
             ->columns([
+
                 TextColumn::make('id'),
                 Tables\Columns\TextColumn::make('firstname')
                     ->searchable(),
@@ -78,6 +87,9 @@ class ContactRequestResource extends Resource
                 Tables\Columns\TextColumn::make('address')
                     ->wrap()
                     ->searchable(),
+
+                TextColumn::make('media_count')->counts('media'),
+
                 Tables\Columns\TextColumn::make('solved_at')
                     ->dateTime()
                     ->sortable(),
