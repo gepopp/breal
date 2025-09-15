@@ -29,7 +29,7 @@ class ContactRequestController extends Controller
             $office = ContactForm::RECIPIENT;
 
             Mail::to($recipeint)->send(new \App\Mail\ContactRequestConfirmedMail());
-            Mail::to($office)->send(new \App\Mail\ContactRequestSolvedMail($formRequest));
+            Mail::to($office)->send(new \App\Mail\NewContactRequestAdminMail($formRequest));
 
         }
 
