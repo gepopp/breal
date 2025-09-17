@@ -579,7 +579,7 @@
                                     style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:14px;line-height:24px;font-weight:400;font-style:normal;color:#999999;text-decoration:none;letter-spacing:0px;">
                                     <!-- Links -->
                                     <singleline>
-                                        <a href="#" mc:edit data-button data-text-style="Footer Links"
+                                        <a href="{{ route('hausverwaltung.home') }}" mc:edit data-button data-text-style="Footer Links"
                                            style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:14px;line-height:28px;font-weight:400;font-style:normal;color:#999999;text-decoration:none;letter-spacing:0px;display:inline-block;vertical-align:middle;"><span>Hausverwaltung</span></a>
                                     </singleline>
                                     <!-- Links -->
@@ -602,7 +602,7 @@
                                     style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:14px;line-height:24px;font-weight:400;font-style:normal;color:#999999;text-decoration:none;letter-spacing:0px;">
                                     <!-- Links -->
                                     <singleline>
-                                        <a href="#" mc:edit data-button data-text-style="Footer Links"
+                                        <a href="{{ route('makler.home') }}" mc:edit data-button data-text-style="Footer Links"
                                            style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:14px;line-height:28px;font-weight:400;font-style:normal;color:#999999;text-decoration:none;letter-spacing:0px;display:inline-block;vertical-align:middle;"><span>Immobilien</span></a>
                                     </singleline>
                                     <!-- Links -->
@@ -625,7 +625,7 @@
                                     style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:14px;line-height:24px;font-weight:400;font-style:normal;color:#999999;text-decoration:none;letter-spacing:0px;">
                                     <!-- Links -->
                                     <singleline>
-                                        <a href="#" mc:edit data-button data-text-style="Footer Links"
+                                        <a href="{{ route('technik.home') }}" mc:edit data-button data-text-style="Footer Links"
                                            style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:14px;line-height:28px;font-weight:400;font-style:normal;color:#999999;text-decoration:none;letter-spacing:0px;display:inline-block;vertical-align:middle;"><span>Technik</span></a>
                                     </singleline>
                                     <!-- Links -->
