@@ -11,3 +11,7 @@ Artisan::command('inspire', function () {
 Schedule::call(function () {
     \App\Justimmo\Importer::import();
 })->daily();
+
+Schedule::call(function () {
+    (new \App\Http\Controllers\SitemapController())->generate();
+})->daily();

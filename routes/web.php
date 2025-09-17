@@ -169,3 +169,6 @@ Route::get('mail-test', function () {
 
     return 'Bitte erst im Backend einloggen';
 });
+
+
+Route::get('sitemap', [\App\Http\Controllers\SitemapController::class, 'generate']);
