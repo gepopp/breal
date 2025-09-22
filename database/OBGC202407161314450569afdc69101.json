@@ -1,0 +1,370 @@
+{
+  "objektkategorie": {
+    "nutzungsart": {
+      "@attributes": {
+        "WOHNEN": "0",
+        "GEWERBE": "0",
+        "ANLAGE": "1"
+      }
+    },
+    "vermarktungsart": {
+      "@attributes": {
+        "KAUF": "1",
+        "MIETE_PACHT": "0"
+      }
+    },
+    "objektart": {
+      "wohnung": {}
+    },
+    "user_defined_simplefield": [
+      "2",
+      "Wohnung",
+      "45",
+      "Wohnung"
+    ]
+  },
+  "geo": {
+    "plz": "1110",
+    "ort": "Wien",
+    "geokoordinaten": {
+      "@attributes": {
+        "breitengrad": "48.15116174",
+        "laengengrad": "16.47087996"
+      }
+    },
+    "strasse": "Dreherstra\u00dfe",
+    "hausnummer": "82",
+    "bundesland": "Wien",
+    "land": {
+      "@attributes": {
+        "iso_land": "AUT"
+      }
+    },
+    "etage": "1",
+    "anzahl_etagen": "4",
+    "wohnungsnr": "5",
+    "regionaler_zusatz": "Etrichstra\u00dfe, Huma Eleven",
+    "user_defined_simplefield": [
+      "16.47087996",
+      "48.15116174",
+      "1. Etage \/ 1. Liftstock",
+      "B",
+      "Wien 11., Simmering"
+    ]
+  },
+  "kontaktperson": {
+    "email_direkt": "anfrage1@teamneunzehn.at",
+    "tel_zentrale": "+43 1 236 97 97",
+    "tel_fax": "+43 1 263 24 18",
+    "tel_handy": "+43 699 190 02 009",
+    "name": "Bichelhuber",
+    "vorname": "Paul",
+    "anrede": "Herr",
+    "position": "Immobilienvermittlung",
+    "firma": "T19-RE Real Estate GmbH & Co KG # Future Alpha Two GmbH",
+    "strasse": "Handelskai 94 -96 | 44. Stock | Millennium Tower",
+    "plz": "1200",
+    "ort": "Wien",
+    "land": {
+      "@attributes": {
+        "iso_land": "AUT"
+      }
+    },
+    "email_feedback": "88321-202504-f7e8c32d@oi-feedback.justimmo.at",
+    "url": "https:\/\/www.teamneunzehn.at",
+    "personennummer": "11524349",
+    "foto": {
+      "@attributes": {
+        "location": "REMOTE"
+      },
+      "format": "jpg",
+      "daten": {
+        "pfad": "https:\/\/storage.justimmo.at\/thumb\/bdcec603b3452f10cc94d2871d227bc3\/fc_h600_w800\/1uyW7yIrtB6g7RtcSjA5vk.jpg"
+      }
+    },
+    "user_defined_anyfield": {
+      "anhang": {
+        "@attributes": {
+          "location": "REMOTE",
+          "gruppe": "BILD"
+        },
+        "anhangtitel": "Paul Bichelhuber",
+        "format": "jpg",
+        "daten": {
+          "pfad": "https:\/\/storage.justimmo.at\/thumb\/bdcec603b3452f10cc94d2871d227bc3\/fc_h600_w800\/1uyW7yIrtB6g7RtcSjA5vk.jpg"
+        }
+      }
+    }
+  },
+  "preise": {
+    "kaufpreis": "228000",
+    "kaufpreisbrutto": "228000",
+    "provisionspflichtig": "1",
+    "aussen_courtage": "3% des Kaufpreises zzgl. 20% USt.",
+    "waehrung": {
+      "@attributes": {
+        "iso_waehrung": "EUR"
+      }
+    },
+    "user_defined_simplefield": [
+      "3.5%",
+      "1.1%"
+    ]
+  },
+  "flaechen": {
+    "wohnflaeche": "38.14",
+    "nutzflaeche": "43.03",
+    "gesamtflaeche": "43.03",
+    "freiflaeche": "4.89",
+    "anzahl_zimmer": "2",
+    "anzahl_badezimmer": "1",
+    "anzahl_sep_wc": "1",
+    "anzahl_logia": "1",
+    "balkon_terrasse_flaeche": "4.89",
+    "user_defined_simplefield": "4.89"
+  },
+  "ausstattung": {
+    "bad": {
+      "@attributes": {
+        "DUSCHE": "1"
+      }
+    },
+    "boden": {
+      "@attributes": {
+        "FERTIGPARKETT": "1"
+      }
+    },
+    "heizungsart": {
+      "@attributes": {
+        "FUSSBODEN": "1"
+      }
+    },
+    "befeuerung": {
+      "@attributes": {
+        "LUFTWP": "1"
+      }
+    },
+    "fahrstuhl": {
+      "@attributes": {
+        "PERSONEN": "1"
+      }
+    },
+    "stellplatzart": {
+      "@attributes": {
+        "GARAGE": "1"
+      }
+    },
+    "ausricht_balkon_terrasse": {
+      "@attributes": {
+        "WEST": "1"
+      }
+    },
+    "fahrradraum": "1"
+  },
+  "zustand_angaben": {
+    "baujahr": "2025",
+    "zustand": {
+      "@attributes": {
+        "zustand_art": "ERSTBEZUG"
+      }
+    },
+    "alter": {
+      "@attributes": {
+        "alter_attr": "NEUBAU"
+      }
+    },
+    "energiepass": {
+      "epart": "BEDARF",
+      "hwbwert": "53.4",
+      "hwbklasse": "C",
+      "fgeewert": "0.76",
+      "fgeeklasse": "A"
+    },
+    "user_defined_simplefield": [
+      "53.4",
+      "C",
+      "0.76",
+      "A"
+    ]
+  },
+  "freitexte": {
+    "objekttitel": "Urbanes Wohnen trifft modernen Charme",
+    "objektbeschreibung": "<p><strong><em><u>Urbanes Wohnen trifft modernen Charme<\/u><\/em><\/strong><\/p>\r\n\r\n<p>Unser modernes Wohnprojekt in der Dreherstra\u00dfe, 1110 Wien bietet Ihnen <strong><u>1- bis 3-Zimmer-Wohnungen<\/u><\/strong>, jede mit <strong><u>eigener Freifl\u00e4che<\/u><\/strong>, die ideal f\u00fcr Paare, Singles und kleine Familien geeignet sind. \u00dcberzeugen Sie sich selbst von den <strong><u>erstklassigen Ausstattungsmerkmalen<\/u><\/strong> und genie\u00dfen Sie <strong><u>h\u00f6chsten Wohnkomfort<\/u><\/strong> in einem der aufstrebendsten Bezirke Wiens.<\/p>\r\n\r\n<p>\u00a0<\/p>\r\n\r\n<p><u>Das Projekt zeichnet sich vor allem durch folgende Attribute aus:<\/u><\/p>\r\n\r\n<ul>\r\n\t<li><strong>top-moderner\u00a0Erstbezugs-Neubau <\/strong><\/li>\r\n\t<li><strong>hochwertige Ausstattung (Fu\u00dfbodenheizung, <\/strong><strong>Au\u00dfenliegender Sonnenschutz, <\/strong><strong>Klimavorbereitung im DG, etc.)<\/strong><\/li>\r\n\t<li><strong>ausgezeichnete Grundrisse <\/strong>zum Teil mit <strong>Blick ins Gr\u00fcne<\/strong><\/li>\r\n\t<li><strong>tolle Lage\u00a0<\/strong>\u2013\u00a0kurze Distanz zur <strong>U<\/strong><strong>3 Simmering\u00a0<\/strong>und nach Schwechat<\/li>\r\n\t<li><strong>Freifl\u00e4chen\u00a0<\/strong>(Balkon, Terrasse, Loggia, Eigeng\u00e4rten) bei jeder Wohnung<\/li>\r\n\t<li>Ideal\u00a0als<strong>\u00a0Endnutzer- und Vorsorgewohnung\u00a0<\/strong>geeignet<\/li>\r\n\t<li>2 Parkpl\u00e4tze\u00a0in der\u00a0hauseigenen Garage<\/li>\r\n<\/ul>\r\n\r\n<p>\u00a0<\/p>\r\n\r\n<p><strong>Ausstattungsstandard<\/strong><\/p>\r\n\r\n<p><strong>Beheizung und Warmwasser:<\/strong> Jede Wohnung verf\u00fcgt \u00fcber eine effiziente Fu\u00dfbodenheizung, die durch eine moderne Luftw\u00e4rmepumpe betrieben wird. Das sorgt f\u00fcr wohlige W\u00e4rme und niedrige Energiekosten.<\/p>\r\n\r\n<p><strong>D\u00e4mmung und Fenster:<\/strong> Die Fassade ist mit einer hochwertigen 14 cm dicken Styropor-D\u00e4mmung (SPS plus) ausgestattet. Kunststofffenster und Balkont\u00fcren mit 3-fach Verglasung sowie Velux Dachfenster bieten hervorragende Isolierung und Schallschutz. Au\u00dfenrolll\u00e4den sorgen f\u00fcr optimalen Sonnenschutz und Privatsph\u00e4re.<\/p>\r\n\r\n<p><strong>Bodenbel\u00e4ge:<\/strong> In den Wohnr\u00e4umen erwartet Sie hochwertiges, wohnfertig ge\u00f6ltes Fertigparkett aus Eiche Natur, das ein angenehmes Wohnklima schafft. Die Wandfliesen (60x30 cm) in Wei\u00df matt und die Bodenfliesen (60x30 cm) in Grau verleiht dem Badezimmer eine moderne Eleganz.<\/p>\r\n\r\n<p><strong>Sanit\u00e4rausstattung:<\/strong> Die Badezimmer sind mit hochwertigen Sanit\u00e4ranlagen ausgestattet, die sowohl funktional als auch \u00e4sthetisch \u00fcberzeugen.<\/p>\r\n\r\n<p><strong>Innere T\u00fcren:<\/strong> Farblackierte, wei\u00dfe und glatte T\u00fcren unterstreichen das elegante Wohnambiente und sorgen f\u00fcr ein harmonisches Gesamtbild.<\/p>\r\n\r\n<p>\u00a0<\/p><p><strong><u>Wohnung Stiege B Top 5<\/u><\/strong><\/p>\r\n\r\n<p>Die<strong>\u00a02-Zimmer-Wohnung<\/strong>\u00a0mit ca<strong>. 38,14 m\u00b2 Wohnfl\u00e4che <\/strong>befindet sich im <strong>1. Obergeschoss\u00a0<\/strong>und hat folgende Raumaufteilung:<\/p>\r\n\r\n<ul>\r\n\t<li>Bad\/WC: 4,82 m\u00b2\u00a0<\/li>\r\n\t<li>Vorraum: 2,83 m\u00b2<\/li>\r\n\t<li>Wohnk\u00fcche:\u00a019,44 m\u00b2<\/li>\r\n\t<li>Zimmer: 11,05 m\u00b2<\/li>\r\n\t<li>Loggia: 4,89 m\u00b2<\/li>\r\n<\/ul>\r\n\r\n<p>\u00a0<\/p>\r\n\r\n<p><strong><u>Kaufpreis:<\/u><\/strong><br \/>\r\nDer Kaufpreis\u00a0f\u00fcr Eigennutzer betr\u00e4gt\u00a0<strong>248.000,00 \u20ac<\/strong><br \/>\r\nDer Kaufpreis f\u00fcr Anleger betr\u00e4gt\u00a0<strong>228.000,00 \u20ac zzgl. 20% USt.<\/strong><\/p>\r\n\r\n<p>\u00a0<\/p>\r\n\r\n<p>Die monatlichen Betriebskosten gliedern sich derzeit wie folgt auf:<\/p>\r\n\r\n<p>Betriebskosten Brutto: 94,38 \u20ac<\/p>\r\n\r\n<p>Reparaturr\u00fccklage: 9,75 \u20ac<\/p>\r\n\r\n<p>\u00a0<\/p>\r\n\r\n<p><u><strong>Nebenkosten:<\/strong><\/u><\/p>\r\n\r\n<p>Provision: <strong>3%<\/strong> des Kaufpreises zzgl. 20% USt. bei Willens\u00fcbereinkunft.<\/p>\r\n\r\n<p>Vertragserrichtung: <strong>1,5 %<\/strong> des Kaufpreises zzgl. Barauslagen und USt<\/p>\r\n\r\n<p>\u00a0<\/p>\r\n\r\n<p><strong><em><u>Lage und Umgebung:<\/u><\/em><\/strong><\/p>\r\n\r\n<p>Die Wohnhausanlage befindet sich in einer ruhigen Wohngegend des 11. Bezirks von Wien, der f\u00fcr seine ausgezeichnete Infrastruktur und Lebensqualit\u00e4t bekannt ist. In unmittelbarer N\u00e4he finden Sie zahlreiche Einkaufsm\u00f6glichkeiten, Schulen, Kinderg\u00e4rten und Freizeiteinrichtungen. Die gute Anbindung an \u00f6ffentliche Verkehrsmittel und die Autobahn erm\u00f6glicht eine schnelle und bequeme Erreichbarkeit der Innenstadt und anderer Stadtteile.<\/p>\r\n\r\n<p>\u00a0<\/p>\r\n\r\n<p>Erleben Sie urbanes Wohnen in bester Lage und lassen Sie sich von der Qualit\u00e4t und dem Komfort unserer Wohnungen begeistern. Vereinbaren Sie noch heute einen Besichtigungstermin und entdecken Sie Ihr neues Zuhause in der Dreherstra\u00dfe.<\/p>\r\n\r\n<p>\u00a0<\/p>\r\n\r\n<p>\u00a0<\/p>\r\n\r\n<p><strong><em><u>Energieausweis<\/u><\/em><\/strong><\/p>\r\n\r\n<p>Der Heizw\u00e4rmebedarf der Stiege 1 betr\u00e4gt <strong>53,1 kWh\/m2a<\/strong> (fGEE: 0,75, Kl: A), dieser\u00a0entspricht der<strong>\u00a0Klasse C.<\/strong><\/p>\r\n\r\n<p>Der Heizw\u00e4rmebedarf der Stiege 2 betr\u00e4gt <strong>53,4 kWh\/m2a<\/strong> (fGEE: 0,76, Kl: A), dieser\u00a0entspricht der<strong>\u00a0Klasse C.<\/strong><\/p>\r\n\r\n<p>\u00a0<\/p>\r\n\r\n<p><strong>Gerne steht Ihnen Herr Paul Bichelhuber f\u00fcr weitere Fragen bzw. Besichtigungen unter 0699 1900 2009 zur Verf\u00fcgung.<\/strong><\/p>\n<p>Wir weisen darauf hin, dass zwischen dem Vermittler und dem zu vermittelnden Dritten ein famili\u00e4res oder wirtschaftliches Naheverh\u00e4ltnis besteht.<\/p>\n<p>Der Vermittler ist als Doppelmakler t\u00e4tig.<\/p><br\/><p><strong>Infrastruktur \/ Entfernungen<\/strong><\/p><p><strong>Gesundheit<\/strong><br \/>Arzt &lt;625m<br \/>Apotheke &lt;550m<br \/>Klinik &lt;1.000m<br \/>Krankenhaus &lt;7.300m<br \/><br \/><strong>Kinder & Schulen<\/strong><br \/>Schule &lt;500m<br \/>Kindergarten &lt;600m<br \/>Universit\u00e4t &lt;6.150m<br \/>H\u00f6here Schule &lt;6.525m<br \/><br \/><strong>Nahversorgung<\/strong><br \/>Supermarkt &lt;150m<br \/>B\u00e4ckerei &lt;550m<br \/>Einkaufszentrum &lt;900m<br \/><br \/><strong>Sonstige<\/strong><br \/>Geldautomat &lt;500m<br \/>Bank &lt;500m<br \/>Post &lt;575m<br \/>Polizei &lt;200m<br \/><br \/><strong>Verkehr<\/strong><br \/>Bus &lt;450m<br \/>U-Bahn &lt;4.100m<br \/>Stra\u00dfenbahn &lt;525m<br \/>Bahnhof &lt;700m<br \/>Autobahnanschluss &lt;1.000m<br \/>Flughafen &lt;8.375m<br \/><br \/><sub>Angaben Entfernung Luftlinie \/ Quelle: OpenStreetMap<\/sub><\/p>"
+  },
+  "anhaenge": {
+    "anhang": [
+      {
+        "@attributes": {
+          "location": "REMOTE",
+          "gruppe": "TITELBILD"
+        },
+        "format": "jpg",
+        "check": "2024-08-08T20:13:40",
+        "daten": {
+          "pfad": "https:\/\/storage.justimmo.at\/thumb\/d7345039d8adf4b90b1cf61736868cbb\/Fc_Lb_M2t59qT2FQymUn0vCjHsiuF.png_fm_h1080_w1920\/1iUNMJv44FvsHzUg8RYZqk.jpg"
+        }
+      },
+      {
+        "@attributes": {
+          "location": "REMOTE",
+          "gruppe": "BILD"
+        },
+        "format": "jpg",
+        "check": "2024-07-12T09:36:34",
+        "daten": {
+          "pfad": "https:\/\/storage.justimmo.at\/thumb\/b5cecc6f681465c79313e56ccd5d8697\/Fc_Lb_M2t59qT2FQymUn0vCjHsiuF.png_fm_h1080_w1920\/3HvsCk1gq69Bq165LIOaTB.jpg"
+        }
+      },
+      {
+        "@attributes": {
+          "location": "REMOTE",
+          "gruppe": "BILD"
+        },
+        "format": "jpg",
+        "check": "2024-07-12T09:36:41",
+        "daten": {
+          "pfad": "https:\/\/storage.justimmo.at\/thumb\/c056b27885323a322cf3befbd504e4ca\/Fc_Lb_M2t59qT2FQymUn0vCjHsiuF.png_fm_h1080_w1920\/2kRUbEDJdfv9EgxotvS5Cf.jpg"
+        }
+      },
+      {
+        "@attributes": {
+          "location": "REMOTE",
+          "gruppe": "BILD"
+        },
+        "format": "jpg",
+        "check": "2024-07-12T09:36:41",
+        "daten": {
+          "pfad": "https:\/\/storage.justimmo.at\/thumb\/1ab9cacc14f66bbe8ceb90b72ba7360b\/Fc_Lb_M2t59qT2FQymUn0vCjHsiuF.png_fm_h1080_w1920\/3NEdEXgu4dXqgxYdK6K8Kh.jpg"
+        }
+      },
+      {
+        "@attributes": {
+          "location": "REMOTE",
+          "gruppe": "BILD"
+        },
+        "format": "jpg",
+        "check": "2024-07-12T09:36:38",
+        "daten": {
+          "pfad": "https:\/\/storage.justimmo.at\/thumb\/0fa0c8f9927abba165898bfa240733af\/Fc_Lb_M2t59qT2FQymUn0vCjHsiuF.png_fm_h1080_w1920\/2q32ZvKaKHteGjcdAqa64c.jpg"
+        }
+      },
+      {
+        "@attributes": {
+          "location": "REMOTE",
+          "gruppe": "BILD"
+        },
+        "format": "jpg",
+        "check": "2024-07-12T09:36:39",
+        "daten": {
+          "pfad": "https:\/\/storage.justimmo.at\/thumb\/ad5c983ce607aaf9853e8dce7b171895\/Fc_Lb_M2t59qT2FQymUn0vCjHsiuF.png_fm_h1080_w1920\/ymvyP7VR14w7F2rgjpZQ0.jpg"
+        }
+      },
+      {
+        "@attributes": {
+          "location": "REMOTE",
+          "gruppe": "BILD"
+        },
+        "format": "jpg",
+        "check": "2024-08-29T21:37:39",
+        "daten": {
+          "pfad": "https:\/\/storage.justimmo.at\/thumb\/6c5629627dab4040a74de7f6859b8e21\/Fc_Lb_M2t59qT2FQymUn0vCjHsiuF.png_fm_h1080_w1920\/6cfTAFeIhbR2UcUFYtQMUQ.jpg"
+        }
+      },
+      {
+        "@attributes": {
+          "location": "REMOTE",
+          "gruppe": "BILD"
+        },
+        "format": "jpg",
+        "check": "2024-07-12T09:36:37",
+        "daten": {
+          "pfad": "https:\/\/storage.justimmo.at\/thumb\/b84ccac61524ff77f5c84c2101ddc4f8\/Fc_Lb_M2t59qT2FQymUn0vCjHsiuF.png_fm_h1080_w1920\/nA3t5sRHx9rNVIPsZy5mE.jpg"
+        }
+      },
+      {
+        "@attributes": {
+          "location": "REMOTE",
+          "gruppe": "BILD"
+        },
+        "format": "jpg",
+        "check": "2024-07-12T09:36:35",
+        "daten": {
+          "pfad": "https:\/\/storage.justimmo.at\/thumb\/e9ef32c2b68b082bc130bb332adfc0f2\/Fc_Lb_M2t59qT2FQymUn0vCjHsiuF.png_fm_h1080_w1920\/4jmynSuirSrao4c3MHNoRc.jpg"
+        }
+      },
+      {
+        "@attributes": {
+          "location": "REMOTE",
+          "gruppe": "BILD"
+        },
+        "format": "jpg",
+        "check": "2024-07-12T09:36:35",
+        "daten": {
+          "pfad": "https:\/\/storage.justimmo.at\/thumb\/4af2331ef579d3c215791f62f6479ab0\/Fc_Lb_M2t59qT2FQymUn0vCjHsiuF.png_fm_h1080_w1920\/6lW9RPHaOvDIAkS3zPlkoD.jpg"
+        }
+      },
+      {
+        "@attributes": {
+          "location": "REMOTE",
+          "gruppe": "BILD"
+        },
+        "format": "jpg",
+        "check": "2024-07-12T09:36:40",
+        "daten": {
+          "pfad": "https:\/\/storage.justimmo.at\/thumb\/695eb1f9405b988faf183410d009a09f\/Fc_Lb_M2t59qT2FQymUn0vCjHsiuF.png_fm_h1080_w1920\/4Rt2FDzf2OjR8JoKhJhrhP.jpg"
+        }
+      },
+      {
+        "@attributes": {
+          "location": "REMOTE",
+          "gruppe": "BILD"
+        },
+        "format": "jpg",
+        "check": "2024-07-12T09:36:36",
+        "daten": {
+          "pfad": "https:\/\/storage.justimmo.at\/thumb\/137bb0bf6233cc85fbee4b2c173bda61\/Fc_Lb_M2t59qT2FQymUn0vCjHsiuF.png_fm_h1080_w1920\/4wlQw6A8u4Jbh0nRsfujNV.jpg"
+        }
+      },
+      {
+        "@attributes": {
+          "location": "REMOTE",
+          "gruppe": "GRUNDRISS"
+        },
+        "format": "jpg",
+        "check": "2024-08-14T08:24:04",
+        "daten": {
+          "pfad": "https:\/\/storage.justimmo.at\/thumb\/980abb3d0cf88e17fcde44642bec79a2\/Fc_Lb_M2t59qT2FQymUn0vCjHsiuF.png_fm_h1080_w1920\/1LbBnzv3VEtqzQgrHjh192.jpg"
+        }
+      }
+    ]
+  },
+  "verwaltung_objekt": {
+    "objektadresse_freigeben": "1",
+    "verfuegbar_ab": "Sommer 2025",
+    "user_defined_simplefield": [
+      "aktiv",
+      "5",
+      "2",
+      "https:\/\/apps.justimmo.at\/website\/objekt\/OBGC202407161314450569afdc69101"
+    ]
+  },
+  "verwaltung_techn": {
+    "objektnr_intern": "13707754",
+    "objektnr_extern": "1711801",
+    "aktion": {
+      "@attributes": {
+        "aktionart": "CHANGE"
+      }
+    },
+    "openimmo_obid": "OBGC202407161314450569afdc69101",
+    "stand_vom": "2025-04-23",
+    "gruppen_kennung": "OBGC20240712113256259989e78662d",
+    "sprache": "de-DE",
+    "user_defined_simplefield": [
+      "1",
+      "residential_subunit",
+      "94",
+      "2025-04-23 16:05:45"
+    ]
+  }
+}

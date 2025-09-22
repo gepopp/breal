@@ -22,19 +22,19 @@
     <form wire:submit class="mt-12 !bg-technik-200/25 p-4 rounded">
         <div @class(['grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4'])>
             <div>
-                <flux:radio.group wire:model.live="filters.nutzungsart" label="Nutzungsart">
-                    @foreach ($arten as $art )
-                        <flux:radio value="{{ $art->nutzungsart }}" label="{{ ucfirst( strtolower($art->nutzungsart ) ) }}"/>
+                <flux:checkbox.group wire:model.live="filters.nutzungsart" label="Nutzungsart">
+                    @foreach ($typen as $art )
+                        <flux:checkbox value="{{ $art->nutzungsart }}" label="{{ ucfirst( strtolower($art->nutzungsart ) ) }}" />
                     @endforeach
-                </flux:radio.group>
+                </flux:checkbox.group>
             </div>
 
             <div>
-                <flux:radio.group wire:model.live="filters.typ" label="Miete oder Kauf">
+                <flux:checkbox.group wire:model.live="filters.typ" label="Miete oder Kauf">
                     @foreach ($typen as $art )
-                        <flux:radio value="{{ $art->vermarktungsart }}" label="{{ ucfirst( strtolower( $art->vermarktungsart )) }}"/>
+                        <flux:checkbox value="{{ $art->vermarktungsart }}" label="{{ ucfirst( strtolower( $art->vermarktungsart )) }}" />
                     @endforeach
-                </flux:radio.group>
+                </flux:checkbox.group>
             </div>
 
             <div>

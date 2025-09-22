@@ -51,8 +51,8 @@ class Immobiliensuche extends Component
     {
         return [
             'filters'             => 'array',
-            'filters.nutzungsart' => 'nullable|string',
-            'filters.typ'         => 'nullable|string',
+            'filters.nutzungsart' => 'nullable|array',
+            'filters.typ'         => 'nullable|array',
             'filters.rooms_min'   => 'nullable|integer|min:' . $this->min_rooms,
             'filters.rooms_max'   => 'nullable|integer|min:' . $this->min_rooms . '|max:' . $this->max_rooms . '|gt:filters.rooms_min',
             'filters.price_min'   => 'nullable|integer|min:' . $this->min_price . '|max:' . $this->max_price . '|gt:filters.price_min',
@@ -109,11 +109,11 @@ class Immobiliensuche extends Component
             ->tap(fn($query) => $this->sortBy ? $query->orderBy($this->sortBy, $this->sortDirection) : $query);
 
         if ($this->filters['nutzungsart']) {
-            $query->where('nutzungsart', $this->filters['nutzungsart']);
+            $query->whereIn('nutzungsart', $this->filters['nutzungsart']);
         }
 
         if ($this->filters['typ']) {
-            $query->where('vermarktungsart', $this->filters['typ']);
+            $query->whereIn('vermarktungsart', $this->filters['typ']);
         }
 
         if ($this->filters['rooms_min']) {
