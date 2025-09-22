@@ -76,8 +76,14 @@ class Immobiliensuche extends Component
         $this->min_space = (int)DB::table('realties')->min('wohnflaeche');
         $this->max_space = (int)DB::table('realties')->max('wohnflaeche');
 
-        $this->filters['nutzungsart'] = array_map(fn($item) => $item['nutzungsart'], $this->arten);
-        $this->filters['typ'] = array_map(fn($item) => $item['vermarktungsart'], $this->typen);
+
+        foreach ($this->arten as $value) {
+            $this->filters['nutzungsart'][] = $value->nutzungsart;
+        }
+
+        foreach ($this->typen as $value) {
+            $this->filters['typ'][] = $value->vermarktungsart;
+        }
     }
 
 
