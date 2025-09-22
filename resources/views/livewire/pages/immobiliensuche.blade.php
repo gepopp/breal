@@ -23,7 +23,7 @@
         <div @class(['grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4'])>
             <div>
                 <flux:checkbox.group wire:model.live="filters.nutzungsart" label="Nutzungsart">
-                    @foreach ($typen as $art )
+                    @foreach ($arten as $art )
                         <flux:checkbox value="{{ $art->nutzungsart }}" label="{{ ucfirst( strtolower($art->nutzungsart ) ) }}" />
                     @endforeach
                 </flux:checkbox.group>
