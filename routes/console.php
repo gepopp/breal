@@ -10,7 +10,7 @@ Artisan::command('inspire', function () {
 
 Schedule::call(function () {
     \App\Justimmo\Importer::import();
-})->dailyAt('07:00');
+})->twiceDaily(['07:00', '19:00']);
 
 Schedule::call(function () {
     (new \App\Http\Controllers\SitemapController())->generate();
