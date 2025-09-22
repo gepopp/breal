@@ -5,7 +5,8 @@ window.loader = new Loader({
     libraries: ['marker'],
 });
 
-
+import Swiper from 'swiper';
+window.Swiper = Swiper;
 
 import Fuse from 'fuse.js';
 window.Fuse = Fuse;
