@@ -35,7 +35,7 @@ class Immobiliensuche extends Component
 
     #[Url]
     public array $filters = [
-        'nutzungsart' => ['WOHNEN', 'KAUF'],
+        'nutzungsart' => [],
         'typ'         => [],
         'rooms_min'   => null,
         'rooms_max'   => null,
@@ -66,8 +66,8 @@ class Immobiliensuche extends Component
 
     public function mount()
     {
-        $this->arten =  DB::table('realties')->select('nutzungsart')->distinct()->get()->toArray();
-        $this->typen =  DB::table('realties')->select('vermarktungsart')->distinct()->get()->toArray();
+        $this->arten = DB::table('realties')->select('nutzungsart')->distinct()->get()->toArray();
+        $this->typen = DB::table('realties')->select('vermarktungsart')->distinct()->get()->toArray();
         $this->plz = DB::table('realties')->select('plz', 'ort')->distinct()->get()->toArray();
         $this->min_rooms = DB::table('realties')->min('zimmer');
         $this->max_rooms = DB::table('realties')->max('zimmer');
@@ -77,13 +77,13 @@ class Immobiliensuche extends Component
         $this->max_space = (int)DB::table('realties')->max('wohnflaeche');
 
 
-//        foreach ($this->arten as $value) {
-//            $this->filters['nutzungsart'][] = $value->nutzungsart;
-//        }
-//
-//        foreach ($this->typen as $value) {
-//            $this->filters['typ'][] = $value->vermarktungsart;
-//        }
+        foreach ($this->arten as $value) {
+            $this->filters['nutzungsart'][] = $value->nutzungsart;
+        }
+
+        foreach ($this->typen as $value) {
+            $this->filters['typ'][] = $value->vermarktungsart;
+        }
     }
 
 
@@ -149,7 +149,7 @@ class Immobiliensuche extends Component
             $query->where('wohnflaeche', '<=', $this->filters['space_max']);
         }
 
-        if(count($this->filters['plz']) > 0){
+        if (count($this->filters['plz']) > 0) {
             $query->whereIn('plz', $this->filters['plz']);
         }
 
