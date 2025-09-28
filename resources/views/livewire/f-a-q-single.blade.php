@@ -7,6 +7,10 @@
             {!! $faq->question !!}
         </x-headings>
 
+        @if($faq->hasMedia('*'))
+            {{ $faq->getFirstMedia('*') }}
+        @endif
+
 
         <div class="flex flex-col md:flex-row mt-12">
             <div class="w-full md:w-3/4 prose" data-aos="fade-up">
