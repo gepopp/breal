@@ -38,7 +38,6 @@ class QuestionResource extends Resource
                     ->downloadable()
                     ->responsiveImages()
                     ->rules(['nullable', 'image', 'max:2024'])
-                    ->required()
                     ->preserveFilenames(),
 
                 Forms\Components\TextInput::make('order')
