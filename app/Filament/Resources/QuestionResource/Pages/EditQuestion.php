@@ -14,6 +14,9 @@ class EditQuestion extends EditRecord
     {
         return [
             Actions\DeleteAction::make(),
+            Actions\Action::make('ansehen')
+            ->openUrlInNewTab()
+            ->url(fn($record) => route('faq.single', $record->slug))
         ];
     }
 }
