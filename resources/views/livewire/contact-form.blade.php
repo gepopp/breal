@@ -88,6 +88,7 @@
                         @if($address)
                             <flux:input wire:model="data.address" label="Adresse" required badge="Pflichtfeld"/>
                         @endif
+                        <flux:input wire:model="data.subject" label="Betreff" required badge="Pflichtfeld"/>
                         <flux:editor wire:model="data.message" label="Nachricht" required badge="Pflichtfeld"/>
 
                     </div>

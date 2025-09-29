@@ -13,6 +13,8 @@ class FacilityManagment extends Component
 
     public function render( LandingpageHausverwaltung $settings)
     {
-        return view('livewire.landing.facility-managment', compact('settings'));
+        $description = 'Hausverwaltung, der Sie vertrauen können: Mit Kompetenz, Nachhaltigkeit & persönlicher Betreuung. be real kümmert sich um Ihre Zinshäuser, Wohnungseigentum & Gewerbeimmobilien als wäre es unser eigenes.';
+        return view('livewire.landing.facility-managment', compact('settings', 'description'))
+            ->title('be real Hausverwaltung in Wien mit Weitblick & Persönlichkeit ');
     }
 }

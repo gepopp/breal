@@ -30,6 +30,9 @@ class Leistungen extends Component
     {
         $text = strtolower( $this->company ) . '_leistungen_introtext';
         $preparedText = $this->prepareText($pagesSettings->$text);
-        return view('livewire.hausverwaltung.leistungen', compact('pagesSettings', 'preparedText'));
+        $description = 'Von allgemeiner Immobilienverwaltung über WEG- und Gewerbeimmobilienbetreuung bis zum Baumanagement: be real bietet maßgeschneiderte Services für Eigentümer & Investoren in Wien & ganz Österreich.';
+        return view('livewire.hausverwaltung.leistungen',
+            compact('pagesSettings', 'preparedText', 'description'))
+            ->title('Unsere Leistungen | be real – Hausverwaltungen, WEG, Bau- & Gewerbeobjekte');
     }
 }

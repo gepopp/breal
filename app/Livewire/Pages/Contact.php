@@ -25,7 +25,8 @@ class Contact extends Component
 
     public function render( PagesSettings $pagesSettings )
     {
+        $description ='Vereinbaren Sie ein Beratungsgespräch oder fordern Sie Ihr individuelles Angebot an. be real Immobilienmanagement – persönlich, verlässlich & serviceorientiert.';
         $preparedText = $this->prepareText();
-        return view('livewire.pages.contact', compact('pagesSettings', 'preparedText'));
+        return view('livewire.pages.contact', compact('pagesSettings', 'preparedText', 'description'))->title('Kontakt | be real Immobilien – Wir sind für Sie da in Wien');
     }
 }

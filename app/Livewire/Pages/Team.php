@@ -15,17 +15,19 @@ class Team extends Component
 
     public string $text = '';
 
-    public function mount( PagesSettings $pagesSettings)
+    public function mount(PagesSettings $pagesSettings)
     {
         $this->company = CompaniesEnum::getByRoute();
 
         $this->text = $pagesSettings->team_introtext;
     }
 
-    public function render( PagesSettings $pagesSettings )
+    public function render(PagesSettings $pagesSettings)
     {
         $preparedText = $this->prepareText();
-
-        return view('livewire.pages.team', compact('pagesSettings', 'preparedText'));
+        $description = 'Lernen Sie das Team von be real kennen: erfahrene Hausverwalter:innen, Jurist:innen & Immobilienexpert:innen, die mit Leidenschaft & Klarheit für Ihre Immobilie arbeiten.';
+        return view('livewire.pages.team',
+            compact('pagesSettings', 'preparedText', 'description'))
+            ->title('Unser Team | be real Immobilien – Persönlich & kompetent für Sie da');
     }
 }

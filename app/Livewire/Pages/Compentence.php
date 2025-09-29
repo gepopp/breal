@@ -19,6 +19,8 @@ class Compentence extends Component
 
     public function render()
     {
-        return view('livewire.pages.compentence');
+        return view('livewire.pages.compentence',
+            ['description' => $this->competence->description])
+            ->title($this->competence->name);
     }
 }

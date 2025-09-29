@@ -17,7 +17,7 @@ class Vacancies extends Component
 
     public string $text = '';
 
-    public function mount( PagesSettings $pagesSettings)
+    public function mount(PagesSettings $pagesSettings)
     {
         $this->company = CompaniesEnum::getByRoute();
 
@@ -25,12 +25,13 @@ class Vacancies extends Component
     }
 
 
-
     public function render(PagesSettings $pagesSettings)
     {
         $preparedText = $this->prepareText();
-        $vacancies = JobVacancy::where('from', '<',  now())->where('to', '>', now())->get();
-
-        return view('livewire.pages.vacancies', compact('pagesSettings', 'preparedText', 'vacancies'));
+        $vacancies = JobVacancy::where('from', '<', now())->where('to', '>', now())->get();
+        $description = 'Gestalten Sie mit uns die Zukunft der Immobilienverwaltung. be real bietet Jobs mit Verantwortung, Weiterentwicklung & Teamgeist – jetzt bewerben & Teil unseres Teams werden.';
+        return view('livewire.pages.vacancies',
+            compact('pagesSettings', 'preparedText', 'vacancies', 'description'))
+            ->title('Karriere bei be real Immobilien | Arbeiten mit Sinn & Perspektive');
     }
 }

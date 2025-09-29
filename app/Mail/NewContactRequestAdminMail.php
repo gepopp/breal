@@ -30,7 +30,7 @@ class NewContactRequestAdminMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Neue Kontaktanfrage eingegangen',
+            subject: $this->contactRequest->subject ?? 'Neue Kontaktanfrage eingegangen',
         );
     }
 

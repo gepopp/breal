@@ -29,6 +29,7 @@ class ContactForm extends Component
 
 
     public array $data = [
+        'subject'   => '',
         'firstname' => '',
         'lastname'  => '',
         'email'     => '',
@@ -44,6 +45,7 @@ class ContactForm extends Component
     {
         if (app()->environment('local')) {
             $this->data = [
+                'subject'   => 'Test-Betreff',
                 'firstname' => 'Max',
                 'lastname'  => 'Mustermann',
                 'email'     => 'gerhard@poppgerhard.at',
@@ -60,6 +62,7 @@ class ContactForm extends Component
     public function getValidationAttributes()
     {
         return [
+            'data.subject'   => 'Betreff',
             'data.firstname' => 'Vorname',
             'data.lastname'  => 'Nachname',
             'data.email'     => 'E-Mail-Adresse',
@@ -76,6 +79,7 @@ class ContactForm extends Component
     public function rules()
     {
         return [
+            'data.subject'   => ['required', 'string', 'max:255'],
             'data.firstname' => ['required', 'string', 'max:255'],
             'data.lastname'  => ['required', 'string', 'max:255'],
             'data.email'     => ['required', 'string', 'email:rfc,dns', 'max:255'],
@@ -110,7 +114,7 @@ class ContactForm extends Component
          */
         foreach ($data['uploads'] as $upload) {
             $contents = file_get_contents($upload['path']);
-            Storage::disk('public')->put( $upload['name'], $contents );
+            Storage::disk('public')->put($upload['name'], $contents);
 
             $request->addMediaFromDisk($upload['name'], 'public')
                 ->toMediaCollection('uploads', 'local');

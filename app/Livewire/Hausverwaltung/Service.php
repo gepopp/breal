@@ -25,9 +25,9 @@ class Service extends Component
         $this->text = $pagesSettings->services_introtext;
         $this->services = \App\Models\Service::all()->toArray();
 
-        if(request()->has('tab')){
+        if (request()->has('tab')) {
             $this->tab = request()->get('tab');
-        }else{
+        } else {
             $this->tab = $this->services[0]['slug'];
         }
 
@@ -37,7 +37,8 @@ class Service extends Component
     public function render(PagesSettings $pagesSettings)
     {
         $preparedText = $this->prepareText();
-
-        return view('livewire.hausverwaltung.service', compact('pagesSettings', 'preparedText'));
+        $description = 'Einfach, schnell & digital: Nutzen Sie unser Serviceportal für Schadensmeldungen, Dokumente & Kommunikation. be real macht Immobilienverwaltung transparent & effizient.';
+        return view('livewire.hausverwaltung.service', compact('pagesSettings', 'preparedText', 'description'))
+            ->title('Service & Kundenportal | be real Immobilienmanagement Wien');
     }
 }
