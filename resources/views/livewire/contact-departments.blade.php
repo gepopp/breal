@@ -16,9 +16,7 @@
 
     <div @class(["mt-24" => $withIntro])>
         @foreach($departments as $department)
-            @if($department->department?->count())
-                continue;
-            @endif
+            @continue($department->department?->count())
             <div @class(['mb-12']) data-aos="fade">
                 <h3 @class([
                     "uppercase font-bold text-3xl",
