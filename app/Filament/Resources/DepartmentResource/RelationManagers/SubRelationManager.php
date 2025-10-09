@@ -48,7 +48,7 @@ class SubRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),
-                Tables\Actions\AttachAction::make()
+                Tables\Actions\AssociateAction::make()
             ])
             ->actions([
                 Tables\Actions\DeleteAction::make(),
@@ -59,6 +59,7 @@ class SubRelationManager extends RelationManager
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ])
+            ->reorderable('order')
             ->modifyQueryUsing(fn($query) => $query->withoutGlobalScopes(['main']));
     }
 
