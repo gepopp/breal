@@ -33,7 +33,7 @@ class Department extends Model
 
     public function sub(): HasMany
     {
-        return $this->hasMany(Department::class, 'id', 'department_id' );
+        return $this->hasMany(Department::class );
     }
 
 
