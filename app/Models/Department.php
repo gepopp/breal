@@ -39,7 +39,7 @@ class Department extends Model
 
     public function department(): BelongsTo
     {
-        return $this->belongsTo(Department::class, 'department_id', 'id');
+        return $this->belongsTo(Department::class, 'id', 'department_id');
     }
 
     public function contacts(): HasMany
