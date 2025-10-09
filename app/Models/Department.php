@@ -33,13 +33,13 @@ class Department extends Model
 
     public function sub(): HasMany
     {
-        return $this->hasMany(Department::class, 'department_id', 'id' );
+        return $this->hasMany(Department::class, 'id', 'department_id' );
     }
 
 
     public function department(): BelongsTo
     {
-        return $this->belongsTo(Department::class, 'id', 'department_id');
+        return $this->belongsTo(Department::class, 'department_id', 'id');
     }
 
     public function contacts(): HasMany
