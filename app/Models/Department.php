@@ -37,7 +37,7 @@ class Department extends Model
     }
 
 
-    public function main(): BelongsTo
+    public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class, 'department_id', 'id');
     }

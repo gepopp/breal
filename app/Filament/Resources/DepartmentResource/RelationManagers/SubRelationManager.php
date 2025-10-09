@@ -48,7 +48,7 @@ class SubRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),
-                Tables\Actions\AssociateAction::make()
+                Tables\Actions\AttachAction::make()
             ])
             ->actions([
                 Tables\Actions\DeleteAction::make(),
