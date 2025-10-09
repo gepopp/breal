@@ -8,7 +8,7 @@
     </div>
     <div>
         <h5 @class([
-        "text-xl font-semibold",
+        "text-xl dark:text-white font-semibold",
         "text-logo-950" => !Route::is('technik.*', 'makler.*'),
         "text-technik-950" => Route::is('technik.*'),
         "text-makler-950" => Route::is('makler.*'),
