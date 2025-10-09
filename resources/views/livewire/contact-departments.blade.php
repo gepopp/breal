@@ -16,7 +16,7 @@
 
     <div @class(["mt-24" => $withIntro])>
         @foreach($departments as $department)
-            @if($department->department?->count > 0)
+            @if($department->department?->count())
                 continue;
             @endif
             <div @class(['mb-12']) data-aos="fade">
