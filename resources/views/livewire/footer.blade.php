@@ -44,9 +44,9 @@ state();
             <p class="!mb-0">Telefon: +43 1 535 36 19</p>
             <p class="!mb-0">Fax: +43 1 535 64 28</p>
             <p class="!mb-0">E-Mail: <a href="mail:office@bereal-immobilien.at">office@bereal-immobilien.at</a></p>
-            <p class="!mb-0">MO-DO 08:00-16:00
+            <p class="!mb-0">Mo-Do: 08:00-16:00
                 <br>
-                FR 08:00-12:00</p>
+                Fr: 08:00-12:00</p>
         </div>
     </div>
 
