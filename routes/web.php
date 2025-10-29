@@ -172,3 +172,11 @@ Route::get('mail-test', function () {
 
 
 Route::get('sitemap', [\App\Http\Controllers\SitemapController::class, 'generate']);
+
+Route::get('storage-test', function (){
+    \Illuminate\Support\Facades\Storage::disk('s3')->put('test.txt', 'test');
+    $url = \Illuminate\Support\Facades\Storage::disk('s3')->url('test.txt');
+
+    dump($url);
+
+});
