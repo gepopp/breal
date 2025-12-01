@@ -377,8 +377,17 @@ class MediaMigrationService
                     $responsivePath = $baseDir . '/' . $filename;
                     $oldPaths[] = $responsivePath;
 
+                    // Construct full URL if it's not already complete
+                    if (!preg_match('/^https?:\/\//', $url)) {
+                        // URL is relative, construct the full URL
+                        $fullUrl = Storage::disk($this->sourceDisk)->url($responsivePath);
+                    } else {
+                        // URL is already complete
+                        $fullUrl = $url;
+                    }
+
                     // Download and upload responsive image via URL
-                    $this->migrateFileViaUrl($url, $responsivePath, "responsive-{$conversionName}");
+                    $this->migrateFileViaUrl($fullUrl, $responsivePath, "responsive-{$conversionName}");
                     $count++;
                 } catch (\Exception $e) {
                     $this->output("    ⚠ Failed to migrate responsive image '{$filename}': {$e->getMessage()}", 'warning');
