@@ -137,6 +137,12 @@ class MediaMigrationService
                 }
             }
 
+            // Migrate responsive images
+            $responsiveCount = $this->migrateResponsiveImages($media, $oldPaths);
+            if ($responsiveCount > 0) {
+                $this->output("  → Migrated {$responsiveCount} responsive image(s)");
+            }
+
             // Update database record (skip in test mode)
             if ($testMode) {
                 $this->output("  → [TEST MODE] Skipping database update", 'warning');
@@ -306,6 +312,99 @@ class MediaMigrationService
         $bytes /= pow(1024, $pow);
 
         return round($bytes, 2) . ' ' . $units[$pow];
+    }
+
+    /**
+     * Migrate responsive images for a media item
+     */
+    protected function migrateResponsiveImages(Media $media, array &$oldPaths): int
+    {
+        $responsiveImages = $media->responsive_images;
+        $count = 0;
+
+        if (empty($responsiveImages)) {
+            return 0;
+        }
+
+        foreach ($responsiveImages as $conversionName => $responsiveImageData) {
+            if (!isset($responsiveImageData['urls']) || empty($responsiveImageData['urls'])) {
+                continue;
+            }
+
+            // Determine the base directory for this conversion
+            if ($conversionName === 'media_library_original') {
+                $baseDir = $media->id . '/responsive-images';
+            } else {
+                $baseDir = $media->id . '/conversions/responsive-images';
+            }
+
+            // Migrate each responsive image file
+            foreach ($responsiveImageData['urls'] as $url) {
+                try {
+                    // Extract filename from URL
+                    $filename = basename(parse_url($url, PHP_URL_PATH));
+                    $responsivePath = $baseDir . '/' . $filename;
+                    $oldPaths[] = $responsivePath;
+
+                    // Download and upload responsive image via URL
+                    $this->migrateFileViaUrl($url, $responsivePath, "responsive-{$conversionName}");
+                    $count++;
+                } catch (\Exception $e) {
+                    $this->output("    ⚠ Failed to migrate responsive image '{$filename}': {$e->getMessage()}", 'warning');
+                }
+            }
+        }
+
+        return $count;
+    }
+
+    /**
+     * Migrate a file using direct URL (for responsive images)
+     */
+    protected function migrateFileViaUrl(string $url, string $targetPath, string $fileType): void
+    {
+        $targetPath = ltrim($targetPath, '/');
+
+        $this->output("    📍 Responsive image ({$fileType}): {$targetPath}");
+        $this->output("    🌐 Download URL: {$url}");
+
+        try {
+            // Download from URL
+            $this->output("    ↓ Downloading responsive image...");
+            $fileContents = @file_get_contents($url);
+
+            if ($fileContents === false) {
+                $error = error_get_last();
+                throw new \Exception("Failed to download: " . ($error['message'] ?? 'Unknown error'));
+            }
+
+            if (empty($fileContents)) {
+                throw new \Exception("Downloaded file is empty");
+            }
+
+            $downloadedSize = strlen($fileContents);
+            $this->output("    ✓ Downloaded: " . $this->formatBytes($downloadedSize));
+
+            // Upload to target disk
+            $this->output("    ↑ Uploading to {$this->targetDisk}...");
+
+            $uploadResult = Storage::disk($this->targetDisk)->put($targetPath, $fileContents, 'public');
+
+            if ($uploadResult === false) {
+                throw new \Exception("Storage::put() returned false");
+            }
+
+            // Verify upload
+            if (!Storage::disk($this->targetDisk)->exists($targetPath)) {
+                throw new \Exception("Upload verification failed");
+            }
+
+            $this->output("    ✓✓ Responsive image uploaded successfully");
+
+        } catch (\Exception $e) {
+            $this->output("    ✗✗ Failed: {$e->getMessage()}", 'error');
+            throw $e;
+        }
     }
 
     /**
