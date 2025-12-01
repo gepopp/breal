@@ -98,13 +98,41 @@ class MediaMigrationService
         }
 
         try {
-            // Get the relative path from the disk root (e.g., "206/filename.jpg")
-            // Spatie stores files as: {media_id}/{file_name}
-            $relativePath = $media->id . '/' . $media->file_name;
+            // Store old paths before updating database
+            $oldPaths = [];
 
-            // Migrate original file only
+            // Get the relative path for original file
+            $relativePath = $media->id . '/' . $media->file_name;
+            $oldPaths[] = $relativePath;
+
+            // Migrate original file
             $this->output("  → Migrating original file...");
             $this->migrateFile($relativePath, $relativePath, $media);
+
+            // Migrate conversions
+            $conversions = $media->getGeneratedConversions();
+            if (!empty($conversions)) {
+                $conversionCount = count(array_filter($conversions));
+                if ($conversionCount > 0) {
+                    $this->output("  → Migrating {$conversionCount} conversion(s)...");
+
+                    foreach ($conversions as $conversionName => $generated) {
+                        if ($generated) {
+                            try {
+                                // Get conversion file name from media collection
+                                $conversionFileName = $media->getPath($conversionName);
+                                // Extract relative path (remove any absolute path parts)
+                                $conversionPath = $media->id . '/conversions/' . pathinfo($conversionFileName, PATHINFO_BASENAME);
+                                $oldPaths[] = $conversionPath;
+
+                                $this->migrateFile($conversionPath, $conversionPath, $media, $conversionName);
+                            } catch (\Exception $e) {
+                                $this->output("    ⚠ Failed to migrate conversion '{$conversionName}': {$e->getMessage()}", 'warning');
+                            }
+                        }
+                    }
+                }
+            }
 
             // Update database record (skip in test mode)
             if ($testMode) {
@@ -117,12 +145,14 @@ class MediaMigrationService
                 ]);
             }
 
-            // Delete old file if requested (skip in test mode)
+            // Delete old files if requested (skip in test mode)
             if ($deleteOldFiles && !$testMode) {
-                $this->output("  → Deleting old file from source disk...");
-                $this->deleteOldFile($relativePath);
+                $this->output("  → Deleting old files from source disk...");
+                foreach ($oldPaths as $oldPath) {
+                    $this->deleteOldFile($oldPath);
+                }
             } elseif ($deleteOldFiles && $testMode) {
-                $this->output("  → [TEST MODE] Would delete old file from source disk", 'warning');
+                $this->output("  → [TEST MODE] Would delete old files from source disk", 'warning');
             }
 
             if (!$testMode) {
@@ -145,14 +175,21 @@ class MediaMigrationService
         $sourcePath = ltrim($sourcePath, '/');
         $targetPath = ltrim($targetPath, '/');
 
-        // Get URL for the file - use Media's getUrl() method if media object is provided
-        if ($media) {
+        $fileType = $conversionName ? "conversion '{$conversionName}'" : 'original';
+
+        // Get URL for the file
+        if ($media && $conversionName) {
+            // Get conversion URL
+            $fileUrl = $media->getUrl($conversionName);
+        } elseif ($media) {
+            // Get original file URL
             $fileUrl = $media->getUrl();
         } else {
+            // Fallback to Storage URL
             $fileUrl = Storage::disk($this->sourceDisk)->url($sourcePath);
         }
 
-        $this->output("    📍 Source path: {$sourcePath}");
+        $this->output("    📍 Source path ({$fileType}): {$sourcePath}");
         $this->output("    🌐 Download URL: {$fileUrl}");
 
         // Check if file exists
