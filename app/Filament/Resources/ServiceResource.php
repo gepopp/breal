@@ -55,6 +55,8 @@ class ServiceResource extends Resource
                     ->label('Dokumente')
                     ->schema([
                         FileUpload::make('path')
+                            ->disk('s3')
+                            ->visibility('public')
                             ->required()
                             ->downloadable()
                             ->preserveFilenames()
