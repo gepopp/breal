@@ -175,7 +175,7 @@ Route::get('sitemap', [\App\Http\Controllers\SitemapController::class, 'generate
 
 Route::get('storage-test', function (){
 
-    $get = \Illuminate\Support\Facades\Storage::disk('public')->get('1/job-default.jpg');
+    $get = \Illuminate\Support\Facades\Storage::disk('public')->url('1/job-default.jpg');
     dd($get);
 
     $put = \Illuminate\Support\Facades\Storage::disk('s3')->put('test2.txt', 'test2');
