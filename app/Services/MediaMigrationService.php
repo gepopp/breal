@@ -52,6 +52,9 @@ class MediaMigrationService
         $this->errorCount = 0;
         $this->errors = [];
 
+        // Validate disk configuration
+        $this->validateDiskConfiguration();
+
         $media = Media::where('disk', $this->sourceDisk)->get();
 
         $modeText = $testMode ? ' [TEST MODE - No database changes]' : '';
@@ -180,16 +183,49 @@ class MediaMigrationService
             $this->output("    ↑ Uploading to {$this->targetDisk} disk at path: {$targetPath}");
 
             try {
+                // Get disk configuration for debugging
+                $diskConfig = config("filesystems.disks.{$this->targetDisk}");
+                $this->output("    📋 Target disk driver: " . ($diskConfig['driver'] ?? 'unknown'));
+
+                if (isset($diskConfig['bucket'])) {
+                    $this->output("    📦 S3 Bucket: " . $diskConfig['bucket']);
+                }
+                if (isset($diskConfig['region'])) {
+                    $this->output("    🌍 S3 Region: " . $diskConfig['region']);
+                }
+
                 $uploadResult = Storage::disk($this->targetDisk)->put($targetPath, $fileContents, 'public');
 
                 if ($uploadResult === false) {
-                    throw new \Exception("Storage::put() returned false");
+                    throw new \Exception("Storage::put() returned false - check S3 credentials and permissions");
                 }
 
                 $this->output("    ✓ Storage::put() returned success");
 
             } catch (\Exception $uploadException) {
-                $this->output("    ✗ Upload failed: " . $uploadException->getMessage(), 'error');
+                // Detailed error output
+                $this->output("    ✗ Upload failed!", 'error');
+                $this->output("    ✗ Error type: " . get_class($uploadException), 'error');
+                $this->output("    ✗ Error message: " . $uploadException->getMessage(), 'error');
+                $this->output("    ✗ Error code: " . $uploadException->getCode(), 'error');
+
+                // Check for AWS-specific errors
+                if (method_exists($uploadException, 'getAwsErrorCode')) {
+                    $this->output("    ✗ AWS Error Code: " . $uploadException->getAwsErrorCode(), 'error');
+                }
+
+                if (method_exists($uploadException, 'getStatusCode')) {
+                    $this->output("    ✗ HTTP Status Code: " . $uploadException->getStatusCode(), 'error');
+                }
+
+                // Show stack trace for debugging
+                $this->output("    ✗ Stack trace:", 'error');
+                $trace = $uploadException->getTraceAsString();
+                $traceLines = explode("\n", $trace);
+                foreach (array_slice($traceLines, 0, 5) as $line) {
+                    $this->output("      " . $line, 'error');
+                }
+
                 throw new \Exception("Failed to upload to S3: " . $uploadException->getMessage());
             }
 
@@ -277,5 +313,77 @@ class MediaMigrationService
             'errors' => $this->errorCount,
             'error_details' => $this->errors,
         ];
+    }
+
+    /**
+     * Validate disk configuration before migration
+     */
+    protected function validateDiskConfiguration(): void
+    {
+        $this->output("\n🔧 Validating disk configuration...");
+
+        // Check source disk
+        $sourceConfig = config("filesystems.disks.{$this->sourceDisk}");
+        if (!$sourceConfig) {
+            throw new \Exception("Source disk '{$this->sourceDisk}' is not configured in config/filesystems.php");
+        }
+        $this->output("  ✓ Source disk '{$this->sourceDisk}' configured (driver: {$sourceConfig['driver']})");
+
+        // Check target disk
+        $targetConfig = config("filesystems.disks.{$this->targetDisk}");
+        if (!$targetConfig) {
+            throw new \Exception("Target disk '{$this->targetDisk}' is not configured in config/filesystems.php");
+        }
+        $this->output("  ✓ Target disk '{$this->targetDisk}' configured (driver: {$targetConfig['driver']})");
+
+        // Validate S3 configuration if target is S3
+        if ($targetConfig['driver'] === 's3') {
+            $this->output("\n  📦 S3 Configuration:");
+
+            $missingConfig = [];
+
+            if (empty($targetConfig['key'])) {
+                $missingConfig[] = 'AWS_ACCESS_KEY_ID';
+            } else {
+                $keyPreview = substr($targetConfig['key'], 0, 4) . '...' . substr($targetConfig['key'], -4);
+                $this->output("    • Access Key: {$keyPreview}");
+            }
+
+            if (empty($targetConfig['secret'])) {
+                $missingConfig[] = 'AWS_SECRET_ACCESS_KEY';
+            } else {
+                $this->output("    • Secret Key: [CONFIGURED]");
+            }
+
+            if (empty($targetConfig['region'])) {
+                $missingConfig[] = 'AWS_DEFAULT_REGION';
+            } else {
+                $this->output("    • Region: {$targetConfig['region']}");
+            }
+
+            if (empty($targetConfig['bucket'])) {
+                $missingConfig[] = 'AWS_BUCKET';
+            } else {
+                $this->output("    • Bucket: {$targetConfig['bucket']}");
+            }
+
+            if (!empty($missingConfig)) {
+                throw new \Exception("Missing S3 configuration in .env: " . implode(', ', $missingConfig));
+            }
+
+            // Test S3 connectivity
+            $this->output("\n  🔌 Testing S3 connection...");
+            try {
+                // Try to check if bucket exists by attempting a simple operation
+                Storage::disk($this->targetDisk)->exists('__migration_test__');
+                $this->output("  ✓ S3 connection successful!");
+            } catch (\Exception $e) {
+                $this->output("  ✗ S3 connection failed!", 'error');
+                $this->output("  ✗ Error: " . $e->getMessage(), 'error');
+                throw new \Exception("Cannot connect to S3. Please verify your credentials and bucket configuration.");
+            }
+        }
+
+        $this->output("\n✓ All disk configurations validated successfully!\n");
     }
 }
