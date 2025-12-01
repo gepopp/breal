@@ -322,12 +322,32 @@ class MediaMigrationService
         $responsiveImages = $media->responsive_images;
         $count = 0;
 
-        if (empty($responsiveImages)) {
+        // Check for null or empty
+        if ($responsiveImages === null || empty($responsiveImages)) {
             return 0;
         }
 
+        // Ensure it's an array (could be Collection or other type)
+        if (!is_array($responsiveImages)) {
+            $responsiveImages = is_object($responsiveImages) && method_exists($responsiveImages, 'toArray')
+                ? $responsiveImages->toArray()
+                : (array) $responsiveImages;
+        }
+
         foreach ($responsiveImages as $conversionName => $responsiveImageData) {
-            if (!isset($responsiveImageData['urls']) || empty($responsiveImageData['urls'])) {
+            // Skip if not an array or missing urls
+            if (!is_array($responsiveImageData)) {
+                continue;
+            }
+
+            if (!isset($responsiveImageData['urls'])) {
+                continue;
+            }
+
+            $urls = $responsiveImageData['urls'];
+
+            // Check if urls is null or empty
+            if ($urls === null || empty($urls) || !is_array($urls)) {
                 continue;
             }
 
@@ -339,10 +359,21 @@ class MediaMigrationService
             }
 
             // Migrate each responsive image file
-            foreach ($responsiveImageData['urls'] as $url) {
+            foreach ($urls as $url) {
+                // Skip empty or invalid URLs
+                if (empty($url) || !is_string($url)) {
+                    continue;
+                }
+
                 try {
                     // Extract filename from URL
                     $filename = basename(parse_url($url, PHP_URL_PATH));
+
+                    if (empty($filename)) {
+                        $this->output("    ⚠ Skipping invalid URL: {$url}", 'warning');
+                        continue;
+                    }
+
                     $responsivePath = $baseDir . '/' . $filename;
                     $oldPaths[] = $responsivePath;
 
