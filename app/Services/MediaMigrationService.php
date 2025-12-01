@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -99,12 +98,13 @@ class MediaMigrationService
         }
 
         try {
-            // Store old path before updating database
-            $oldPath = $media->getPath();
+            // Get the relative path from the disk root (e.g., "206/filename.jpg")
+            // Spatie stores files as: {media_id}/{file_name}
+            $relativePath = $media->id . '/' . $media->file_name;
 
             // Migrate original file only
             $this->output("  → Migrating original file...");
-            $this->migrateFile($media->getPath(), $media->getPath(), $media);
+            $this->migrateFile($relativePath, $relativePath, $media);
 
             // Update database record (skip in test mode)
             if ($testMode) {
@@ -120,7 +120,7 @@ class MediaMigrationService
             // Delete old file if requested (skip in test mode)
             if ($deleteOldFiles && !$testMode) {
                 $this->output("  → Deleting old file from source disk...");
-                $this->deleteOldFile($oldPath);
+                $this->deleteOldFile($relativePath);
             } elseif ($deleteOldFiles && $testMode) {
                 $this->output("  → [TEST MODE] Would delete old file from source disk", 'warning');
             }
@@ -168,13 +168,13 @@ class MediaMigrationService
         $this->output("    ↓ Downloading file ({$fileSizeFormatted})...");
 
         try {
-            $response = Http::timeout(120)->get($fileUrl);
+            $fileContents = @file_get_contents($fileUrl);
 
-            if (!$response->successful()) {
-                throw new \Exception("HTTP download failed with status {$response->status()}");
+            if ($fileContents === false) {
+                $error = error_get_last();
+                throw new \Exception("Failed to download file: " . ($error['message'] ?? 'Unknown error'));
             }
 
-            $fileContents = $response->body();
             $downloadedSize = strlen($fileContents);
 
             if (empty($fileContents)) {
