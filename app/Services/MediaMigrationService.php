@@ -52,6 +52,9 @@ class MediaMigrationService
         $this->errorCount = 0;
         $this->errors = [];
 
+        // Validate disk configuration
+        $this->validateDiskConfiguration();
+
         $media = Media::where('disk', $this->sourceDisk)->get();
 
         $modeText = $testMode ? ' [TEST MODE - No database changes]' : '';
@@ -96,37 +99,12 @@ class MediaMigrationService
         }
 
         try {
-            // Store old paths before updating database (important!)
-            $oldPaths = [
-                'original' => $media->getPath(),
-                'conversions' => [],
-                'responsive' => [],
-            ];
+            // Store old path before updating database
+            $oldPath = $media->getPath();
 
-            // Store conversion paths
-            foreach ($media->getGeneratedConversions() as $conversionName => $generated) {
-                if ($generated) {
-                    $oldPaths['conversions'][$conversionName] = $media->getPath($conversionName);
-                }
-            }
-
-            // Migrate original file
+            // Migrate original file only
             $this->output("  → Migrating original file...");
             $this->migrateFile($media->getPath(), $media->getPath(), $media);
-
-            // Migrate conversions
-            if (!empty($oldPaths['conversions'])) {
-                $this->output("  → Migrating " . count($oldPaths['conversions']) . " conversion(s)...");
-                foreach ($oldPaths['conversions'] as $conversionName => $conversionPath) {
-                    $this->migrateFile($conversionPath, $conversionPath, $media, $conversionName);
-                }
-            }
-
-            // Migrate responsive images
-            $responsiveCount = $this->migrateResponsiveImages($media);
-            if ($responsiveCount > 0) {
-                $this->output("  → Migrated {$responsiveCount} responsive image(s)");
-            }
 
             // Update database record (skip in test mode)
             if ($testMode) {
@@ -139,12 +117,12 @@ class MediaMigrationService
                 ]);
             }
 
-            // Delete old files if requested (skip in test mode)
+            // Delete old file if requested (skip in test mode)
             if ($deleteOldFiles && !$testMode) {
-                $this->output("  → Deleting old files from source disk...");
-                $this->deleteOldFilesWithPaths($oldPaths);
+                $this->output("  → Deleting old file from source disk...");
+                $this->deleteOldFile($oldPath);
             } elseif ($deleteOldFiles && $testMode) {
-                $this->output("  → [TEST MODE] Would delete old files from source disk", 'warning');
+                $this->output("  → [TEST MODE] Would delete old file from source disk", 'warning');
             }
 
             if (!$testMode) {
@@ -167,16 +145,15 @@ class MediaMigrationService
         $sourcePath = ltrim($sourcePath, '/');
         $targetPath = ltrim($targetPath, '/');
 
-        $fileType = $conversionName ? "conversion '{$conversionName}'" : 'original';
-
         // Get URL for the file from source disk
         $fileUrl = Storage::disk($this->sourceDisk)->url($sourcePath);
 
-        // Check if file exists by checking URL accessibility
+        $this->output("    📍 Source path: {$sourcePath}");
+        $this->output("    🌐 Download URL: {$fileUrl}");
+
+        // Check if file exists
         if (!Storage::disk($this->sourceDisk)->exists($sourcePath)) {
-            $this->output("    ⚠ Source file does not exist ({$fileType}): {$sourcePath}", 'warning');
-            $this->output("    URL attempted: {$fileUrl}", 'debug');
-            return;
+            throw new \Exception("Source file does not exist: {$sourcePath}");
         }
 
         // Get file size for reporting
@@ -184,38 +161,92 @@ class MediaMigrationService
         $fileSizeFormatted = $this->formatBytes($fileSize);
 
         // Download from source via URL
-        $this->output("    ↓ Downloading {$fileType} ({$fileSizeFormatted}) from URL: {$fileUrl}");
+        $this->output("    ↓ Downloading file ({$fileSizeFormatted})...");
 
         try {
             $response = Http::timeout(120)->get($fileUrl);
 
             if (!$response->successful()) {
-                throw new \Exception("Failed to download file from URL: {$fileUrl} (Status: {$response->status()})");
+                throw new \Exception("HTTP download failed with status {$response->status()}");
             }
 
             $fileContents = $response->body();
+            $downloadedSize = strlen($fileContents);
 
             if (empty($fileContents)) {
-                throw new \Exception("Downloaded file is empty from URL: {$fileUrl}");
+                throw new \Exception("Downloaded file is empty");
             }
+
+            $this->output("    ✓ Downloaded successfully: " . $this->formatBytes($downloadedSize));
 
             // Upload to target disk
-            $this->output("    ↑ Uploading to {$this->targetDisk}: {$targetPath}");
-            Storage::disk($this->targetDisk)->put($targetPath, $fileContents, 'public');
+            $this->output("    ↑ Uploading to {$this->targetDisk} disk at path: {$targetPath}");
+
+            try {
+                // Get disk configuration for debugging
+                $diskConfig = config("filesystems.disks.{$this->targetDisk}");
+                $this->output("    📋 Target disk driver: " . ($diskConfig['driver'] ?? 'unknown'));
+
+                if (isset($diskConfig['bucket'])) {
+                    $this->output("    📦 S3 Bucket: " . $diskConfig['bucket']);
+                }
+                if (isset($diskConfig['region'])) {
+                    $this->output("    🌍 S3 Region: " . $diskConfig['region']);
+                }
+
+                $uploadResult = Storage::disk($this->targetDisk)->put($targetPath, $fileContents, 'public');
+
+                if ($uploadResult === false) {
+                    throw new \Exception("Storage::put() returned false - check S3 credentials and permissions");
+                }
+
+                $this->output("    ✓ Storage::put() returned success");
+
+            } catch (\Exception $uploadException) {
+                // Detailed error output
+                $this->output("    ✗ Upload failed!", 'error');
+                $this->output("    ✗ Error type: " . get_class($uploadException), 'error');
+                $this->output("    ✗ Error message: " . $uploadException->getMessage(), 'error');
+                $this->output("    ✗ Error code: " . $uploadException->getCode(), 'error');
+
+                // Check for AWS-specific errors
+                if (method_exists($uploadException, 'getAwsErrorCode')) {
+                    $this->output("    ✗ AWS Error Code: " . $uploadException->getAwsErrorCode(), 'error');
+                }
+
+                if (method_exists($uploadException, 'getStatusCode')) {
+                    $this->output("    ✗ HTTP Status Code: " . $uploadException->getStatusCode(), 'error');
+                }
+
+                // Show stack trace for debugging
+                $this->output("    ✗ Stack trace:", 'error');
+                $trace = $uploadException->getTraceAsString();
+                $traceLines = explode("\n", $trace);
+                foreach (array_slice($traceLines, 0, 5) as $line) {
+                    $this->output("      " . $line, 'error');
+                }
+
+                throw new \Exception("Failed to upload to S3: " . $uploadException->getMessage());
+            }
 
             // Verify upload
-            if (Storage::disk($this->targetDisk)->exists($targetPath)) {
-                $uploadedSize = Storage::disk($this->targetDisk)->size($targetPath);
-                if ($uploadedSize === $fileSize) {
-                    $this->output("    ✓ Upload verified (size match: {$fileSizeFormatted})", 'debug');
-                } else {
-                    $this->output("    ⚠ Upload size mismatch: expected {$fileSizeFormatted}, got " . $this->formatBytes($uploadedSize), 'warning');
-                }
-            } else {
-                throw new \Exception("Upload verification failed for: {$targetPath}");
+            $this->output("    🔍 Verifying upload...");
+
+            if (!Storage::disk($this->targetDisk)->exists($targetPath)) {
+                throw new \Exception("Upload verification failed - file does not exist on target disk");
             }
+
+            $uploadedSize = Storage::disk($this->targetDisk)->size($targetPath);
+
+            if ($uploadedSize !== $downloadedSize) {
+                throw new \Exception("Size mismatch - expected {$downloadedSize} bytes, got {$uploadedSize} bytes");
+            }
+
+            $this->output("    ✓✓ UPLOAD SUCCESSFUL - File verified on {$this->targetDisk} ({$fileSizeFormatted})");
+
         } catch (\Exception $e) {
-            throw new \Exception("Failed to migrate {$fileType} '{$sourcePath}': {$e->getMessage()}");
+            $this->output("    ✗✗ UPLOAD FAILED: {$e->getMessage()}", 'error');
+            throw $e;
         }
     }
 
@@ -234,125 +265,18 @@ class MediaMigrationService
     }
 
     /**
-     * Migrate responsive images
+     * Delete a single file from source disk
      */
-    protected function migrateResponsiveImages(Media $media): int
+    protected function deleteOldFile(string $filePath): void
     {
-        $responsiveImages = $media->responsive_images;
-        $count = 0;
+        $filePath = ltrim($filePath, '/');
 
-        if (empty($responsiveImages)) {
-            return 0;
-        }
-
-        foreach ($responsiveImages as $conversionName => $responsiveImageData) {
-            if (!isset($responsiveImageData['urls'])) {
-                continue;
-            }
-
-            // Get the base path for this conversion
-            $basePath = $media->getPath($conversionName === 'media_library_original' ? '' : $conversionName);
-            $directory = dirname($basePath);
-
-            // Migrate each responsive image file
-            foreach ($responsiveImageData['urls'] as $url) {
-                // Extract filename from URL
-                $filename = basename(parse_url($url, PHP_URL_PATH));
-                $filePath = $directory . '/' . $filename;
-
-                try {
-                    $this->migrateFile($filePath, $filePath, $media, "responsive-{$conversionName}");
-                    $count++;
-                } catch (\Exception $e) {
-                    $this->output("    ⚠ Failed to migrate responsive image {$filePath}: {$e->getMessage()}", 'warning');
-                }
-            }
-        }
-
-        return $count;
-    }
-
-    /**
-     * Delete old files from source disk using stored paths
-     */
-    protected function deleteOldFilesWithPaths(array $oldPaths): void
-    {
-        // Delete original file
-        $originalPath = ltrim($oldPaths['original'], '/');
-        if (Storage::disk($this->sourceDisk)->exists($originalPath)) {
-            Storage::disk($this->sourceDisk)->delete($originalPath);
+        if (Storage::disk($this->sourceDisk)->exists($filePath)) {
+            Storage::disk($this->sourceDisk)->delete($filePath);
             $this->output("    🗑 Deleted original from source disk");
-        }
 
-        // Delete conversions
-        foreach ($oldPaths['conversions'] as $conversionName => $conversionPath) {
-            $path = ltrim($conversionPath, '/');
-            if (Storage::disk($this->sourceDisk)->exists($path)) {
-                Storage::disk($this->sourceDisk)->delete($path);
-                $this->output("    🗑 Deleted conversion '{$conversionName}' from source disk");
-            }
-        }
-
-        // Try to delete empty directories
-        $this->deleteEmptyDirectories($originalPath);
-    }
-
-    /**
-     * Delete old files from source disk (legacy method, kept for compatibility)
-     */
-    protected function deleteOldFiles(Media $media): void
-    {
-        // Delete original file
-        $originalPath = ltrim($media->getPath(), '/');
-        if (Storage::disk($this->sourceDisk)->exists($originalPath)) {
-            Storage::disk($this->sourceDisk)->delete($originalPath);
-        }
-
-        // Delete conversions
-        foreach ($media->getGeneratedConversions() as $conversionName => $generated) {
-            if ($generated) {
-                $conversionPath = ltrim($media->getPath($conversionName), '/');
-                if (Storage::disk($this->sourceDisk)->exists($conversionPath)) {
-                    Storage::disk($this->sourceDisk)->delete($conversionPath);
-                }
-            }
-        }
-
-        // Delete responsive images
-        $this->deleteResponsiveImages($media);
-
-        // Try to delete empty directories
-        $this->deleteEmptyDirectories($originalPath);
-    }
-
-    /**
-     * Delete responsive images from source disk
-     */
-    protected function deleteResponsiveImages(Media $media): void
-    {
-        $responsiveImages = $media->responsive_images;
-
-        if (empty($responsiveImages)) {
-            return;
-        }
-
-        foreach ($responsiveImages as $conversionName => $responsiveImageData) {
-            if (!isset($responsiveImageData['urls'])) {
-                continue;
-            }
-
-            $basePath = $media->getPath($conversionName === 'media_library_original' ? '' : $conversionName);
-            $directory = dirname($basePath);
-
-            foreach ($responsiveImageData['urls'] as $url) {
-                $filename = basename(parse_url($url, PHP_URL_PATH));
-                $filePath = $directory . '/' . $filename;
-                $filePath = ltrim($filePath, '/');
-
-                if (Storage::disk($this->sourceDisk)->exists($filePath)) {
-                    Storage::disk($this->sourceDisk)->delete($filePath);
-                }
-            }
+            // Try to delete empty directories
+            $this->deleteEmptyDirectories($filePath);
         }
     }
 
@@ -389,5 +313,77 @@ class MediaMigrationService
             'errors' => $this->errorCount,
             'error_details' => $this->errors,
         ];
+    }
+
+    /**
+     * Validate disk configuration before migration
+     */
+    protected function validateDiskConfiguration(): void
+    {
+        $this->output("\n🔧 Validating disk configuration...");
+
+        // Check source disk
+        $sourceConfig = config("filesystems.disks.{$this->sourceDisk}");
+        if (!$sourceConfig) {
+            throw new \Exception("Source disk '{$this->sourceDisk}' is not configured in config/filesystems.php");
+        }
+        $this->output("  ✓ Source disk '{$this->sourceDisk}' configured (driver: {$sourceConfig['driver']})");
+
+        // Check target disk
+        $targetConfig = config("filesystems.disks.{$this->targetDisk}");
+        if (!$targetConfig) {
+            throw new \Exception("Target disk '{$this->targetDisk}' is not configured in config/filesystems.php");
+        }
+        $this->output("  ✓ Target disk '{$this->targetDisk}' configured (driver: {$targetConfig['driver']})");
+
+        // Validate S3 configuration if target is S3
+        if ($targetConfig['driver'] === 's3') {
+            $this->output("\n  📦 S3 Configuration:");
+
+            $missingConfig = [];
+
+            if (empty($targetConfig['key'])) {
+                $missingConfig[] = 'AWS_ACCESS_KEY_ID';
+            } else {
+                $keyPreview = substr($targetConfig['key'], 0, 4) . '...' . substr($targetConfig['key'], -4);
+                $this->output("    • Access Key: {$keyPreview}");
+            }
+
+            if (empty($targetConfig['secret'])) {
+                $missingConfig[] = 'AWS_SECRET_ACCESS_KEY';
+            } else {
+                $this->output("    • Secret Key: [CONFIGURED]");
+            }
+
+            if (empty($targetConfig['region'])) {
+                $missingConfig[] = 'AWS_DEFAULT_REGION';
+            } else {
+                $this->output("    • Region: {$targetConfig['region']}");
+            }
+
+            if (empty($targetConfig['bucket'])) {
+                $missingConfig[] = 'AWS_BUCKET';
+            } else {
+                $this->output("    • Bucket: {$targetConfig['bucket']}");
+            }
+
+            if (!empty($missingConfig)) {
+                throw new \Exception("Missing S3 configuration in .env: " . implode(', ', $missingConfig));
+            }
+
+            // Test S3 connectivity
+            $this->output("\n  🔌 Testing S3 connection...");
+            try {
+                // Try to check if bucket exists by attempting a simple operation
+                Storage::disk($this->targetDisk)->exists('__migration_test__');
+                $this->output("  ✓ S3 connection successful!");
+            } catch (\Exception $e) {
+                $this->output("  ✗ S3 connection failed!", 'error');
+                $this->output("  ✗ Error: " . $e->getMessage(), 'error');
+                throw new \Exception("Cannot connect to S3. Please verify your credentials and bucket configuration.");
+            }
+        }
+
+        $this->output("\n✓ All disk configurations validated successfully!\n");
     }
 }
