@@ -111,12 +111,15 @@ class MediaMigrationService
 
             // Migrate conversions
             $conversions = $media->getGeneratedConversions();
-            if (!empty($conversions)) {
-                $conversionCount = count(array_filter($conversions));
+            if ($conversions && !empty($conversions)) {
+                // Convert to array if it's a Collection
+                $conversionsArray = is_array($conversions) ? $conversions : $conversions->toArray();
+                $conversionCount = count(array_filter($conversionsArray));
+
                 if ($conversionCount > 0) {
                     $this->output("  → Migrating {$conversionCount} conversion(s)...");
 
-                    foreach ($conversions as $conversionName => $generated) {
+                    foreach ($conversionsArray as $conversionName => $generated) {
                         if ($generated) {
                             try {
                                 // Get conversion file name from media collection
