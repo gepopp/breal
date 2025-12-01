@@ -15,7 +15,7 @@ class ServiceObserver
             $links[] = [
                 'name' => $link['name'],
                 'path' => $link['path'],
-                'url'  => Storage::disk('public')->url($link['path']),
+                'url'  => Storage::disk('s3')->url($link['path']),
             ];
         }
 
@@ -32,7 +32,7 @@ class ServiceObserver
             $links[] = [
               'name' => $link['name'],
               'path' => $link['path'],
-              'url'  => Storage::disk('public')->url($link['path']),
+              'url'  => Storage::disk('s3')->url($link['path']),
             ];
         }
 
