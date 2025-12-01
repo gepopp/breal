@@ -16,6 +16,7 @@ class MigrateMediaToS3Command extends Command
                             {--source=public : The source disk to migrate from}
                             {--target=s3 : The target disk to migrate to}
                             {--delete : Delete old files from source disk after migration}
+                            {--test-upload : Upload files to S3 without updating database (for testing)}
                             {--dry-run : Show what would be migrated without actually doing it}';
 
     /**
@@ -34,6 +35,7 @@ class MigrateMediaToS3Command extends Command
         $targetDisk = $this->option('target');
         $deleteOldFiles = $this->option('delete');
         $dryRun = $this->option('dry-run');
+        $testUpload = $this->option('test-upload');
 
         $this->info("Media Migration from {$sourceDisk} to {$targetDisk}");
         $this->info('----------------------------------------');
@@ -44,17 +46,30 @@ class MigrateMediaToS3Command extends Command
             return self::SUCCESS;
         }
 
+        if ($testUpload) {
+            $this->warn('TEST UPLOAD MODE - Files will be uploaded but database will NOT be updated');
+            $this->newLine();
+        }
+
         // Confirm before proceeding
-        if (!$this->confirm("This will migrate all media files from {$sourceDisk} to {$targetDisk}. Continue?")) {
+        $confirmMessage = $testUpload
+            ? "This will upload all media files to {$targetDisk} WITHOUT updating the database. Continue?"
+            : "This will migrate all media files from {$sourceDisk} to {$targetDisk}. Continue?";
+
+        if (!$this->confirm($confirmMessage)) {
             $this->info('Migration cancelled.');
             return self::SUCCESS;
         }
 
-        if ($deleteOldFiles) {
+        if ($deleteOldFiles && !$testUpload) {
             if (!$this->confirm('You have chosen to delete old files. Are you sure?', false)) {
                 $this->info('Migration cancelled.');
                 return self::SUCCESS;
             }
+        }
+
+        if ($deleteOldFiles && $testUpload) {
+            $this->warn('Note: --delete flag is ignored in test upload mode');
         }
 
         // Run migration
@@ -73,17 +88,23 @@ class MigrateMediaToS3Command extends Command
         $this->info('Starting migration...');
         $this->newLine();
 
-        $result = $migrationService->migrateAll($deleteOldFiles);
+        $result = $migrationService->migrateAll($deleteOldFiles, $testUpload);
 
         $this->newLine();
 
         // Display results
-        $this->info('Migration completed!');
+        if ($testUpload) {
+            $this->info('Test upload completed!');
+            $this->warn('Note: Database was NOT updated. Run without --test-upload to complete migration.');
+        } else {
+            $this->info('Migration completed!');
+        }
+
         $this->table(
             ['Metric', 'Count'],
             [
                 ['Total files', $result['total']],
-                ['Successfully migrated', $result['migrated']],
+                ['Successfully uploaded', $result['migrated']],
                 ['Errors', $result['errors']],
             ]
         );

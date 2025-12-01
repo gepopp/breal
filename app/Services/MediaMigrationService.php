@@ -45,7 +45,7 @@ class MediaMigrationService
     /**
      * Migrate all media files from source disk to target disk
      */
-    public function migrateAll(bool $deleteOldFiles = false): array
+    public function migrateAll(bool $deleteOldFiles = false, bool $testMode = false): array
     {
         $this->migratedCount = 0;
         $this->errorCount = 0;
@@ -53,14 +53,16 @@ class MediaMigrationService
 
         $media = Media::where('disk', $this->sourceDisk)->get();
 
-        $this->output("Starting media migration: {$media->count()} files to migrate from {$this->sourceDisk} to {$this->targetDisk}");
+        $modeText = $testMode ? ' [TEST MODE - No database changes]' : '';
+        $this->output("Starting media migration{$modeText}: {$media->count()} files to migrate from {$this->sourceDisk} to {$this->targetDisk}");
 
         foreach ($media as $mediaItem) {
             try {
                 $this->output("\n[Media ID: {$mediaItem->id}] Processing: {$mediaItem->file_name}");
-                $this->migrateMediaItem($mediaItem, $deleteOldFiles);
+                $this->migrateMediaItem($mediaItem, $deleteOldFiles, $testMode);
                 $this->migratedCount++;
-                $this->output("[Media ID: {$mediaItem->id}] ✓ Successfully migrated", 'info');
+                $successMsg = $testMode ? '✓ Files uploaded (DB not updated)' : '✓ Successfully migrated';
+                $this->output("[Media ID: {$mediaItem->id}] {$successMsg}", 'info');
             } catch (\Exception $e) {
                 $this->errorCount++;
                 $this->errors[] = [
@@ -79,15 +81,18 @@ class MediaMigrationService
             'migrated' => $this->migratedCount,
             'errors' => $this->errorCount,
             'error_details' => $this->errors,
+            'test_mode' => $testMode,
         ];
     }
 
     /**
      * Migrate a single media item
      */
-    protected function migrateMediaItem(Media $media, bool $deleteOldFiles = false): void
+    protected function migrateMediaItem(Media $media, bool $deleteOldFiles = false, bool $testMode = false): void
     {
-        DB::beginTransaction();
+        if (!$testMode) {
+            DB::beginTransaction();
+        }
 
         try {
             // Store old paths before updating database (important!)
@@ -122,22 +127,32 @@ class MediaMigrationService
                 $this->output("  → Migrated {$responsiveCount} responsive image(s)");
             }
 
-            // Update database record
-            $this->output("  → Updating database record...");
-            $media->update([
-                'disk' => $this->targetDisk,
-                'conversions_disk' => $this->targetDisk,
-            ]);
-
-            // Delete old files if requested
-            if ($deleteOldFiles) {
-                $this->output("  → Deleting old files from source disk...");
-                $this->deleteOldFilesWithPaths($oldPaths);
+            // Update database record (skip in test mode)
+            if ($testMode) {
+                $this->output("  → [TEST MODE] Skipping database update", 'warning');
+            } else {
+                $this->output("  → Updating database record...");
+                $media->update([
+                    'disk' => $this->targetDisk,
+                    'conversions_disk' => $this->targetDisk,
+                ]);
             }
 
-            DB::commit();
+            // Delete old files if requested (skip in test mode)
+            if ($deleteOldFiles && !$testMode) {
+                $this->output("  → Deleting old files from source disk...");
+                $this->deleteOldFilesWithPaths($oldPaths);
+            } elseif ($deleteOldFiles && $testMode) {
+                $this->output("  → [TEST MODE] Would delete old files from source disk", 'warning');
+            }
+
+            if (!$testMode) {
+                DB::commit();
+            }
         } catch (\Exception $e) {
-            DB::rollBack();
+            if (!$testMode) {
+                DB::rollBack();
+            }
             throw $e;
         }
     }
