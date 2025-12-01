@@ -145,8 +145,12 @@ class MediaMigrationService
         $sourcePath = ltrim($sourcePath, '/');
         $targetPath = ltrim($targetPath, '/');
 
-        // Get URL for the file from source disk
-        $fileUrl = Storage::disk($this->sourceDisk)->url($sourcePath);
+        // Get URL for the file - use Media's getUrl() method if media object is provided
+        if ($media) {
+            $fileUrl = $media->getUrl();
+        } else {
+            $fileUrl = Storage::disk($this->sourceDisk)->url($sourcePath);
+        }
 
         $this->output("    📍 Source path: {$sourcePath}");
         $this->output("    🌐 Download URL: {$fileUrl}");
