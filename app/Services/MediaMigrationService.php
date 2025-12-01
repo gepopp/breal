@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -168,8 +169,13 @@ class MediaMigrationService
 
         $fileType = $conversionName ? "conversion '{$conversionName}'" : 'original';
 
+        // Get URL for the file from source disk
+        $fileUrl = Storage::disk($this->sourceDisk)->url($sourcePath);
+
+        // Check if file exists by checking URL accessibility
         if (!Storage::disk($this->sourceDisk)->exists($sourcePath)) {
             $this->output("    ⚠ Source file does not exist ({$fileType}): {$sourcePath}", 'warning');
+            $this->output("    URL attempted: {$fileUrl}", 'debug');
             return;
         }
 
@@ -177,19 +183,39 @@ class MediaMigrationService
         $fileSize = Storage::disk($this->sourceDisk)->size($sourcePath);
         $fileSizeFormatted = $this->formatBytes($fileSize);
 
-        // Download from source
-        $this->output("    ↓ Downloading {$fileType} ({$fileSizeFormatted}): {$sourcePath}");
-        $fileContents = Storage::disk($this->sourceDisk)->get($sourcePath);
+        // Download from source via URL
+        $this->output("    ↓ Downloading {$fileType} ({$fileSizeFormatted}) from URL: {$fileUrl}");
 
-        // Upload to target disk
-        $this->output("    ↑ Uploading to {$this->targetDisk}: {$targetPath}");
-        Storage::disk($this->targetDisk)->put($targetPath, $fileContents, 'public');
+        try {
+            $response = Http::timeout(120)->get($fileUrl);
 
-        // Verify upload
-        if (Storage::disk($this->targetDisk)->exists($targetPath)) {
-            $this->output("    ✓ Upload verified", 'debug');
-        } else {
-            throw new \Exception("Upload verification failed for: {$targetPath}");
+            if (!$response->successful()) {
+                throw new \Exception("Failed to download file from URL: {$fileUrl} (Status: {$response->status()})");
+            }
+
+            $fileContents = $response->body();
+
+            if (empty($fileContents)) {
+                throw new \Exception("Downloaded file is empty from URL: {$fileUrl}");
+            }
+
+            // Upload to target disk
+            $this->output("    ↑ Uploading to {$this->targetDisk}: {$targetPath}");
+            Storage::disk($this->targetDisk)->put($targetPath, $fileContents, 'public');
+
+            // Verify upload
+            if (Storage::disk($this->targetDisk)->exists($targetPath)) {
+                $uploadedSize = Storage::disk($this->targetDisk)->size($targetPath);
+                if ($uploadedSize === $fileSize) {
+                    $this->output("    ✓ Upload verified (size match: {$fileSizeFormatted})", 'debug');
+                } else {
+                    $this->output("    ⚠ Upload size mismatch: expected {$fileSizeFormatted}, got " . $this->formatBytes($uploadedSize), 'warning');
+                }
+            } else {
+                throw new \Exception("Upload verification failed for: {$targetPath}");
+            }
+        } catch (\Exception $e) {
+            throw new \Exception("Failed to migrate {$fileType} '{$sourcePath}': {$e->getMessage()}");
         }
     }
 
