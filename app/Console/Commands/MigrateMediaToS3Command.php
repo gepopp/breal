@@ -60,13 +60,22 @@ class MigrateMediaToS3Command extends Command
         // Run migration
         $migrationService = new MediaMigrationService($sourceDisk, $targetDisk);
 
+        // Set up output callback to display messages in real-time
+        $migrationService->setOutputCallback(function($message, $level) {
+            match($level) {
+                'error' => $this->error($message),
+                'warning' => $this->warn($message),
+                'debug' => $this->line($message),
+                default => $this->info($message),
+            };
+        });
+
         $this->info('Starting migration...');
-        $progressBar = $this->output->createProgressBar();
+        $this->newLine();
 
         $result = $migrationService->migrateAll($deleteOldFiles);
 
-        $progressBar->finish();
-        $this->newLine(2);
+        $this->newLine();
 
         // Display results
         $this->info('Migration completed!');

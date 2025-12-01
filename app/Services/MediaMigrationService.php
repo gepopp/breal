@@ -14,11 +14,32 @@ class MediaMigrationService
     protected int $migratedCount = 0;
     protected int $errorCount = 0;
     protected array $errors = [];
+    protected $outputCallback;
 
     public function __construct(string $sourceDisk = 'public', string $targetDisk = 's3')
     {
         $this->sourceDisk = $sourceDisk;
         $this->targetDisk = $targetDisk;
+    }
+
+    /**
+     * Set callback for output messages
+     */
+    public function setOutputCallback(callable $callback): self
+    {
+        $this->outputCallback = $callback;
+        return $this;
+    }
+
+    /**
+     * Output a message via callback or log
+     */
+    protected function output(string $message, string $level = 'info'): void
+    {
+        if ($this->outputCallback) {
+            call_user_func($this->outputCallback, $message, $level);
+        }
+        Log::{$level}($message);
     }
 
     /**
@@ -32,12 +53,14 @@ class MediaMigrationService
 
         $media = Media::where('disk', $this->sourceDisk)->get();
 
-        Log::info("Starting media migration: {$media->count()} files to migrate from {$this->sourceDisk} to {$this->targetDisk}");
+        $this->output("Starting media migration: {$media->count()} files to migrate from {$this->sourceDisk} to {$this->targetDisk}");
 
         foreach ($media as $mediaItem) {
             try {
+                $this->output("\n[Media ID: {$mediaItem->id}] Processing: {$mediaItem->file_name}");
                 $this->migrateMediaItem($mediaItem, $deleteOldFiles);
                 $this->migratedCount++;
+                $this->output("[Media ID: {$mediaItem->id}] ✓ Successfully migrated", 'info');
             } catch (\Exception $e) {
                 $this->errorCount++;
                 $this->errors[] = [
@@ -45,11 +68,11 @@ class MediaMigrationService
                     'file_name' => $mediaItem->file_name,
                     'error' => $e->getMessage(),
                 ];
-                Log::error("Failed to migrate media {$mediaItem->id}: {$e->getMessage()}");
+                $this->output("[Media ID: {$mediaItem->id}] ✗ Failed: {$e->getMessage()}", 'error');
             }
         }
 
-        Log::info("Media migration completed. Migrated: {$this->migratedCount}, Errors: {$this->errorCount}");
+        $this->output("\nMedia migration completed. Migrated: {$this->migratedCount}, Errors: {$this->errorCount}");
 
         return [
             'total' => $media->count(),
@@ -67,21 +90,40 @@ class MediaMigrationService
         DB::beginTransaction();
 
         try {
-            // Migrate original file
-            $this->migrateFile($media->getPath(), $media->getPath());
+            // Store old paths before updating database (important!)
+            $oldPaths = [
+                'original' => $media->getPath(),
+                'conversions' => [],
+                'responsive' => [],
+            ];
 
-            // Migrate conversions
+            // Store conversion paths
             foreach ($media->getGeneratedConversions() as $conversionName => $generated) {
                 if ($generated) {
-                    $conversionPath = $media->getPath($conversionName);
-                    $this->migrateFile($conversionPath, $conversionPath);
+                    $oldPaths['conversions'][$conversionName] = $media->getPath($conversionName);
+                }
+            }
+
+            // Migrate original file
+            $this->output("  → Migrating original file...");
+            $this->migrateFile($media->getPath(), $media->getPath(), $media);
+
+            // Migrate conversions
+            if (!empty($oldPaths['conversions'])) {
+                $this->output("  → Migrating " . count($oldPaths['conversions']) . " conversion(s)...");
+                foreach ($oldPaths['conversions'] as $conversionName => $conversionPath) {
+                    $this->migrateFile($conversionPath, $conversionPath, $media, $conversionName);
                 }
             }
 
             // Migrate responsive images
-            $this->migrateResponsiveImages($media);
+            $responsiveCount = $this->migrateResponsiveImages($media);
+            if ($responsiveCount > 0) {
+                $this->output("  → Migrated {$responsiveCount} responsive image(s)");
+            }
 
             // Update database record
+            $this->output("  → Updating database record...");
             $media->update([
                 'disk' => $this->targetDisk,
                 'conversions_disk' => $this->targetDisk,
@@ -89,12 +131,11 @@ class MediaMigrationService
 
             // Delete old files if requested
             if ($deleteOldFiles) {
-                $this->deleteOldFiles($media);
+                $this->output("  → Deleting old files from source disk...");
+                $this->deleteOldFilesWithPaths($oldPaths);
             }
 
             DB::commit();
-
-            Log::info("Successfully migrated media {$media->id}: {$media->file_name}");
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
@@ -104,35 +145,63 @@ class MediaMigrationService
     /**
      * Copy a file from source disk to target disk
      */
-    protected function migrateFile(string $sourcePath, string $targetPath): void
+    protected function migrateFile(string $sourcePath, string $targetPath, ?Media $media = null, ?string $conversionName = null): void
     {
         // Remove leading slash if present
         $sourcePath = ltrim($sourcePath, '/');
         $targetPath = ltrim($targetPath, '/');
 
+        $fileType = $conversionName ? "conversion '{$conversionName}'" : 'original';
+
         if (!Storage::disk($this->sourceDisk)->exists($sourcePath)) {
-            Log::warning("Source file does not exist: {$sourcePath}");
+            $this->output("    ⚠ Source file does not exist ({$fileType}): {$sourcePath}", 'warning');
             return;
         }
 
-        // Get file contents from source
+        // Get file size for reporting
+        $fileSize = Storage::disk($this->sourceDisk)->size($sourcePath);
+        $fileSizeFormatted = $this->formatBytes($fileSize);
+
+        // Download from source
+        $this->output("    ↓ Downloading {$fileType} ({$fileSizeFormatted}): {$sourcePath}");
         $fileContents = Storage::disk($this->sourceDisk)->get($sourcePath);
 
-        // Write to target disk
+        // Upload to target disk
+        $this->output("    ↑ Uploading to {$this->targetDisk}: {$targetPath}");
         Storage::disk($this->targetDisk)->put($targetPath, $fileContents, 'public');
 
-        Log::debug("Migrated file: {$sourcePath} -> {$targetPath}");
+        // Verify upload
+        if (Storage::disk($this->targetDisk)->exists($targetPath)) {
+            $this->output("    ✓ Upload verified", 'debug');
+        } else {
+            throw new \Exception("Upload verification failed for: {$targetPath}");
+        }
+    }
+
+    /**
+     * Format bytes to human readable size
+     */
+    protected function formatBytes(int $bytes): string
+    {
+        $units = ['B', 'KB', 'MB', 'GB'];
+        $bytes = max($bytes, 0);
+        $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
+        $pow = min($pow, count($units) - 1);
+        $bytes /= pow(1024, $pow);
+
+        return round($bytes, 2) . ' ' . $units[$pow];
     }
 
     /**
      * Migrate responsive images
      */
-    protected function migrateResponsiveImages(Media $media): void
+    protected function migrateResponsiveImages(Media $media): int
     {
         $responsiveImages = $media->responsive_images;
+        $count = 0;
 
         if (empty($responsiveImages)) {
-            return;
+            return 0;
         }
 
         foreach ($responsiveImages as $conversionName => $responsiveImageData) {
@@ -151,16 +220,44 @@ class MediaMigrationService
                 $filePath = $directory . '/' . $filename;
 
                 try {
-                    $this->migrateFile($filePath, $filePath);
+                    $this->migrateFile($filePath, $filePath, $media, "responsive-{$conversionName}");
+                    $count++;
                 } catch (\Exception $e) {
-                    Log::warning("Failed to migrate responsive image {$filePath}: {$e->getMessage()}");
+                    $this->output("    ⚠ Failed to migrate responsive image {$filePath}: {$e->getMessage()}", 'warning');
                 }
             }
         }
+
+        return $count;
     }
 
     /**
-     * Delete old files from source disk
+     * Delete old files from source disk using stored paths
+     */
+    protected function deleteOldFilesWithPaths(array $oldPaths): void
+    {
+        // Delete original file
+        $originalPath = ltrim($oldPaths['original'], '/');
+        if (Storage::disk($this->sourceDisk)->exists($originalPath)) {
+            Storage::disk($this->sourceDisk)->delete($originalPath);
+            $this->output("    🗑 Deleted original from source disk");
+        }
+
+        // Delete conversions
+        foreach ($oldPaths['conversions'] as $conversionName => $conversionPath) {
+            $path = ltrim($conversionPath, '/');
+            if (Storage::disk($this->sourceDisk)->exists($path)) {
+                Storage::disk($this->sourceDisk)->delete($path);
+                $this->output("    🗑 Deleted conversion '{$conversionName}' from source disk");
+            }
+        }
+
+        // Try to delete empty directories
+        $this->deleteEmptyDirectories($originalPath);
+    }
+
+    /**
+     * Delete old files from source disk (legacy method, kept for compatibility)
      */
     protected function deleteOldFiles(Media $media): void
     {
@@ -184,7 +281,7 @@ class MediaMigrationService
         $this->deleteResponsiveImages($media);
 
         // Try to delete empty directories
-        $this->deleteEmptyDirectories($media);
+        $this->deleteEmptyDirectories($originalPath);
     }
 
     /**
@@ -221,9 +318,9 @@ class MediaMigrationService
     /**
      * Delete empty directories after file migration
      */
-    protected function deleteEmptyDirectories(Media $media): void
+    protected function deleteEmptyDirectories(string $path): void
     {
-        $path = ltrim($media->getPath(), '/');
+        $path = ltrim($path, '/');
         $directory = dirname($path);
 
         // Try to delete the directory and parent directories if empty
@@ -233,6 +330,7 @@ class MediaMigrationService
 
             if (empty($files) && empty($directories)) {
                 Storage::disk($this->sourceDisk)->deleteDirectory($directory);
+                $this->output("    🗑 Deleted empty directory: {$directory}");
                 $directory = dirname($directory);
             } else {
                 break;
