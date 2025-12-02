@@ -30,6 +30,8 @@ class Importer
 
         $batchFiles = $instance->extractBatchFiles($xmlFile);
 
+
+
         foreach($batchFiles as $batchFile)
         {
             $filePath = storage_path('app/public/' . $batchFile);
@@ -37,7 +39,9 @@ class Importer
             $json = json_encode($xml);
             $array = json_decode($json, true);
 
-            dd($array);
+            $openimmo_obid = $array['verwaltung_techn']['openimmo_obid'] ?? null;
+
+            dump($openimmo_obid);
         }
 
     }
