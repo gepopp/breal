@@ -205,8 +205,6 @@ Route::get('import-test', function (){
                 $fileContent = $zip->getFromIndex($i);
                 $xmlFile = 'imports/' . $fileInfo['basename'];
 
-                dd($xmlFile);
-
                 Storage::disk('public')->put($xmlFile, $fileContent);
 
                 dump(Storage::disk('public')->url($xmlFile));
