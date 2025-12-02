@@ -28,7 +28,9 @@ class Importer
             return;
         }
 
-        $instance->extractBatchFiles($xmlFile);
+        $batchFiles = $instance->extractBatchFiles($xmlFile);
+
+        dd($batchFiles);
 
     }
 
@@ -87,6 +89,7 @@ class Importer
         $reader = new \XMLReader();
         $reader->open(storage_path('app/public/' . $file));
 
+        $batchFiles = [];
 
         while ($reader->read()) {
             if ($reader->nodeType === \XMLReader::ELEMENT && $reader->name === 'immobilie') {
@@ -114,8 +117,12 @@ class Importer
                     file_get_contents($tempFile)
                 );
 
+                $batchFiles[] = $filename;
+
                 // Temporäre Datei löschen
                 unlink($tempFile);
+
+                return $batchFiles;
             }
         }
     }
