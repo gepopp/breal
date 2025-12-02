@@ -22,17 +22,17 @@ class JustimmoImport extends Page
 
     protected static ?string $navigationGroup = 'Import';
 
-    // Available in all environments (local, staging, production)
-    public static function shouldRegisterNavigation(): bool
+    // Only allow admin users to see and access this page
+    public static function canAccess(): bool
     {
-        return true;
+        return auth()->check() && auth()->user()->admin;
     }
 
-    // Only allow admin users to access
-//    public static function canAccess(): bool
-//    {
-//        return auth()->check() && auth()->user()->admin;
-//    }
+    public static function shouldRegisterNavigation(): bool
+    {
+        // Only show in navigation for admin users
+        return static::canAccess();
+    }
 
     public ?array $zipFileInfo = null;
     public ?array $extractedXmlInfo = null;
