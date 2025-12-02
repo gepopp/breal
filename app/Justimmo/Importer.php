@@ -30,7 +30,8 @@ class Importer
 
         $batchFiles = $instance->extractBatchFiles($xmlFile);
 
-        $path = 'realties/' . time() . '/';
+        Storage::disk('public')->deleteDirectory('realties');
+        Storage::disk('public')->makeDirectory('realties');
 
         DB::table('realties')->truncate();
 
@@ -48,12 +49,11 @@ class Importer
                 continue;
             }
 
-            Storage::disk('public')->put($path . $openimmo_obid . '.json', $json);
-            ImportRealtyJob::dispatchSync($path . $openimmo_obid . '.json');
+            Storage::disk('public')->put('realties/' . $openimmo_obid . '.json', $json);
+            ImportRealtyJob::dispatchSync('realties/' . $openimmo_obid . '.json');
         }
 
         Storage::disk('public')->delete($xmlFile);
-        Storage::disk('public')->deleteDirectory($path);
         Storage::disk('public')->delete('imports/openimmo.zip');
     }
 
