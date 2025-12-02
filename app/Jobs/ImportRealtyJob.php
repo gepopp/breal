@@ -27,18 +27,11 @@ class ImportRealtyJob implements ShouldQueue
     public function handle(): void
     {
         try {
-            Log::info('Processing realty file: ' . $this->path);
 
-            $filePath = storage_path('app/public/' . $this->path);
-
-            if (!file_exists($filePath)) {
-                Log::error('Realty file not found: ' . $this->path);
-                return;
-            }
-
-            $xml = simplexml_load_file($filePath);
-            $json = json_encode($xml);
+            $json = Storage::disk('public')->get($this->path);
             $array = json_decode($json, true);
+
+            dd($array);
 
             $openimmo_obid = $array['verwaltung_techn']['openimmo_obid'] ?? null;
 
