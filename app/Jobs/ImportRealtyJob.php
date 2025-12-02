@@ -28,15 +28,13 @@ class ImportRealtyJob implements ShouldQueue
         $json = Storage::disk('public')->get($this->path);
         $array = json_decode($json, true);
 
-        dd($array);
+        $keys = array_keys($array);
 
-        $openimmo_obid = $array['verwaltung_techn']['openimmo_obid'] ?? null;
+        dd($keys);
 
-        if (!$openimmo_obid) {
-            Log::warning('Missing openimmo_obid in file: ' . $this->path);
-            unlink($filePath);
-            return;
-        }
+
+        $openimmo_obid = $array['verwaltung_techn']['openimmo_obid'];
+
 
         $nutzungsart = '';
         foreach ($array['objektkategorie']['nutzungsart']['@attributes'] as $key => $value) {
@@ -45,7 +43,7 @@ class ImportRealtyJob implements ShouldQueue
             }
         }
 
-        $realty = Realty::updateOrCreate(
+        Realty::updateOrCreate(
             [
                 'openimmo_obid' => $openimmo_obid,
             ],
@@ -75,8 +73,6 @@ class ImportRealtyJob implements ShouldQueue
         );
 
         Storage::disk('public')->put('realties/' . $openimmo_obid . '.json', $json);
-
-        Log::info('Successfully imported realty: ' . $openimmo_obid . ' - ' . ($array['freitexte']['objekttitel'] ?? 'No title'));
 
         // Clean up batch file
         unlink($filePath);
