@@ -17,14 +17,15 @@ use Illuminate\Support\Facades\Storage;
 // Step 1: Check for openimmo.zip file
 Route::get('/justimmo-test/check-zip', function () {
     $zipFilePath = 'imports/openimmo.zip';
-    $fullZipPath = storage_path('app/public/' . $zipFilePath);
 
-    if (!file_exists($fullZipPath)) {
+    if (!Storage::disk('public')->exists($zipFilePath)) {
         return response()->json([
             'status' => 'No openimmo.zip file found',
             'path' => $zipFilePath
         ]);
     }
+
+    $fullZipPath = Storage::disk('public')->path($zipFilePath);
 
     $fileInfo = [
         'path' => $zipFilePath,
@@ -45,9 +46,8 @@ Route::get('/justimmo-test/check-zip', function () {
 Route::get('/justimmo-test/extract-xml', function () {
     $importer = new Importer();
     $zipFilePath = 'imports/openimmo.zip';
-    $fullZipPath = storage_path('app/public/' . $zipFilePath);
 
-    if (!file_exists($fullZipPath)) {
+    if (!Storage::disk('public')->exists($zipFilePath)) {
         return response()->json([
             'status' => 'error',
             'message' => 'No openimmo.zip file found'
@@ -57,8 +57,9 @@ Route::get('/justimmo-test/extract-xml', function () {
     try {
         $extractedPath = $importer->extractZipFile($zipFilePath);
 
-        $xmlContent = file_get_contents(storage_path('app/public/' . $extractedPath));
-        $fileSize = filesize(storage_path('app/public/' . $extractedPath));
+        $fullXmlPath = Storage::disk('public')->path($extractedPath);
+        $xmlContent = file_get_contents($fullXmlPath);
+        $fileSize = filesize($fullXmlPath);
 
         return response()->json([
             'status' => 'success',
@@ -80,9 +81,8 @@ Route::get('/justimmo-test/extract-xml', function () {
 Route::get('/justimmo-test/extract-properties', function () {
     $importer = new Importer();
     $zipFilePath = 'imports/openimmo.zip';
-    $fullZipPath = storage_path('app/public/' . $zipFilePath);
 
-    if (!file_exists($fullZipPath)) {
+    if (!Storage::disk('public')->exists($zipFilePath)) {
         return response()->json([
             'status' => 'error',
             'message' => 'No openimmo.zip file found'
@@ -130,9 +130,10 @@ Route::get('/justimmo-test/show-property/{index?}', function ($index = 0) {
     }
 
     $file = $batchFiles[$index];
-    $xmlContent = file_get_contents(storage_path('app/public/' . $file['path']));
+    $filePath = Storage::disk('public')->path($file['path']);
+    $xmlContent = file_get_contents($filePath);
 
-    $xml = simplexml_load_file(storage_path('app/public/' . $file['path']));
+    $xml = simplexml_load_file($filePath);
     $json = json_encode($xml);
     $array = json_decode($json, true);
 
@@ -171,7 +172,7 @@ Route::get('/justimmo-test/cleanup', function () {
 
     // Delete batch files
     foreach ($batchFiles as $file) {
-        $path = storage_path('app/public/' . $file['path']);
+        $path = Storage::disk('public')->path($file['path']);
         if (file_exists($path)) {
             unlink($path);
             $deletedCount++;
@@ -181,7 +182,7 @@ Route::get('/justimmo-test/cleanup', function () {
     // Delete import XMLs (but not ZIPs)
     foreach ($importsFiles as $file) {
         if (str_contains($file['filename'], '.xml')) {
-            $path = storage_path('app/public/' . $file['path']);
+            $path = Storage::disk('public')->path($file['path']);
             if (file_exists($path)) {
                 unlink($path);
                 $deletedCount++;
@@ -201,21 +202,26 @@ Route::get('/justimmo-test/overview', function () {
     $importer = new Importer();
 
     $zipFilePath = 'imports/openimmo.zip';
-    $fullZipPath = storage_path('app/public/' . $zipFilePath);
-    $zipFileExists = file_exists($fullZipPath);
+    $zipFileExists = Storage::disk('public')->exists($zipFilePath);
 
     $batchFiles = $importer->getSortedFilesWithFileFacade('batches');
     $importFiles = $importer->getSortedFilesWithFileFacade('imports');
+
+    $zipInfo = null;
+    if ($zipFileExists) {
+        $fullZipPath = Storage::disk('public')->path($zipFilePath);
+        $zipInfo = [
+            'modified_date' => date('Y-m-d H:i:s', filemtime($fullZipPath)),
+            'size' => round(filesize($fullZipPath) / 1024 / 1024, 2) . ' MB'
+        ];
+    }
 
     return response()->json([
         'status' => 'overview',
         'zip_file' => [
             'exists' => $zipFileExists,
             'path' => $zipFilePath,
-            'info' => $zipFileExists ? [
-                'modified_date' => date('Y-m-d H:i:s', filemtime($fullZipPath)),
-                'size' => round(filesize($fullZipPath) / 1024 / 1024, 2) . ' MB'
-            ] : null
+            'info' => $zipInfo
         ],
         'import_xmls' => [
             'count' => count(array_filter($importFiles, fn($f) => str_contains($f['filename'], '.xml'))),
