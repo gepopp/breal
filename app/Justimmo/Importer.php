@@ -19,26 +19,50 @@ class Importer
 
         $instance = new self();
 
-        //look for new Zip
-        $zipFile = $instance->findZipFile();
+        // Look for zip files
+        $zipFiles = $instance->getAllZipFiles();
 
-        if(is_null($zipFile)) {
-           Notification::make()
-                ->title('Keine neuen Dateien gefunden.')
-                ->sendToDatabase($recipient);
-           return;
+        if (empty($zipFiles)) {
+            if ($recipient) {
+                Notification::make()
+                    ->title('Keine neuen Dateien gefunden.')
+                    ->sendToDatabase($recipient);
+            }
+            return;
         }
 
-        $path = $instance->extractZipFile($zipFile['path']);
-        $instance->deleteZipFiles();
+        // Sort by modification time (newest first)
+        usort($zipFiles, function ($a, $b) {
+            return $b['modified'] <=> $a['modified'];
+        });
+
+        // Delete all but the latest zip file
+        if (count($zipFiles) > 1) {
+            $instance->deleteOldZipFiles($zipFiles);
+        }
+
+        // Get the latest zip file
+        $latestZipFile = $zipFiles[0];
+
+        // Extract and process
+        $path = $instance->extractZipFile($latestZipFile['path']);
+
+        // Delete the processed zip file
+        if (file_exists(storage_path('app/public/' . $latestZipFile['path']))) {
+            unlink(storage_path('app/public/' . $latestZipFile['path']));
+        }
 
         $instance->extractBatchFiles($path);
-        unlink(storage_path('app/public/' . $path));
+
+        // Delete the extracted XML file
+        if (file_exists(storage_path('app/public/' . $path))) {
+            unlink(storage_path('app/public/' . $path));
+        }
 
         $files = $instance->getSortedFilesWithFileFacade('batches');
 
         $flattend = array_map(function ($value) {
-           return $value['path'];
+            return $value['path'];
         }, $files);
 
         $chunks = array_chunk($flattend, 50);
@@ -52,31 +76,40 @@ class Importer
 
         CleanupRealtiesJob::dispatch();
 
-        Notification::make()->title('Import gestartet! Es werden ' . count($files) . ' Objekte aktualisiert!')->sendToDatabase(auth()->user());
-
-    }
-
-
-    public function findZipFile()
-    {
-        $last_import = Realty::orderBy('updated_at', 'desc')->first();
-        $files = $this->getSortedFilesWithFileFacade('imports');
-        $zipFile = null;
-        foreach ($files as $file) {
-            if (str_contains($file['filename'], '.zip') && Carbon::parse($file['modified_date'])->gt($last_import?->updated_at ?? now()->subDays(1))) {
-                $zipFile = $file;
-            }
+        if ($recipient) {
+            Notification::make()
+                ->title('Import gestartet! Es werden ' . count($files) . ' Objekte aktualisiert!')
+                ->sendToDatabase($recipient);
         }
-        return $zipFile;
     }
 
-
-    public function deleteZipFiles()
+    /**
+     * Get all zip files in the imports directory
+     */
+    public function getAllZipFiles(): array
     {
         $files = $this->getSortedFilesWithFileFacade('imports');
+        $zipFiles = [];
+
         foreach ($files as $file) {
             if (str_contains($file['filename'], '.zip')) {
-                unlink(storage_path('app/public/' . $file['path']));
+                $zipFiles[] = $file;
+            }
+        }
+
+        return $zipFiles;
+    }
+
+    /**
+     * Delete old zip files, keeping only the latest
+     */
+    public function deleteOldZipFiles(array $zipFiles): void
+    {
+        // Skip the first one (the latest), delete the rest
+        for ($i = 1; $i < count($zipFiles); $i++) {
+            $filePath = storage_path('app/public/' . $zipFiles[$i]['path']);
+            if (file_exists($filePath)) {
+                unlink($filePath);
             }
         }
     }

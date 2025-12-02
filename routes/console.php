@@ -7,10 +7,8 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
-//
-//Schedule::call(function () {
-//    \App\Justimmo\Importer::import();
-//})->hourly();
+// Import Justimmo real estate data from uploaded zip files
+Schedule::command('justimmo:import')->hourly();
 
 Schedule::call(function () {
     (new \App\Http\Controllers\SitemapController())->generate();
