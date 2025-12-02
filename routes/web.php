@@ -1,5 +1,6 @@
 <?php
 
+use Filament\Actions\Imports\Models\Import;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 use Illuminate\Support\Facades\Mail;
@@ -75,7 +76,6 @@ Route::get('solve-test', function () {
 })->name('solve-test');
 
 
-
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
@@ -127,13 +127,13 @@ Route::get('/admin/oauth/callback/linkedin', function () {
     $user = Socialite::driver('linkedin')->user();
 
     $data = [
-            'id' => $user->getId(),
-            'name' => $user->getName(),
-            'email' => $user->getEmail(),
-            'token' => $user->token,
-            'refreshToken' => $user->refreshToken,
-            'expiresIn' => now()->addSeconds($user->expiresIn)->format('Y-m-d H:i:s'),
-        ];
+        'id'           => $user->getId(),
+        'name'         => $user->getName(),
+        'email'        => $user->getEmail(),
+        'token'        => $user->token,
+        'refreshToken' => $user->refreshToken,
+        'expiresIn'    => now()->addSeconds($user->expiresIn)->format('Y-m-d H:i:s'),
+    ];
 
     $user = \App\Models\User::where('email', $user->getEmail())->first();
 
@@ -143,29 +143,26 @@ Route::get('/admin/oauth/callback/linkedin', function () {
 });
 
 
-
-Route::get('import', function (){
-   \App\Justimmo\Importer::import();
+Route::get('import', function () {
+    \App\Justimmo\Importer::import();
 });
 
 
-Route::get('faqslug', function (){
-   foreach (\App\Models\Question::all() as $faq) {
+Route::get('faqslug', function () {
+    foreach (\App\Models\Question::all() as $faq) {
         $faq->update(['updated_at' => now()]);
     }
 });
 
 
-
-
 Route::get('mail-test', function () {
-    if(auth()->check()){
+    if (auth()->check()) {
         $request = \App\Models\ContactRequest::whereHas('media')->inRandomOrder()->first();
 
-        Mail::to(auth()->user())->send( new \App\Mail\NewContactRequestAdminMail( $request ) );
+        Mail::to(auth()->user())->send(new \App\Mail\NewContactRequestAdminMail($request));
 
 
-        return new \App\Mail\NewContactRequestAdminMail( $request );
+        return new \App\Mail\NewContactRequestAdminMail($request);
     }
 
     return 'Bitte erst im Backend einloggen';
@@ -174,43 +171,8 @@ Route::get('mail-test', function () {
 
 Route::get('sitemap', [\App\Http\Controllers\SitemapController::class, 'generate']);
 
-Route::get('import-test', function (){
+Route::get('import-test', function () {
 
-    $exists = Storage::disk('public')->exists('imports/openimmo.zip');
-
-    if($exists){
-        $zipPath = Storage::disk('public')->path('imports/openimmo.zip');
-
-        $zip = new \ZipArchive();
-
-        if ($zip->open($zipPath) !== true) {
-
-           dd('cannot open zip');
-
-        }
-
-
-        for ($i = 0; $i < $zip->numFiles; $i++) {
-
-            $filename = $zip->getNameIndex($i);
-
-            $fileInfo = pathinfo($filename);
-
-
-            if (empty($fileInfo['extension'])) {
-                continue;
-            }
-
-            if($fileInfo['extension'] == 'xml'){
-                $fileContent = $zip->getFromIndex($i);
-                $xmlFile = 'imports/' . $fileInfo['basename'];
-
-                Storage::disk('public')->put($xmlFile, $fileContent);
-
-                dump(Storage::disk('public')->url($xmlFile));
-            }
-        }
-
-    }
+    Import::import();
 
 });

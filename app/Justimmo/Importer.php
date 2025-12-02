@@ -21,136 +21,73 @@ class Importer
     {
         $instance = new self();
 
+        $xmlFile = $instance->extractZipFile();
 
-
-        if (!file_exists($fullZipPath)) {
-
+        if(!$xmlFile)
+        {
             return;
         }
 
-        Log::info('Found openimmo.zip file');
+        $instance->extractBatchFiles($xmlFile);
 
-        // Extract and process
-        Log::info('Extracting zip file: ' . $zipFilePath);
-        $path = $instance->extractZipFile($zipFilePath);
-        Log::info('Extracted XML file: ' . $path);
-
-        // Mark processed zip file for deletion
-        $instance->filesToDelete[] = $fullZipPath;
-
-        Log::info('Extracting individual property XML files from: ' . $path);
-        $instance->extractBatchFiles($path);
-
-        // Mark extracted XML for deletion
-        $instance->filesToDelete[] = storage_path('app/public/' . $path);
-
-        $files = $instance->getSortedFilesWithFileFacade('batches');
-        Log::info('Found ' . count($files) . ' property files to import');
-
-        // Truncate realty table before processing new data
-        Log::info('Truncating realty table');
-        DB::table('realties')->truncate();
-
-        // Dispatch individual jobs
-        Log::info('Dispatching ' . count($files) . ' import jobs');
-        foreach ($files as $file) {
-            ImportRealtyJob::dispatch($file['path']);
-        }
-
-        Log::info('All import jobs dispatched successfully');
-
-        // Delete all marked files
-        Log::info('Cleaning up ' . count($instance->filesToDelete) . ' temporary files');
-        $instance->deleteMarkedFiles();
-
-        Log::info('=== Justimmo Import Completed ===');
-
-        // Notify all admins
-        foreach ($adminUsers as $admin) {
-            Notification::make()
-                ->title('Import gestartet! Es werden ' . count($files) . ' Objekte aktualisiert!')
-                ->sendToDatabase($admin);
-        }
-    }
-
-    /**
-     * Delete all marked files
-     */
-    public function deleteMarkedFiles(): void
-    {
-        foreach ($this->filesToDelete as $file) {
-            if (file_exists($file)) {
-                unlink($file);
-                Log::debug('Deleted file: ' . $file);
-            }
-        }
     }
 
 
-    public function extractZipFile($zipFile)
+
+
+    public function extractZipFile(): string|bool
     {
+        if (!Storage::disk('public')->exists('imports/openimmo.zip')) {
+            Log::channel('importer')->info('No openimmo.zip file found');
+            return false;
+        }
+
+        $zipPath = Storage::disk('public')->path('imports/openimmo.zip');
 
         $zip = new \ZipArchive();
-        if ($zip->open(storage_path('app/public/' . $zipFile)) === TRUE) {
 
-            // XML-Dateien extrahieren
-            // Über alle Dateien im Zip iterieren
-            for ($i = 0; $i < $zip->numFiles; $i++) {
-                $filename = $zip->getNameIndex($i);
-                $fileInfo = pathinfo($filename);
+        if ($zip->open($zipPath) !== true) {
+            throw new ImportException('Could not open zip file: ' . $zipPath);
+        }
 
-                // Prüfen, ob es sich um eine XML-Datei handelt
-                if (isset($fileInfo['extension']) && strtolower($fileInfo['extension']) === 'xml') {
-                    // Einzigartigen Dateinamen generieren
-                    $newFilename = 'imports/' . pathinfo($zipFile, PATHINFO_FILENAME) . '_' . uniqid() . '.xml';
-                    $targetPath = storage_path('app/public/' . $newFilename);
 
-                    // XML-Datei extrahieren und direkt in die Zieldatei schreiben
-                    $fileContent = $zip->getFromIndex($i);
-                    file_put_contents($targetPath, $fileContent);
+        for ($i = 0; $i < $zip->numFiles; $i++) {
 
-                    $zip->close();
-                    return $newFilename;
+            $filename = $zip->getNameIndex($i);
+
+            $fileInfo = pathinfo($filename);
+
+
+            if (empty($fileInfo['extension'])) {
+                continue;
+            }
+
+            if ($fileInfo['extension'] == 'xml') {
+                $fileContent = $zip->getFromIndex($i);
+                $xmlFile = 'imports/' . $fileInfo['basename'];
+
+                $put = Storage::disk('public')->put($xmlFile, $fileContent);
+
+                if ($put) {
+                    return $xmlFile;
                 }
             }
         }
+        return false;
     }
 
 
-    function getSortedFilesWithFileFacade($directoryPath)
-    {
-        $path = storage_path('app/public/' . $directoryPath);
-
-        if (!File::isDirectory($path)) {
-            return [];
-        }
-
-        $files = File::files($path);
-
-        $filesWithData = [];
-        foreach ($files as $file) {
-            $relativePath = str_replace(storage_path('app/public/'), '', $file->getPathname());
-            $filesWithData[] = [
-                'path'          => $relativePath,
-                'filename'      => $file->getFilename(),
-                'modified'      => $file->getMTime(),
-                'modified_date' => date('Y-m-d H:i:s', $file->getMTime()),
-                'size'          => $file->getSize()
-            ];
-        }
-
-        // Sort by last modified timestamp
-        usort($filesWithData, function ($a, $b) {
-            return $a['modified'] <=> $b['modified'];
-        });
-
-        return $filesWithData;
-    }
 
     public function extractBatchFiles($file)
     {
+        Storage::disk('public')->deleteDirectory('batches');
+        Storage::disk('public')->makeDirectory('batches');
+
+
         $reader = new \XMLReader();
         $reader->open(storage_path('app/public/' . $file));
+
+        dd($reader);
 
         while ($reader->read()) {
             if ($reader->nodeType === \XMLReader::ELEMENT && $reader->name === 'immobilie') {
@@ -194,10 +131,6 @@ class Importer
                 ->sendToDatabase($admin);
         }
     }
-
-    public function getZipFile()
-    {
-
-    }
-
 }
+
+class ImportException extends \Exception{}
