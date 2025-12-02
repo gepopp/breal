@@ -27,12 +27,12 @@ class Importer
         $adminUsers = User::where('admin', true)->get();
         Log::info('Found ' . $adminUsers->count() . ' admin user(s) for notifications');
 
-        // Look for zip files
-        $zipFiles = $instance->getAllZipFiles();
-        Log::info('Found ' . count($zipFiles) . ' zip file(s) in imports folder');
+        // Check for openimmo.zip file
+        $zipFilePath = 'imports/openimmo.zip';
+        $fullZipPath = storage_path('app/public/' . $zipFilePath);
 
-        if (empty($zipFiles)) {
-            Log::warning('No zip files found - aborting import');
+        if (!file_exists($fullZipPath)) {
+            Log::warning('No openimmo.zip file found - aborting import');
             foreach ($adminUsers as $admin) {
                 Notification::make()
                     ->title('Keine neuen Dateien gefunden.')
@@ -41,29 +41,15 @@ class Importer
             return;
         }
 
-        // Sort by modification time (newest first)
-        usort($zipFiles, function ($a, $b) {
-            return $b['modified'] <=> $a['modified'];
-        });
-
-        Log::info('Latest zip file: ' . $zipFiles[0]['filename'] . ' (modified: ' . $zipFiles[0]['modified_date'] . ')');
-
-        // Mark old zip files for deletion (but don't delete yet)
-        if (count($zipFiles) > 1) {
-            Log::info('Marking ' . (count($zipFiles) - 1) . ' old zip file(s) for deletion');
-            $instance->markOldZipFilesForDeletion($zipFiles);
-        }
-
-        // Get the latest zip file
-        $latestZipFile = $zipFiles[0];
+        Log::info('Found openimmo.zip file');
 
         // Extract and process
-        Log::info('Extracting zip file: ' . $latestZipFile['path']);
-        $path = $instance->extractZipFile($latestZipFile['path']);
+        Log::info('Extracting zip file: ' . $zipFilePath);
+        $path = $instance->extractZipFile($zipFilePath);
         Log::info('Extracted XML file: ' . $path);
 
         // Mark processed zip file for deletion
-        $instance->filesToDelete[] = storage_path('app/public/' . $latestZipFile['path']);
+        $instance->filesToDelete[] = $fullZipPath;
 
         Log::info('Extracting individual property XML files from: ' . $path);
         $instance->extractBatchFiles($path);
@@ -97,37 +83,6 @@ class Importer
             Notification::make()
                 ->title('Import gestartet! Es werden ' . count($files) . ' Objekte aktualisiert!')
                 ->sendToDatabase($admin);
-        }
-    }
-
-    /**
-     * Get all zip files in the imports directory
-     */
-    public function getAllZipFiles(): array
-    {
-        $files = $this->getSortedFilesWithFileFacade('imports');
-        $zipFiles = [];
-
-        foreach ($files as $file) {
-            if (str_contains($file['filename'], '.zip')) {
-                $zipFiles[] = $file;
-            }
-        }
-
-        return $zipFiles;
-    }
-
-    /**
-     * Mark old zip files for deletion, keeping only the latest
-     */
-    public function markOldZipFilesForDeletion(array $zipFiles): void
-    {
-        // Skip the first one (the latest), mark the rest for deletion
-        for ($i = 1; $i < count($zipFiles); $i++) {
-            $filePath = storage_path('app/public/' . $zipFiles[$i]['path']);
-            if (file_exists($filePath)) {
-                $this->filesToDelete[] = $filePath;
-            }
         }
     }
 
