@@ -87,7 +87,6 @@ class Importer
         $reader = new \XMLReader();
         $reader->open(storage_path('app/public/' . $file));
 
-        dd($reader);
 
         while ($reader->read()) {
             if ($reader->nodeType === \XMLReader::ELEMENT && $reader->name === 'immobilie') {
