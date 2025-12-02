@@ -28,8 +28,6 @@ class ImportRealtyJob implements ShouldQueue
         $json = Storage::disk('public')->get($this->path);
         $array = json_decode($json, true);
 
-        $keys = array_keys($array);
-
         $openimmo_obid = $array['verwaltung_techn']['openimmo_obid'];
 
         $nutzungsart = '';

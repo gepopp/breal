@@ -23,8 +23,7 @@ class Importer
 
         $xmlFile = $instance->extractZipFile();
 
-        if(!$xmlFile)
-        {
+        if (!$xmlFile) {
             return;
         }
 
@@ -35,8 +34,8 @@ class Importer
 
         DB::table('realties')->truncate();
 
-        foreach($batchFiles as $batchFile)
-        {
+        foreach ($batchFiles as $batchFile) {
+
             $filePath = storage_path('app/public/' . $batchFile);
             $xml = simplexml_load_file($filePath);
             $json = json_encode($xml);
@@ -44,11 +43,11 @@ class Importer
 
             $openimmo_obid = $array['verwaltung_techn']['openimmo_obid'] ?? null;
 
-            if(is_null($openimmo_obid))
-            {
+            if (is_null($openimmo_obid)) {
                 continue;
             }
 
+            Storage::disk('public')->delete($batchFile);;
             Storage::disk('public')->put('realties/' . $openimmo_obid . '.json', $json);
             ImportRealtyJob::dispatchSync('realties/' . $openimmo_obid . '.json');
         }
@@ -58,12 +57,10 @@ class Importer
     }
 
 
-
-
     public function extractZipFile(): string|bool
     {
         if (!Storage::disk('public')->exists('imports/openimmo.zip')) {
-            Log::channel('importer')->info('No openimmo.zip file found');
+            Log::info('No openimmo.zip file found');
             return false;
         }
 
@@ -88,19 +85,20 @@ class Importer
             }
 
             if ($fileInfo['extension'] == 'xml') {
+
                 $fileContent = $zip->getFromIndex($i);
                 $xmlFile = 'imports/' . $fileInfo['basename'];
-
                 $put = Storage::disk('public')->put($xmlFile, $fileContent);
 
                 if ($put) {
+                    $zip->close();
+                    Storage::disk('public')->delete('imports/openimmo.zip');
                     return $xmlFile;
                 }
             }
         }
         return false;
     }
-
 
 
     public function extractBatchFiles($file)
@@ -164,4 +162,6 @@ class Importer
     }
 }
 
-class ImportException extends \Exception{}
+class ImportException extends \Exception
+{
+}
