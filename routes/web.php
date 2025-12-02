@@ -189,7 +189,29 @@ Route::get('import-test', function (){
 
         }
 
-        dd($zip);
+        $extractedFiles = [];
+
+
+
+        for ($i = 0; $i < $zip->numFiles; $i++) {
+
+            $filename = $zip->getNameIndex($i);
+
+            $fileInfo = pathinfo($filename);
+
+            if (empty($fileInfo['extension'])) {
+                continue;
+            }
+
+            if($fileInfo['extension'] !== 'xml'){
+                $fileContent = $zip->getFromIndex($i);
+                $xmlFile = 'imports/' . $filename;
+
+                Storage::disk('public')->put($xmlFile, $fileContent);
+
+                dump(Storage::disk('public')->url($xmlFile));
+            }
+        }
 
     }
 
