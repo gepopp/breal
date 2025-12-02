@@ -18,7 +18,7 @@ class ImportRealtyJob implements ShouldQueue
      */
     public function __construct(public string $path)
     {
-        //
+        dd($path);
     }
 
     /**
@@ -26,8 +26,6 @@ class ImportRealtyJob implements ShouldQueue
      */
     public function handle(): void
     {
-        try {
-
             $json = Storage::disk('public')->get($this->path);
             $array = json_decode($json, true);
 
@@ -84,15 +82,6 @@ class ImportRealtyJob implements ShouldQueue
             // Clean up batch file
             unlink($filePath);
 
-        } catch (\Exception $e) {
-            Log::error('Failed to import realty from file: ' . $this->path . ' - Error: ' . $e->getMessage());
 
-            // Still try to clean up the file
-            if (file_exists(storage_path('app/public/' . $this->path))) {
-                unlink(storage_path('app/public/' . $this->path));
-            }
-
-            throw $e;
-        }
     }
 }
