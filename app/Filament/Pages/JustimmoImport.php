@@ -29,10 +29,10 @@ class JustimmoImport extends Page
     }
 
     // Only allow admin users to access
-    public static function canAccess(): bool
-    {
-        return auth()->check() && auth()->user()->admin;
-    }
+//    public static function canAccess(): bool
+//    {
+//        return auth()->check() && auth()->user()->admin;
+//    }
 
     public ?array $zipFileInfo = null;
     public ?array $extractedXmlInfo = null;
