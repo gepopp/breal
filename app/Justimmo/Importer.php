@@ -2,7 +2,7 @@
 
 namespace App\Justimmo;
 
-use App\Jobs\ImportRealtyChunkJob;
+use App\Jobs\ImportRealtyJob;
 use App\Models\Realty;
 use App\Models\User;
 use Carbon\Carbon;
@@ -10,21 +10,29 @@ use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class Importer
 {
+    protected array $filesToDelete = [];
+
     public static function import()
     {
+        Log::info('=== Justimmo Import Started ===');
+
         $instance = new self();
 
         // Get all admin users for notifications
         $adminUsers = User::where('admin', true)->get();
+        Log::info('Found ' . $adminUsers->count() . ' admin user(s) for notifications');
 
-        // Look for zip files
-        $zipFiles = $instance->getAllZipFiles();
+        // Check for openimmo.zip file
+        $zipFilePath = 'imports/openimmo.zip';
+        $fullZipPath = storage_path('app/public/' . $zipFilePath);
 
-        if (empty($zipFiles)) {
+        if (!file_exists($fullZipPath)) {
+            Log::warning('No openimmo.zip file found - aborting import');
             foreach ($adminUsers as $admin) {
                 Notification::make()
                     ->title('Keine neuen Dateien gefunden.')
@@ -33,51 +41,42 @@ class Importer
             return;
         }
 
-        // Sort by modification time (newest first)
-        usort($zipFiles, function ($a, $b) {
-            return $b['modified'] <=> $a['modified'];
-        });
-
-        // Delete all but the latest zip file
-        if (count($zipFiles) > 1) {
-            $instance->deleteOldZipFiles($zipFiles);
-        }
-
-        // Get the latest zip file
-        $latestZipFile = $zipFiles[0];
+        Log::info('Found openimmo.zip file');
 
         // Extract and process
-        $path = $instance->extractZipFile($latestZipFile['path']);
+        Log::info('Extracting zip file: ' . $zipFilePath);
+        $path = $instance->extractZipFile($zipFilePath);
+        Log::info('Extracted XML file: ' . $path);
 
-        // Delete the processed zip file
-        if (file_exists(storage_path('app/public/' . $latestZipFile['path']))) {
-            unlink(storage_path('app/public/' . $latestZipFile['path']));
-        }
+        // Mark processed zip file for deletion
+        $instance->filesToDelete[] = $fullZipPath;
 
+        Log::info('Extracting individual property XML files from: ' . $path);
         $instance->extractBatchFiles($path);
 
-        // Delete the extracted XML file
-        if (file_exists(storage_path('app/public/' . $path))) {
-            unlink(storage_path('app/public/' . $path));
-        }
+        // Mark extracted XML for deletion
+        $instance->filesToDelete[] = storage_path('app/public/' . $path);
 
         $files = $instance->getSortedFilesWithFileFacade('batches');
-
-        $flattend = array_map(function ($value) {
-            return $value['path'];
-        }, $files);
-
-        $chunks = array_chunk($flattend, 50);
+        Log::info('Found ' . count($files) . ' property files to import');
 
         // Truncate realty table before processing new data
+        Log::info('Truncating realty table');
         DB::table('realties')->truncate();
 
-        $jobs = [];
-        foreach ($chunks as $chunk) {
-            $jobs[] = new ImportRealtyChunkJob($chunk);
+        // Dispatch individual jobs
+        Log::info('Dispatching ' . count($files) . ' import jobs');
+        foreach ($files as $file) {
+            ImportRealtyJob::dispatch($file['path']);
         }
 
-        Bus::batch($jobs)->dispatch();
+        Log::info('All import jobs dispatched successfully');
+
+        // Delete all marked files
+        Log::info('Cleaning up ' . count($instance->filesToDelete) . ' temporary files');
+        $instance->deleteMarkedFiles();
+
+        Log::info('=== Justimmo Import Completed ===');
 
         // Notify all admins
         foreach ($adminUsers as $admin) {
@@ -88,32 +87,14 @@ class Importer
     }
 
     /**
-     * Get all zip files in the imports directory
+     * Delete all marked files
      */
-    public function getAllZipFiles(): array
+    public function deleteMarkedFiles(): void
     {
-        $files = $this->getSortedFilesWithFileFacade('imports');
-        $zipFiles = [];
-
-        foreach ($files as $file) {
-            if (str_contains($file['filename'], '.zip')) {
-                $zipFiles[] = $file;
-            }
-        }
-
-        return $zipFiles;
-    }
-
-    /**
-     * Delete old zip files, keeping only the latest
-     */
-    public function deleteOldZipFiles(array $zipFiles): void
-    {
-        // Skip the first one (the latest), delete the rest
-        for ($i = 1; $i < count($zipFiles); $i++) {
-            $filePath = storage_path('app/public/' . $zipFiles[$i]['path']);
-            if (file_exists($filePath)) {
-                unlink($filePath);
+        foreach ($this->filesToDelete as $file) {
+            if (file_exists($file)) {
+                unlink($file);
+                Log::debug('Deleted file: ' . $file);
             }
         }
     }

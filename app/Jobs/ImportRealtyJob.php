@@ -3,14 +3,14 @@
 namespace App\Jobs;
 
 use App\Models\Realty;
-use Illuminate\Bus\Batchable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class ImportRealtyJob implements ShouldQueue
 {
-    use Queueable, Batchable;
+    use Queueable;
 
 
     /**
@@ -18,51 +18,7 @@ class ImportRealtyJob implements ShouldQueue
      */
     public function __construct(public string $path)
     {
-
-        $xml = simplexml_load_file(storage_path('app/public/' . $path));;
-        $json = json_encode($xml);
-        $array = json_decode($json, true);
-
-
-        $nutzungsart = '';
-        foreach ($array['objektkategorie']['nutzungsart']['@attributes'] as $key => $value) {
-            if ($value == '1') {
-                $nutzungsart = $key;
-            }
-        }
-
-
-        Realty::updateOrCreate(
-            [
-                'openimmo_obid' => $array['verwaltung_techn']['openimmo_obid'],
-            ],
-            [
-                'objektnr_intern' => $array['verwaltung_techn']['objektnr_intern'] ?? null,
-                'objektnr_extern' => $array['verwaltung_techn']['objektnr_extern'] ?? null,
-                'title'           => $array['freitexte']['objekttitel'] ?? null,
-                'beschreibung'    => $array['freitexte']['objektbeschreibung'] ?? null,
-                'zimmer'          => $array['flaechen']['anzahl_zimmer'] ?? null,
-                'wohnflaeche'     => $array['flaechen']['gesamtflaeche'] ?? null,
-                'preis'           => ($array['preise']['kaufpreisbrutto'] ?? null) ?:
-                    ($array['preise']['gesamtmietebrutto'] ?? null),
-                'vermarktungsart' => isset($array['objektkategorie']['vermarktungsart']['@attributes']['KAUF']) &&
-                $array['objektkategorie']['vermarktungsart']['@attributes']['KAUF'] == '1'
-                    ? 'kauf' : 'miete',
-                'nutzungsart'     => $nutzungsart ?? null,
-                'plz'             => $array['geo']['plz'] ?? null,
-                'ort'             => $array['geo']['ort'] ?? null,
-                'strasse'         => $array['geo']['strasse'] ?? null,
-                'hausnummer'      => $array['geo']['hausnummer'] ?? null,
-                'bundesland'      => $array['geo']['bundesland'] ?? null,
-                'wohnungsnummer'  => $array['geo']['wohnungsnr'] ?? null,
-                'lat'             => $array['geo']['user_defined_simplefield'][0] ?? null,
-                'lng'             => $array['geo']['user_defined_simplefield'][1] ?? null,
-                'path'            => 'realties/' . $array['verwaltung_techn']['openimmo_obid'] . '.json'
-            ]);
-
-
-        Storage::disk('public')->put('realties/' . $array['verwaltung_techn']['openimmo_obid'] . '.json', $json);
-        unlink(storage_path('app/public/' . $path));
+        //
     }
 
     /**
@@ -70,6 +26,80 @@ class ImportRealtyJob implements ShouldQueue
      */
     public function handle(): void
     {
-        //
+        try {
+            Log::info('Processing realty file: ' . $this->path);
+
+            $filePath = storage_path('app/public/' . $this->path);
+
+            if (!file_exists($filePath)) {
+                Log::error('Realty file not found: ' . $this->path);
+                return;
+            }
+
+            $xml = simplexml_load_file($filePath);
+            $json = json_encode($xml);
+            $array = json_decode($json, true);
+
+            $openimmo_obid = $array['verwaltung_techn']['openimmo_obid'] ?? null;
+
+            if (!$openimmo_obid) {
+                Log::warning('Missing openimmo_obid in file: ' . $this->path);
+                unlink($filePath);
+                return;
+            }
+
+            $nutzungsart = '';
+            foreach ($array['objektkategorie']['nutzungsart']['@attributes'] as $key => $value) {
+                if ($value == '1') {
+                    $nutzungsart = $key;
+                }
+            }
+
+            $realty = Realty::updateOrCreate(
+                [
+                    'openimmo_obid' => $openimmo_obid,
+                ],
+                [
+                    'objektnr_intern' => $array['verwaltung_techn']['objektnr_intern'] ?? null,
+                    'objektnr_extern' => $array['verwaltung_techn']['objektnr_extern'] ?? null,
+                    'title'           => $array['freitexte']['objekttitel'] ?? null,
+                    'beschreibung'    => $array['freitexte']['objektbeschreibung'] ?? null,
+                    'zimmer'          => $array['flaechen']['anzahl_zimmer'] ?? null,
+                    'wohnflaeche'     => $array['flaechen']['gesamtflaeche'] ?? null,
+                    'preis'           => ($array['preise']['kaufpreisbrutto'] ?? null) ?:
+                        ($array['preise']['gesamtmietebrutto'] ?? null),
+                    'vermarktungsart' => isset($array['objektkategorie']['vermarktungsart']['@attributes']['KAUF']) &&
+                    $array['objektkategorie']['vermarktungsart']['@attributes']['KAUF'] == '1'
+                        ? 'kauf' : 'miete',
+                    'nutzungsart'     => $nutzungsart ?? null,
+                    'plz'             => $array['geo']['plz'] ?? null,
+                    'ort'             => $array['geo']['ort'] ?? null,
+                    'strasse'         => $array['geo']['strasse'] ?? null,
+                    'hausnummer'      => $array['geo']['hausnummer'] ?? null,
+                    'bundesland'      => $array['geo']['bundesland'] ?? null,
+                    'wohnungsnummer'  => $array['geo']['wohnungsnr'] ?? null,
+                    'lat'             => $array['geo']['user_defined_simplefield'][0] ?? null,
+                    'lng'             => $array['geo']['user_defined_simplefield'][1] ?? null,
+                    'path'            => 'realties/' . $openimmo_obid . '.json'
+                ]
+            );
+
+            Storage::disk('public')->put('realties/' . $openimmo_obid . '.json', $json);
+
+            Log::info('Successfully imported realty: ' . $openimmo_obid . ' - ' . ($array['freitexte']['objekttitel'] ?? 'No title'));
+
+            // Clean up batch file
+            unlink($filePath);
+
+        } catch (\Exception $e) {
+            Log::error('Failed to import realty from file: ' . $this->path . ' - Error: ' . $e->getMessage());
+
+            // Still try to clean up the file
+            if (file_exists(storage_path('app/public/' . $this->path))) {
+                unlink(storage_path('app/public/' . $this->path));
+            }
+
+            throw $e;
+        }
     }
 }
