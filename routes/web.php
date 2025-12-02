@@ -184,4 +184,7 @@ Route::get('import-test', function (){
 
     dump( $base );
 
+    $exists = Storage::disk('public')->exists('imports/openimmo.zip');
+
+    dump($exists);
 });
