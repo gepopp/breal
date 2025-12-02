@@ -8,7 +8,9 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 // Import Justimmo real estate data from uploaded zip files
-Schedule::command('justimmo:import')->hourly();
+Schedule::call(function () {
+    \App\Justimmo\Importer::import();
+})->hourly();
 
 Schedule::call(function () {
     (new \App\Http\Controllers\SitemapController())->generate();
