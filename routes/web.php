@@ -201,7 +201,7 @@ Route::get('import-test', function (){
                 continue;
             }
 
-            if($fileInfo['extension'] !== 'xml'){
+            if($fileInfo['extension'] == 'xml'){
                 $fileContent = $zip->getFromIndex($i);
                 $xmlFile = 'imports/' . $fileInfo['basename'];
 
