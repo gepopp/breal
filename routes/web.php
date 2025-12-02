@@ -180,7 +180,17 @@ Route::get('import-test', function (){
 
     if($exists){
         $zipPath = Storage::disk('public')->path('imports/openimmo.zip');
-        dump($zipPath);
+
+        $zip = new \ZipArchive();
+
+        if ($zip->open($zipPath) !== true) {
+
+           dd('cannot open zip');
+
+        }
+
+        dd($zip);
+
     }
 
 });
