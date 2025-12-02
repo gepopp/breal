@@ -73,11 +73,8 @@ class ImportRealtyJob implements ShouldQueue
                 'wohnungsnummer'  => $array['geo']['wohnungsnr'] ?? null,
                 'lat'             => $array['geo']['user_defined_simplefield'][0] ?? null,
                 'lng'             => $array['geo']['user_defined_simplefield'][1] ?? null,
-                'path'            => 'realties/' . $openimmo_obid . '.json'
+                'data'            => $array,
             ]
         );
-
-        Storage::disk('public')->put('realties/' . $openimmo_obid . '.json', $json);
-
     }
 }

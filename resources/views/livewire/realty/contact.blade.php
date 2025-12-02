@@ -5,9 +5,12 @@
         $contact = $realty->data['kontaktperson'];
     @endphp
     <div class="flex lg:flex-col space-x-8 lg:space-x-0 mt-4 lg:mt-0 pt-4 lg:pt-0 border-t lg:border-t-none border-gray-200">
-        <div class="w-full">
-            <img src="{{ $contact['foto']['daten']['pfad'] }}" alt="{{ $contact['vorname'] }} {{ $contact['name'] }}" class="aspect-square object-cover object-top">
-        </div>
+        @if(array_key_exists('foto', $contact))
+            <div class="w-full">
+                <img src="{{ $contact['foto']['daten']['pfad'] }}" alt="{{ $contact['vorname'] }} {{ $contact['name'] }}" class="aspect-square object-cover object-top">
+            </div>
+       @endif
+
         <div class="w-full">
             <h3 class="pt-0 !lg:pt-4">{{ $contact['anrede'] }} {{ $contact['vorname'] }} {{ $contact['name'] }}</h3>
             <p class="flex items-center space-x-2">

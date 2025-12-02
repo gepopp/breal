@@ -12,13 +12,9 @@ class Realty extends Model
 {
     use HasSlug;
 
-
-    protected function data(): Attribute
-    {
-        return Attribute::make(
-          get: fn() => json_decode(Storage::disk('public')->get($this->path), true),
-        );
-    }
+    public $casts = [
+        'data' => 'array'
+    ];
 
 
     public function getRouteKeyName()
