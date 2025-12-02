@@ -122,9 +122,11 @@ class Importer
                 // Temporäre Datei löschen
                 unlink($tempFile);
 
-                return $batchFiles;
             }
         }
+
+        return $batchFiles;
+
     }
 
 
