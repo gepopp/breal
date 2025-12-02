@@ -51,6 +51,9 @@ class Importer
             Storage::disk('public')->put($path . $openimmo_obid . '.json', $json);
             ImportRealtyJob::dispatchSync($path . $openimmo_obid . '.json');
         }
+
+        Storage::disk('public')->delete($xmlFile);
+        Storage::disk('public')->deleteDirectory($path);
     }
 
 
