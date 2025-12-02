@@ -178,6 +178,10 @@ Route::get('import-test', function (){
 
     $fullZipPath = storage_path('app/public/imports/openimmo.zip');
 
-    dd($fullZipPath);
+    dump($fullZipPath);
+
+    $base = base_path();
+
+    dump( $base );
 
 });
