@@ -173,6 +173,6 @@ Route::get('sitemap', [\App\Http\Controllers\SitemapController::class, 'generate
 
 Route::get('import-test', function () {
 
-    Import::import();
+    \App\Justimmo\Importer::import();
 
 });
