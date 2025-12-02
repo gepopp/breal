@@ -2,12 +2,13 @@
 
 namespace App\Justimmo;
 
-use App\Jobs\CleanupRealtiesJob;
 use App\Jobs\ImportRealtyChunkJob;
 use App\Models\Realty;
+use App\Models\User;
 use Carbon\Carbon;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -15,18 +16,19 @@ class Importer
 {
     public static function import()
     {
-        $recipient = auth()->user();
-
         $instance = new self();
+
+        // Get all admin users for notifications
+        $adminUsers = User::where('admin', true)->get();
 
         // Look for zip files
         $zipFiles = $instance->getAllZipFiles();
 
         if (empty($zipFiles)) {
-            if ($recipient) {
+            foreach ($adminUsers as $admin) {
                 Notification::make()
                     ->title('Keine neuen Dateien gefunden.')
-                    ->sendToDatabase($recipient);
+                    ->sendToDatabase($admin);
             }
             return;
         }
@@ -67,6 +69,9 @@ class Importer
 
         $chunks = array_chunk($flattend, 50);
 
+        // Truncate realty table before processing new data
+        DB::table('realties')->truncate();
+
         $jobs = [];
         foreach ($chunks as $chunk) {
             $jobs[] = new ImportRealtyChunkJob($chunk);
@@ -74,12 +79,11 @@ class Importer
 
         Bus::batch($jobs)->dispatch();
 
-        CleanupRealtiesJob::dispatch();
-
-        if ($recipient) {
+        // Notify all admins
+        foreach ($adminUsers as $admin) {
             Notification::make()
                 ->title('Import gestartet! Es werden ' . count($files) . ' Objekte aktualisiert!')
-                ->sendToDatabase($recipient);
+                ->sendToDatabase($admin);
         }
     }
 
