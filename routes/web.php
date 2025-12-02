@@ -1,8 +1,16 @@
 <?php
 
+use Filament\Actions\Imports\Models\Import;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 use Illuminate\Support\Facades\Mail;
+
+require __DIR__ . '/auth.php';
+
+
+Route::fallback(function () {
+    return view('404');
+});
 
 Route::get('/welcome', function () {
     return view('welcome');
@@ -47,7 +55,6 @@ Route::group(['prefix' => 'technik', 'as' => 'technik.'], function () {
 });
 
 Route::get('/faq/{slug}', \App\Livewire\FAQSingle::class)->name('faq.single');
-
 Route::get('/stellenanzeige/{JobVacancy}', \App\Livewire\Pages\JobVacancy::class)->name('stellenanzeige');
 
 
@@ -67,7 +74,6 @@ Route::get('solve-test', function () {
     return view('solved', compact('request'));
 
 })->name('solve-test');
-
 
 
 Route::view('dashboard', 'dashboard')
@@ -121,13 +127,13 @@ Route::get('/admin/oauth/callback/linkedin', function () {
     $user = Socialite::driver('linkedin')->user();
 
     $data = [
-            'id' => $user->getId(),
-            'name' => $user->getName(),
-            'email' => $user->getEmail(),
-            'token' => $user->token,
-            'refreshToken' => $user->refreshToken,
-            'expiresIn' => now()->addSeconds($user->expiresIn)->format('Y-m-d H:i:s'),
-        ];
+        'id'           => $user->getId(),
+        'name'         => $user->getName(),
+        'email'        => $user->getEmail(),
+        'token'        => $user->token,
+        'refreshToken' => $user->refreshToken,
+        'expiresIn'    => now()->addSeconds($user->expiresIn)->format('Y-m-d H:i:s'),
+    ];
 
     $user = \App\Models\User::where('email', $user->getEmail())->first();
 
@@ -137,34 +143,26 @@ Route::get('/admin/oauth/callback/linkedin', function () {
 });
 
 
-
-Route::get('import', function (){
-   \App\Justimmo\Importer::import();
+Route::get('import', function () {
+    \App\Justimmo\Importer::import();
 });
 
 
-Route::get('faqslug', function (){
-   foreach (\App\Models\Question::all() as $faq) {
+Route::get('faqslug', function () {
+    foreach (\App\Models\Question::all() as $faq) {
         $faq->update(['updated_at' => now()]);
     }
 });
 
-require __DIR__ . '/auth.php';
-
-
-Route::fallback(function () {
-    return view('404');
-});
-
 
 Route::get('mail-test', function () {
-    if(auth()->check()){
+    if (auth()->check()) {
         $request = \App\Models\ContactRequest::whereHas('media')->inRandomOrder()->first();
 
-        Mail::to(auth()->user())->send( new \App\Mail\NewContactRequestAdminMail( $request ) );
+        Mail::to(auth()->user())->send(new \App\Mail\NewContactRequestAdminMail($request));
 
 
-        return new \App\Mail\NewContactRequestAdminMail( $request );
+        return new \App\Mail\NewContactRequestAdminMail($request);
     }
 
     return 'Bitte erst im Backend einloggen';
@@ -173,14 +171,8 @@ Route::get('mail-test', function () {
 
 Route::get('sitemap', [\App\Http\Controllers\SitemapController::class, 'generate']);
 
-Route::get('storage-test', function (){
+Route::get('import-test', function () {
 
-    $get = \Illuminate\Support\Facades\Storage::disk('public')->url('1/job-default.jpg');
-    dd($get);
+    \App\Justimmo\Importer::import();
 
-    $put = \Illuminate\Support\Facades\Storage::disk('s3')->put('test2.txt', 'test2');
-    $url = \Illuminate\Support\Facades\Storage::disk('s3')->url('test2.txt');
-
-    dump($url);
-    dump($put);
 });

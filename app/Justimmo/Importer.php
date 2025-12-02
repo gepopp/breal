@@ -45,14 +45,20 @@ class Importer
 
         // Extract and process
         Log::info('Extracting zip file: ' . $zipFilePath);
-        $path = $instance->extractZipFile($zipFilePath);
+        $path = $instance->extractZipFile();
+
+        if (!$path) {
+            Log::error('Failed to extract XML from zip file');
+            return;
+        }
+
         Log::info('Extracted XML file: ' . $path);
 
         // Mark processed zip file for deletion
         $instance->filesToDelete[] = $fullZipPath;
 
         Log::info('Extracting individual property XML files from: ' . $path);
-        $instance->extractBatchFiles($path);
+        $batchFiles = $instance->extractBatchFiles($path);
 
         // Mark extracted XML for deletion
         $instance->filesToDelete[] = Storage::disk('public')->path($path);
@@ -158,38 +164,44 @@ class Importer
         ];
     }
 
-
-    public function extractZipFile($zipFile)
+    public function extractZipFile(): string|bool
     {
+        if (!Storage::disk('public')->exists('imports/openimmo.zip')) {
+            Log::channel('importer')->info('No openimmo.zip file found');
+            return false;
+        }
+
+        $zipPath = Storage::disk('public')->path('imports/openimmo.zip');
 
         $zip = new \ZipArchive();
-        $zipPath = Storage::disk('public')->path($zipFile);
 
-        if ($zip->open($zipPath) === TRUE) {
+        if ($zip->open($zipPath) !== true) {
+            throw new ImportException('Could not open zip file: ' . $zipPath);
+        }
 
-            // XML-Dateien extrahieren
-            // Über alle Dateien im Zip iterieren
-            for ($i = 0; $i < $zip->numFiles; $i++) {
-                $filename = $zip->getNameIndex($i);
-                $fileInfo = pathinfo($filename);
+        for ($i = 0; $i < $zip->numFiles; $i++) {
 
-                // Prüfen, ob es sich um eine XML-Datei handelt
-                if (isset($fileInfo['extension']) && strtolower($fileInfo['extension']) === 'xml') {
-                    // Einzigartigen Dateinamen generieren
-                    $newFilename = 'imports/' . pathinfo($zipFile, PATHINFO_FILENAME) . '_' . uniqid() . '.xml';
-                    $targetPath = Storage::disk('public')->path($newFilename);
+            $filename = $zip->getNameIndex($i);
 
-                    // XML-Datei extrahieren und direkt in die Zieldatei schreiben
-                    $fileContent = $zip->getFromIndex($i);
-                    file_put_contents($targetPath, $fileContent);
+            $fileInfo = pathinfo($filename);
 
-                    $zip->close();
-                    return $newFilename;
+            if (empty($fileInfo['extension'])) {
+                continue;
+            }
+
+            if ($fileInfo['extension'] == 'xml') {
+                $fileContent = $zip->getFromIndex($i);
+                $xmlFile = 'imports/' . $fileInfo['basename'];
+
+                $put = Storage::disk('public')->put($xmlFile, $fileContent);
+
+                if ($put) {
+                    return $xmlFile;
                 }
             }
         }
+        return false;
     }
-
 
     function getSortedFilesWithFileFacade($directoryPath)
     {
@@ -224,8 +236,13 @@ class Importer
 
     public function extractBatchFiles($file)
     {
+        Storage::disk('public')->deleteDirectory('batches');
+        Storage::disk('public')->makeDirectory('batches');
+
         $reader = new \XMLReader();
         $reader->open(Storage::disk('public')->path($file));
+
+        $batchFiles = [];
 
         while ($reader->read()) {
             if ($reader->nodeType === \XMLReader::ELEMENT && $reader->name === 'immobilie') {
@@ -253,10 +270,25 @@ class Importer
                     file_get_contents($tempFile)
                 );
 
+                $batchFiles[] = $filename;
+
                 // Temporäre Datei löschen
                 unlink($tempFile);
             }
         }
 
+        return $batchFiles;
+    }
+
+    public function notifyAdmins(string $message)
+    {
+        $adminUsers = User::where('admin', true)->get();
+        foreach ($adminUsers as $admin) {
+            Notification::make()
+                ->title($message)
+                ->sendToDatabase($admin);
+        }
     }
 }
+
+class ImportException extends \Exception{}

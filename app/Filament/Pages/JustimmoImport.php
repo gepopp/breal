@@ -96,7 +96,15 @@ class JustimmoImport extends Page
 
         try {
             $importer = new Importer();
-            $extractedPath = $importer->extractZipFile($this->zipFileInfo['path']);
+            $extractedPath = $importer->extractZipFile();
+
+            if (!$extractedPath) {
+                Notification::make()
+                    ->title('Fehler: XML konnte nicht extrahiert werden')
+                    ->danger()
+                    ->send();
+                return;
+            }
 
             $fullXmlPath = Storage::disk('public')->path($extractedPath);
             $xmlContent = file_get_contents($fullXmlPath);
