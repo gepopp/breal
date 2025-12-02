@@ -25,9 +25,10 @@ class ImportRealtyJob implements ShouldQueue
      */
     public function handle(): void
     {
-        dd($this->path);
-
         $json = Storage::disk('public')->get($this->path);
+
+        dd($json);
+
         $array = json_decode($json, true);
 
         dd($array);
