@@ -22,7 +22,6 @@ class JustimmoImport extends Page
 
     protected static ?string $navigationGroup = 'Import';
 
-
     public ?array $zipFileInfo = null;
     public ?array $extractedXmlInfo = null;
     public ?array $batchFilesInfo = null;
