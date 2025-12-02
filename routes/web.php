@@ -176,15 +176,11 @@ Route::get('sitemap', [\App\Http\Controllers\SitemapController::class, 'generate
 
 Route::get('import-test', function (){
 
-    $fullZipPath = storage_path('app/public/imports/openimmo.zip');
-
-    dump($fullZipPath);
-
-    $base = base_path();
-
-    dump( $base );
-
     $exists = Storage::disk('public')->exists('imports/openimmo.zip');
 
-    dump($exists);
+    if($exists){
+        $zipPath = Storage::disk('public')->path('imports/openimmo.zip');
+        dump($zipPath);
+    }
+
 });
