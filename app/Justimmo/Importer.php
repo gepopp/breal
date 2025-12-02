@@ -30,7 +30,15 @@ class Importer
 
         $batchFiles = $instance->extractBatchFiles($xmlFile);
 
-        dd($batchFiles);
+        foreach($batchFiles as $batchFile)
+        {
+            $filePath = storage_path('app/public/' . $batchFile);
+            $xml = simplexml_load_file($filePath);
+            $json = json_encode($xml);
+            $array = json_decode($json, true);
+
+            dd($array);
+        }
 
     }
 
