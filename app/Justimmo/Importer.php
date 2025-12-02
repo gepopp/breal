@@ -30,7 +30,7 @@ class Importer
 
         $batchFiles = $instance->extractBatchFiles($xmlFile);
 
-
+        $path = 'realties/' . time() . '/';
 
         foreach($batchFiles as $batchFile)
         {
@@ -41,9 +41,13 @@ class Importer
 
             $openimmo_obid = $array['verwaltung_techn']['openimmo_obid'] ?? null;
 
-            dump($openimmo_obid);
-        }
+            if(is_null($openimmo_obid))
+            {
+                continue;
+            }
 
+            Storage::disk('public')->put($path . $openimmo_obid . '.json', $json);
+        }
     }
 
 
