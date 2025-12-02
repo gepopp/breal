@@ -99,6 +99,65 @@ class Importer
         }
     }
 
+    /**
+     * Check for openimmo.zip and extract it to imports folder
+     *
+     * @return array{success: bool, message: string, files?: array}
+     */
+    public function checkAndExtractZip(): array
+    {
+        $zipFilePath = 'imports/openimmo.zip';
+
+        // Check if zip file exists
+        if (!Storage::disk('public')->exists($zipFilePath)) {
+            return [
+                'success' => false,
+                'message' => 'openimmo.zip not found in imports folder'
+            ];
+        }
+
+        $fullZipPath = Storage::disk('public')->path($zipFilePath);
+        $importsPath = Storage::disk('public')->path('imports');
+
+        $zip = new \ZipArchive();
+
+        if ($zip->open($fullZipPath) !== true) {
+            return [
+                'success' => false,
+                'message' => 'Failed to open zip file'
+            ];
+        }
+
+        // Extract all files to imports folder
+        $extractedFiles = [];
+
+        for ($i = 0; $i < $zip->numFiles; $i++) {
+            $filename = $zip->getNameIndex($i);
+            $fileInfo = pathinfo($filename);
+
+            // Skip directories
+            if (empty($fileInfo['extension'])) {
+                continue;
+            }
+
+            // Extract file
+            $fileContent = $zip->getFromIndex($i);
+            $targetPath = $importsPath . '/' . $filename;
+
+            if (file_put_contents($targetPath, $fileContent) !== false) {
+                $extractedFiles[] = $filename;
+            }
+        }
+
+        $zip->close();
+
+        return [
+            'success' => true,
+            'message' => 'Successfully extracted ' . count($extractedFiles) . ' file(s)',
+            'files' => $extractedFiles
+        ];
+    }
+
 
     public function extractZipFile($zipFile)
     {
