@@ -25,7 +25,7 @@ class JustimmoImport extends Page
     // Only allow admin users to see and access this page
     public static function canAccess(): bool
     {
-        return auth()->check() && auth()->user()->admin === true;
+        return auth()->check() && auth()->user()->admin;
     }
 
     public static function shouldRegisterNavigation(): bool
