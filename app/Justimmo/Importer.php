@@ -32,6 +32,8 @@ class Importer
 
         $path = 'realties/' . time() . '/';
 
+        DB::table('realties')->truncate();
+
         foreach($batchFiles as $batchFile)
         {
             $filePath = storage_path('app/public/' . $batchFile);
@@ -47,9 +49,6 @@ class Importer
             }
 
             Storage::disk('public')->put($path . $openimmo_obid . '.json', $json);
-
-            DB::table('realties')->truncate();
-
             ImportRealtyJob::dispatchSync($path . $openimmo_obid . '.json');
         }
     }
