@@ -4,6 +4,13 @@ use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 use Illuminate\Support\Facades\Mail;
 
+require __DIR__ . '/auth.php';
+
+
+Route::fallback(function () {
+    return view('404');
+});
+
 Route::get('/welcome', function () {
     return view('welcome');
 });
@@ -47,7 +54,6 @@ Route::group(['prefix' => 'technik', 'as' => 'technik.'], function () {
 });
 
 Route::get('/faq/{slug}', \App\Livewire\FAQSingle::class)->name('faq.single');
-
 Route::get('/stellenanzeige/{JobVacancy}', \App\Livewire\Pages\JobVacancy::class)->name('stellenanzeige');
 
 
@@ -149,12 +155,7 @@ Route::get('faqslug', function (){
     }
 });
 
-require __DIR__ . '/auth.php';
 
-
-Route::fallback(function () {
-    return view('404');
-});
 
 
 Route::get('mail-test', function () {
@@ -173,14 +174,10 @@ Route::get('mail-test', function () {
 
 Route::get('sitemap', [\App\Http\Controllers\SitemapController::class, 'generate']);
 
-Route::get('storage-test', function (){
+Route::get('import-test', function (){
 
-    $get = \Illuminate\Support\Facades\Storage::disk('public')->url('1/job-default.jpg');
-    dd($get);
+    $fullZipPath = storage_path('app/public/imports/openimmo.zip');
 
-    $put = \Illuminate\Support\Facades\Storage::disk('s3')->put('test2.txt', 'test2');
-    $url = \Illuminate\Support\Facades\Storage::disk('s3')->url('test2.txt');
+    dd($fullZipPath);
 
-    dump($url);
-    dump($put);
 });

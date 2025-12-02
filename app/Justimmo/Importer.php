@@ -19,25 +19,12 @@ class Importer
 
     public static function import()
     {
-        Log::info('=== Justimmo Import Started ===');
-
         $instance = new self();
 
-        // Get all admin users for notifications
-        $adminUsers = User::where('admin', true)->get();
-        Log::info('Found ' . $adminUsers->count() . ' admin user(s) for notifications');
 
-        // Check for openimmo.zip file
-        $zipFilePath = 'imports/openimmo.zip';
-        $fullZipPath = storage_path('app/public/' . $zipFilePath);
 
         if (!file_exists($fullZipPath)) {
-            Log::warning('No openimmo.zip file found - aborting import');
-            foreach ($adminUsers as $admin) {
-                Notification::make()
-                    ->title('Keine neuen Dateien gefunden.')
-                    ->sendToDatabase($admin);
-            }
+
             return;
         }
 
@@ -195,6 +182,22 @@ class Importer
                 unlink($tempFile);
             }
         }
+    }
+
+
+    public function notifyAdmins(string $message)
+    {
+        $adminUsers = User::where('admin', true)->get();
+        foreach ($adminUsers as $admin) {
+            Notification::make()
+                ->title($message)
+                ->sendToDatabase($admin);
+        }
+    }
+
+    public function getZipFile()
+    {
 
     }
+
 }
