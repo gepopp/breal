@@ -29,9 +29,9 @@ class Importer
 
         // Check for openimmo.zip file
         $zipFilePath = 'imports/openimmo.zip';
-        $fullZipPath = storage_path('app/public/' . $zipFilePath);
+        $fullZipPath = Storage::disk('public')->path($zipFilePath);
 
-        if (!file_exists($fullZipPath)) {
+        if (!Storage::disk('public')->exists($zipFilePath)) {
             Log::warning('No openimmo.zip file found - aborting import');
             foreach ($adminUsers as $admin) {
                 Notification::make()
@@ -41,7 +41,7 @@ class Importer
             return;
         }
 
-        Log::info('Found openimmo.zip file');
+        Log::info('Found openimmo.zip file at: ' . $fullZipPath);
 
         // Extract and process
         Log::info('Extracting zip file: ' . $zipFilePath);
@@ -55,7 +55,7 @@ class Importer
         $instance->extractBatchFiles($path);
 
         // Mark extracted XML for deletion
-        $instance->filesToDelete[] = storage_path('app/public/' . $path);
+        $instance->filesToDelete[] = Storage::disk('public')->path($path);
 
         $files = $instance->getSortedFilesWithFileFacade('batches');
         Log::info('Found ' . count($files) . ' property files to import');
@@ -104,7 +104,9 @@ class Importer
     {
 
         $zip = new \ZipArchive();
-        if ($zip->open(storage_path('app/public/' . $zipFile)) === TRUE) {
+        $zipPath = Storage::disk('public')->path($zipFile);
+
+        if ($zip->open($zipPath) === TRUE) {
 
             // XML-Dateien extrahieren
             // Über alle Dateien im Zip iterieren
@@ -116,7 +118,7 @@ class Importer
                 if (isset($fileInfo['extension']) && strtolower($fileInfo['extension']) === 'xml') {
                     // Einzigartigen Dateinamen generieren
                     $newFilename = 'imports/' . pathinfo($zipFile, PATHINFO_FILENAME) . '_' . uniqid() . '.xml';
-                    $targetPath = storage_path('app/public/' . $newFilename);
+                    $targetPath = Storage::disk('public')->path($newFilename);
 
                     // XML-Datei extrahieren und direkt in die Zieldatei schreiben
                     $fileContent = $zip->getFromIndex($i);
@@ -132,7 +134,8 @@ class Importer
 
     function getSortedFilesWithFileFacade($directoryPath)
     {
-        $path = storage_path('app/public/' . $directoryPath);
+        $path = Storage::disk('public')->path($directoryPath);
+        $publicBasePath = Storage::disk('public')->path('');
 
         if (!File::isDirectory($path)) {
             return [];
@@ -142,7 +145,7 @@ class Importer
 
         $filesWithData = [];
         foreach ($files as $file) {
-            $relativePath = str_replace(storage_path('app/public/'), '', $file->getPathname());
+            $relativePath = str_replace($publicBasePath, '', $file->getPathname());
             $filesWithData[] = [
                 'path'          => $relativePath,
                 'filename'      => $file->getFilename(),
@@ -163,7 +166,7 @@ class Importer
     public function extractBatchFiles($file)
     {
         $reader = new \XMLReader();
-        $reader->open(storage_path('app/public/' . $file));
+        $reader->open(Storage::disk('public')->path($file));
 
         while ($reader->read()) {
             if ($reader->nodeType === \XMLReader::ELEMENT && $reader->name === 'immobilie') {

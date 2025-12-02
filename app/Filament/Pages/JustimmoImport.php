@@ -49,9 +49,10 @@ class JustimmoImport extends Page
     public function checkZipFile(): void
     {
         $zipFilePath = 'imports/openimmo.zip';
-        $fullZipPath = storage_path('app/public/' . $zipFilePath);
 
-        if (file_exists($fullZipPath)) {
+        if (Storage::disk('public')->exists($zipFilePath)) {
+            $fullZipPath = Storage::disk('public')->path($zipFilePath);
+
             $this->zipFileInfo = [
                 'path' => $zipFilePath,
                 'filename' => 'openimmo.zip',
@@ -97,7 +98,7 @@ class JustimmoImport extends Page
             $importer = new Importer();
             $extractedPath = $importer->extractZipFile($this->zipFileInfo['path']);
 
-            $fullXmlPath = storage_path('app/public/' . $extractedPath);
+            $fullXmlPath = Storage::disk('public')->path($extractedPath);
             $xmlContent = file_get_contents($fullXmlPath);
             $fileSize = filesize($fullXmlPath);
 
@@ -227,7 +228,7 @@ class JustimmoImport extends Page
             $deletedCount = 0;
 
             foreach ($batchFiles as $file) {
-                $path = storage_path('app/public/' . $file['path']);
+                $path = Storage::disk('public')->path($file['path']);
                 if (file_exists($path)) {
                     unlink($path);
                     $deletedCount++;
@@ -238,7 +239,7 @@ class JustimmoImport extends Page
             $importsFiles = $importer->getSortedFilesWithFileFacade('imports');
             foreach ($importsFiles as $file) {
                 if (str_contains($file['filename'], '.xml')) {
-                    $path = storage_path('app/public/' . $file['path']);
+                    $path = Storage::disk('public')->path($file['path']);
                     if (file_exists($path)) {
                         unlink($path);
                         $deletedCount++;
@@ -247,8 +248,8 @@ class JustimmoImport extends Page
             }
 
             // Delete the zip file
-            $zipFilePath = storage_path('app/public/imports/openimmo.zip');
-            if (file_exists($zipFilePath)) {
+            if (Storage::disk('public')->exists('imports/openimmo.zip')) {
+                $zipFilePath = Storage::disk('public')->path('imports/openimmo.zip');
                 unlink($zipFilePath);
                 $deletedCount++;
             }
