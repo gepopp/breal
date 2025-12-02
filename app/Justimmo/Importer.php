@@ -48,6 +48,8 @@ class Importer
 
             Storage::disk('public')->put($path . $openimmo_obid . '.json', $json);
 
+            DB::table('realties')->truncate();
+
             ImportRealtyJob::dispatchSync($path . $openimmo_obid . '.json');
         }
     }

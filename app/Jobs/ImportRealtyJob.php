@@ -30,11 +30,7 @@ class ImportRealtyJob implements ShouldQueue
 
         $keys = array_keys($array);
 
-        dd($keys);
-
-
         $openimmo_obid = $array['verwaltung_techn']['openimmo_obid'];
-
 
         $nutzungsart = '';
         foreach ($array['objektkategorie']['nutzungsart']['@attributes'] as $key => $value) {
@@ -42,6 +38,18 @@ class ImportRealtyJob implements ShouldQueue
                 $nutzungsart = $key;
             }
         }
+
+        $preis = null;
+        if (isset($array['preise']['kaufpreisbrutto'])) {
+            $preis = $array['preise']['kaufpreisbrutto'];
+        } elseif (isset($array['preise']['gesamtmietebrutto'])) {
+            $preis = $array['preise']['gesamtmietebrutto'];
+        }
+
+        $vermarktungsart = isset($array['objektkategorie']['vermarktungsart']['@attributes']['KAUF']) &&
+        $array['objektkategorie']['vermarktungsart']['@attributes']['KAUF'] == '1'
+            ? 'kauf' : 'miete';
+
 
         Realty::updateOrCreate(
             [
@@ -54,11 +62,8 @@ class ImportRealtyJob implements ShouldQueue
                 'beschreibung'    => $array['freitexte']['objektbeschreibung'] ?? null,
                 'zimmer'          => $array['flaechen']['anzahl_zimmer'] ?? null,
                 'wohnflaeche'     => $array['flaechen']['gesamtflaeche'] ?? null,
-                'preis'           => ($array['preise']['kaufpreisbrutto'] ?? null) ?:
-                    ($array['preise']['gesamtmietebrutto'] ?? null),
-                'vermarktungsart' => isset($array['objektkategorie']['vermarktungsart']['@attributes']['KAUF']) &&
-                $array['objektkategorie']['vermarktungsart']['@attributes']['KAUF'] == '1'
-                    ? 'kauf' : 'miete',
+                'preis'           => $preis,
+                'vermarktungsart' => $vermarktungsart,
                 'nutzungsart'     => $nutzungsart ?? null,
                 'plz'             => $array['geo']['plz'] ?? null,
                 'ort'             => $array['geo']['ort'] ?? null,
@@ -73,10 +78,6 @@ class ImportRealtyJob implements ShouldQueue
         );
 
         Storage::disk('public')->put('realties/' . $openimmo_obid . '.json', $json);
-
-        // Clean up batch file
-        unlink($filePath);
-
 
     }
 }
