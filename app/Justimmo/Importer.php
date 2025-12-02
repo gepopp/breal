@@ -54,6 +54,7 @@ class Importer
 
         Storage::disk('public')->delete($xmlFile);
         Storage::disk('public')->deleteDirectory($path);
+        Storage::disk('public')->delete('imports/openimmo.zip');
     }
 
 
