@@ -93,6 +93,7 @@ class ContactForm extends Component
 
     public function submitWithoutAddress()
     {
+        $this->validate();
         $this->address = false;
         $this->save();
     }
@@ -100,6 +101,7 @@ class ContactForm extends Component
 
     public function submitWithAddress()
     {
+        $this->validate();
         $this->address = true;
         $this->save();
     }
