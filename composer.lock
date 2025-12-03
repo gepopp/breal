@@ -240,16 +240,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.364.0",
+            "version": "3.365.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "768e0055da7e9e505aae8a87454d310a7c321ac1"
+                "reference": "ce4b9a5fe8bad81caf40a3cca8069eba750103b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/768e0055da7e9e505aae8a87454d310a7c321ac1",
-                "reference": "768e0055da7e9e505aae8a87454d310a7c321ac1",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/ce4b9a5fe8bad81caf40a3cca8069eba750103b1",
+                "reference": "ce4b9a5fe8bad81caf40a3cca8069eba750103b1",
                 "shasum": ""
             },
             "require": {
@@ -331,9 +331,9 @@
             "support": {
                 "forum": "https://github.com/aws/aws-sdk-php/discussions",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.364.0"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.365.0"
             },
-            "time": "2025-12-01T01:08:11+00:00"
+            "time": "2025-12-02T16:06:36+00:00"
         },
         {
             "name": "blade-ui-kit/blade-heroicons",
@@ -4305,16 +4305,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v12.40.2",
+            "version": "v12.41.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "1ccd99220b474500e672b373f32bd709ec38de50"
+                "reference": "836045933b4f950d96151cbbaea89b8958303bd4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/1ccd99220b474500e672b373f32bd709ec38de50",
-                "reference": "1ccd99220b474500e672b373f32bd709ec38de50",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/836045933b4f950d96151cbbaea89b8958303bd4",
+                "reference": "836045933b4f950d96151cbbaea89b8958303bd4",
                 "shasum": ""
             },
             "require": {
@@ -4520,7 +4520,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-11-26T19:24:25+00:00"
+            "time": "2025-12-03T00:22:36+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -5563,16 +5563,16 @@
         },
         {
             "name": "livewire/flux",
-            "version": "v2.9.0",
+            "version": "v2.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/flux.git",
-                "reference": "d961ba5512ecfa38f8b759133ceec0fb295c4e16"
+                "reference": "041cdd07c74508fb2884d4614ee968c8f51765e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/flux/zipball/d961ba5512ecfa38f8b759133ceec0fb295c4e16",
-                "reference": "d961ba5512ecfa38f8b759133ceec0fb295c4e16",
+                "url": "https://api.github.com/repos/livewire/flux/zipball/041cdd07c74508fb2884d4614ee968c8f51765e7",
+                "reference": "041cdd07c74508fb2884d4614ee968c8f51765e7",
                 "shasum": ""
             },
             "require": {
@@ -5623,25 +5623,25 @@
             ],
             "support": {
                 "issues": "https://github.com/livewire/flux/issues",
-                "source": "https://github.com/livewire/flux/tree/v2.9.0"
+                "source": "https://github.com/livewire/flux/tree/v2.9.1"
             },
-            "time": "2025-11-26T00:32:54+00:00"
+            "time": "2025-12-01T23:27:11+00:00"
         },
         {
             "name": "livewire/flux-pro",
-            "version": "2.9.0",
+            "version": "2.9.1",
             "dist": {
                 "type": "zip",
-                "url": "https://composer.fluxui.dev/download/a0720fc1-891f-4fdd-8618-036c2875ec68/flux-pro-2.9.0.zip",
-                "reference": "8c9cb10318331a30111c6c61c6d601f077d5a538",
-                "shasum": "c260feba3f5ae44d3ad4859e759cbbef56d1795e"
+                "url": "https://composer.fluxui.dev/download/a07e1167-9208-4075-be99-609f21ead139/flux-pro-2.9.1.zip",
+                "reference": "bdacab332f5749d40859b35d988e248fc2237413",
+                "shasum": "ad0f224a07614a66d1bda9fa2e7cec4b92022bdf"
             },
             "require": {
                 "illuminate/console": "^10.0|^11.0|^12.0",
                 "illuminate/support": "^10.0|^11.0|^12.0",
                 "illuminate/view": "^10.0|^11.0|^12.0",
                 "laravel/prompts": "^0.1.24|^0.2|^0.3",
-                "livewire/flux": "2.9.0|dev-main",
+                "livewire/flux": "2.9.1|dev-main",
                 "livewire/livewire": "^3.7.0|^4.0",
                 "php": "^8.1",
                 "symfony/console": "^6.0|^7.0"
@@ -5682,7 +5682,7 @@
                 "livewire",
                 "ui"
             ],
-            "time": "2025-11-26T00:38:31+00:00"
+            "time": "2025-12-01T23:53:05+00:00"
         },
         {
             "name": "livewire/livewire",

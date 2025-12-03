@@ -91,6 +91,20 @@ class ContactForm extends Component
         ];
     }
 
+    public function submitWithoutAddress()
+    {
+        $this->address = false;
+        $this->save();
+    }
+
+
+    public function submitWithAddress()
+    {
+        $this->address = true;
+        $this->save();
+    }
+
+
     public function save()
     {
         $data = $this->validate();
@@ -102,25 +116,14 @@ class ContactForm extends Component
 
         $request = ContactRequest::create($data['data']);
 
-        /**
-         * 0 => array:6 [▼
-         * "tmpFilename" => "T6bYJq4DlWul6UOBNGwEvRV3twywsx-metaZ2VsYmVyIGtvZmZlci5qcGVn-.jpeg"
-         * "name" => "gelber koffer.jpeg"
-         * "extension" => "jpg"
-         * "path" => "/home/vagrant/code/breal/storage/app/private/livewire-tmp/T6bYJq4DlWul6UOBNGwEvRV3twywsx-metaZ2VsYmVyIGtvZmZlci5qcGVn-.jpeg"
-         * "temporaryUrl" => "http://breal.test/livewire/preview-file/T6bYJq4DlWul6UOBNGwEvRV3twywsx-metaZ2VsYmVyIGtvZmZlci5qcGVn-.jpeg?expires=1752854399&signature=816d96bdb12a65b3f36a45ae5 ▶"
-         * "size" => 426682
-         * ]
-         */
         foreach ($data['uploads'] as $upload) {
             $request->addMedia($upload['path'])
                 ->usingName($upload['name'])
-                ->toMediaCollection('uploads');
+                ->toMediaCollection('uploads', 's3');
         }
 
         $address = $data['data']['email'];
-        $mail = Mail::to($address)->send(new VerificationEmail($request));
-
+        Mail::to($address)->send(new VerificationEmail($request));
 
         $this->reset();
 
