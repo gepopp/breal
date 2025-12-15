@@ -18,9 +18,11 @@ class RealtyThumbnail extends Component
     public function mount(Realty $realty){
         $this->realty = $realty;
 
-        $data = Storage::disk('public')->get($realty->path);
-        $data = json_decode($data, true);
-        $files = $data['anhaenge']['anhang'];
+
+        dd($realty->data);
+
+
+        $files = $realty->data['anhaenge']['anhang'];
 
         $titelimage = array_filter($files, function ($value) {
             return $value['@attributes']['gruppe'] == 'TITELBILD';
