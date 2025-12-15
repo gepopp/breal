@@ -19,9 +19,6 @@ class RealtyThumbnail extends Component
         $this->realty = $realty;
 
 
-        dd($realty->data);
-
-
         $files = $realty->data['anhaenge']['anhang'];
 
         $titelimage = array_filter($files, function ($value) {
