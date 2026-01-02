@@ -48,4 +48,23 @@ class LandingpageTechnikSettings extends Settings
     {
         return 'LandingpageTechnik';
     }
+
+    public function toArray(): array
+    {
+        return [
+            'hero_image_alt' => $this->hero_image_alt,
+            'hero_header' => $this->hero_header,
+            'hero_subheader' => $this->hero_subheader,
+            'hero_introtext' => $this->hero_introtext,
+            'hero_text_column_one' => $this->hero_text_column_one,
+            'hero_text_column_two' => $this->hero_text_column_two,
+            'text' => $this->text,
+            'text_image_alt' => $this->text_image_alt,
+            'about_header' => $this->about_header,
+            'about_subheader' => $this->about_subheader,
+            'about_text' => $this->about_text,
+            'about_image_alt' => $this->about_image_alt,
+            'about_video_embed_code' => $this->about_video_embed_code,
+        ];
+    }
 }

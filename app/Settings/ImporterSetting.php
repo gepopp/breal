@@ -14,4 +14,10 @@ class ImporterSetting extends Settings
     {
         return 'importer';
     }
+
+    public function toArray(): array
+    {
+        // No translatable text properties in this settings class
+        return [];
+    }
 }

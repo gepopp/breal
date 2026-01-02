@@ -69,4 +69,38 @@ class LandingpageHausverwaltung extends Settings
     {
         return 'hausverwaltung';
     }
+
+    public function toArray(): array
+    {
+        return [
+            'hero_image_alt' => $this->hero_image_alt,
+            'hero_header' => $this->hero_header,
+            'hero_subheader' => $this->hero_subheader,
+            'hero_introtext' => $this->hero_introtext,
+            'hero_text_column_one' => $this->hero_text_column_one,
+            'hero_text_column_two' => $this->hero_text_column_two,
+            'text' => $this->text,
+            'text_image_alt' => $this->text_image_alt,
+            'about_header' => $this->about_header,
+            'about_subheader' => $this->about_subheader,
+            'about_text' => $this->about_text,
+            'about_image_alt' => $this->about_image_alt,
+            'about_video_embed_code' => $this->about_video_embed_code,
+            'timeline_header' => $this->timeline_header,
+            'timeline_subheader' => $this->timeline_subheader,
+            'timeline_intro' => $this->timeline_intro,
+            'service_heading' => $this->service_heading,
+            'service_subheading' => $this->service_subheading,
+            'service_introtext' => $this->service_introtext,
+            'contact_header' => $this->contact_header,
+            'contact_subheader' => $this->contact_subheader,
+            'contact_introtext' => $this->contact_introtext,
+            'reference_header' => $this->reference_header,
+            'reference_subheader' => $this->reference_subheader,
+            'reference_introtext' => $this->reference_introtext,
+            'competence_header' => $this->competence_header,
+            'competence_subheader' => $this->competence_subheader,
+            'competence_introtext' => $this->competence_introtext,
+        ];
+    }
 }
