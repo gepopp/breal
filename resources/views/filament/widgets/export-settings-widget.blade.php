@@ -34,17 +34,19 @@
         </div>
     </x-filament::section>
 
+    @script
     <script>
-        document.addEventListener('livewire:init', () => {
-            Livewire.on('download-file', (event) => {
-                const url = event[0].url;
-                const link = document.createElement('a');
-                link.href = url;
-                link.download = '';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            });
+        $wire.on('download-file', (event) => {
+            console.log('Download event received:', event);
+            const url = event.url || event[0]?.url;
+
+            if (url) {
+                console.log('Downloading from:', url);
+                window.location.href = url;
+            } else {
+                console.error('No URL provided in download event');
+            }
         });
     </script>
+    @endscript
 </x-filament-widgets::widget>
