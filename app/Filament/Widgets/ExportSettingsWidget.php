@@ -17,17 +17,29 @@ class ExportSettingsWidget extends Widget
     public function export()
     {
         try {
-            // Define the file path
+            // Define the file path (relative to storage/app)
             $fileName = 'settings-export-' . now()->format('Y-m-d_His') . '.json';
             $filePath = 'exports/' . $fileName;
 
-            // Run the artisan command
-            Artisan::call('settings:export', [
-                '--file' => storage_path('app/' . $filePath)
+            // Run the artisan command with relative path
+            $exitCode = Artisan::call('settings:export', [
+                '--file' => $filePath,
+                '--disk' => 'local'
             ]);
 
+            // Check if command succeeded
+            if ($exitCode !== 0) {
+                Notification::make()
+                    ->title('Export failed')
+                    ->body('The artisan command failed. Exit code: ' . $exitCode)
+                    ->danger()
+                    ->send();
+
+                return;
+            }
+
             // Check if file was created
-            if (!Storage::exists($filePath)) {
+            if (!Storage::disk('local')->exists($filePath)) {
                 Notification::make()
                     ->title('Export failed')
                     ->body('The settings export file could not be created.')

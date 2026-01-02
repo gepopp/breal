@@ -4,11 +4,12 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Spatie\LaravelSettings\Settings;
 
 class ExportSettings extends Command
 {
-    protected $signature = 'settings:export {--file=storage/app/settings-export.json}';
+    protected $signature = 'settings:export {--file=} {--disk=local}';
 
     protected $description = 'Export translatable text from all Spatie settings to a JSON file';
 
@@ -39,21 +40,28 @@ class ExportSettings extends Command
             }
         }
 
-        $filePath = $this->option('file');
-
-        // Ensure directory exists
-        $directory = dirname($filePath);
-        if (!File::exists($directory)) {
-            File::makeDirectory($directory, 0755, true);
-        }
-
         // Convert to pretty JSON
         $json = json_encode($settingsData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
-        File::put($filePath, $json);
+        $disk = $this->option('disk');
+        $filePath = $this->option('file');
 
-        $this->info("Settings exported successfully to: {$filePath}");
-        $this->info("Total settings classes exported: " . count($settingsData));
+        // If no file path specified, use default
+        if (!$filePath) {
+            $filePath = 'settings-export.json';
+        }
+
+        try {
+            // Use Storage facade to write file
+            Storage::disk($disk)->put($filePath, $json);
+
+            $fullPath = Storage::disk($disk)->path($filePath);
+            $this->info("Settings exported successfully to: {$fullPath}");
+            $this->info("Total settings classes exported: " . count($settingsData));
+        } catch (\Exception $e) {
+            $this->error("Failed to write file: " . $e->getMessage());
+            return Command::FAILURE;
+        }
 
         return Command::SUCCESS;
     }

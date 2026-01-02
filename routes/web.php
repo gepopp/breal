@@ -9,13 +9,14 @@ require __DIR__ . '/auth.php';
 
 Route::middleware(['auth'])->get('/admin/download-settings-export/{filename}', function ($filename) {
     $filePath = 'exports/' . $filename;
+    $disk = \Illuminate\Support\Facades\Storage::disk('local');
 
-    if (!\Illuminate\Support\Facades\Storage::exists($filePath)) {
+    if (!$disk->exists($filePath)) {
         abort(404);
     }
 
     return response()->download(
-        storage_path('app/' . $filePath),
+        $disk->path($filePath),
         $filename,
         ['Content-Type' => 'application/json']
     )->deleteFileAfterSend(true);
