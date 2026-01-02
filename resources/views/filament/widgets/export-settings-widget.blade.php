@@ -23,7 +23,9 @@
             </div>
 
             <div class="flex justify-end">
-                {{ ($this->exportAction)() }}
+                <x-filament-actions::action
+                    :action="$this->exportAction"
+                />
             </div>
         </div>
     </x-filament::section>
