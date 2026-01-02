@@ -4,16 +4,13 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
-use ReflectionClass;
-use ReflectionProperty;
 use Spatie\LaravelSettings\Settings;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ExportSettings extends Command
 {
-    protected $signature = 'settings:export {--file=storage/app/settings-export.json} {--with-media-paths}';
+    protected $signature = 'settings:export {--file=storage/app/settings-export.json}';
 
-    protected $description = 'Export all Spatie settings to a JSON file';
+    protected $description = 'Export translatable text from all Spatie settings to a JSON file';
 
     public function handle()
     {
@@ -27,7 +24,15 @@ class ExportSettings extends Command
 
             try {
                 $settings = app($settingsClass);
-                $settingsData[$settingsClass] = $this->extractSettings($settings);
+                $translatable = $settings->toArray();
+
+                // Only include settings that have translatable content
+                if (!empty($translatable)) {
+                    $settingsData[$settingsClass] = [
+                        'group' => $settings::group(),
+                        'properties' => $translatable,
+                    ];
+                }
             } catch (\Exception $e) {
                 $this->error("Failed to load {$settingsClass}: " . $e->getMessage());
                 continue;
@@ -98,88 +103,5 @@ class ExportSettings extends Command
         $fullClassName = $namespace . '\\' . $className;
 
         return $fullClassName;
-    }
-
-    protected function extractSettings(Settings $settings): array
-    {
-        $reflection = new ReflectionClass($settings);
-        $properties = $reflection->getProperties(ReflectionProperty::IS_PUBLIC);
-
-        $data = [
-            'group' => $this->getSettingsGroup($settings),
-            'properties' => [],
-        ];
-
-        foreach ($properties as $property) {
-            // Skip static properties
-            if ($property->isStatic()) {
-                continue;
-            }
-
-            $propertyName = $property->getName();
-            $value = $property->getValue($settings);
-
-            // If with-media-paths option is enabled, resolve media IDs to paths
-            if ($this->option('with-media-paths') && $this->looksLikeMediaIds($value)) {
-                $value = $this->resolveMediaPaths($value);
-            }
-
-            $data['properties'][$propertyName] = $value;
-        }
-
-        return $data;
-    }
-
-    protected function getSettingsGroup(Settings $settings): ?string
-    {
-        $reflection = new ReflectionClass($settings);
-
-        // Try to get the group from static property
-        if ($reflection->hasProperty('group')) {
-            $groupProperty = $reflection->getProperty('group');
-            if ($groupProperty->isStatic()) {
-                $groupProperty->setAccessible(true);
-                return $groupProperty->getValue();
-            }
-        }
-
-        return null;
-    }
-
-    protected function looksLikeMediaIds($value): bool
-    {
-        // Check if value is an integer or array of integers (potential media IDs)
-        if (is_int($value)) {
-            return true;
-        }
-
-        if (is_array($value) && !empty($value)) {
-            foreach ($value as $item) {
-                if (!is_int($item)) {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        return false;
-    }
-
-    protected function resolveMediaPaths($mediaIds): array
-    {
-        $ids = is_array($mediaIds) ? $mediaIds : [$mediaIds];
-
-        $media = Media::whereIn('id', $ids)->get();
-
-        return $media->map(function ($mediaItem) {
-            return [
-                'id' => $mediaItem->id,
-                'file_name' => $mediaItem->file_name,
-                'mime_type' => $mediaItem->mime_type,
-                'url' => $mediaItem->getUrl(),
-                'path' => $mediaItem->getPath(),
-                'collection' => $mediaItem->collection_name,
-            ];
-        })->toArray();
     }
 }

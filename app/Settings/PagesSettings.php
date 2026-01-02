@@ -126,4 +126,54 @@ class PagesSettings extends Settings
     {
         return 'pages';
     }
+
+    public function toArray(): array
+    {
+        return [
+            'contact_header' => $this->contact_header,
+            'contact_subheader' => $this->contact_subheader,
+            'contact_introtext' => $this->contact_introtext,
+            'team_header' => $this->team_header,
+            'team_subheader' => $this->team_subheader,
+            'team_introtext' => $this->team_introtext,
+            'vacancies_header' => $this->vacancies_header,
+            'vacancies_subheader' => $this->vacancies_subheader,
+            'vacancies_introtext' => $this->vacancies_introtext,
+            'contactform_heading' => $this->contactform_heading,
+            'contactform_email' => $this->contactform_email,
+            'contactform_phone' => $this->contactform_phone,
+            'contactform_address' => $this->contactform_address,
+            'makler_contactform_email' => $this->makler_contactform_email,
+            'makler_contactform_phone' => $this->makler_contactform_phone,
+            'makler_contactform_address' => $this->makler_contactform_address,
+            'technik_contactform_email' => $this->technik_contactform_email,
+            'technik_contactform_phone' => $this->technik_contactform_phone,
+            'technik_contactform_address' => $this->technik_contactform_address,
+            'contactform_terms' => $this->contactform_terms,
+            'contactpersons_heading' => $this->contactpersons_heading,
+            'contactpersons_introtext' => $this->contactpersons_introtext,
+            'cold_application_cta_text' => $this->cold_application_cta_text,
+            'imprint_text' => $this->imprint_text,
+            'dpgr_text' => $this->dpgr_text,
+            'accessability_text' => $this->accessability_text,
+            'services_header' => $this->services_header,
+            'services_subheader' => $this->services_subheader,
+            'services_introtext' => $this->services_introtext,
+            'faq_header' => $this->faq_header,
+            'faq_subheader' => $this->faq_subheader,
+            'faq_introtext' => $this->faq_introtext,
+            'hausverwaltung_leistungen_header' => $this->hausverwaltung_leistungen_header,
+            'hausverwaltung_leistungen_subheader' => $this->hausverwaltung_leistungen_subheader,
+            'hausverwaltung_leistungen_introtext' => $this->hausverwaltung_leistungen_introtext,
+            'immobilien_leistungen_header' => $this->immobilien_leistungen_header,
+            'immobilien_leistungen_subheader' => $this->immobilien_leistungen_subheader,
+            'immobilien_leistungen_introtext' => $this->immobilien_leistungen_introtext,
+            'technik_leistungen_header' => $this->technik_leistungen_header,
+            'technik_leistungen_subheader' => $this->technik_leistungen_subheader,
+            'technik_leistungen_introtext' => $this->technik_leistungen_introtext,
+            'search_header' => $this->search_header,
+            'search_subheader' => $this->search_subheader,
+            'search_introtext' => $this->search_introtext,
+        ];
+    }
 }

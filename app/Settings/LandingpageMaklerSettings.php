@@ -36,4 +36,21 @@ class LandingpageMaklerSettings extends Settings
     {
         return 'MaklerSettings';
     }
+
+    public function toArray(): array
+    {
+        return [
+            'intro_title' => $this->intro_title,
+            'intro_subtitle' => $this->intro_subtitle,
+            'intro_description' => $this->intro_description,
+            'cta_header' => $this->cta_header,
+            'cta_subheader' => $this->cta_subheader,
+            'cta_text' => $this->cta_text,
+            'cta_image_alt' => $this->cta_image_alt,
+            'cta_video_embed_code' => $this->cta_video_embed_code,
+            'about_heading' => $this->about_heading,
+            'about_text' => $this->about_text,
+            'about_image_alt' => $this->about_image_alt,
+        ];
+    }
 }
