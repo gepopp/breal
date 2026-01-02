@@ -23,10 +23,28 @@
             </div>
 
             <div class="flex justify-end">
-                <x-filament-actions::action
-                    :action="$this->exportAction"
-                />
+                <x-filament::button
+                    wire:click="export"
+                    icon="heroicon-o-arrow-down-tray"
+                    color="primary"
+                >
+                    Export Settings
+                </x-filament::button>
             </div>
         </div>
     </x-filament::section>
+
+    <script>
+        document.addEventListener('livewire:init', () => {
+            Livewire.on('download-file', (event) => {
+                const url = event[0].url;
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = '';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+        });
+    </script>
 </x-filament-widgets::widget>

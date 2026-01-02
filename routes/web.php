@@ -7,6 +7,19 @@ use Illuminate\Support\Facades\Mail;
 
 require __DIR__ . '/auth.php';
 
+Route::middleware(['auth'])->get('/admin/download-settings-export/{filename}', function ($filename) {
+    $filePath = 'exports/' . $filename;
+
+    if (!\Illuminate\Support\Facades\Storage::exists($filePath)) {
+        abort(404);
+    }
+
+    return response()->download(
+        storage_path('app/' . $filePath),
+        $filename,
+        ['Content-Type' => 'application/json']
+    )->deleteFileAfterSend(true);
+})->name('download-settings-export');
 
 Route::fallback(function () {
     return view('404');
