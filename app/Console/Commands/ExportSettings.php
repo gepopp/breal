@@ -20,6 +20,8 @@ class ExportSettings extends Command
         $settingsData = [];
         $settingsClasses = $this->discoverSettingsClasses();
 
+        $this->info("Discovered " . count($settingsClasses) . " settings classes");
+
         foreach ($settingsClasses as $settingsClass) {
             $this->line("Processing: {$settingsClass}");
 
@@ -27,12 +29,17 @@ class ExportSettings extends Command
                 $settings = app($settingsClass);
                 $translatable = $settings->toArray();
 
+                $this->line("  - Properties found: " . count($translatable));
+
                 // Only include settings that have translatable content
                 if (!empty($translatable)) {
                     $settingsData[$settingsClass] = [
                         'group' => $settings::group(),
                         'properties' => $translatable,
                     ];
+                    $this->info("  ✓ Added to export");
+                } else {
+                    $this->warn("  ⚠ Skipped (no translatable content)");
                 }
             } catch (\Exception $e) {
                 $this->error("Failed to load {$settingsClass}: " . $e->getMessage());

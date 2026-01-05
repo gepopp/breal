@@ -9,7 +9,7 @@ return [
      * put them (manually) here.
      */
     'settings' => [
-        PAgesSettings::class,
+        PagesSettings::class,
     ],
 
     /*
