@@ -9,7 +9,10 @@ return [
      * put them (manually) here.
      */
     'settings' => [
-        PAgesSettings::class,
+        PagesSettings::class,
+        \App\Settings\LandingpageHausverwaltung::class,
+        \App\Settings\LandingpageMaklerSettings::class,
+        \App\Settings\LandingpageTechnikSettings::class,
     ],
 
     /*
