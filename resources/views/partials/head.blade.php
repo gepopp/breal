@@ -4,7 +4,7 @@
 <title>{{ $title ?? 'bereal' }}</title>
 <meta name="keywords" content="HTML, CSS, JavaScript">
 <meta name="description" content="{{ $description ?? '' }}">
-<link rel="canonical" href="{{ $canonical ?? url() }}">
+<link rel="canonical" href="{{ $canonical ?? url()->current() }}">
 <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
 @vite(['resources/js/app.js', 'resources/css/app.css'])
 @fluxAppearance
