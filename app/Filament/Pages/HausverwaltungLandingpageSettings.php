@@ -69,53 +69,61 @@ class HausverwaltungLandingpageSettings extends SettingsPage
                             ->label('Hero Intro Text (English)')
                             ->required(),
                     ]),
-                    Forms\Components\Select::make('intro_layout')
+                    Forms\Components\ToggleButtons::make('intro_layout')
                         ->label('Intro Layout')
                         ->options([
-                            'one_column'  => 'Eine Spalte',
                             'two_columns' => 'Zwei Spalten',
+                            'text_image' => 'Text mit Bild',
                         ])
                         ->default('two_columns')
+                        ->grouped()
+                        ->reactive()
                         ->columnSpanFull(),
-                    Grid::make(2)->schema([
-                        Forms\Components\RichEditor::make('hero_text_column_one_de')
-                            ->label('Text Spalte 1 (Deutsch)')
-                            ->required(),
-                        Forms\Components\RichEditor::make('hero_text_column_one_en')
-                            ->label('Text Spalte 1 (English)')
-                            ->required(),
-                    ]),
-                    Grid::make(2)->schema([
-                        Forms\Components\RichEditor::make('hero_text_column_two_de')
-                            ->label('Text Spalte 2 (Deutsch)')
-                            ->required(),
-                        Forms\Components\RichEditor::make('hero_text_column_two_en')
-                            ->label('Text Spalte 2 (English)')
-                            ->required(),
-                    ]),
-                ]),
 
-            Section::make('Text Bereich')
-                ->schema([
-                    Grid::make(2)->schema([
-                        Forms\Components\RichEditor::make('text_de')
-                            ->label('Text (Deutsch)')
-                            ->required(),
-                        Forms\Components\RichEditor::make('text_en')
-                            ->label('Text (English)')
-                            ->required(),
-                    ]),
-                    Forms\Components\FileUpload::make('text_image')
-                        ->label('Text Bild')
-                        ->columnSpanFull(),
-                    Grid::make(2)->schema([
-                        Forms\Components\TextInput::make('text_image_alt_de')
-                            ->label('Text Bild Alt-Text (Deutsch)')
-                            ->required(),
-                        Forms\Components\TextInput::make('text_image_alt_en')
-                            ->label('Text Bild Alt-Text (English)')
-                            ->required(),
-                    ]),
+                    Section::make('Zwei Spalten Layout')
+                        ->schema([
+                            Grid::make(2)->schema([
+                                Forms\Components\RichEditor::make('hero_text_column_one_de')
+                                    ->label('Text Spalte 1 (Deutsch)')
+                                    ->required(),
+                                Forms\Components\RichEditor::make('hero_text_column_one_en')
+                                    ->label('Text Spalte 1 (English)')
+                                    ->required(),
+                            ]),
+                            Grid::make(2)->schema([
+                                Forms\Components\RichEditor::make('hero_text_column_two_de')
+                                    ->label('Text Spalte 2 (Deutsch)')
+                                    ->required(),
+                                Forms\Components\RichEditor::make('hero_text_column_two_en')
+                                    ->label('Text Spalte 2 (English)')
+                                    ->required(),
+                            ]),
+                        ])
+                        ->visible(fn ($get) => $get('intro_layout') === 'two_columns'),
+
+                    Section::make('Text mit Bild Layout')
+                        ->schema([
+                            Grid::make(2)->schema([
+                                Forms\Components\RichEditor::make('text_de')
+                                    ->label('Text (Deutsch)')
+                                    ->required(),
+                                Forms\Components\RichEditor::make('text_en')
+                                    ->label('Text (English)')
+                                    ->required(),
+                            ]),
+                            Forms\Components\FileUpload::make('text_image')
+                                ->label('Text Bild')
+                                ->columnSpanFull(),
+                            Grid::make(2)->schema([
+                                Forms\Components\TextInput::make('text_image_alt_de')
+                                    ->label('Text Bild Alt-Text (Deutsch)')
+                                    ->required(),
+                                Forms\Components\TextInput::make('text_image_alt_en')
+                                    ->label('Text Bild Alt-Text (English)')
+                                    ->required(),
+                            ]),
+                        ])
+                        ->visible(fn ($get) => $get('intro_layout') === 'text_image'),
                 ]),
 
             Section::make('About Bereich')
