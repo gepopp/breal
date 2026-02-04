@@ -44,7 +44,7 @@
                     <h5 class="font-bold">{{ $vacancy->title }}</h5>
 
                     <a href="{{ route('stellenanzeige', $vacancy) }}" class="flex items-center justify-end">
-                        <span @class(["group-hover:mr-2"])>Jetzt bewerben</span>
+                        <span @class(["group-hover:mr-2"])>{{ __('vacancy.apply_now') }}</span>
                         <svg class="size-4 invisible -translate-x-full group-hover:visible group-hover:translate-x-none group-hover:ml-2 transition-all duration-300"
                              data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
                              xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

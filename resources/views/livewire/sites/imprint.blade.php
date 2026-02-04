@@ -4,8 +4,8 @@
             <div>
                 <div>
                     <x-headings level="1">
-                        <x-slot name="tag">Informed</x-slot>
-                        Impressum der be real Immobilienmanagment GmbH
+                        <x-slot name="tag">{{ __('legal.imprint_tag') }}</x-slot>
+                        {{ __('legal.imprint_title') }}
                     </x-headings>
                 </div>
             </div>

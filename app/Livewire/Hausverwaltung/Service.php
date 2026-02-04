@@ -4,14 +4,12 @@ namespace App\Livewire\Hausverwaltung;
 
 use App\Settings\PagesSettings;
 use App\Traits\SplitsHtmlText;
-use Illuminate\Support\Collection;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 
 class Service extends Component
 {
     use SplitsHtmlText;
-
 
     public $text;
 
@@ -33,12 +31,16 @@ class Service extends Component
 
     }
 
-
     public function render(PagesSettings $pagesSettings)
     {
         $preparedText = $this->prepareText();
-        $description = 'Einfach, schnell & digital: Nutzen Sie unser Serviceportal für Schadensmeldungen, Dokumente & Kommunikation. be real macht Immobilienverwaltung transparent & effizient.';
-        return view('livewire.hausverwaltung.service', compact('pagesSettings', 'preparedText', 'description'))
-            ->title('Service & Kundenportal | be real Immobilienmanagement Wien');
+
+        return view('livewire.hausverwaltung.service', compact('pagesSettings', 'preparedText'))
+            ->title(__('pages.service.title'))
+            ->layout('components.layouts.site')
+            ->layoutData([
+                'canonical' => route('hausverwaltung.service'),
+                'description' => __('pages.service.description'),
+            ]);
     }
 }

@@ -22,9 +22,9 @@
 
     <livewire:parts.references
             company="$company"
-            header="{{ $settings->reference_header }}"
-            subheader="{{ $settings->reference_subheader }}"
-            text="{{ $settings->reference_introtext }}"
+            header="{{ app()->getLocale() == 'de' ?  $settings->reference_header_de : $settings->reference_header_en}}"
+            subheader="{{ app()->getLocale() == 'de' ?  $settings->reference_subheader_de : $settings->reference_subheader_en }}"
+            text="{{ app()->getLocale() == 'de' ? $settings->reference_introtext_de : $settings->reference_introtext_en }}"
     />
 
 

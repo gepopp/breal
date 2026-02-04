@@ -12,7 +12,6 @@ class Vacancies extends Component
 {
     use SplitsHtmlText;
 
-
     public string $company = CompaniesEnum::Hausverwaltung->name;
 
     public string $text = '';
@@ -24,14 +23,19 @@ class Vacancies extends Component
         $this->text = $pagesSettings->vacancies_introtext;
     }
 
-
     public function render(PagesSettings $pagesSettings)
     {
         $preparedText = $this->prepareText();
         $vacancies = JobVacancy::where('from', '<', now())->where('to', '>', now())->get();
-        $description = 'Gestalten Sie mit uns die Zukunft der Immobilienverwaltung. be real bietet Jobs mit Verantwortung, Weiterentwicklung & Teamgeist – jetzt bewerben & Teil unseres Teams werden.';
+        $description = __('pages.vacancies.description');
+
         return view('livewire.pages.vacancies',
             compact('pagesSettings', 'preparedText', 'vacancies', 'description'))
-            ->title('Karriere bei be real Immobilien | Arbeiten mit Sinn & Perspektive');
+            ->title(__('pages.vacancies.title'))
+            ->layout('components.layouts.site')
+            ->layoutData([
+                'canonical' => route($this->company === CompaniesEnum::Hausverwaltung->name ? 'hausverwaltung.karriere' : ($this->company === CompaniesEnum::Makler->name ? 'makler.karriere' : 'technik.karriere')),
+                'description' => __('pages.vacancies.description'),
+            ]);
     }
 }

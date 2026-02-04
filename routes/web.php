@@ -29,8 +29,6 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::get('/home-v2', \App\Livewire\Landing\HomeV2::class)->name('home.v2');
-
 Route::group(['as' => 'hausverwaltung.'], function () {
     Route::get('/', \App\Livewire\Landing\FacilityManagment::class)->name('home');
     Route::get('/leistungen', \App\Livewire\Hausverwaltung\Leistungen::class)->name('leistungen');

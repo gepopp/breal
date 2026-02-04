@@ -12,9 +12,14 @@ class HomeV2 extends Component
 
     public function render(LandingpageHausverwaltung $settings)
     {
-        $description = 'Hausverwaltung, der Sie vertrauen können: Mit Kompetenz, Nachhaltigkeit & persönlicher Betreuung. be real kümmert sich um Ihre Zinshäuser, Wohnungseigentum & Gewerbeimmobilien als wäre es unser eigenes.';
+        $description = __('landing.home.description');
 
         return view('livewire.landing.home-v2', compact('settings', 'description'))
-            ->title('be real Hausverwaltung in Wien mit Weitblick & Persönlichkeit ');
+            ->title(__('landing.home.title'))
+            ->layout('components.layouts.site')
+            ->layoutData([
+                'canonical' => route('hausverwaltung.home'),
+                'description' => __('landing.home.description'),
+            ]);
     }
 }

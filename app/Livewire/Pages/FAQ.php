@@ -15,11 +15,9 @@ class FAQ extends Component
 
     public string $text = '';
 
-
     public ?array $faqs = null;
 
-
-    public function mount( PagesSettings $pagesSettings)
+    public function mount(PagesSettings $pagesSettings)
     {
         $this->company = CompaniesEnum::getByRoute();
 
@@ -28,11 +26,16 @@ class FAQ extends Component
         $this->faqs = \App\Models\Question::all()->toArray();
     }
 
-
-    public function render( PagesSettings $pagesSettings)
+    public function render(PagesSettings $pagesSettings)
     {
         $preparedText = $this->prepareText();
 
-        return view('livewire.pages.f-a-q', compact('pagesSettings', 'preparedText'));
+        return view('livewire.pages.f-a-q', compact('pagesSettings', 'preparedText'))
+            ->title(__('pages.faq.title'))
+            ->layout('components.layouts.site')
+            ->layoutData([
+                'canonical' => route($this->company === CompaniesEnum::Hausverwaltung->name ? 'hausverwaltung.faq' : ($this->company === CompaniesEnum::Makler->name ? 'makler.faq' : 'technik.faq')),
+                'description' => __('pages.faq.description'),
+            ]);
     }
 }

@@ -2,7 +2,7 @@
     <ul>
         @if(array_key_exists('baujahr', $data))
             <li class="!ml-0 flex justify-between">
-                <span>Baujahr</span>
+                <span>{{ __('realty.year_built') }}</span>
                 <span>{{ $data['baujahr'] }}</span>
             </li>
         @endif
@@ -10,11 +10,11 @@
     @if(array_key_exists('energiepass', $data))
         <div class="pt-4 mt-4 border-t border-gray-200">
 
-            <h3>Energiepass</h3>
+            <h3>{{ __('realty.energy_certificate') }}</h3>
             <ul>
                 @if(array_key_exists('hwbwert', $data['energiepass']) && array_key_exists('hwbklasse', $data['energiepass']))
                     <li class="!ml-0 flex justify-between">
-                        <span>HWB</span>
+                        <span>{{ __('realty.hwb') }}</span>
                         <span class="flex items-center space-x-1">
                         <span>{{ $data['energiepass']['hwbwert'] }} kWh/m²a</span>
                         {!! \App\Enums\EnergieausweissEnum::{$data['energiepass']['hwbklasse']}->getBadge() !!}
@@ -34,7 +34,7 @@
 
                 @if(array_key_exists('heizungsart', $ausstattung))
                     <li class="!ml-0 flex justify-between">
-                        <span>Heizung</span>
+                        <span>{{ __('realty.heating') }}</span>
                         <span>
                                 @foreach($ausstattung['heizungsart']['@attributes'] as $key => $heizung)
                                 @if($heizung == 1)
@@ -46,7 +46,7 @@
                 @endif
                 @if(array_key_exists('befeuerung', $ausstattung))
                     <li class="!ml-0 flex justify-between">
-                        <span>Befeuerung</span>
+                        <span>{{ __('realty.fuel_type') }}</span>
                         <span>
                                 @foreach($ausstattung['befeuerung']['@attributes'] as $key => $heizung)
                                 @if($heizung == 1)

@@ -15,7 +15,7 @@
 
             @if(array_key_exists('freitexte', $realty->data) && array_key_exists('lage', $realty->data['freitexte']))
                 <div class="prose">
-                    <h3>Lage</h3>
+                    <h3>{{ __('realty.location') }}</h3>
                     {!! $realty['data']['freitexte']['lage'] !!}
                 </div>
             @endif
@@ -25,7 +25,7 @@
             @endif
 
             <div class="prose">
-                <h3>Beschreibung</h3>
+                <h3>{{ __('realty.description') }}</h3>
                 {!! $realty->beschreibung !!}
             </div>
         </div>
@@ -38,29 +38,29 @@
             @endif
 
             <div class="pt-4 mt-4 border-t border-gray-200">
-                <h3>Eckdaten</h3>
+                <h3>{{ __('realty.key_data') }}</h3>
 
                 <livewire:realty.spaces :spaces="$realty->data['flaechen']"/>
 
 
                 <ul class="!mt-8">
                     <li class="!ml-0 flex justify-between">
-                        <span>Nutzungsart</span>
+                        <span>{{ __('realty.usage_type') }}</span>
                         <span>{{ ucfirst(strtolower( $realty->nutzungsart)) }}</span>
                     </li>
                     @if($realty->vermarktungsart == 'miete')
                         @if(array_key_exists('verfuegbar_ab', $data['verwaltung_objekt']))
                             <li class="!ml-0 flex justify-between">
-                                <span>Verfügbar ab</span>
+                                <span>{{ __('realty.available_from') }}</span>
                                 <span>{{ $data['verwaltung_objekt']['verfuegbar_ab'] }}</span>
                             </li>
                         @endif
                         @if(array_key_exists('max_mietdauer', $data['verwaltung_objekt']))
                             <li class="!ml-0 flex justify-between">
-                                <span>Mietdauer</span>
+                                <span>{{ __('realty.rental_duration') }}</span>
                                 <span>{{
                                         is_numeric( $data['verwaltung_objekt']['max_mietdauer'] )
-                                        ? $data['verwaltung_objekt']['max_mietdauer'] . ' Jahre'
+                                        ? $data['verwaltung_objekt']['max_mietdauer'] . ' ' . __('realty.years')
                                         : $data['verwaltung_objekt']['max_mietdauer']
                                     }}</span>
                             </li>

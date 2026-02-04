@@ -17,7 +17,7 @@ class Leistungen extends Component
 
     public ?Collection $leistungen = null;
 
-    public function mount( PagesSettings $pagesSettings)
+    public function mount(PagesSettings $pagesSettings)
     {
         $this->company = CompaniesEnum::getByRoute();
 
@@ -28,11 +28,16 @@ class Leistungen extends Component
 
     public function render(PagesSettings $pagesSettings)
     {
-        $text = strtolower( $this->company ) . '_leistungen_introtext';
+        $text = strtolower($this->company).'_leistungen_introtext';
         $preparedText = $this->prepareText($pagesSettings->$text);
-        $description = 'Von allgemeiner Immobilienverwaltung über WEG- und Gewerbeimmobilienbetreuung bis zum Baumanagement: be real bietet maßgeschneiderte Services für Eigentümer & Investoren in Wien & ganz Österreich.';
+
         return view('livewire.hausverwaltung.leistungen',
-            compact('pagesSettings', 'preparedText', 'description'))
-            ->title('Unsere Leistungen | be real – Hausverwaltungen, WEG, Bau- & Gewerbeobjekte');
+            compact('pagesSettings', 'preparedText'))
+            ->title(__('pages.leistungen.title'))
+            ->layout('components.layouts.site')
+            ->layoutData([
+                'canonical' => route($this->company === CompaniesEnum::Hausverwaltung->name ? 'hausverwaltung.leistungen' : ($this->company === CompaniesEnum::Makler->name ? 'makler.leistungen' : 'technik.leistungen')),
+                'description' => __('pages.leistungen.description'),
+            ]);
     }
 }

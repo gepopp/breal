@@ -33,7 +33,7 @@
                 <span class="bg-logo p-1.5 rounded text-white">Logo</span>
                 Animation</h1>
 
-            <p class="mt-16">Wir beim laden der Seiten abgespielt.</p>
+            <p class="mt-16">{{ __('demo.logo_animation_description') }}</p>
 
             <div id="canvas"></div>
             <script type="module">
@@ -56,7 +56,7 @@
                 Animation
             </h1>
 
-            <p class="mt-16">Hovern</p>
+            <p class="mt-16">{{ __('demo.menu_animation_description') }}</p>
 
             <div class="relative w-full mt-16">
                 <nav class="menu overflow-hidden text-xl font-bold text-logo/90">
@@ -130,7 +130,7 @@
                 form
             </h1>
 
-            <p class="mt-16">Demo-Formular zur Newsletter Anmeldung - versendet auch ein Demo-E-Mail</p>
+            <p class="mt-16">{{ __('demo.form_description') }}</p>
 
             <livewire:demo-form/>
 

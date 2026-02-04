@@ -30,7 +30,7 @@
             @php
                 $company = strtolower($competence->company->value);
             @endphp
-            <x-button href="{{ route( $company == 'makler' ? 'immobilien.leistungen' : $company . '.leistungen' ) }}" wire:navigate data-aos="fade-up" data-aos-delay="500">Alle Leistungen</x-button>
+            <x-button href="{{ route( $company == 'makler' ? 'immobilien.leistungen' : $company . '.leistungen' ) }}" wire:navigate data-aos="fade-up" data-aos-delay="500">{{ __('common.all_services') }}</x-button>
         </div>
     </div>
 </x-section>

@@ -3,18 +3,21 @@
 namespace App\Livewire\Landing;
 
 use App\Enums\CompaniesEnum;
-use App\Settings\LandingpageHausverwaltung;
+use App\Settings\HausverwaltungLandingpageSettings;
 use Livewire\Component;
 
 class FacilityManagment extends Component
 {
     public string $company = CompaniesEnum::Hausverwaltung->name;
 
-
-    public function render( LandingpageHausverwaltung $settings)
+    public function render(HausverwaltungLandingpageSettings $settings)
     {
-        $description = 'Hausverwaltung, der Sie vertrauen können: Mit Kompetenz, Nachhaltigkeit & persönlicher Betreuung. be real kümmert sich um Ihre Zinshäuser, Wohnungseigentum & Gewerbeimmobilien als wäre es unser eigenes.';
-        return view('livewire.landing.facility-managment', compact('settings', 'description'))
-            ->title('be real Hausverwaltung in Wien mit Weitblick & Persönlichkeit ');
+        return view('livewire.landing.facility-managment', compact('settings'))
+            ->title(__('facility_management.title'))
+            ->layout('components.layouts.site')
+            ->layoutData([
+                'canonical' => route('hausverwaltung.home'),
+                'description' => __('facility_management.description'),
+            ]);
     }
 }

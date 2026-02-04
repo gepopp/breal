@@ -21,19 +21,19 @@ use function Livewire\Volt\{mount}
                 <nav class="absolute flex w-full justify-between items-center overflow-hidden font-semibold text-logo-500 dark:text-white">
                     <a href="#" class="menu-item relative uppercase cursor-pointer text-logo-600 font-extrabold">
                         <div>
-                            <span class="menu-item-text pointer-events-none block relative">verwaltung</span>
+                            <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.property_management_short') }}</span>
                         </div>
                     </a>
 
                     <a href="#" class="menu-item uppercase cursor-pointer relative">
                         <div>
-                            <span class="menu-item-text pointer-events-none block relative">immobilien</span>
+                            <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.real_estate_short') }}</span>
                         </div>
                     </a>
 
                     <a href="#" class="menu-item uppercase cursor-pointer relative">
                         <div>
-                            <span class="menu-item-text pointer-events-none block relative">technik</span>
+                            <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.technology_short') }}</span>
                         </div>
                     </a>
                 </nav>
@@ -46,7 +46,7 @@ use function Livewire\Volt\{mount}
                  x-transition:enter-start="opacity-0 scale-90"
                  x-transition:enter-end="opacity-100 scale-100"
                  class="hidden md:flex flex-col items-center justify-end min-h-full mb-1">
-                <x-button>kontakt</x-button>
+                <x-button>{{ __('navigation.contact') }}</x-button>
             </div>
 
             <div x-cloak
@@ -61,7 +61,7 @@ use function Livewire\Volt\{mount}
                          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"></path>
                     </svg>
-                    <p class="uppercase !text-sm font-bold leading-1 -mb-1 text-logo dark:text-white">verwaltung</p>
+                    <p class="uppercase !text-sm font-bold leading-1 -mb-1 text-logo dark:text-white">{{ __('navigation.property_management_short') }}</p>
 
                     <div x-cloak x-show="show" x-collapse
                          class="absolute top-full w-full mt-2 pb-2 px-2 space-y-2 bg-white dark:bg-logo-950 shadow">
@@ -73,7 +73,7 @@ use function Livewire\Volt\{mount}
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                       d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
                             </svg>
-                            <p class="uppercase font-bold leading-1 -mb-1 text-logo dark:text-white !text-sm">immobilien</p>
+                            <p class="uppercase font-bold leading-1 -mb-1 text-logo dark:text-white !text-sm">{{ __('navigation.real_estate_short') }}</p>
                         </div>
                         <div class="flex items-center mr-4">
                             <svg class="size-4 shrink-0 text-logo dark:text-white -ml-2" data-slot="icon" fill="none"
@@ -83,7 +83,7 @@ use function Livewire\Volt\{mount}
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                       d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
                             </svg>
-                            <p class="uppercase font-bold leading-1 -mb-1 text-logo dark:text-white !text-sm">technik</p>
+                            <p class="uppercase font-bold leading-1 -mb-1 text-logo dark:text-white !text-sm">{{ __('navigation.technology_short') }}</p>
                         </div>
                     </div>
                 </div>
@@ -111,17 +111,17 @@ use function Livewire\Volt\{mount}
 
         <div x-cloak x-show="submenu" x-collapse.duration.1000ms
              class="hidden sm:flex w-full p-4 bg-logo-500 text-white justify-center items-center space-x-4">
-            <a href="#" class="hover:font-semibold transition-all duration-300">leistungen</a>
-            <a href="#" class="hover:font-semibold transition-all duration-300">service</a>
-            <a href="#" class="hover:font-semibold transition-all duration-300">karriere</a>
-            <a href="#" class="md:hidden">kontakt</a>
+            <a href="#" class="hover:font-semibold transition-all duration-300">{{ __('navigation.services') }}</a>
+            <a href="#" class="hover:font-semibold transition-all duration-300">{{ __('navigation.service') }}</a>
+            <a href="#" class="hover:font-semibold transition-all duration-300">{{ __('navigation.careers') }}</a>
+            <a href="#" class="md:hidden">{{ __('navigation.contact') }}</a>
         </div>
 
         <div x-cloak x-show="open" x-collapse
              class="absolute top-full left-0 w-full p-4 bg-logo-500 text-white flex justify-center items-center space-x-4">
-            <a href="#">leistungen</a>
-            <a href="#">service</a>
-            <a href="#">karriere</a>
+            <a href="#">{{ __('navigation.services') }}</a>
+            <a href="#">{{ __('navigation.service') }}</a>
+            <a href="#">{{ __('navigation.careers') }}</a>
         </div>
     </div>
 </div>

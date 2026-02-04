@@ -7,7 +7,7 @@
             <div class="p-4">
                 <form wire:submit="save" class="space-y-5 w-full mt-16">
                     <flux:field>
-                        <flux:label badge="erforderlich">Name</flux:label>
+                        <flux:label badge="{{ __('form.required') }}">{{ __('form.name') }}</flux:label>
 
                         <flux:input wire:model="name" type="text" required/>
 
@@ -15,7 +15,7 @@
                     </flux:field>
 
                     <flux:field>
-                        <flux:label badge="erforderlich">E-Mail-Adresse</flux:label>
+                        <flux:label badge="{{ __('form.required') }}">{{ __('form.email') }}</flux:label>
 
                         <flux:input wire:model="email" type="email" required/>
 
@@ -23,16 +23,15 @@
                     </flux:field>
 
                     <flux:field>
-                        <x-button>speichern</x-button>
+                        <x-button>{{ __('form.save') }}</x-button>
                     </flux:field>
                 </form>
             </div>
             <div class="bg-logo text-white p-4 flex flex-col justify-center items-center">
                 <div class="max-w-xs text-center">
-                    <h5 class="text-2xl font-bold">Vielen Dank!</h5>
+                    <h5 class="text-2xl font-bold">{{ __('form.thank_you') }}</h5>
                     <p class="!text-sm font-thin">
-                        Bitte prüfen Sie ihren Posteingang,
-                        wir haben Ihnen ein E-Mail zum Bestätigen Ihrer Anmeldung gesendet.
+                        {{ __('form.check_inbox') }}
                     </p>
                 </div>
             </div>

@@ -3,15 +3,15 @@
             <div class="flex justify-center items-center min-h-[70vh]">
                 <div class="max-w-md">
                     <x-headings>
-                        <x-slot name="tag">unfound</x-slot>
-                        Diesen Inhalt konnten wir leider nicht finden
+                        <x-slot name="tag">{{ __('unfound') }}</x-slot>
+                        {{ __('Diesen Inhalt konnten wir leider nicht finden') }}
                     </x-headings>
-                    <p>Bitte prüfen Sie die Eingabe in der Adressleiste Ihres Browsers auf Tippfehler oder besuchen Sie eine unserer Unternehmensbereiche:</p>
+                    <p>{{ __('Bitte prüfen Sie die Eingabe in der Adressleiste Ihres Browsers auf Tippfehler oder besuchen Sie eine unserer Unternehmensbereiche:') }}</p>
 
                     <div class="mt-8 space-y-8">
-                        <x-button class="w-full">Hausverwaltung</x-button>
-                        <x-button class="w-full">Immobilien</x-button>
-                        <x-button class="w-full">Technik</x-button>
+                        <x-button class="w-full">{{ __('Hausverwaltung') }}</x-button>
+                        <x-button class="w-full">{{ __('Immobilien') }}</x-button>
+                        <x-button class="w-full">{{ __('Technik') }}</x-button>
                     </div>
                 </div>
             </div>

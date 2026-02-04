@@ -25,9 +25,14 @@ class Team extends Component
     public function render(PagesSettings $pagesSettings)
     {
         $preparedText = $this->prepareText();
-        $description = 'Lernen Sie das Team von be real kennen: erfahrene Hausverwalter:innen, Jurist:innen & Immobilienexpert:innen, die mit Leidenschaft & Klarheit für Ihre Immobilie arbeiten.';
+
         return view('livewire.pages.team',
-            compact('pagesSettings', 'preparedText', 'description'))
-            ->title('Unser Team | be real Immobilien – Persönlich & kompetent für Sie da');
+            compact('pagesSettings', 'preparedText'))
+            ->title(__('pages.team.title'))
+            ->layout('components.layouts.site')
+            ->layoutData([
+                'canonical' => route($this->company === CompaniesEnum::Hausverwaltung->name ? 'hausverwaltung.team' : ($this->company === CompaniesEnum::Makler->name ? 'makler.team' : 'technik.team')),
+                'description' => __('pages.team.description'),
+            ]);
     }
 }

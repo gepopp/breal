@@ -15,7 +15,6 @@ class Contact extends Component
 
     public string $text = '';
 
-
     public function mount(PagesSettings $pagesSettings)
     {
         $this->company = CompaniesEnum::getByRoute();
@@ -23,10 +22,16 @@ class Contact extends Component
         $this->text = $pagesSettings->contact_introtext;
     }
 
-    public function render( PagesSettings $pagesSettings )
+    public function render(PagesSettings $pagesSettings)
     {
-        $description ='Vereinbaren Sie ein Beratungsgespräch oder fordern Sie Ihr individuelles Angebot an. be real Immobilienmanagement – persönlich, verlässlich & serviceorientiert.';
         $preparedText = $this->prepareText();
-        return view('livewire.pages.contact', compact('pagesSettings', 'preparedText', 'description'))->title('Kontakt | be real Immobilien – Wir sind für Sie da in Wien');
+
+        return view('livewire.pages.contact', compact('pagesSettings', 'preparedText'))
+            ->title(__('pages.contact.title'))
+            ->layout('components.layouts.site')
+            ->layoutData([
+                'canonical' => route($this->company === CompaniesEnum::Hausverwaltung->name ? 'hausverwaltung.kontakt' : ($this->company === CompaniesEnum::Makler->name ? 'makler.kontakt' : 'technik.kontakt')),
+                'description' => __('pages.contact.description'),
+            ]);
     }
 }

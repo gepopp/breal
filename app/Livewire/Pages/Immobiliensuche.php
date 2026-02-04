@@ -13,10 +13,11 @@ use Livewire\WithPagination;
 
 class Immobiliensuche extends Component
 {
-    use WithPagination;
     use SplitsHtmlText;
+    use WithPagination;
 
     public $sortBy = 'date';
+
     public $sortDirection = 'desc';
 
     public array $arten = [];
@@ -26,43 +27,45 @@ class Immobiliensuche extends Component
     public array $plz = [];
 
     public int $min_rooms = 0;
+
     public int $max_rooms = 0;
+
     public int $min_price = 0;
+
     public int $max_price = 0;
 
     public int $min_space = 0;
+
     public int $max_space = 0;
 
     #[Url]
     public array $filters = [
         'nutzungsart' => [],
-        'typ'         => [],
-        'rooms_min'   => null,
-        'rooms_max'   => null,
-        'price_min'   => null,
-        'price_max'   => null,
-        'space_min'   => null,
-        'space_max'   => null,
-        'plz'         => [],
+        'typ' => [],
+        'rooms_min' => null,
+        'rooms_max' => null,
+        'price_min' => null,
+        'price_max' => null,
+        'space_min' => null,
+        'space_max' => null,
+        'plz' => [],
     ];
-
 
     public function rules()
     {
         return [
-            'filters'             => 'array',
+            'filters' => 'array',
             'filters.nutzungsart' => 'nullable|array',
-            'filters.typ'         => 'nullable|array',
-            'filters.rooms_min'   => 'nullable|integer|min:' . $this->min_rooms,
-            'filters.rooms_max'   => 'nullable|integer|min:' . $this->min_rooms . '|max:' . $this->max_rooms . '|gt:filters.rooms_min',
-            'filters.price_min'   => 'nullable|integer|min:' . $this->min_price . '|max:' . $this->max_price . '|gt:filters.price_min',
-            'filters.price_max'   => 'nullable|integer|min:' . $this->min_price . '|max:' . $this->max_price . '|gt:filters.price_min',
-            'filters.space_min'   => 'nullable|integer|min:' . $this->min_space . '|max:' . $this->max_space . '|gt:filters.space_min',
-            'filters.space_max'   => 'nullable|integer|min:' . $this->min_space . '|max:' . $this->max_space . '|gt:filters.space_min',
-            'filters.plz'         => 'nullable|array|min:1'
+            'filters.typ' => 'nullable|array',
+            'filters.rooms_min' => 'nullable|integer|min:'.$this->min_rooms,
+            'filters.rooms_max' => 'nullable|integer|min:'.$this->min_rooms.'|max:'.$this->max_rooms.'|gt:filters.rooms_min',
+            'filters.price_min' => 'nullable|integer|min:'.$this->min_price.'|max:'.$this->max_price.'|gt:filters.price_min',
+            'filters.price_max' => 'nullable|integer|min:'.$this->min_price.'|max:'.$this->max_price.'|gt:filters.price_min',
+            'filters.space_min' => 'nullable|integer|min:'.$this->min_space.'|max:'.$this->max_space.'|gt:filters.space_min',
+            'filters.space_max' => 'nullable|integer|min:'.$this->min_space.'|max:'.$this->max_space.'|gt:filters.space_min',
+            'filters.plz' => 'nullable|array|min:1',
         ];
     }
-
 
     public function mount()
     {
@@ -71,11 +74,10 @@ class Immobiliensuche extends Component
         $this->plz = DB::table('realties')->select('plz', 'ort')->distinct()->get()->toArray();
         $this->min_rooms = DB::table('realties')->min('zimmer');
         $this->max_rooms = DB::table('realties')->max('zimmer');
-        $this->min_price = (int)DB::table('realties')->min('preis');
-        $this->max_price = (int)DB::table('realties')->max('preis');
-        $this->min_space = (int)DB::table('realties')->min('wohnflaeche');
-        $this->max_space = (int)DB::table('realties')->max('wohnflaeche');
-
+        $this->min_price = (int) DB::table('realties')->min('preis');
+        $this->max_price = (int) DB::table('realties')->max('preis');
+        $this->min_space = (int) DB::table('realties')->min('wohnflaeche');
+        $this->max_space = (int) DB::table('realties')->max('wohnflaeche');
 
         $this->filters['nutzungsart'] = [];
         foreach ($this->arten as $value) {
@@ -88,11 +90,10 @@ class Immobiliensuche extends Component
         }
     }
 
-
     public function resetFilters()
     {
         $this->resetPage();
-        $this->reset('filters');;
+        $this->reset('filters');
     }
 
     public function sort($column)
@@ -106,18 +107,16 @@ class Immobiliensuche extends Component
         }
     }
 
-
     public function updatedFilters()
     {
         $this->resetPage();
     }
 
-
     #[Computed]
     public function realties()
     {
         $query = Realty::query()
-            ->tap(fn($query) => $this->sortBy ? $query->orderBy($this->sortBy, $this->sortDirection) : $query);
+            ->tap(fn ($query) => $this->sortBy ? $query->orderBy($this->sortBy, $this->sortDirection) : $query);
 
         if ($this->filters['nutzungsart']) {
             $query->whereIn('nutzungsart', $this->filters['nutzungsart']);
@@ -158,10 +157,16 @@ class Immobiliensuche extends Component
         return $query->paginate(25);
     }
 
-
     public function render(PagesSettings $settings)
     {
         $preparedText = $this->prepareText($settings->search_introtext);
-        return view('livewire.pages.immobiliensuche', compact('settings', 'preparedText'));
+
+        return view('livewire.pages.immobiliensuche', compact('settings', 'preparedText'))
+            ->title(__('pages.immobiliensuche.title'))
+            ->layout('components.layouts.site')
+            ->layoutData([
+                'canonical' => route('makler.immobiliensuche'),
+                'description' => __('pages.immobiliensuche.description'),
+            ]);
     }
 }

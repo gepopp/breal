@@ -4,15 +4,13 @@ namespace App\Livewire\Parts;
 
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
-use Illuminate\Support\Facades\Http;
-
 
 class LinkeInWall extends Component
 {
     public ?User $user = null;
-
 
     public function mount()
     {
@@ -26,38 +24,36 @@ class LinkeInWall extends Component
         }
     }
 
-
     public function linkedin_posts()
     {
-        //6975493",
+        // 6975493",
 
         $response = Http::withHeaders([
             'X-Restli-Protocol-Version' => '2.0.0',
-            'LinkedIn-Version'          => '202504',
-            'X-RestLi-Method'           => 'FINDER',
-            'Authorization'             => "Bearer {$this->user->linkedin['token']}",
-            'Accept'                    => 'application/json',
-        ])->get('https://api.linkedin.com/rest/' . 'posts', [
-            'q'      => 'author',
-            'author' => "urn:li:organization:11490371",
-            'count'  => 3,
-            'sortBy' => 'CREATED'
+            'LinkedIn-Version' => '202504',
+            'X-RestLi-Method' => 'FINDER',
+            'Authorization' => "Bearer {$this->user->linkedin['token']}",
+            'Accept' => 'application/json',
+        ])->get('https://api.linkedin.com/rest/'.'posts', [
+            'q' => 'author',
+            'author' => 'urn:li:organization:11490371',
+            'count' => 3,
+            'sortBy' => 'CREATED',
         ]);
 
+        //        $response = Http::withHeaders([
+        //            'X-Restli-Protocol-Version' => '2.0.0',
+        //            'LinkedIn-Version' => '202404',
+        //            'Authorization' => "Bearer {$this->user->linkedin['token']}",
+        //        ])->get('https://api.linkedin.com/v2/organizationAcls', [
+        //            'q' => 'roleAssignee',
+        //            'role' => 'ADMINISTRATOR',
+        //            'projection' => '(elements*(*,organization~(id,localizedName,logoV2(original~:playableStreams))))'
+        //        ]);
 
-//        $response = Http::withHeaders([
-//            'X-Restli-Protocol-Version' => '2.0.0',
-//            'LinkedIn-Version' => '202404',
-//            'Authorization' => "Bearer {$this->user->linkedin['token']}",
-//        ])->get('https://api.linkedin.com/v2/organizationAcls', [
-//            'q' => 'roleAssignee',
-//            'role' => 'ADMINISTRATOR',
-//            'projection' => '(elements*(*,organization~(id,localizedName,logoV2(original~:playableStreams))))'
-//        ]);
-
-
-        if (!$response->successful()) {
+        if (! $response->successful()) {
             Log::critical($response->body());
+
             return [];
         }
 
@@ -74,7 +70,6 @@ class LinkeInWall extends Component
         return $posts;
     }
 
-
     public function getPostDetails(string $postId)
     {
         try {
@@ -83,18 +78,18 @@ class LinkeInWall extends Component
 
             $response = Http::withHeaders([
                 'X-Restli-Protocol-Version' => '2.0.0',
-                'LinkedIn-Version'          => '202504',
-                'Authorization'             => "Bearer {$this->user->linkedin['token']}",
-                'Accept'                    => 'application/json',
+                'LinkedIn-Version' => '202504',
+                'Authorization' => "Bearer {$this->user->linkedin['token']}",
+                'Accept' => 'application/json',
             ])->get("https://api.linkedin.com/v2/ugcPosts/{$encodedPostId}", [
-                'projection' => '(id,author,created,lastModified,visibility,specificContent(com.linkedin.ugc.ShareContent(shareCommentary,shareMediaCategory,media(*(media~:playableStreams,thumbnails,status,originalUrl,*)))))'
+                'projection' => '(id,author,created,lastModified,visibility,specificContent(com.linkedin.ugc.ShareContent(shareCommentary,shareMediaCategory,media(*(media~:playableStreams,thumbnails,status,originalUrl,*)))))',
             ]);
 
-            if (!$response->successful()) {
+            if (! $response->successful()) {
                 return [
                     'success' => false,
-                    'message' => "API-Fehler beim Abrufen des Beitrags: {$response->status()}",
-                    'details' => $response->json() ?: $response->body()
+                    'message' => __('linkedin.api_error', ['status' => $response->status()]),
+                    'details' => $response->json() ?: $response->body(),
                 ];
             }
 
@@ -102,15 +97,15 @@ class LinkeInWall extends Component
 
             // Transformiere die rohen Daten in ein besser strukturiertes Format
             $formattedPost = [
-                'id'               => $postData['id'],
-                'author'           => $postData['author'],
-                'visibility'       => $postData['visibility'] ?? 'UNKNOWN',
-                'created_at'       => date('Y-m-d H:i:s', $postData['createdAt'] / 1000),
-                'published_at'     => date('Y-m-d H:i:s', $postData['publishedAt'] / 1000),
+                'id' => $postData['id'],
+                'author' => $postData['author'],
+                'visibility' => $postData['visibility'] ?? 'UNKNOWN',
+                'created_at' => date('Y-m-d H:i:s', $postData['createdAt'] / 1000),
+                'published_at' => date('Y-m-d H:i:s', $postData['publishedAt'] / 1000),
                 'last_modified_at' => date('Y-m-d H:i:s', $postData['lastModifiedAt'] / 1000),
-                'text'             => $postData['commentary'] ?? null,
-                'lifecycle_state'  => $postData['lifecycleState'] ?? null,
-                'is_edited'        => $postData['lifecycleStateInfo']['isEditedByAuthor'] ?? false,
+                'text' => $postData['commentary'] ?? null,
+                'lifecycle_state' => $postData['lifecycleState'] ?? null,
+                'is_edited' => $postData['lifecycleStateInfo']['isEditedByAuthor'] ?? false,
             ];
 
             // Content und Medien extrahieren
@@ -129,17 +124,16 @@ class LinkeInWall extends Component
         } catch (\Exception $e) {
             Log::error("LinkedIn Post-Details Exception: {$e->getMessage()}", [
                 'post_id' => $postId,
-                'trace'   => $e->getTraceAsString()
+                'trace' => $e->getTraceAsString(),
             ]);
 
             return [];
         }
     }
 
-
     public function render()
     {
-        if(!is_null($this->user)){
+        if (! is_null($this->user)) {
             $posts = $this->linkedin_posts();
         }
 

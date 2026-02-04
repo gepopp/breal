@@ -56,7 +56,7 @@
                     <p class="!text-sm line-clamp-5">{{ $competence->description }}</p>
 
 
-                    <a href="{{ route( strtolower( $competence->company->name ) . '.leistung', ['competence' => $competence ] ) }}" class="mt-4 text-right w-full block">weiterlesen</a>
+                    <a href="{{ route( strtolower( $competence->company->name ) . '.leistung', ['competence' => $competence ] ) }}" class="mt-4 text-right w-full block">{{ __('common.read_more') }}</a>
                 </div>
 
             </div>

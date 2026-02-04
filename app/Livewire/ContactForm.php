@@ -2,20 +2,16 @@
 
 namespace App\Livewire;
 
-use App\Enums\CompaniesEnum;
 use App\Mail\VerificationEmail;
 use App\Models\ContactRequest;
 use App\Settings\PagesSettings;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Livewire\Attributes\Lazy;
 use Livewire\Component;
 
 class ContactForm extends Component
 {
-    const RECIPIENT = 'office@bereal-immobilien.at'; //'ronald@ivalu.eu';// ;
+    const RECIPIENT = 'office@bereal-immobilien.at'; // 'ronald@ivalu.eu';// ;
 
     public bool $is_sent = false;
 
@@ -27,33 +23,31 @@ class ContactForm extends Component
 
     public array $uploads = [];
 
-
     public array $data = [
-        'subject'   => '',
+        'subject' => '',
         'firstname' => '',
-        'lastname'  => '',
-        'email'     => '',
-        'phone'     => '',
-        'message'   => '',
-        'company'   => null,
-        'terms'     => false,
-        'address'   => null,
+        'lastname' => '',
+        'email' => '',
+        'phone' => '',
+        'message' => '',
+        'company' => null,
+        'terms' => false,
+        'address' => null,
     ];
-
 
     public function mount()
     {
         if (app()->environment('local')) {
             $this->data = [
-                'subject'   => 'Test-Betreff',
+                'subject' => 'Test-Betreff',
                 'firstname' => 'Max',
-                'lastname'  => 'Mustermann',
-                'email'     => 'gerhard@poppgerhard.at',
-                'phone'     => '0676335203',
-                'message'   => 'TEXT',
-                'company'   => null,
-                'terms'     => true,
-                'address'   => null,
+                'lastname' => 'Mustermann',
+                'email' => 'gerhard@poppgerhard.at',
+                'phone' => '0676335203',
+                'message' => 'TEXT',
+                'company' => null,
+                'terms' => true,
+                'address' => null,
             ];
         }
 
@@ -62,32 +56,31 @@ class ContactForm extends Component
     public function getValidationAttributes()
     {
         return [
-            'data.subject'   => 'Betreff',
-            'data.firstname' => 'Vorname',
-            'data.lastname'  => 'Nachname',
-            'data.email'     => 'E-Mail-Adresse',
-            'data.phone'     => 'Telefonnummer',
-            'data.message'   => 'Nachricht',
-            'data.terms'     => 'Verarbeitung',
-            'data.address'   => 'Adresse',
-            'uploads.*'      => 'Datei',
-            'uploads'        => 'Dateien',
+            'data.subject' => __('contact.validation.attributes.subject'),
+            'data.firstname' => __('contact.validation.attributes.firstname'),
+            'data.lastname' => __('contact.validation.attributes.lastname'),
+            'data.email' => __('contact.validation.attributes.email'),
+            'data.phone' => __('contact.validation.attributes.phone'),
+            'data.message' => __('contact.validation.attributes.message'),
+            'data.terms' => __('contact.validation.attributes.terms'),
+            'data.address' => __('contact.validation.attributes.address'),
+            'uploads.*' => __('contact.validation.attributes.file'),
+            'uploads' => __('contact.validation.attributes.files'),
         ];
     }
-
 
     public function rules()
     {
         return [
-            'data.subject'   => ['required', 'string', 'max:255'],
+            'data.subject' => ['required', 'string', 'max:255'],
             'data.firstname' => ['required', 'string', 'max:255'],
-            'data.lastname'  => ['required', 'string', 'max:255'],
-            'data.email'     => ['required', 'string', 'email:rfc,dns', 'max:255'],
-            'data.phone'     => ['required', 'string', 'max:255'],
-            'data.message'   => ['required', 'string'],
-            'data.terms'     => ['required', 'accepted'],
-            'data.address'   => $this->address ? ['required', 'string', 'max:255'] : ['nullable'],
-            'uploads'        => ['nullable', 'array', 'max:5'],
+            'data.lastname' => ['required', 'string', 'max:255'],
+            'data.email' => ['required', 'string', 'email:rfc,dns', 'max:255'],
+            'data.phone' => ['required', 'string', 'max:255'],
+            'data.message' => ['required', 'string'],
+            'data.terms' => ['required', 'accepted'],
+            'data.address' => $this->address ? ['required', 'string', 'max:255'] : ['nullable'],
+            'uploads' => ['nullable', 'array', 'max:5'],
         ];
     }
 
@@ -98,14 +91,12 @@ class ContactForm extends Component
         $this->save();
     }
 
-
     public function submitWithAddress()
     {
         $this->validate();
         $this->address = true;
         $this->save();
     }
-
 
     public function save()
     {
@@ -131,7 +122,6 @@ class ContactForm extends Component
 
         $this->is_sent = true;
     }
-
 
     public function render(PagesSettings $pagesSettings)
     {

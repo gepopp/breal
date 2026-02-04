@@ -1,10 +1,10 @@
 <div class="pt-4 mt-4 border-t border-gray-200">
-    <h3>Preisinformation</h3>
+    <h3>{{ __('realty.price_information') }}</h3>
     @if($realty->vermarktungsart == 'miete')
         <ul>
             @if(array_key_exists('gesamtmietebrutto', $prices))
                 <li class="flex justify-between !ml-0">
-                    <span>Gesamtmiete</span>
+                    <span>{{ __('realty.total_rent') }}</span>
                     <span>{{ \Illuminate\Support\Number::currency($prices['gesamtmietebrutto'], 'EUR', 'de') }}</span>
                 </li>
             @endif
@@ -12,20 +12,20 @@
 
             @if(array_key_exists('gesamtmietenetto', $prices))
                 <li class="flex justify-between !ml-0 mt-8">
-                    <span>Nettomiete</span>
+                    <span>{{ __('realty.net_rent') }}</span>
                     <span>{{ \Illuminate\Support\Number::currency($prices['gesamtmietenetto'], 'EUR', 'de') }}</span>
                 </li>
             @endif
             @if(array_key_exists('betriebskostennetto', $prices))
                 <li class="flex justify-between !ml-0">
-                    <span>Betreibskosten-Netto</span>
+                    <span>{{ __('realty.operating_costs_net') }}</span>
                     <span>{{ \Illuminate\Support\Number::currency($prices['betriebskostennetto'], 'EUR', 'de') }}</span>
                 </li>
             @endif
 
             @if(array_key_exists('kaution_text', $prices))
                 <li class="flex justify-between !ml-0 mt-8">
-                    <span>Kaution</span>
+                    <span>{{ __('realty.deposit') }}</span>
                     <span>{{ $prices['kaution_text'] }}</span>
                 </li>
             @endif
@@ -44,7 +44,7 @@
         <ul>
             @if(array_key_exists('kaufpreisbrutto', $prices))
                 <li class="flex justify-between !ml-0">
-                    <span>Kaufpreis</span>
+                    <span>{{ __('realty.purchase_price') }}</span>
                     <span>{{ \Illuminate\Support\Number::currency($prices['kaufpreisbrutto'], 'EUR', 'de') }}</span>
                 </li>
             @endif
@@ -52,13 +52,13 @@
 
             @if(array_key_exists('kaufpreisnetto', $prices))
                 <li class="flex justify-between !ml-0 mt-8">
-                    <span>Netto-Kaufpreis</span>
+                    <span>{{ __('realty.net_purchase_price') }}</span>
                     <span>{{ \Illuminate\Support\Number::currency($prices['kaufpreisnetto'], 'EUR', 'de') }}</span>
                 </li>
             @endif
             @if(array_key_exists('betriebskostennetto', $prices))
                 <li class="flex justify-between !ml-0">
-                    <span>Betreibskosten-Netto</span>
+                    <span>{{ __('realty.operating_costs_net') }}</span>
                     <span>{{ \Illuminate\Support\Number::currency($prices['betriebskostennetto'], 'EUR', 'de') }}</span>
                 </li>
             @endif

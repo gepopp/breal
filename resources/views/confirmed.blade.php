@@ -3,15 +3,15 @@
             <div class="flex justify-center items-center min-h-[70vh]">
                 <div class="max-w-md">
                     <x-headings>
-                        <x-slot name="tag">confirmed</x-slot>
-                        Vielen, Dank!
+                        <x-slot name="tag">{{ __('confirmed.tag') }}</x-slot>
+                        {{ __('confirmed.title') }}
                     </x-headings>
-                    <p>Ihre E-Mail-Adresse ist nun bestätigt, und wir bearbeiten Ihre Anfrage so schnell wie möglich. Besuchen Sie einstweilen einen unserer Unternehmensbereiche:</p>
+                    <p>{{ __('confirmed.description') }}</p>
 
                     <div class="mt-8 space-y-8">
-                        <x-button class="w-full">Hausverwaltung</x-button>
-                        <x-button class="w-full">Immobilien</x-button>
-                        <x-button class="w-full">Technik</x-button>
+                        <x-button class="w-full">{{ __('navigation.property_management') }}</x-button>
+                        <x-button class="w-full">{{ __('navigation.real_estate') }}</x-button>
+                        <x-button class="w-full">{{ __('navigation.technology') }}</x-button>
                     </div>
                 </div>
             </div>

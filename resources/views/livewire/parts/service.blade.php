@@ -23,7 +23,7 @@
         </div>
 
         <div data-aos="fade-up" data-aos-delay="600" class="flex justify-center mt-8">
-            <x-button href="{{ route('hausverwaltung.service') }}">alle services</x-button>
+            <x-button href="{{ route('hausverwaltung.service') }}">{{ __('common.all_services') }}</x-button>
         </div>
     </div>
 </x-section>
