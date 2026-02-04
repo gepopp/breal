@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pages;
 
+use App\Forms\Components\SettingsUpload;
 use App\Settings\MaklerLandingpageSettings as Settings;
 use BackedEnum;
 use Filament\Forms;
@@ -29,9 +30,11 @@ class MaklerLandingpageSettings extends SettingsPage
         return $schema->schema([
             Section::make('Hero Bereich')
                 ->schema([
-                    Forms\Components\FileUpload::make('hero_images')
+                    SettingsUpload::make('hero_images')
                         ->label('Hero Bilder')
                         ->multiple()
+                        ->reorderable()
+                        ->panelLayout('grid')
                         ->columnSpanFull(),
                 ]),
 
@@ -89,7 +92,7 @@ class MaklerLandingpageSettings extends SettingsPage
                             ->label('CTA Text (English)')
                             ->required(),
                     ]),
-                    Forms\Components\FileUpload::make('cta_image')
+                    SettingsUpload::make('cta_image')
                         ->label('CTA Bild')
                         ->columnSpanFull(),
                     Grid::make(2)->schema([
@@ -123,7 +126,7 @@ class MaklerLandingpageSettings extends SettingsPage
                             ->label('About Text (English)')
                             ->required(),
                     ]),
-                    Forms\Components\FileUpload::make('about_image')
+                    SettingsUpload::make('about_image')
                         ->label('About Bild')
                         ->columnSpanFull(),
                     Grid::make(2)->schema([

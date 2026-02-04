@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pages;
 
+use App\Forms\Components\SettingsUpload;
 use App\Settings\TechnikLandingpageSettings as Settings;
 use BackedEnum;
 use Filament\Forms;
@@ -29,8 +30,11 @@ class TechnikLandingpageSettings extends SettingsPage
         return $schema->schema([
             Section::make('Hero Bereich')
                 ->schema([
-                    Forms\Components\FileUpload::make('hero_image')
+                    SettingsUpload::make('hero_image')
                         ->label('Hero Bild')
+                        ->multiple()
+                        ->reorderable()
+                        ->panelLayout('grid')
                         ->columnSpanFull(),
                     Grid::make(2)->schema([
                         Forms\Components\TextInput::make('hero_image_alt_de')
@@ -106,8 +110,11 @@ class TechnikLandingpageSettings extends SettingsPage
                                     ->label('Text (English)')
                                     ->required(),
                             ]),
-                            Forms\Components\FileUpload::make('text_image')
+                            SettingsUpload::make('text_image')
                                 ->label('Text Bild')
+                                ->multiple()
+                                ->reorderable()
+                                ->panelLayout('grid')
                                 ->columnSpanFull(),
                             Grid::make(2)->schema([
                                 Forms\Components\TextInput::make('text_image_alt_de')
@@ -147,7 +154,7 @@ class TechnikLandingpageSettings extends SettingsPage
                             ->label('About Text (English)')
                             ->required(),
                     ]),
-                    Forms\Components\FileUpload::make('about_image')
+                    SettingsUpload::make('about_image')
                         ->label('About Bild')
                         ->columnSpanFull(),
                     Grid::make(2)->schema([
