@@ -6,20 +6,17 @@ use Spatie\LaravelSettings\Settings;
 
 class PagesSettings extends Settings
 {
-
     public string $contact_header = 'together';
 
     public string $contact_subheader = 'Ihr Kontakt zu Bontus Eybel';
 
     public string $contact_introtext = '';
 
-
     public string $team_header = 'team';
 
     public string $team_subheader = 'Das Team von Bontus Eybel';
 
     public string $team_introtext = '<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>';
-
 
     public string $vacancies_header = 'with us';
 
@@ -40,7 +37,6 @@ class PagesSettings extends Settings
                 mitzugestalten.
             </p>';
 
-
     public string $contactform_heading = 'Sagen Sie uns Hallo!';
 
     public string $contactform_email = 'office@bontus-eybel.at';
@@ -49,21 +45,17 @@ class PagesSettings extends Settings
 
     public string $contactform_address = 'Franz Josefs Kai 65, 1010 Wien';
 
-
-
     public string $makler_contactform_email = 'office@bontus-eybel.at';
 
     public string $makler_contactform_phone = '+43 1 535 36 19';
 
     public string $makler_contactform_address = 'Franz Josefs Kai 65, 1010 Wien';
 
-
     public string $technik_contactform_email = 'office@bontus-eybel.at';
 
     public string $technik_contactform_phone = '+43 1 535 36 19';
 
     public string $technik_contactform_address = 'Franz Josefs Kai 65, 1010 Wien';
-
 
     public string $contactform_terms = 'Ich bin mit der Verarbeitung und Speicherung meiner Daten, sowie mit der Kontaktaufnahme via E-Mail oder Telefon im Zuge der Bearbeitung meiner Anfrage einverstanden.';
 
@@ -73,12 +65,11 @@ class PagesSettings extends Settings
 
     public string $cold_application_cta_text;
 
-    public string $imprint_text = "<p>Impressum</p>";
+    public string $imprint_text = '<p>Impressum</p>';
 
-    public string $dpgr_text = "<p>Datenschutz</p>";
+    public string $dpgr_text = '<p>Datenschutz</p>';
 
-    public string $accessability_text = "<p>Barrierefreiheit</p>";
-
+    public string $accessability_text = '<p>Barrierefreiheit</p>';
 
     public string $services_header = 'secure';
 
@@ -92,13 +83,11 @@ class PagesSettings extends Settings
 
     public string $faq_introtext = '<p>Hausverwaltung ist ein komplexes Thema. Da kann es schon mal zu Fragen kommen. Wir beantworten Ihre Fragen rund um das Thema Immobilienmanagement und Hausverwaltung.</p>';
 
-
     public string $hausverwaltung_leistungen_header = 'competent';
 
     public string $hausverwaltung_leistungen_subheader = 'Unsere Leistungen';
 
     public string $hausverwaltung_leistungen_introtext = '<p>Wir brennen für Hausverwaltung - von Wohneigentumsverwaltung und Mietrechtsgesetz bis zu Bauverwaltung und allgemeiner Beratung – wir kümmern uns darum, dass Sie sich rundum gut betreut fühlen. Dabei stehen partnerschaftliche Zusammenarbeit, individuelle Lösungen und umfangreiche Beratung an erster Stelle.</p>';
-
 
     public string $immobilien_leistungen_header = 'competent';
 
@@ -106,21 +95,17 @@ class PagesSettings extends Settings
 
     public string $immobilien_leistungen_introtext = '<p>Wir brennen für Hausverwaltung - von Wohneigentumsverwaltung und Mietrechtsgesetz bis zu Bauverwaltung und allgemeiner Beratung – wir kümmern uns darum, dass Sie sich rundum gut betreut fühlen. Dabei stehen partnerschaftliche Zusammenarbeit, individuelle Lösungen und umfangreiche Beratung an erster Stelle.</p>';
 
-
-
     public string $technik_leistungen_header = 'competent';
 
     public string $technik_leistungen_subheader = 'Unsere Leistungen';
 
     public string $technik_leistungen_introtext = '<p>Wir brennen für Hausverwaltung - von Wohneigentumsverwaltung und Mietrechtsgesetz bis zu Bauverwaltung und allgemeiner Beratung – wir kümmern uns darum, dass Sie sich rundum gut betreut fühlen. Dabei stehen partnerschaftliche Zusammenarbeit, individuelle Lösungen und umfangreiche Beratung an erster Stelle.</p>';
 
-
-
     public string $search_header = 'home';
+
     public string $search_subheader = 'Immobiliensuche der be real makler';
 
     public string $search_introtext = '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet hic incidunt, inventore ipsa iste minima nemo officia similique veniam vero. Aliquid aspernatur cumque dolore, eveniet facilis iusto laborum nihil similique?</p>';
-
 
     public static function group(): string
     {

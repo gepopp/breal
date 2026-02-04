@@ -6,7 +6,6 @@ use Spatie\LaravelSettings\Settings;
 
 class LandingpageTechnikSettings extends Settings
 {
-
     public array|int|null $hero_image = null;
 
     public string $hero_image_alt = 'Bontus Eybel Intro Bild';
@@ -16,7 +15,6 @@ class LandingpageTechnikSettings extends Settings
     public string $hero_subheader = 'Die Technik für Hausverwaltung und Immobilienmanagement';
 
     public string $hero_introtext = '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur delectus ea id maiores quasi reiciendis sed voluptate. Cumque deserunt dignissimos, dolore, excepturi fugiat id libero nostrum qui, quod repellat vero.</p>';
-
 
     public string $intro_layout = 'two_columns';
 
@@ -30,7 +28,6 @@ class LandingpageTechnikSettings extends Settings
 
     public string $text_image_alt = 'Bontus Eybel Intro Bild';
 
-
     public string $about_header = 'with us';
 
     public string $about_subheader = 'Warum be real?';
@@ -42,7 +39,6 @@ class LandingpageTechnikSettings extends Settings
     public string $about_image_alt = 'Bontus Eybel Intro Bild';
 
     public ?string $about_video_embed_code = '';
-
 
     public static function group(): string
     {

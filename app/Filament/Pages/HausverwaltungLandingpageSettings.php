@@ -1,0 +1,309 @@
+<?php
+
+namespace App\Filament\Pages;
+
+use App\Settings\HausverwaltungLandingpageSettings as Settings;
+use BackedEnum;
+use Filament\Forms;
+use Filament\Pages\SettingsPage;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
+use UnitEnum;
+
+class HausverwaltungLandingpageSettings extends SettingsPage
+{
+    protected static BackedEnum|string|null $navigationIcon = Heroicon::Home;
+
+    protected static string $settings = Settings::class;
+
+    protected static UnitEnum|string|null $navigationGroup = 'Landingpages';
+
+    protected static ?string $navigationLabel = 'Hausverwaltung';
+
+    protected static ?string $title = 'Hausverwaltung Landingpage Einstellungen';
+
+    public function form(Schema $schema): Schema
+    {
+        return $schema->schema([
+            Section::make('Hero Bereich')
+                ->schema([
+                    Forms\Components\FileUpload::make('hero_image')
+                        ->label('Hero Bild')
+                        ->columnSpanFull(),
+                    Forms\Components\TextInput::make('hero_speed')
+                        ->label('Hero Geschwindigkeit (ms)')
+                        ->numeric()
+                        ->default(4000)
+                        ->columnSpanFull(),
+                    Grid::make(2)->schema([
+                        Forms\Components\TextInput::make('hero_image_alt_de')
+                            ->label('Bild Alt-Text (Deutsch)')
+                            ->required(),
+                        Forms\Components\TextInput::make('hero_image_alt_en')
+                            ->label('Bild Alt-Text (English)')
+                            ->required(),
+                    ]),
+                    Grid::make(2)->schema([
+                        Forms\Components\TextInput::make('hero_header_de')
+                            ->label('Hero Header (Deutsch)')
+                            ->required(),
+                        Forms\Components\TextInput::make('hero_header_en')
+                            ->label('Hero Header (English)')
+                            ->required(),
+                    ]),
+                    Grid::make(2)->schema([
+                        Forms\Components\Textarea::make('hero_subheader_de')
+                            ->label('Hero Subheader (Deutsch)')
+                            ->required(),
+                        Forms\Components\Textarea::make('hero_subheader_en')
+                            ->label('Hero Subheader (English)')
+                            ->required(),
+                    ]),
+                    Grid::make(2)->schema([
+                        Forms\Components\RichEditor::make('hero_introtext_de')
+                            ->label('Hero Intro Text (Deutsch)')
+                            ->required(),
+                        Forms\Components\RichEditor::make('hero_introtext_en')
+                            ->label('Hero Intro Text (English)')
+                            ->required(),
+                    ]),
+                    Forms\Components\Select::make('intro_layout')
+                        ->label('Intro Layout')
+                        ->options([
+                            'one_column'  => 'Eine Spalte',
+                            'two_columns' => 'Zwei Spalten',
+                        ])
+                        ->default('two_columns')
+                        ->columnSpanFull(),
+                    Grid::make(2)->schema([
+                        Forms\Components\RichEditor::make('hero_text_column_one_de')
+                            ->label('Text Spalte 1 (Deutsch)')
+                            ->required(),
+                        Forms\Components\RichEditor::make('hero_text_column_one_en')
+                            ->label('Text Spalte 1 (English)')
+                            ->required(),
+                    ]),
+                    Grid::make(2)->schema([
+                        Forms\Components\RichEditor::make('hero_text_column_two_de')
+                            ->label('Text Spalte 2 (Deutsch)')
+                            ->required(),
+                        Forms\Components\RichEditor::make('hero_text_column_two_en')
+                            ->label('Text Spalte 2 (English)')
+                            ->required(),
+                    ]),
+                ]),
+
+            Section::make('Text Bereich')
+                ->schema([
+                    Grid::make(2)->schema([
+                        Forms\Components\RichEditor::make('text_de')
+                            ->label('Text (Deutsch)')
+                            ->required(),
+                        Forms\Components\RichEditor::make('text_en')
+                            ->label('Text (English)')
+                            ->required(),
+                    ]),
+                    Forms\Components\FileUpload::make('text_image')
+                        ->label('Text Bild')
+                        ->columnSpanFull(),
+                    Grid::make(2)->schema([
+                        Forms\Components\TextInput::make('text_image_alt_de')
+                            ->label('Text Bild Alt-Text (Deutsch)')
+                            ->required(),
+                        Forms\Components\TextInput::make('text_image_alt_en')
+                            ->label('Text Bild Alt-Text (English)')
+                            ->required(),
+                    ]),
+                ]),
+
+            Section::make('About Bereich')
+                ->schema([
+                    Grid::make(2)->schema([
+                        Forms\Components\TextInput::make('about_header_de')
+                            ->label('About Header (Deutsch)')
+                            ->required(),
+                        Forms\Components\TextInput::make('about_header_en')
+                            ->label('About Header (English)')
+                            ->required(),
+                    ]),
+                    Grid::make(2)->schema([
+                        Forms\Components\TextInput::make('about_subheader_de')
+                            ->label('About Subheader (Deutsch)')
+                            ->required(),
+                        Forms\Components\TextInput::make('about_subheader_en')
+                            ->label('About Subheader (English)')
+                            ->required(),
+                    ]),
+                    Grid::make(2)->schema([
+                        Forms\Components\RichEditor::make('about_text_de')
+                            ->label('About Text (Deutsch)')
+                            ->required(),
+                        Forms\Components\RichEditor::make('about_text_en')
+                            ->label('About Text (English)')
+                            ->required(),
+                    ]),
+                    Forms\Components\FileUpload::make('about_image')
+                        ->label('About Bild')
+                        ->columnSpanFull(),
+                    Grid::make(2)->schema([
+                        Forms\Components\TextInput::make('about_image_alt_de')
+                            ->label('About Bild Alt-Text (Deutsch)')
+                            ->required(),
+                        Forms\Components\TextInput::make('about_image_alt_en')
+                            ->label('About Bild Alt-Text (English)')
+                            ->required(),
+                    ]),
+                    Forms\Components\Textarea::make('about_video_embed_code')
+                        ->label('About Video Embed Code')
+                        ->columnSpanFull(),
+                ]),
+
+            Section::make('Timeline Bereich')
+                ->schema([
+                    Grid::make(2)->schema([
+                        Forms\Components\TextInput::make('timeline_header_de')
+                            ->label('Timeline Header (Deutsch)')
+                            ->required(),
+                        Forms\Components\TextInput::make('timeline_header_en')
+                            ->label('Timeline Header (English)')
+                            ->required(),
+                    ]),
+                    Grid::make(2)->schema([
+                        Forms\Components\TextInput::make('timeline_subheader_de')
+                            ->label('Timeline Subheader (Deutsch)')
+                            ->required(),
+                        Forms\Components\TextInput::make('timeline_subheader_en')
+                            ->label('Timeline Subheader (English)')
+                            ->required(),
+                    ]),
+                    Grid::make(2)->schema([
+                        Forms\Components\RichEditor::make('timeline_intro_de')
+                            ->label('Timeline Intro (Deutsch)')
+                            ->required(),
+                        Forms\Components\RichEditor::make('timeline_intro_en')
+                            ->label('Timeline Intro (English)')
+                            ->required(),
+                    ]),
+                    Forms\Components\TextInput::make('timeline_speed')
+                        ->label('Timeline Geschwindigkeit (ms)')
+                        ->numeric()
+                        ->default(4000)
+                        ->columnSpanFull(),
+                ]),
+
+            Section::make('Service Bereich')
+                ->schema([
+                    Grid::make(2)->schema([
+                        Forms\Components\TextInput::make('service_heading_de')
+                            ->label('Service Heading (Deutsch)')
+                            ->required(),
+                        Forms\Components\TextInput::make('service_heading_en')
+                            ->label('Service Heading (English)')
+                            ->required(),
+                    ]),
+                    Grid::make(2)->schema([
+                        Forms\Components\TextInput::make('service_subheading_de')
+                            ->label('Service Subheading (Deutsch)')
+                            ->required(),
+                        Forms\Components\TextInput::make('service_subheading_en')
+                            ->label('Service Subheading (English)')
+                            ->required(),
+                    ]),
+                    Grid::make(2)->schema([
+                        Forms\Components\RichEditor::make('service_introtext_de')
+                            ->label('Service Intro Text (Deutsch)')
+                            ->required(),
+                        Forms\Components\RichEditor::make('service_introtext_en')
+                            ->label('Service Intro Text (English)')
+                            ->required(),
+                    ]),
+                ]),
+
+            Section::make('Kontakt Bereich')
+                ->schema([
+                    Grid::make(2)->schema([
+                        Forms\Components\TextInput::make('contact_header_de')
+                            ->label('Kontakt Header (Deutsch)')
+                            ->required(),
+                        Forms\Components\TextInput::make('contact_header_en')
+                            ->label('Kontakt Header (English)')
+                            ->required(),
+                    ]),
+                    Grid::make(2)->schema([
+                        Forms\Components\TextInput::make('contact_subheader_de')
+                            ->label('Kontakt Subheader (Deutsch)')
+                            ->required(),
+                        Forms\Components\TextInput::make('contact_subheader_en')
+                            ->label('Kontakt Subheader (English)')
+                            ->required(),
+                    ]),
+                    Grid::make(2)->schema([
+                        Forms\Components\RichEditor::make('contact_introtext_de')
+                            ->label('Kontakt Intro Text (Deutsch)')
+                            ->required(),
+                        Forms\Components\RichEditor::make('contact_introtext_en')
+                            ->label('Kontakt Intro Text (English)')
+                            ->required(),
+                    ]),
+                ]),
+
+            Section::make('Referenzen Bereich')
+                ->schema([
+                    Grid::make(2)->schema([
+                        Forms\Components\TextInput::make('reference_header_de')
+                            ->label('Referenz Header (Deutsch)')
+                            ->required(),
+                        Forms\Components\TextInput::make('reference_header_en')
+                            ->label('Referenz Header (English)')
+                            ->required(),
+                    ]),
+                    Grid::make(2)->schema([
+                        Forms\Components\TextInput::make('reference_subheader_de')
+                            ->label('Referenz Subheader (Deutsch)')
+                            ->required(),
+                        Forms\Components\TextInput::make('reference_subheader_en')
+                            ->label('Referenz Subheader (English)')
+                            ->required(),
+                    ]),
+                    Grid::make(2)->schema([
+                        Forms\Components\RichEditor::make('reference_introtext_de')
+                            ->label('Referenz Intro Text (Deutsch)')
+                            ->required(),
+                        Forms\Components\RichEditor::make('reference_introtext_en')
+                            ->label('Referenz Intro Text (English)')
+                            ->required(),
+                    ]),
+                ]),
+
+            Section::make('Kompetenzen Bereich')
+                ->schema([
+                    Grid::make(2)->schema([
+                        Forms\Components\TextInput::make('competence_header_de')
+                            ->label('Kompetenz Header (Deutsch)')
+                            ->required(),
+                        Forms\Components\TextInput::make('competence_header_en')
+                            ->label('Kompetenz Header (English)')
+                            ->required(),
+                    ]),
+                    Grid::make(2)->schema([
+                        Forms\Components\TextInput::make('competence_subheader_de')
+                            ->label('Kompetenz Subheader (Deutsch)')
+                            ->required(),
+                        Forms\Components\TextInput::make('competence_subheader_en')
+                            ->label('Kompetenz Subheader (English)')
+                            ->required(),
+                    ]),
+                    Grid::make(2)->schema([
+                        Forms\Components\RichEditor::make('competence_introtext_de')
+                            ->label('Kompetenz Intro Text (Deutsch)')
+                            ->required(),
+                        Forms\Components\RichEditor::make('competence_introtext_en')
+                            ->label('Kompetenz Intro Text (English)')
+                            ->required(),
+                    ]),
+                ]),
+        ])->columns(1);
+    }
+}

@@ -8,8 +8,6 @@ class ImporterSetting extends Settings
 {
     public string $last_import = '';
 
-
-
     public static function group(): string
     {
         return 'importer';
