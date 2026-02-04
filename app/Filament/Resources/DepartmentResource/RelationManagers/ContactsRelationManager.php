@@ -3,12 +3,10 @@
 namespace App\Filament\Resources\DepartmentResource\RelationManagers;
 
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ContactsRelationManager extends RelationManager
 {
@@ -20,9 +18,9 @@ class ContactsRelationManager extends RelationManager
 
     protected static ?string $title = 'Kontakte';
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()

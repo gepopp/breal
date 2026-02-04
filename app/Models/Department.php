@@ -5,23 +5,22 @@ namespace App\Models;
 use App\Enums\CompaniesEnum;
 use App\Observers\DepartmentObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
-use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Builder;
-
+use Spatie\Translatable\HasTranslations;
 
 #[ObservedBy(DepartmentObserver::class)]
 class Department extends Model
 {
     use HasFactory;
+    use HasTranslations;
 
+    public array $translatable = ['name'];
 
     protected $casts = ['company' => CompaniesEnum::class];
-
-
 
     protected static function booted(): void
     {
@@ -30,12 +29,10 @@ class Department extends Model
         });
     }
 
-
     public function sub(): HasMany
     {
-        return $this->hasMany(Department::class );
+        return $this->hasMany(Department::class);
     }
-
 
     public function department(): BelongsTo
     {

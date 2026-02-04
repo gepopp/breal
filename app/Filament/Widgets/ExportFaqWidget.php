@@ -10,15 +10,15 @@ use Illuminate\Support\Facades\Storage;
 
 class ExportFaqWidget extends Widget
 {
-    protected static string $view = 'filament.widgets.export-faq-widget';
+    protected string $view = 'filament.widgets.export-faq-widget';
 
-    protected int | string | array $columnSpan = 'full';
+    protected int|string|array $columnSpan = 'full';
 
     public function export()
     {
         try {
-            $fileName = 'faq-export-' . now()->format('Y-m-d_His') . '.json';
-            $filePath = 'exports/' . $fileName;
+            $fileName = 'faq-export-'.now()->format('Y-m-d_His').'.json';
+            $filePath = 'exports/'.$fileName;
 
             // Export FAQs
             $faqs = FAQ::all()->map(function ($faq) {
@@ -64,7 +64,7 @@ class ExportFaqWidget extends Widget
         } catch (\Exception $e) {
             Notification::make()
                 ->title('Export failed')
-                ->body('Error: ' . $e->getMessage())
+                ->body('Error: '.$e->getMessage())
                 ->danger()
                 ->send();
         }

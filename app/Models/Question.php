@@ -12,21 +12,24 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Spatie\Translatable\HasTranslations;
 
 class Question extends Model implements HasMedia
 {
     use HasFactory;
-    use SoftDeletes;
     use HasSlug;
+    use HasTranslations;
     use InteractsWithMedia;
+    use SoftDeletes;
+
+    public array $translatable = ['question', 'excerpt', 'answer'];
 
     protected $appends = ['link'];
 
     protected function link(): Attribute
     {
-        return Attribute::make( get: fn() => route('faq.single', $this->slug ));
+        return Attribute::make(get: fn () => route('faq.single', $this->slug));
     }
-
 
     protected static function booted(): void
     {

@@ -3,30 +3,32 @@
 namespace App\Filament\Pages;
 
 use App\Forms\Components\SettingsUpload;
-use App\Settings\MaklerSettings;
+use BackedEnum;
 use Filament\Forms;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
 use Filament\Pages\SettingsPage;
+use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Schema;
 
 class LandingpageMaklerSettings extends SettingsPage
 {
-    protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
+    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-document-text';
 
     protected static string $settings = \App\Settings\LandingpageMaklerSettings::class;
 
-    protected static null|string $navigationLabel = 'Landingpage Makler';
-    protected static null|string $title = 'Landingpage Makler';
+    protected static ?string $navigationLabel = 'Landingpage Makler';
 
-    public function form(Form $form): Form
+    protected static ?string $title = 'Landingpage Makler';
+
+    public function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
 
-                Forms\Components\Tabs::make('Sektionen')
+                Tabs::make('Sektionen')
                     ->schema([
-                        Forms\Components\Tabs\Tab::make('Intro')
+                        Tabs\Tab::make('Intro')
                             ->schema([
                                 SettingsUpload::make('hero_images')
                                     ->multiple()
@@ -39,7 +41,7 @@ class LandingpageMaklerSettings extends SettingsPage
                                 Forms\Components\RichEditor::make('intro_description'),
                             ]),
 
-                        Forms\Components\Tabs\Tab::make('Über uns')
+                        Tabs\Tab::make('Über uns')
                             ->schema([
                                 SettingsUpload::make('about_image')->required(),
                                 Forms\Components\TextInput::make('about_image_alt')->required(),
@@ -47,7 +49,7 @@ class LandingpageMaklerSettings extends SettingsPage
                                 Forms\Components\RichEditor::make('about_text')->required(),
                             ]),
 
-                        Forms\Components\Tabs\Tab::make('CTA')
+                        Tabs\Tab::make('CTA')
                             ->schema([
                                 Forms\Components\TextInput::make('cta_header')->required(),
                                 Forms\Components\TextInput::make('cta_subheader')->required(),
@@ -57,8 +59,7 @@ class LandingpageMaklerSettings extends SettingsPage
                                 Textarea::make('cta_video_embed_code'),
                             ]),
 
-
-                    ])
+                    ]),
             ])->columns(1);
     }
 }

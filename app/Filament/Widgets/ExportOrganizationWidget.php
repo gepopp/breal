@@ -10,15 +10,15 @@ use Illuminate\Support\Facades\Storage;
 
 class ExportOrganizationWidget extends Widget
 {
-    protected static string $view = 'filament.widgets.export-organization-widget';
+    protected string $view = 'filament.widgets.export-organization-widget';
 
-    protected int | string | array $columnSpan = 'full';
+    protected int|string|array $columnSpan = 'full';
 
     public function export()
     {
         try {
-            $fileName = 'organization-export-' . now()->format('Y-m-d_His') . '.json';
-            $filePath = 'exports/' . $fileName;
+            $fileName = 'organization-export-'.now()->format('Y-m-d_His').'.json';
+            $filePath = 'exports/'.$fileName;
 
             // Export Contact Persons
             $contactPersons = Contactperson::all()->map(function ($person) {
@@ -65,7 +65,7 @@ class ExportOrganizationWidget extends Widget
         } catch (\Exception $e) {
             Notification::make()
                 ->title('Export failed')
-                ->body('Error: ' . $e->getMessage())
+                ->body('Error: '.$e->getMessage())
                 ->danger()
                 ->send();
         }

@@ -9,15 +9,15 @@ use Illuminate\Support\Facades\Storage;
 
 class ExportJobsWidget extends Widget
 {
-    protected static string $view = 'filament.widgets.export-jobs-widget';
+    protected string $view = 'filament.widgets.export-jobs-widget';
 
-    protected int | string | array $columnSpan = 'full';
+    protected int|string|array $columnSpan = 'full';
 
     public function export()
     {
         try {
-            $fileName = 'jobs-export-' . now()->format('Y-m-d_His') . '.json';
-            $filePath = 'exports/' . $fileName;
+            $fileName = 'jobs-export-'.now()->format('Y-m-d_His').'.json';
+            $filePath = 'exports/'.$fileName;
 
             $jobs = JobVacancy::all()->map(function ($job) {
                 return [
@@ -53,7 +53,7 @@ class ExportJobsWidget extends Widget
         } catch (\Exception $e) {
             Notification::make()
                 ->title('Export failed')
-                ->body('Error: ' . $e->getMessage())
+                ->body('Error: '.$e->getMessage())
                 ->danger()
                 ->send();
         }

@@ -3,8 +3,8 @@
 namespace App\Filament\Widgets;
 
 use App\Models\Competence;
-use App\Models\Service;
 use App\Models\Reference;
+use App\Models\Service;
 use App\Models\Timeline;
 use Filament\Notifications\Notification;
 use Filament\Widgets\Widget;
@@ -12,15 +12,15 @@ use Illuminate\Support\Facades\Storage;
 
 class ExportContentWidget extends Widget
 {
-    protected static string $view = 'filament.widgets.export-content-widget';
+    protected string $view = 'filament.widgets.export-content-widget';
 
-    protected int | string | array $columnSpan = 'full';
+    protected int|string|array $columnSpan = 'full';
 
     public function export()
     {
         try {
-            $fileName = 'content-export-' . now()->format('Y-m-d_His') . '.json';
-            $filePath = 'exports/' . $fileName;
+            $fileName = 'content-export-'.now()->format('Y-m-d_His').'.json';
+            $filePath = 'exports/'.$fileName;
 
             // Export Competences
             $competences = Competence::all()->map(function ($comp) {
@@ -93,7 +93,7 @@ class ExportContentWidget extends Widget
         } catch (\Exception $e) {
             Notification::make()
                 ->title('Export failed')
-                ->body('Error: ' . $e->getMessage())
+                ->body('Error: '.$e->getMessage())
                 ->danger()
                 ->send();
         }

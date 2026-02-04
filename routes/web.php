@@ -1,17 +1,16 @@
 <?php
 
-use Filament\Actions\Imports\Models\Import;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
-use Illuminate\Support\Facades\Mail;
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';
 
 Route::middleware(['auth'])->get('/admin/download-settings-export/{filename}', function ($filename) {
-    $filePath = 'exports/' . $filename;
+    $filePath = 'exports/'.$filename;
     $disk = \Illuminate\Support\Facades\Storage::disk('local');
 
-    if (!$disk->exists($filePath)) {
+    if (! $disk->exists($filePath)) {
         abort(404);
     }
 
@@ -30,6 +29,7 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
+Route::get('/home-v2', \App\Livewire\Landing\HomeV2::class)->name('home.v2');
 
 Route::group(['as' => 'hausverwaltung.'], function () {
     Route::get('/', \App\Livewire\Landing\FacilityManagment::class)->name('home');
@@ -42,7 +42,6 @@ Route::group(['as' => 'hausverwaltung.'], function () {
     Route::get('/leistung/{competence}', \App\Livewire\Pages\Compentence::class)->name('leistung');
 
 });
-
 
 Route::group(['prefix' => 'makler', 'as' => 'makler.'], function () {
     Route::get('/start', \App\Livewire\Landing\RealEstate::class)->name('home');
@@ -71,7 +70,6 @@ Route::group(['prefix' => 'technik', 'as' => 'technik.'], function () {
 Route::get('/faq/{slug}', \App\Livewire\FAQSingle::class)->name('faq.single');
 Route::get('/stellenanzeige/{JobVacancy}', \App\Livewire\Pages\JobVacancy::class)->name('stellenanzeige');
 
-
 Route::get('impressum', \App\Livewire\Sites\Imprint::class)->name('impressum');
 Route::get('barrierefreiheit', \App\Livewire\Pages\AccessabilityDeclaration::class)->name('barrierefreiheit');
 Volt::route('datenschutz', 'policy')->name('datenschutz');
@@ -81,14 +79,13 @@ Route::view('/confirm-test', 'confirmed')->name('confirm-test');
 Route::get('confirmation/{id?}/{token?}', [\App\Http\Controllers\ContactRequestController::class, 'confirmation'])->name('confirm');
 Route::get('solve/{request}/{token}', [\App\Http\Controllers\ContactRequestController::class, 'solve'])->name('solve');
 
-
 Route::get('solve-test', function () {
 
     $request = \App\Models\ContactRequest::inRandomOrder()->whereHas('media')->first();
+
     return view('solved', compact('request'));
 
 })->name('solve-test');
-
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -102,24 +99,22 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 });
 
-
 Route::get('mail-test', function () {
-    return new \App\Mail\VerificationEmail();
+    return new \App\Mail\VerificationEmail;
 });
 
 Route::get('mail-test-confirmed', function () {
-    return new \App\Mail\ContactRequestConfirmedMail();
+    return new \App\Mail\ContactRequestConfirmedMail;
 });
 
 Route::get('admins', function () {
     foreach (['gerhard@poppgerhard.at' => 'Gerhard', 'ronald@ivalu.eu' => 'Ronald', 'katharina@ivalu.eu' => 'Katharina'] as $email => $name) {
         \App\Models\User::updateOrCreate(['email' => $email], [
-            'name'     => $name,
+            'name' => $name,
             'password' => \Illuminate\Support\Facades\Hash::make($name),
-            'admin'    => true
+            'admin' => true,
         ]);
     }
-
 
 });
 
@@ -132,7 +127,7 @@ Route::get('/auth/redirect', function () {
             'rw_organization_admin',
             'r_organization_social',
             'w_organization_social',
-            'w_organization_social'
+            'w_organization_social',
         ])
         ->redirect();
 });
@@ -141,26 +136,24 @@ Route::get('/admin/oauth/callback/linkedin', function () {
     $user = Socialite::driver('linkedin')->user();
 
     $data = [
-        'id'           => $user->getId(),
-        'name'         => $user->getName(),
-        'email'        => $user->getEmail(),
-        'token'        => $user->token,
+        'id' => $user->getId(),
+        'name' => $user->getName(),
+        'email' => $user->getEmail(),
+        'token' => $user->token,
         'refreshToken' => $user->refreshToken,
-        'expiresIn'    => now()->addSeconds($user->expiresIn)->format('Y-m-d H:i:s'),
+        'expiresIn' => now()->addSeconds($user->expiresIn)->format('Y-m-d H:i:s'),
     ];
 
     $user = \App\Models\User::where('email', $user->getEmail())->first();
 
     $user->update(['linkedin' => $data]);
 
-    return redirect('/admin/users/' . $user->id . '/edit');
+    return redirect('/admin/users/'.$user->id.'/edit');
 });
-
 
 Route::get('import', function () {
     \App\Justimmo\Importer::import();
 });
-
 
 Route::get('faqslug', function () {
     foreach (\App\Models\Question::all() as $faq) {
@@ -168,20 +161,17 @@ Route::get('faqslug', function () {
     }
 });
 
-
 Route::get('mail-test', function () {
     if (auth()->check()) {
         $request = \App\Models\ContactRequest::whereHas('media')->inRandomOrder()->first();
 
         Mail::to(auth()->user())->send(new \App\Mail\NewContactRequestAdminMail($request));
 
-
         return new \App\Mail\NewContactRequestAdminMail($request);
     }
 
     return 'Bitte erst im Backend einloggen';
 });
-
 
 Route::get('sitemap', [\App\Http\Controllers\SitemapController::class, 'generate']);
 

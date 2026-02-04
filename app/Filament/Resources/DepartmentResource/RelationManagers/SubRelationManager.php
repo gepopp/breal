@@ -2,13 +2,15 @@
 
 namespace App\Filament\Resources\DepartmentResource\RelationManagers;
 
+use Filament\Actions\AssociateAction;
+use Filament\Actions\CreateAction;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class SubRelationManager extends RelationManager
 {
@@ -18,20 +20,23 @@ class SubRelationManager extends RelationManager
 
     protected static ?string $pluralLabel = 'Unterabteilungen';
 
-
     protected static ?string $title = 'Unterabteilungen';
 
-
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
-                Forms\Components\TextInput::make('name')
+                Forms\Components\TextInput::make('name.de')
+                    ->label('Name Deutsch')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('name.en')
+                    ->label('Name Englisch')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('order')
                     ->required()
-                    ->numeric()
+                    ->numeric(),
             ]);
     }
 
@@ -47,20 +52,14 @@ class SubRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
-                Tables\Actions\AssociateAction::make()
+                CreateAction::make(),
+                AssociateAction::make(),
             ])
             ->actions([
-                Tables\Actions\DeleteAction::make(),
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                DeleteAction::make(),
+                EditAction::make(),
             ])
             ->reorderable('order')
-            ->modifyQueryUsing(fn($query) => $query->withoutGlobalScopes(['main']));
+            ->modifyQueryUsing(fn ($query) => $query->withoutGlobalScopes(['main']));
     }
-
 }

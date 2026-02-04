@@ -10,14 +10,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Translatable\HasTranslations;
 
 class Contactperson extends Model implements HasMedia
 {
     use HasFactory;
+    use HasTranslations;
     use InteractsWithMedia;
     use SoftDeletes;
 
-
+    public array $translatable = ['position'];
 
     /**
      * The "booted" method of the model.
@@ -29,13 +31,10 @@ class Contactperson extends Model implements HasMedia
         });
     }
 
-
     public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class, 'department_id');
     }
-
-
 
     public function registerMediaConversions(?Media $media = null): void
     {

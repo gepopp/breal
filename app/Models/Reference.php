@@ -8,16 +8,19 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Spatie\Translatable\HasTranslations;
 
 class Reference extends Model implements HasMedia
 {
     use HasFactory;
-    use InteractsWithMedia;
     use HasSlug;
+    use HasTranslations;
+    use InteractsWithMedia;
 
+    public array $translatable = ['title', 'description', 'testimonial'];
 
     protected $casts = [
-      'tags' => 'array',
+        'tags' => 'array',
     ];
 
     public function getSlugOptions(): SlugOptions
@@ -27,5 +30,4 @@ class Reference extends Model implements HasMedia
             ->doNotGenerateSlugsOnUpdate()
             ->saveSlugsTo('slug');
     }
-
 }

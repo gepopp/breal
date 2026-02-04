@@ -1,5 +1,5 @@
 <div class="mt-12 relative max-w-screen">
-    <div x-data="timeline" data-aos="fade" class="mt-12 md:mt-24">
+    <div x-data="timeline" class="mt-12 md:mt-24" x-intersect.once="initSlider" >
 
         <div class="relative w-3/4 lg:w-1/2 mb-4 ml-auto mb-8">
             <div x-ref="indices"
@@ -24,8 +24,8 @@
         </div>
 
 
-        <div x-intersect.once="initSlider" class="relative max-w-full">
-            <div class="swiper max-w-screen timelineswiper max-h-[60vh]">
+        <div class="relative max-w-full">
+            <div class="swiper max-w-screen  max-h-[60vh]" x-ref="timelineswiper">
                 <div class="swiper-wrapper w-full">
                     @foreach($timeline as $key => $entry)
                         <div class="swiper-slide max-w-screen bg-transparent">
@@ -51,11 +51,13 @@
                     @endforeach
                 </div>
             </div>
-            <div class="prev-slide cursor-pointer absolute top-1/2 left-0 w-6 md:w-12 -translate-x-1/2 -translate-y-1/2  aspect-square rounded-full bg-logo text-white flex justify-center items-center z-[9999] shadow-lg">
-                <svg class="size-5 md:size-10" data-slot="icon" fill="none" stroke-width="2" stroke="currentColor"
-                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"></path>
-                </svg>
+            <div class="cursor-pointer absolute top-1/2 left-0 w-6 md:w-12 -translate-x-1/2 -translate-y-1/2  aspect-square rounded-full bg-logo text-white flex justify-center items-center shadow-lg">
+                <div class="relative prev-slide !z-[9999] ">
+                    <svg class="size-5 md:size-10" data-slot="icon" fill="none" stroke-width="2" stroke="currentColor"
+                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"></path>
+                    </svg>
+                </div>
             </div>
 
             <div class="next-slide cursor-pointer absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-6 md:w-12 right-0 aspect-square rounded-full bg-logo text-white flex justify-center items-center z-[9999] shadow-lg">
@@ -74,16 +76,16 @@
     Alpine.data('timeline', () => ({
         slider: null,
         active: 0,
-        init() {
-            this.slider = new Swiper('.timelineswiper', {
-                init: false,
+        initSlider() {
+            this.slider = new Swiper(this.$refs.timelineswiper, {
                 loop: true,
                 slidesPerView: 1,
                 speed: 800,
                 spaceBetween: 30,
-                pauseOnMouseenter: true,
                 autoplay: {
                     delay: {{ app( \App\Settings\LandingpageHausverwaltung::class )->timeline_speed }},
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true,
                 },
                 navigation: {
                     nextEl: ".next-slide",
@@ -91,19 +93,20 @@
                 }
             });
 
-            this.slider.on('afterInit', () => {
+            this.slider.on('init', () => {
                 setTimeout(() => {
                     this.scrollItemToCenter(0);
-                }, 2000)
+                }, 100)
             })
+
+
+            this.$nextTick(() => console.log(Alpine.raw(this.slider)));
+
 
             this.slider.on('slideChange', () => {
                 this.active = this.slider.realIndex;
                 this.scrollItemToCenter(this.active);
             });
-        },
-        initSlider() {
-            this.slider.init();
         },
         scrollItemToCenter(index) {
             // Container-Element abrufen

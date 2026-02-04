@@ -1,7 +1,12 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-ChqosvfO.css",
+    "file": "assets/app-BuU9-_zR.css",
     "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/css/filament/admin/theme.css": {
+    "file": "assets/theme-DnRrLJZg.css",
+    "src": "resources/css/filament/admin/theme.css",
     "isEntry": true
   },
   "resources/fonts/BontusEybelLogoFont.otf": {
@@ -21,7 +26,7 @@
     "src": "resources/fonts/EmBauhaus-W00-Bold.woff2"
   },
   "resources/js/app.js": {
-    "file": "assets/app-C815ogPH.js",
+    "file": "assets/app-CYF_bnOY.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,

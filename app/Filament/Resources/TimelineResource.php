@@ -3,71 +3,30 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TimelineResource\Pages;
-use App\Filament\Resources\TimelineResource\RelationManagers;
+use App\Filament\Schemas\Resources\TimelineResource\Schemas\TimelineForm;
+use App\Filament\Tables\Resources\TimelineResource\Schemas\TimelineTable;
 use App\Models\Timeline;
-use Filament\Forms;
-use Filament\Forms\Form;
+use BackedEnum;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Schema;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TimelineResource extends Resource
 {
     protected static ?string $model = Timeline::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-clock';
 
-    public static function form(Form $form): Form
+    protected static \UnitEnum|string|null $navigationGroup = 'Zweisprachige Datenmodelle';
+
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\SpatieMediaLibraryFileUpload::make('titleimage')
-                    ->required()
-                    ->image()
-                    ->downloadable()
-                    ->collection('titleimage'),
-                Forms\Components\TextInput::make('year')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('title')
-                    ->required(),
-                Forms\Components\Textarea::make('description')
-                    ->required(),
-            ])
-            ->columns(1);
+        return TimelineForm::configure($schema);
     }
 
     public static function table(Table $table): Table
     {
-        return $table
-            ->columns([
-                Tables\Columns\TextColumn::make('year')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('title')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                //
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
+        return TimelineTable::configure($table);
     }
 
     public static function getRelations(): array
@@ -80,9 +39,9 @@ class TimelineResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index'  => Pages\ListTimelines::route('/'),
+            'index' => Pages\ListTimelines::route('/'),
             'create' => Pages\CreateTimeline::route('/create'),
-            'edit'   => Pages\EditTimeline::route('/{record}/edit'),
+            'edit' => Pages\EditTimeline::route('/{record}/edit'),
         ];
     }
 }

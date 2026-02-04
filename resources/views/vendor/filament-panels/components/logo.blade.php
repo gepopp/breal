@@ -7,9 +7,8 @@
 
     $getLogoClasses = fn (bool $isDarkMode): string => \Illuminate\Support\Arr::toCssClasses([
         'fi-logo',
-        'flex' => ! $hasDarkModeBrandLogo,
-        'flex dark:hidden' => $hasDarkModeBrandLogo && (! $isDarkMode),
-        'hidden dark:flex' => $hasDarkModeBrandLogo && $isDarkMode,
+        'fi-logo-light' => $hasDarkModeBrandLogo && (! $isDarkMode),
+        'fi-logo-dark' => $isDarkMode,
     ]);
 
     $logoStyles = "height: {$brandLogoHeight}";
@@ -17,36 +16,41 @@
 
 @capture($content, $logo, $isDarkMode = false)
     @if ($logo instanceof \Illuminate\Contracts\Support\Htmlable)
-        <div
-            {{
-                $attributes
-                    ->class([$getLogoClasses($isDarkMode)])
-                    ->style([$logoStyles])
-            }}
-        >
-            {{ $logo }}
-        </div>
+        <a href="{{ url('/') }}" target="_blank" rel="noopener noreferrer">
+            <div
+                {{
+                    $attributes
+                        ->class([$getLogoClasses($isDarkMode)])
+                        ->style([$logoStyles])
+                }}
+            >
+                {{ $logo }}
+            </div>
+        </a>
     @elseif (filled($logo))
-        <img
-            alt="{{ __('filament-panels::layout.logo.alt', ['name' => $brandName]) }}"
-            src="{{ $logo }}"
-            {{
-                $attributes
-                    ->class([$getLogoClasses($isDarkMode)])
-                    ->style([$logoStyles])
-            }}
-        />
+        <a href="{{ url('/') }}" target="_blank" rel="noopener noreferrer">
+            <img
+                alt="{{ __('filament-panels::layout.logo.alt', ['name' => $brandName]) }}"
+                src="{{ $logo }}"
+                {{
+                    $attributes
+                        ->class([$getLogoClasses($isDarkMode)])
+                        ->style([$logoStyles])
+                }}
+            />
+        </a>
     @else
-        <div
-            {{
-                $attributes->class([
-                    $getLogoClasses($isDarkMode),
-                    'text-xl font-bold leading-5 tracking-tight text-gray-950 dark:text-white',
-                ])
-            }}
-        >
-            {{ $brandName }}
-        </div>
+        <a href="{{ url('/') }}" target="_blank" rel="noopener noreferrer">
+            <div
+                {{
+                    $attributes->class([
+                        $getLogoClasses($isDarkMode),
+                    ])
+                }}
+            >
+                {{ $brandName }}
+            </div>
+        </a>
     @endif
 @endcapture
 

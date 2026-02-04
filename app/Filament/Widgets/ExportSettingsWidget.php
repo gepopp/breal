@@ -6,32 +6,31 @@ use Filament\Notifications\Notification;
 use Filament\Widgets\Widget;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
-use Livewire\Attributes\On;
 
 class ExportSettingsWidget extends Widget
 {
-    protected static string $view = 'filament.widgets.export-settings-widget';
+    protected string $view = 'filament.widgets.export-settings-widget';
 
-    protected int | string | array $columnSpan = 'full';
+    protected int|string|array $columnSpan = 'full';
 
     public function export()
     {
         try {
             // Define the file path (relative to storage/app)
-            $fileName = 'settings-export-' . now()->format('Y-m-d_His') . '.json';
-            $filePath = 'exports/' . $fileName;
+            $fileName = 'settings-export-'.now()->format('Y-m-d_His').'.json';
+            $filePath = 'exports/'.$fileName;
 
             // Run the artisan command with relative path
             $exitCode = Artisan::call('settings:export', [
                 '--file' => $filePath,
-                '--disk' => 'local'
+                '--disk' => 'local',
             ]);
 
             // Check if command succeeded
             if ($exitCode !== 0) {
                 Notification::make()
                     ->title('Export failed')
-                    ->body('The artisan command failed. Exit code: ' . $exitCode)
+                    ->body('The artisan command failed. Exit code: '.$exitCode)
                     ->danger()
                     ->send();
 
@@ -39,7 +38,7 @@ class ExportSettingsWidget extends Widget
             }
 
             // Check if file was created
-            if (!Storage::disk('local')->exists($filePath)) {
+            if (! Storage::disk('local')->exists($filePath)) {
                 Notification::make()
                     ->title('Export failed')
                     ->body('The settings export file could not be created.')
@@ -64,7 +63,7 @@ class ExportSettingsWidget extends Widget
         } catch (\Exception $e) {
             Notification::make()
                 ->title('Export failed')
-                ->body('Error: ' . $e->getMessage())
+                ->body('Error: '.$e->getMessage())
                 ->danger()
                 ->send();
         }

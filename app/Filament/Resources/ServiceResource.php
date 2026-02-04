@@ -2,124 +2,31 @@
 
 namespace App\Filament\Resources;
 
-use App\Enums\CompaniesEnum;
 use App\Filament\Resources\ServiceResource\Pages;
-use App\Filament\Resources\ServiceResource\RelationManagers;
+use App\Filament\Schemas\Resources\ServiceResource\Schemas\ServiceForm;
+use App\Filament\Tables\Resources\ServiceResource\Schemas\ServiceTable;
 use App\Models\Service;
-use Filament\Forms;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
+use BackedEnum;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Schema;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Support\Facades\Storage;
-use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class ServiceResource extends Resource
 {
     protected static ?string $model = Service::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-cog-6-tooth';
 
-    public static function form(Form $form): Form
+    protected static \UnitEnum|string|null $navigationGroup = 'Zweisprachige Datenmodelle';
+
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('order')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('name')
-                    ->label('Bezeichnung auf der Startseite')
-                    ->required(),
-                Forms\Components\Repeater::make('points')
-                    ->label('Liste auf der Startseite')
-                    ->simple(Forms\Components\TextInput::make('point')),
-                Forms\Components\Select::make('company')
-                    ->options(CompaniesEnum::class),
-
-                Forms\Components\RichEditor::make('description'),
-
-
-                Forms\Components\Select::make('form')
-                    ->options([
-                        'form'    => 'Kontaktformular',
-                        'address' => 'mit Adressfeld',
-                    ])
-                    ->nullable(),
-
-
-                Forms\Components\Repeater::make('links')
-                    ->label('Dokumente')
-                    ->schema([
-                        FileUpload::make('path')
-                            ->disk('s3')
-                            ->visibility('public')
-                            ->required()
-                            ->downloadable()
-                            ->preserveFilenames()
-                            ->label('Dokument'),
-
-                        Forms\Components\TextInput::make('name')
-                            ->required()
-
-                    ]),
-
-                Forms\Components\Repeater::make('list')
-                    ->schema([
-                        Forms\Components\Select::make('icon')
-                            ->options([
-                                'none'       => 'Keines',
-                                'rufzeichen' => 'Rufzeichen',
-                                'stern'      => 'Stern',
-                                'arrow'      => 'Pfeil',
-                            ]),
-                        Forms\Components\Repeater::make('list')
-                            ->simple(TextInput::make('list'))
-                    ])
-
-
-            ])
-            ->columns(1);
+        return ServiceForm::configure($schema);
     }
 
     public static function table(Table $table): Table
     {
-        return $table
-            ->columns([
-                Tables\Columns\TextColumn::make('order')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                Tables\Columns\IconColumn::make('on_landing')
-                    ->boolean(),
-                //                Tables\Columns\TextColumn::make('title')
-                //                    ->searchable(),
-                //                Tables\Columns\TextColumn::make('description')
-                //                    ->searchable(),
-                //                Tables\Columns\TextColumn::make('created_at')
-                //                    ->dateTime()
-                //                    ->sortable()
-                //                    ->toggleable(isToggledHiddenByDefault: true),
-                //                Tables\Columns\TextColumn::make('updated_at')
-                //                    ->dateTime()
-                //                    ->sortable()
-                //                    ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                //
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
+        return ServiceTable::configure($table);
     }
 
     public static function getRelations(): array
@@ -132,9 +39,9 @@ class ServiceResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index'  => Pages\ListServices::route('/'),
+            'index' => Pages\ListServices::route('/'),
             'create' => Pages\CreateService::route('/create'),
-            'edit'   => Pages\EditService::route('/{record}/edit'),
+            'edit' => Pages\EditService::route('/{record}/edit'),
         ];
     }
 }

@@ -3,25 +3,18 @@
 ])>
     <div x-data="{
         init(){
-
-            if(window.innerWidth > 767){
+            if(window.innerWidth > 767 && $refs.wrapper){
                  var height = $refs.textCol.clientHeight;
                  $refs.wrapper.style.height = `${height}px`;
                  setTimeout(() => $dispatch('setheight', height), 500);
-            }else{
-               $refs.wrapper.style.height = `auto`;
-               setTimeout(() => $dispatch('setheight', height), 500);
             }
 
 
             window.addEventListener('resize', () => {
-                 if(window.innerWidth > 767){
+                 if(window.innerWidth > 767 && $refs.wrapper){
                      var height = $refs.textCol.clientHeight;
                      $refs.wrapper.style.height = `${height}px`;
                      setTimeout(() => $dispatch('setheight', height), 500);
-                }else{
-                   $refs.wrapper.style.height = `auto`;
-                   setTimeout(() => $dispatch('setheight', height), 500);
                 }
             })
 
@@ -79,7 +72,3 @@
         </div>
     </div>
 </div>
-@assets
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-@endassets

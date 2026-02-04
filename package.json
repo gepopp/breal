@@ -8,7 +8,6 @@
     "dependencies": {
         "@googlemaps/js-api-loader": "^1.16.8",
         "@lottiefiles/dotlottie-web": "^0.41.0",
-        "@tailwindcss/vite": "^4.0.7",
         "aos": "^3.0.0-beta.6",
         "autoprefixer": "^10.4.20",
         "axios": "^1.7.4",
@@ -19,7 +18,6 @@
         "simple-lightbox": "^2.1.0",
         "simple-parallax-js": "^6.1.1",
         "swiper": "^11.2.6",
-        "tailwindcss": "^4.0.7",
         "vite": "^6.0"
     },
     "optionalDependencies": {
@@ -28,6 +26,8 @@
         "lightningcss-linux-x64-gnu": "^1.29.1"
     },
     "devDependencies": {
-        "tailwind-scrollbar": "^4.0.2"
+        "@tailwindcss/vite": "^4.1.18",
+        "tailwind-scrollbar": "^4.0.2",
+        "tailwindcss": "^4.1.18"
     }
 }

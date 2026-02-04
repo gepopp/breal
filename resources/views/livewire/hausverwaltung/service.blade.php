@@ -43,41 +43,15 @@
         <div class="relative min-h-[300px] md:min-h-screen w-full md:w-84 shrink-0">
             <div class="absolute inset-0 bg-white flex flex-col">
                 <flux:input x-model="searchterm" class="border-logo" icon:trailing="funnel" placeholder="Filtern Sie aus {{ count($services) }} Services"/>
-                <div class="mt-4 pt-4 flex-grow relative">
-                    <ul class="absolute inset-0 overflow-y-auto scrollbar scrollbar-thin  !list-none space-y-4">
+                <div class="mt-4 pt-4 relative">
+                    <ul class="overflow-y-auto overflow-x-hidden scrollbar scrollbar-thin  !list-none space-y-4">
                         <template x-for="service in services" :key="`menu-${service.id}`">
                             <li class="border border-logo rounded-lg p-2 !ml-0 relative group cursor-pointer" wire:click="set('tab', service.slug)">
-                                <p class="!font-bold !mb-0 !dark:text-logo !text-logo !text-sm" x-text="service.name"></p>
-                                <div class="flex space-x-2">
-                                    <template x-for="point in service.points">
-                                        <div class="flex space-x-px items-center !text-logo !dark:text-logo/50 !text-xs">
-                                            <svg class="size-3" data-slot="icon" fill="none"
-                                                 stroke-width="2" stroke="currentColor"
-                                                 viewBox="0 0 24 24"
-                                                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
-                                            </svg>
-                                            <span class="text-xs" x-text="point"></span>
-                                        </div>
-                                    </template>
-                                </div>
+                                <p class="!font-bold !mb-0 !dark:text-logo !text-logo !text-sm" x-text="service.name.de"></p>
                                 <div class="absolute inset-0 rounded-lg bg-logo p-2 text-white "
                                      :class="selected == service.slug ? '' : 'translate-x-[98%] -scale-y-75 group-hover:scale-y-100 group-hover:translate-x-0 transition-all duration-500 ease-in'"
                                 >
-                                    <p class="!font-bold !mb-0 !text-white !text-sm" x-text="service.name"></p>
-                                    <div class="flex space-x-2">
-                                        <template x-for="point in service.points">
-                                            <div class="flex space-x-px items-center !text-white !text-xs">
-                                                <svg class="size-3" data-slot="icon" fill="none"
-                                                     stroke-width="2" stroke="currentColor"
-                                                     viewBox="0 0 24 24"
-                                                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
-                                                </svg>
-                                                <span class="text-xs" x-text="point"></span>
-                                            </div>
-                                        </template>
-                                    </div>
+                                    <p class="!font-bold !mb-0 !text-white !text-sm" x-text="service.name.de"></p>
                                 </div>
                             </li>
                         </template>
@@ -89,7 +63,7 @@
             </div>
         </div>
         <div class="w-full md:w-auto mt-10 md:mt-0">
-            <div class="p-4 pt-0 prose grow" x-html="selectedService.description"></div>
+            <div class="p-4 pt-0 prose grow" x-html="selectedService.description.de"></div>
 
             <div class="px-3" x-show="selectedService.form == 'form'">
                 <livewire:contact-form :sidebar="false" wire:key="form_without_address"/>

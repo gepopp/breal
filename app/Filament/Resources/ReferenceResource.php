@@ -3,66 +3,30 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ReferenceResource\Pages;
-use App\Filament\Resources\ReferenceResource\RelationManagers;
+use App\Filament\Schemas\Resources\ReferenceResource\Schemas\ReferenceForm;
+use App\Filament\Tables\Resources\ReferenceResource\Schemas\ReferenceTable;
 use App\Models\Reference;
-use Filament\Forms;
-use Filament\Forms\Form;
+use BackedEnum;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Schema;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ReferenceResource extends Resource
 {
     protected static ?string $model = Reference::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-star';
 
-    public static function form(Form $form): Form
+    protected static \UnitEnum|string|null $navigationGroup = 'Zweisprachige Datenmodelle';
+
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\SpatieMediaLibraryFileUpload::make('titleimage')
-                    ->image()
-                    ->required()
-                    ->collection('titleimage'),
-                Forms\Components\TextInput::make('title')
-                    ->required(),
-                Forms\Components\Textarea::make('description')
-                    ->required(),
-                Forms\Components\Repeater::make('tags')
-                    ->simple(Forms\Components\TextInput::make('tag'))
-                    ->required(),
-                Forms\Components\SpatieMediaLibraryFileUpload::make('avatar')
-                    ->image()
-                    ->avatar()
-                    ->collection('avatar'),
-                Forms\Components\TextInput::make('client_name'),
-                Forms\Components\Textarea::make('testimonial'),
-            ])
-            ->columns(1);
+        return ReferenceForm::configure($schema);
     }
 
     public static function table(Table $table): Table
     {
-        return $table
-            ->columns([
-
-                Tables\Columns\TextColumn::make('title')
-                    ->searchable(),
-            ])
-            ->filters([
-                //
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
+        return ReferenceTable::configure($table);
     }
 
     public static function getRelations(): array
@@ -75,9 +39,9 @@ class ReferenceResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index'  => Pages\ListReferences::route('/'),
+            'index' => Pages\ListReferences::route('/'),
             'create' => Pages\CreateReference::route('/create'),
-            'edit'   => Pages\EditReference::route('/{record}/edit'),
+            'edit' => Pages\EditReference::route('/{record}/edit'),
         ];
     }
 }

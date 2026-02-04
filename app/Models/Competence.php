@@ -11,19 +11,22 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Spatie\Translatable\HasTranslations;
 
 class Competence extends Model implements HasMedia
 {
     use HasFactory;
-    use InteractsWithMedia;
     use HasSlug;
+    use HasTranslations;
+    use InteractsWithMedia;
+
+    public array $translatable = ['name', 'description', 'body'];
 
     protected $casts = [
-        'company'     => CompaniesEnum::class,
-        'on_landing'  => 'boolean',
+        'company' => CompaniesEnum::class,
+        'on_landing' => 'boolean',
         'on_dropdown' => 'boolean',
     ];
-
 
     protected static function booted(): void
     {
@@ -32,7 +35,6 @@ class Competence extends Model implements HasMedia
         });
     }
 
-
     public function registerMediaConversions(?Media $media = null): void
     {
         $this->addMediaConversion('thumb')
@@ -40,13 +42,11 @@ class Competence extends Model implements HasMedia
             ->height(250)
             ->sharpen(10);
 
-
         $this->addMediaConversion('article_header')
             ->width(1152)
             ->height((1152 / 16) * 9)
             ->sharpen(10);
     }
-
 
     public function getRouteKeyName(): string
     {
@@ -59,5 +59,4 @@ class Competence extends Model implements HasMedia
             ->generateSlugsFrom('name')
             ->saveSlugsTo('slug');
     }
-
 }

@@ -4,26 +4,29 @@ namespace App\Filament\Pages;
 
 use App\Forms\Components\SettingsUpload;
 use App\Settings\LandingpageTechnikSettings;
+use BackedEnum;
 use Filament\Forms;
 use Filament\Forms\Components\Textarea;
-use Filament\Forms\Form;
 use Filament\Pages\SettingsPage;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Schema;
 
 class LandingpageTechnikPage extends SettingsPage
 {
-    protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
+    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-document-text';
 
     protected static string $settings = LandingpageTechnikSettings::class;
 
     protected static ?string $navigationLabel = 'Landingpage Technik';
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
-                Forms\Components\Tabs::make('Sektionen')
+                Tabs::make('Sektionen')
                     ->schema([
-                        Forms\Components\Tabs\Tab::make('Intro')
+                        Tabs\Tab::make('Intro')
                             ->schema([
                                 SettingsUpload::make('hero_image')->multiple()->reorderable()->panelLayout('grid')->required(),
                                 Forms\Components\TextInput::make('hero_image_alt')->required(),
@@ -38,24 +41,23 @@ class LandingpageTechnikPage extends SettingsPage
                                     ->reactive()
                                     ->options(['two_columns' => 'two_columns', 'text_image' => 'text_image']),
 
-                                Forms\Components\Section::make('two_columns')
+                                Section::make('two_columns')
                                     ->schema([
                                         Forms\Components\RichEditor::make('hero_text_column_one')->required(),
                                         Forms\Components\RichEditor::make('hero_text_column_two')->required(),
                                     ])
-                                    ->visible(fn($get) => $get('intro_layout') === 'two_columns'),
+                                    ->visible(fn ($get) => $get('intro_layout') === 'two_columns'),
 
-                                Forms\Components\Section::make('text_image')
+                                Section::make('text_image')
                                     ->schema([
                                         Forms\Components\RichEditor::make('text')->required(),
                                         SettingsUpload::make('text_image')->multiple()->reorderable()->panelLayout('grid')->required(),
                                         Forms\Components\TextInput::make('text_image_alt')->required(),
                                     ])
-                                    ->visible(fn($get) => $get('intro_layout') === 'text_image'),
-
+                                    ->visible(fn ($get) => $get('intro_layout') === 'text_image'),
 
                             ]),
-                        Forms\Components\Tabs\Tab::make('Über uns')
+                        Tabs\Tab::make('Über uns')
                             ->schema([
                                 Forms\Components\TextInput::make('about_header')->required(),
                                 Forms\Components\TextInput::make('about_subheader')->required(),
@@ -64,7 +66,7 @@ class LandingpageTechnikPage extends SettingsPage
                                 Forms\Components\TextInput::make('about_image_alt')->required(),
                                 Textarea::make('about_video_embed_code'),
                             ]),
-                    ])
+                    ]),
             ])->columns(1);
     }
 }

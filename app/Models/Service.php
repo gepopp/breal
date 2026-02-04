@@ -12,31 +12,32 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
-
+use Spatie\Translatable\HasTranslations;
 
 #[ObservedBy([ServiceObserver::class])]
 class Service extends Model implements HasMedia
 {
     use HasFactory;
-    use InteractsWithMedia;
     use HasSlug;
+    use HasTranslations;
+    use InteractsWithMedia;
+
+    public array $translatable = ['name', 'description'];
 
     protected $casts = [
-        'points'     => 'array',
         'on_landing' => 'boolean',
-        'links'      => 'array',
-        'list'       => 'array'
+        'links' => 'array',
+        'list' => 'array',
     ];
 
     protected $appends = ['link'];
 
-    public function link() : Attribute
+    public function link(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => route('hausverwaltung.service') . '?tab=' . $this->slug,
+            get: fn ($value) => route('hausverwaltung.service').'?tab='.$this->slug,
         );
     }
-
 
     protected static function booted(): void
     {
@@ -48,7 +49,7 @@ class Service extends Model implements HasMedia
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('name')
+            ->generateSlugsFrom(fn ($model) => $model->getTranslation('name', 'de'))
             ->saveSlugsTo('slug');
     }
 }
