@@ -23,6 +23,9 @@ class JobVacancyResource extends Resource
 
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-briefcase';
 
+    protected static \UnitEnum|string|null $navigationGroup = 'Zweisprachige Datenmodelle';
+
+
     public static function form(Schema $schema): Schema
     {
         return JobVacancyForm::configure($schema);

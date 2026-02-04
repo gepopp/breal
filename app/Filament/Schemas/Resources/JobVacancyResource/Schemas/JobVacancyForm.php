@@ -32,13 +32,27 @@ class JobVacancyForm
                         Select::make('company')
                             ->options(CompaniesEnum::class)
                             ->required(),
-                        TextInput::make('title')
-                            ->label('Titel der Stellenanzeige')
-                            ->required(),
-                        RichEditor::make('description')
-                            ->label('Beschreibung der Stellenanzeige')
-                            ->required()
-                            ->columnSpanFull(),
+
+                        Section::make()
+                            ->schema([
+                                TextInput::make('title.de')
+                                    ->label('Titel der Stellenanzeige Deutsch')
+                                    ->required(),
+                                TextInput::make('title.en')
+                                    ->label('Titel der Stellenanzeige Englisch')
+                                    ->required(),
+
+                                RichEditor::make('description.de')
+                                    ->label('Beschreibung der Stellenanzeige Deutsch')
+                                    ->required()
+                                    ->columnSpanFull(),
+                                RichEditor::make('description.en')
+                                    ->label('Beschreibung der Stellenanzeige Englisch')
+                                    ->required()
+                                    ->columnSpanFull(),
+                            ])->columns(2),
+
+
                         TextInput::make('email')
                             ->label('Bewerbungen an')
                             ->email()
@@ -55,26 +69,31 @@ class JobVacancyForm
                             ->label('Gültig bis')
                             ->required(),
 
-                        TextInput::make('job_title')
+                        TextInput::make('job_title.de')
                             ->required()
-                            ->label('Job Titel'),
+                            ->label('Job Titel Deutsch'),
+
+                        TextInput::make('job_title.en')
+                            ->required()
+                            ->label('Job Titel Englisch'),
 
                         Select::make('contract_type')
+                            ->label('Anstellungsart')
                             ->options([
                                 'Freiberuflich' => 'Freiberuflich',
-                                'Geringfügig' => 'Geringfügig',
-                                'Teilzeit' => 'Teilzeit',
-                                'Vollzeit' => 'Vollzeit',
+                                'Geringfügig'   => 'Geringfügig',
+                                'Teilzeit'      => 'Teilzeit',
+                                'Vollzeit'      => 'Vollzeit',
                             ])
                             ->required(),
 
                         Select::make('unit_text')
-                            ->label('Zahlungsinterval')
+                            ->label('Zahlungsintervall')
                             ->options([
-                                'Stündlich' => 'Stündlich',
+                                'Stündlich'   => 'Stündlich',
                                 'Wöchentlich' => 'Wöchnentlich',
-                                'Monatlich' => 'Monatlich',
-                                'Jährlich' => 'Jährlich',
+                                'Monatlich'   => 'Monatlich',
+                                'Jährlich'    => 'Jährlich',
                             ]),
 
                         TextInput::make('salary')

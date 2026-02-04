@@ -9,13 +9,17 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Spatie\Translatable\HasTranslations;
 
 class JobVacancy extends Model implements HasMedia
 {
     use HasFactory;
     use SoftDeletes;
     use HasSlug;
+    use HasTranslations;
     use InteractsWithMedia;
+
+    public array $translatable = ['title', 'job_title', 'description'];
 
     protected $casts = [
         'from' => 'datetime',
