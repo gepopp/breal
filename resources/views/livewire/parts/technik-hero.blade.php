@@ -1,25 +1,7 @@
 <div @class([
         "mx-auto grid grid-cols-1 md:grid-cols-2 relative w-full"
 ])>
-    <div x-data="{
-        init(){
-            if(window.innerWidth > 767 && $refs.wrapper){
-                 var height = $refs.textCol.clientHeight;
-                 $refs.wrapper.style.height = `${height}px`;
-                 setTimeout(() => $dispatch('setheight', height), 500);
-            }
-
-
-            window.addEventListener('resize', () => {
-                 if(window.innerWidth > 767 && $refs.wrapper){
-                     var height = $refs.textCol.clientHeight;
-                     $refs.wrapper.style.height = `${height}px`;
-                     setTimeout(() => $dispatch('setheight', height), 500);
-                }
-            })
-
-        }
-    }"
+    <div x-data="imageTextHeight"
          x-ref="textCol"
             @class(['flex justify-center xl:justify-start xl:ml-24 items-center md:min-h-[70vh] mt-12 md:mt-0'])>
         <div @class(['md:max-w-sm lg:max-w-lg lg:my-48 px-4'])>
@@ -72,6 +54,29 @@
         </div>
     </div>
 </div>
+
+@script
+<script>
+    Alpine.data('imageTextHeight', () => ({
+        init() {
+            if (window.innerWidth > 767 && this.$refs.wrapper) {
+                const height = this.$refs.textCol.clientHeight;
+                this.$refs.wrapper.style.height = `${height}px`;
+                setTimeout(() => this.$dispatch('setheight', height), 500);
+            }
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 767 && this.$refs.wrapper) {
+                    const height = this.$refs.textCol.clientHeight;
+                    this.$refs.wrapper.style.height = `${height}px`;
+                    setTimeout(() => this.$dispatch('setheight', height), 500);
+                }
+            });
+        }
+    }));
+</script>
+@endscript
+
 @assets
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

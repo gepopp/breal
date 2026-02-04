@@ -2,9 +2,7 @@
 
 namespace App\Settings;
 
-use Spatie\LaravelSettings\Settings;
-
-class HausverwaltungLandingpageSettings extends Settings
+class HausverwaltungLandingpageSettings extends BaseSettings
 {
     public array|int|null $hero_image = null;
     public int $hero_speed = 4000;

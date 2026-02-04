@@ -47,23 +47,23 @@
                     <ul class="overflow-y-auto overflow-x-hidden scrollbar scrollbar-thin  !list-none space-y-4">
                         <template x-for="service in services" :key="`menu-${service.id}`">
                             <li class="border border-logo rounded-lg p-2 !ml-0 relative group cursor-pointer" wire:click="set('tab', service.slug)">
-                                <p class="!font-bold !mb-0 !dark:text-logo !text-logo !text-sm" x-text="service.name.de"></p>
+                                <p class="!font-bold !mb-0 !dark:text-logo !text-logo !text-sm" x-text="service.name[locale] || service.name.de"></p>
                                 <div class="absolute inset-0 rounded-lg bg-logo p-2 text-white "
                                      :class="selected == service.slug ? '' : 'translate-x-[98%] -scale-y-75 group-hover:scale-y-100 group-hover:translate-x-0 transition-all duration-500 ease-in'"
                                 >
-                                    <p class="!font-bold !mb-0 !text-white !text-sm" x-text="service.name.de"></p>
+                                    <p class="!font-bold !mb-0 !text-white !text-sm" x-text="service.name[locale] || service.name.de"></p>
                                 </div>
                             </li>
                         </template>
                     </ul>
                 </div>
                 <div class="mt-4 pt-4 border-t border-logo">
-                    <x-button href="https://realonline.bereal-immobilien.at/">Kundenlogin</x-button>
+                    <x-button href="https://realonline.bereal-immobilien.at/">{{ __('navigation.customer_login') }}</x-button>
                 </div>
             </div>
         </div>
         <div class="w-full md:w-auto mt-10 md:mt-0">
-            <div class="p-4 pt-0 prose grow" x-html="selectedService.description.de"></div>
+            <div class="p-4 pt-0 prose grow" x-html="selectedService.description[locale] || selectedService.description.de"></div>
 
             <div class="px-3" x-show="selectedService.form == 'form'">
                 <livewire:contact-form :sidebar="false" wire:key="form_without_address"/>
@@ -115,9 +115,9 @@
             </template>
 
 
-            <template x-if="selectedService.links.length > 0">
+            <template x-if="selectedService.links && selectedService.links.length > 0">
                 <div class="pt-8 mt-8 border-t-4 border-logo/50">
-                    <template x-for="download in selectedService.links">
+                    <template x-for="download in selectedService.links.filter(link.language === locale)">
                         <a target="_blank" :href="download.url" class="flex items-center space-x-4 group">
                             <div>
                                 <svg class="size-8" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -138,6 +138,7 @@
 <script>
     Alpine.data('siteServiceFilter', () => ({
         originalServices: @entangle('services'),
+        locale: '{{ app()->getLocale() }}',
         services: null,
         searchterm: '',
         fuse: null,

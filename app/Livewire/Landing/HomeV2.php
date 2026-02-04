@@ -3,14 +3,14 @@
 namespace App\Livewire\Landing;
 
 use App\Enums\CompaniesEnum;
-use App\Settings\LandingpageHausverwaltung;
+use App\Settings\HausverwaltungLandingpageSettings;
 use Livewire\Component;
 
 class HomeV2 extends Component
 {
     public string $company = CompaniesEnum::Hausverwaltung->name;
 
-    public function render(LandingpageHausverwaltung $settings)
+    public function render(HausverwaltungLandingpageSettings $settings)
     {
         $description = __('landing.home.description');
 

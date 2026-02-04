@@ -77,13 +77,6 @@ Route::view('/confirm-test', 'confirmed')->name('confirm-test');
 Route::get('confirmation/{id?}/{token?}', [\App\Http\Controllers\ContactRequestController::class, 'confirmation'])->name('confirm');
 Route::get('solve/{request}/{token}', [\App\Http\Controllers\ContactRequestController::class, 'solve'])->name('solve');
 
-Route::get('solve-test', function () {
-
-    $request = \App\Models\ContactRequest::inRandomOrder()->whereHas('media')->first();
-
-    return view('solved', compact('request'));
-
-})->name('solve-test');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])

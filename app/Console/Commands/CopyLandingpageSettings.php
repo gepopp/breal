@@ -55,13 +55,13 @@ class CopyLandingpageSettings extends Command
         $old = app(LandingpageHausverwaltung::class);
 
         // Update settings directly in database
-        $this->updateSetting('translatable_hausverwaltung', 'hero_image', $old->hero_image);
-        $this->updateSetting('translatable_hausverwaltung', 'text_image', $old->text_image);
-        $this->updateSetting('translatable_hausverwaltung', 'about_image', $old->about_image);
-        $this->updateSetting('translatable_hausverwaltung', 'intro_layout', $old->intro_layout);
-        $this->updateSetting('translatable_hausverwaltung', 'hero_speed', $old->hero_speed);
-        $this->updateSetting('translatable_hausverwaltung', 'timeline_speed', $old->timeline_speed);
-        $this->updateSetting('translatable_hausverwaltung', 'about_video_embed_code', $old->about_video_embed_code);
+        $this->updateSetting('translatable_hausverwaltung_landingpage', 'hero_image', $old->hero_image);
+        $this->updateSetting('translatable_hausverwaltung_landingpage', 'text_image', $old->text_image);
+        $this->updateSetting('translatable_hausverwaltung_landingpage', 'about_image', $old->about_image);
+        $this->updateSetting('translatable_hausverwaltung_landingpage', 'intro_layout', $old->intro_layout);
+        $this->updateSetting('translatable_hausverwaltung_landingpage', 'hero_speed', $old->hero_speed);
+        $this->updateSetting('translatable_hausverwaltung_landingpage', 'timeline_speed', $old->timeline_speed);
+        $this->updateSetting('translatable_hausverwaltung_landingpage', 'about_video_embed_code', $old->about_video_embed_code);
 
         $this->info('  ✓ Hausverwaltung: hero_image, text_image, about_image, intro_layout, speeds, video');
     }

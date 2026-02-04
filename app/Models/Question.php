@@ -41,6 +41,8 @@ class Question extends Model implements HasMedia
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
+            ->usingLanguage('de')
+            ->doNotGenerateSlugsOnUpdate()
             ->generateSlugsFrom('question')
             ->saveSlugsTo('slug');
     }

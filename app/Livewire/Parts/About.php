@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Parts;
 
-use App\Settings\LandingpageHausverwaltung;
+use App\Settings\HausverwaltungLandingpageSettings;
 use App\Traits\SplitsHtmlText;
 use Livewire\Component;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -13,7 +13,7 @@ class About extends Component
 
 
 
-    public function render( LandingpageHausverwaltung $settings )
+    public function render( HausverwaltungLandingpageSettings $settings )
     {
         $media = Media::whereId($settings->about_image)->first();
 

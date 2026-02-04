@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Parts;
 
-use App\Settings\LandingpageHausverwaltung;
+use App\Settings\HausverwaltungLandingpageSettings;
 use Illuminate\Support\Arr;
 use Livewire\Component;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -10,7 +10,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 class ImageText extends Component
 {
 
-    public function render( LandingpageHausverwaltung $settings )
+    public function render( HausverwaltungLandingpageSettings $settings )
     {
         $media = [];
 

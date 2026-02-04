@@ -15,22 +15,22 @@
 
                 <form wire:submit="save"
                       class="space-y-4 mt-24 sm:mt-0 grid grid-cols-1 md:grid-cols-2 gap-y-4 md:gap-x-4">
-                    <flux:input wire:model="data.firstname" label="Vorname" required badge="Pflichtfeld"/>
-                    <flux:input wire:model="data.lastname" label="Nachname" required badge="Pflichtfeld"/>
-                    <flux:input wire:model="data.email" label="E-Mail-Adresse" type="email" required badge="Pflichtfeld"/>
-                    <flux:input wire:model="data.phone" label="Telefonnummer" type="tel" required badge="Pflichtfeld"/>
+                    <flux:input wire:model="data.firstname" label="{{ __('contact.form.firstname') }}" required badge="{{ __('form.required') }}"/>
+                    <flux:input wire:model="data.lastname" label="{{ __('contact.form.lastname') }}" required badge="{{ __('form.required') }}"/>
+                    <flux:input wire:model="data.email" label="{{ __('form.email') }}" type="email" required badge="{{ __('form.required') }}"/>
+                    <flux:input wire:model="data.phone" label="{{ __('contact.form.phone') }}" type="tel" required badge="{{ __('form.required') }}"/>
 
                     <div class="md:col-span-2 space-y-4">
                         @if($address)
-                            <flux:input wire:model="data.address" description="Bitte geben Sie wenn notwendig auch die Top-Nummer an" label="Adresse der Liegenschaft" required badge="Pflichtfeld"/>
+                            <flux:input wire:model="data.address" description="{{ __('contact.form.address_description') }}" label="{{ __('contact.form.property_address') }}" required badge="{{ __('form.required') }}"/>
                         @endif
-                        <flux:input wire:model="data.subject" label="Betreff" required badge="Pflichtfeld"/>
-                        <flux:editor wire:model="data.message" label="Nachricht" required badge="Pflichtfeld"/>
+                        <flux:input wire:model="data.subject" label="{{ __('contact.form.subject') }}" required badge="{{ __('form.required') }}"/>
+                        <flux:editor wire:model="data.message" label="{{ __('contact.form.message') }}" required badge="{{ __('form.required') }}"/>
                     </div>
 
 
                     <div class="col-span-full" wire:key="contact-form-upload-container">
-                        <flux:label>Bis zu 5 Dateien à 5 MB hochladen</flux:label>
+                        <flux:label>{{ __('contact.form.upload_label') }}</flux:label>
                         <livewire:dropzone
                                 wire:key="dropzone"
                                 wire:model="uploads"
@@ -41,7 +41,7 @@
 
                     <div class="md:col-span-2 space-y-4">
                         <flux:checkbox wire:model="data.terms"
-                                       label="Ich bin mit der Verarbeitung und Speicherung meiner Daten, sowie mit der Kontaktaufnahme via E-Mail oder Telefon im Zuge der Bearbeitung meiner Anfrage einverstanden."/>
+                                       label="{{ __('contact.form.terms_label') }}"/>
                     </div>
 
 
@@ -51,10 +51,10 @@
                     >
                         @if($address)
                             <div :class="isLoading ? 'opacity-0' : 'opacity-100'" class="transition-all duration-500 ease-in-out delay-[1s]">
-                                <x-button>absenden</x-button>
+                                <x-button>{{ __('contact.form.submit') }}</x-button>
                             </div>
                         @else
-                            <flux:button type="button" variant="primary" x-on:click="$flux.modal('damage').show()">absenden</flux:button>
+                            <flux:button type="button" variant="primary" x-on:click="$flux.modal('damage').show()">{{ __('contact.form.submit') }}</flux:button>
                         @endif
 
                     </div>
@@ -62,14 +62,14 @@
                     <flux:modal name="damage" class="md:w-96">
                         <div class="space-y-6">
                             <div>
-                                <flux:heading size="lg">Melden Sie einen Schaden?</flux:heading>
-                                <flux:text class="mt-2">Im Falle eine Schadensmeldung geben Sie bitte Ihre Adresse ein.</flux:text>
+                                <flux:heading size="lg">{{ __('contact.form.damage_heading') }}</flux:heading>
+                                <flux:text class="mt-2">{{ __('contact.form.damage_description') }}</flux:text>
                             </div>
-                            <flux:input label="Adresse" badge="Pflichtfeld" wire:model="data.address"/>
+                            <flux:input label="{{ __('contact.form.address') }}" badge="{{ __('form.required') }}" wire:model="data.address"/>
                             <div class="flex items-center">
                                 <flux:spacer />
-                                <flux:button type="button" wire:click="submitWithoutAddress" size="xs" variant="ghost">Keine Schadensmeldung</flux:button>
-                                <flux:button type="button" wire:click="submitWithAddress" variant="primary">absenden</flux:button>
+                                <flux:button type="button" wire:click="submitWithoutAddress" size="xs" variant="ghost">{{ __('contact.form.no_damage') }}</flux:button>
+                                <flux:button type="button" wire:click="submitWithAddress" variant="primary">{{ __('contact.form.submit') }}</flux:button>
                             </div>
                         </div>
                     </flux:modal>

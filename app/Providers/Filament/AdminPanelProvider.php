@@ -5,6 +5,7 @@ namespace App\Providers\Filament;
 use App\Filament\Pages\Auth\EditProfile;
 use Filament\Auth\MultiFactor\App\AppAuthentication;
 use Filament\Http\Middleware\Authenticate;
+//use Statikbe\FilamentChainedTranslationManager\ChainedTranslationManagerPlugin;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -18,6 +19,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Statikbe\FilamentTranslationManager\FilamentChainedTranslationManagerPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -77,6 +79,7 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->databaseNotifications()
-            ->profile(EditProfile::class);
+            ->profile(EditProfile::class)
+            ->plugin(FilamentChainedTranslationManagerPlugin::make());
     }
 }

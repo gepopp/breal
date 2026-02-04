@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages;
 
 use App\Enums\CompaniesEnum;
+use App\Settings\FaqSettings;
 use App\Settings\PagesSettings;
 use App\Traits\SplitsHtmlText;
 use Livewire\Component;
@@ -17,16 +18,14 @@ class FAQ extends Component
 
     public ?array $faqs = null;
 
-    public function mount(PagesSettings $pagesSettings)
+    public function mount(FaqSettings $pagesSettings)
     {
         $this->company = CompaniesEnum::getByRoute();
-
-        $this->text = $pagesSettings->team_introtext;
 
         $this->faqs = \App\Models\Question::all()->toArray();
     }
 
-    public function render(PagesSettings $pagesSettings)
+    public function render(FaqSettings $pagesSettings)
     {
         $preparedText = $this->prepareText();
 

@@ -3,7 +3,7 @@
 namespace App\Livewire\Parts;
 
 use App\Enums\CompaniesEnum;
-use App\Settings\LandingpageHausverwaltung;
+use App\Settings\HausverwaltungLandingpageSettings;
 use App\Traits\SplitsHtmlText;
 use Illuminate\Support\Collection;
 use Livewire\Component;
@@ -27,7 +27,7 @@ class Competences extends Component
     }
 
 
-    public function render( LandingpageHausverwaltung $settings )
+    public function render( HausverwaltungLandingpageSettings $settings )
     {
         $this->company = CompaniesEnum::getByRoute();
 

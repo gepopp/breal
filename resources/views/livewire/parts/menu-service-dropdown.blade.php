@@ -11,7 +11,7 @@
                         <template x-for="service in services" :key="`menu-${service.id}`">
                             <li class="border-b border-logo p-2 !ml-0">
                                 <a :href="service.link">
-                                    <p class="!font-bold !mb-0 !dark:text-logo !text-logo !text-sm" x-text="service.name.de"></p>
+                                    <p class="!font-bold !mb-0 !dark:text-logo !text-logo !text-sm" x-text="service.name[locale] || service.name.de"></p>
                                 </a>
                             </li>
                         </template>
@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="mt-4 pt-4 border-t border-logo">
-                    <x-button href="https://realonline.bereal-immobilien.at/">Kundenlogin</x-button>
+                    <x-button href="https://realonline.bereal-immobilien.at/">{{ __('navigation.customer_login') }}</x-button>
                 </div>
 
             </div>
@@ -30,6 +30,7 @@
 <script>
     Alpine.data('menuServiceFilter', () => ({
         originalServices: @entangle('services'),
+        locale: '{{ app()->getLocale() }}',
         services: null,
         searchterm: '',
         fuse: null,

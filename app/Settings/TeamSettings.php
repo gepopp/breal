@@ -2,9 +2,7 @@
 
 namespace App\Settings;
 
-use Spatie\LaravelSettings\Settings;
-
-class TeamSettings extends Settings
+class TeamSettings extends BaseSettings
 {
     // Team Page
     public string $team_header_de = 'with us';

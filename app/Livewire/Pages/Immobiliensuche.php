@@ -4,6 +4,7 @@ namespace App\Livewire\Pages;
 
 use App\Models\Realty;
 use App\Settings\PagesSettings;
+use App\Settings\SearchSettings;
 use App\Traits\SplitsHtmlText;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Computed;
@@ -157,7 +158,7 @@ class Immobiliensuche extends Component
         return $query->paginate(25);
     }
 
-    public function render(PagesSettings $settings)
+    public function render(SearchSettings $settings)
     {
         $preparedText = $this->prepareText($settings->search_introtext);
 

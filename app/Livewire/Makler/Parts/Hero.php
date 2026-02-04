@@ -3,7 +3,7 @@
 namespace App\Livewire\Makler\Parts;
 
 use App\Models\Realty;
-use App\Settings\LandingpageMaklerSettings;
+use App\Settings\MaklerLandingpageSettings;
 use App\Traits\SplitsHtmlText;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -19,14 +19,14 @@ class Hero extends Component
 
     public array $typen = [];
 
-    public function mount(LandingpageMaklerSettings $settings)
+    public function mount(MaklerLandingpageSettings $settings)
     {
         $this->text = $settings->intro_description;
         $this->arten = DB::table('realties')->select('nutzungsart')->distinct()->get()->toArray();
         $this->typen = DB::table('realties')->select('vermarktungsart')->distinct()->get()->toArray();
     }
 
-    public function render(LandingpageMaklerSettings $settings)
+    public function render(MaklerLandingpageSettings $settings)
     {
         $images = Media::whereIn('id', $settings->hero_images)->get();
         $realEstates = Realty::all();

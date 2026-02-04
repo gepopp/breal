@@ -50,7 +50,7 @@
                             <a href="{{ route('hausverwaltung.leistungen') }}"
                                class="menu-item relative uppercase cursor-pointer text-logo-600">
                                 <div @class(["font-black" => Route::is('hausverwaltung.leistungen')])>
-                                    <span class="menu-item-text pointer-events-none block relative">Leistungen</span>
+                                    <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.services') }}</span>
                                 </div>
                             </a>
                         </div>
@@ -63,7 +63,7 @@
                             <a href="{{ route('hausverwaltung.service') }}"
                                class="menu-item relative uppercase cursor-pointer text-logo-600">
                                 <div @class(["font-black" => Route::is('hausverwaltung.service')])>
-                                    <span class="menu-item-text pointer-events-none block relative">Service</span>
+                                    <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.service') }}</span>
                                 </div>
                             </a>
                             <div class="group-hover:block hidden transition-all duration-300">
@@ -77,7 +77,7 @@
                             <a href="{{ route('hausverwaltung.karriere') }}"
                                class="menu-item relative uppercase cursor-pointer text-logo-600 ">
                                 <div @class(["font-black" => Route::is('hausverwaltung.karriere')])>
-                                    <span class="menu-item-text pointer-events-none block relative">Karriere</span>
+                                    <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.careers') }}</span>
                                 </div>
                             </a>
                         </div>
@@ -89,7 +89,7 @@
                             <a href="{{ route('hausverwaltung.team') }}"
                                class="menu-item relative uppercase cursor-pointer text-logo-600 ">
                                 <div @class(["font-black" => Route::is('hausverwaltung.team')])>
-                                    <span class="menu-item-text pointer-events-none block relative">Team</span>
+                                    <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.team') }}</span>
                                 </div>
                             </a>
                         </div>
@@ -115,7 +115,7 @@
                                 <a href="{{ route('makler.immobiliensuche') }}"
                                    class="menu-item relative uppercase cursor-pointer text-logo-600 ">
                                     <div @class(["font-black" => Route::is('makler.immobiliensuche')])>
-                                        <span class="menu-item-text pointer-events-none block relative">Immobiliensuche</span>
+                                        <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.property_search') }}</span>
                                     </div>
                                 </a>
                             </div>
@@ -138,7 +138,7 @@
                             <a href="{{ route('makler.karriere') }}"
                                class="menu-item relative uppercase cursor-pointer text-logo-600 ">
                                 <div @class(["font-black" => Route::is('makler.karriere')])>
-                                    <span class="menu-item-text pointer-events-none block relative">Karriere</span>
+                                    <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.careers') }}</span>
                                 </div>
                             </a>
                         </div>
@@ -150,7 +150,7 @@
                             <a href="{{ route('makler.team') }}"
                                class="menu-item relative uppercase cursor-pointer text-logo-600 ">
                                 <div @class(["font-black" => Route::is('makler.team')])>
-                                    <span class="menu-item-text pointer-events-none block relative">Team</span>
+                                    <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.team') }}</span>
                                 </div>
                             </a>
                         </div>
@@ -166,7 +166,7 @@
                             <a href="{{ route('technik.leistungen') }}"
                                class="menu-item relative uppercase cursor-pointer text-logo-600 ">
                                 <div @class(["font-black" => Route::is('technik.leistung')])>
-                                    <span class="menu-item-text pointer-events-none block relative">Leistungen</span>
+                                    <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.services') }}</span>
                                 </div>
                             </a>
                         </div>
@@ -178,7 +178,7 @@
                             <a href="{{ route('technik.karriere') }}"
                                class="menu-item relative uppercase cursor-pointer text-logo-600 ">
                                 <div @class(["font-black" => Route::is('technik.karriere')])>
-                                    <span class="menu-item-text pointer-events-none block relative">Karriere</span>
+                                    <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.careers') }}</span>
                                 </div>
                             </a>
                         </div>
@@ -190,7 +190,7 @@
                             <a href="{{ route('technik.team') }}"
                                class="menu-item relative uppercase cursor-pointer text-logo-600 ">
                                 <div @class(["font-black" => Route::is('technik.team')])>
-                                    <span class="menu-item-text pointer-events-none block relative">Team</span>
+                                    <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.team') }}</span>
                                 </div>
                             </a>
                         </div>
@@ -229,27 +229,27 @@
 ])>
                 <ul class="flex flex-col space-y-8 text-lg font-bold uppercase">
                     @if( Route::is('hausverwaltung.*') )
-                        <a href="{{ route('hausverwaltung.leistungen') }}">Leistungen</a>
-                        <a href="{{ route('hausverwaltung.service') }}">Service</a>
-                        <a href="{{ route('hausverwaltung.karriere') }}">Karriere</a>
-                        <a href="{{ route('hausverwaltung.kontakt') }}">Kontakt</a>
-                        <a href="{{ route('hausverwaltung.team') }}">Team</a>
+                        <a href="{{ route('hausverwaltung.leistungen') }}">{{ __('navigation.services') }}</a>
+                        <a href="{{ route('hausverwaltung.service') }}">{{ __('navigation.service') }}</a>
+                        <a href="{{ route('hausverwaltung.karriere') }}">{{ __('navigation.careers') }}</a>
+                        <a href="{{ route('hausverwaltung.kontakt') }}">{{ __('navigation.contact') }}</a>
+                        <a href="{{ route('hausverwaltung.team') }}">{{ __('navigation.team') }}</a>
                     @endif
 
                     @if( Route::is('makler.*') )
                         @if(\App\Models\Realty::count())
-                            <a href="{{ route('makler.immobiliensuche') }}">Immobiliensuche</a>
+                            <a href="{{ route('makler.immobiliensuche') }}">{{ __('navigation.property_search') }}</a>
                         @endif
-                        <a href="{{ route('makler.karriere') }}">Karriere</a>
-                        <a href="{{ route('makler.kontakt') }}">Kontakt</a>
-                        <a href="{{ route('makler.team') }}">Team</a>
+                        <a href="{{ route('makler.karriere') }}">{{ __('navigation.careers') }}</a>
+                        <a href="{{ route('makler.kontakt') }}">{{ __('navigation.contact') }}</a>
+                        <a href="{{ route('makler.team') }}">{{ __('navigation.team') }}</a>
                     @endif
 
 
                     @if( Route::is('technik.*') )
-                        <a href="{{ route('technik.karriere') }}">Karriere</a>
-                        <a href="{{ route('technik.kontakt') }}">Kontakt</a>
-                        <a href="{{ route('technik.team') }}">Team</a>
+                        <a href="{{ route('technik.karriere') }}">{{ __('navigation.careers') }}</a>
+                        <a href="{{ route('technik.kontakt') }}">{{ __('navigation.contact') }}</a>
+                        <a href="{{ route('technik.team') }}">{{ __('navigation.team') }}</a>
                     @endif
                 </ul>
             </div>
@@ -307,7 +307,7 @@
                               d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"></path>
                     </svg>
                     <a href="https://realonline.bereal-immobilien.at/" class="font-bold uppercase"
-                       target="_blank">Kundenlogin</a>
+                       target="_blank">{{ __('navigation.customer_login') }}</a>
                 </div>
             </div>
 

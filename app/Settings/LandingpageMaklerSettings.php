@@ -2,9 +2,7 @@
 
 namespace App\Settings;
 
-use Spatie\LaravelSettings\Settings;
-
-class LandingpageMaklerSettings extends Settings
+class LandingpageMaklerSettings extends BaseSettings
 {
     public array|int|null $hero_images = null;
 

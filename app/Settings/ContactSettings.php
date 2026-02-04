@@ -2,9 +2,7 @@
 
 namespace App\Settings;
 
-use Spatie\LaravelSettings\Settings;
-
-class ContactSettings extends Settings
+class ContactSettings extends BaseSettings
 {
     // Contact Page
     public string $contact_header_de = 'together';

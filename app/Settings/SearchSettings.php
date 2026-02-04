@@ -2,9 +2,7 @@
 
 namespace App\Settings;
 
-use Spatie\LaravelSettings\Settings;
-
-class SearchSettings extends Settings
+class SearchSettings extends BaseSettings
 {
     // Search/Immobiliensuche Page
     public string $search_header_de = 'home';

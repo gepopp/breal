@@ -16,6 +16,8 @@ class FAQ extends Model
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
+            ->usingLanguage('de')
+            ->doNotGenerateSlugsOnUpdate()
             ->generateSlugsFrom('question')
             ->saveSlugsTo('slug');
     }

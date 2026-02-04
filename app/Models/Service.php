@@ -49,7 +49,9 @@ class Service extends Model implements HasMedia
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom(fn ($model) => $model->getTranslation('name', 'de'))
+            ->usingLanguage('de')
+            ->doNotGenerateSlugsOnUpdate()
+            ->generateSlugsFrom('name')
             ->saveSlugsTo('slug');
     }
 }

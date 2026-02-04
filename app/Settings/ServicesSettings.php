@@ -2,9 +2,7 @@
 
 namespace App\Settings;
 
-use Spatie\LaravelSettings\Settings;
-
-class ServicesSettings extends Settings
+class ServicesSettings extends BaseSettings
 {
     // Services Page
     public string $services_header_de = 'secure';

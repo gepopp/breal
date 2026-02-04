@@ -4,6 +4,7 @@ namespace App\Livewire\Pages;
 
 use App\Enums\CompaniesEnum;
 use App\Settings\PagesSettings;
+use App\Settings\TeamSettings;
 use App\Traits\SplitsHtmlText;
 use Livewire\Component;
 
@@ -15,14 +16,14 @@ class Team extends Component
 
     public string $text = '';
 
-    public function mount(PagesSettings $pagesSettings)
+    public function mount(TeamSettings $pagesSettings)
     {
         $this->company = CompaniesEnum::getByRoute();
 
         $this->text = $pagesSettings->team_introtext;
     }
 
-    public function render(PagesSettings $pagesSettings)
+    public function render(TeamSettings $pagesSettings)
     {
         $preparedText = $this->prepareText();
 

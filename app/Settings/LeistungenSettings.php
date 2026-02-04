@@ -2,9 +2,7 @@
 
 namespace App\Settings;
 
-use Spatie\LaravelSettings\Settings;
-
-class LeistungenSettings extends Settings
+class LeistungenSettings extends BaseSettings
 {
     // Hausverwaltung Leistungen
     public string $hausverwaltung_leistungen_header_de = 'competent';

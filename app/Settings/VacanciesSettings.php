@@ -2,9 +2,7 @@
 
 namespace App\Settings;
 
-use Spatie\LaravelSettings\Settings;
-
-class VacanciesSettings extends Settings
+class VacanciesSettings extends BaseSettings
 {
     // Vacancies/Career Page
     public string $vacancies_header_de = 'inspired';

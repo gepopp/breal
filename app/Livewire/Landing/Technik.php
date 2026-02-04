@@ -2,12 +2,12 @@
 
 namespace App\Livewire\Landing;
 
-use App\Settings\LandingpageTechnikSettings;
+use App\Settings\TechnikLandingpageSettings;
 use Livewire\Component;
 
 class Technik extends Component
 {
-    public function render(LandingpageTechnikSettings $settings)
+    public function render(TechnikLandingpageSettings $settings)
     {
         return view('livewire.landing.technik', compact('settings'))
             ->title(__('landing.technik.title'))

@@ -1,4 +1,4 @@
-<x-site xmlns:flus="http://www.w3.org/1999/html">
+<x-layouts.site xmlns:flus="http://www.w3.org/1999/html">
     <div class="grid grid-cols-1 lg:grid-cols-2 w-full">
         <div class="flex justify-center items-center min-h-[70vh]">
             <div class="max-w-md">
@@ -48,4 +48,4 @@
             </div>
         </div>
     </div>
-</x-site>
+</x-layouts.site>

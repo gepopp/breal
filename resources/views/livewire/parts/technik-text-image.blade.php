@@ -1,23 +1,6 @@
 <div>
     <div>
-        <div x-data="{
-        init(){
-             if(window.innerWidth > 767 && $refs.wrapper){
-                 var height = $refs.textCol.clientHeight;
-                 $refs.wrapper.style.height = `${height}px`;
-                 setTimeout(() => $dispatch('setheight', height), 500);
-            }
-
-
-            window.addEventListener('resize', () => {
-                 if(window.innerWidth > 767 && $refs.wrapper){
-                     var height = $refs.textCol.clientHeight;
-                     $refs.wrapper.style.height = `${height}px`;
-                     setTimeout(() => $dispatch('setheight', height), 500);
-                }
-            })
-        }
-    }"
+        <div x-data="imageTextHeight"
                 x-ref="textCol"
                 @class([
         "mx-auto grid grid-cols-1 md:grid-cols-2 relative min-h-[70vh] w-full mb-24 md:mb-0"
@@ -73,3 +56,25 @@
         </div>
     </div>
 </div>
+
+@script
+<script>
+    Alpine.data('imageTextHeight', () => ({
+        init() {
+            if (window.innerWidth > 767 && this.$refs.wrapper) {
+                const height = this.$refs.textCol.clientHeight;
+                this.$refs.wrapper.style.height = `${height}px`;
+                setTimeout(() => this.$dispatch('setheight', height), 500);
+            }
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 767 && this.$refs.wrapper) {
+                    const height = this.$refs.textCol.clientHeight;
+                    this.$refs.wrapper.style.height = `${height}px`;
+                    setTimeout(() => this.$dispatch('setheight', height), 500);
+                }
+            });
+        }
+    }));
+</script>
+@endscript

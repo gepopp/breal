@@ -2,9 +2,7 @@
 
 namespace App\Settings;
 
-use Spatie\LaravelSettings\Settings;
-
-class ImporterSetting extends Settings
+class ImporterSetting extends BaseSettings
 {
     public string $last_import = '';
 

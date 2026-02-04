@@ -2,13 +2,13 @@
 
 namespace App\Livewire\Parts;
 
-use App\Settings\LandingpageMaklerSettings;
+use App\Settings\MaklerLandingpageSettings;
 use Livewire\Component;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class MaklerAbout extends Component
 {
-    public function render( LandingpageMaklerSettings $settings )
+    public function render( MaklerLandingpageSettings $settings )
     {
         $image = Media::whereId( $settings->about_image )->first();
 

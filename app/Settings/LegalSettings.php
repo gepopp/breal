@@ -2,9 +2,7 @@
 
 namespace App\Settings;
 
-use Spatie\LaravelSettings\Settings;
-
-class LegalSettings extends Settings
+class LegalSettings extends BaseSettings
 {
     // Imprint/Impressum
     public string $imprint_text_de = '<h2>Angaben gemäß § 5 TMG</h2><p>be real Immobilienmanagement GmbH<br>Franz Josefs Kai 65, 1010 Wien</p><p><strong>Vertreten durch:</strong><br>Lukas Eybel</p><p><strong>Firmenbuch:</strong> FN 152672 v</p><p><strong>UID-Nummer: </strong>ATU49490402&nbsp;</p><h2>Kontakt</h2><p>Telefon: +43 1 535 36 19<br>Telefax: +43 1 535 64 28<br>E-Mail: office@bereal-immobilien.at</p><h2>Redaktionell verantwortlich</h2><p>be real Immobilienmanagement GmbH<br>Franz Josefs Kai 65, 1010 Wien</p><h2>Verbundene Unternehmen:&nbsp;</h2><p>be real Immobilienmakler GmbH<br>Franz Josefs Kai 65, 1010 Wien&nbsp;</p><p>E-Mail:&nbsp; office@bereal-makler.at</p><p>&nbsp;<strong>Firmenbuch:</strong> FN 556967 w</p><p>be real Baumanagement GmbH<br>Franz Josefs Kai 65, 1010 Wien&nbsp;</p><p>E-Mail:&nbsp; t.keinrath@bereal-immobilien.at</p><p>&nbsp;<strong>Firmenbuch:</strong>&nbsp; FN 660246 a&nbsp;</p><p><br></p><h2>EU-Streitschlichtung</h2><p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr/"><span style="text-decoration: underline;">https://ec.europa.eu/consumers/odr/</span></a>.<br>Unsere E-Mail-Adresse finden Sie oben im Impressum.</p><h2>Verbraucher­streit­beilegung/Universal­schlichtungs­stelle</h2><p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p><p><br><br></p><p><br></p>';

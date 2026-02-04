@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages;
 
 use App\Enums\CompaniesEnum;
+use App\Settings\ContactSettings;
 use App\Settings\PagesSettings;
 use App\Traits\SplitsHtmlText;
 use Livewire\Component;
@@ -15,14 +16,14 @@ class Contact extends Component
 
     public string $text = '';
 
-    public function mount(PagesSettings $pagesSettings)
+    public function mount(ContactSettings $pagesSettings)
     {
         $this->company = CompaniesEnum::getByRoute();
 
         $this->text = $pagesSettings->contact_introtext;
     }
 
-    public function render(PagesSettings $pagesSettings)
+    public function render(ContactSettings $pagesSettings)
     {
         $preparedText = $this->prepareText();
 

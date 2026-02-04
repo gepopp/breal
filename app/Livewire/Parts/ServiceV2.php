@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Parts;
 
-use App\Settings\LandingpageHausverwaltung;
+use App\Settings\HausverwaltungLandingpageSettings;
 use App\Traits\SplitsHtmlText;
 use Illuminate\Support\Collection;
 use Livewire\Component;
@@ -20,7 +20,7 @@ class ServiceV2 extends Component
         $this->services = \App\Models\Service::all()->toArray();
     }
 
-    public function render( LandingpageHausverwaltung $settings)
+    public function render( HausverwaltungLandingpageSettings $settings)
     {
         $preparedText = $this->prepareText($settings->service_introtext);
 

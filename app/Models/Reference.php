@@ -26,6 +26,8 @@ class Reference extends Model implements HasMedia
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
+            ->usingLanguage('de')
+            ->doNotGenerateSlugsOnUpdate()
             ->generateSlugsFrom('title')
             ->doNotGenerateSlugsOnUpdate()
             ->saveSlugsTo('slug');

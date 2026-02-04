@@ -1,30 +1,14 @@
 <div @class([
         "mx-auto grid grid-cols-1 md:grid-cols-2 relative w-full"
 ])>
-    <div x-data="{
-        init(){
-            if(window.innerWidth > 767 && $refs.wrapper){
-                 var height = $refs.textCol.clientHeight;
-                 $refs.wrapper.style.height = `${height}px`;
-                 setTimeout(() => $dispatch('setheight', height), 500);
-            }
-
-
-            window.addEventListener('resize', () => {
-                 if(window.innerWidth > 767 && $refs.wrapper){
-                     var height = $refs.textCol.clientHeight;
-                     $refs.wrapper.style.height = `${height}px`;
-                     setTimeout(() => $dispatch('setheight', height), 500);
-                }
-            })
-
-        }
-    }"
+    <div x-data="imageTextHeight"
          x-ref="textCol"
             @class(['flex justify-center items-center md:min-h-[70vh] mt-12 md:mt-0'])>
         <div @class(['md:max-w-sm lg:max-w-lg lg:my-48 px-4'])>
             <x-headings>
-                <x-slot name="tag">{{ $settings->hero_header }}</x-slot>
+                <x-slot name="tag">
+                    {{ $settings->hero_header }}
+                </x-slot>
                 {{ $settings->hero_subheader }}
             </x-headings>
             <div data-aos="fade" data-aos-delay="600" class="prose">
@@ -72,3 +56,25 @@
         </div>
     </div>
 </div>
+
+@script
+<script>
+    Alpine.data('imageTextHeight', () => ({
+        init() {
+            if (window.innerWidth > 767 && this.$refs.wrapper) {
+                const height = this.$refs.textCol.clientHeight;
+                this.$refs.wrapper.style.height = `${height}px`;
+                setTimeout(() => this.$dispatch('setheight', height), 500);
+            }
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 767 && this.$refs.wrapper) {
+                    const height = this.$refs.textCol.clientHeight;
+                    this.$refs.wrapper.style.height = `${height}px`;
+                    setTimeout(() => this.$dispatch('setheight', height), 500);
+                }
+            });
+        }
+    }));
+</script>
+@endscript

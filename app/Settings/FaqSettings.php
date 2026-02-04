@@ -2,9 +2,7 @@
 
 namespace App\Settings;
 
-use Spatie\LaravelSettings\Settings;
-
-class FaqSettings extends Settings
+class FaqSettings extends BaseSettings
 {
     // FAQ Page
     public string $faq_header_de = 'informed';
