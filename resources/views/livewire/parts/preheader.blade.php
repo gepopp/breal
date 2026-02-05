@@ -8,23 +8,32 @@
  ])>
     <div class="flex justify-between items-center text-white">
         <div class="flex items-center space-x-2">
-            <svg class="size-6" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
-                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"></path>
-                </svg>
+
+            @auth
+                <div>
+                    @if(app()->getLocale() == 'de')
+                        <a href="{{ language()->back('en') }}" class="font-bold uppercase">ENGLISH</a>
+                    @else
+                        <a href="{{ language()->back('de') }}" class="font-bold uppercase">DEUTSCH</a>
+                    @endif
+                </div>
+            @endauth
+
+            <div class="w-2 h-2 bg-white rounded last:hidden"></div>
+
             <a href="{{ route('hausverwaltung.kontakt') }}" class="font-bold uppercase" target="_blank">{{ __('navigation.contact') }}</a>
         </div>
 
         <div class="flex items-center">
             @if( ! Route::is('hausverwaltung.*') )
-                <a href="{{ route('hausverwaltung.home') }}" class="px-4 block" >
+                <a href="{{ route('hausverwaltung.home') }}" class="px-4 block">
                     <img src="{{ asset('logos/bereal_immobilien_white.svg') }}" class="h-5"/>
                 </a>
                 <div class="w-2 h-2 bg-white rounded last:hidden"></div>
             @endif
 
             @if( ! Route::is('makler.*') )
-                <a href="{{ route('makler.home') }}" class="px-4" >
+                <a href="{{ route('makler.home') }}" class="px-4">
                     <img src="{{ asset('logos/bereal_makler_white.svg') }}" class="h-5"/>
                 </a>
                 <div class="w-2 h-2 bg-white rounded last:hidden"></div>
@@ -32,7 +41,7 @@
 
 
             @if( ! Route::is('technik.*') )
-                <a href="{{ route('technik.home') }}" class="px-4" >
+                <a href="{{ route('technik.home') }}" class="px-4">
                     <img src="{{ asset('logos/bereal_technik_white.svg') }}" class="h-5"/>
                 </a>
                 <div class="w-2 h-2 bg-white rounded last:hidden"></div>

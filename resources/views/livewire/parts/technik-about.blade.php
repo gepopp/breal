@@ -42,7 +42,7 @@
             @endif
         </div>
     </div>
-    <div class="flex justify-center mt-8">
-        <x-button href="{{ route('hausverwaltung.kontakt') }}" :ondark="true">{{ __('navigation.contact') }}</x-button>
-    </div>
+{{--    <div class="flex justify-center mt-8">--}}
+{{--        <x-button href="{{ route('hausverwaltung.kontakt') }}" :ondark="true">{{ __('navigation.contact') }}</x-button>--}}
+{{--    </div>--}}
 </x-section>

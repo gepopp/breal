@@ -17,6 +17,7 @@
     "ext-xmlreader": "*",
     "ext-xmlwriter": "*",
     "ext-zip": "*",
+    "akaunting/laravel-language": "^2.0",
     "dasundev/livewire-dropzone": "^2.0",
     "filament/filament": "^4.0",
     "filament/spatie-laravel-media-library-plugin": "^4.0",
