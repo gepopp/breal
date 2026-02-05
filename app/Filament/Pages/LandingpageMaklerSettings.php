@@ -13,6 +13,8 @@ use Filament\Schemas\Schema;
 
 class LandingpageMaklerSettings extends SettingsPage
 {
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-document-text';
 
     protected static string $settings = \App\Settings\LandingpageMaklerSettings::class;

@@ -14,6 +14,8 @@ use Filament\Schemas\Schema;
 
 class LandingpageHausverwaltung extends SettingsPage
 {
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-document-text';
 
     protected static string $settings = Setting::class;

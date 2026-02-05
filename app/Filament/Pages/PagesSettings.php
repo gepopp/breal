@@ -11,6 +11,8 @@ use Filament\Schemas\Schema;
 
 class PagesSettings extends SettingsPage
 {
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-adjustments-horizontal';
 
     protected static ?string $navigationLabel = 'Seiteneinstellungen';
