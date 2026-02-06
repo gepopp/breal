@@ -6,6 +6,4 @@
 <meta name="description" content="{{ $description ?? '' }}">
 <link rel="canonical" href="{{ $canonical ?? url()->current() }}">
 <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
-@vite(['resources/js/app.js', 'resources/css/app.css'])
-@fluxAppearance
-@cookieconsentscripts
+

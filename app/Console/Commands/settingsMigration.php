@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Str;
 use App\Models\Settings;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
@@ -51,7 +52,7 @@ class settingsMigration extends Command
 
         $content = $this->migratorFileContent($unmigrated, $group);
 
-        $filename = database_path('settings\\') . now()->format('Y_m_d_His') . '_' . \Str::slug($this->argument('class')) . '.php';
+        $filename = database_path('settings\\') . now()->format('Y_m_d_His') . '_' . Str::slug($this->argument('class')) . '.php';
 
         file_put_contents($filename, $content);
 

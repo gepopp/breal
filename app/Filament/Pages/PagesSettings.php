@@ -2,6 +2,9 @@
 
 namespace App\Filament\Pages;
 
+use Filament\Schemas\Components\Tabs\Tab;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\RichEditor;
 use BackedEnum;
 use Filament\Forms;
 use Filament\Pages\SettingsPage;
@@ -13,7 +16,7 @@ class PagesSettings extends SettingsPage
 {
     protected static bool $shouldRegisterNavigation = false;
 
-    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-adjustments-horizontal';
+    protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-adjustments-horizontal';
 
     protected static ?string $navigationLabel = 'Seiteneinstellungen';
 
@@ -24,117 +27,117 @@ class PagesSettings extends SettingsPage
     public function form(Schema $schema): Schema
     {
         return $schema
-            ->schema([
+            ->components([
                 Tabs::make('Seiten')
                     ->schema([
-                        Tabs\Tab::make('Kontaktseite')
+                        Tab::make('Kontaktseite')
                             ->schema([
-                                Forms\Components\TextInput::make('contact_header')->label('Header')->required(),
-                                Forms\Components\TextInput::make('contact_subheader')->label('Überschrift')->required(),
-                                Forms\Components\RichEditor::make('contact_introtext')->label('Introtext')->required(),
+                                TextInput::make('contact_header')->label('Header')->required(),
+                                TextInput::make('contact_subheader')->label('Überschrift')->required(),
+                                RichEditor::make('contact_introtext')->label('Introtext')->required(),
 
-                                Forms\Components\TextInput::make('contactform_heading')->label('Überschrift Kontaktformular')->required(),
+                                TextInput::make('contactform_heading')->label('Überschrift Kontaktformular')->required(),
 
                                 Section::make('Kontaktdaten Hausverwaltung')
                                     ->schema([
-                                        Forms\Components\TextInput::make('contactform_phone')->label('Telefonnummer')->required(),
-                                        Forms\Components\TextInput::make('contactform_email')->label('E-Mail-Adresse')->email()->required(),
-                                        Forms\Components\TextInput::make('contactform_address')->label('Adresse')->required(),
+                                        TextInput::make('contactform_phone')->label('Telefonnummer')->required(),
+                                        TextInput::make('contactform_email')->label('E-Mail-Adresse')->email()->required(),
+                                        TextInput::make('contactform_address')->label('Adresse')->required(),
 
                                     ]),
 
                                 Section::make('Kontaktdaten Makler')
                                     ->schema([
-                                        Forms\Components\TextInput::make('makler_contactform_phone')->label('Telefonnummer')->required(),
-                                        Forms\Components\TextInput::make('makler_contactform_email')->label('E-Mail-Adresse')->email()->required(),
-                                        Forms\Components\TextInput::make('makler_contactform_address')->label('Adresse')->required(),
+                                        TextInput::make('makler_contactform_phone')->label('Telefonnummer')->required(),
+                                        TextInput::make('makler_contactform_email')->label('E-Mail-Adresse')->email()->required(),
+                                        TextInput::make('makler_contactform_address')->label('Adresse')->required(),
 
                                     ]),
 
                                 Section::make('Kontaktdaten Technik')
                                     ->schema([
-                                        Forms\Components\TextInput::make('technik_contactform_phone')->label('Telefonnummer')->required(),
-                                        Forms\Components\TextInput::make('technik_contactform_email')->label('E-Mail-Adresse')->email()->required(),
-                                        Forms\Components\TextInput::make('technik_contactform_address')->label('Adresse')->required(),
+                                        TextInput::make('technik_contactform_phone')->label('Telefonnummer')->required(),
+                                        TextInput::make('technik_contactform_email')->label('E-Mail-Adresse')->email()->required(),
+                                        TextInput::make('technik_contactform_address')->label('Adresse')->required(),
 
                                     ]),
 
-                                Forms\Components\TextInput::make('contactpersons_heading')->label('Kontaktpersonen Überschrift')->required(),
-                                Forms\Components\RichEditor::make('contactpersons_introtext')->label('Introtext')->required(),
+                                TextInput::make('contactpersons_heading')->label('Kontaktpersonen Überschrift')->required(),
+                                RichEditor::make('contactpersons_introtext')->label('Introtext')->required(),
                             ]),
-                        Tabs\Tab::make('Karriereseite')
+                        Tab::make('Karriereseite')
                             ->schema([
-                                Forms\Components\TextInput::make('vacancies_header')->label('Überschrift')->required(),
-                                Forms\Components\TextInput::make('vacancies_subheader')->label('Unterzeile')->required(),
-                                Forms\Components\RichEditor::make('vacancies_introtext')->label('Introtext')->required(),
-                                Forms\Components\RichEditor::make('cold_application_cta_text')->label('Text für Initiativbewerbungs-CTA"')->required(),
+                                TextInput::make('vacancies_header')->label('Überschrift')->required(),
+                                TextInput::make('vacancies_subheader')->label('Unterzeile')->required(),
+                                RichEditor::make('vacancies_introtext')->label('Introtext')->required(),
+                                RichEditor::make('cold_application_cta_text')->label('Text für Initiativbewerbungs-CTA"')->required(),
                             ]),
 
-                        Tabs\Tab::make('Teamseite')
+                        Tab::make('Teamseite')
                             ->schema([
-                                Forms\Components\TextInput::make('team_header')->label('Überschrift')->required(),
-                                Forms\Components\TextInput::make('team_subheader')->label('Unterzeile')->required(),
-                                Forms\Components\RichEditor::make('team_introtext')->label('Introtext"')->required(),
+                                TextInput::make('team_header')->label('Überschrift')->required(),
+                                TextInput::make('team_subheader')->label('Unterzeile')->required(),
+                                RichEditor::make('team_introtext')->label('Introtext"')->required(),
                             ]),
 
-                        Tabs\Tab::make('Service Seite')
+                        Tab::make('Service Seite')
                             ->schema([
-                                Forms\Components\TextInput::make('services_header')->label('Überschrift')->required(),
-                                Forms\Components\TextInput::make('services_subheader')->label('Unterzeile')->required(),
-                                Forms\Components\RichEditor::make('services_introtext')->label('Introtext"')->required(),
+                                TextInput::make('services_header')->label('Überschrift')->required(),
+                                TextInput::make('services_subheader')->label('Unterzeile')->required(),
+                                RichEditor::make('services_introtext')->label('Introtext"')->required(),
                             ]),
 
-                        Tabs\Tab::make('FAQ Seite')
+                        Tab::make('FAQ Seite')
                             ->schema([
-                                Forms\Components\TextInput::make('faq_header')->label('Überschrift')->required(),
-                                Forms\Components\TextInput::make('faq_subheader')->label('Unterzeile')->required(),
-                                Forms\Components\RichEditor::make('faq_introtext')->label('Introtext"')->required(),
+                                TextInput::make('faq_header')->label('Überschrift')->required(),
+                                TextInput::make('faq_subheader')->label('Unterzeile')->required(),
+                                RichEditor::make('faq_introtext')->label('Introtext"')->required(),
                             ]),
 
-                        Tabs\Tab::make('Leistungen Seite')
+                        Tab::make('Leistungen Seite')
                             ->schema([
 
                                 Section::make('Hausverwaltung')
                                     ->schema([
-                                        Forms\Components\TextInput::make('hausverwaltung_leistungen_header')->label('Überschrift')->required(),
-                                        Forms\Components\TextInput::make('hausverwaltung_leistungen_subheader')->label('Unterzeile')->required(),
-                                        Forms\Components\RichEditor::make('hausverwaltung_leistungen_introtext')->label('Introtext"')->required(),
+                                        TextInput::make('hausverwaltung_leistungen_header')->label('Überschrift')->required(),
+                                        TextInput::make('hausverwaltung_leistungen_subheader')->label('Unterzeile')->required(),
+                                        RichEditor::make('hausverwaltung_leistungen_introtext')->label('Introtext"')->required(),
                                     ]),
 
                                 Section::make('Makler')
                                     ->schema([
-                                        Forms\Components\TextInput::make('immobilien_leistungen_header')->label('Überschrift')->required(),
-                                        Forms\Components\TextInput::make('immobilien_leistungen_subheader')->label('Unterzeile')->required(),
-                                        Forms\Components\RichEditor::make('immobilien_leistungen_introtext')->label('Introtext"')->required(),
+                                        TextInput::make('immobilien_leistungen_header')->label('Überschrift')->required(),
+                                        TextInput::make('immobilien_leistungen_subheader')->label('Unterzeile')->required(),
+                                        RichEditor::make('immobilien_leistungen_introtext')->label('Introtext"')->required(),
                                     ]),
                                 Section::make('Technik')
                                     ->schema([
-                                        Forms\Components\TextInput::make('technik_leistungen_header')->label('Überschrift')->required(),
-                                        Forms\Components\TextInput::make('technik_leistungen_subheader')->label('Unterzeile')->required(),
-                                        Forms\Components\RichEditor::make('technik_leistungen_introtext')->label('Introtext"')->required(),
+                                        TextInput::make('technik_leistungen_header')->label('Überschrift')->required(),
+                                        TextInput::make('technik_leistungen_subheader')->label('Unterzeile')->required(),
+                                        RichEditor::make('technik_leistungen_introtext')->label('Introtext"')->required(),
                                     ]),
                             ]),
 
-                        Tabs\Tab::make('Immobiliensuche')
+                        Tab::make('Immobiliensuche')
                             ->schema([
-                                Forms\Components\TextInput::make('search_header')->label('Überschrift')->required(),
-                                Forms\Components\TextInput::make('search_subheader')->label('Unterzeile')->required(),
-                                Forms\Components\RichEditor::make('search_introtext')->label('Introtext"')->required(),
+                                TextInput::make('search_header')->label('Überschrift')->required(),
+                                TextInput::make('search_subheader')->label('Unterzeile')->required(),
+                                RichEditor::make('search_introtext')->label('Introtext"')->required(),
                             ]),
 
-                        Tabs\Tab::make('Impressum')
+                        Tab::make('Impressum')
                             ->schema([
-                                Forms\Components\RichEditor::make('imprint_text')->label('Text für Initiativbewerbungs-CTA"')->required(),
+                                RichEditor::make('imprint_text')->label('Text für Initiativbewerbungs-CTA"')->required(),
                             ]),
 
-                        Tabs\Tab::make('Datenschutz')
+                        Tab::make('Datenschutz')
                             ->schema([
-                                Forms\Components\RichEditor::make('dpgr_text')->label('Text für Initiativbewerbungs-CTA"')->required(),
+                                RichEditor::make('dpgr_text')->label('Text für Initiativbewerbungs-CTA"')->required(),
                             ]),
 
-                        Tabs\Tab::make('Barrierefreiheit')
+                        Tab::make('Barrierefreiheit')
                             ->schema([
-                                Forms\Components\RichEditor::make('accessability_text')->label('Text für Initiativbewerbungs-CTA"')->required(),
+                                RichEditor::make('accessability_text')->label('Text für Initiativbewerbungs-CTA"')->required(),
                             ]),
 
                     ])->persistTabInQueryString(),

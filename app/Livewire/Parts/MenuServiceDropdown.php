@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Parts;
 
+use App\Models\Service;
 use App\Enums\CompaniesEnum;
 use Livewire\Component;
 
@@ -18,7 +19,7 @@ class MenuServiceDropdown extends Component
     {
         $this->company = CompaniesEnum::getByRoute();
 
-        $this->services = \App\Models\Service::all()->toArray();
+        $this->services = Service::all()->toArray();
     }
 
     public function render()

@@ -34,10 +34,10 @@ class DepartmentTable
                 SelectFilter::make('company')
                     ->options(CompaniesEnum::class),
             ])
-            ->actions([
+            ->recordActions([
                 EditAction::make(),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),

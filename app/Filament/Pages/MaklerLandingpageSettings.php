@@ -2,6 +2,9 @@
 
 namespace App\Filament\Pages;
 
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\RichEditor;
 use App\Forms\Components\SettingsUpload;
 use App\Settings\MaklerLandingpageSettings as Settings;
 use BackedEnum;
@@ -15,11 +18,11 @@ use UnitEnum;
 
 class MaklerLandingpageSettings extends SettingsPage
 {
-    protected static BackedEnum|string|null $navigationIcon = Heroicon::BuildingOffice;
+    protected static string | BackedEnum | null $navigationIcon = Heroicon::BuildingOffice;
 
     protected static string $settings = Settings::class;
 
-    protected static UnitEnum|string|null $navigationGroup = 'Landingpages';
+    protected static string | UnitEnum | null $navigationGroup = 'Landingpages';
 
     protected static ?string $navigationLabel = 'Makler';
 
@@ -27,7 +30,7 @@ class MaklerLandingpageSettings extends SettingsPage
 
     public function form(Schema $schema): Schema
     {
-        return $schema->schema([
+        return $schema->components([
             Section::make('Hero Bereich')
                 ->schema([
                     SettingsUpload::make('hero_images')
@@ -41,26 +44,26 @@ class MaklerLandingpageSettings extends SettingsPage
             Section::make('Intro Bereich')
                 ->schema([
                     Grid::make(2)->schema([
-                        Forms\Components\TextInput::make('intro_title_de')
+                        TextInput::make('intro_title_de')
                             ->label('Intro Titel (Deutsch)')
                             ->required(),
-                        Forms\Components\TextInput::make('intro_title_en')
+                        TextInput::make('intro_title_en')
                             ->label('Intro Titel (English)')
                             ->required(),
                     ]),
                     Grid::make(2)->schema([
-                        Forms\Components\Textarea::make('intro_subtitle_de')
+                        Textarea::make('intro_subtitle_de')
                             ->label('Intro Untertitel (Deutsch)')
                             ->required(),
-                        Forms\Components\Textarea::make('intro_subtitle_en')
+                        Textarea::make('intro_subtitle_en')
                             ->label('Intro Untertitel (English)')
                             ->required(),
                     ]),
                     Grid::make(2)->schema([
-                        Forms\Components\RichEditor::make('intro_description_de')
+                        RichEditor::make('intro_description_de')
                             ->label('Intro Beschreibung (Deutsch)')
                             ->required(),
-                        Forms\Components\RichEditor::make('intro_description_en')
+                        RichEditor::make('intro_description_en')
                             ->label('Intro Beschreibung (English)')
                             ->required(),
                     ]),
@@ -69,26 +72,26 @@ class MaklerLandingpageSettings extends SettingsPage
             Section::make('CTA Bereich')
                 ->schema([
                     Grid::make(2)->schema([
-                        Forms\Components\TextInput::make('cta_header_de')
+                        TextInput::make('cta_header_de')
                             ->label('CTA Header (Deutsch)')
                             ->required(),
-                        Forms\Components\TextInput::make('cta_header_en')
+                        TextInput::make('cta_header_en')
                             ->label('CTA Header (English)')
                             ->required(),
                     ]),
                     Grid::make(2)->schema([
-                        Forms\Components\TextInput::make('cta_subheader_de')
+                        TextInput::make('cta_subheader_de')
                             ->label('CTA Subheader (Deutsch)')
                             ->required(),
-                        Forms\Components\TextInput::make('cta_subheader_en')
+                        TextInput::make('cta_subheader_en')
                             ->label('CTA Subheader (English)')
                             ->required(),
                     ]),
                     Grid::make(2)->schema([
-                        Forms\Components\RichEditor::make('cta_text_de')
+                        RichEditor::make('cta_text_de')
                             ->label('CTA Text (Deutsch)')
                             ->required(),
-                        Forms\Components\RichEditor::make('cta_text_en')
+                        RichEditor::make('cta_text_en')
                             ->label('CTA Text (English)')
                             ->required(),
                     ]),
@@ -96,14 +99,14 @@ class MaklerLandingpageSettings extends SettingsPage
                         ->label('CTA Bild')
                         ->columnSpanFull(),
                     Grid::make(2)->schema([
-                        Forms\Components\TextInput::make('cta_image_alt_de')
+                        TextInput::make('cta_image_alt_de')
                             ->label('CTA Bild Alt-Text (Deutsch)')
                             ->required(),
-                        Forms\Components\TextInput::make('cta_image_alt_en')
+                        TextInput::make('cta_image_alt_en')
                             ->label('CTA Bild Alt-Text (English)')
                             ->required(),
                     ]),
-                    Forms\Components\Textarea::make('cta_video_embed_code')
+                    Textarea::make('cta_video_embed_code')
                         ->label('CTA Video Embed Code')
                         ->columnSpanFull(),
                 ]),
@@ -111,18 +114,18 @@ class MaklerLandingpageSettings extends SettingsPage
             Section::make('About Bereich')
                 ->schema([
                     Grid::make(2)->schema([
-                        Forms\Components\TextInput::make('about_heading_de')
+                        TextInput::make('about_heading_de')
                             ->label('About Überschrift (Deutsch)')
                             ->required(),
-                        Forms\Components\TextInput::make('about_heading_en')
+                        TextInput::make('about_heading_en')
                             ->label('About Überschrift (English)')
                             ->required(),
                     ]),
                     Grid::make(2)->schema([
-                        Forms\Components\RichEditor::make('about_text_de')
+                        RichEditor::make('about_text_de')
                             ->label('About Text (Deutsch)')
                             ->required(),
-                        Forms\Components\RichEditor::make('about_text_en')
+                        RichEditor::make('about_text_en')
                             ->label('About Text (English)')
                             ->required(),
                     ]),
@@ -130,10 +133,10 @@ class MaklerLandingpageSettings extends SettingsPage
                         ->label('About Bild')
                         ->columnSpanFull(),
                     Grid::make(2)->schema([
-                        Forms\Components\TextInput::make('about_image_alt_de')
+                        TextInput::make('about_image_alt_de')
                             ->label('About Bild Alt-Text (Deutsch)')
                             ->required(),
-                        Forms\Components\TextInput::make('about_image_alt_en')
+                        TextInput::make('about_image_alt_en')
                             ->label('About Bild Alt-Text (English)')
                             ->required(),
                     ]),

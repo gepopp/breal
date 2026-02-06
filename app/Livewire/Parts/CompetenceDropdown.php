@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Parts;
 
+use App\Models\Competence;
 use App\Enums\CompaniesEnum;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
@@ -16,7 +17,7 @@ class CompetenceDropdown extends Component
     {
         $this->company = CompaniesEnum::getByRoute();
 
-        $this->competences = \App\Models\Competence::where('company', $this->company)->where('on_dropdown', true)->get();
+        $this->competences = Competence::where('company', $this->company)->where('on_dropdown', true)->get();
     }
 
 

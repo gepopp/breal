@@ -43,11 +43,11 @@ class UserTable
             ->filters([
                 //
             ])
-            ->actions([
+            ->recordActions([
                 ViewAction::make(),
                 DeleteAction::make(),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),

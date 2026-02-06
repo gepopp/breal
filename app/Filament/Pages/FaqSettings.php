@@ -2,6 +2,8 @@
 
 namespace App\Filament\Pages;
 
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\RichEditor;
 use BackedEnum;
 use Filament\Forms;
 use Filament\Pages\SettingsPage;
@@ -12,11 +14,11 @@ use UnitEnum;
 
 class FaqSettings extends SettingsPage
 {
-    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-question-mark-circle';
+    protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-question-mark-circle';
 
     protected static ?string $navigationLabel = 'FAQ Seite';
 
-    protected static UnitEnum|string|null $navigationGroup = 'Seiteneinstellungen';
+    protected static string | UnitEnum | null $navigationGroup = 'Seiteneinstellungen';
 
     protected static ?string $title = 'FAQ Seite Einstellungen';
 
@@ -25,33 +27,33 @@ class FaqSettings extends SettingsPage
     public function form(Schema $schema): Schema
     {
         return $schema
-            ->schema([
+            ->components([
                 Section::make('FAQ Seite')
                     ->schema([
                         Grid::make(2)
                             ->schema([
-                                Forms\Components\TextInput::make('faq_header_de')
+                                TextInput::make('faq_header_de')
                                     ->label('Header (Deutsch)')
                                     ->required(),
-                                Forms\Components\TextInput::make('faq_header_en')
+                                TextInput::make('faq_header_en')
                                     ->label('Header (English)')
                                     ->required(),
                             ]),
                         Grid::make(2)
                             ->schema([
-                                Forms\Components\TextInput::make('faq_subheader_de')
+                                TextInput::make('faq_subheader_de')
                                     ->label('Unterzeile (Deutsch)')
                                     ->required(),
-                                Forms\Components\TextInput::make('faq_subheader_en')
+                                TextInput::make('faq_subheader_en')
                                     ->label('Subheader (English)')
                                     ->required(),
                             ]),
                         Grid::make(2)
                             ->schema([
-                                Forms\Components\RichEditor::make('faq_introtext_de')
+                                RichEditor::make('faq_introtext_de')
                                     ->label('Introtext (Deutsch)')
                                     ->required(),
-                                Forms\Components\RichEditor::make('faq_introtext_en')
+                                RichEditor::make('faq_introtext_en')
                                     ->label('Introtext (English)')
                                     ->required(),
                             ]),

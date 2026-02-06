@@ -314,3 +314,16 @@ iframe{
 #cookies-policy .cookies__category input:checked+.cookies__box:after{
     @apply !bg-logo;
 }
+
+.angled-borders {
+    position: relative;
+    padding: 20px 40px; /* Adjust padding to accommodate angled edges */
+    clip-path: polygon(
+            20px 0,           /* top-left corner offset */
+            calc(100% - 20px) 0,  /* top-right corner offset */
+            100% 100%,        /* bottom-right corner */
+            0 100%,           /* bottom-left corner */
+            20px 0            /* close the path */
+    );
+    background: #3498db; /* your background color */
+}

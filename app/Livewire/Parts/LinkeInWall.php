@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Parts;
 
+use Exception;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
@@ -121,7 +122,7 @@ class LinkeInWall extends Component
 
             return $formattedPost;
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Log::error("LinkedIn Post-Details Exception: {$e->getMessage()}", [
                 'post_id' => $postId,
                 'trace' => $e->getTraceAsString(),

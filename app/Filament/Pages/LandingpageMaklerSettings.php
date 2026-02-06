@@ -2,6 +2,8 @@
 
 namespace App\Filament\Pages;
 
+use Filament\Schemas\Components\Tabs\Tab;
+use Filament\Forms\Components\RichEditor;
 use App\Forms\Components\SettingsUpload;
 use BackedEnum;
 use Filament\Forms;
@@ -15,7 +17,7 @@ class LandingpageMaklerSettings extends SettingsPage
 {
     protected static bool $shouldRegisterNavigation = false;
 
-    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-document-text';
+    protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-document-text';
 
     protected static string $settings = \App\Settings\LandingpageMaklerSettings::class;
 
@@ -26,11 +28,11 @@ class LandingpageMaklerSettings extends SettingsPage
     public function form(Schema $schema): Schema
     {
         return $schema
-            ->schema([
+            ->components([
 
                 Tabs::make('Sektionen')
                     ->schema([
-                        Tabs\Tab::make('Intro')
+                        Tab::make('Intro')
                             ->schema([
                                 SettingsUpload::make('hero_images')
                                     ->multiple()
@@ -40,24 +42,24 @@ class LandingpageMaklerSettings extends SettingsPage
 
                                 TextInput::make('intro_title'),
                                 TextInput::make('intro_subtitle'),
-                                Forms\Components\RichEditor::make('intro_description'),
+                                RichEditor::make('intro_description'),
                             ]),
 
-                        Tabs\Tab::make('Über uns')
+                        Tab::make('Über uns')
                             ->schema([
                                 SettingsUpload::make('about_image')->required(),
-                                Forms\Components\TextInput::make('about_image_alt')->required(),
-                                Forms\Components\TextInput::make('about_heading')->required(),
-                                Forms\Components\RichEditor::make('about_text')->required(),
+                                TextInput::make('about_image_alt')->required(),
+                                TextInput::make('about_heading')->required(),
+                                RichEditor::make('about_text')->required(),
                             ]),
 
-                        Tabs\Tab::make('CTA')
+                        Tab::make('CTA')
                             ->schema([
-                                Forms\Components\TextInput::make('cta_header')->required(),
-                                Forms\Components\TextInput::make('cta_subheader')->required(),
-                                Forms\Components\RichEditor::make('cta_text')->required(),
+                                TextInput::make('cta_header')->required(),
+                                TextInput::make('cta_subheader')->required(),
+                                RichEditor::make('cta_text')->required(),
                                 SettingsUpload::make('cta_image')->required(),
-                                Forms\Components\TextInput::make('cta_image_alt')->required(),
+                                TextInput::make('cta_image_alt')->required(),
                                 Textarea::make('cta_video_embed_code'),
                             ]),
 

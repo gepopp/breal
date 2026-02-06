@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pages;
 
+use Filament\Forms\Components\RichEditor;
 use BackedEnum;
 use Filament\Forms;
 use Filament\Pages\SettingsPage;
@@ -12,11 +13,11 @@ use UnitEnum;
 
 class LegalSettings extends SettingsPage
 {
-    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-scale';
+    protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-scale';
 
     protected static ?string $navigationLabel = 'Rechtliches';
 
-    protected static UnitEnum|string|null $navigationGroup = 'Seiteneinstellungen';
+    protected static string | UnitEnum | null $navigationGroup = 'Seiteneinstellungen';
 
     protected static ?string $title = 'Rechtliche Seiten Einstellungen';
 
@@ -25,15 +26,15 @@ class LegalSettings extends SettingsPage
     public function form(Schema $schema): Schema
     {
         return $schema
-            ->schema([
+            ->components([
                 Section::make('Impressum')
                     ->schema([
                         Grid::make(2)
                             ->schema([
-                                Forms\Components\RichEditor::make('imprint_text_de')
+                                RichEditor::make('imprint_text_de')
                                     ->label('Impressum (Deutsch)')
                                     ->required(),
-                                Forms\Components\RichEditor::make('imprint_text_en')
+                                RichEditor::make('imprint_text_en')
                                     ->label('Imprint (English)')
                                     ->required(),
                             ]),
@@ -43,10 +44,10 @@ class LegalSettings extends SettingsPage
                     ->schema([
                         Grid::make(2)
                             ->schema([
-                                Forms\Components\RichEditor::make('dpgr_text_de')
+                                RichEditor::make('dpgr_text_de')
                                     ->label('Datenschutz (Deutsch)')
                                     ->required(),
-                                Forms\Components\RichEditor::make('dpgr_text_en')
+                                RichEditor::make('dpgr_text_en')
                                     ->label('Data Protection (English)')
                                     ->required(),
                             ]),
@@ -56,10 +57,10 @@ class LegalSettings extends SettingsPage
                     ->schema([
                         Grid::make(2)
                             ->schema([
-                                Forms\Components\RichEditor::make('accessability_text_de')
+                                RichEditor::make('accessability_text_de')
                                     ->label('Barrierefreiheit (Deutsch)')
                                     ->required(),
-                                Forms\Components\RichEditor::make('accessability_text_en')
+                                RichEditor::make('accessability_text_en')
                                     ->label('Accessibility (English)')
                                     ->required(),
                             ]),

@@ -2,6 +2,9 @@
 
 namespace App\Filament\Resources\ContactRequestResource\Pages;
 
+use Filament\Actions\DeleteAction;
+use Filament\Actions\Action;
+use App\Mail\NewContactRequestAdminMail;
 use App\Filament\Resources\ContactRequestResource;
 use App\Livewire\ContactForm;
 use Filament\Actions;
@@ -16,10 +19,10 @@ class EditContactRequest extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
-            Actions\Action::make('Send Email')
+            DeleteAction::make(),
+            Action::make('Send Email')
                 ->icon('heroicon-o-envelope')
-                ->form([
+                ->schema([
                     TextInput::make('email')
                         ->label('Email')
                         ->required()
@@ -27,7 +30,7 @@ class EditContactRequest extends EditRecord
                         ->default(ContactForm::RECIPIENT)
                 ])
                 ->action(function ($record, array $data) {
-                    Mail::to($data['email'])->send(new \App\Mail\NewContactRequestAdminMail($record));
+                    Mail::to($data['email'])->send(new NewContactRequestAdminMail($record));
                 })
         ];
     }

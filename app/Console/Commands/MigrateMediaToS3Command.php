@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use App\Services\MediaMigrationService;
 use Illuminate\Console\Command;
 
@@ -130,7 +131,7 @@ class MigrateMediaToS3Command extends Command
      */
     protected function showMigrationPreview(string $sourceDisk, string $targetDisk): void
     {
-        $media = \Spatie\MediaLibrary\MediaCollections\Models\Media::where('disk', $sourceDisk)->get();
+        $media = Media::where('disk', $sourceDisk)->get();
 
         $this->info("\nFound {$media->count()} media files to migrate:");
         $this->newLine();

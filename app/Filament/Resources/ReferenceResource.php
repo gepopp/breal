@@ -2,6 +2,10 @@
 
 namespace App\Filament\Resources;
 
+use UnitEnum;
+use App\Filament\Resources\ReferenceResource\Pages\ListReferences;
+use App\Filament\Resources\ReferenceResource\Pages\CreateReference;
+use App\Filament\Resources\ReferenceResource\Pages\EditReference;
 use App\Filament\Resources\ReferenceResource\Pages;
 use App\Filament\Schemas\Resources\ReferenceResource\Schemas\ReferenceForm;
 use App\Filament\Tables\Resources\ReferenceResource\Schemas\ReferenceTable;
@@ -15,9 +19,9 @@ class ReferenceResource extends Resource
 {
     protected static ?string $model = Reference::class;
 
-    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-star';
+    protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-star';
 
-    protected static \UnitEnum|string|null $navigationGroup = 'Zweisprachige Datenmodelle';
+    protected static string | UnitEnum | null $navigationGroup = 'Zweisprachige Datenmodelle';
 
     public static function form(Schema $schema): Schema
     {
@@ -39,9 +43,9 @@ class ReferenceResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListReferences::route('/'),
-            'create' => Pages\CreateReference::route('/create'),
-            'edit' => Pages\EditReference::route('/{record}/edit'),
+            'index' => ListReferences::route('/'),
+            'create' => CreateReference::route('/create'),
+            'edit' => EditReference::route('/{record}/edit'),
         ];
     }
 }

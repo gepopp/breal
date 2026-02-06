@@ -2,6 +2,10 @@
 
 namespace App\Filament\Resources;
 
+use UnitEnum;
+use App\Filament\Resources\QuestionResource\Pages\ListQuestions;
+use App\Filament\Resources\QuestionResource\Pages\CreateQuestion;
+use App\Filament\Resources\QuestionResource\Pages\EditQuestion;
 use App\Filament\Resources\QuestionResource\Pages;
 use App\Filament\Schemas\Resources\QuestionResource\Schemas\QuestionForm;
 use App\Filament\Tables\Resources\QuestionResource\Schemas\QuestionTable;
@@ -21,9 +25,9 @@ class QuestionResource extends Resource
 
     protected static ?string $navigationLabel = 'FAQ Fragen';
 
-    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-question-mark-circle';
+    protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-question-mark-circle';
 
-    protected static \UnitEnum|string|null $navigationGroup = 'Zweisprachige Datenmodelle';
+    protected static string | UnitEnum | null $navigationGroup = 'Zweisprachige Datenmodelle';
 
     public static function form(Schema $schema): Schema
     {
@@ -45,9 +49,9 @@ class QuestionResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListQuestions::route('/'),
-            'create' => Pages\CreateQuestion::route('/create'),
-            'edit' => Pages\EditQuestion::route('/{record}/edit'),
+            'index' => ListQuestions::route('/'),
+            'create' => CreateQuestion::route('/create'),
+            'edit' => EditQuestion::route('/{record}/edit'),
         ];
     }
 }

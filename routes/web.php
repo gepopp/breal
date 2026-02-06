@@ -2,10 +2,6 @@
 
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
-use Livewire\Volt\Volt;
-
-require __DIR__ . '/auth.php';
-
 
 Route::fallback(function () {
     return view('404');
@@ -55,7 +51,7 @@ Route::group(['middleware' => 'language'], function () {
 
     Route::get('impressum', \App\Livewire\Sites\Imprint::class)->name('impressum');
     Route::get('barrierefreiheit', \App\Livewire\Pages\AccessabilityDeclaration::class)->name('barrierefreiheit');
-    Volt::route('datenschutz', 'policy')->name('datenschutz');
+    Route::livewire('datenschutz', 'policy')->name('datenschutz');
 
     Route::view('/confirm-test', 'confirmed')->name('confirm-test');
 
@@ -64,6 +60,7 @@ Route::group(['middleware' => 'language'], function () {
 
 });
 
+Route::livewire('verwalterservice', 'pages.verwalterservice')->middleware('language')->name('verwalterservice');
 
 Route::get('import', function () {
     \App\Justimmo\Importer::import();

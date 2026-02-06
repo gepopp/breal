@@ -2,6 +2,10 @@
 
 namespace App\Filament\Resources;
 
+use UnitEnum;
+use App\Filament\Resources\ContactpersonResource\Pages\ListContactpeople;
+use App\Filament\Resources\ContactpersonResource\Pages\CreateContactperson;
+use App\Filament\Resources\ContactpersonResource\Pages\EditContactperson;
 use App\Filament\Resources\ContactpersonResource\Pages;
 use App\Filament\Schemas\Resources\ContactpersonResource\Schemas\ContactpersonForm;
 use App\Filament\Tables\Resources\ContactpersonResource\Schemas\ContactpersonTable;
@@ -15,7 +19,7 @@ class ContactpersonResource extends Resource
 {
     protected static ?string $model = Contactperson::class;
 
-    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-user-group';
+    protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-user-group';
 
     protected static ?string $label = 'Kontakt';
 
@@ -23,7 +27,7 @@ class ContactpersonResource extends Resource
 
     protected static ?string $title = 'Kontakte';
 
-    protected static \UnitEnum|string|null $navigationGroup = 'Zweisprachige Datenmodelle';
+    protected static string | UnitEnum | null $navigationGroup = 'Zweisprachige Datenmodelle';
 
     public static function form(Schema $schema): Schema
     {
@@ -45,9 +49,9 @@ class ContactpersonResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListContactpeople::route('/'),
-            'create' => Pages\CreateContactperson::route('/create'),
-            'edit' => Pages\EditContactperson::route('/{record}/edit'),
+            'index' => ListContactpeople::route('/'),
+            'create' => CreateContactperson::route('/create'),
+            'edit' => EditContactperson::route('/{record}/edit'),
         ];
     }
 }

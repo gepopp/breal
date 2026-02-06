@@ -2,6 +2,8 @@
 
 namespace App\Filament\Pages;
 
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\RichEditor;
 use BackedEnum;
 use Filament\Forms;
 use Filament\Pages\SettingsPage;
@@ -12,11 +14,11 @@ use UnitEnum;
 
 class VacanciesSettings extends SettingsPage
 {
-    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-briefcase';
+    protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-briefcase';
 
     protected static ?string $navigationLabel = 'Karriereseite';
 
-    protected static UnitEnum|string|null $navigationGroup = 'Seiteneinstellungen';
+    protected static string | UnitEnum | null $navigationGroup = 'Seiteneinstellungen';
 
     protected static ?string $title = 'Karriereseite Einstellungen';
 
@@ -25,41 +27,41 @@ class VacanciesSettings extends SettingsPage
     public function form(Schema $schema): Schema
     {
         return $schema
-            ->schema([
+            ->components([
                 Section::make('Karriereseite')
                     ->schema([
                         Grid::make(2)
                             ->schema([
-                                Forms\Components\TextInput::make('vacancies_header_de')
+                                TextInput::make('vacancies_header_de')
                                     ->label('Header (Deutsch)')
                                     ->required(),
-                                Forms\Components\TextInput::make('vacancies_header_en')
+                                TextInput::make('vacancies_header_en')
                                     ->label('Header (English)')
                                     ->required(),
                             ]),
                         Grid::make(2)
                             ->schema([
-                                Forms\Components\TextInput::make('vacancies_subheader_de')
+                                TextInput::make('vacancies_subheader_de')
                                     ->label('Unterzeile (Deutsch)')
                                     ->required(),
-                                Forms\Components\TextInput::make('vacancies_subheader_en')
+                                TextInput::make('vacancies_subheader_en')
                                     ->label('Subheader (English)')
                                     ->required(),
                             ]),
                         Grid::make(2)
                             ->schema([
-                                Forms\Components\RichEditor::make('vacancies_introtext_de')
+                                RichEditor::make('vacancies_introtext_de')
                                     ->label('Introtext (Deutsch)')
                                     ->required(),
-                                Forms\Components\RichEditor::make('vacancies_introtext_en')
+                                RichEditor::make('vacancies_introtext_en')
                                     ->label('Introtext (English)')
                                     ->required(),
                             ]),
                         Grid::make(2)
                             ->schema([
-                                Forms\Components\RichEditor::make('cold_application_cta_text_de')
+                                RichEditor::make('cold_application_cta_text_de')
                                     ->label('Initiativbewerbungs-CTA Text (Deutsch)'),
-                                Forms\Components\RichEditor::make('cold_application_cta_text_en')
+                                RichEditor::make('cold_application_cta_text_en')
                                     ->label('Unsolicited Application CTA Text (English)'),
                             ]),
                     ]),

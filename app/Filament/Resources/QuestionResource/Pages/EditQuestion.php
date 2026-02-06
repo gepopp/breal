@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\QuestionResource\Pages;
 
+use Filament\Actions\DeleteAction;
+use Filament\Actions\Action;
 use App\Filament\Resources\QuestionResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
@@ -13,8 +15,8 @@ class EditQuestion extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
-            Actions\Action::make('ansehen')
+            DeleteAction::make(),
+            Action::make('ansehen')
             ->openUrlInNewTab()
             ->url(fn($record) => route('faq.single', $record->slug))
         ];

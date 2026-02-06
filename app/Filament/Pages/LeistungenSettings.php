@@ -2,6 +2,8 @@
 
 namespace App\Filament\Pages;
 
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\RichEditor;
 use BackedEnum;
 use Filament\Forms;
 use Filament\Pages\SettingsPage;
@@ -12,11 +14,11 @@ use UnitEnum;
 
 class LeistungenSettings extends SettingsPage
 {
-    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-clipboard-document-list';
+    protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-clipboard-document-list';
 
     protected static ?string $navigationLabel = 'Leistungsseiten';
 
-    protected static UnitEnum|string|null $navigationGroup = 'Seiteneinstellungen';
+    protected static string | UnitEnum | null $navigationGroup = 'Seiteneinstellungen';
 
     protected static ?string $title = 'Leistungsseiten Einstellungen';
 
@@ -25,33 +27,33 @@ class LeistungenSettings extends SettingsPage
     public function form(Schema $schema): Schema
     {
         return $schema
-            ->schema([
+            ->components([
                 Section::make('Hausverwaltung Leistungen')
                     ->schema([
                         Grid::make(2)
                             ->schema([
-                                Forms\Components\TextInput::make('hausverwaltung_leistungen_header_de')
+                                TextInput::make('hausverwaltung_leistungen_header_de')
                                     ->label('Header (Deutsch)')
                                     ->required(),
-                                Forms\Components\TextInput::make('hausverwaltung_leistungen_header_en')
+                                TextInput::make('hausverwaltung_leistungen_header_en')
                                     ->label('Header (English)')
                                     ->required(),
                             ]),
                         Grid::make(2)
                             ->schema([
-                                Forms\Components\TextInput::make('hausverwaltung_leistungen_subheader_de')
+                                TextInput::make('hausverwaltung_leistungen_subheader_de')
                                     ->label('Unterzeile (Deutsch)')
                                     ->required(),
-                                Forms\Components\TextInput::make('hausverwaltung_leistungen_subheader_en')
+                                TextInput::make('hausverwaltung_leistungen_subheader_en')
                                     ->label('Subheader (English)')
                                     ->required(),
                             ]),
                         Grid::make(2)
                             ->schema([
-                                Forms\Components\RichEditor::make('hausverwaltung_leistungen_introtext_de')
+                                RichEditor::make('hausverwaltung_leistungen_introtext_de')
                                     ->label('Introtext (Deutsch)')
                                     ->required(),
-                                Forms\Components\RichEditor::make('hausverwaltung_leistungen_introtext_en')
+                                RichEditor::make('hausverwaltung_leistungen_introtext_en')
                                     ->label('Introtext (English)')
                                     ->required(),
                             ]),
@@ -61,28 +63,28 @@ class LeistungenSettings extends SettingsPage
                     ->schema([
                         Grid::make(2)
                             ->schema([
-                                Forms\Components\TextInput::make('immobilien_leistungen_header_de')
+                                TextInput::make('immobilien_leistungen_header_de')
                                     ->label('Header (Deutsch)')
                                     ->required(),
-                                Forms\Components\TextInput::make('immobilien_leistungen_header_en')
+                                TextInput::make('immobilien_leistungen_header_en')
                                     ->label('Header (English)')
                                     ->required(),
                             ]),
                         Grid::make(2)
                             ->schema([
-                                Forms\Components\TextInput::make('immobilien_leistungen_subheader_de')
+                                TextInput::make('immobilien_leistungen_subheader_de')
                                     ->label('Unterzeile (Deutsch)')
                                     ->required(),
-                                Forms\Components\TextInput::make('immobilien_leistungen_subheader_en')
+                                TextInput::make('immobilien_leistungen_subheader_en')
                                     ->label('Subheader (English)')
                                     ->required(),
                             ]),
                         Grid::make(2)
                             ->schema([
-                                Forms\Components\RichEditor::make('immobilien_leistungen_introtext_de')
+                                RichEditor::make('immobilien_leistungen_introtext_de')
                                     ->label('Introtext (Deutsch)')
                                     ->required(),
-                                Forms\Components\RichEditor::make('immobilien_leistungen_introtext_en')
+                                RichEditor::make('immobilien_leistungen_introtext_en')
                                     ->label('Introtext (English)')
                                     ->required(),
                             ]),
@@ -92,28 +94,28 @@ class LeistungenSettings extends SettingsPage
                     ->schema([
                         Grid::make(2)
                             ->schema([
-                                Forms\Components\TextInput::make('technik_leistungen_header_de')
+                                TextInput::make('technik_leistungen_header_de')
                                     ->label('Header (Deutsch)')
                                     ->required(),
-                                Forms\Components\TextInput::make('technik_leistungen_header_en')
+                                TextInput::make('technik_leistungen_header_en')
                                     ->label('Header (English)')
                                     ->required(),
                             ]),
                         Grid::make(2)
                             ->schema([
-                                Forms\Components\TextInput::make('technik_leistungen_subheader_de')
+                                TextInput::make('technik_leistungen_subheader_de')
                                     ->label('Unterzeile (Deutsch)')
                                     ->required(),
-                                Forms\Components\TextInput::make('technik_leistungen_subheader_en')
+                                TextInput::make('technik_leistungen_subheader_en')
                                     ->label('Subheader (English)')
                                     ->required(),
                             ]),
                         Grid::make(2)
                             ->schema([
-                                Forms\Components\RichEditor::make('technik_leistungen_introtext_de')
+                                RichEditor::make('technik_leistungen_introtext_de')
                                     ->label('Introtext (Deutsch)')
                                     ->required(),
-                                Forms\Components\RichEditor::make('technik_leistungen_introtext_en')
+                                RichEditor::make('technik_leistungen_introtext_en')
                                     ->label('Introtext (English)')
                                     ->required(),
                             ]),

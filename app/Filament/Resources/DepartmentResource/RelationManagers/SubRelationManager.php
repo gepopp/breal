@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\DepartmentResource\RelationManagers;
 
+use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\TextInputColumn;
 use Filament\Actions\AssociateAction;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
@@ -25,16 +27,16 @@ class SubRelationManager extends RelationManager
     public function form(Schema $schema): Schema
     {
         return $schema
-            ->schema([
-                Forms\Components\TextInput::make('name.de')
+            ->components([
+                TextInput::make('name.de')
                     ->label('Name Deutsch')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('name.en')
+                TextInput::make('name.en')
                     ->label('Name Englisch')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('order')
+                TextInput::make('order')
                     ->required()
                     ->numeric(),
             ]);
@@ -45,8 +47,8 @@ class SubRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
-                Tables\Columns\TextInputColumn::make('name'),
-                Tables\Columns\TextInputColumn::make('order')->rules(['required', 'numeric']),
+                TextInputColumn::make('name'),
+                TextInputColumn::make('order')->rules(['required', 'numeric']),
             ])
             ->filters([
                 //
@@ -55,7 +57,7 @@ class SubRelationManager extends RelationManager
                 CreateAction::make(),
                 AssociateAction::make(),
             ])
-            ->actions([
+            ->recordActions([
                 DeleteAction::make(),
                 EditAction::make(),
             ])

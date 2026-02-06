@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -66,7 +67,7 @@ class MediaMigrationService
                 $this->migratedCount++;
                 $successMsg = $testMode ? '✓ Files uploaded (DB not updated)' : '✓ Successfully migrated';
                 $this->output("[Media ID: {$mediaItem->id}] {$successMsg}", 'info');
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->errorCount++;
                 $this->errors[] = [
                     'media_id' => $mediaItem->id,
@@ -129,7 +130,7 @@ class MediaMigrationService
                                 $oldPaths[] = $conversionPath;
 
                                 $this->migrateFile($conversionPath, $conversionPath, $media, $conversionName);
-                            } catch (\Exception $e) {
+                            } catch (Exception $e) {
                                 $this->output("    ⚠ Failed to migrate conversion '{$conversionName}': {$e->getMessage()}", 'warning');
                             }
                         }
@@ -167,7 +168,7 @@ class MediaMigrationService
             if (!$testMode) {
                 DB::commit();
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             if (!$testMode) {
                 DB::rollBack();
             }
@@ -203,7 +204,7 @@ class MediaMigrationService
 
         // Check if file exists
         if (!Storage::disk($this->sourceDisk)->exists($sourcePath)) {
-            throw new \Exception("Source file does not exist: {$sourcePath}");
+            throw new Exception("Source file does not exist: {$sourcePath}");
         }
 
         // Get file size for reporting
@@ -218,13 +219,13 @@ class MediaMigrationService
 
             if ($fileContents === false) {
                 $error = error_get_last();
-                throw new \Exception("Failed to download file: " . ($error['message'] ?? 'Unknown error'));
+                throw new Exception("Failed to download file: " . ($error['message'] ?? 'Unknown error'));
             }
 
             $downloadedSize = strlen($fileContents);
 
             if (empty($fileContents)) {
-                throw new \Exception("Downloaded file is empty");
+                throw new Exception("Downloaded file is empty");
             }
 
             $this->output("    ✓ Downloaded successfully: " . $this->formatBytes($downloadedSize));
@@ -247,12 +248,12 @@ class MediaMigrationService
                 $uploadResult = Storage::disk($this->targetDisk)->put($targetPath, $fileContents, 'public');
 
                 if ($uploadResult === false) {
-                    throw new \Exception("Storage::put() returned false - check S3 credentials and permissions");
+                    throw new Exception("Storage::put() returned false - check S3 credentials and permissions");
                 }
 
                 $this->output("    ✓ Storage::put() returned success");
 
-            } catch (\Exception $uploadException) {
+            } catch (Exception $uploadException) {
                 // Detailed error output
                 $this->output("    ✗ Upload failed!", 'error');
                 $this->output("    ✗ Error type: " . get_class($uploadException), 'error');
@@ -276,25 +277,25 @@ class MediaMigrationService
                     $this->output("      " . $line, 'error');
                 }
 
-                throw new \Exception("Failed to upload to S3: " . $uploadException->getMessage());
+                throw new Exception("Failed to upload to S3: " . $uploadException->getMessage());
             }
 
             // Verify upload
             $this->output("    🔍 Verifying upload...");
 
             if (!Storage::disk($this->targetDisk)->exists($targetPath)) {
-                throw new \Exception("Upload verification failed - file does not exist on target disk");
+                throw new Exception("Upload verification failed - file does not exist on target disk");
             }
 
             $uploadedSize = Storage::disk($this->targetDisk)->size($targetPath);
 
             if ($uploadedSize !== $downloadedSize) {
-                throw new \Exception("Size mismatch - expected {$downloadedSize} bytes, got {$uploadedSize} bytes");
+                throw new Exception("Size mismatch - expected {$downloadedSize} bytes, got {$uploadedSize} bytes");
             }
 
             $this->output("    ✓✓ UPLOAD SUCCESSFUL - File verified on {$this->targetDisk} ({$fileSizeFormatted})");
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->output("    ✗✗ UPLOAD FAILED: {$e->getMessage()}", 'error');
             throw $e;
         }
@@ -389,7 +390,7 @@ class MediaMigrationService
                     // Download and upload responsive image via URL
                     $this->migrateFileViaUrl($fullUrl, $responsivePath, "responsive-{$conversionName}");
                     $count++;
-                } catch (\Exception $e) {
+                } catch (Exception $e) {
                     $this->output("    ⚠ Failed to migrate responsive image '{$filename}': {$e->getMessage()}", 'warning');
                 }
             }
@@ -415,11 +416,11 @@ class MediaMigrationService
 
             if ($fileContents === false) {
                 $error = error_get_last();
-                throw new \Exception("Failed to download: " . ($error['message'] ?? 'Unknown error'));
+                throw new Exception("Failed to download: " . ($error['message'] ?? 'Unknown error'));
             }
 
             if (empty($fileContents)) {
-                throw new \Exception("Downloaded file is empty");
+                throw new Exception("Downloaded file is empty");
             }
 
             $downloadedSize = strlen($fileContents);
@@ -431,17 +432,17 @@ class MediaMigrationService
             $uploadResult = Storage::disk($this->targetDisk)->put($targetPath, $fileContents, 'public');
 
             if ($uploadResult === false) {
-                throw new \Exception("Storage::put() returned false");
+                throw new Exception("Storage::put() returned false");
             }
 
             // Verify upload
             if (!Storage::disk($this->targetDisk)->exists($targetPath)) {
-                throw new \Exception("Upload verification failed");
+                throw new Exception("Upload verification failed");
             }
 
             $this->output("    ✓✓ Responsive image uploaded successfully");
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->output("    ✗✗ Failed: {$e->getMessage()}", 'error');
             throw $e;
         }
@@ -508,14 +509,14 @@ class MediaMigrationService
         // Check source disk
         $sourceConfig = config("filesystems.disks.{$this->sourceDisk}");
         if (!$sourceConfig) {
-            throw new \Exception("Source disk '{$this->sourceDisk}' is not configured in config/filesystems.php");
+            throw new Exception("Source disk '{$this->sourceDisk}' is not configured in config/filesystems.php");
         }
         $this->output("  ✓ Source disk '{$this->sourceDisk}' configured (driver: {$sourceConfig['driver']})");
 
         // Check target disk
         $targetConfig = config("filesystems.disks.{$this->targetDisk}");
         if (!$targetConfig) {
-            throw new \Exception("Target disk '{$this->targetDisk}' is not configured in config/filesystems.php");
+            throw new Exception("Target disk '{$this->targetDisk}' is not configured in config/filesystems.php");
         }
         $this->output("  ✓ Target disk '{$this->targetDisk}' configured (driver: {$targetConfig['driver']})");
 
@@ -551,7 +552,7 @@ class MediaMigrationService
             }
 
             if (!empty($missingConfig)) {
-                throw new \Exception("Missing S3 configuration in .env: " . implode(', ', $missingConfig));
+                throw new Exception("Missing S3 configuration in .env: " . implode(', ', $missingConfig));
             }
 
             // Test S3 connectivity
@@ -560,10 +561,10 @@ class MediaMigrationService
                 // Try to check if bucket exists by attempting a simple operation
                 Storage::disk($this->targetDisk)->exists('__migration_test__');
                 $this->output("  ✓ S3 connection successful!");
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->output("  ✗ S3 connection failed!", 'error');
                 $this->output("  ✗ Error: " . $e->getMessage(), 'error');
-                throw new \Exception("Cannot connect to S3. Please verify your credentials and bucket configuration.");
+                throw new Exception("Cannot connect to S3. Please verify your credentials and bucket configuration.");
             }
         }
 

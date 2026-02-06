@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Pages;
 
+use App\Models\Question;
 use App\Enums\CompaniesEnum;
 use App\Settings\FaqSettings;
 use App\Settings\PagesSettings;
@@ -22,7 +23,7 @@ class FAQ extends Component
     {
         $this->company = CompaniesEnum::getByRoute();
 
-        $this->faqs = \App\Models\Question::all()->toArray();
+        $this->faqs = Question::all()->toArray();
     }
 
     public function render(FaqSettings $pagesSettings)

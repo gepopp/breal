@@ -2,6 +2,10 @@
 
 namespace App\Filament\Resources;
 
+use UnitEnum;
+use App\Filament\Resources\CompetenceResource\Pages\ListCompetences;
+use App\Filament\Resources\CompetenceResource\Pages\CreateCompetence;
+use App\Filament\Resources\CompetenceResource\Pages\EditCompetence;
 use App\Filament\Resources\CompetenceResource\Pages;
 use App\Filament\Schemas\Resources\CompetenceResource\Schemas\CompetenceForm;
 use App\Filament\Tables\Resources\CompetenceResource\Schemas\CompetenceTable;
@@ -15,7 +19,7 @@ class CompetenceResource extends Resource
 {
     protected static ?string $model = Competence::class;
 
-    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-wrench-screwdriver';
+    protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-wrench-screwdriver';
 
     protected static ?string $navigationLabel = 'Leistungen';
 
@@ -25,7 +29,7 @@ class CompetenceResource extends Resource
 
     protected static ?string $title = 'Leistungen';
 
-    protected static \UnitEnum|string|null $navigationGroup = 'Zweisprachige Datenmodelle';
+    protected static string | UnitEnum | null $navigationGroup = 'Zweisprachige Datenmodelle';
 
     public static function form(Schema $schema): Schema
     {
@@ -47,9 +51,9 @@ class CompetenceResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCompetences::route('/'),
-            'create' => Pages\CreateCompetence::route('/create'),
-            'edit' => Pages\EditCompetence::route('/{record}/edit'),
+            'index' => ListCompetences::route('/'),
+            'create' => CreateCompetence::route('/create'),
+            'edit' => EditCompetence::route('/{record}/edit'),
         ];
     }
 }

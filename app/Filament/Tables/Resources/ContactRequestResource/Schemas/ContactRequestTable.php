@@ -70,10 +70,10 @@ class ContactRequestTable
                     ->baseQuery(fn (Builder $query) => $query->withoutGlobalScopes(['solved'])),
 
             ])
-            ->actions([
+            ->recordActions([
                 EditAction::make(),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),

@@ -2,6 +2,10 @@
 
 namespace App\Filament\Resources;
 
+use UnitEnum;
+use App\Filament\Resources\JobVacancyResource\Pages\ListJobVacancies;
+use App\Filament\Resources\JobVacancyResource\Pages\CreateJobVacancy;
+use App\Filament\Resources\JobVacancyResource\Pages\EditJobVacancy;
 use App\Filament\Resources\JobVacancyResource\Pages;
 use App\Filament\Schemas\Resources\JobVacancyResource\Schemas\JobVacancyForm;
 use App\Filament\Tables\Resources\JobVacancyResource\Schemas\JobVacancyTable;
@@ -21,9 +25,9 @@ class JobVacancyResource extends Resource
 
     protected static ?string $navigationLabel = 'Stellenanzeigen';
 
-    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-briefcase';
+    protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-briefcase';
 
-    protected static \UnitEnum|string|null $navigationGroup = 'Zweisprachige Datenmodelle';
+    protected static string | UnitEnum | null $navigationGroup = 'Zweisprachige Datenmodelle';
 
 
     public static function form(Schema $schema): Schema
@@ -46,9 +50,9 @@ class JobVacancyResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListJobVacancies::route('/'),
-            'create' => Pages\CreateJobVacancy::route('/create'),
-            'edit' => Pages\EditJobVacancy::route('/{record}/edit'),
+            'index' => ListJobVacancies::route('/'),
+            'create' => CreateJobVacancy::route('/create'),
+            'edit' => EditJobVacancy::route('/{record}/edit'),
         ];
     }
 }

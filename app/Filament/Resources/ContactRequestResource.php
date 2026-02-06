@@ -2,6 +2,9 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\ContactRequestResource\Pages\ListContactRequests;
+use App\Filament\Resources\ContactRequestResource\Pages\CreateContactRequest;
+use App\Filament\Resources\ContactRequestResource\Pages\EditContactRequest;
 use App\Filament\Resources\ContactRequestResource\Pages;
 use App\Filament\Schemas\Resources\ContactRequestResource\Schemas\ContactRequestForm;
 use App\Filament\Tables\Resources\ContactRequestResource\Schemas\ContactRequestTable;
@@ -16,7 +19,7 @@ class ContactRequestResource extends Resource
 {
     protected static ?string $model = ContactRequest::class;
 
-    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-envelope';
+    protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-envelope';
 
     protected static ?string $label = 'Kontaktanfrage';
 
@@ -49,9 +52,9 @@ class ContactRequestResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListContactRequests::route('/'),
-            'create' => Pages\CreateContactRequest::route('/create'),
-            'edit' => Pages\EditContactRequest::route('/{record}/edit'),
+            'index' => ListContactRequests::route('/'),
+            'create' => CreateContactRequest::route('/create'),
+            'edit' => EditContactRequest::route('/{record}/edit'),
         ];
     }
 }

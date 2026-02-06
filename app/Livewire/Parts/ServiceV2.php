@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Parts;
 
+use App\Models\Service;
 use App\Settings\HausverwaltungLandingpageSettings;
 use App\Traits\SplitsHtmlText;
 use Illuminate\Support\Collection;
@@ -17,7 +18,7 @@ class ServiceV2 extends Component
 
     public function mount()
     {
-        $this->services = \App\Models\Service::all()->toArray();
+        $this->services = Service::all()->toArray();
     }
 
     public function render( HausverwaltungLandingpageSettings $settings)

@@ -2,6 +2,9 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\RealtyResource\Pages\ListRealties;
+use App\Filament\Resources\RealtyResource\Pages\CreateRealty;
+use App\Filament\Resources\RealtyResource\Pages\EditRealty;
 use App\Filament\Resources\RealtyResource\Pages;
 use App\Filament\Schemas\Resources\RealtyResource\Schemas\RealtyForm;
 use App\Filament\Tables\Resources\RealtyResource\Schemas\RealtyTable;
@@ -15,7 +18,7 @@ class RealtyResource extends Resource
 {
     protected static ?string $model = Realty::class;
 
-    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-home';
+    protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-home';
 
     protected static ?string $navigationLabel = 'Immobilien';
 
@@ -43,9 +46,9 @@ class RealtyResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListRealties::route('/'),
-            'create' => Pages\CreateRealty::route('/create'),
-            'edit' => Pages\EditRealty::route('/{record}/edit'),
+            'index' => ListRealties::route('/'),
+            'create' => CreateRealty::route('/create'),
+            'edit' => EditRealty::route('/{record}/edit'),
         ];
     }
 }

@@ -2,6 +2,10 @@
 
 namespace App\Filament\Resources;
 
+use UnitEnum;
+use App\Filament\Resources\TimelineResource\Pages\ListTimelines;
+use App\Filament\Resources\TimelineResource\Pages\CreateTimeline;
+use App\Filament\Resources\TimelineResource\Pages\EditTimeline;
 use App\Filament\Resources\TimelineResource\Pages;
 use App\Filament\Schemas\Resources\TimelineResource\Schemas\TimelineForm;
 use App\Filament\Tables\Resources\TimelineResource\Schemas\TimelineTable;
@@ -15,9 +19,9 @@ class TimelineResource extends Resource
 {
     protected static ?string $model = Timeline::class;
 
-    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-clock';
+    protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-clock';
 
-    protected static \UnitEnum|string|null $navigationGroup = 'Zweisprachige Datenmodelle';
+    protected static string | UnitEnum | null $navigationGroup = 'Zweisprachige Datenmodelle';
 
     public static function form(Schema $schema): Schema
     {
@@ -39,9 +43,9 @@ class TimelineResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTimelines::route('/'),
-            'create' => Pages\CreateTimeline::route('/create'),
-            'edit' => Pages\EditTimeline::route('/{record}/edit'),
+            'index' => ListTimelines::route('/'),
+            'create' => CreateTimeline::route('/create'),
+            'edit' => EditTimeline::route('/{record}/edit'),
         ];
     }
 }

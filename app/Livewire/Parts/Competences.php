@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Parts;
 
+use App\Models\Competence;
 use App\Enums\CompaniesEnum;
 use App\Settings\HausverwaltungLandingpageSettings;
 use App\Traits\SplitsHtmlText;
@@ -21,7 +22,7 @@ class Competences extends Component
     public function mount()
     {
         $this->competences =
-            \App\Models\Competence::where('company', $this->company)
+            Competence::where('company', $this->company)
             ->where('on_landing', true)
             ->get();
     }

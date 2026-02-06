@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class FAQSingle extends Component
 {
-    public \App\Models\Question $faq;
+    public Question $faq;
 
 
     public function mount(string $slug){

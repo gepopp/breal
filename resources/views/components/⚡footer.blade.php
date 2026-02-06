@@ -1,9 +1,11 @@
 <?php
 
-use function Livewire\Volt\{state};
+use Livewire\Component;
 
-state();
-
+new class extends Component
+{
+    //
+};
 ?>
 
 <footer class="bg-logo pt-24 flex flex-col items-center justify-center text-white px-4">
@@ -62,5 +64,4 @@ state();
             </div>
         </div>
     </div>
-
 </footer>

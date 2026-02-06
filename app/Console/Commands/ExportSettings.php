@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -34,7 +35,7 @@ class ExportSettings extends Command
                         'properties' => $translatable,
                     ];
                 }
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->error("Failed to load {$settingsClass}: " . $e->getMessage());
                 continue;
             }
@@ -58,7 +59,7 @@ class ExportSettings extends Command
             $fullPath = Storage::disk($disk)->path($filePath);
             $this->info("Settings exported successfully to: {$fullPath}");
             $this->info("Total settings classes exported: " . count($settingsData));
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->error("Failed to write file: " . $e->getMessage());
             return Command::FAILURE;
         }

@@ -2,6 +2,11 @@
 
 namespace App\Filament\Resources;
 
+use UnitEnum;
+use App\Filament\Resources\DepartmentResource\RelationManagers\SubRelationManager;
+use App\Filament\Resources\DepartmentResource\Pages\ListDepartments;
+use App\Filament\Resources\DepartmentResource\Pages\CreateDepartment;
+use App\Filament\Resources\DepartmentResource\Pages\EditDepartment;
 use App\Filament\Resources\DepartmentResource\Pages;
 use App\Filament\Resources\DepartmentResource\RelationManagers;
 use App\Filament\Resources\DepartmentResource\RelationManagers\ContactsRelationManager;
@@ -17,7 +22,7 @@ class DepartmentResource extends Resource
 {
     protected static ?string $model = Department::class;
 
-    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-building-office';
+    protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-building-office';
 
     protected static ?string $label = 'Abteilung';
 
@@ -25,7 +30,7 @@ class DepartmentResource extends Resource
 
     protected static ?string $title = 'Ateilungen';
 
-    protected static \UnitEnum|string|null $navigationGroup = 'Zweisprachige Datenmodelle';
+    protected static string | UnitEnum | null $navigationGroup = 'Zweisprachige Datenmodelle';
 
     public static function form(Schema $schema): Schema
     {
@@ -40,7 +45,7 @@ class DepartmentResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\SubRelationManager::class,
+            SubRelationManager::class,
             ContactsRelationManager::class,
         ];
     }
@@ -48,9 +53,9 @@ class DepartmentResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListDepartments::route('/'),
-            'create' => Pages\CreateDepartment::route('/create'),
-            'edit' => Pages\EditDepartment::route('/{record}/edit'),
+            'index' => ListDepartments::route('/'),
+            'create' => CreateDepartment::route('/create'),
+            'edit' => EditDepartment::route('/{record}/edit'),
         ];
     }
 }

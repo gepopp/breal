@@ -38,7 +38,7 @@ return [
     |
     */
 
-    'layout' => 'components.layouts.site',
+    'component_layout' => 'components.layouts.site',
 
     /*
     |---------------------------------------------------------------------------

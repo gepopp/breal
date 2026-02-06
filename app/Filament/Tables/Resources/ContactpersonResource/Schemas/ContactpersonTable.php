@@ -32,11 +32,11 @@ class ContactpersonTable
             ->filters([
                 TrashedFilter::make('trashed'),
             ])
-            ->actions([
+            ->recordActions([
                 EditAction::make(),
                 RestoreAction::make(),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),

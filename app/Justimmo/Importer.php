@@ -2,6 +2,10 @@
 
 namespace App\Justimmo;
 
+use ZipArchive;
+use XMLReader;
+use XMLWriter;
+use Exception;
 use App\Jobs\ImportRealtyJob;
 use App\Models\Realty;
 use App\Models\User;
@@ -66,7 +70,7 @@ class Importer
 
         $zipPath = Storage::disk('public')->path('imports/openimmo.zip');
 
-        $zip = new \ZipArchive();
+        $zip = new ZipArchive();
 
         if ($zip->open($zipPath) !== true) {
             throw new ImportException('Could not open zip file: ' . $zipPath);
@@ -107,19 +111,19 @@ class Importer
         Storage::disk('public')->makeDirectory('batches');
 
 
-        $reader = new \XMLReader();
+        $reader = new XMLReader();
         $reader->open(storage_path('app/public/' . $file));
 
         $batchFiles = [];
 
         while ($reader->read()) {
-            if ($reader->nodeType === \XMLReader::ELEMENT && $reader->name === 'immobilie') {
+            if ($reader->nodeType === XMLReader::ELEMENT && $reader->name === 'immobilie') {
                 // Eindeutigen Dateinamen generieren
                 $filename = 'batches/immobilie_' . uniqid() . '.xml';
 
                 // Temporäre Datei erzeugen
                 $tempFile = tempnam(sys_get_temp_dir(), 'immobilie_xml_');
-                $writer = new \XMLWriter();
+                $writer = new XMLWriter();
                 $writer->openURI($tempFile);
                 $writer->startDocument('1.0', 'UTF-8');
                 $writer->setIndent(true);
@@ -162,6 +166,6 @@ class Importer
     }
 }
 
-class ImportException extends \Exception
+class ImportException extends Exception
 {
 }

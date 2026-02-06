@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactRequestConfirmedMail;
+use App\Mail\NewContactRequestAdminMail;
 use App\Livewire\ContactForm;
 use App\Models\ContactRequest;
 use Illuminate\Http\Request;
@@ -28,8 +30,8 @@ class ContactRequestController extends Controller
             $recipeint = $formRequest->email;
             $office = ContactForm::RECIPIENT;
 
-            Mail::to($recipeint)->send(new \App\Mail\ContactRequestConfirmedMail());
-            Mail::to($office)->send(new \App\Mail\NewContactRequestAdminMail($formRequest));
+            Mail::to($recipeint)->send(new ContactRequestConfirmedMail());
+            Mail::to($office)->send(new NewContactRequestAdminMail($formRequest));
 
         }
 
