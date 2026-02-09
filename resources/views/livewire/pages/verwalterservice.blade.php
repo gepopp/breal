@@ -74,7 +74,7 @@
     {{-- ============================================ --}}
     {{-- PROFESSIONAL SERVICES SECTION --}}
     {{-- ============================================ --}}
-    <x-section class="mt-16">
+    <x-section class="mt-16 !py-16 md:!py-32">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 items-center">
             <div data-aos="fade-up">
                 <x-headings :level="2">
@@ -133,7 +133,7 @@
     {{-- ============================================ --}}
     {{-- OUR SERVICES GRID --}}
     {{-- ============================================ --}}
-    <x-section class="bg-logo-500/5 dark:bg-logo-500/10">
+    <x-section class="bg-logo-500/5 dark:bg-logo-500/10 !py-16 md:!py-32">
         <div class="text-center max-w-2xl mx-auto mb-16">
             <x-headings :level="2">
                 <x-slot name="tag">leistungen</x-slot>
@@ -219,7 +219,7 @@
     {{-- ============================================ --}}
     {{-- GUARANTEE / TRUST SECTION --}}
     {{-- ============================================ --}}
-    <x-section class="bg-logo">
+    <x-section class="bg-logo !py-16 md:!py-32">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
             <div data-aos="fade-up">
                 <x-headings :level="2" :ondark="true">
@@ -301,7 +301,7 @@
     {{-- ============================================ --}}
     {{-- HOW IT WORKS SECTION --}}
     {{-- ============================================ --}}
-    <x-section>
+    <x-section class="!py-16 md:!py-32">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 items-center">
             <div class="relative order-last md:order-first" data-aos="fade-up">
                 <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
@@ -364,7 +364,7 @@
     {{-- ============================================ --}}
     {{-- CTA / CONTACT SECTION --}}
     {{-- ============================================ --}}
-    <section class="py-12 md:py-24 bg-logo-500/5 dark:bg-logo-500/10">
+    <section class="py-16 md:py-32 bg-logo-500/5 dark:bg-logo-500/10">
         <div class="lg:max-w-4xl xl:max-w-6xl mx-auto px-4 text-center">
             <div data-aos="fade-up">
                 <x-headings :level="2">
