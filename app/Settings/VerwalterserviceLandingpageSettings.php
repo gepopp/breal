@@ -5,209 +5,209 @@ namespace App\Settings;
 class VerwalterserviceLandingpageSettings extends BaseSettings
 {
     // Hero Section
-    public string $hero_tagline_de = 'professionell • individuell • effizient';
+    public string $hero_tagline_de = 'Professionell. Persönlich. Verlässlich.';
 
-    public string $hero_tagline_en = 'professional • individual • efficient';
+    public string $hero_tagline_en = 'Professional. Personal. Reliable.';
 
-    public string $hero_headline_de = 'Zufriedene Kunden, die sich gut betreut fühlen, sind Ihr Kapital.';
+    public string $hero_headline_de = 'Unser Service für Verwalter: Wir arbeiten. Sie profitieren.';
 
-    public string $hero_headline_en = 'Satisfied customers who feel well taken care of are your capital.';
+    public string $hero_headline_en = 'Our Service for Managers: We work. You benefit.';
 
     public string $hero_email = 'verwalterservice@bereal-immobilien.at';
 
     public string $hero_phone = '+43 1 535 36 19';
 
-    public string $hero_feature_1_de = 'Schnelle Hilfe';
+    public string $hero_feature_1_de = 'Schnelle Unterstützung';
 
-    public string $hero_feature_1_en = 'Quick Help';
+    public string $hero_feature_1_en = 'Fast Support';
 
-    public string $hero_feature_2_de = 'Umfangreiche Dokumentation';
+    public string $hero_feature_2_de = 'Lückenlose Dokumentation';
 
-    public string $hero_feature_2_en = 'Comprehensive Documentation';
+    public string $hero_feature_2_en = 'Complete Documentation';
 
-    public string $hero_feature_3_de = 'White-Label Service';
+    public string $hero_feature_3_de = 'Flexible Einsatzzeiten';
 
-    public string $hero_feature_3_en = 'White-Label Service';
+    public string $hero_feature_3_en = 'Flexible Deployment Times';
 
     // Professional Services Section
-    public string $section_1_tag_de = 'serviced';
+    public string $section_1_tag_de = 'be serviced';
 
-    public string $section_1_tag_en = 'serviced';
+    public string $section_1_tag_en = 'be serviced';
 
-    public string $section_1_headline_de = 'Professionell für Ihre Hausverwaltung';
+    public string $section_1_headline_de = 'Professionelle Unterstützung für Ihre Hausverwaltung';
 
-    public string $section_1_headline_en = 'Professional for Your Property Management';
+    public string $section_1_headline_en = 'Professional Support for Your Property Management';
 
-    public string $section_1_text_de = 'Sie möchten sich auf Ihr Kerngeschäft konzentrieren und trotzdem erstklassigen Service bieten? Wir unterstützen Hausverwaltungen mit maßgeschneiderten Dienstleistungen, die Ihre Kunden begeistern und Ihren Arbeitsalltag entlasten.';
+    public string $section_1_text_de = 'Sie möchten sich auf Eigentümer, Strategie und Wachstum konzentrieren – ohne sich im Tagesgeschäft zu verlieren? Wir unterstützen kleine Hausverwaltungen dort, wo operative Aufgaben Zeit, Ressourcen und Nerven kosten. Mit klaren Prozessen, sauberer Dokumentation und einem Team, das weiß, worauf es ankommt. Wir übernehmen operative Leistungen rund um Ihre Immobilien und sorgen dafür, dass Abläufe strukturiert, transparent und effizient bleiben. Unsere Unterstützung umfasst unter anderem: Objektbuchhaltung, Mahnwesen & Inkasso, Objektbegehungen & Zustandskontrollen, Schadensdokumentation & Versicherungsabwicklung, Sanierungsbegleitung, Energieausweise.';
 
-    public string $section_1_text_en = 'You want to focus on your core business and still offer first-class service? We support property management companies with customized services that delight your customers and relieve your daily workload.';
+    public string $section_1_text_en = 'You want to focus on owners, strategy and growth – without getting lost in day-to-day operations? We support small property management companies where operational tasks cost time, resources and nerves. With clear processes, clean documentation and a team that knows what matters. We take over operational services for your properties and ensure that processes remain structured, transparent and efficient.';
 
-    public string $section_1_feature_1_de = 'Objektbegehungen';
+    public string $section_1_feature_1_de = 'Objektbuchhaltung';
 
-    public string $section_1_feature_1_en = 'Property Inspections';
+    public string $section_1_feature_1_en = 'Property Accounting';
 
-    public string $section_1_feature_2_de = 'Schadensdokumentation';
+    public string $section_1_feature_2_de = 'Mahnwesen & Inkasso';
 
-    public string $section_1_feature_2_en = 'Damage Documentation';
+    public string $section_1_feature_2_en = 'Dunning & Collection';
 
-    public string $section_1_feature_3_de = 'Mieterbetreuung';
+    public string $section_1_feature_3_de = 'Objektbegehungen';
 
-    public string $section_1_feature_3_en = 'Tenant Support';
+    public string $section_1_feature_3_en = 'Property Inspections';
 
-    public string $section_1_feature_4_de = 'Kosteneffizient';
+    public string $section_1_feature_4_de = 'Schadensdokumentation';
 
-    public string $section_1_feature_4_en = 'Cost-Efficient';
+    public string $section_1_feature_4_en = 'Damage Documentation';
 
-    public string $section_1_feature_5_de = 'Versicherungsabwicklung';
+    public string $section_1_feature_5_de = 'Sanierungsbegleitung';
 
-    public string $section_1_feature_5_en = 'Insurance Processing';
+    public string $section_1_feature_5_en = 'Renovation Support';
 
-    public string $section_1_feature_6_de = 'Nachhaltige Lösungen';
+    public string $section_1_feature_6_de = 'Energieausweise';
 
-    public string $section_1_feature_6_en = 'Sustainable Solutions';
+    public string $section_1_feature_6_en = 'Energy Certificates';
 
-    public string $section_1_cta_de = 'Jetzt Beratung anfordern';
+    public string $section_1_cta_de = 'Jetzt unverbindlich beraten lassen';
 
-    public string $section_1_cta_en = 'Request Consultation Now';
+    public string $section_1_cta_en = 'Get advice now without obligation';
 
     // Services Grid Section
-    public string $section_2_tag_de = 'cared';
+    public string $section_2_tag_de = 'be cared';
 
-    public string $section_2_tag_en = 'cared';
+    public string $section_2_tag_en = 'be cared';
 
-    public string $section_2_headline_de = '360° Leistungen in der Immobilien Verwaltung';
+    public string $section_2_headline_de = '360°-Leistungen für Immobilienverwaltungen';
 
-    public string $section_2_headline_en = '360° Services in Property Management';
+    public string $section_2_headline_en = '360° Services for Property Management';
 
-    public string $section_2_text_de = 'Von der Objektbegehung bis zur Sanierungsbegleitung – wir bieten Ihnen ein umfassendes Leistungspaket, das keine Wünsche offen lässt.';
+    public string $section_2_text_de = 'Von der regelmäßigen Begehung bis zur professionellen Projektbegleitung: Wir bieten ein modulares Leistungspaket, das sich an Ihre Anforderungen anpasst.';
 
-    public string $section_2_text_en = 'From property inspections to renovation support – we offer you a comprehensive service package that leaves nothing to be desired.';
+    public string $section_2_text_en = 'From regular inspections to professional project support: We offer a modular service package that adapts to your requirements.';
 
-    public string $service_1_title_de = 'Objektbegehungen';
+    public string $service_1_title_de = 'Objektbuchhaltung';
 
-    public string $service_1_title_en = 'Property Inspections';
+    public string $service_1_title_en = 'Property Accounting';
 
-    public string $service_1_description_de = 'Regelmäßige Begehungen und Zustandsberichte Ihrer Liegenschaften. Wir dokumentieren den baulichen Zustand und identifizieren Handlungsbedarf frühzeitig.';
+    public string $service_1_description_de = 'Sorgfältige und transparente Abwicklung sämtlicher buchhalterischer Agenden rund um Ihre Liegenschaften. Von der laufenden Verbuchung über Betriebskostenabrechnungen bis zur Eigentümerabrechnung – wir sorgen für strukturierte Prozesse, termingerechte Abschlüsse und vollständige Nachvollziehbarkeit aller Zahlen.';
 
-    public string $service_1_description_en = 'Regular inspections and condition reports of your properties. We document the structural condition and identify action needs early.';
+    public string $service_1_description_en = 'Careful and transparent handling of all accounting matters for your properties. From ongoing bookkeeping to operating cost statements and owner accounting – we ensure structured processes, timely completion and full traceability of all figures.';
 
-    public string $service_2_title_de = 'Schadensmeldungen';
+    public string $service_2_title_de = 'Mahnwesen & Inkasso';
 
-    public string $service_2_title_en = 'Damage Reports';
+    public string $service_2_title_en = 'Dunning & Collection';
 
-    public string $service_2_description_de = 'Professionelle Erfassung und Abwicklung von Schadensfällen. Lückenlose Dokumentation mit Fotos und detaillierten Berichten für Ihre Unterlagen.';
+    public string $service_2_description_de = 'Konsequentes, professionelles Forderungsmanagement mit Fingerspitzengefühl. Wir übernehmen Zahlungserinnerungen, Mahnläufe und – falls erforderlich – die Koordination mit Rechtsanwälten oder Inkassodienstleistern. Ziel ist eine rasche Liquiditätssicherung bei gleichzeitiger Wahrung eines sachlichen Umgangs.';
 
-    public string $service_2_description_en = 'Professional recording and handling of damage cases. Complete documentation with photos and detailed reports for your records.';
+    public string $service_2_description_en = 'Consistent, professional claims management with sensitivity. We handle payment reminders, dunning procedures and – if necessary – coordination with lawyers or collection agencies. The goal is rapid liquidity assurance while maintaining professional conduct.';
 
-    public string $service_3_title_de = 'Mieterkommunikation';
+    public string $service_3_title_de = 'Objektbegehungen & Zustandskontrollen';
 
-    public string $service_3_title_en = 'Tenant Communication';
+    public string $service_3_title_en = 'Property Inspections & Condition Checks';
 
-    public string $service_3_description_de = 'Wir übernehmen die Kommunikation mit Ihren Mietern – von der Terminvereinbarung bis zur Beschwerdebearbeitung, stets freundlich und lösungsorientiert.';
+    public string $service_3_description_de = 'Regelmäßige Vor-Ort-Begehungen zur Sicherstellung des ordnungsgemäßen Objektzustands. Wir dokumentieren den baulichen und technischen Status mittels strukturierter Berichte und Fotodokumentation, identifizieren frühzeitig Handlungsbedarf und schaffen Transparenz für Eigentümer und Verwaltung.';
 
-    public string $service_3_description_en = 'We handle communication with your tenants – from scheduling appointments to handling complaints, always friendly and solution-oriented.';
+    public string $service_3_description_en = 'Regular on-site inspections to ensure proper property condition. We document structural and technical status through structured reports and photo documentation, identify action needs early and create transparency for owners and management.';
 
-    public string $service_4_title_de = 'Dokumentation & Reporting';
+    public string $service_4_title_de = 'Schadensdokumentation & Versicherungsabwicklung';
 
-    public string $service_4_title_en = 'Documentation & Reporting';
+    public string $service_4_title_en = 'Damage Documentation & Insurance Processing';
 
-    public string $service_4_description_de = 'Umfangreiche Dokumentation aller Vorgänge mit regelmäßigen Reports. Transparente Berichterstattung, damit Sie stets den Überblick behalten.';
+    public string $service_4_description_de = 'Professionelle Erfassung und Aufbereitung von Schadensfällen – von der Erstaufnahme bis zur vollständigen Abwicklung mit der Versicherung. Wir koordinieren Professionisten, überwachen Fristen und sorgen für eine lückenlose Dokumentation, damit Ansprüche effizient und korrekt abgewickelt werden.';
 
-    public string $service_4_description_en = 'Comprehensive documentation of all processes with regular reports. Transparent reporting so you always stay informed.';
+    public string $service_4_description_en = 'Professional recording and processing of damage cases – from initial assessment to complete insurance settlement. We coordinate professionals, monitor deadlines and ensure complete documentation so claims are handled efficiently and correctly.';
 
-    public string $service_5_title_de = 'Versicherungsabwicklung';
+    public string $service_5_title_de = 'Sanierungsbegleitung';
 
-    public string $service_5_title_en = 'Insurance Processing';
+    public string $service_5_title_en = 'Renovation Support';
 
-    public string $service_5_description_de = 'Komplette Abwicklung von Versicherungsfällen – von der Schadensmeldung bis zur Regulierung. Wir koordinieren alle Beteiligten für Sie.';
+    public string $service_5_description_de = 'Strukturierte Begleitung von Instandhaltungs- und Sanierungsprojekten – von der Ausschreibung über die Angebotsprüfung bis zur Bauüberwachung. Wir behalten Kosten, Qualität und Zeitplan im Blick und stellen sicher, dass Maßnahmen wirtschaftlich und fachgerecht umgesetzt werden.';
 
-    public string $service_5_description_en = 'Complete handling of insurance cases – from damage report to settlement. We coordinate all parties involved for you.';
+    public string $service_5_description_en = 'Structured support for maintenance and renovation projects – from tender to bid review to construction supervision. We keep track of costs, quality and schedule and ensure measures are implemented economically and professionally.';
 
-    public string $service_6_title_de = 'Sanierungsbegleitung';
+    public string $service_6_title_de = 'Energieausweise';
 
-    public string $service_6_title_en = 'Renovation Support';
+    public string $service_6_title_en = 'Energy Certificates';
 
-    public string $service_6_description_de = 'Professionelle Begleitung von Sanierungsprojekten – von der Planung bis zur Abnahme. Wir sorgen für reibungslose Abläufe und Qualitätskontrolle.';
+    public string $service_6_description_de = 'Erstellung und Aktualisierung von Energieausweisen gemäß gesetzlicher Vorgaben. Wir koordinieren die technische Aufnahme, sorgen für eine normgerechte Berechnung und stellen die fristgerechte Bereitstellung bei Vermietung, Verkauf oder Sanierung sicher.';
 
-    public string $service_6_description_en = 'Professional support for renovation projects – from planning to completion. We ensure smooth processes and quality control.';
+    public string $service_6_description_en = 'Creation and updating of energy certificates according to legal requirements. We coordinate technical assessment, ensure standard-compliant calculation and guarantee timely provision for rental, sale or renovation.';
 
-    public string $section_2_cta_text_de = 'Sie benötigen eine maßgeschneiderte Lösung?';
+    public string $section_2_cta_text_de = 'Sie benötigen eine maßgeschneiderte Lösung? Wir entwickeln die optimale, individuelle Lösungen für Ihre Verwaltung.';
 
-    public string $section_2_cta_text_en = 'Do you need a customized solution?';
+    public string $section_2_cta_text_en = 'Do you need a customized solution? We develop the optimal, individual solutions for your management.';
 
     public string $section_2_cta_button_de = 'Kontaktieren Sie uns';
 
     public string $section_2_cta_button_en = 'Contact Us';
 
     // Trust Section
-    public string $section_3_tag_de = 'trusted';
+    public string $section_3_tag_de = 'be trusted';
 
-    public string $section_3_tag_en = 'trusted';
+    public string $section_3_tag_en = 'be trusted';
 
-    public string $section_3_headline_de = 'Schnell, Zuverlässig und mit Zufriedenheitsgarantie';
+    public string $section_3_headline_de = 'Schnelle, zuverlässige Umsetzung mit Qualitätsgarantie';
 
-    public string $section_3_headline_en = 'Fast, Reliable and with Satisfaction Guarantee';
+    public string $section_3_headline_en = 'Fast, reliable implementation with quality guarantee';
 
-    public string $section_3_text_de = 'Egal ob es sich um eine routinemäßige Objektbegehung oder einen dringenden Schadensfall handelt – unser Team steht bereit, um schnell und professionell zu handeln. Ihre Zufriedenheit und die Ihrer Kunden stehen für uns an erster Stelle.';
+    public string $section_3_text_de = 'Ihre Verwaltung wird immer ins rechte Licht gerückt! Ob regelmäßige Objektkontrolle oder akuter Handlungsbedarf – wir reagieren rasch und handeln professionell. Ihre Reputation bei Eigentümern und Mietern ist auch unsere Verantwortung.';
 
-    public string $section_3_text_en = 'Whether it\'s a routine property inspection or an urgent damage case – our team is ready to act quickly and professionally. Your satisfaction and that of your customers are our top priority.';
+    public string $section_3_text_en = 'Your management will always be put in the right light! Whether regular property inspection or urgent action needs – we respond quickly and act professionally. Your reputation with owners and tenants is also our responsibility.';
 
-    public string $trust_1_title_de = 'Zufriedenheitsgarantie';
+    public string $trust_1_title_de = 'Hohe Serviceorientierung';
 
-    public string $trust_1_title_en = 'Satisfaction Guarantee';
+    public string $trust_1_title_en = 'High Service Orientation';
 
-    public string $trust_1_text_de = 'Wir arbeiten so lange, bis Sie und Ihre Kunden zufrieden sind. Qualität ist unser Versprechen.';
+    public string $trust_1_text_de = 'Wir arbeiten so lange, bis alle Beteiligten zufrieden sind.';
 
-    public string $trust_1_text_en = 'We work until you and your customers are satisfied. Quality is our promise.';
+    public string $trust_1_text_en = 'We work until all parties are satisfied.';
 
-    public string $trust_2_title_de = 'Kostenlose Erstberatung';
+    public string $trust_2_title_de = 'Transparente Erstberatung';
 
-    public string $trust_2_title_en = 'Free Initial Consultation';
+    public string $trust_2_title_en = 'Transparent Initial Consultation';
 
-    public string $trust_2_text_de = 'Unverbindliche Erstberatung, um Ihre Anforderungen zu verstehen und die passende Lösung zu finden.';
+    public string $trust_2_text_de = 'Klare Einschätzung Ihrer Anforderungen – ohne versteckte Kosten.';
 
-    public string $trust_2_text_en = 'Non-binding initial consultation to understand your requirements and find the right solution.';
+    public string $trust_2_text_en = 'Clear assessment of your requirements – without hidden costs.';
 
-    public string $trust_3_title_de = 'Lokale Experten';
+    public string $trust_3_title_de = 'Lokale Marktkenntnis';
 
-    public string $trust_3_title_en = 'Local Experts';
+    public string $trust_3_title_en = 'Local Market Knowledge';
 
-    public string $trust_3_text_de = 'Unser Team kennt den Wiener Immobilienmarkt und die lokalen Gegebenheiten aus erster Hand.';
+    public string $trust_3_text_de = 'Wir kennen die Besonderheiten des Wiener Immobilienmarktes.';
 
-    public string $trust_3_text_en = 'Our team knows the Vienna real estate market and local conditions first-hand.';
+    public string $trust_3_text_en = 'We know the specifics of the Vienna real estate market.';
 
     public string $trust_4_title_de = 'Schnelle Reaktionszeiten';
 
     public string $trust_4_title_en = 'Fast Response Times';
 
-    public string $trust_4_text_de = 'Dringende Anliegen werden priorisiert. Bei Notfällen sind wir kurzfristig vor Ort verfügbar.';
+    public string $trust_4_text_de = 'Dringende Anliegen behandeln wir priorisiert.';
 
-    public string $trust_4_text_en = 'Urgent matters are prioritized. In emergencies, we are available on-site at short notice.';
+    public string $trust_4_text_en = 'We treat urgent matters as priority.';
 
-    public string $trust_5_title_de = 'Flexible Termine';
+    public string $trust_5_title_de = 'Flexible Terminvereinbarung';
 
-    public string $trust_5_title_en = 'Flexible Appointments';
+    public string $trust_5_title_en = 'Flexible Appointment Scheduling';
 
-    public string $trust_5_text_de = 'Terminvereinbarungen, die sich an Ihrem Zeitplan orientieren – auch abends und am Wochenende möglich.';
+    public string $trust_5_text_de = 'Auch außerhalb klassischer Bürozeiten.';
 
-    public string $trust_5_text_en = 'Appointment scheduling that fits your schedule – also possible in the evenings and on weekends.';
+    public string $trust_5_text_en = 'Also outside of traditional office hours.';
 
-    public string $trust_6_title_de = '100% Transparent';
+    public string $trust_6_title_de = '100 % Transparenz';
 
-    public string $trust_6_title_en = '100% Transparent';
+    public string $trust_6_title_en = '100% Transparency';
 
-    public string $trust_6_text_de = 'Keine versteckten Kosten. Sie erhalten detaillierte Aufstellungen aller durchgeführten Arbeiten.';
+    public string $trust_6_text_de = 'Nachvollziehbare Abläufe und strukturierte Dokumentation.';
 
-    public string $trust_6_text_en = 'No hidden costs. You receive detailed statements of all work performed.';
+    public string $trust_6_text_en = 'Traceable processes and structured documentation.';
 
     // How It Works Section
-    public string $section_4_tag_de = 'easy';
+    public string $section_4_tag_de = 'be easy';
 
-    public string $section_4_tag_en = 'easy';
+    public string $section_4_tag_en = 'be easy';
 
-    public string $section_4_headline_de = 'So funktioniert unser Verwalterservice';
+    public string $section_4_headline_de = 'So funktioniert die Zusammenarbeit';
 
-    public string $section_4_headline_en = 'How Our Management Service Works';
+    public string $section_4_headline_en = 'How the collaboration works';
 
     public string $section_4_stat_number = '500+';
 
@@ -219,38 +219,38 @@ class VerwalterserviceLandingpageSettings extends BaseSettings
 
     public string $step_1_title_en = 'Contact';
 
-    public string $step_1_text_de = 'Sie kontaktieren uns per Telefon oder E-Mail und schildern Ihren Bedarf. Wir nehmen uns Zeit für Ihre Anliegen und beraten Sie umfassend.';
+    public string $step_1_text_de = 'Sie schildern uns Ihren Bedarf telefonisch oder per E-Mail. Wir analysieren gemeinsam Ihre aktuelle Situation.';
 
-    public string $step_1_text_en = 'You contact us by phone or email and describe your needs. We take time for your concerns and provide comprehensive advice.';
+    public string $step_1_text_en = 'You describe your needs by phone or email. We analyze your current situation together.';
 
-    public string $step_2_title_de = 'Bedarfsanalyse & Angebot';
+    public string $step_2_title_de = 'Analyse & Angebot';
 
-    public string $step_2_title_en = 'Needs Analysis & Offer';
+    public string $step_2_title_en = 'Analysis & Offer';
 
-    public string $step_2_text_de = 'Nach der Kontaktaufnahme analysieren unsere Experten Ihren individuellen Bedarf und erstellen ein maßgeschneidertes Angebot für Sie.';
+    public string $step_2_text_de = 'Wir definieren Leistungsumfang, Reaktionszeiten und Reporting-Struktur und erstellen ein transparentes Angebot.';
 
-    public string $step_2_text_en = 'After initial contact, our experts analyze your individual needs and create a customized offer for you.';
+    public string $step_2_text_en = 'We define scope of services, response times and reporting structure and create a transparent offer.';
 
-    public string $step_3_title_de = 'Professionelle Umsetzung';
+    public string $step_3_title_de = 'Umsetzung & Betreuung';
 
-    public string $step_3_title_en = 'Professional Implementation';
+    public string $step_3_title_en = 'Implementation & Support';
 
-    public string $step_3_text_de = 'Unser geschultes Team setzt alle vereinbarten Leistungen zuverlässig um. Sie erhalten lückenlose Dokumentation und regelmäßige Updates.';
+    public string $step_3_text_de = 'Unser Team übernimmt die vereinbarten Leistungen – strukturiert, dokumentiert und zuverlässig. Sie erhalten regelmäßige Updates und volle Transparenz.';
 
-    public string $step_3_text_en = 'Our trained team reliably implements all agreed services. You receive complete documentation and regular updates.';
+    public string $step_3_text_en = 'Our team takes over the agreed services – structured, documented and reliable. You receive regular updates and full transparency.';
 
     // CTA Section
-    public string $cta_tag_de = 'kontakt';
+    public string $cta_tag_de = 'be relaxed';
 
-    public string $cta_tag_en = 'contact';
+    public string $cta_tag_en = 'be relaxed';
 
-    public string $cta_headline_de = 'Bereit für erstklassigen Service?';
+    public string $cta_headline_de = 'Bereit für professionelle Unterstützung?';
 
-    public string $cta_headline_en = 'Ready for First-Class Service?';
+    public string $cta_headline_en = 'Ready for professional support?';
 
-    public string $cta_text_de = 'Überzeugen Sie sich selbst von unserem Verwalterservice. Kontaktieren Sie uns für eine unverbindliche Erstberatung und erfahren Sie, wie wir Ihre Hausverwaltung unterstützen können.';
+    public string $cta_text_de = 'Überzeugen Sie sich selbst von unserem Service für Verwalter! Gerne besprechen wir in einem unverbindlichen Erstgespräch, wie wir Ihre Hausverwaltung effizient entlasten können. Wir sind Ihr verlässlicher Partner in Wien und Österreich, wenn es um professionelle Unterstützung in der Immobilienverwaltung geht.';
 
-    public string $cta_text_en = 'See for yourself our management service. Contact us for a non-binding initial consultation and learn how we can support your property management.';
+    public string $cta_text_en = 'See for yourself our service for managers! We are happy to discuss in a non-binding initial meeting how we can efficiently relieve your property management. We are your reliable partner in Vienna and Austria when it comes to professional support in property management.';
 
     public string $cta_button_de = 'Jetzt Kontakt aufnehmen';
 
@@ -258,6 +258,6 @@ class VerwalterserviceLandingpageSettings extends BaseSettings
 
     public static function group(): string
     {
-        return 'translatable_verwalterservice_landingpage';
+        return 'translatable_verwalterservicelandingpage';
     }
 }
