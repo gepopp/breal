@@ -36,6 +36,10 @@ new class extends Component
                     {{ __('navigation.technology_short') }}
                 </a>
 
+                <a href="{{ route('verwalterservice') }}" wire:navigate class="lowercase cursor-pointer font-extrabold overflow-hidden text-2xl hover:tracking-wider transition-all duration-300">
+                    {{ __('verwalterservice') }}
+                </a>
+
             </nav>
         </div>
 

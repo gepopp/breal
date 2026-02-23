@@ -9,7 +9,7 @@
     <div class="flex justify-between items-center text-white">
         <div class="flex items-center space-x-2">
 
-            @auth
+{{--            @auth--}}
                 <div>
                     @if(app()->getLocale() == 'de')
                         <a href="{{ language()->back('en') }}" class="font-bold uppercase">ENGLISH</a>
@@ -17,9 +17,11 @@
                         <a href="{{ language()->back('de') }}" class="font-bold uppercase">DEUTSCH</a>
                     @endif
                 </div>
-            @endauth
 
-            <div class="w-2 h-2 bg-white rounded last:hidden"></div>
+                <div class="w-2 h-2 bg-white rounded last:hidden"></div>
+{{--            @endauth--}}
+
+
 
             <a href="{{ route('hausverwaltung.kontakt') }}" class="font-bold uppercase" target="_blank">{{ __('navigation.contact') }}</a>
         </div>

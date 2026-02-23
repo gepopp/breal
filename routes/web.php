@@ -1,12 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 Route::fallback(function () {
     return view('404');
 });
-
 
 Route::group(['as' => 'hausverwaltung.', 'middleware' => 'language'], function () {
     Route::get('/', \App\Livewire\Landing\FacilityManagment::class)->name('home');
@@ -60,7 +58,9 @@ Route::group(['middleware' => 'language'], function () {
 
 });
 
-Route::livewire('verwalterservice', 'pages.verwalterservice')->middleware('language')->name('verwalterservice');
+Route::livewire('verwalterservice', 'pages.verwalterservice')
+    ->middleware('language')
+    ->name('verwalterservice');
 
 Route::get('import', function () {
     \App\Justimmo\Importer::import();

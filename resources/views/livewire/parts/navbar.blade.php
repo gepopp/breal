@@ -45,7 +45,7 @@
 
             <nav class="hidden lg:flex mb-px space-x-12 justify-between items-center font-bold text-logo-500 dark:text-white">
                 @if( !Route::is('makler.*', 'technik.*') )
-                    <div class="relative group">
+                    <div x-data="{ show:false }" x-on:mouseenter="show = true" x-on:mouseleave="show = false" class="relative group">
                         <div class="overflow-hidden">
                             <a href="{{ route('hausverwaltung.leistungen') }}"
                                class="menu-item relative uppercase cursor-pointer text-logo-600">
@@ -54,11 +54,11 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="group-hover:block hidden transition-all duration-300">
+                        <div x-show="show" x-cloak x-transition x-on:mouseleave="show ? show = false : null" class="transition-all duration-500">
                             <livewire:parts.competence-dropdown/>
                         </div>
                     </div>
-                    <div class="relative group">
+                    <div class="relative" x-data="{ show:false }" x-on:mouseenter="show = true" x-on:mouseleave="show = false">
                         <div class="overflow-hidden">
                             <a href="{{ route('hausverwaltung.service') }}"
                                class="menu-item relative uppercase cursor-pointer text-logo-600">
@@ -66,7 +66,7 @@
                                     <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.service') }}</span>
                                 </div>
                             </a>
-                            <div class="group-hover:block hidden transition-all duration-300">
+                            <div x-show="show" x-cloak x-transition x-on:mouseleave="show ? show = false : null" class="transition-all duration-300">
                                 <livewire:parts.menu-service-dropdown/>
                             </div>
                         </div>
@@ -228,12 +228,14 @@
         "bg-white dark:bg-makler-950 border-makler-900 dark:border-makler-50 text-makler-950 dark:text-makler-50 dark:border-makler-50" => Route::is('makler.*'),
 ])>
                 <ul class="flex flex-col space-y-8 text-lg font-bold uppercase">
-                    @if( Route::is('hausverwaltung.*') )
+                    @if( Route::is('hausverwaltung.*') || Route::is('verwalterservice'))
                         <a href="{{ route('hausverwaltung.leistungen') }}">{{ __('navigation.services') }}</a>
                         <a href="{{ route('hausverwaltung.service') }}">{{ __('navigation.service') }}</a>
                         <a href="{{ route('hausverwaltung.karriere') }}">{{ __('navigation.careers') }}</a>
                         <a href="{{ route('hausverwaltung.kontakt') }}">{{ __('navigation.contact') }}</a>
                         <a href="{{ route('hausverwaltung.team') }}">{{ __('navigation.team') }}</a>
+{{--                        <a href="{{ route('verwalterservice') }}">Verwalterservice</a>--}}
+
                     @endif
 
                     @if( Route::is('makler.*') )
