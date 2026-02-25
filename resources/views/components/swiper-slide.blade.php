@@ -1,7 +1,7 @@
 @props([
     'ref'
 ])
-<a href="#" class="swiper-slide max-w-full">
+<div class="swiper-slide max-w-full">
     <div>
         {{ $ref->getFirstMedia('titleimage') }}
     </div>
@@ -29,4 +29,4 @@
 {{--            </div>--}}
 {{--        </div>--}}
     </div>
-</a>
+</div>
