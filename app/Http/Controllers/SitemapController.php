@@ -53,7 +53,6 @@ class SitemapController extends Controller
 
         // Add model routes
         $sitemap->add(Competence::all());
-        $sitemap->add(FAQ::all());
         $sitemap->add(JobVacancy::all());
         $sitemap->add(Realty::all());
 

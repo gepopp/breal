@@ -20,9 +20,4 @@ class FAQ extends Model implements Sitemapable
             ->generateSlugsFrom('question')
             ->saveSlugsTo('slug');
     }
-
-    public function toSitemapTag(): Url|string|array
-    {
-        return Url::create(route('faq.single', $this->slug));
-    }
 }
