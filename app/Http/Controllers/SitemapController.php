@@ -51,32 +51,11 @@ class SitemapController extends Controller
         $sitemap->add(Url::create(route('datenschutz')));
         $sitemap->add(Url::create(route('verwalterservice')));
 
-        // Competence routes for each company
-        Competence::query()->get()->each(function (Competence $competence) use ($sitemap) {
-            // Add for hausverwaltung
-            $sitemap->add(Url::create(route('hausverwaltung.leistung', $competence)));
-
-            // Add for makler
-            $sitemap->add(Url::create(route('makler.leistung', $competence)));
-
-            // Add for technik
-            $sitemap->add(Url::create(route('technik.leistung', $competence)));
-        });
-
-        // FAQ routes
-        FAQ::query()->get()->each(function (FAQ $faq) use ($sitemap) {
-            $sitemap->add(Url::create(route('faq.single', $faq->slug)));
-        });
-
-        // Job Vacancy routes
-        JobVacancy::query()->get()->each(function (JobVacancy $jobVacancy) use ($sitemap) {
-            $sitemap->add(Url::create(route('stellenanzeige', $jobVacancy)));
-        });
-
-        // Realty routes
-        Realty::query()->get()->each(function (Realty $realty) use ($sitemap) {
-            $sitemap->add(Url::create(route('makler.immobilie', $realty)));
-        });
+        // Add model routes
+        $sitemap->add(Competence::all());
+        $sitemap->add(FAQ::all());
+        $sitemap->add(JobVacancy::all());
+        $sitemap->add(Realty::all());
 
         $sitemap->writeToFile(public_path('sitemap.xml'));
     }

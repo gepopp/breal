@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Sitemap\Contracts\Sitemapable;
+use Spatie\Sitemap\Tags\Url;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
-class FAQ extends Model
+class FAQ extends Model implements Sitemapable
 {
     use hasFactory, HasSlug;
-
 
     public function getSlugOptions(): SlugOptions
     {
@@ -20,5 +20,10 @@ class FAQ extends Model
             ->doNotGenerateSlugsOnUpdate()
             ->generateSlugsFrom('question')
             ->saveSlugsTo('slug');
+    }
+
+    public function toSitemapTag(): Url|string|array
+    {
+        return Url::create(route('faq.single', $this->slug));
     }
 }

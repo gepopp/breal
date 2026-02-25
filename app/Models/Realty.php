@@ -2,20 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
+use Spatie\Sitemap\Contracts\Sitemapable;
+use Spatie\Sitemap\Tags\Url;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
-class Realty extends Model
+class Realty extends Model implements Sitemapable
 {
     use HasSlug;
 
     public $casts = [
-        'data' => 'array'
+        'data' => 'array',
     ];
-
 
     public function getRouteKeyName()
     {
@@ -30,4 +29,8 @@ class Realty extends Model
             ->saveSlugsTo('slug');
     }
 
+    public function toSitemapTag(): Url|string|array
+    {
+        return Url::create(route('makler.immobilie', $this));
+    }
 }
