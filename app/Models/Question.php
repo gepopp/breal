@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
@@ -16,7 +15,6 @@ use Spatie\Translatable\HasTranslations;
 
 class Question extends Model implements HasMedia
 {
-    use HasFactory;
     use HasSlug;
     use HasTranslations;
     use InteractsWithMedia;

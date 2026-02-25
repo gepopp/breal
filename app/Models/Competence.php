@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Enums\CompaniesEnum;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -17,7 +16,6 @@ use Spatie\Translatable\HasTranslations;
 
 class Competence extends Model implements HasMedia, Sitemapable
 {
-    use HasFactory;
     use HasSlug;
     use HasTranslations;
     use InteractsWithMedia;

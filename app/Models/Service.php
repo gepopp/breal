@@ -6,7 +6,6 @@ use App\Observers\ServiceObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -17,7 +16,6 @@ use Spatie\Translatable\HasTranslations;
 #[ObservedBy([ServiceObserver::class])]
 class Service extends Model implements HasMedia
 {
-    use HasFactory;
     use HasSlug;
     use HasTranslations;
     use InteractsWithMedia;

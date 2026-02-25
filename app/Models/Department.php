@@ -6,7 +6,6 @@ use App\Enums\CompaniesEnum;
 use App\Observers\DepartmentObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -15,7 +14,6 @@ use Spatie\Translatable\HasTranslations;
 #[ObservedBy(DepartmentObserver::class)]
 class Department extends Model
 {
-    use HasFactory;
     use HasTranslations;
 
     public array $translatable = ['name'];
