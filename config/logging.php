@@ -83,10 +83,10 @@ return [
 
         'slack' => [
             'driver' => 'slack',
-            'url' => 'https://hooks.slack.com/services/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',
+            'url' => 'https://hooks.slack.com/services/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',
             'username' => env('LOG_SLACK_USERNAME', 'Laravel Log'),
             'emoji' => env('LOG_SLACK_EMOJI', ':boom:'),
-            'level' => env('LOG_LEVEL', 'critical'),
+            'level' => env('LOG_LEVEL', 'debug'),
             'replace_placeholders' => true,
         ],
 
