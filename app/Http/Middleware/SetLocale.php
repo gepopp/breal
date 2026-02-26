@@ -18,9 +18,12 @@ class SetLocale
     {
         $locale = session('locale', config('app.locale'));
 
-        if (in_array($locale, ['de', 'en'])) {
-            App::setLocale($locale);
+        // Ensure locale is always a valid value
+        if (!in_array($locale, ['de', 'en'])) {
+            $locale = config('app.fallback_locale', 'de');
         }
+
+        App::setLocale($locale);
 
         return $next($request);
     }

@@ -17,7 +17,7 @@ abstract class BaseSettings extends Settings
     public function __get($name): mixed
     {
         // Check if a locale-suffixed version exists first
-        $locale = app()->getLocale();
+        $locale = app()->getLocale() ?: config('app.fallback_locale', 'de');
         $localizedName = "{$name}_{$locale}";
 
         if (property_exists($this, $localizedName)) {
