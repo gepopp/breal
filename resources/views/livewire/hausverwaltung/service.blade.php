@@ -46,7 +46,7 @@
                 <div class="mt-4 pt-4 relative">
                     <ul class="overflow-y-auto overflow-x-hidden scrollbar scrollbar-thin  !list-none space-y-4">
                         <template x-for="service in services" :key="`menu-${service.id}`">
-                            <li class="border border-logo rounded-lg p-2 !ml-0 relative group cursor-pointer" wire:click="set('tab', service.slug)">
+                            <li class="border border-logo rounded-lg p-2 !ml-0 relative group cursor-pointer" @click="selected = service.slug">
                                 <p class="!font-bold !mb-0 !dark:text-logo !text-logo !text-sm" x-text="service.name[locale] || service.name.de"></p>
                                 <div class="absolute inset-0 rounded-lg bg-logo p-2 text-white "
                                      :class="selected == service.slug ? '' : 'translate-x-[98%] -scale-y-75 group-hover:scale-y-100 group-hover:translate-x-0 transition-all duration-500 ease-in'"
@@ -67,14 +67,14 @@
         <div class="w-full md:w-auto mt-10 md:mt-0">
             <template x-if="selectedService">
                 <div>
-                    <div class="p-4 pt-0 prose grow" x-html="selectedService.description[locale] || selectedService.description.de"></div>
+                    <div class="p-4 pt-0 prose grow" x-html="selectedService && selectedService.description ? (selectedService.description[locale] || selectedService.description.de) : ''"></div>
 
-                    <div class="px-3" x-show="selectedService.form == 'form'">
+                    <div class="px-3" x-show="selectedService && selectedService.form == 'form'">
                         <livewire:contact-form :sidebar="false" wire:key="form_without_address"/>
                     </div>
 
 
-                    <div class="px-3" x-show="selectedService.form == 'address'">
+                    <div class="px-3" x-show="selectedService && selectedService.form == 'address'">
                         <livewire:contact-form :sidebar="false" :address="true" wire:key="form_with_address"/>
                     </div>
 
