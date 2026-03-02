@@ -119,6 +119,7 @@
                     </template>
 
 
+
                     <template x-if="selectedService.links && selectedService.links.length > 0">
                         <div class="pt-8 mt-8 border-t-4 border-logo/50">
                             <template x-for="download in selectedService.links.filter(link => link.language === locale)">
