@@ -25,13 +25,10 @@
 
 
     <section x-data="{ current: 0 }" class="mt-12">
-
-        @dump($locale);
-
         @foreach($faqs as $index => $faq)
             <div class="py-4 border-b border-logo">
                 <p class="!text-lg !font-bold flex justify-between items-center cursor-pointer !text-logo !dark:text-white" x-on:click="current = {{ $index }}">
-                    <span class="dark:text-white">{{ blank($faq['question'][$locale]) ? $faq['question']['de'] : $faq['question'][$locale] }}</span>
+{{--                    <span class="dark:text-white">{{ blank($faq['question'][$locale]) ? $faq['question']['de'] : $faq['question'][$locale] }}</span>--}}
                     <span>
                         <template x-if="current != {{ $index }}">
                              <svg class="size-8" data-slot="icon" fill="none" stroke-width="4" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -48,7 +45,7 @@
                 </p>
                 <div x-show="current == {{ $index }}" x-collapse>
                     <div class="prose">
-                        {!! blank($faq['answer'][$locale]) ? $faq['answer']['de'] : $faq['answer'][$locale] !!}
+{{--                        {!! blank($faq['answer'][$locale]) ? $faq['answer']['de'] : $faq['answer'][$locale] !!}--}}
                     </div>
                     <div class="h-px w-full bg-logo mt-8"></div>
                     <div class="prose bg-logo p-4 text-white flex flex-col items-center justify-center">
