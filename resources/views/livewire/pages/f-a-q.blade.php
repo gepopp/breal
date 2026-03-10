@@ -24,12 +24,12 @@
     </section>
 
 
-{{--    <section x-data="{ current: 0 }" class="mt-12">--}}
-{{--        @foreach($faqs as $index => $faq)--}}
-{{--            <div class="py-4 border-b border-logo">--}}
-{{--                <p class="!text-lg !font-bold flex justify-between items-center cursor-pointer !text-logo !dark:text-white" x-on:click="current = {{ $index }}">--}}
+    <section x-data="{ current: 0 }" class="mt-12">
+        @foreach($faqs as $index => $faq)
+            <div class="py-4 border-b border-logo">
+                <p class="!text-lg !font-bold flex justify-between items-center cursor-pointer !text-logo !dark:text-white" x-on:click="current = {{ $index }}">
 {{--                    <span class="dark:text-white">{{ blank($faq['question'][$locale]) ? $faq['question']['de'] : $faq['question'][$locale] }}</span>--}}
-{{--                    <span>--}}
+                    <span>
 {{--                        <template x-if="current != {{ $index }}">--}}
 {{--                             <svg class="size-8" data-slot="icon" fill="none" stroke-width="4" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">--}}
 {{--                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>--}}
@@ -41,10 +41,10 @@
 {{--                             </svg>--}}
 {{--                        </template>--}}
 
-{{--                    </span>--}}
-{{--                </p>--}}
-{{--                <div x-show="current == {{ $index }}" x-collapse>--}}
-{{--                    <div class="prose">--}}
+                    </span>
+                </p>
+                <div x-show="current == {{ $index }}" x-collapse>
+                    <div class="prose">
 {{--                        {!! blank($faq['answer'][$locale]) ? $faq['answer']['de'] : $faq['answer'][$locale] !!}--}}
 {{--                    </div>--}}
 {{--                    <div class="h-px w-full bg-logo mt-8"></div>--}}
@@ -53,9 +53,9 @@
 {{--                        <div class="max-w-xs mt-4">--}}
 {{--                            <x-button href="{{ $faq['link'] }}" :ondark="true">kontaktieren sie uns</x-button>--}}
 {{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        @endforeach--}}
-{{--    </section>--}}
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </section>
 </x-section>
