@@ -17,13 +17,19 @@ class FAQ extends Component
 
     public string $text = '';
 
+    public string $locale = 'de';
+
+
     public ?array $faqs = null;
 
-    public function mount(FaqSettings $pagesSettings)
+    public function mount()
     {
         $this->company = CompaniesEnum::getByRoute();
 
         $this->faqs = Question::all()->toArray();
+
+        $this->locale = app()->getLocale() ?? 'de';
+
     }
 
     public function render(FaqSettings $pagesSettings)
