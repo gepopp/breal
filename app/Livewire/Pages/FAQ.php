@@ -26,9 +26,7 @@ class FAQ extends Component
 
         $this->faqs = Question::all()->toArray();
 
-        $this->locale = app()->getLocale();
-
-        dd($this->locale);
+        $this->locale = blank(app()->getLocale()) ? 'de' : app()->getLocale();
 
     }
 

@@ -23,11 +23,11 @@
         </div>
     </section>
 
-    @php
-        if(!in_array($locale, ['de', 'en'])){
-            $locale = 'de';
-        }
-    @endphp
+{{--    @php--}}
+{{--        if(!in_array($locale, ['de', 'en'])){--}}
+{{--            $locale = 'de';--}}
+{{--        }--}}
+{{--    @endphp--}}
 
     <section x-data="{ current: 0 }" class="mt-12">
         @foreach($faqs as $index => $faq)
