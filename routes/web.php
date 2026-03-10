@@ -72,3 +72,7 @@ Route::get('sitemap', [\App\Http\Controllers\SitemapController::class, 'generate
 Route::get('log-test', function(){
     \Illuminate\Support\Facades\Log::debug('Test');
 });
+
+Route::get('log-test-critical', function(){
+    \Illuminate\Support\Facades\Log::critical('Test critical');
+});
