@@ -44,7 +44,7 @@
                 </p>
                 <div x-show="current == {{ $index }}" x-collapse>
                     <div class="prose">
-                        {{--                        {!! blank($faq['answer'][$locale]) ? $faq['answer']['de'] : $faq['answer'][$locale] !!}--}}
+                        {!! $faq['answer'][$locale] !!}
                     </div>
                     <div class="h-px w-full bg-logo mt-8"></div>
                     <div class="prose bg-logo p-4 text-white flex flex-col items-center justify-center">
