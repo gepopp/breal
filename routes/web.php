@@ -67,3 +67,8 @@ Route::get('import', function () {
 });
 
 Route::get('sitemap', [\App\Http\Controllers\SitemapController::class, 'generate']);
+
+
+Route::get('log-test', function(){
+    \Illuminate\Support\Facades\Log::debug('Test');
+});
