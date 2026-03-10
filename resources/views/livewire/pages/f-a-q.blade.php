@@ -27,7 +27,6 @@
         if(!in_array($locale, ['de', 'en'])){
             $locale = 'de';
         }
-
     @endphp
 
     <section x-data="{ current: 0 }" class="mt-12">

@@ -18,8 +18,6 @@ class FAQ extends Component
     public string $text = '';
 
     public string $locale = 'de';
-
-
     public ?array $faqs = null;
 
     public function mount()
@@ -28,7 +26,9 @@ class FAQ extends Component
 
         $this->faqs = Question::all()->toArray();
 
-        $this->locale = app()->getLocale() ?? 'de';
+        $this->locale = app()->getLocale();
+
+        dd($this->locale);
 
     }
 
