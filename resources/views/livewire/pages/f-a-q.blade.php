@@ -1,27 +1,27 @@
 <x-section>
-{{--    <section @class([--}}
-{{--        "text-logo-950" => \Illuminate\Support\Facades\Route::is('hausverwaltung.*'),--}}
-{{--        "text-technik-950" => \Illuminate\Support\Facades\Route::is('technik.*'),--}}
-{{--        "text-makler-950" => \Illuminate\Support\Facades\Route::is('makler.*'),--}}
-{{--    ])>--}}
-{{--        <div class="max-w-md w-full">--}}
-{{--            <x-headings>--}}
-{{--                <x-slot name="tag">{{ $pagesSettings->faq_header }}</x-slot>--}}
-{{--                {{ $pagesSettings->faq_subheader }}--}}
-{{--            </x-headings>--}}
-{{--        </div>--}}
-{{--        <div data-aos="fade" data-aos-delay="600" class="prose max-w-full">--}}
+    <section @class([
+        "text-logo-950" => \Illuminate\Support\Facades\Route::is('hausverwaltung.*'),
+        "text-technik-950" => \Illuminate\Support\Facades\Route::is('technik.*'),
+        "text-makler-950" => \Illuminate\Support\Facades\Route::is('makler.*'),
+    ])>
+        <div class="max-w-md w-full">
+            <x-headings>
+                <x-slot name="tag">{{ $pagesSettings->faq_header }}</x-slot>
+                {{ $pagesSettings->faq_subheader }}
+            </x-headings>
+        </div>
+        <div data-aos="fade" data-aos-delay="600" class="prose max-w-full">
 
-{{--            @if(!is_array($preparedText))--}}
-{{--                {!! html_entity_decode( $preparedText ) !!}--}}
-{{--            @else--}}
-{{--                <div class="grid grid-cols-1 md:grid-cols-2 md:gap-12 w-full">--}}
-{{--                    <div>{!! $preparedText['firstHalf'] !!}</div>--}}
-{{--                    <div>{!! $preparedText['secondHalf'] !!}</div>--}}
-{{--                </div>--}}
-{{--            @endif--}}
-{{--        </div>--}}
-{{--    </section>--}}
+            @if(!is_array($preparedText))
+                {!! html_entity_decode( $preparedText ) !!}
+            @else
+                <div class="grid grid-cols-1 md:grid-cols-2 md:gap-12 w-full">
+                    <div>{!! $preparedText['firstHalf'] !!}</div>
+                    <div>{!! $preparedText['secondHalf'] !!}</div>
+                </div>
+            @endif
+        </div>
+    </section>
 
 
 {{--    <section x-data="{ current: 0 }" class="mt-12">--}}
