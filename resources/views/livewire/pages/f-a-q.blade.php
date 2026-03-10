@@ -29,18 +29,18 @@
             <div class="py-4 border-b border-logo">
                 <p class="!text-lg !font-bold flex justify-between items-center cursor-pointer !text-logo !dark:text-white" x-on:click="current = {{ $index }}">
                     {{--                    <span class="dark:text-white">{{ blank($faq['question'][$locale]) ? $faq['question']['de'] : $faq['question'][$locale] }}</span>--}}
-{{--                    <span>--}}
-{{--                        <template x-if="current != {{ $index }}">--}}
-{{--                             <svg class="size-8" data-slot="icon" fill="none" stroke-width="4" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">--}}
-{{--                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>--}}
-{{--                             </svg>--}}
-{{--                        </template>--}}
-{{--                        <template x-if="current == {{ $index }}">--}}
-{{--                             <svg class="size-8" data-slot="icon" fill="none" stroke-width="4" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">--}}
-{{--                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14"></path>--}}
-{{--                             </svg>--}}
-{{--                        </template>--}}
-{{--                    </span>--}}
+                    {{--                    <span>--}}
+                    {{--                        <template x-if="current != {{ $index }}">--}}
+                    {{--                             <svg class="size-8" data-slot="icon" fill="none" stroke-width="4" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">--}}
+                    {{--                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>--}}
+                    {{--                             </svg>--}}
+                    {{--                        </template>--}}
+                    {{--                        <template x-if="current == {{ $index }}">--}}
+                    {{--                             <svg class="size-8" data-slot="icon" fill="none" stroke-width="4" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">--}}
+                    {{--                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14"></path>--}}
+                    {{--                             </svg>--}}
+                    {{--                        </template>--}}
+                    {{--                    </span>--}}
                 </p>
                 <div x-show="current == {{ $index }}" x-collapse>
                     <div class="prose">
@@ -49,11 +49,11 @@
                     <div class="h-px w-full bg-logo mt-8"></div>
                     <div class="prose bg-logo p-4 text-white flex flex-col items-center justify-center">
                         <h5 class="!text-lg !font-bold !text-white">Sie haben Fragen oder Anregungen zu diesem Thema?</h5>
-                        {{--                        <div class="max-w-xs mt-4">--}}
-                        {{--                            <x-button href="{{ $faq['link'] }}" :ondark="true">kontaktieren sie uns</x-button>--}}
+                        <div class="max-w-xs mt-4">
+                            {{--                            <x-button href="{{ $faq['link'] }}" :ondark="true">kontaktieren sie uns</x-button>--}}
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
         @endforeach
     </section>
