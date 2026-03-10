@@ -25,6 +25,12 @@ abstract class BaseSettings extends Settings
             return parent::__get($localizedName);
         }
 
+        if(!property_exists($this, $name))
+        {
+            return '';
+        }
+
+
         // Fall back to the original property name via parent
         return parent::__get($name);
     }
