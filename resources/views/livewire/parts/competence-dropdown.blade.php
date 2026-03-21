@@ -11,7 +11,7 @@
         </ul>
 
 {{--        <div class="mt-4 pt-4 border-t border-logo">--}}
-{{--            <x-button href="{{ route('verwalterservice') }}">{{ __('Verwalterservice') }}</x-button>--}}
+{{--            <x-button href="{{ route('verwalterservice') }}">{{ __('Corporate Service') }}</x-button>--}}
 {{--        </div>--}}
     </div>
 </div>

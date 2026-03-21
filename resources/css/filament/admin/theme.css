@@ -1,3 +1,12 @@
 @import '../../../../vendor/filament/filament/resources/css/theme.css';
 
 @import 'tailwindcss';
+
+/* Ensure icon select classes are available */
+@layer utilities {
+    .flex { display: flex; }
+    .items-center { align-items: center; }
+    .gap-2 { gap: 0.5rem; }
+    .w-5 { width: 1.25rem; }
+    .h-5 { height: 1.25rem; }
+}

@@ -26,7 +26,7 @@ Route::group(['prefix' => 'makler', 'as' => 'makler.', 'middleware' => 'language
     Route::get('/kontakt', \App\Livewire\Pages\Contact::class)->name('kontakt');
     Route::get('/team', \App\Livewire\Pages\Team::class)->name('team');
     Route::get('/faq', \App\Livewire\Pages\FAQ::class)->name('faq');
-//    Route::get('/leistungen', \App\Livewire\Hausverwaltung\Leistungen::class)->name('leistungen');
+    //    Route::get('/leistungen', \App\Livewire\Hausverwaltung\Leistungen::class)->name('leistungen');
     Route::get('/leistung/{competence}', \App\Livewire\Pages\Compentence::class)->name('leistung');
     Route::get('immobiliensuche', \App\Livewire\Pages\Immobiliensuche::class)->name('immobiliensuche');
     Route::get('immobilie/{realty}', \App\Livewire\Pages\Immobilie::class)->name('immobilie');
@@ -58,7 +58,7 @@ Route::group(['middleware' => 'language'], function () {
 
 });
 
-Route::livewire('verwalterservice', 'pages.verwalterservice')
+Route::livewire('unternehmensservice', 'pages.verwalterservice')
     ->middleware(['language', 'auth'])
     ->name('verwalterservice');
 
@@ -68,8 +68,7 @@ Route::get('import', function () {
 
 Route::get('sitemap', [\App\Http\Controllers\SitemapController::class, 'generate']);
 
-
-Route::get('log-test', function(){
+Route::get('log-test', function () {
     \Illuminate\Support\Facades\Log::info('Test info');
     \Illuminate\Support\Facades\Log::debug('Test debug');
     \Illuminate\Support\Facades\Log::error('Test error');

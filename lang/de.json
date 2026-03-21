@@ -270,5 +270,6 @@
     "makler.table.usage_type": "Nutzungsart",
     "makler.table.rent_buy": "Miete / Kauf",
     "makler.table.postal_code": "Postleitzahl",
-    "makler.table.on_request": "Auf Anfrage"
+    "makler.table.on_request": "Auf Anfrage",
+    "Corporate Service": "Unternehmensservice"
 }

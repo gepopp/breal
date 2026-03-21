@@ -164,5 +164,6 @@
     "makler.table.usage_type": "Usage Type",
     "makler.table.rent_buy": "Rent / Buy",
     "makler.table.postal_code": "Postal Code",
-    "makler.table.on_request": "On Request"
+    "makler.table.on_request": "On Request",
+    "Corporate Service": "Corporate Service"
 }

@@ -45,7 +45,7 @@ new class extends Component
 
 
         <div class="flex flex-col space-y-6">
-            <p class="!mb-0">Franz Josefs Kai 65/Mezzanin</p>
+            <p class="!mb-0">Franz-Josefs-Kai 65/Mezzanin</p>
             <p class="!mb-0">1010 Wien</p>
             <p class="!mb-0">{{ __('footer.phone') }}: +43 1 535 36 19</p>
             <p class="!mb-0">{{ __('footer.fax') }}: +43 1 535 64 28</p>

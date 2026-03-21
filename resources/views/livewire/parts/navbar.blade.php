@@ -234,7 +234,7 @@
                         <a href="{{ route('hausverwaltung.karriere') }}">{{ __('navigation.careers') }}</a>
                         <a href="{{ route('hausverwaltung.kontakt') }}">{{ __('navigation.contact') }}</a>
                         <a href="{{ route('hausverwaltung.team') }}">{{ __('navigation.team') }}</a>
-{{--                        <a href="{{ route('verwalterservice') }}">Verwalterservice</a>--}}
+{{--                        <a href="{{ route('verwalterservice') }}">{{ __('Corporate Service') }}</a>--}}
 
                     @endif
 

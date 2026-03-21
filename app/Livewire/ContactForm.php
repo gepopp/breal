@@ -17,7 +17,7 @@ class ContactForm extends Component
 
     public bool $sidebar = true;
 
-    public bool $address = false;
+    public bool $address = true;
 
     protected string $company = '';
 
