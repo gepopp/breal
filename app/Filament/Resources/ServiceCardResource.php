@@ -22,6 +22,8 @@ class ServiceCardResource extends Resource
 
     protected static string|UnitEnum|null $navigationGroup = 'Zweisprachige Datenmodelle';
 
+    protected static ?string $navigationLabel = 'Unternehmensservice Cards';
+
     public static function form(Schema $schema): Schema
     {
         return ServiceCardForm::configure($schema);
