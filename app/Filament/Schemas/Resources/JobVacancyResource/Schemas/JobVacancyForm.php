@@ -23,6 +23,7 @@ class JobVacancyForm
 
                         SpatieMediaLibraryFileUpload::make('titleimage')
                             ->collection('title')
+                            ->disk('s3')
                             ->rule(['required', 'max:1024', 'mimes:jpg,jpeg,png'])
                             ->hint('jpg, jpeg, png mit max. 1MB')
                             ->downloadable()

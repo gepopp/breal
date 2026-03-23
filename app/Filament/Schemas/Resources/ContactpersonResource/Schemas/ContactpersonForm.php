@@ -16,6 +16,7 @@ class ContactpersonForm
             ->components([
                 SpatieMediaLibraryFileUpload::make('avatar')
                     ->maxSize(521)
+                    ->disk('s3')
                     ->collection('avatar')
                     ->responsiveImages()
                     ->rules(['nullable', 'image', 'max:521'])

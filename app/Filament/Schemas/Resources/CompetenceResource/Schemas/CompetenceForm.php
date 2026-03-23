@@ -20,6 +20,7 @@ class CompetenceForm
             ->components([
                 SpatieMediaLibraryFileUpload::make('titleimage')
                     ->image()
+                    ->disk('s3')
                     ->collection('titleimage')
                     ->downloadable()
                     ->responsiveImages()

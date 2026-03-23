@@ -32,7 +32,9 @@ class LandingpageHausverwaltung extends SettingsPage
                     ->schema([
                         Tab::make('Intro')
                             ->schema([
-                                SettingsUpload::make('hero_image')->multiple()->reorderable()->panelLayout('grid')->required(),
+                                SettingsUpload::make('hero_image')
+                                    ->disk('s3')
+                                    ->multiple()->reorderable()->panelLayout('grid')->required(),
                                 TextInput::make('hero_image_alt')->required(),
                                 TextInput::make('hero_speed')->numeric()->required(),
                                 TextInput::make('hero_header')->required(),
@@ -56,7 +58,9 @@ class LandingpageHausverwaltung extends SettingsPage
                                 Section::make('text_image')
                                     ->schema([
                                         RichEditor::make('text')->required(),
-                                        SettingsUpload::make('text_image')->multiple()->reorderable()->panelLayout('grid')->required(),
+                                        SettingsUpload::make('text_image')
+                                            ->disk('s3')
+                                            ->multiple()->reorderable()->panelLayout('grid')->required(),
                                         TextInput::make('text_image_alt')->required(),
                                     ])
                                     ->visible(fn ($get) => $get('intro_layout') === 'text_image'),
@@ -67,7 +71,9 @@ class LandingpageHausverwaltung extends SettingsPage
                                 TextInput::make('about_header')->required(),
                                 TextInput::make('about_subheader')->required(),
                                 RichEditor::make('about_text')->required(),
-                                SettingsUpload::make('about_image')->required(),
+                                SettingsUpload::make('about_image')
+                                    ->disk('s3')
+                                    ->required(),
                                 TextInput::make('about_image_alt')->required(),
                                 Textarea::make('about_video_embed_code'),
                             ]),
