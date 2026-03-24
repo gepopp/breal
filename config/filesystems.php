@@ -53,7 +53,7 @@ return [
             'secret' => env('AWS_SECRET_ACCESS_KEY'),
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
-            'endpoint' => 'https://fsn1.your-objectstorage.com',
+            'endpoint' => env('AWS_ENDPOINT'),
             'use_path_style_endpoint' => true,
             'throw' => false,
             'report' => false,
