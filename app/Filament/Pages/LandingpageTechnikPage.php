@@ -34,7 +34,7 @@ class LandingpageTechnikPage extends SettingsPage
                     ->schema([
                         Tab::make('Intro')
                             ->schema([
-                                SettingsUpload::make('hero_image')->disk('s3')->multiple()->reorderable()->panelLayout('grid')->required(),
+                                SettingsUpload::make('hero_image')->disk('hetzner')->multiple()->reorderable()->panelLayout('grid')->required(),
                                 TextInput::make('hero_image_alt')->required(),
                                 TextInput::make('hero_header')->required(),
                                 TextInput::make('hero_subheader')->required(),
@@ -57,7 +57,7 @@ class LandingpageTechnikPage extends SettingsPage
                                 Section::make('text_image')
                                     ->schema([
                                         RichEditor::make('text')->required(),
-                                        SettingsUpload::make('text_image')->disk('s3')->multiple()->reorderable()->panelLayout('grid')->required(),
+                                        SettingsUpload::make('text_image')->disk('hetzner')->multiple()->reorderable()->panelLayout('grid')->required(),
                                         TextInput::make('text_image_alt')->required(),
                                     ])
                                     ->visible(fn ($get) => $get('intro_layout') === 'text_image'),
@@ -68,7 +68,7 @@ class LandingpageTechnikPage extends SettingsPage
                                 TextInput::make('about_header')->required(),
                                 TextInput::make('about_subheader')->required(),
                                 RichEditor::make('about_text')->required(),
-                                SettingsUpload::make('about_image')->disk('s3')->required(),
+                                SettingsUpload::make('about_image')->disk('hetzner')->required(),
                                 TextInput::make('about_image_alt')->required(),
                                 Textarea::make('about_video_embed_code'),
                             ]),

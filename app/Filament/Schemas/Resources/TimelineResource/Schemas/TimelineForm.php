@@ -19,7 +19,7 @@ class TimelineForm
                         SpatieMediaLibraryFileUpload::make('titleimage')
                             ->label('Titelbild')
                             ->required()
-                            ->disk('s3')
+                            ->disk('hetzner')
                             ->image()
                             ->downloadable()
                             ->collection('titleimage'),

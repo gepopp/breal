@@ -33,7 +33,7 @@ class LandingpageHausverwaltung extends SettingsPage
                         Tab::make('Intro')
                             ->schema([
                                 SettingsUpload::make('hero_image')
-                                    ->disk('s3')
+                                    ->disk('hetzner')
                                     ->multiple()->reorderable()->panelLayout('grid')->required(),
                                 TextInput::make('hero_image_alt')->required(),
                                 TextInput::make('hero_speed')->numeric()->required(),
@@ -59,7 +59,7 @@ class LandingpageHausverwaltung extends SettingsPage
                                     ->schema([
                                         RichEditor::make('text')->required(),
                                         SettingsUpload::make('text_image')
-                                            ->disk('s3')
+                                            ->disk('hetzner')
                                             ->multiple()->reorderable()->panelLayout('grid')->required(),
                                         TextInput::make('text_image_alt')->required(),
                                     ])
@@ -72,7 +72,7 @@ class LandingpageHausverwaltung extends SettingsPage
                                 TextInput::make('about_subheader')->required(),
                                 RichEditor::make('about_text')->required(),
                                 SettingsUpload::make('about_image')
-                                    ->disk('s3')
+                                    ->disk('hetzner')
                                     ->required(),
                                 TextInput::make('about_image_alt')->required(),
                                 Textarea::make('about_video_embed_code'),

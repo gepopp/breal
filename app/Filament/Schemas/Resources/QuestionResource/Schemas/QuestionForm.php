@@ -20,7 +20,7 @@ class QuestionForm
                 SpatieMediaLibraryFileUpload::make('image')
                     ->image()
                     ->collection('image')
-                    ->disk('s3')
+                    ->disk('hetzner')
                     ->downloadable()
                     ->responsiveImages()
                     ->rules(['nullable', 'image', 'max:2024'])

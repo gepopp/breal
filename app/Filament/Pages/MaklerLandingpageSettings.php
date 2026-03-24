@@ -35,7 +35,7 @@ class MaklerLandingpageSettings extends SettingsPage
                 ->schema([
                     SettingsUpload::make('hero_images')
                         ->label('Hero Bilder')
-                        ->disk('s3')
+                        ->disk('hetzner')
                         ->multiple()
                         ->reorderable()
                         ->panelLayout('grid')
@@ -97,7 +97,7 @@ class MaklerLandingpageSettings extends SettingsPage
                             ->required(),
                     ]),
                     SettingsUpload::make('cta_image')
-                        ->disk('s3')
+                        ->disk('hetzner')
                         ->label('CTA Bild')
                         ->columnSpanFull(),
                     Grid::make(2)->schema([
@@ -132,7 +132,7 @@ class MaklerLandingpageSettings extends SettingsPage
                             ->required(),
                     ]),
                     SettingsUpload::make('about_image')
-                        ->disk('s3')
+                        ->disk('hetzner')
                         ->label('About Bild')
                         ->columnSpanFull(),
                     Grid::make(2)->schema([

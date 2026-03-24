@@ -18,7 +18,7 @@ class ReferenceForm
                 SpatieMediaLibraryFileUpload::make('titleimage')
                     ->label('Titelbild')
                     ->image()
-                    ->disk('s3')
+                    ->disk('hetzner')
                     ->required()
                     ->responsiveImages()
                     ->downloadable()
@@ -50,7 +50,7 @@ class ReferenceForm
 
                         SpatieMediaLibraryFileUpload::make('avatar')
                             ->image()
-                            ->disk('s3')
+                            ->disk('hetzner')
                             ->avatar()
                             ->columnSpan(1)
                             ->collection('avatar'),

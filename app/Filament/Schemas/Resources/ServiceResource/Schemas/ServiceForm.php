@@ -49,7 +49,7 @@ class ServiceForm
                     ->label('Dokumente')
                     ->schema([
                         FileUpload::make('path')
-                            ->disk('s3')
+                            ->disk('hetzner')
                             ->visibility('public')
                             ->required()
                             ->downloadable()

@@ -39,7 +39,7 @@ class ContactRequestForm
 
                 SpatieMediaLibraryFileUpload::make('uploads')
                     ->multiple()
-                    ->disk('s3')
+                    ->disk('hetzner')
                     ->downloadable()
                     ->disk('local')
                     ->visibility('private')

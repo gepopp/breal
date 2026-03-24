@@ -37,7 +37,7 @@ class TechnikLandingpageSettings extends SettingsPage
                     SettingsUpload::make('hero_image')
                         ->label('Hero Bild')
                         ->multiple()
-                        ->disk('s3')
+                        ->disk('hetzner')
                         ->reorderable()
                         ->panelLayout('grid')
                         ->columnSpanFull(),
@@ -117,7 +117,7 @@ class TechnikLandingpageSettings extends SettingsPage
                             ]),
                             SettingsUpload::make('text_image')
                                 ->label('Text Bild')
-                                ->disk('s3')
+                                ->disk('hetzner')
                                 ->multiple()
                                 ->reorderable()
                                 ->panelLayout('grid')
@@ -162,7 +162,7 @@ class TechnikLandingpageSettings extends SettingsPage
                     ]),
                     SettingsUpload::make('about_image')
                         ->label('About Bild')
-                        ->disk('s3')
+                        ->disk('hetzner')
                         ->columnSpanFull(),
                     Grid::make(2)->schema([
                         TextInput::make('about_image_alt_de')

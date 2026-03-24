@@ -36,7 +36,7 @@ class HausverwaltungLandingpageSettings extends SettingsPage
                 ->schema([
                     SettingsUpload::make('hero_image')
                         ->label('Hero Bild')
-                        ->disk('s3')
+                        ->disk('hetzner')
                         ->multiple()
                         ->reorderable()
                         ->panelLayout('grid')
@@ -122,7 +122,7 @@ class HausverwaltungLandingpageSettings extends SettingsPage
                             ]),
                             SettingsUpload::make('text_image')
                                 ->label('Text Bild')
-                                ->disk('s3')
+                                ->disk('hetzner')
                                 ->multiple()
                                 ->reorderable()
                                 ->panelLayout('grid')
@@ -166,7 +166,7 @@ class HausverwaltungLandingpageSettings extends SettingsPage
                             ->required(),
                     ]),
                     SettingsUpload::make('about_image')
-                        ->disk('s3')
+                        ->disk('hetzner')
                         ->label('About Bild')
                         ->columnSpanFull(),
                     Grid::make(2)->schema([
