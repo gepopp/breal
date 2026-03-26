@@ -56,7 +56,7 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
             'use_path_style_endpoint' => true,
             'throw' => false,
-            'visibility' => 'private',
+            'visibility' => 'public',
         ],
         'hetzner' => [
             'driver' => 's3',
@@ -67,7 +67,7 @@ return [
             'endpoint' => env('HETZNER_S3_ENDPOINT'),
             'use_path_style_endpoint' => true,
             'throw' => false,
-            'visibility' => 'private',
+            'visibility' => 'public',
         ],
     ],
 
