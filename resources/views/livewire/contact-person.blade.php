@@ -2,7 +2,13 @@
     <div class="w-24 aspect-square shrink-0">
         <div class="rounded-full bg-logo/15 w-full aspect-square overflow-hidden">
             @if($contactperson->hasMedia('avatar'))
-                <img src="{{ $contactperson->getFirstMediaUrl('avatar', 'thumb') }}" @class(['w-full h-full object-cover rounded-full overflow-hidden']) alt="Avatar von {{ $contactperson->name }}"/>
+                @php
+                    $image = $contactperson->getFirstMedia('avatar');
+                    $url = $image->getAvailableUrl(['thumb']);
+                @endphp
+
+
+                <img src="{{ $url }}" @class(['w-full h-full object-cover rounded-full overflow-hidden']) alt="Avatar von {{ $contactperson->name }}"/>
             @endif
         </div>
     </div>
