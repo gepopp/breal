@@ -54,7 +54,6 @@ class UnternehmensserviceSchlagworteResource extends Resource
         return [
             'index' => ListUnternehmensserviceSchlagwortes::route('/'),
             'create' => CreateUnternehmensserviceSchlagworte::route('/create'),
-            'view' => ViewUnternehmensserviceSchlagworte::route('/{record}'),
             'edit' => EditUnternehmensserviceSchlagworte::route('/{record}/edit'),
         ];
     }

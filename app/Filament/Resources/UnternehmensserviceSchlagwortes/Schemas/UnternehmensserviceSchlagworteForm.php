@@ -15,7 +15,8 @@ class UnternehmensserviceSchlagworteForm
                 TextInput::make('name.de')
                     ->label('Bezeichnung Deutsch')
                     ->required()
-                    ->columnSpanFull(),TextInput::make('name.en')
+                    ->columnSpanFull(),
+                TextInput::make('name.en')
                     ->label('Bezeichnung Englisch')
                     ->required()
                     ->columnSpanFull(),

@@ -15,9 +15,7 @@ class UnternehmensserviceSchlagwortesTable
     {
         return $table
             ->columns([
-                TextColumn::make('order')
-                    ->numeric()
-                    ->sortable(),
+                TextColumn::make('name'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
