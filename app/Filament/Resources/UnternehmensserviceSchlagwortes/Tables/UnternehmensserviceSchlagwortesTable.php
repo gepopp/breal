@@ -38,6 +38,8 @@ class UnternehmensserviceSchlagwortesTable
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->reorderable('order')
+            ->defaultSort('order');
     }
 }

@@ -20,8 +20,6 @@ class UnternehmensserviceSchlagworteForm
                     ->required()
                     ->columnSpanFull(),
             ])
-            ->columns(2)
-            ->reorderable('order')
-            ->defaultSort('order');
+            ->columns(2);
     }
 }
