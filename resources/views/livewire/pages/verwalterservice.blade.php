@@ -83,7 +83,7 @@
                 </p>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-8" data-aos="fade" data-aos-delay="500">
-                    @foreach(\App\Models\UnternehmensserviceSchlagworte::orderBy('order')->all() as $tag)
+                    @foreach(\App\Models\UnternehmensserviceSchlagworte::orderBy('order')->all() ?? [] as $tag)
                         <div class="flex items-center gap-2">
                             <svg class="size-5 text-logo-300 shrink-0" fill="none" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path></svg>
                             <span class="text-sm">{{ $tag->name }}</span>
