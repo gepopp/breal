@@ -67,7 +67,7 @@
         <div class="w-full md:w-auto mt-10 md:mt-0">
             <template x-if="selectedService">
                 <div>
-                    <div class="p-4 pt-0 prose grow" x-html="selectedService && selectedService.description ? (selectedService.description[locale] || selectedService.description.de) : ''"></div>
+                    <div class="md:p-4 pt-0 prose grow" x-html="selectedService && selectedService.description ? (selectedService.description[locale] || selectedService.description.de) : ''"></div>
 
                     <div class="px-3" x-show="selectedService && selectedService.form == 'form'">
                         <livewire:contact-form :sidebar="false" wire:key="form_without_address"/>
