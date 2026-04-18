@@ -4,13 +4,11 @@ namespace App\Mail;
 
 use App\Models\ContactRequest;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Attachment;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Storage;
 
 class NewContactRequestAdminMail extends Mailable
 {
@@ -45,20 +43,14 @@ class NewContactRequestAdminMail extends Mailable
     }
 
     /**
-     * Get the attachments for the message.
-     *
      * @return array<int, \Illuminate\Mail\Mailables\Attachment>
      */
     public function attachments(): array
     {
-       $paths = [];
-       foreach ($this->contactRequest->getMedia('*') ?? [] as $media) {
-           if(Storage::disk('local')->exists($media->id . '/' . $media->file_name))
-           {
-               $paths[] = Attachment::fromStorageDisk('local', $media->id . '/' . $media->file_name);
-           }
-       }
-
-        return $paths;
+        return $this->contactRequest->getMedia('uploads')
+            ->map(fn ($media) => Attachment::fromStorageDisk('s3_private', $media->getPathRelativeToRoot())
+                ->as($media->file_name)
+                ->withMime($media->mime_type))
+            ->all();
     }
 }

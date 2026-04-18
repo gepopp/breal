@@ -2,20 +2,17 @@
 
 namespace App\Justimmo;
 
-use ZipArchive;
-use XMLReader;
-use XMLWriter;
-use Exception;
 use App\Jobs\ImportRealtyJob;
-use App\Models\Realty;
 use App\Models\User;
-use Carbon\Carbon;
+use Exception;
 use Filament\Notifications\Notification;
-use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use XMLReader;
+use XMLWriter;
+use ZipArchive;
 
 class Importer
 {
@@ -23,11 +20,11 @@ class Importer
 
     public static function import()
     {
-        $instance = new self();
+        $instance = new self;
 
         $xmlFile = $instance->extractZipFile();
 
-        if (!$xmlFile) {
+        if (! $xmlFile) {
             return;
         }
 
@@ -40,7 +37,7 @@ class Importer
 
         foreach ($batchFiles as $batchFile) {
 
-            $filePath = storage_path('app/public/' . $batchFile);
+            $filePath = storage_path('app/public/'.$batchFile);
             $xml = simplexml_load_file($filePath);
             $json = json_encode($xml);
             $array = json_decode($json, true);
@@ -51,38 +48,35 @@ class Importer
                 continue;
             }
 
-            Storage::disk('public')->delete($batchFile);;
-            Storage::disk('public')->put('realties/' . $openimmo_obid . '.json', $json);
-            ImportRealtyJob::dispatchSync('realties/' . $openimmo_obid . '.json');
+            Storage::disk('public')->delete($batchFile);
+            Storage::disk('public')->put('realties/'.$openimmo_obid.'.json', $json);
+            ImportRealtyJob::dispatchSync('realties/'.$openimmo_obid.'.json');
         }
 
         Storage::disk('public')->delete($xmlFile);
         Storage::disk('public')->delete('imports/openimmo.zip');
     }
 
-
     public function extractZipFile(): string|bool
     {
-        if (!Storage::disk('public')->exists('imports/openimmo.zip')) {
-            Log::info('No openimmo.zip file found');
+        if (! Storage::disk('public')->exists('imports/openimmo.zip')) {
+            //            Log::info('No openimmo.zip file found');
             return false;
         }
 
         $zipPath = Storage::disk('public')->path('imports/openimmo.zip');
 
-        $zip = new ZipArchive();
+        $zip = new ZipArchive;
 
         if ($zip->open($zipPath) !== true) {
-            throw new ImportException('Could not open zip file: ' . $zipPath);
+            throw new ImportException('Could not open zip file: '.$zipPath);
         }
-
 
         for ($i = 0; $i < $zip->numFiles; $i++) {
 
             $filename = $zip->getNameIndex($i);
 
             $fileInfo = pathinfo($filename);
-
 
             if (empty($fileInfo['extension'])) {
                 continue;
@@ -91,39 +85,39 @@ class Importer
             if ($fileInfo['extension'] == 'xml') {
 
                 $fileContent = $zip->getFromIndex($i);
-                $xmlFile = 'imports/' . $fileInfo['basename'];
+                $xmlFile = 'imports/'.$fileInfo['basename'];
                 $put = Storage::disk('public')->put($xmlFile, $fileContent);
 
                 if ($put) {
                     $zip->close();
                     Storage::disk('public')->delete('imports/openimmo.zip');
+
                     return $xmlFile;
                 }
             }
         }
+
         return false;
     }
-
 
     public function extractBatchFiles($file)
     {
         Storage::disk('public')->deleteDirectory('batches');
         Storage::disk('public')->makeDirectory('batches');
 
-
-        $reader = new XMLReader();
-        $reader->open(storage_path('app/public/' . $file));
+        $reader = new XMLReader;
+        $reader->open(storage_path('app/public/'.$file));
 
         $batchFiles = [];
 
         while ($reader->read()) {
             if ($reader->nodeType === XMLReader::ELEMENT && $reader->name === 'immobilie') {
                 // Eindeutigen Dateinamen generieren
-                $filename = 'batches/immobilie_' . uniqid() . '.xml';
+                $filename = 'batches/immobilie_'.uniqid().'.xml';
 
                 // Temporäre Datei erzeugen
                 $tempFile = tempnam(sys_get_temp_dir(), 'immobilie_xml_');
-                $writer = new XMLWriter();
+                $writer = new XMLWriter;
                 $writer->openURI($tempFile);
                 $writer->startDocument('1.0', 'UTF-8');
                 $writer->setIndent(true);
@@ -154,7 +148,6 @@ class Importer
 
     }
 
-
     public function notifyAdmins(string $message)
     {
         $adminUsers = User::where('admin', true)->get();
@@ -166,6 +159,4 @@ class Importer
     }
 }
 
-class ImportException extends Exception
-{
-}
+class ImportException extends Exception {}

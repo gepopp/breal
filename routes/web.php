@@ -59,7 +59,7 @@ Route::group(['middleware' => 'language'], function () {
 });
 
 Route::livewire('unternehmensservice', 'pages.verwalterservice')
-    ->middleware(['language', 'auth'])
+    ->middleware(['language'])
     ->name('verwalterservice');
 
 Route::get('import', function () {

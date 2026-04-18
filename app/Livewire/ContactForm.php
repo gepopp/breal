@@ -112,7 +112,7 @@ class ContactForm extends Component
         foreach ($data['uploads'] as $upload) {
             $request->addMedia($upload['path'])
                 ->usingName($upload['name'])
-                ->toMediaCollection('uploads', 's3');
+                ->toMediaCollection('uploads', 's3_private');
         }
 
         $address = $data['data']['email'];

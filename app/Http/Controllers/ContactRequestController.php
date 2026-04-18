@@ -2,48 +2,44 @@
 
 namespace App\Http\Controllers;
 
+use App\Livewire\ContactForm;
 use App\Mail\ContactRequestConfirmedMail;
 use App\Mail\NewContactRequestAdminMail;
-use App\Livewire\ContactForm;
 use App\Models\ContactRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class ContactRequestController extends Controller
 {
-    function confirmation(null|int $id = null, string|null $token = null)
+    public function confirmation(?int $id = null, ?string $token = null)
     {
-        if (!request()->hasValidSignature()) {
+        if (! request()->hasValidSignature()) {
             abort(401);
         }
 
         $formRequest = ContactRequest::withoutGlobalScopes()->whereId($id)->first();
 
-        if($formRequest->token != $token) {
+        if ($formRequest->token != $token) {
             abort(401);
         }
 
-        if(!is_null($formRequest) && is_null($formRequest->verified_at)){
+        if (! is_null($formRequest) && is_null($formRequest->verified_at)) {
 
             $formRequest->update(['verified_at' => now()]);
 
             $recipeint = $formRequest->email;
             $office = ContactForm::RECIPIENT;
 
-            Mail::to($recipeint)->send(new ContactRequestConfirmedMail());
+            Mail::to($recipeint)->send(new ContactRequestConfirmedMail($formRequest));
             Mail::to($office)->send(new NewContactRequestAdminMail($formRequest));
 
         }
 
-
         return view('confirmed');
     }
 
-
-
-    public function solve(ContactRequest $request, string|null $token = null)
+    public function solve(ContactRequest $request, ?string $token = null)
     {
-        if (!request()->hasValidSignature() || $request->token !== $token) {
+        if (! request()->hasValidSignature() || $request->token !== $token) {
             abort(401);
         }
 

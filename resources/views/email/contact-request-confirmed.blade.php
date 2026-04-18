@@ -547,6 +547,96 @@
             </table>
 
             <table data-outer-table border="0" align="center" cellpadding="0" cellspacing="0" class="outer-table row"
+                   role="presentation" width="580" style="width:580px;max-width:580px;" data-module="black-summary">
+                <tr>
+                    <td height="30" style="font-size:30px;line-height:30px;">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="center"
+                        style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:22px;line-height:32px;font-weight:700;font-style:normal;color:#1b1b18;text-decoration:none;letter-spacing:0px;">
+                        Ihre Angaben
+                    </td>
+                </tr>
+                <tr>
+                    <td height="20" style="font-size:20px;line-height:20px;">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="center"
+                        style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:18px;line-height:32px;font-weight:400;font-style:normal;color:#1b1b18;text-decoration:none;letter-spacing:0px;">
+                        {{ $contactRequest->subject }}
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center"
+                        style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:18px;line-height:32px;font-weight:400;font-style:normal;color:#1b1b18;text-decoration:none;letter-spacing:0px;">
+                        {{ $contactRequest->firstname }} {{ $contactRequest->lastname }}
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center"
+                        style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:18px;line-height:32px;font-weight:400;font-style:normal;color:#1b1b18;text-decoration:none;letter-spacing:0px;">
+                        {{ $contactRequest->email }}
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center"
+                        style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:18px;line-height:32px;font-weight:400;font-style:normal;color:#1b1b18;text-decoration:none;letter-spacing:0px;">
+                        {{ $contactRequest->phone }}
+                    </td>
+                </tr>
+                @if($contactRequest->address)
+                    <tr>
+                        <td align="center"
+                            style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:18px;line-height:32px;font-weight:400;font-style:normal;color:#1b1b18;text-decoration:none;letter-spacing:0px;">
+                            {{ $contactRequest->address }}
+                        </td>
+                    </tr>
+                @endif
+                <tr>
+                    <td height="20" style="font-size:20px;line-height:20px;">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="center"
+                        style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:18px;line-height:32px;font-weight:400;font-style:normal;color:#1b1b18;text-decoration:none;letter-spacing:0px;">
+                        {!! $contactRequest->message !!}
+                    </td>
+                </tr>
+                @php($uploads = $contactRequest->getMedia('uploads'))
+                @if($uploads->isNotEmpty())
+                    <tr>
+                        <td height="30" style="font-size:30px;line-height:30px;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td align="center"
+                            style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:18px;line-height:32px;font-weight:700;font-style:normal;color:#1b1b18;text-decoration:none;letter-spacing:0px;">
+                            Ihre hochgeladenen Dateien
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center"
+                            style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:14px;line-height:24px;font-weight:400;font-style:normal;color:#999999;text-decoration:none;letter-spacing:0px;">
+                            Diese Links sind 7 Tage gültig.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="10" style="font-size:10px;line-height:10px;">&nbsp;</td>
+                    </tr>
+                    @foreach($uploads as $upload)
+                        <tr>
+                            <td align="center"
+                                style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:16px;line-height:28px;font-weight:400;font-style:normal;color:#002641;text-decoration:none;letter-spacing:0px;">
+                                <a href="{{ $upload->getTemporaryUrl(now()->addDays(7)) }}"
+                                   style="color:#002641;text-decoration:underline;">{{ $upload->file_name }}</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+                <tr>
+                    <td height="30" style="font-size:30px;line-height:30px;">&nbsp;</td>
+                </tr>
+            </table>
+
+            <table data-outer-table border="0" align="center" cellpadding="0" cellspacing="0" class="outer-table row"
                    role="presentation" width="580" style="width:580px;max-width:580px;" data-module="black-splitter">
                 <!-- black-splitter -->
                 <tr>
