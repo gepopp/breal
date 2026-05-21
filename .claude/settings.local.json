@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(vendor/bin/pint --dirty)",
+      "Bash(php artisan *)",
+      "Bash(grep -vi \"config\\\\|#\\\\|//\")",
+      "Bash(npm run *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
+    ]
+  }
+}
