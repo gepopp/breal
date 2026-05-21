@@ -122,7 +122,7 @@
 
                     <template x-if="selectedService.links && selectedService.links.length > 0">
                         <div class="pt-8 mt-8 border-t-4 border-logo/50">
-                            <template x-for="download in selectedService.links.filter(link => link.language === locale)">
+                            <template x-for="download in selectedService.links.filter(link => link.lang === locale)">
                                 <a target="_blank" :href="download.url" class="flex items-center space-x-4 group">
                                     <div>
                                         <svg class="size-8" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
