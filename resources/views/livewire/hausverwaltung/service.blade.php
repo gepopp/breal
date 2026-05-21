@@ -169,6 +169,7 @@
 
             this.$watch('selected', (slug) => {
                 this.selectedService = this.originalServices.find(service => service.slug == slug);
+                console.log(this.selectedService)
             })
 
         },
