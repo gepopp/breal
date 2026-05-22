@@ -7,8 +7,6 @@ use App\Models\User;
 use Exception;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use XMLReader;
 use XMLWriter;
@@ -60,7 +58,6 @@ class Importer
     public function extractZipFile(): string|bool
     {
         if (! Storage::disk('public')->exists('imports/openimmo.zip')) {
-            //            Log::info('No openimmo.zip file found');
             return false;
         }
 

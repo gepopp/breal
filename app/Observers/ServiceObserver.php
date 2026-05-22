@@ -3,20 +3,20 @@
 namespace App\Observers;
 
 use App\Models\Service;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class ServiceObserver
 {
-    public function created(Service $service){
+    public function created(Service $service)
+    {
 
         $links = [];
 
-        foreach($service->links as $link){
+        foreach ($service->links as $link) {
             $links[] = [
                 'name' => $link['name'],
                 'path' => $link['path'],
-                'url'  => Storage::disk('hetzner')->url($link['path']),
+                'url' => Storage::disk('hetzner')->url($link['path']),
             ];
         }
 
@@ -24,24 +24,19 @@ class ServiceObserver
 
     }
 
-
-    public function updated(Service $service){
-
-        Log::alert('Service updated:', [$service]);
+    public function updated(Service $service)
+    {
 
         $links = [];
 
-        foreach($service->links as $link){
+        foreach ($service->links as $link) {
 
-            Log::alert('Link:', $link);
             $url = Storage::disk('hetzner')->url($link['path']);
-            Log::alert('URL:', [$url]);
-
 
             $links[] = [
-              'name' => $link['name'],
-              'path' => $link['path'],
-              'url'  => $url,
+                'name' => $link['name'],
+                'path' => $link['path'],
+                'url' => $url,
             ];
         }
 
