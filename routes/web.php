@@ -69,12 +69,12 @@ Route::get('import', function () {
 Route::get('sitemap', [\App\Http\Controllers\SitemapController::class, 'generate']);
 
 Route::get('log-test', function () {
-    \Illuminate\Support\Facades\Log::info('Test info');
-    \Illuminate\Support\Facades\Log::debug('Test debug');
-    \Illuminate\Support\Facades\Log::error('Test error');
-    \Illuminate\Support\Facades\Log::critical('Test critical');
-    \Illuminate\Support\Facades\Log::emergency('Test emergency');
-    \Illuminate\Support\Facades\Log::alert('Test alert');
-    \Illuminate\Support\Facades\Log::notice('Test notice');
-    \Illuminate\Support\Facades\Log::info('Test info');
+    dump(\Illuminate\Support\Facades\Log::info('Test info'));
+    dump(\Illuminate\Support\Facades\Log::debug('Test debug'));
+    dump(\Illuminate\Support\Facades\Log::error('Test error'));
+    dump(\Illuminate\Support\Facades\Log::critical('Test critical'));
+    dump(\Illuminate\Support\Facades\Log::emergency('Test emergency'));
+    dump(\Illuminate\Support\Facades\Log::alert('Test alert'));
+    dump(\Illuminate\Support\Facades\Log::notice('Test notice'));
+    dump(\Illuminate\Support\Facades\Log::info('Test info'));
 });
