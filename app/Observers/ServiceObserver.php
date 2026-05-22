@@ -27,7 +27,7 @@ class ServiceObserver
 
     public function updated(Service $service){
 
-        Log::alert('Service updated:', $service);
+        Log::alert('Service updated:', [$service]);
 
         $links = [];
 
@@ -35,7 +35,7 @@ class ServiceObserver
 
             Log::alert('Link:', $link);
             $url = Storage::disk('hetzner')->url($link['path']);
-            Log::alert('URL:', $url);
+            Log::alert('URL:', [$url]);
 
 
             $links[] = [
