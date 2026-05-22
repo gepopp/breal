@@ -15,7 +15,7 @@ class ServiceObserver
             $links[] = [
                 'name' => $link['name'],
                 'path' => $link['path'],
-                'url'  => Storage::disk('s3')->url($link['path']),
+                'url'  => Storage::disk('hetzner')->url($link['path']),
             ];
         }
 
