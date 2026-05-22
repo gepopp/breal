@@ -27,6 +27,8 @@ class ServiceObserver
 
     public function updated(Service $service){
 
+        Log::alert('Service updated:', $service);
+
         $links = [];
 
         foreach($service->links as $link){
