@@ -30,6 +30,7 @@ class UserForm
                     ->dehydrateStateUsing(fn ($state) => Hash::make($state))
                     ->dehydrated(fn ($state) => filled($state))
                     ->required(fn (string $context): bool => $context === 'create'),
+
                 Toggle::make('admin')
                     ->label('Administrator')
                     ->required(),

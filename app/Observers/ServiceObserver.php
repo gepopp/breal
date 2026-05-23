@@ -14,9 +14,10 @@ class ServiceObserver
 
         foreach ($service->links as $link) {
             $links[] = [
+                'lang' => $link['lang'],
                 'name' => $link['name'],
                 'path' => $link['path'],
-                'url' => Storage::disk('hetzner')->url($link['path']),
+                'url'  => Storage::disk('hetzner')->url($link['path']),
             ];
         }
 
@@ -34,9 +35,10 @@ class ServiceObserver
             $url = Storage::disk('hetzner')->url($link['path']);
 
             $links[] = [
+                'lang' => $link['lang'],
                 'name' => $link['name'],
                 'path' => $link['path'],
-                'url' => $url,
+                'url'  => $url,
             ];
         }
 
