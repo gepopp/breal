@@ -11,6 +11,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class ServiceForm
 {
@@ -40,7 +41,7 @@ class ServiceForm
                 Select::make('form')
                     ->label('Formular')
                     ->options([
-                        'form' => 'Kontaktformular',
+                        'form'    => 'Kontaktformular',
                         'address' => 'mit Adressfeld',
                     ])
                     ->nullable(),
@@ -50,13 +51,15 @@ class ServiceForm
                     ->schema([
 
                         FileUpload::make('path')
+                            ->getUploadedFileNameForStorageUsing(fn(TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
+                                ->replace(' ', '_')
+                                ->prepend(now()->format('Ymd_His')),)
                             ->disk('hetzner')
                             ->visibility('public')
                             ->required()
                             ->downloadable()
                             ->openable()
                             ->previewable()
-                            ->preserveFilenames()
                             ->acceptedFileTypes(['application/pdf'])
                             ->label('Dokument'),
 
@@ -82,10 +85,10 @@ class ServiceForm
                         Radio::make('icon')
                             ->label('Symbol')
                             ->options([
-                                'none' => '❌ Keines',
+                                'none'       => '❌ Keines',
                                 'rufzeichen' => '❗ Rufzeichen',
-                                'stern' => '⭐ Stern',
-                                'arrow' => '➡️ Pfeil',
+                                'stern'      => '⭐ Stern',
+                                'arrow'      => '➡️ Pfeil',
                             ])
                             ->inline()
                             ->required(),
