@@ -125,6 +125,13 @@ return [
             'path' => storage_path('logs/laravel.log'),
         ],
 
+        /*
+         * Laravel deep-merges the framework's default logging channels into this
+         * file, so the slack channel cannot be removed by omission alone. Setting
+         * it to null explicitly removes it; do not delete this entry.
+         */
+        'slack' => null,
+
     ],
 
 ];
