@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Competence;
-use App\Models\FAQ;
 use App\Models\JobVacancy;
 use App\Models\Realty;
 use Illuminate\Support\Facades\File;
@@ -35,7 +34,6 @@ class SitemapController extends Controller
         $sitemap->add(Url::create(route('makler.kontakt')));
         $sitemap->add(Url::create(route('makler.team')));
         $sitemap->add(Url::create(route('makler.faq')));
-        $sitemap->add(Url::create(route('makler.leistungen')));
 
         // Technik routes
         $sitemap->add(Url::create(route('technik.home')));
