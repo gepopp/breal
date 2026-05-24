@@ -12,15 +12,17 @@
        @endif
 
         <div class="w-full">
-            <h3 class="pt-0 !lg:pt-4">{{ $contact['anrede'] }} {{ $contact['vorname'] }} {{ $contact['name'] }}</h3>
-            <p class="flex items-center space-x-2">
-                <svg class="size-5" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"></path>
-                </svg>
-            <span>
-                <a href="mailto:{{ $contact['email_direkt'] }}">{{ $contact['email_direkt'] }}</a>
-            </span>
-            </p>
+            <h3 class="pt-0 !lg:pt-4">{{ $contact['anrede'] ?? '' }} {{ $contact['vorname'] ?? '' }} {{ $contact['name'] ?? '' }}</h3>
+            @if(array_key_exists('email_direkt', $contact))
+                <p class="flex items-center space-x-2">
+                    <svg class="size-5" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"></path>
+                    </svg>
+                <span>
+                    <a href="mailto:{{ $contact['email_direkt'] }}">{{ $contact['email_direkt'] }}</a>
+                </span>
+                </p>
+            @endif
             @if(array_key_exists('tel_zentrale', $contact) || array_key_exists('tel_handy', $contact))
                 <p class="flex items-center space-x-2">
                     <svg class="size-5" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
