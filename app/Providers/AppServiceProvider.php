@@ -46,9 +46,8 @@ class AppServiceProvider extends ServiceProvider
                 return true;
             }
 
-            return $request->user() instanceof User && $request->user()->role === 'admin';
+            return (bool) $request->user()?->admin;
         });
-
 
         Queue::failing(function (JobFailed $event) {
             Log::error('Queue job failed', [
