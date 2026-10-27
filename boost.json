@@ -3,6 +3,7 @@
         "claude_code",
         "junie"
     ],
+    "cloud": false,
     "guidelines": true,
     "herd_mcp": false,
     "mcp": true,
@@ -11,8 +12,10 @@
     ],
     "sail": false,
     "skills": [
+        "laravel-best-practices",
+        "socialite-development",
         "fluxui-development",
-        "volt-development",
+        "livewire-development",
         "tailwindcss-development"
     ]
 }
