@@ -24,7 +24,7 @@ return [
     'categories' => [
         'essentials' => [
             'title' => 'Notwendige Cookies',
-            'description' => 'Es gibt einige Cookies, die wir einsetzen müssen, damit bestimmte Webseiten funktionieren. Aus diesem Grund benötigen sie nicht Ihre Zustimmung.',
+            'description' => 'Es gibt einige Cookies, die wir einsetzen müssen, damit bestimmte Webseiten funktionieren. Aus diesem Grund benötigen Sie nicht Ihre Zustimmung.',
         ],
         'analytics' => [
             'title' => 'Analytics Cookies',
@@ -43,6 +43,5 @@ return [
         '_ga' => 'Haupt-Cookie, das von Google Analytics verwendet wird und es dem Dienst ermöglicht, einen Besucher von einem anderen zu unterscheiden.',
         '_ga_ID' => 'Wird von Google Analytics verwendet, um den Sitzungsstatus zu erhalten.',
         '_gid' => 'Wird von Google Analytics verwendet, um den Benutzer zu identifizieren.',
-        '_gat' => 'Wird von Google Analytics verwendet, um die Abfragerate zu drosseln.',
     ],
 ];

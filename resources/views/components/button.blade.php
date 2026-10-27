@@ -6,13 +6,13 @@
         <a {{ $attributes->merge(['class' => 'button-hover block flex justify-center']) }}>
             <div class="lowercase flex justify-center">{{ $slot }}</div>
             <span class="lowercase"></span>
-            <div class="absolute inset-0 flex justify-center items-center lowercase">{{ $slot }}</div>
+            <div aria-hidden="true" class="absolute inset-0 flex justify-center items-center lowercase">{{ $slot }}</div>
         </a>
     @else
         <button {{ $attributes->merge(['class' => 'button-hover']) }} wire:loading.class="!bg-logo dark:bg-white" wire:target="save">
             <div class="lowercase">{{ $slot }}</div>
             <span class="lowercase"></span>
-            <div wire:loading.remove class="absolute inset-0 flex justify-center items-center lowercase">{{ $slot }}</div>
+            <div aria-hidden="true" wire:loading.remove class="absolute inset-0 flex justify-center items-center lowercase">{{ $slot }}</div>
             <div wire:loading.flex wire:target="save" class="absolute inset-0 flex justify-center items-center">
                 <svg class="mr-3 -ml-1 size-5 animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
                      viewBox="0 0 24 24">

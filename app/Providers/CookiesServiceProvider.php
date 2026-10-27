@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use Whitecube\LaravelCookieConsent\AnalyticCookiesCategory;
 use Whitecube\LaravelCookieConsent\Consent;
+use Whitecube\LaravelCookieConsent\Cookie;
+use Whitecube\LaravelCookieConsent\CookiesGroup;
 use Whitecube\LaravelCookieConsent\CookiesServiceProvider as ServiceProvider;
 use Whitecube\LaravelCookieConsent\Facades\Cookies;
 
@@ -18,18 +21,48 @@ class CookiesServiceProvider extends ServiceProvider
             ->session()
             ->csrf();
 
-//         Register all Analytics cookies at once using one single shorthand method:
-        Cookies::analytics()
-            ->google(
-                id: config('cookieconsent.google_analytics.id'),
-                anonymizeIp: config('cookieconsent.google_analytics.anonymize_ip')
-            );
+        $this->registerGoogleAnalytics(
+            id: config('cookieconsent.google_analytics.id'),
+            anonymizeIp: config('cookieconsent.google_analytics.anonymize_ip')
+        );
 
-//         Register custom cookies under the pre-existing "optional" category:
         Cookies::optional()
             ->name('google_maps')
-            ->description('Diese Cookie muss zum Anzeigen von Google Maps aktiviert werden.')
+            ->description('Dieses Cookie muss zum Anzeigen von Google Maps aktiviert werden.')
             ->duration(120);
+    }
 
+    /**
+     * Registers the Google Analytics 4 cookies and scripts.
+     *
+     * Replaces the package's google() shorthand, which still lists the
+     * obsolete Universal Analytics cookie "_gat".
+     */
+    protected function registerGoogleAnalytics(string $id, bool $anonymizeIp = true): void
+    {
+        $key = str_starts_with($id, 'G-') ? substr($id, 2) : $id;
+        $anonymize = $anonymizeIp ? 'true' : 'false';
+
+        Cookies::analytics()->group(function (CookiesGroup $group) use ($id, $key, $anonymize): void {
+            $group->name(AnalyticCookiesCategory::GOOGLE_ANALYTICS)
+                ->cookie(fn (Cookie $cookie) => $cookie->name('_ga')
+                    ->duration(2 * 365 * 24 * 60)
+                    ->description(__('cookieConsent::cookies.defaults._ga'))
+                )
+                ->cookie(fn (Cookie $cookie) => $cookie->name('_ga_'.strtoupper($key))
+                    ->duration(2 * 365 * 24 * 60)
+                    ->description(__('cookieConsent::cookies.defaults._ga_ID'))
+                )
+                ->cookie(fn (Cookie $cookie) => $cookie->name('_gid')
+                    ->duration(24 * 60)
+                    ->description(__('cookieConsent::cookies.defaults._gid'))
+                )
+                ->accepted(fn (Consent $consent) => $consent
+                    ->script('<script async src="https://www.googletagmanager.com/gtag/js?id='.$id.'"></script>')
+                    ->script(
+                        '<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag(\'js\',new Date());gtag(\'config\',\''.$id.'\', {\'anonymize_ip\':'.$anonymize.'});</script>'
+                    )
+                );
+        });
     }
 }

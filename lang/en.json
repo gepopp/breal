@@ -165,5 +165,9 @@
     "makler.table.rent_buy": "Rent / Buy",
     "makler.table.postal_code": "Postal Code",
     "makler.table.on_request": "On Request",
-    "Corporate Service": "Corporate Service"
+    "Corporate Service": "Corporate Service",
+    "unfound": "Page not found",
+    "Hausverwaltung": "Property management",
+    "Immobilien": "Real estate",
+    "Technik": "Technical services"
 }

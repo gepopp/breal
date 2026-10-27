@@ -20,7 +20,7 @@ class SetLocale
 
         // Ensure locale is always a valid value
         if (!in_array($locale, ['de', 'en'])) {
-            $locale = config('app.fallback_locale', 'de');
+            $locale = config('app.locale', 'de');
         }
 
         App::setLocale($locale);

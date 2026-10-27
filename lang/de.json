@@ -271,5 +271,9 @@
     "makler.table.rent_buy": "Miete / Kauf",
     "makler.table.postal_code": "Postleitzahl",
     "makler.table.on_request": "Auf Anfrage",
-    "Corporate Service": "Unternehmensservice"
+    "Corporate Service": "Unternehmensservice",
+    "unfound": "Seite nicht gefunden",
+    "Hausverwaltung": "Hausverwaltung",
+    "Immobilien": "Immobilien",
+    "Technik": "Technik"
 }
