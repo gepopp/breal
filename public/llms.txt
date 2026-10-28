@@ -27,6 +27,7 @@ Die Website ist auf Deutsch (Österreich). Eine englische Fassung ist unter http
 - [ÖNORM B 1300 / B 1301](https://www.bereal-immobilien.at/leistung/onorm-b-1300-b-1301)
 - [Leistungen von be real Technik](https://www.bereal-immobilien.at/technik/leistungen): Baumanagement und technische Gebäudeverwaltung
 - [Immobiliensuche](https://www.bereal-immobilien.at/makler/immobiliensuche): Aktuelle Objekte von be real Makler
+- [Über be real Makler](https://www.bereal-immobilien.at/makler/ueber-uns): Geschäftsführerin und Eigentümerin Tanja Bachschwöller
 
 ## Service und Information
 

@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Enums\CompaniesEnum;
 use App\Mail\VerificationEmail;
 use App\Models\ContactRequest;
 use App\Settings\PagesSettings;
@@ -19,7 +20,10 @@ class ContactForm extends Component
 
     public bool $address = true;
 
-    protected string $company = '';
+    /**
+     * The business area (name of CompaniesEnum) of the page the form is on.
+     */
+    public string $company = '';
 
     public array $uploads = [];
 
@@ -37,6 +41,8 @@ class ContactForm extends Component
 
     public function mount()
     {
+        $this->company = CompaniesEnum::getByRoute();
+
         if (app()->environment('local')) {
             $this->data = [
                 'subject' => 'Test-Betreff',
@@ -102,7 +108,7 @@ class ContactForm extends Component
     {
         $data = $this->validate();
 
-        $data['data']['company'] = $this->company;
+        $data['data']['company'] = CompaniesEnum::tryFrom($this->company)?->name ?? CompaniesEnum::Hausverwaltung->name;
         $data['data']['token'] = Str::uuid();
         $data['data']['locale'] = app()->getLocale();
 

@@ -17,8 +17,7 @@ class PageMetaTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * Public pages that render without database content. /makler/ueber-uns is
-     * left out until the page has content.
+     * Public pages that render without database content.
      *
      * @return list<string>
      */
@@ -26,7 +25,7 @@ class PageMetaTest extends TestCase
     {
         return [
             '/', '/leistungen', '/service', '/karriere', '/kontakt', '/team', '/faq', '/unternehmensservice',
-            '/makler/start', '/makler/immobiliensuche', '/makler/karriere', '/makler/kontakt', '/makler/team', '/makler/faq',
+            '/makler/start', '/makler/ueber-uns', '/makler/immobiliensuche', '/makler/karriere', '/makler/kontakt', '/makler/team', '/makler/faq',
             '/technik/start', '/technik/karriere', '/technik/kontakt', '/technik/team', '/technik/faq', '/technik/leistungen',
             '/impressum', '/barrierefreiheit', '/datenschutz',
         ];

@@ -28,7 +28,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-12 my-12">
                     @foreach($department->contacts as $contact)
-                        <livewire:contact-person :contactperson="$contact"/>
+                        <x-contact-person :contactperson="$contact"/>
                     @endforeach
                 </div>
 
@@ -43,7 +43,7 @@
 
                         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-12 my-12">
                             @foreach($sub->contacts as $contact)
-                                <livewire:contact-person :contactperson="$contact"/>
+                                <x-contact-person :contactperson="$contact"/>
                             @endforeach
                         </div>
                     </div>

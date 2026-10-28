@@ -1,6 +1,10 @@
 <x-mail::message>
 # Eine neue Kontaktanfrage wurde soeben bestätigt.
 
+@if($contactRequest->company)
+**Bereich:** {{ $contactRequest->company }}
+@endif
+
 {{ $contactRequest->subject }}
 
 {{ $contactRequest->firstname }} {{ $contactRequest->lastname }}

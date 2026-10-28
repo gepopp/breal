@@ -26,7 +26,7 @@ class SitemapBuilder
 {
     /**
      * Static pages with the settings groups and models whose last change
-     * decides their lastmod. /makler/ueber-uns is left out until it has content.
+     * decides their lastmod.
      *
      * @var array<string, array{groups: list<string>, models: list<class-string>}>
      */
@@ -40,6 +40,7 @@ class SitemapBuilder
         'hausverwaltung.faq' => ['groups' => ['translatable_faq'], 'models' => [Question::class]],
         'verwalterservice' => ['groups' => ['translatable_verwalterservicelandingpage'], 'models' => [ServiceCard::class]],
         'makler.home' => ['groups' => ['translatable_makler'], 'models' => [Realty::class]],
+        'makler.ueber-uns' => ['groups' => ['translatable_makler'], 'models' => []],
         'makler.immobiliensuche' => ['groups' => ['translatable_search'], 'models' => [Realty::class]],
         'makler.karriere' => ['groups' => ['translatable_vacancies'], 'models' => [JobVacancy::class]],
         'makler.kontakt' => ['groups' => ['translatable_contact', 'pages'], 'models' => [Department::class, Contactperson::class]],

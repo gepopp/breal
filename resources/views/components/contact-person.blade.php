@@ -1,3 +1,4 @@
+@props(['contactperson'])
 <div class="fade flex space-x-4 items-start">
     <div class="w-24 aspect-square shrink-0">
         <div class="rounded-full bg-logo/15 w-full aspect-square overflow-hidden">

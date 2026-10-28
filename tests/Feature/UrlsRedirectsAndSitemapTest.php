@@ -117,9 +117,16 @@ class UrlsRedirectsAndSitemapTest extends TestCase
         $this->assertDatabaseHas('competences', ['slug' => 'alias-qui-vel-ea-repellendus']);
     }
 
-    public function test_empty_about_page_is_not_indexed(): void
+    public function test_about_page_shows_the_makler_about_content_and_is_indexable(): void
     {
-        $this->get('/makler/ueber-uns')->assertOk()->assertSee('<meta name="robots" content="noindex">', false);
+        $response = $this->get('/makler/ueber-uns')
+            ->assertOk()
+            ->assertSee('Über uns')
+            ->assertSee('Geschäftsführerin und Eigentümerin Tanja Bachschwöller')
+            ->assertDontSee('name="robots"', false);
+
+        $this->assertSame(1, substr_count($response->getContent(), '<h1'));
+        $this->get('/en/makler/ueber-uns')->assertOk()->assertSee('About us')->assertSee('Managing Director and Owner Tanja Bachschwöller');
     }
 
     public function test_sitemap_lists_every_page_once_with_lastmod_and_alternates(): void
@@ -142,8 +149,10 @@ class UrlsRedirectsAndSitemapTest extends TestCase
             $this->assertContains($this->root().($path === '/' ? '' : $path), $locations, $path);
         }
 
+        $this->assertContains($this->root().'/makler/ueber-uns', $locations);
+        $this->assertContains($this->root().'/en/makler/ueber-uns', $locations);
+
         foreach ($locations as $location) {
-            $this->assertStringNotContainsString('/makler/ueber-uns', $location);
             $this->assertStringNotContainsString('/sitemap', $location);
         }
     }
