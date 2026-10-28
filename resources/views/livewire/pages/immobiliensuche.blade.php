@@ -1,7 +1,7 @@
 <x-section>
 
     <div @class([ 'max-w-screen w-full', 'md:max-w-sm lg:max-w-lg' => !is_array($preparedText)])>
-        <x-headings :animate="false">
+        <x-headings level="1" :animate="false">
             <x-slot name="tag">{{ $settings->search_header }}</x-slot>
             {!! $settings->search_subheader !!}
         </x-headings>

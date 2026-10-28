@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages;
 
 use App\Models\ServiceCard;
+use App\Services\PageMeta;
 use App\Settings\VerwalterserviceLandingpageSettings;
 use Livewire\Component;
 
@@ -14,6 +15,12 @@ class Verwalterservice extends Component
             'settings' => app(VerwalterserviceLandingpageSettings::class),
             'serviceCards' => ServiceCard::where('type', 'service')->orderBy('order')->get(),
             'featureCards' => ServiceCard::where('type', 'feature')->orderBy('order')->get(),
-        ]);
+        ])
+            ->title(PageMeta::title('unternehmensservice'))
+            ->layout('components.layouts.site')
+            ->layoutData([
+                'canonical' => route('verwalterservice'),
+                'description' => PageMeta::description('unternehmensservice'),
+            ]);
     }
 }

@@ -1,3 +1,4 @@
+@props(['title' => null, 'description' => null, 'canonical' => null, 'noindex' => false])
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() === 'de' ? 'de-AT' : str_replace('_', '-', app()->getLocale()) }}">
 <head>

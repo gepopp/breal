@@ -3,7 +3,7 @@
 namespace App\Livewire\Pages;
 
 use App\Enums\CompaniesEnum;
-use App\Settings\PagesSettings;
+use App\Services\PageMeta;
 use App\Settings\TeamSettings;
 use App\Traits\SplitsHtmlText;
 use Livewire\Component;
@@ -29,11 +29,11 @@ class Team extends Component
 
         return view('livewire.pages.team',
             compact('pagesSettings', 'preparedText'))
-            ->title(__('pages.team.title'))
+            ->title(PageMeta::title('team'))
             ->layout('components.layouts.site')
             ->layoutData([
                 'canonical' => route($this->company === CompaniesEnum::Hausverwaltung->name ? 'hausverwaltung.team' : ($this->company === CompaniesEnum::Makler->name ? 'makler.team' : 'technik.team')),
-                'description' => __('pages.team.description'),
+                'description' => PageMeta::description('team'),
             ]);
     }
 }

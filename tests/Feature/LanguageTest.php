@@ -17,6 +17,7 @@ class LanguageTest extends TestCase
     {
         return [
             'start' => ['/'],
+            'makler' => ['/makler/start'],
             'technik' => ['/technik/start'],
             'kontakt' => ['/kontakt'],
             'faq' => ['/faq'],
@@ -31,8 +32,8 @@ class LanguageTest extends TestCase
 
         $response->assertOk();
         $response->assertSee('<html lang="de-AT">', false);
-        $response->assertSee(__('facility_management.title'));
-        $response->assertDontSee('facility_management.title');
+        $response->assertSee(__('meta.start.title'));
+        $response->assertDontSee('meta.start.title');
     }
 
     public function test_english_accept_language_header_does_not_switch_the_language(): void
@@ -41,7 +42,7 @@ class LanguageTest extends TestCase
 
         $response->assertOk();
         $response->assertSee('<html lang="de-AT">', false);
-        $response->assertSee(__('facility_management.title'));
+        $response->assertSee(__('meta.start.title'));
     }
 
     public function test_default_locale_is_german(): void

@@ -6,7 +6,7 @@
         "text-makler-950" => \Illuminate\Support\Facades\Route::is('makler.*'),
     ])>
         <div class="max-w-md w-full mb-24">
-            <x-headings>
+            <x-headings level="1">
                 <x-slot name="tag">{{ $pagesSettings->contact_header }}</x-slot>
                 {{ $pagesSettings->contact_subheader }}
             </x-headings>

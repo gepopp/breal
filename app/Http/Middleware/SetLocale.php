@@ -18,11 +18,11 @@ class SetLocale
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $locale = $request->attributes->get('locale', config('app.locale'));
+        $locale = $request->attributes->get('locale', config('app.default_locale'));
 
         // Ensure locale is always a valid value
         if (! in_array($locale, ['de', 'en'])) {
-            $locale = config('app.locale', 'de');
+            $locale = config('app.default_locale', 'de');
         }
 
         App::setLocale($locale);

@@ -28,7 +28,7 @@ class Hero extends Component
 
     public function render(MaklerLandingpageSettings $settings)
     {
-        $images = Media::whereIn('id', $settings->hero_images)->get();
+        $images = Media::whereIn('id', $settings->hero_images ?? [])->get();
         $realEstates = Realty::all();
         $preparedText = $this->prepareText();
 

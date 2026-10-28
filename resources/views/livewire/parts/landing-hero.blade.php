@@ -5,7 +5,7 @@
          x-ref="textCol"
             @class(['flex justify-center items-center md:min-h-[70vh] mt-12 md:mt-0'])>
         <div @class(['md:max-w-sm lg:max-w-lg lg:my-48 px-4'])>
-            <x-headings>
+            <x-headings level="1">
                 <x-slot name="tag">
                     {{ $settings->hero_header }}
                 </x-slot>

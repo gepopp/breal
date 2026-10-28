@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Pages;
 
+use App\Services\PageMeta;
 use Livewire\Component;
 
 class JobVacancy extends Component
@@ -22,11 +23,11 @@ class JobVacancy extends Component
     public function render()
     {
         return view('livewire.pages.job-vacancy')
-            ->title($this->jobVacancy->title)
+            ->title(PageMeta::compose($this->jobVacancy->title, __('meta.job.suffix')))
             ->layout('components.layouts.site')
             ->layoutData([
                 'canonical' => route('stellenanzeige', $this->jobVacancy),
-                'description' => $this->jobVacancy->description,
+                'description' => PageMeta::excerpt($this->jobVacancy->description),
             ]);
     }
 }

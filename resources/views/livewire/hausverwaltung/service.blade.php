@@ -22,7 +22,7 @@
         ])>
                     <span class="font-logo dark:text-white">{{ $pagesSettings->services_header }}</span>
                 </div>
-                <div class="text-xl font-bold dark:text-white">{{ $pagesSettings->services_subheader }}</div>
+                <h1 class="text-xl font-bold dark:text-white">{{ $pagesSettings->services_subheader }}</h1>
             </div>
         </div>
         <div class="prose max-w-full">

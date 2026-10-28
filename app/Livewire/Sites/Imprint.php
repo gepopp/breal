@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Sites;
 
+use App\Services\PageMeta;
 use App\Settings\PagesSettings;
-use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 class Imprint extends Component
@@ -11,11 +11,11 @@ class Imprint extends Component
     public function render(PagesSettings $pagesSettings)
     {
         return view('livewire.sites.imprint', compact('pagesSettings'))
-            ->title(__('legal.imprint_title'))
+            ->title(PageMeta::title('impressum'))
             ->layout('components.layouts.site')
             ->layoutData([
                 'canonical' => route('impressum'),
-                'description' => __('pages.imprint.description'),
+                'description' => PageMeta::description('impressum'),
             ]);
     }
 }

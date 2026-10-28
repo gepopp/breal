@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages;
 
 use App\Models\Competence;
+use App\Services\PageMeta;
 use Livewire\Component;
 
 class Compentence extends Component
@@ -21,11 +22,11 @@ class Compentence extends Component
     {
         return view('livewire.pages.compentence',
             ['description' => $this->competence->description])
-            ->title($this->competence->name)
+            ->title(PageMeta::compose($this->competence->name))
             ->layout('components.layouts.site')
             ->layoutData([
                 'canonical' => route($this->company === 'Hausverwaltung' ? 'hausverwaltung.leistung' : ($this->company === 'Makler' ? 'makler.leistung' : 'technik.leistung'), $this->competence),
-                'description' => $this->competence->description,
+                'description' => PageMeta::excerpt($this->competence->description),
             ]);
     }
 }

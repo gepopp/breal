@@ -3,7 +3,7 @@
 namespace App\Livewire\Pages;
 
 use App\Models\Realty;
-use App\Settings\PagesSettings;
+use App\Services\PageMeta;
 use App\Settings\SearchSettings;
 use App\Traits\SplitsHtmlText;
 use Illuminate\Support\Facades\DB;
@@ -73,8 +73,8 @@ class Immobiliensuche extends Component
         $this->arten = DB::table('realties')->select('nutzungsart')->distinct()->get()->toArray();
         $this->typen = DB::table('realties')->select('vermarktungsart')->distinct()->get()->toArray();
         $this->plz = DB::table('realties')->select('plz', 'ort')->distinct()->get()->toArray();
-        $this->min_rooms = DB::table('realties')->min('zimmer');
-        $this->max_rooms = DB::table('realties')->max('zimmer');
+        $this->min_rooms = (int) DB::table('realties')->min('zimmer');
+        $this->max_rooms = (int) DB::table('realties')->max('zimmer');
         $this->min_price = (int) DB::table('realties')->min('preis');
         $this->max_price = (int) DB::table('realties')->max('preis');
         $this->min_space = (int) DB::table('realties')->min('wohnflaeche');
@@ -163,11 +163,11 @@ class Immobiliensuche extends Component
         $preparedText = $this->prepareText($settings->search_introtext);
 
         return view('livewire.pages.immobiliensuche', compact('settings', 'preparedText'))
-            ->title(__('pages.immobiliensuche.title'))
+            ->title(PageMeta::title('immobiliensuche'))
             ->layout('components.layouts.site')
             ->layoutData([
                 'canonical' => route('makler.immobiliensuche'),
-                'description' => __('pages.immobiliensuche.description'),
+                'description' => PageMeta::description('immobiliensuche'),
             ]);
     }
 }

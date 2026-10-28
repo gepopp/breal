@@ -56,7 +56,7 @@ class TranslationKeysTest extends TestCase
                 }
 
                 preg_match_all(
-                    '/(?:__|trans|@lang|Lang::get)\(\s*([\'"])((?:(?!\1).)+)\1/',
+                    '/(?:__|trans|@lang|Lang::get)\(\s*([\'"])((?:(?!\1).)+)\1(?!\s*\.)/',
                     $file->getContents(),
                     $matches
                 );

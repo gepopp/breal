@@ -4,7 +4,7 @@ namespace App\Livewire\Pages;
 
 use App\Enums\CompaniesEnum;
 use App\Models\JobVacancy;
-use App\Settings\PagesSettings;
+use App\Services\PageMeta;
 use App\Settings\VacanciesSettings;
 use App\Traits\SplitsHtmlText;
 use Livewire\Component;
@@ -28,15 +28,15 @@ class Vacancies extends Component
     {
         $preparedText = $this->prepareText();
         $vacancies = JobVacancy::where('from', '<', now())->where('to', '>', now())->get();
-        $description = __('pages.vacancies.description');
+        $description = PageMeta::description('karriere');
 
         return view('livewire.pages.vacancies',
             compact('pagesSettings', 'preparedText', 'vacancies', 'description'))
-            ->title(__('pages.vacancies.title'))
+            ->title(PageMeta::title('karriere'))
             ->layout('components.layouts.site')
             ->layoutData([
                 'canonical' => route($this->company === CompaniesEnum::Hausverwaltung->name ? 'hausverwaltung.karriere' : ($this->company === CompaniesEnum::Makler->name ? 'makler.karriere' : 'technik.karriere')),
-                'description' => __('pages.vacancies.description'),
+                'description' => PageMeta::description('karriere'),
             ]);
     }
 }

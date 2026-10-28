@@ -43,18 +43,24 @@ Briefing: "Sprache, ganze Website", "Platzhalter", "Cookie-Hinweis", "Kleinigkei
   - The ENGLISH/DEUTSCH switcher in navbar and preheader still shows for logged-in users only and now links to the other language's URL. Showing it to everyone is a product decision, since English content may be incomplete.
   - Tests: `tests/Feature/EnglishPrefixTest.php`. Also verified with `route:cache`.
 - [ ] Follow-ups for `/en`: add English URLs to the sitemap (WP4), unknown `/en/...` paths return HTTP 200 like German ones (soft 404, WP4), check English texts/settings (`*_en` settings and translatable models) for gaps, decide whether to expose the language switcher publicly.
-- [ ] Makler landing page (`/makler/start`) returns 500 when its settings are empty (`Makler\Parts\Hero` calls `whereIn('id', null)`), so it is not in the test list of `LanguageTest`. Harden or seed settings in tests.
+- [x] Makler landing page (`/makler/start`) returned 500 when its settings were empty (`Makler\Parts\Hero` called `whereIn('id', null)`, the about image was null). Fixed during WP2; the page is back in the `LanguageTest` list and covered by `PageMetaTest`. The property search crashed on an empty realties table too (fixed).
 - Verified locally (Herd, production DB copy): no `Accept-Language` gives German titles, `lang="de-AT"`, no raw keys; English header still gives German.
 - Done when (verify on production after deploy): `curl` without `Accept-Language` returns German text, no `word.word` placeholders, correct `lang`. Note production `.env` has `APP_FALLBACK_LOCALE=en`; harmless now but should be set to `de`.
 
 ### WP2 Titles, descriptions, headings, share preview
 Briefing: "Seitentitel und Beschreibungen", "Kleinigkeiten", Technik #4 and #7.
-- [ ] Real `<title>` (about 60 characters) and meta description (about 155) per page; proposals for Startseite, Makler, Technik, Team, Karriere are in the briefing (p. 7). Datenschutz and error pages must not be just "bereal".
-- [ ] Exactly one `<h1>` per page (start page has none today).
-- [ ] Remove `<meta name="keywords" content="HTML, CSS, JavaScript">` from `partials/head.blade.php`.
-- [ ] Open Graph tags (title, description, image) on all pages; favicon (a `favicon.png` link exists; verify the file and add `.ico`/touch icon if missing).
-- [ ] Canonical URLs: one per page, `www` host, no query noise.
-- Done when: a crawler test lists unique title/description/H1 for every route.
+Status 2026-10-28: implemented and tested locally (not committed, not deployed). The crawler test is `tests/Feature/PageMetaTest.php`.
+- [x] Real `<title>` and meta description on every page, German and English, all unique. The briefing's proposals are used verbatim for Startseite, Makler, Technik, Team and Karriere. Texts live in the language files (`meta.<page>.title|description`; `meta.makler.*` and `meta.technik.*` override on those sections); `App\Services\PageMeta` selects them and builds titles for dynamic pages: competences ("<name> – be real Verwaltung"), FAQ answers, job ads ("… – Karriere bei be real") and properties (ALL-CAPS titles become title case; description from `freitexte.objektbeschreibung`). Titles are at most 60 characters (the home title from the briefing has 63), descriptions about 77 to 155; texts are cut at word boundaries and stripped of HTML. The unused old title/description keys were removed.
+- [x] Fixed on the way: property pages had the title `bereal` (the component read `titel`, the field is `title`); FAQ detail, Unternehmensservice and 404 had `bereal`; two description tags per page; "Immobilienmanagment" typo in the Impressum and Barrierefreiheit headings (WP7).
+- [x] Exactly one `<h1>` on every page: the main heading of each page (hero of the three start pages, Leistungen, Service, Karriere, Kontakt, Team, FAQ, FAQ detail, Immobiliensuche, competence and job pages, 404) now renders as `<h1>` (no visual change; the heading component already supported `level="1"`). Exception: `/makler/ueber-uns` is an empty scaffold (WP9/WP6) and has no H1.
+- [x] `<meta name="keywords">` removed.
+- [x] Open Graph (`og:title|description|url|type|locale|site_name|image` with width, height, alt) and Twitter card (`summary_large_image`) on all pages; the image is chosen per section: `public/og-image.png` (be real Immobilien, brand blue), `og-makler.png`, `og-technik.png` (1200x630, white section logo on the section colour, rendered from the SVG logos). `<meta name="theme-color" content="#002540">`.
+- [x] Favicon: `public/favicon.ico` was an empty (0 byte) file; now a valid multi-size icon (16/32/48) built from `favicon.png`, plus `apple-touch-icon.png` (180x180) and the links in the head.
+- [x] Canonical: one per page with the `www` host (APP_URL on production), no query noise, self-canonical per service tab and per language.
+- [x] 404 page: own title/description, H1, `noindex` (the HTTP status is still 200, WP4).
+- [x] Hardening found by the crawler test (empty database): Makler about image, property search with no properties; `config('app.default_locale')` so a request to `/en` cannot leak English into later requests of the same process (tests, queue workers).
+- [ ] **Placeholder, needs delivery from Ronald (see "Deliverables needed from Ronald / the client" in section 5):** the share images `public/og-image.png`, `og-makler.png` and `og-technik.png` are a technical placeholder (white section logo on the section colour, generated by us). Final designed images are to be supplied (1200 x 630 px, PNG or JPG, one per section) and dropped in under the same file names; no code change needed. A per-page image for properties (first photo) is possible later. The Makler and Technik FAQ pages show the Hausverwaltung questions (same content on all three), so their meta text is generic.
+- [ ] Open: per-service titles on `/service?tab=<slug>` (all tabs share the page title).
 
 ### WP3 Links and contact data per section
 Briefing: "E-Mail- und Telefonlinks", "Makler, Kontakt", "Makler und Technik, Kontakt und Fußzeile", "Öffnungszeiten".
@@ -164,4 +170,16 @@ Common: Franz-Josefs-Kai 65/Mezzanin, 1010 Wien, Tel. +43 1 535 36 19 (`tel:+431
 - Production PHP is still 8.3; switching to 8.5 in Plesk is a separate ops step (check extensions `intl`, `exif`, `zip`, `bcmath`, `pdo_sqlite`, php.ini, rollback plan).
 - Local images load from the production S3 bucket via public URLs only (dummy keys). Admin login is LinkedIn OAuth and does not work locally.
 
-Inputs from the client / Ronald (not ours, but they block parts above): legal details per company (Gewerbe, Kammer, Aufsichtsbehörde, Firmenbuchgericht), Datenschutz text review, `llms.txt` text, FAQ updates, team content and Über-uns content, social profile URLs, new logo files.
+### Deliverables needed from Ronald / the client
+Not ours, but they block or finish parts above. This list is the basis for the "what is missing" report; add items as they come up.
+
+| Deliverable | Needed for | Status of what is in the repo |
+|---|---|---|
+| **Share images**, one per section (be real Immobilien, Makler, Technik): 1200 x 630 px, PNG or JPG, replace `public/og-image.png`, `og-makler.png`, `og-technik.png` | WP2 (link previews on WhatsApp, LinkedIn, Facebook, Google) | **Placeholder** (white logo on section colour, generated by us) |
+| Final `llms.txt` text (group, companies, services, contact, key links; decide whether the English version is mentioned) | WP6 | Placeholder text, marked with a comment in the file |
+| New logo files for Immobilien, Verwaltung, Makler, Technik (RGB and CMYK), social media profile URLs (`sameAs`) | WP5, social profiles | Current logos in `public/logos` |
+| Legal details per company: Gewerbe, Kammer, Aufsichtsbehörde, Firmenbuchgericht; review of the Datenschutz text (German, and English if wanted) | WP7 | Data in section 4 only |
+| English texts: 18 of 19 FAQ questions and answers, 3 services, 4 job ads (and the Datenschutz/Impressum/Barrierefreiheit pages if an English version is wanted) | WP10 | English falls back to German |
+| FAQ updates (Wertsicherung, Kurzzeitvermietung, Stromanbieter) and "Stand" dates | WP9 | Outdated texts still online |
+| Team content for Makler and Technik (persons, departments), content for `/makler/ueber-uns`; decision whether to hide these pages until then | WP6, WP9 | Pages exist, show no persons or no content |
+| Decisions: expose the language switcher publicly, domain redirects/access for `bereal-makler.at` and `bereal-technik.at`, Search Console/Bing access | WP1, WP8 | Open |

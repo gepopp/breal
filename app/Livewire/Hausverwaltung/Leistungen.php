@@ -4,6 +4,7 @@ namespace App\Livewire\Hausverwaltung;
 
 use App\Enums\CompaniesEnum;
 use App\Models\Competence;
+use App\Services\PageMeta;
 use App\Settings\LeistungenSettings;
 use App\Traits\SplitsHtmlText;
 use Illuminate\Support\Collection;
@@ -26,16 +27,16 @@ class Leistungen extends Component
 
     public function render(LeistungenSettings $pagesSettings)
     {
-        $text = strtolower($this->company).'_leistungen_introtext_' . app()->getLocale() ?? 'de';
+        $text = strtolower($this->company).'_leistungen_introtext_'.app()->getLocale() ?? 'de';
         $preparedText = $this->prepareText($pagesSettings->$text);
 
         return view('livewire.hausverwaltung.leistungen',
             compact('pagesSettings', 'preparedText'))
-            ->title(__('pages.leistungen.title'))
+            ->title(PageMeta::title('leistungen'))
             ->layout('components.layouts.site')
             ->layoutData([
                 'canonical' => route($this->company === CompaniesEnum::Hausverwaltung->name ? 'hausverwaltung.leistungen' : ($this->company === CompaniesEnum::Makler->name ? 'makler.leistungen' : 'technik.leistungen')),
-                'description' => __('pages.leistungen.description'),
+                'description' => PageMeta::description('leistungen'),
             ]);
     }
 }

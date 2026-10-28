@@ -9,7 +9,7 @@
                 $header = strtolower($company) . '_leistungen_header';
                 $subheader = strtolower($company) . '_leistungen_subheader';
             @endphp
-            <x-headings>
+            <x-headings level="1">
                 <x-slot name="tag">{{ $pagesSettings->$header }}</x-slot>
                 {{ $pagesSettings->$subheader }}
             </x-headings>

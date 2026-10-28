@@ -9,7 +9,7 @@
         </div>
     </div>
     <x-section class="bg-makler-500 dark:bg-makler-950 !text-white pt-36">
-        <x-headings ondark="true">
+        <x-headings level="1" ondark="true">
             <x-slot name="tag">realtor</x-slot>
             {{ $settings->intro_subtitle }}
         </x-headings>

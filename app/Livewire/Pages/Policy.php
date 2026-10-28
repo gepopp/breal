@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Pages;
 
+use App\Services\PageMeta;
 use App\Settings\PagesSettings;
 use Livewire\Component;
 
@@ -10,11 +11,11 @@ class Policy extends Component
     public function render(PagesSettings $pagesSettings)
     {
         return view('livewire.pages.policy', compact('pagesSettings'))
-            ->title(__('pages.policy.title'))
+            ->title(PageMeta::title('datenschutz'))
             ->layout('components.layouts.site')
             ->layoutData([
                 'canonical' => route('datenschutz'),
-                'description' => __('pages.policy.description'),
+                'description' => PageMeta::description('datenschutz'),
             ]);
     }
 }

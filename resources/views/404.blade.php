@@ -1,8 +1,11 @@
-<x-layouts.site xmlns:flus="http://www.w3.org/1999/html">
+<x-layouts.site xmlns:flus="http://www.w3.org/1999/html"
+                 :title="\App\Services\PageMeta::title('notfound')"
+                 :description="\App\Services\PageMeta::description('notfound')"
+                 :noindex="true">
         <div class="grid grid-cols-1 lg:grid-cols-2 w-full">
             <div class="flex justify-center items-center min-h-[70vh]">
                 <div class="max-w-md">
-                    <x-headings>
+                    <x-headings level="1">
                         <x-slot name="tag">{{ __('unfound') }}</x-slot>
                         {{ __('Diesen Inhalt konnten wir leider nicht finden') }}
                     </x-headings>

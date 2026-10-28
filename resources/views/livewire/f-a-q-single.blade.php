@@ -2,7 +2,7 @@
 
     <div class="my-12">
 
-        <x-headings>
+        <x-headings level="1">
             <x-slot name="tag">informed</x-slot>
             {!! $faq->question !!}
         </x-headings>

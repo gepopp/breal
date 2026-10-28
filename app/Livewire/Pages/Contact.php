@@ -3,8 +3,8 @@
 namespace App\Livewire\Pages;
 
 use App\Enums\CompaniesEnum;
+use App\Services\PageMeta;
 use App\Settings\ContactSettings;
-use App\Settings\PagesSettings;
 use App\Traits\SplitsHtmlText;
 use Livewire\Component;
 
@@ -28,11 +28,11 @@ class Contact extends Component
         $preparedText = $this->prepareText();
 
         return view('livewire.pages.contact', compact('pagesSettings', 'preparedText'))
-            ->title(__('pages.contact.title'))
+            ->title(PageMeta::title('kontakt'))
             ->layout('components.layouts.site')
             ->layoutData([
                 'canonical' => route($this->company === CompaniesEnum::Hausverwaltung->name ? 'hausverwaltung.kontakt' : ($this->company === CompaniesEnum::Makler->name ? 'makler.kontakt' : 'technik.kontakt')),
-                'description' => __('pages.contact.description'),
+                'description' => PageMeta::description('kontakt'),
             ]);
     }
 }

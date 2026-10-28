@@ -15,8 +15,8 @@ class EnglishPrefixTest extends TestCase
 
         $response->assertOk();
         $response->assertSee('<html lang="en">', false);
-        $response->assertSee($this->englishTranslation('facility_management.title'));
-        $response->assertDontSee('facility_management.title');
+        $response->assertSee($this->englishTranslation('meta.start.title'));
+        $response->assertDontSee('meta.start.title');
     }
 
     public function test_trailing_slash_after_the_prefix_serves_the_same_page(): void

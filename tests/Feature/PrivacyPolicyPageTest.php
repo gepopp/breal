@@ -37,7 +37,7 @@ class PrivacyPolicyPageTest extends TestCase
     {
         $response = $this->get('/datenschutz');
 
-        $response->assertSee('<title>Datenschutzerklärung | be real Immobilien</title>', false);
+        $response->assertSee('<title>Datenschutzerklärung – be real Immobilien</title>', false);
         $response->assertDontSee('Bontus');
         $response->assertSee('<link rel="canonical" href="'.url('datenschutz').'">', false);
         $this->assertSame(1, substr_count($response->getContent(), '<h1'));
@@ -50,7 +50,7 @@ class PrivacyPolicyPageTest extends TestCase
         $response = $this->get('/en/datenschutz');
 
         $response->assertOk();
-        $response->assertSee('<title>Privacy Policy | be real Immobilien</title>', false);
+        $response->assertSee('<title>Privacy Policy – be real Immobilien</title>', false);
         $response->assertSee('Privacy policy of be real Immobilienmanagement GmbH');
         $response->assertSee('<link rel="alternate" hreflang="de-AT" href="'.url('datenschutz').'">', false);
     }

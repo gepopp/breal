@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Pages;
 
-use App\Models\Question;
 use App\Enums\CompaniesEnum;
+use App\Models\Question;
+use App\Services\PageMeta;
 use App\Settings\FaqSettings;
-use App\Settings\PagesSettings;
 use App\Traits\SplitsHtmlText;
 use Livewire\Component;
 
@@ -18,6 +18,7 @@ class FAQ extends Component
     public string $text = '';
 
     public string $locale = 'de';
+
     public ?array $faqs = null;
 
     public function mount()
@@ -35,11 +36,11 @@ class FAQ extends Component
         $preparedText = $this->prepareText();
 
         return view('livewire.pages.f-a-q', compact('pagesSettings', 'preparedText'))
-            ->title(__('pages.faq.title'))
+            ->title(PageMeta::title('faq'))
             ->layout('components.layouts.site')
             ->layoutData([
                 'canonical' => route($this->company === CompaniesEnum::Hausverwaltung->name ? 'hausverwaltung.faq' : ($this->company === CompaniesEnum::Makler->name ? 'makler.faq' : 'technik.faq')),
-                'description' => __('pages.faq.description'),
+                'description' => PageMeta::description('faq'),
             ]);
     }
 }

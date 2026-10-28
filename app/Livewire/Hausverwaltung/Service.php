@@ -3,6 +3,7 @@
 namespace App\Livewire\Hausverwaltung;
 
 use App\Models\Service as ServiceModel;
+use App\Services\PageMeta;
 use App\Settings\PagesSettings;
 use App\Traits\SplitsHtmlText;
 use Livewire\Attributes\Url;
@@ -39,11 +40,11 @@ class Service extends Component
             ])->all(),
             'selected' => $selected ? $this->present($selected) : null,
         ])
-            ->title(__('pages.service.title'))
+            ->title(PageMeta::title('service'))
             ->layout('components.layouts.site')
             ->layoutData([
                 'canonical' => $selected && $selected->isNot($services->first()) ? $selected->link : route('hausverwaltung.service'),
-                'description' => __('pages.service.description'),
+                'description' => PageMeta::description('service'),
             ]);
     }
 

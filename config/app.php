@@ -80,6 +80,14 @@ return [
 
     'locale' => env('APP_LOCALE', 'de'),
 
+    /*
+    | Locale of requests without a language prefix. Unlike "locale" it is never
+    | changed by App::setLocale(), so a request to /en cannot leak its language
+    | into later requests handled by the same process.
+    */
+
+    'default_locale' => env('APP_LOCALE', 'de'),
+
     'fallback_locale' => env('APP_FALLBACK_LOCALE', 'de'),
 
     'faker_locale' => env('APP_FAKER_LOCALE', 'de_DE'),

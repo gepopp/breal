@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Landing;
 
+use App\Services\PageMeta;
 use App\Settings\TechnikLandingpageSettings;
 use Livewire\Component;
 
@@ -10,11 +11,11 @@ class Technik extends Component
     public function render(TechnikLandingpageSettings $settings)
     {
         return view('livewire.landing.technik', compact('settings'))
-            ->title(__('landing.technik.title'))
+            ->title(PageMeta::title('start'))
             ->layout('components.layouts.site')
             ->layoutData([
                 'canonical' => route('technik.home'),
-                'description' => __('landing.technik.description'),
+                'description' => PageMeta::description('start'),
             ]);
     }
 }

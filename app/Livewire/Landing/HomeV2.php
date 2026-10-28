@@ -3,6 +3,7 @@
 namespace App\Livewire\Landing;
 
 use App\Enums\CompaniesEnum;
+use App\Services\PageMeta;
 use App\Settings\HausverwaltungLandingpageSettings;
 use Livewire\Component;
 
@@ -12,14 +13,14 @@ class HomeV2 extends Component
 
     public function render(HausverwaltungLandingpageSettings $settings)
     {
-        $description = __('landing.home.description');
+        $description = PageMeta::description('start');
 
         return view('livewire.landing.home-v2', compact('settings', 'description'))
-            ->title(__('landing.home.title'))
+            ->title(PageMeta::title('start'))
             ->layout('components.layouts.site')
             ->layoutData([
                 'canonical' => route('hausverwaltung.home'),
-                'description' => __('landing.home.description'),
+                'description' => PageMeta::description('start'),
             ]);
     }
 }
