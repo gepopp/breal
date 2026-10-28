@@ -37,23 +37,23 @@ class PagesSettings extends BaseSettings
 
     public string $contactform_heading = 'Sagen Sie uns Hallo!';
 
-    public string $contactform_email = 'office@bontus-eybel.at';
+    public string $contactform_email = 'office@bereal-immobilien.at';
 
     public string $contactform_phone = '+43 1 535 36 19';
 
-    public string $contactform_address = 'Franz Josefs Kai 65, 1010 Wien';
+    public string $contactform_address = 'Franz-Josefs-Kai 65/Mezzanin, 1010 Wien';
 
-    public string $makler_contactform_email = 'office@bontus-eybel.at';
+    public string $makler_contactform_email = 'office@bereal-makler.at';
 
     public string $makler_contactform_phone = '+43 1 535 36 19';
 
-    public string $makler_contactform_address = 'Franz Josefs Kai 65, 1010 Wien';
+    public string $makler_contactform_address = 'Franz-Josefs-Kai 65/Mezzanin, 1010 Wien';
 
-    public string $technik_contactform_email = 'office@bontus-eybel.at';
+    public string $technik_contactform_email = 'office@bereal-technik.at';
 
     public string $technik_contactform_phone = '+43 1 535 36 19';
 
-    public string $technik_contactform_address = 'Franz Josefs Kai 65, 1010 Wien';
+    public string $technik_contactform_address = 'Franz-Josefs-Kai 65/Mezzanin, 1010 Wien';
 
     public string $contactform_terms = 'Ich bin mit der Verarbeitung und Speicherung meiner Daten, sowie mit der Kontaktaufnahme via E-Mail oder Telefon im Zuge der Bearbeitung meiner Anfrage einverstanden.';
 

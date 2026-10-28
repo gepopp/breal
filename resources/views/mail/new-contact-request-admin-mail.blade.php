@@ -7,7 +7,7 @@
 
 [{{ $contactRequest->email }}](mailto:{{ $contactRequest->email }})
 
-[{{ $contactRequest->phone }}](tel:{{ $contactRequest->phone }})
+[{{ $contactRequest->phone }}]({{ \App\Services\CompanyInfo::telUri($contactRequest->phone) }})
 
 @if($contactRequest->address)
 {{ $contactRequest->address }}

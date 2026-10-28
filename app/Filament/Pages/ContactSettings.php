@@ -2,11 +2,10 @@
 
 namespace App\Filament\Pages;
 
-use Filament\Forms\Components\TextInput;
+use BackedEnum;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Textarea;
-use BackedEnum;
-use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Pages\SettingsPage;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
@@ -15,11 +14,11 @@ use UnitEnum;
 
 class ContactSettings extends SettingsPage
 {
-    protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-phone';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-phone';
 
     protected static ?string $navigationLabel = 'Kontaktseiten';
 
-    protected static string | UnitEnum | null $navigationGroup = 'Seiteneinstellungen';
+    protected static string|UnitEnum|null $navigationGroup = 'Seiteneinstellungen';
 
     protected static ?string $title = 'Kontaktseiten Einstellungen';
 
@@ -82,47 +81,9 @@ class ContactSettings extends SettingsPage
                             ]),
                     ]),
 
-                Section::make('Kontaktdaten Hausverwaltung')
-                    ->schema([
-                        TextInput::make('contactform_email')
-                            ->label('E-Mail-Adresse')
-                            ->email()
-                            ->required(),
-                        TextInput::make('contactform_phone')
-                            ->label('Telefonnummer')
-                            ->required(),
-                        TextInput::make('contactform_address')
-                            ->label('Adresse')
-                            ->required(),
-                    ]),
-
-                Section::make('Kontaktdaten Makler')
-                    ->schema([
-                        TextInput::make('makler_contactform_email')
-                            ->label('E-Mail-Adresse')
-                            ->email()
-                            ->required(),
-                        TextInput::make('makler_contactform_phone')
-                            ->label('Telefonnummer')
-                            ->required(),
-                        TextInput::make('makler_contactform_address')
-                            ->label('Adresse')
-                            ->required(),
-                    ]),
-
-                Section::make('Kontaktdaten Technik')
-                    ->schema([
-                        TextInput::make('technik_contactform_email')
-                            ->label('E-Mail-Adresse')
-                            ->email()
-                            ->required(),
-                        TextInput::make('technik_contactform_phone')
-                            ->label('Telefonnummer')
-                            ->required(),
-                        TextInput::make('technik_contactform_address')
-                            ->label('Adresse')
-                            ->required(),
-                    ]),
+                Section::make('Kontaktdaten')
+                    ->description('Adresse, Telefon, E-Mail-Adressen und Öffnungszeiten werden zentral in config/company.php gepflegt und überall gleich ausgegeben.')
+                    ->schema([]),
 
                 Section::make('Kontaktpersonen')
                     ->schema([

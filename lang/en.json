@@ -94,7 +94,7 @@
     "footer.broker": "broker",
     "footer.phone": "Phone",
     "footer.fax": "Fax",
-    "footer.hours_mon_thu": "Mon-Thu",
+    "footer.hours_mon_thu": "Mon–Thu",
     "footer.hours_fri": "Fri",
     "footer.privacy": "Privacy Policy",
     "footer.accessibility": "Accessibility",
@@ -199,5 +199,8 @@
     "meta.notfound.title": "Page Not Found – be real Immobilien",
     "meta.notfound.description": "This page does not exist. Go to be real Verwaltung, be real Makler or be real Technik.",
     "meta.job.suffix": "Careers at be real",
-    "meta.og.image_alt": "Logo :name"
+    "meta.og.image_alt": "Logo :name",
+    "footer.opening_hours": "Opening hours",
+    "footer.phone_hours": "Phone hours",
+    "footer.and": "and"
 }

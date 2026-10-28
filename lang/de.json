@@ -200,7 +200,7 @@
     "footer.broker": "makler",
     "footer.phone": "Telefon",
     "footer.fax": "Fax",
-    "footer.hours_mon_thu": "Mo-Do",
+    "footer.hours_mon_thu": "Mo–Do",
     "footer.hours_fri": "Fr",
     "footer.privacy": "Datenschutz",
     "footer.accessibility": "Barrierefreiheit",
@@ -305,5 +305,8 @@
     "meta.notfound.title": "Seite nicht gefunden – be real Immobilien",
     "meta.notfound.description": "Diese Seite gibt es nicht. Hier geht es zu be real Verwaltung, be real Makler und be real Technik.",
     "meta.job.suffix": "Karriere bei be real",
-    "meta.og.image_alt": "Logo :name"
+    "meta.og.image_alt": "Logo :name",
+    "footer.opening_hours": "Öffnungszeiten",
+    "footer.phone_hours": "Telefonzeiten",
+    "footer.and": "und"
 }

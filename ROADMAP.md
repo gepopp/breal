@@ -64,12 +64,15 @@ Status 2026-10-28: implemented and tested locally (not committed, not deployed).
 
 ### WP3 Links and contact data per section
 Briefing: "E-Mail- und Telefonlinks", "Makler, Kontakt", "Makler und Technik, Kontakt und Fußzeile", "Öffnungszeiten".
-- [ ] Footer mail link uses `mailto:` (currently `mail:`); Karriere link has `mailto:%20office@...`; telephone links without spaces (`tel:+4315353619`).
-- [ ] Makler page: link `office@bereal-makler.at`, not `office@bereal-immobilien.at`.
-- [ ] Technik page: `office@bereal-technik.at` as a link, not plain text.
-- [ ] Footer and contact area per section show that section's company, e-mail as link, full address "Franz-Josefs-Kai 65/Mezzanin, 1010 Wien" (hyphens, with Mezzanin).
-- [ ] Show telephone hours next to opening hours: Mo–Do 9–12 and 13–16, Fr 9–12.
-- [ ] Single source for company data (config or settings) so footer, contact, Impressum and structured data cannot drift.
+Status 2026-10-28: implemented and tested locally (not committed, not deployed). Tests: `tests/Feature/CompanyContactDataTest.php` (21 tests).
+- [x] **Single source for company data:** `config/company.php` (address "Franz-Josefs-Kai 65/Mezzanin, 1010 Wien", phone, fax, opening and phone hours, and per section: short name, legal name, e-mail, website, Firmenbuch, UID, managing directors, all from the briefing) and `App\Services\CompanyInfo` (`section()`, `address()`, `phoneUri()`, `telUri()`, `mailtoUri()`, localized `hours()`). Footer, contact area, property contact and e-mails read from it; WP5 (structured data), WP7 (Impressum, three companies with data) and `llms.txt` should use it too.
+- [x] Footer: `mailto:` instead of `mail:`; phone as `tel:+4315353619`; the company of the current section (name, legal name in the copyright line, e-mail); full address; opening hours (Mo–Do 08:00–16:00, Fr 08:00–12:00) and the new phone hours (Mo–Do 09:00–12:00 und 13:00–16:00, Fr 09:00–12:00), German and English labels. The section is stored as component state, so the footer stays correct in Livewire updates.
+- [x] Contact area: one block for the current section instead of three copies; the Makler block linked the Verwaltung address (wrong field) and the Technik data came from stale settings: both fixed, address now with "/Mezzanin". Property contact box uses the Makler data.
+- [x] Links in admin-entered texts are repaired when rendered (`App\Services\HtmlLinks`, applied in `BaseSettings`): `mail:` to `mailto:`, `mailto:%20`/space/`&nbsp;` removed, spaces and separators removed from `tel:` links, "Franz Josefs Kai 65" to "Franz-Josefs-Kai 65/Mezzanin". This fixes the Karriere `mailto:%20office@...` link without touching the production database (the bad value is stored in `vacancies_introtext`); the stored text itself is unchanged and can be cleaned in the admin panel at any time.
+- [x] `tel:` links of contact persons, the Unternehmensservice page and the admin mail are normalized; invalid JavaScript in the contact-person analytics handlers (unquoted values) and the stray "o" in the contact analytics label fixed.
+- [x] E-mail templates (confirmation, solved, verification) use the central address.
+- [x] Admin: the nine contact fields (phone, e-mail, address per section) were removed from the Filament pages "Kontakt" and "Seiten", replaced by a notice that they live in `config/company.php`; the stale defaults in the settings classes (`office@bontus-eybel.at`, old address spelling) are corrected. Anyone who edited these fields in the admin panel must now change `config/company.php` (a developer task) instead.
+- [ ] Decisions: the fax number is still shown in the footer (the briefing says "only partly"); the Verwalterservice mailbox `verwalterservice@bereal-immobilien.at` is kept as is; the Impressum text still has the old data (WP7).
 
 ### WP4 URLs, redirects, sitemap
 Briefing: "Über uns", "Leistung Baumanagement und Service", Technik #2 and #3.

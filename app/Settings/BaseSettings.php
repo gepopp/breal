@@ -2,6 +2,7 @@
 
 namespace App\Settings;
 
+use App\Services\HtmlLinks;
 use Spatie\LaravelSettings\Settings;
 
 abstract class BaseSettings extends Settings
@@ -22,16 +23,22 @@ abstract class BaseSettings extends Settings
 
         if (property_exists($this, $localizedName)) {
             // Call parent's __get to load values and return the localized property
-            return parent::__get($localizedName);
+            return $this->normalized(parent::__get($localizedName));
         }
 
-        if(!property_exists($this, $name))
-        {
+        if (! property_exists($this, $name)) {
             return '';
         }
 
-
         // Fall back to the original property name via parent
-        return parent::__get($name);
+        return $this->normalized(parent::__get($name));
+    }
+
+    /**
+     * Repairs contact links and the company address in texts entered in the admin panel.
+     */
+    private function normalized(mixed $value): mixed
+    {
+        return is_string($value) ? HtmlLinks::normalize($value) : $value;
     }
 }

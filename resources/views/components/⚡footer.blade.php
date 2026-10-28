@@ -1,10 +1,25 @@
 <?php
 
+use App\Enums\CompaniesEnum;
+use App\Services\CompanyInfo;
 use Livewire\Component;
 
 new class extends Component
 {
-    //
+    public string $company = '';
+
+    public function mount(): void
+    {
+        $this->company = CompaniesEnum::getByRoute();
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function with(): array
+    {
+        return ['section' => CompanyInfo::section($this->company)];
+    }
 };
 ?>
 
@@ -45,20 +60,28 @@ new class extends Component
 
 
         <div class="flex flex-col space-y-6">
-            <p class="!mb-0">Franz-Josefs-Kai 65/Mezzanin</p>
-            <p class="!mb-0">1010 Wien</p>
-            <p class="!mb-0">{{ __('footer.phone') }}: +43 1 535 36 19</p>
-            <p class="!mb-0">{{ __('footer.fax') }}: +43 1 535 64 28</p>
-            <p class="!mb-0">E-Mail: <a href="mail:office@bereal-immobilien.at">office@bereal-immobilien.at</a></p>
-            <p class="!mb-0">{{ __('footer.hours_mon_thu') }}: 08:00-16:00
-                <br>
-                {{ __('footer.hours_fri') }}: 08:00-12:00</p>
+            <p class="!mb-0 font-bold">{{ $section['name'] }}</p>
+            <p class="!mb-0">{{ config('company.address.street') }}</p>
+            <p class="!mb-0">{{ config('company.address.postal_code') }} {{ config('company.address.city') }}</p>
+            <p class="!mb-0">{{ __('footer.phone') }}: <a href="{{ \App\Services\CompanyInfo::phoneUri() }}">{{ \App\Services\CompanyInfo::phone() }}</a></p>
+            <p class="!mb-0">{{ __('footer.fax') }}: {{ \App\Services\CompanyInfo::fax() }}</p>
+            <p class="!mb-0">E-Mail: <a href="{{ \App\Services\CompanyInfo::mailtoUri($section['email']) }}">{{ $section['email'] }}</a></p>
+            <p class="!mb-0">{{ __('footer.opening_hours') }}:
+                @foreach(\App\Services\CompanyInfo::hours('opening') as $days => $times)
+                    <br>{{ $days }}: {{ $times }}
+                @endforeach
+            </p>
+            <p class="!mb-0">{{ __('footer.phone_hours') }}:
+                @foreach(\App\Services\CompanyInfo::hours('phone') as $days => $times)
+                    <br>{{ $days }}: {{ $times }}
+                @endforeach
+            </p>
         </div>
     </div>
 
     <div class="border-t border-white py-4 w-full mt-16 flex justify-center">
         <div class="lg:max-w-4xl xl:max-w-6xl w-full flex flex-col md:flex-row justify-between text-sm">
-            <p class="!text-sm">&copy; {{ now()->format('Y') }} be real Immobilienmanagement GmbH</p>
+            <p class="!text-sm">&copy; {{ now()->format('Y') }} {{ $section['legal_name'] }}</p>
             <div class="flex flex-col md:flex-row md:divide-x divide-white justify-between order-first md:order-last mb-4">
                 <a @class(['md:px-4']) href="{{ route('datenschutz') }}" wire:navigate @class([ 'font-bold' => request()->is('datenschutz') ])>{{ __('footer.privacy') }}</a>
                 <a @class(['md:px-4']) href="{{ route('barrierefreiheit') }}">{{ __('footer.accessibility') }}</a>

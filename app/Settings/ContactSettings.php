@@ -27,21 +27,21 @@ class ContactSettings extends BaseSettings
 
     public string $contactform_phone = '+43 1 535 36 19';
 
-    public string $contactform_address = 'Franz-Josefs-Kai 65, 1010 Wien';
+    public string $contactform_address = 'Franz-Josefs-Kai 65/Mezzanin, 1010 Wien';
 
     // Makler (Real Estate Agent) Contact Information
     public string $makler_contactform_email = 'office@bereal-makler.at';
 
     public string $makler_contactform_phone = '+43 1 535 36 19';
 
-    public string $makler_contactform_address = 'Franz-Josefs-Kai 65, 1010 Wien';
+    public string $makler_contactform_address = 'Franz-Josefs-Kai 65/Mezzanin, 1010 Wien';
 
     // Technik (Technical) Contact Information
     public string $technik_contactform_email = 'office@bereal-technik.at';
 
     public string $technik_contactform_phone = '+43 1 535 36 19';
 
-    public string $technik_contactform_address = 'Franz-Josefs-Kai 65, 1010 Wien';
+    public string $technik_contactform_address = 'Franz-Josefs-Kai 65/Mezzanin, 1010 Wien';
 
     // Contact Form Terms
     public string $contactform_terms_de = 'Ich bin mit der Verarbeitung und Speicherung meiner Daten, sowie mit der Kontaktaufnahme via E-Mail oder Telefon im Zuge der Bearbeitung meiner Anfrage einverstanden.';
