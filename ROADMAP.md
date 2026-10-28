@@ -20,7 +20,7 @@ Legend: `[x]` done, `[ ]` open, `[~]` partly done / needs input.
 - **Non-www redirect** (`bereal-immobilien.at` to `www`) already returns 301 on production, including paths. Briefing item 2 is partly done on the server.
 - **Production `robots.txt`** exists (`Allow: /`) but has no `Sitemap:` line. `public/sitemap.xml` is a generated file but is committed to git (local copy contains `breal.test` URLs).
 - **Security (not in briefing):** `GET /import` is public and runs `Importer::import()`. Should be protected or removed. Decision needed.
-- **Test suite baseline:** 25 pass, 17 fail. The 17 failures are leftover starter-kit tests (`Auth/*`, `Settings/*`, `DashboardTest`) that need `Livewire\Volt`, which is no longer installed. Not caused by our work. Needs a decision (fix or remove) before relying on the full suite.
+- **Test suite baseline (at the start):** 25 pass, 17 fail; the failures were leftover starter-kit tests, since removed (see WP4). Suite now 169 tests, all passing.
 - **Known production log errors** (Livewire `WithFileUploads` trait missing on navbar/footer components, locked property `rules`, `livewire-dropzone` errors) are not explained yet. Reproduce locally later.
 
 ## 3. Work packages
@@ -86,7 +86,7 @@ Status 2026-10-28: implemented and tested locally (not committed, not deployed).
 - [ ] **Deploy steps this adds:** run `php artisan migrate` (slug rename); delete the static `public/sitemap.xml` on the server, otherwise the old file keeps winning over the new route; refresh the route cache if it is used.
 - [ ] **Server (WP8):** confirm the `www` redirect covers http and https and all hosts, `bontus-eybel.at`, `bereal-makler.at`, `bereal-technik.at`. Non-www already redirects with 301 (checked 2026-10-27).
 - [ ] **Find more old addresses:** the production access logs would show which not-found addresses are really requested (read-only aggregation of paths, no IPs); not done because the log read was blocked. Search Console is the other source once it is set up (WP8).
-- [ ] **Stale tests (needs approval):** 7 tests of the leftover Laravel starter kit (login, registration, password confirmation, e-mail verification and reset screens, dashboard, profile page) only passed because unknown addresses used to answer 200; they now fail honestly because those routes do not exist in this app. Together with the 17 that already failed, 24 tests of `Auth/*`, `Settings/*` and `DashboardTest` are stale (they also need `Livewire\Volt`). Repair or remove them.
+- [x] **Stale tests removed (approved):** the 24 leftover starter-kit tests (`Auth/*`, `Settings/*`, `DashboardTest`, 8 files) tested routes that do not exist in this app and are deleted. Suite: 169 tests, all passing.
 
 ### WP5 Structured data (JSON-LD)
 Briefing: Technik #5.
@@ -124,7 +124,7 @@ Briefing: "Domains", Technik #9 and #10.
 - [ ] `www.bereal-makler.at` to `/makler/start` and `www.bereal-technik.at` to `/technik/start` on `www.bereal-immobilien.at` (permanent redirect; Plesk or app-level host redirect). Needs server/DNS access beyond the current read-only access: decide how.
 - [ ] Google Search Console and Bing Webmaster Tools: set up if missing, submit the sitemap, give the client read access.
 - [ ] PageSpeed Insights for the start page and subpages, mobile first; shrink large images and videos (media is on S3).
-- [ ] Remove the stale 597 MB `storage/logs/laravel.log.old` on production (needs approval, production write).
+- [x] Removed the stale 597 MB `storage/logs/laravel.log.old` on production (done manually by Markus).
 
 ### WP9 FAQ, texts and small content corrections in code or database
 Briefing: "Startseite, Why be real?, Our Story", "Referenzen", "Bilder", "FAQ", "Team".
@@ -172,7 +172,6 @@ Common: Franz-Josefs-Kai 65/Mezzanin, 1010 Wien, Tel. +43 1 535 36 19 (`tel:+431
 
 - ~~English version~~: decided, `/en` prefix, see WP1. Open: expose the language switcher publicly, and who delivers missing English content.
 - `GET /import` public route: protect or remove?
-- 17 stale starter-kit tests: repair or remove (needs approval per project rules)?
 - Domain redirects (`bereal-makler.at`, `bereal-technik.at`) and production writes: how do we get write access, and who deploys? Production is not deployed from git today.
 - Production PHP is still 8.3; switching to 8.5 in Plesk is a separate ops step (check extensions `intl`, `exif`, `zip`, `bcmath`, `pdo_sqlite`, php.ini, rollback plan).
 - Local images load from the production S3 bucket via public URLs only (dummy keys). Admin login at `/admin` is e-mail and password plus a required authenticator app (two-factor); it works locally once a local admin user exists (`herd php artisan make:filament-user`, then set `admin` to true). The LinkedIn settings are only for the LinkedIn wall and the profile URL, not for logging in.
