@@ -23,5 +23,5 @@
         </div>
     </section>
 
-    <livewire:contact-departments lazy :withIntro="false" company="$company"/>
+    <livewire:contact-departments :withIntro="false" :company="$company"/>
 </x-section>

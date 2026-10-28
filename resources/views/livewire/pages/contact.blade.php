@@ -25,10 +25,10 @@
     </section>
 
 
-    <livewire:contact-form lazy company="$company"/>
+    <livewire:contact-form/>
 
 
-    <livewire:contact-departments lazy company="$company"/>
+    <livewire:contact-departments :company="$company"/>
 
 
 </x-section>

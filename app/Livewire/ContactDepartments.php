@@ -9,14 +9,13 @@ use Livewire\Component;
 
 class ContactDepartments extends Component
 {
-    public string $comapny = CompaniesEnum::Hausverwaltung->name;
-
+    public string $company = CompaniesEnum::Hausverwaltung->name;
 
     public bool $withIntro = true;
 
-    public function render( PagesSettings $pagesSettings)
+    public function render(PagesSettings $pagesSettings)
     {
-        $departments = Department::where('company', $this->comapny)->get();
+        $departments = Department::where('company', $this->company)->get();
 
         return view('livewire.contact-departments', compact('departments', 'pagesSettings'));
     }
