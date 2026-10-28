@@ -198,3 +198,22 @@ Not ours, but they block or finish parts above. This list is the basis for the "
 | FAQ updates (Wertsicherung, Kurzzeitvermietung, Stromanbieter) and "Stand" dates | WP9 | Outdated texts still online |
 | Team content for Makler and Technik (persons, departments), content for `/makler/ueber-uns`; decision whether to hide these pages until then | WP6, WP9 | Pages exist, show no persons or no content |
 | Decisions: expose the language switcher publicly, domain redirects/access for `bereal-makler.at` and `bereal-technik.at`, Search Console/Bing access | WP1, WP8 | Open |
+
+## 6. Deployments
+
+### Staging: https://staging.bereal-immobilien.at (deployed 2026-10-28, commit `2328740`)
+Plesk subdomain of the subscription `bereal-immobilien.at` on the server `ishi-zeus`, folder `/var/www/vhosts/bereal-immobilien.at/staging.bereal-immobilien.at`, document root `.../public`, PHP 8.5, Let's Encrypt certificate. Protected by HTTP basic auth (user `BEREAL`), `X-Robots-Tag: noindex` and a `robots.txt` that disallows everything.
+- Deployed with `git archive` of the commit (the built assets in `public/build` are tracked, so no Node build on the server), uploaded over SSH and extracted as the site user, `composer install --no-dev --optimize-autoloader` with `/opt/plesk/php/8.5/bin/php`.
+- Data: a consistent SQLite copy of the production database (`sqlite3 <live>/database/database.sqlite ".backup database/database.sqlite"`), then `php artisan migrate --force` (applied the four migrations of this branch), then `config:cache`, `route:cache`, `view:cache`. The copy contains real personal data (347 contact requests): keep the basic auth, do not share the link.
+- Staging `.env` differs from production on purpose: `APP_ENV=staging`, `APP_FALLBACK_LOCALE=de`, `MAIL_MAILER=log`, `QUEUE_CONNECTION=sync`, `GOOGLE_ANALYTICS_ID=G-STAGING00`, and **non-empty dummy S3 keys** (empty keys make the AWS SDK look for cloud credentials and every page fails after 14 seconds). Staging reads the public images of the live buckets but cannot write to them.
+- Redeploy trap: extracting a new archive overwrites `public/.htaccess` (the auth block is prepended there) and `public/robots.txt`; re-apply both. `.htpasswd` must stay mode 644 (Apache runs as `www-data`). Never overwrite `.env`, `.htpasswd` or `database/database.sqlite` unless a new data copy is wanted.
+- Checked on staging: basic auth, the 301 redirects (`/ueber-uns`, lorem slug, section duplicates, incl. `/en`), real 404 status, titles, sitemap (131 URLs, all with lastmod, 36 English), `llms.txt` as `text/plain`, JSON-LD (home, job ad, FAQ), English cookie banner, Impressum data, corrected phone number, images from the live buckets. Not tested: a real contact form submission (mail only goes to the log). Known: the start page takes about 1.8 to 2.2 seconds here (heavy images, WP8); the hard-coded Google Ads conversion snippet in the layout still points at the live account when cookies are accepted, so decline cookies while testing.
+
+### Production checklist (collected from the work packages, nothing of this is deployed yet)
+- [ ] Merge the branch `wp1-language-default` (or deploy it) and run `composer install --no-dev`, `php artisan migrate --force` (also runs the settings migration and adds `contact_requests.locale`, fixes the lorem slug and one phone number), then `config:cache`, `route:cache`, `view:cache`.
+- [ ] Production `.env`: `APP_FALLBACK_LOCALE=de` (it is `en` today).
+- [ ] Delete the static `public/sitemap.xml` on the server (it would win over the new `/sitemap.xml` route) and replace `public/robots.txt` (the new one has the sitemap line).
+- [ ] PHP 8.3 to 8.5 in Plesk (separate ops step; the code runs on 8.5 locally and on staging).
+- [ ] Fix the Plesk domain forwarding of `bereal-makler.at` and `bereal-technik.at` (paths are glued onto the target without a slash, WP8).
+- [ ] After the deploy: submit the sitemap in Search Console and Bing, run the Rich Results Test (WP5) and PageSpeed Insights (WP8).
+- [ ] Secrets hygiene: `auth.json` (Flux Pro credentials) is tracked in git history, and the Hetzner S3 credentials were printed in a working session on 2026-10-28; rotate both.
