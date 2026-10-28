@@ -32,7 +32,7 @@
                             <div class="inset-0 flex justify-center items-center px-4 sm:px-8">
                                 <div class="flex md:max-w-3/4 relative">
                                     <div class="w-1/3 lg:w-1/2">
-                                        <img lazy src="{{ $entry->getFirstMediaUrl('*') }}"
+                                        <x-media-image :media="$entry->getFirstMedia('*')" sizes="(min-width: 1024px) 25vw, 33vw"
                                              class="aspect-square w-full object-cover" alt="{{ $entry->title }}"/>
                                     </div>
                                     <div class="w-2/3 lg:w-1/2 flex flex-col justify-center ml-4 mt-6">

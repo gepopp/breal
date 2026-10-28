@@ -20,7 +20,7 @@
             @php
                 $media = $media->first();
             @endphp
-            <img src="{{ $media?->getUrl('layout') }}" srcset="{{ $media?->getSrcset() }}" alt="{{ $settings->hero_image_alt }}" data-aos="fade"
+            <x-media-image :media="$media" sizes="(min-width: 768px) 50vw, 100vw" :priority="true" alt="{{ $settings->hero_image_alt }}" data-aos="fade"
                  data-aos-delay="600" class="h-full w-auto object-cover"/>
 
         @elseif($media?->count() > 1)
@@ -29,7 +29,7 @@
                 <div x-ref="wrapper" class="swiper-wrapper min-h-full flex-1">
                     @foreach($media as $image)
                         <div class="swiper-slide min-h-full">
-                            <img scr="{{ $image->getUrl('slider') }}" alt="{{ $settings->hero_image_alt }}" srcset="{{ $image->getSrcset() }}" class="h-full w-auto object-cover"/>
+                            <x-media-image :media="$image" sizes="(min-width: 768px) 50vw, 100vw" :priority="$loop->first" alt="{{ $settings->hero_image_alt }}" class="h-full w-auto object-cover"/>
                         </div>
                     @endforeach
                 </div>
