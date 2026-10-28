@@ -11,9 +11,9 @@ class SitemapTest extends TestCase
 
     public function test_sitemap_generates_without_undefined_route(): void
     {
-        $response = $this->get('sitemap');
+        $response = $this->get('sitemap.xml');
 
         $response->assertStatus(200);
-        $this->assertFileExists(public_path('sitemap.xml'));
+        $this->assertFileDoesNotExist(public_path('sitemap.xml'));
     }
 }

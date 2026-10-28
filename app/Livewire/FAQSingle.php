@@ -12,7 +12,7 @@ class FAQSingle extends Component
 
     public function mount(string $slug)
     {
-        $this->faq = Question::findBySlug($slug);
+        $this->faq = Question::findBySlug($slug) ?? abort(404);
     }
 
     public function render()

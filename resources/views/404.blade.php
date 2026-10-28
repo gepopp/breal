@@ -12,9 +12,9 @@
                     <p>{{ __('Bitte prüfen Sie die Eingabe in der Adressleiste Ihres Browsers auf Tippfehler oder besuchen Sie eine unserer Unternehmensbereiche:') }}</p>
 
                     <div class="mt-8 space-y-8">
-                        <x-button class="w-full">{{ __('Hausverwaltung') }}</x-button>
-                        <x-button class="w-full">{{ __('Immobilien') }}</x-button>
-                        <x-button class="w-full">{{ __('Technik') }}</x-button>
+                        <x-button class="w-full" href="{{ route('hausverwaltung.home') }}">{{ __('Hausverwaltung') }}</x-button>
+                        <x-button class="w-full" href="{{ route('makler.home') }}">{{ __('Immobilien') }}</x-button>
+                        <x-button class="w-full" href="{{ route('technik.home') }}">{{ __('Technik') }}</x-button>
                     </div>
                 </div>
             </div>

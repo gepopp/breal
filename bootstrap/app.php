@@ -1,11 +1,14 @@
 <?php
 
 use App\Http\Middleware\ApplyLocalePrefix;
+use App\Http\Middleware\RedirectLegacyUrls;
 use App\Http\Middleware\SetLocale;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -20,13 +23,24 @@ return Application::configure(basePath: dirname(__DIR__))
         },
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->prepend(ApplyLocalePrefix::class);
+        $middleware->prepend([
+            ApplyLocalePrefix::class,
+            RedirectLegacyUrls::class,
+        ]);
 
         $middleware->web(append: [
             SetLocale::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
+        $exceptions->render(function (NotFoundHttpException $e, Request $request) {
+            if ($request->expectsJson() || $request->is('admin', 'admin/*', 'livewire*', 'log-viewer*', 'up')) {
+                return null;
+            }
+
+            return response()->view('404', [], 404);
+        });
+
         $exceptions->context(function () {
             $context = [];
 

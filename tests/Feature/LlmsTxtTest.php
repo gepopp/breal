@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Route as RouteFacade;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Tests\TestCase;
 
@@ -58,7 +59,7 @@ class LlmsTxtTest extends TestCase
 
         foreach ($paths as $path) {
             if ($path === '/sitemap.xml') {
-                $this->assertFileExists(public_path('sitemap.xml'));
+                $this->assertTrue(RouteFacade::has('sitemap'));
 
                 continue;
             }

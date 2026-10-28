@@ -15,6 +15,7 @@ class Ueber extends Component
             ->layoutData([
                 'canonical' => route('makler.ueber-uns'),
                 'description' => PageMeta::description('ueber'),
+                'noindex' => true,
             ]);
     }
 }

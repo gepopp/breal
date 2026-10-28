@@ -15,7 +15,7 @@ class JobVacancy extends Component
         $this->jobVacancy = $JobVacancy;
 
         if ($this->jobVacancy->from > now() || $this->jobVacancy->to < now()) {
-            abort(403);
+            abort(404);
         }
 
     }

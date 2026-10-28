@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ContactRequestController;
 use App\Http\Controllers\SitemapController;
+use App\Http\Middleware\RedirectCompetenceToItsSection;
 use App\Justimmo\Importer;
 use App\Livewire\FAQSingle;
 use App\Livewire\Hausverwaltung\Leistungen;
@@ -24,7 +25,7 @@ use App\Livewire\Sites\Imprint;
 use Illuminate\Support\Facades\Route;
 
 Route::fallback(function () {
-    return view('404');
+    return response()->view('404', [], 404);
 });
 
 Route::group(['as' => 'hausverwaltung.', 'localized' => true], function () {
@@ -35,7 +36,7 @@ Route::group(['as' => 'hausverwaltung.', 'localized' => true], function () {
     Route::get('/kontakt', Contact::class)->name('kontakt');
     Route::get('/team', Team::class)->name('team');
     Route::get('/faq', FAQ::class)->name('faq');
-    Route::get('/leistung/{competence}', Compentence::class)->name('leistung');
+    Route::get('/leistung/{competence}', Compentence::class)->middleware(RedirectCompetenceToItsSection::class)->name('leistung');
 
 });
 
@@ -48,7 +49,7 @@ Route::group(['prefix' => 'makler', 'as' => 'makler.', 'localized' => true], fun
     Route::get('/team', Team::class)->name('team');
     Route::get('/faq', FAQ::class)->name('faq');
     //    Route::get('/leistungen', \App\Livewire\Hausverwaltung\Leistungen::class)->name('leistungen');
-    Route::get('/leistung/{competence}', Compentence::class)->name('leistung');
+    Route::get('/leistung/{competence}', Compentence::class)->middleware(RedirectCompetenceToItsSection::class)->name('leistung');
     Route::get('immobiliensuche', App\Livewire\Pages\Immobiliensuche::class)->name('immobiliensuche');
     Route::get('immobilie/{realty}', Immobilie::class)->name('immobilie');
 });
@@ -60,7 +61,7 @@ Route::group(['prefix' => 'technik', 'as' => 'technik.', 'localized' => true], f
     Route::get('/team', Team::class)->name('team');
     Route::get('/faq', FAQ::class)->name('faq');
     Route::get('/leistungen', Leistungen::class)->name('leistungen');
-    Route::get('/leistung/{competence}', Compentence::class)->name('leistung');
+    Route::get('/leistung/{competence}', Compentence::class)->middleware(RedirectCompetenceToItsSection::class)->name('leistung');
 });
 
 Route::group(['localized' => true], function () {
@@ -85,4 +86,4 @@ Route::get('import', function () {
     Importer::import();
 });
 
-Route::get('sitemap', [SitemapController::class, 'generate']);
+Route::get('sitemap.xml', SitemapController::class)->name('sitemap');
