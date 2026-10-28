@@ -24,6 +24,13 @@ class Question extends Model implements HasMedia
 
     protected $appends = ['link'];
 
+    protected function casts(): array
+    {
+        return [
+            'stand' => 'date',
+        ];
+    }
+
     protected function link(): Attribute
     {
         return Attribute::make(get: fn () => route('faq.single', $this->slug));

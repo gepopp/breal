@@ -12,7 +12,7 @@
             <div class="w-full md:w-3/5 shadow-2xl text-white flex flex-col items-center px-6 md:px-12 py-24 relative">
 
                 <div class="mx-auto">
-                    <img src="{{ asset('be_Logo_RGB_white.svg') }}" class="h-12" alt="BE Real Immobilien">
+                    <img src="{{ asset('be_Logo_RGB_white.svg') }}" class="h-12" alt="be real Immobilien">
                 </div>
 
                 <div class="text-logo-50 text-center font-medium flex items-center gap-2 mt-4">

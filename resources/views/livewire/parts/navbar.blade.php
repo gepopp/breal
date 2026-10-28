@@ -14,29 +14,29 @@
             <div class="flex items-center">
                 @if( Route::is('hausverwaltung.*') )
                     <a href="{{ route('hausverwaltung.home') }}">
-                        <img src="{{ asset('logos/bereal_immobilien.svg') }}" class="h-6 sm:h-8 md:h-10 dark:hidden"/>
-                        <img src="{{ asset('logos/bereal_immobilien_white.svg') }}"
+                        <img src="{{ asset('logos/bereal_immobilien.svg') }}" alt="be real Immobilien" class="h-6 sm:h-8 md:h-10 dark:hidden"/>
+                        <img src="{{ asset('logos/bereal_immobilien_white.svg') }}" alt="be real Immobilien"
                              class="h-6 sm:h-8 md:h-10 hidden dark:block"/>
                     </a>
 
                 @elseif( Route::is('makler.*') )
                     <a href="{{ route('makler.home') }}">
-                        <img src="{{ asset('logos/bereal_makler.svg') }}" class="h-6 sm:h-8 md:h-10 dark:hidden"/>
-                        <img src="{{ asset('logos/bereal_makler_white.svg') }}"
+                        <img src="{{ asset('logos/bereal_makler.svg') }}" alt="be real Makler" class="h-6 sm:h-8 md:h-10 dark:hidden"/>
+                        <img src="{{ asset('logos/bereal_makler_white.svg') }}" alt="be real Makler"
                              class="h-6 sm:h-8 md:h-10 hidden dark:block"/>
                     </a>
 
                 @elseif( Route::is('technik.*') )
                     <a href="{{ route('technik.home') }}">
-                        <img src="{{ asset('logos/bereal_technik.svg') }}" class="h-6 sm:h-8 md:h-10 dark:hidden"/>
-                        <img src="{{ asset('logos/bereal_technik_white.svg') }}"
+                        <img src="{{ asset('logos/bereal_technik.svg') }}" alt="be real Technik" class="h-6 sm:h-8 md:h-10 dark:hidden"/>
+                        <img src="{{ asset('logos/bereal_technik_white.svg') }}" alt="be real Technik"
                              class="h-6 sm:h-8 md:h-10 hidden dark:block"/>
                     </a>
 
                 @else
                     <a href="{{ route('makler.home') }}">
-                        <img src="{{ asset('logos/bereal.svg') }}" class="h-6 sm:h-8 md:h-10 dark:hidden"/>
-                        <img src="{{ asset('logos/bereal_white.svg') }}"
+                        <img src="{{ asset('logos/bereal.svg') }}" alt="be real" class="h-6 sm:h-8 md:h-10 dark:hidden"/>
+                        <img src="{{ asset('logos/bereal_white.svg') }}" alt="be real"
                              class="h-6 sm:h-8 md:h-10 hidden dark:block"/>
                     </a>
                 @endif
@@ -265,8 +265,8 @@
                 @if( ! Route::is('hausverwaltung.*') )
                     <a href="{{ route('hausverwaltung.home') }}" class="aspect-square flex items-center justify-center"
                     >
-                        <img src="{{ asset('logos/bereal_immobilien_vertical.svg') }}" class="h-10 dark:hidden"/>
-                        <img src="{{ asset('logos/bereal_immobilien_vertical_white.svg') }}"
+                        <img src="{{ asset('logos/bereal_immobilien_vertical.svg') }}" alt="be real Immobilien" class="h-10 dark:hidden"/>
+                        <img src="{{ asset('logos/bereal_immobilien_vertical_white.svg') }}" alt="be real Immobilien"
                              class="h-10 dark:block hidden"/>
                     </a>
                 @endif
@@ -275,8 +275,8 @@
                     <a href="{{ route('makler.home') }}"
                        class="aspect-square sm:aspect-[4/3] flex items-center justify-center"
                     >
-                        <img src="{{ asset('logos/bereal_makler_vertical.svg') }}" class="h-10 dark:hidden"/>
-                        <img src="{{ asset('logos/bereal_makler_vertical_white.svg') }}"
+                        <img src="{{ asset('logos/bereal_makler_vertical.svg') }}" alt="be real Makler" class="h-10 dark:hidden"/>
+                        <img src="{{ asset('logos/bereal_makler_vertical_white.svg') }}" alt="be real Makler"
                              class="h-10 dark:block hidden"/>
                     </a>
                 @endif
@@ -286,8 +286,8 @@
                     <a href="{{ route('technik.home') }}"
                        class="aspect-square sm:aspect-[4/3] flex items-center justify-center"
                     >
-                        <img src="{{ asset('logos/bereal_technik_vertical.svg') }}" class="h-10 dark:hidden"/>
-                        <img src="{{ asset('logos/bereal_technik_vertical_white.svg') }}"
+                        <img src="{{ asset('logos/bereal_technik_vertical.svg') }}" alt="be real Technik" class="h-10 dark:hidden"/>
+                        <img src="{{ asset('logos/bereal_technik_vertical_white.svg') }}" alt="be real Technik"
                              class="h-10 dark:block hidden"/>
                     </a>
                 @endif
@@ -300,7 +300,7 @@
              "bg-makler-900 dark:bg-makler-950" => Route::is('makler.*'),
              ])>
                 <div>
-                    <img src="{{ asset('logos/bereal_immobilien_icon_white.svg') }}" class="h-5">
+                    <img src="{{ asset('logos/bereal_immobilien_icon_white.svg') }}" alt="be real Immobilien" class="h-5">
                 </div>
                 <div class="flex items-center space-x-2 text-white">
                     <a href="https://realonline.bereal-immobilien.at/" class="font-bold uppercase"

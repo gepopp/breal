@@ -27,7 +27,7 @@ new class extends Component
     <div class="lg:max-w-4xl xl:max-w-6xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 w-full">
         <div>
             <a href="{{ route('hausverwaltung.home') }}">
-                <img src="{{ asset('be_Logo_RGB_white_400.svg') }}" class="h-16"/>
+                <img src="{{ asset('be_Logo_RGB_white_400.svg') }}" alt="be real" class="h-16"/>
             </a>
             <div class="mt-12">
                 <p>

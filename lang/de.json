@@ -153,6 +153,8 @@
     "mail.confirmed.uploads_valid": "Diese Links sind 7 Tage gültig.",
     "faq.questions_cta": "Sie haben Fragen oder Anregungen zu diesem Thema?",
     "faq.contact_us": "Kontaktieren Sie uns",
+    "faq.as_of": "Stand: :date",
+    "makler.hero_image_alt": "be real Makler: Immobilien in Wien",
     "cookies.google_maps": "Dieses Cookie muss zum Anzeigen von Google Maps aktiviert werden.",
     "legal.imprint_tag": "Rechtliches",
     "legal.imprint_title": "Impressum",

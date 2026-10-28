@@ -3,6 +3,7 @@
 namespace App\Filament\Schemas\Resources\QuestionResource\Schemas;
 
 use App\Enums\CompaniesEnum;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -28,6 +29,10 @@ class QuestionForm
 
                 Select::make('company')
                     ->options(CompaniesEnum::class),
+
+                DatePicker::make('stand')
+                    ->label('Stand (Datum der letzten inhaltlichen Prüfung)')
+                    ->native(false),
 
                 Section::make()
                     ->schema([
