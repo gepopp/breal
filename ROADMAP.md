@@ -171,7 +171,7 @@ Common: Franz-Josefs-Kai 65/Mezzanin, 1010 Wien, Tel. +43 1 535 36 19 (`tel:+431
 - 17 stale starter-kit tests: repair or remove (needs approval per project rules)?
 - Domain redirects (`bereal-makler.at`, `bereal-technik.at`) and production writes: how do we get write access, and who deploys? Production is not deployed from git today.
 - Production PHP is still 8.3; switching to 8.5 in Plesk is a separate ops step (check extensions `intl`, `exif`, `zip`, `bcmath`, `pdo_sqlite`, php.ini, rollback plan).
-- Local images load from the production S3 bucket via public URLs only (dummy keys). Admin login is LinkedIn OAuth and does not work locally.
+- Local images load from the production S3 bucket via public URLs only (dummy keys). Admin login at `/admin` is e-mail and password plus a required authenticator app (two-factor); it works locally once a local admin user exists (`herd php artisan make:filament-user`, then set `admin` to true). The LinkedIn settings are only for the LinkedIn wall and the profile URL, not for logging in.
 
 ### Deliverables needed from Ronald / the client
 Not ours, but they block or finish parts above. This list is the basis for the "what is missing" report; add items as they come up.
