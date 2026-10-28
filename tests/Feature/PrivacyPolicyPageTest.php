@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Settings\PagesSettings;
+use App\Settings\LegalSettings;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -16,8 +16,8 @@ class PrivacyPolicyPageTest extends TestCase
     {
         parent::setUp();
 
-        $settings = app(PagesSettings::class);
-        $settings->dpgr_text = self::POLICY_HTML;
+        $settings = app(LegalSettings::class);
+        $settings->dpgr_text_de = self::POLICY_HTML;
         $settings->save();
     }
 

@@ -3,12 +3,12 @@
 namespace App\Livewire\Pages;
 
 use App\Services\PageMeta;
-use App\Settings\PagesSettings;
+use App\Settings\LegalSettings;
 use Livewire\Component;
 
 class AccessabilityDeclaration extends Component
 {
-    public function render(PagesSettings $pagesSettings)
+    public function render(LegalSettings $pagesSettings)
     {
         return view('livewire.pages.accessability-declaration', compact('pagesSettings'))
             ->title(PageMeta::title('barrierefreiheit'))

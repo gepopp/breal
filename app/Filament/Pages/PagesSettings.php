@@ -35,14 +35,13 @@ class PagesSettings extends SettingsPage
                                 TextInput::make('contact_subheader')->label('Überschrift')->required(),
                                 RichEditor::make('contact_introtext')->label('Introtext')->required(),
 
-                                TextInput::make('contactform_heading')->label('Überschrift Kontaktformular')->required(),
-
                                 Section::make('Kontaktdaten')
                                     ->description('Adresse, Telefon, E-Mail-Adressen und Öffnungszeiten werden zentral in config/company.php gepflegt und überall gleich ausgegeben.')
                                     ->schema([]),
 
-                                TextInput::make('contactpersons_heading')->label('Kontaktpersonen Überschrift')->required(),
-                                RichEditor::make('contactpersons_introtext')->label('Introtext')->required(),
+                                Section::make('Überschrift Kontaktformular und Kontaktpersonen')
+                                    ->description('Diese Texte (Deutsch und Englisch) werden unter "Kontaktseiten" bearbeitet.')
+                                    ->schema([]),
                             ]),
                         Tab::make('Karriereseite')
                             ->schema([
@@ -61,9 +60,9 @@ class PagesSettings extends SettingsPage
 
                         Tab::make('Service Seite')
                             ->schema([
-                                TextInput::make('services_header')->label('Überschrift')->required(),
-                                TextInput::make('services_subheader')->label('Unterzeile')->required(),
-                                RichEditor::make('services_introtext')->label('Introtext"')->required(),
+                                Section::make('Service Seite')
+                                    ->description('Überschrift, Unterzeile und Introtext (Deutsch und Englisch) werden unter "Serviceseite" bearbeitet.')
+                                    ->schema([]),
                             ]),
 
                         Tab::make('FAQ Seite')
@@ -113,12 +112,16 @@ class PagesSettings extends SettingsPage
 
                         Tab::make('Datenschutz')
                             ->schema([
-                                RichEditor::make('dpgr_text')->label('Text für Initiativbewerbungs-CTA"')->required(),
+                                Section::make('Datenschutz')
+                                    ->description('Der Datenschutztext (Deutsch und Englisch) wird unter "Rechtliches" bearbeitet.')
+                                    ->schema([]),
                             ]),
 
                         Tab::make('Barrierefreiheit')
                             ->schema([
-                                RichEditor::make('accessability_text')->label('Text für Initiativbewerbungs-CTA"')->required(),
+                                Section::make('Barrierefreiheit')
+                                    ->description('Die Barrierefreiheitserklärung (Deutsch und Englisch) wird unter "Rechtliches" bearbeitet.')
+                                    ->schema([]),
                             ]),
 
                     ])->persistTabInQueryString(),

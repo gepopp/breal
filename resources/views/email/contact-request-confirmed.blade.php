@@ -513,7 +513,7 @@
                 <tr data-element="black-intro-2-headline" data-label="Intro Headline">
                     <td class="type48" data-text-style="Intro Headline" align="center"
                         style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:48px;line-height:64px;font-weight:700;font-style:normal;color:#1b1b18;text-decoration:none;letter-spacing:0px;">
-                        Herzlichen Dank für<br class="hide-mobile">Ihre Anfrage!
+                        {{ __('mail.confirmed.headline_1') }}<br class="hide-mobile">{{ __('mail.confirmed.headline_2') }}
                     </td>
                 </tr>
                 <tr data-element="black-intro-2-headline" data-label="Intro Headline">
@@ -524,7 +524,7 @@
                 <tr data-element="black-intro-2-paragraph" data-label="Intro Paragraph">
                     <td data-text-style="Intro Paragraph" align="center"
                         style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:18px;line-height:32px;font-weight:400;font-style:normal;color:#1b1b18;text-decoration:none;letter-spacing:0px;">
-                        Wir bearbeiten Ihr Anliegen bereits und melden uns so rasch wie möglich!
+                        {{ __('mail.confirmed.text') }}
                     </td>
                 </tr>
                 <tr data-element="black-intro-2-paragraph" data-label="Intro Paragraph">
@@ -535,8 +535,8 @@
                 <tr>
                     <td data-text-style="Intro Paragraph" align="center"
                         style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:18px;line-height:32px;font-weight:400;font-style:normal;color:#1b1b18;text-decoration:none;letter-spacing:0px;">
-                        Mit motivierten Grüßen</br>
-                        Ihr be real Team!
+                        {{ __('mail.confirmed.greeting') }}</br>
+                        {{ __('mail.confirmed.team') }}
 
                     </td>
                 </tr>
@@ -554,7 +554,7 @@
                 <tr>
                     <td align="center"
                         style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:22px;line-height:32px;font-weight:700;font-style:normal;color:#1b1b18;text-decoration:none;letter-spacing:0px;">
-                        Ihre Angaben
+                        {{ __('mail.confirmed.details') }}
                     </td>
                 </tr>
                 <tr>
@@ -609,13 +609,13 @@
                     <tr>
                         <td align="center"
                             style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:18px;line-height:32px;font-weight:700;font-style:normal;color:#1b1b18;text-decoration:none;letter-spacing:0px;">
-                            Ihre hochgeladenen Dateien
+                            {{ __('mail.confirmed.uploads') }}
                         </td>
                     </tr>
                     <tr>
                         <td align="center"
                             style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:14px;line-height:24px;font-weight:400;font-style:normal;color:#999999;text-decoration:none;letter-spacing:0px;">
-                            Diese Links sind 7 Tage gültig.
+                            {{ __('mail.confirmed.uploads_valid') }}
                         </td>
                     </tr>
                     <tr>
@@ -670,7 +670,7 @@
                                     <!-- Links -->
                                     <singleline>
                                         <a href="{{ route('hausverwaltung.home') }}" mc:edit data-button data-text-style="Footer Links"
-                                           style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:14px;line-height:28px;font-weight:400;font-style:normal;color:#999999;text-decoration:none;letter-spacing:0px;display:inline-block;vertical-align:middle;"><span>Hausverwaltung</span></a>
+                                           style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:14px;line-height:28px;font-weight:400;font-style:normal;color:#999999;text-decoration:none;letter-spacing:0px;display:inline-block;vertical-align:middle;"><span>{{ __('navigation.property_management') }}</span></a>
                                     </singleline>
                                     <!-- Links -->
                                 </td>
@@ -693,7 +693,7 @@
                                     <!-- Links -->
                                     <singleline>
                                         <a href="{{ route('makler.home') }}" mc:edit data-button data-text-style="Footer Links"
-                                           style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:14px;line-height:28px;font-weight:400;font-style:normal;color:#999999;text-decoration:none;letter-spacing:0px;display:inline-block;vertical-align:middle;"><span>Immobilien</span></a>
+                                           style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:14px;line-height:28px;font-weight:400;font-style:normal;color:#999999;text-decoration:none;letter-spacing:0px;display:inline-block;vertical-align:middle;"><span>{{ __('navigation.real_estate') }}</span></a>
                                     </singleline>
                                     <!-- Links -->
                                 </td>
@@ -716,7 +716,7 @@
                                     <!-- Links -->
                                     <singleline>
                                         <a href="{{ route('technik.home') }}" mc:edit data-button data-text-style="Footer Links"
-                                           style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:14px;line-height:28px;font-weight:400;font-style:normal;color:#999999;text-decoration:none;letter-spacing:0px;display:inline-block;vertical-align:middle;"><span>Technik</span></a>
+                                           style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:14px;line-height:28px;font-weight:400;font-style:normal;color:#999999;text-decoration:none;letter-spacing:0px;display:inline-block;vertical-align:middle;"><span>{{ __('navigation.technology') }}</span></a>
                                     </singleline>
                                     <!-- Links -->
                                 </td>
@@ -738,7 +738,7 @@
                             <tr>
                                 <td class="center-text" data-text-style="Paragraphs" align="center"
                                     style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:14px;line-height:24px;font-weight:400;font-style:normal;color:#999999;text-decoration:none;letter-spacing:0px;">
-                                    {{ now()->format('Y') }} be real. Alle Rechte vorbehalten.<br>
+                                    {{ now()->format('Y') }} be real. {{ __('mail.rights') }}<br>
                                     {{ \App\Services\CompanyInfo::address() }}
                                 </td>
                             </tr>

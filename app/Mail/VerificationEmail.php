@@ -2,11 +2,11 @@
 
 namespace App\Mail;
 
-use Illuminate\Mail\Mailables\Attachment;
 use App\Models\ContactRequest;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -23,12 +23,13 @@ class VerificationEmail extends Mailable implements ShouldQueue
      */
     public function __construct(?ContactRequest $contactRequest = null)
     {
-        if (!is_null($contactRequest)) {
+        if (! is_null($contactRequest)) {
+            $this->locale($contactRequest->locale ?? config('app.default_locale'));
             $this->verificationLink = URL::signedRoute(
                 'confirm',
                 [
                     'id' => $contactRequest->id,
-                    'token'   => $contactRequest->token,
+                    'token' => $contactRequest->token,
                 ]
             );
         }
@@ -41,7 +42,7 @@ class VerificationEmail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Bestätigen Sie Ihre E-Mail-Adresse',
+            subject: __('mail.verification.subject'),
         );
     }
 

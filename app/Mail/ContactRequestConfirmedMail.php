@@ -14,12 +14,15 @@ class ContactRequestConfirmedMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
-    public function __construct(public ContactRequest $contactRequest) {}
+    public function __construct(public ContactRequest $contactRequest)
+    {
+        $this->locale($contactRequest->locale ?? config('app.default_locale'));
+    }
 
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Ihre Anfrage an be real',
+            subject: __('mail.confirmed.subject'),
         );
     }
 

@@ -6,6 +6,7 @@ use App\Livewire\ContactForm;
 use App\Mail\ContactRequestConfirmedMail;
 use App\Mail\NewContactRequestAdminMail;
 use App\Models\ContactRequest;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
 
 class ContactRequestController extends Controller
@@ -18,9 +19,11 @@ class ContactRequestController extends Controller
 
         $formRequest = ContactRequest::withoutGlobalScopes()->whereId($id)->first();
 
-        if ($formRequest->token != $token) {
+        if (is_null($formRequest) || $formRequest->token != $token) {
             abort(401);
         }
+
+        App::setLocale($formRequest->locale);
 
         if (! is_null($formRequest) && is_null($formRequest->verified_at)) {
 

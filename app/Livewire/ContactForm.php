@@ -104,6 +104,7 @@ class ContactForm extends Component
 
         $data['data']['company'] = $this->company;
         $data['data']['token'] = Str::uuid();
+        $data['data']['locale'] = app()->getLocale();
 
         unset($data['data']['terms']);
 

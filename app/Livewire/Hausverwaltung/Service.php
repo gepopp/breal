@@ -4,7 +4,7 @@ namespace App\Livewire\Hausverwaltung;
 
 use App\Models\Service as ServiceModel;
 use App\Services\PageMeta;
-use App\Settings\PagesSettings;
+use App\Settings\ServicesSettings;
 use App\Traits\SplitsHtmlText;
 use Livewire\Attributes\Url;
 use Livewire\Component;
@@ -18,12 +18,12 @@ class Service extends Component
     #[Url]
     public ?string $tab = '';
 
-    public function mount(PagesSettings $pagesSettings): void
+    public function mount(ServicesSettings $pagesSettings): void
     {
         $this->text = $pagesSettings->services_introtext;
     }
 
-    public function render(PagesSettings $pagesSettings)
+    public function render(ServicesSettings $pagesSettings)
     {
         $services = ServiceModel::all();
         $selected = $services->firstWhere('slug', $this->tab) ?? $services->first();

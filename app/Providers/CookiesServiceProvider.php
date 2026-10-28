@@ -6,11 +6,22 @@ use Whitecube\LaravelCookieConsent\AnalyticCookiesCategory;
 use Whitecube\LaravelCookieConsent\Consent;
 use Whitecube\LaravelCookieConsent\Cookie;
 use Whitecube\LaravelCookieConsent\CookiesGroup;
+use Whitecube\LaravelCookieConsent\CookiesRegistrar;
 use Whitecube\LaravelCookieConsent\CookiesServiceProvider as ServiceProvider;
 use Whitecube\LaravelCookieConsent\Facades\Cookies;
 
 class CookiesServiceProvider extends ServiceProvider
 {
+    /**
+     * Registers the cookies when the cookie registrar is first used (while the
+     * page renders) instead of at boot, because the descriptions are translated
+     * on registration and the locale of the request is not known at boot.
+     */
+    public function register(): void
+    {
+        $this->app->afterResolving(CookiesRegistrar::class, fn () => $this->registerCookies());
+    }
+
     /**
      * Define the cookies users should be aware of.
      */
@@ -28,7 +39,7 @@ class CookiesServiceProvider extends ServiceProvider
 
         Cookies::optional()
             ->name('google_maps')
-            ->description('Dieses Cookie muss zum Anzeigen von Google Maps aktiviert werden.')
+            ->description(__('cookies.google_maps'))
             ->duration(120);
     }
 

@@ -4,7 +4,7 @@ namespace App\Livewire;
 
 use App\Enums\CompaniesEnum;
 use App\Models\Department;
-use App\Settings\PagesSettings;
+use App\Settings\ContactSettings;
 use Livewire\Component;
 
 class ContactDepartments extends Component
@@ -13,7 +13,7 @@ class ContactDepartments extends Component
 
     public bool $withIntro = true;
 
-    public function render(PagesSettings $pagesSettings)
+    public function render(ContactSettings $pagesSettings)
     {
         $departments = Department::where('company', $this->company)->get();
 

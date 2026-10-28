@@ -26,9 +26,15 @@ class FAQ extends Component
     {
         $this->company = CompaniesEnum::getByRoute();
 
-        $this->faqs = Question::all()->toArray();
-
         $this->locale = blank(app()->getLocale()) ? 'de' : app()->getLocale();
+
+        $this->faqs = Question::all()
+            ->map(fn (Question $question): array => [
+                'question' => $this->translated($question, 'question'),
+                'answer' => $this->translated($question, 'answer'),
+                'link' => $question->link,
+            ])
+            ->all();
 
     }
 
@@ -42,10 +48,15 @@ class FAQ extends Component
             ->layoutData([
                 'canonical' => route($this->company === CompaniesEnum::Hausverwaltung->name ? 'hausverwaltung.faq' : ($this->company === CompaniesEnum::Makler->name ? 'makler.faq' : 'technik.faq')),
                 'description' => PageMeta::description('faq'),
-                'schema' => [StructuredData::faqPage(array_map(fn (array $faq): array => [
-                    'question' => $faq['question'][$this->locale] ?? $faq['question']['de'] ?? null,
-                    'answer' => $faq['answer']['de'] ?? null,
-                ], $this->faqs))],
+                'schema' => [StructuredData::faqPage($this->faqs)],
             ]);
+    }
+
+    /**
+     * The text in the page language; German until an English text exists.
+     */
+    private function translated(Question $question, string $attribute): string
+    {
+        return $question->getTranslation($attribute, $this->locale, false) ?: $question->getTranslation($attribute, 'de', false);
     }
 }
