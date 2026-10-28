@@ -17,6 +17,7 @@ use App\Livewire\Pages\Contact;
 use App\Livewire\Pages\FAQ;
 use App\Livewire\Pages\Immobilie;
 use App\Livewire\Pages\JobVacancy;
+use App\Livewire\Pages\Policy;
 use App\Livewire\Pages\Team;
 use App\Livewire\Pages\Vacancies;
 use App\Livewire\Sites\Imprint;
@@ -69,7 +70,7 @@ Route::group(['localized' => true], function () {
 
     Route::get('impressum', Imprint::class)->name('impressum');
     Route::get('barrierefreiheit', AccessabilityDeclaration::class)->name('barrierefreiheit');
-    Route::livewire('datenschutz', 'policy')->name('datenschutz');
+    Route::get('datenschutz', Policy::class)->name('datenschutz');
 
     Route::livewire('unternehmensservice', 'pages.verwalterservice')->name('verwalterservice');
 

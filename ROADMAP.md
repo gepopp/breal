@@ -88,7 +88,14 @@ Briefing: Technik #5.
 Briefing: Technik #6 and #8.
 - [x] `robots.txt`: `Allow: /` kept, `Sitemap: https://www.bereal-immobilien.at/sitemap.xml` added, file now in the repo (`public/robots.txt`; production's copy must be replaced on deploy). Every page also has `<link rel="sitemap" type="application/xml" title="Sitemap" href=".../sitemap.xml">` in the head (`partials/head.blade.php`). Tests: `SitemapReferenceTest`. The sitemap content itself is still WP4.
 - [~] `llms.txt`: served as `public/llms.txt` with placeholder text (German; built from the briefing facts and the current site; starts with an HTML comment marking it as a placeholder, remove it when Ronald's final text is in). Needs from Ronald: final wording, whether the English version is mentioned. Service links use today's slugs and must be updated when WP4 renames them (the test `LlmsTxtTest` fails on dead links, wrong address spelling, "Bontus" and missing company facts).
-- [ ] Verify that all texts (Datenschutz, Über uns, Team) are in the server-rendered HTML without JavaScript. The `datenschutz` route is a Volt/Livewire `policy` component; check with `curl` and fix if empty.
+- [~] Server-rendered HTML check (all public pages fetched without JavaScript, 2026-10-28; production serves the same code and the same empty pages). Results:
+  - [x] **Datenschutz was empty** (0 characters in `<main>`, title `bereal`): `Route::livewire('datenschutz', 'policy')` resolved to an empty scaffold (`components/⚡policy.blade.php`); the real markup sat in a dead Volt file (`livewire/policy.blade.php`, Volt is no longer installed). Fixed: class component `App\Livewire\Pages\Policy` with view `livewire/pages/policy.blade.php`, normal route, title/description/heading from `pages.policy.*` (no "Bontus", typo "Immobilienmanagment" fixed), both dead files removed. Now about 23,000 characters of policy text in the HTML. Tests: `PrivacyPolicyPageTest`. The policy text itself (`PagesSettings::dpgr_text`) is German only (WP10).
+  - [ ] **Über uns (`/makler/ueber-uns`) is empty:** `livewire/makler/ueber.blade.php` is an empty scaffold. Needs the client's content (WP9); until then remove it from the sitemap or return 404/noindex.
+  - [ ] **Team and Contact content is loaded by JavaScript:** `<livewire:contact-departments lazy>` (Team and Contact) and `<livewire:contact-form lazy>` (Contact, includes the sidebar with address, phone and e-mail) only deliver a placeholder in the HTML. This is the real reason why "the Team pages show no persons" (37 contact persons exist). Fix: drop `lazy` or give the lazy components a server-rendered placeholder (contact data); check the page-speed impact (WP8).
+  - [ ] **Bug found on the way:** `company="$company"` is passed as a literal string and `ContactDepartments` declares the property as `$comapny` (typo), so the company is never applied: Makler and Technik team/contact pages show the Hausverwaltung departments. Fix with `:company="$company"` and the correct property name.
+  - [ ] **Service page (`/service`) is client-rendered:** the service list, descriptions, bullet lists and downloads are built by Alpine `x-for`; only about 200 characters are in the HTML. Needs server-rendered service content (Blade loops, real links such as `?tab=<slug>`) with Alpine only for filtering/selection. Largest item of this check.
+  - Fine (server-rendered, 900 to 14,000 characters in `<main>`): start pages, Leistungen, Karriere, FAQ list and detail, Impressum, Barrierefreiheit, Unternehmensservice, service detail pages, Immobiliensuche, property detail. Thin but present: Team intro (about 330 characters).
+  - Still `bereal` as title (WP2): Unternehmensservice, FAQ detail, property detail.
 
 ### WP7 Impressum and Datenschutz
 Briefing: "Impressum", "Datenschutz".
@@ -96,7 +103,7 @@ Briefing: "Impressum", "Datenschutz".
 - [ ] "Franz-Josefs-Kai 65/Mezzanin" everywhere; fix typo "Immobilienmanagment".
 - [ ] Technik company: use `office@bereal-technik.at` (not `t.keinrath@bereal-immobilien.at`).
 - [ ] Add managing directors and UID for Makler and Technik (data below). Gewerbe, Kammer, Aufsichtsbehörde, Firmenbuchgericht per company: client delivers.
-- [ ] Datenschutz page: title (not "Bontus Eybel Immobilien"), text must be present in the HTML. The legal text is checked by the client.
+- [x] Datenschutz page: title (no "Bontus"), text present in the HTML (see WP6). The legal text itself is checked by the client; cookie list `_gat` done in WP1.
 
 ### WP8 Domains, search engines, performance (previously "Christoph's")
 Briefing: "Domains", Technik #9 and #10.
