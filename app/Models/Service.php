@@ -37,6 +37,16 @@ class Service extends Model implements HasMedia
         );
     }
 
+    /**
+     * Translation for the given locale, falling back to German when it is missing.
+     */
+    public function translatedFor(string $attribute, ?string $locale = null): string
+    {
+        $locale ??= app()->getLocale();
+
+        return (string) ($this->getTranslation($attribute, $locale, false) ?: $this->getTranslation($attribute, 'de', false));
+    }
+
     protected static function booted(): void
     {
         static::addGlobalScope('order', function (Builder $builder) {

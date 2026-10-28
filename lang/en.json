@@ -85,6 +85,7 @@
     "linkedin.api_error": "API error while retrieving post: :status",
     "pages.vacancies.description": "Shape the future of property management with us. be real offers jobs with responsibility, development & team spirit – apply now & become part of our team.",
     "pages.vacancies.title": "Careers at be real Real Estate | Working with Purpose & Perspective",
+    "service.filter_placeholder": "Filter from :count services",
     "pages.policy.title": "Privacy Policy | be real Immobilien",
     "pages.policy.description": "Privacy policy of be real Immobilien: how we process personal data on this website and which rights you have.",
     "pages.policy.heading": "Privacy policy of be real Immobilienmanagement GmbH",
