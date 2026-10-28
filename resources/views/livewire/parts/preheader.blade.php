@@ -12,9 +12,9 @@
             @auth
                 <div>
                     @if(app()->getLocale() == 'de')
-                        <a href="{{ language()->back('en') }}" class="font-bold uppercase">ENGLISH</a>
+                        <a href="{{ app(\App\Services\LocaleUrls::class)->forLocale('en') }}" class="font-bold uppercase">ENGLISH</a>
                     @else
-                        <a href="{{ language()->back('de') }}" class="font-bold uppercase">DEUTSCH</a>
+                        <a href="{{ app(\App\Services\LocaleUrls::class)->forLocale('de') }}" class="font-bold uppercase">DEUTSCH</a>
                     @endif
                 </div>
 

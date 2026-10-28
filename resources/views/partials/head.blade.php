@@ -4,6 +4,12 @@
 <title>{{ $title ?? 'bereal' }}</title>
 <meta name="keywords" content="HTML, CSS, JavaScript">
 <meta name="description" content="{{ $description ?? '' }}">
-<link rel="canonical" href="{{ $canonical ?? url()->current() }}">
+@php($localeUrls = app(\App\Services\LocaleUrls::class))
+<link rel="canonical" href="{{ $canonical ?? $localeUrls->current() }}">
+@if($localeUrls->isLocalized())
+    @foreach($localeUrls->alternates() as $hreflang => $alternateUrl)
+        <link rel="alternate" hreflang="{{ $hreflang }}" href="{{ $alternateUrl }}">
+    @endforeach
+@endif
 <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
 

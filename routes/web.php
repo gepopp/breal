@@ -26,7 +26,7 @@ Route::fallback(function () {
     return view('404');
 });
 
-Route::group(['as' => 'hausverwaltung.', 'middleware' => 'language'], function () {
+Route::group(['as' => 'hausverwaltung.', 'localized' => true], function () {
     Route::get('/', FacilityManagment::class)->name('home');
     Route::get('/leistungen', Leistungen::class)->name('leistungen');
     Route::get('/service', Service::class)->name('service');
@@ -38,7 +38,7 @@ Route::group(['as' => 'hausverwaltung.', 'middleware' => 'language'], function (
 
 });
 
-Route::group(['prefix' => 'makler', 'as' => 'makler.', 'middleware' => 'language'], function () {
+Route::group(['prefix' => 'makler', 'as' => 'makler.', 'localized' => true], function () {
     Route::get('/start', RealEstate::class)->name('home');
     Route::get('/immobiliensuche', Immobiliensuche::class)->name('immobiliensuche');
     Route::get('/ueber-uns', Ueber::class)->name('ueber-uns');
@@ -52,7 +52,7 @@ Route::group(['prefix' => 'makler', 'as' => 'makler.', 'middleware' => 'language
     Route::get('immobilie/{realty}', Immobilie::class)->name('immobilie');
 });
 
-Route::group(['prefix' => 'technik', 'as' => 'technik.', 'middleware' => 'language'], function () {
+Route::group(['prefix' => 'technik', 'as' => 'technik.', 'localized' => true], function () {
     Route::get('/start', Technik::class)->name('home');
     Route::get('/karriere', Vacancies::class)->name('karriere');
     Route::get('/kontakt', Contact::class)->name('kontakt');
@@ -62,7 +62,7 @@ Route::group(['prefix' => 'technik', 'as' => 'technik.', 'middleware' => 'langua
     Route::get('/leistung/{competence}', Compentence::class)->name('leistung');
 });
 
-Route::group(['middleware' => 'language'], function () {
+Route::group(['localized' => true], function () {
 
     Route::get('/faq/{slug}', FAQSingle::class)->name('faq.single');
     Route::get('/stellenanzeige/{JobVacancy}', JobVacancy::class)->name('stellenanzeige');
@@ -71,16 +71,14 @@ Route::group(['middleware' => 'language'], function () {
     Route::get('barrierefreiheit', AccessabilityDeclaration::class)->name('barrierefreiheit');
     Route::livewire('datenschutz', 'policy')->name('datenschutz');
 
-    Route::view('/confirm-test', 'confirmed')->name('confirm-test');
-
-    Route::get('confirmation/{id?}/{token?}', [ContactRequestController::class, 'confirmation'])->name('confirm');
-    Route::get('solve/{request}/{token}', [ContactRequestController::class, 'solve'])->name('solve');
+    Route::livewire('unternehmensservice', 'pages.verwalterservice')->name('verwalterservice');
 
 });
 
-Route::livewire('unternehmensservice', 'pages.verwalterservice')
-    ->middleware(['language'])
-    ->name('verwalterservice');
+Route::view('/confirm-test', 'confirmed')->name('confirm-test');
+
+Route::get('confirmation/{id?}/{token?}', [ContactRequestController::class, 'confirmation'])->name('confirm');
+Route::get('solve/{request}/{token}', [ContactRequestController::class, 'solve'])->name('solve');
 
 Route::get('import', function () {
     Importer::import();

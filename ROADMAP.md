@@ -35,7 +35,14 @@ Briefing: "Sprache, ganze Website", "Platzhalter", "Cookie-Hinweis", "Kleinigkei
 - [x] Cookie banner: wording fixed ("Dieses Cookie muss", "benötigen Sie"), the obsolete `_gat` cookie is no longer listed (own GA4 registration in `CookiesServiceProvider`, replaces the package's `google()` shorthand).
 - [x] Menu duplicates: the doubled labels ("Unternehmensservice", "Kundenlogin") come from `x-button`, which renders its label twice for the hover animation. The decorative copy is now `aria-hidden="true"`. The text still appears twice in the HTML; removing it needs a CSS rework of the button (rebuild of `public/build`), deferred.
 - [x] Tests: `tests/Feature/LanguageTest.php` (13 tests with `TranslationKeysTest`). With `language.auto` switched back to `true` 10 of 11 language tests fail, so they guard the fix.
-- [ ] English version: still reachable via `?lang=en`, the session (admin language switcher) and the package route, i.e. under the same URL as German. Decide: own `/en/` with hreflang, or switch it off for the public site (see section 5).
+- [x] English under its own `/en` prefix (decided; implemented on branch `wp1-language-default`, not committed):
+  - `ApplyLocalePrefix` (global middleware) strips `/en` before routing and records the locale; each page keeps one route and one route name, so `Route::is('makler.*')`, `route:cache` and all existing `route()` calls keep working. `/en`, `/en/` and `/en/kontakt` etc. serve the English page; same slugs as German.
+  - Generated links get `/en` back via `URL::formatPathUsing` (`AppServiceProvider`), only for routes in the `localized` route groups (the 30 public page routes in `routes/web.php`). Email token routes (`confirmation`, `solve`), admin, assets and Livewire's update URL stay unprefixed; Livewire restores the locale from the component snapshot, so updates on English pages stay English with prefixed links (covered by a test).
+  - `SetLocale` now only reads that locale (default `de`). The package middleware `language` was removed from the public routes, so `?lang=en`, the session and `Accept-Language` no longer switch the public site. (Filament panel routes never ran `SetLocale`; the admin has always been German.)
+  - Every public page has `rel="canonical"` (self) and `hreflang` alternates `de-AT`, `en`, `x-default` (`App\Services\LocaleUrls`, `partials/head.blade.php`).
+  - The ENGLISH/DEUTSCH switcher in navbar and preheader still shows for logged-in users only and now links to the other language's URL. Showing it to everyone is a product decision, since English content may be incomplete.
+  - Tests: `tests/Feature/EnglishPrefixTest.php`. Also verified with `route:cache`.
+- [ ] Follow-ups for `/en`: add English URLs to the sitemap (WP4), unknown `/en/...` paths return HTTP 200 like German ones (soft 404, WP4), check English texts/settings (`*_en` settings and translatable models) for gaps, decide whether to expose the language switcher publicly.
 - [ ] Makler landing page (`/makler/start`) returns 500 when its settings are empty (`Makler\Parts\Hero` calls `whereIn('id', null)`), so it is not in the test list of `LanguageTest`. Harden or seed settings in tests.
 - Verified locally (Herd, production DB copy): no `Accept-Language` gives German titles, `lang="de-AT"`, no raw keys; English header still gives German.
 - Done when (verify on production after deploy): `curl` without `Accept-Language` returns German text, no `word.word` placeholders, correct `lang`. Note production `.env` has `APP_FALLBACK_LOCALE=en`; harmless now but should be set to `de`.
@@ -123,7 +130,7 @@ Common: Franz-Josefs-Kai 65/Mezzanin, 1010 Wien, Tel. +43 1 535 36 19 (`tel:+431
 
 ## 5. Open decisions and inputs
 
-- English version: own `/en/` with hreflang, or switch off for now?
+- ~~English version~~: decided, `/en` prefix, see WP1. Open: expose the language switcher publicly, and who delivers missing English content.
 - `GET /import` public route: protect or remove?
 - 17 stale starter-kit tests: repair or remove (needs approval per project rules)?
 - Domain redirects (`bereal-makler.at`, `bereal-technik.at`) and production writes: how do we get write access, and who deploys? Production is not deployed from git today.

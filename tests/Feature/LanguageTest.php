@@ -30,7 +30,7 @@ class LanguageTest extends TestCase
         $response = $this->get('/');
 
         $response->assertOk();
-        $response->assertSee('lang="de-AT"', false);
+        $response->assertSee('<html lang="de-AT">', false);
         $response->assertSee(__('facility_management.title'));
         $response->assertDontSee('facility_management.title');
     }
@@ -40,16 +40,8 @@ class LanguageTest extends TestCase
         $response = $this->withHeaders(['Accept-Language' => 'en-US,en;q=0.9'])->get('/');
 
         $response->assertOk();
-        $response->assertSee('lang="de-AT"', false);
+        $response->assertSee('<html lang="de-AT">', false);
         $response->assertSee(__('facility_management.title'));
-    }
-
-    public function test_session_locale_can_still_select_english(): void
-    {
-        $response = $this->withSession(['locale' => 'en'])->get('/');
-
-        $response->assertOk();
-        $response->assertSee('lang="en"', false);
     }
 
     public function test_default_locale_is_german(): void

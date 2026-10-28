@@ -3,12 +3,15 @@
 namespace App\Providers;
 
 use App\Models\User;
+use App\Services\LocaleUrls;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Queue\Events\JobFailed;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Queue;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Opcodes\LogViewer\Facades\LogViewer;
 
@@ -28,6 +31,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Model::unguard();
+
+        URL::formatPathUsing(function (string $path, ?Route $route): string {
+            return LocaleUrls::isLocalizedRoute($route)
+                ? LocaleUrls::prefixPath($path, app()->getLocale())
+                : $path;
+        });
 
         Gate::define('viewLogViewer', fn (?User $user): bool => (bool) $user?->admin);
 
