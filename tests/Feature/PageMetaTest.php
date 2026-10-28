@@ -233,7 +233,7 @@ class PageMetaTest extends TestCase
 
     public function test_legal_headings_no_longer_contain_the_typo(): void
     {
-        $this->get('/impressum')->assertSee('Impressum der be real Immobilienmanagement GmbH')->assertDontSee('Immobilienmanagment');
+        $this->get('/impressum')->assertSee('be real Immobilienmanagement GmbH')->assertDontSee('Immobilienmanagment');
         $this->get('/barrierefreiheit')->assertSee('Barrierefreiheitserklärung der be real Immobilienmanagement GmbH')->assertDontSee('Immobilienmanagment');
     }
 

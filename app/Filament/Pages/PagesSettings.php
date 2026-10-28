@@ -106,7 +106,9 @@ class PagesSettings extends SettingsPage
 
                         Tab::make('Impressum')
                             ->schema([
-                                RichEditor::make('imprint_text')->label('Text für Initiativbewerbungs-CTA"')->required(),
+                                Section::make('Impressum')
+                                    ->description('Das Impressum wird aus den Firmendaten in config/company.php erzeugt (Adresse, Geschäftsführung, Firmenbuch, UID, Kontakt je Gesellschaft) und ist hier nicht mehr bearbeitbar.')
+                                    ->schema([]),
                             ]),
 
                         Tab::make('Datenschutz')

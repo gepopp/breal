@@ -51,6 +51,22 @@ return [
         'fri' => ['09:00-12:00'],
     ],
 
+    /*
+    | Disclosure pursuant to § 25 MedienG for the website (Medieninhaber is the
+    | Hausverwaltung company). Shown in the Impressum once filled in.
+    */
+
+    'media' => [
+        'owners' => null,
+        'editorial_line' => null,
+    ],
+
+    /*
+    | Per company: "firmenbuchgericht", "gewerbe", "kammer" and
+    | "aufsichtsbehoerde" are shown in the Impressum as soon as they are filled
+    | in (delivery from the client); empty values are not printed.
+    */
+
     'sections' => [
 
         'Hausverwaltung' => [
@@ -62,6 +78,10 @@ return [
             'firmenbuch' => 'FN 152672 v',
             'uid' => 'ATU49490402',
             'managing_directors' => ['Lukas Eybel'],
+            'firmenbuchgericht' => null,
+            'gewerbe' => null,
+            'kammer' => null,
+            'aufsichtsbehoerde' => null,
         ],
 
         'Makler' => [
@@ -73,6 +93,10 @@ return [
             'firmenbuch' => 'FN 556967 w',
             'uid' => 'ATU76971617',
             'managing_directors' => ['Lukas Eybel', 'Tanja Bachschwöller-Eybel'],
+            'firmenbuchgericht' => null,
+            'gewerbe' => null,
+            'kammer' => null,
+            'aufsichtsbehoerde' => null,
         ],
 
         'Technik' => [
@@ -84,6 +108,10 @@ return [
             'firmenbuch' => 'FN 660246 a',
             'uid' => 'ATU82490109',
             'managing_directors' => ['Thomas Keinrath'],
+            'firmenbuchgericht' => null,
+            'gewerbe' => null,
+            'kammer' => null,
+            'aufsichtsbehoerde' => null,
         ],
 
     ],
