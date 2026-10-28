@@ -205,7 +205,7 @@ Not ours, but they block or finish parts above. This list is the basis for the "
 
 ## 6. Deployments
 
-### Staging: https://staging.bereal-immobilien.at (deployed 2026-10-28, commit `2328740`)
+### Staging: https://staging.bereal-immobilien.at (deployed 2026-10-28, redeployed with commit `f0c4ead`, WP1 to WP10)
 Plesk subdomain of the subscription `bereal-immobilien.at` on the server `ishi-zeus`, folder `/var/www/vhosts/bereal-immobilien.at/staging.bereal-immobilien.at`, document root `.../public`, PHP 8.5, Let's Encrypt certificate. Protected by HTTP basic auth (user `BEREAL`), `X-Robots-Tag: noindex` and a `robots.txt` that disallows everything.
 - Deployed with `git archive` of the commit (the built assets in `public/build` are tracked, so no Node build on the server), uploaded over SSH and extracted as the site user, `composer install --no-dev --optimize-autoloader` with `/opt/plesk/php/8.5/bin/php`.
 - Data: a consistent SQLite copy of the production database (`sqlite3 <live>/database/database.sqlite ".backup database/database.sqlite"`), then `php artisan migrate --force` (applied the four migrations of this branch), then `config:cache`, `route:cache`, `view:cache`. The copy contains real personal data (347 contact requests): keep the basic auth, do not share the link.
