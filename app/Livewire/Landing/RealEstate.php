@@ -4,6 +4,7 @@ namespace App\Livewire\Landing;
 
 use App\Models\Realty;
 use App\Services\PageMeta;
+use App\Services\StructuredData;
 use Livewire\Component;
 
 class RealEstate extends Component
@@ -18,6 +19,7 @@ class RealEstate extends Component
             ->layoutData([
                 'canonical' => route('makler.home'),
                 'description' => PageMeta::description('start'),
+                'schema' => [StructuredData::organizations()],
             ]);
     }
 }

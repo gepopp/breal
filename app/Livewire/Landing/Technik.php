@@ -3,6 +3,7 @@
 namespace App\Livewire\Landing;
 
 use App\Services\PageMeta;
+use App\Services\StructuredData;
 use App\Settings\TechnikLandingpageSettings;
 use Livewire\Component;
 
@@ -16,6 +17,7 @@ class Technik extends Component
             ->layoutData([
                 'canonical' => route('technik.home'),
                 'description' => PageMeta::description('start'),
+                'schema' => [StructuredData::organizations()],
             ]);
     }
 }

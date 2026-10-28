@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Question;
 use App\Services\PageMeta;
+use App\Services\StructuredData;
 use Livewire\Component;
 
 class FAQSingle extends Component
@@ -23,6 +24,7 @@ class FAQSingle extends Component
             ->layoutData([
                 'canonical' => route('faq.single', $this->faq->slug),
                 'description' => PageMeta::excerpt($this->faq->excerpt ?: $this->faq->answer),
+                'schema' => [StructuredData::faqPage([['question' => $this->faq->question, 'answer' => $this->faq->answer]])],
             ]);
     }
 }

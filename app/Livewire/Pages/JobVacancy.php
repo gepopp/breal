@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages;
 
 use App\Services\PageMeta;
+use App\Services\StructuredData;
 use Livewire\Component;
 
 class JobVacancy extends Component
@@ -28,6 +29,7 @@ class JobVacancy extends Component
             ->layoutData([
                 'canonical' => route('stellenanzeige', $this->jobVacancy),
                 'description' => PageMeta::excerpt($this->jobVacancy->description),
+                'schema' => [StructuredData::jobPosting($this->jobVacancy)],
             ]);
     }
 }

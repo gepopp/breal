@@ -4,6 +4,7 @@ namespace App\Livewire\Landing;
 
 use App\Enums\CompaniesEnum;
 use App\Services\PageMeta;
+use App\Services\StructuredData;
 use App\Settings\HausverwaltungLandingpageSettings;
 use Livewire\Component;
 
@@ -19,6 +20,7 @@ class FacilityManagment extends Component
             ->layoutData([
                 'canonical' => route('hausverwaltung.home'),
                 'description' => PageMeta::description('start'),
+                'schema' => [StructuredData::organizations()],
             ]);
     }
 }

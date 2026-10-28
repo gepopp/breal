@@ -5,6 +5,7 @@ namespace App\Livewire\Pages;
 use App\Enums\CompaniesEnum;
 use App\Models\Question;
 use App\Services\PageMeta;
+use App\Services\StructuredData;
 use App\Settings\FaqSettings;
 use App\Traits\SplitsHtmlText;
 use Livewire\Component;
@@ -41,6 +42,10 @@ class FAQ extends Component
             ->layoutData([
                 'canonical' => route($this->company === CompaniesEnum::Hausverwaltung->name ? 'hausverwaltung.faq' : ($this->company === CompaniesEnum::Makler->name ? 'makler.faq' : 'technik.faq')),
                 'description' => PageMeta::description('faq'),
+                'schema' => [StructuredData::faqPage(array_map(fn (array $faq): array => [
+                    'question' => $faq['question'][$this->locale] ?? $faq['question']['de'] ?? null,
+                    'answer' => $faq['answer']['de'] ?? null,
+                ], $this->faqs))],
             ]);
     }
 }

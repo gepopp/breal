@@ -90,12 +90,14 @@ Status 2026-10-28: implemented and tested locally (not committed, not deployed).
 
 ### WP5 Structured data (JSON-LD)
 Briefing: Technik #5.
-- [ ] `Organization` be real Immobilien with the three companies (name, address, phone, e-mail, opening hours, logo, `sameAs` profile links).
-- [ ] `RealEstateAgent` for be real Makler.
-- [ ] `JobPosting` for each vacancy (`job_vacancies`).
-- [ ] `FAQPage` for the FAQ.
-- [ ] Validate with Google Rich Results Test after deploy; add tests that the JSON-LD parses and has required fields.
-- Needs: social profile URLs for `sameAs` (from Ronald), logo files.
+Status 2026-10-28: implemented and tested locally (not committed, not deployed). `App\Services\StructuredData` builds the data; pages pass it to the layout as `schema`, `partials/head.blade.php` prints one `<script type="application/ld+json">` per node (escaped so content cannot break out of the tag). Tests: `tests/Feature/StructuredDataTest.php` (11 tests: JSON parses, required fields, values match `config/company.php`).
+- [x] Organization graph on the three section home pages (`/`, `/makler/start`, `/technik/start`): group "be real Immobilien" (`Organization`) with the three companies as `subOrganization`; Verwaltung and Technik as `LocalBusiness`, Makler as `RealEstateAgent`. Name, legal name, address, phone, fax, e-mail, UID (`vatID`), logo and opening hours (Mo–Do 08–16, Fr 08–12) all come from `config/company.php`.
+- [x] `JobPosting` on every job ad page: title, description, `datePosted`/`validThrough` (from/to), hiring organization (the legal name of the ad's company), location, `employmentType` (Vollzeit → FULL_TIME, Teilzeit/Geringfügig → PART_TIME, Freiberuflich → CONTRACTOR) and `baseSalary` (period from the unit text, incl. the existing typo "Wöchnentlich"). Unknown values are left out instead of guessed.
+- [x] `FAQPage` on the FAQ pages (all questions; mirrors what the page shows: question in the page language, answer German) and on each single FAQ page.
+- [x] No empty claims: `sameAs` is only output when profile URLs are filled in (`company.group.social_profiles`, empty now).
+- [ ] After deploy: validate a home page, a job ad and the FAQ with Google's Rich Results Test and the Schema.org validator.
+- [ ] Decision: Makler/Technik company nodes use the domains `bereal-makler.at` / `bereal-technik.at` as `url`/`@id` (as in the footer); revisit with WP8 (domain setup).
+- Needs: social profile URLs for `sameAs` (from Ronald) into `config/company.php`; new logo files replace the SVGs in `public/logos` (paths are in `config/company.php`, `logo` per section). English FAQ answers are German until WP10.
 
 ### WP6 Crawler files and HTML content
 Briefing: Technik #6 and #8.
