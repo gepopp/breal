@@ -86,8 +86,8 @@ Briefing: Technik #5.
 
 ### WP6 Crawler files and HTML content
 Briefing: Technik #6 and #8.
-- [ ] `robots.txt`: keep `Allow: /`, add `Sitemap: https://www.bereal-immobilien.at/sitemap.xml`. File lives only on the server today; add it to the repo.
-- [ ] `llms.txt`: short text with group, companies, services, contact, key links. Text comes from Ronald, we create and serve the file.
+- [x] `robots.txt`: `Allow: /` kept, `Sitemap: https://www.bereal-immobilien.at/sitemap.xml` added, file now in the repo (`public/robots.txt`; production's copy must be replaced on deploy). Every page also has `<link rel="sitemap" type="application/xml" title="Sitemap" href=".../sitemap.xml">` in the head (`partials/head.blade.php`). Tests: `SitemapReferenceTest`. The sitemap content itself is still WP4.
+- [~] `llms.txt`: served as `public/llms.txt` with placeholder text (German; built from the briefing facts and the current site; starts with an HTML comment marking it as a placeholder, remove it when Ronald's final text is in). Needs from Ronald: final wording, whether the English version is mentioned. Service links use today's slugs and must be updated when WP4 renames them (the test `LlmsTxtTest` fails on dead links, wrong address spelling, "Bontus" and missing company facts).
 - [ ] Verify that all texts (Datenschutz, Über uns, Team) are in the server-rendered HTML without JavaScript. The `datenschutz` route is a Volt/Livewire `policy` component; check with `curl` and fix if empty.
 
 ### WP7 Impressum and Datenschutz

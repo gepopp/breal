@@ -11,5 +11,6 @@
         <link rel="alternate" hreflang="{{ $hreflang }}" href="{{ $alternateUrl }}">
     @endforeach
 @endif
+<link rel="sitemap" type="application/xml" title="Sitemap" href="{{ url('sitemap.xml') }}">
 <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
 
