@@ -10,11 +10,6 @@
             <h5 class="text-xl font-bold text-white h-[56px] line-clamp-2">{{ $ref->title }}</h5>
             <p class="text-white line-clamp-5 h-[140px]">{{ $ref->description }}</p>
         </div>
-        <div class="my-6 text-sm font-medium text-white/50">
-            @foreach($ref->hashtags() as $hashtag)
-                #{{ $hashtag }}
-            @endforeach
-        </div>
 {{--        <div class="flex space-x-4 mt-auto mb-12">--}}
 {{--            <div class="w-16 shrink-0">--}}
 {{--                <img src="{{ $ref->getFirstMediaUrl('avatar') }}"--}}
