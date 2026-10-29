@@ -136,10 +136,12 @@ class CompanyContactDataTest extends TestCase
         $this->assertStringContainsString('Franz-Josefs-Kai 65/Mezzanin', $footer);
         $this->assertStringContainsString('1010 Wien', $footer);
         $this->assertStringContainsString('Öffnungszeiten', $footer);
-        $this->assertStringContainsString('Mo–Do: 08:00–16:00', $footer);
+        $text = preg_replace('/\s+/u', ' ', strip_tags($footer));
+
+        $this->assertStringContainsString('Mo–Do 08:00–16:00', $text);
         $this->assertStringContainsString('Telefonzeiten', $footer);
-        $this->assertStringContainsString('Mo–Do: 09:00–12:00 und 13:00–16:00', $footer);
-        $this->assertStringContainsString('Fr: 09:00–12:00', $footer);
+        $this->assertStringContainsString('Mo–Do 09:00–12:00 und 13:00–16:00', $text);
+        $this->assertStringContainsString('Fr 09:00–12:00', $text);
 
         foreach (['be real Immobilienmanagement GmbH', 'be real Immobilienmakler GmbH', 'be real Baumanagement GmbH'] as $other) {
             if ($other !== $legalName) {
@@ -153,7 +155,7 @@ class CompanyContactDataTest extends TestCase
         $footer = $this->footerOf($this->get('/en/makler/team')->getContent());
 
         $this->assertStringContainsString('Phone hours', $footer);
-        $this->assertStringContainsString('Mon–Thu: 09:00–12:00 and 13:00–16:00', $footer);
+        $this->assertStringContainsString('Mon–Thu 09:00–12:00 and 13:00–16:00', preg_replace('/\s+/u', ' ', strip_tags($footer)));
         $this->assertStringContainsString('Opening hours', $footer);
     }
 

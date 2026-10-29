@@ -60,22 +60,32 @@ new class extends Component
 
 
         <div class="flex flex-col space-y-6">
-            <p class="!mb-0 font-bold">{{ $section['name'] }}</p>
-            <p class="!mb-0">{{ config('company.address.street') }}</p>
-            <p class="!mb-0">{{ config('company.address.postal_code') }} {{ config('company.address.city') }}</p>
-            <p class="!mb-0">{{ __('footer.phone') }}: <a href="{{ \App\Services\CompanyInfo::phoneUri() }}">{{ \App\Services\CompanyInfo::phone() }}</a></p>
-            <p class="!mb-0">{{ __('footer.fax') }}: {{ \App\Services\CompanyInfo::fax() }}</p>
-            <p class="!mb-0">E-Mail: <a href="{{ \App\Services\CompanyInfo::mailtoUri($section['email']) }}">{{ $section['email'] }}</a></p>
-            <p class="!mb-0">{{ __('footer.opening_hours') }}:
-                @foreach(\App\Services\CompanyInfo::hours('opening') as $days => $times)
-                    <br>{{ $days }}: {{ $times }}
-                @endforeach
-            </p>
-            <p class="!mb-0">{{ __('footer.phone_hours') }}:
-                @foreach(\App\Services\CompanyInfo::hours('phone') as $days => $times)
-                    <br>{{ $days }}: {{ $times }}
-                @endforeach
-            </p>
+            <div>
+                <p class="!mb-1 font-bold">{{ $section['name'] }}</p>
+                <p class="!mb-0">{{ config('company.address.street') }}</p>
+                <p class="!mb-0">{{ config('company.address.postal_code') }} {{ config('company.address.city') }}</p>
+            </div>
+
+            <dl class="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1">
+                <dt>{{ __('footer.phone') }}</dt>
+                <dd><a href="{{ \App\Services\CompanyInfo::phoneUri() }}">{{ \App\Services\CompanyInfo::phone() }}</a></dd>
+                <dt>{{ __('footer.fax') }}</dt>
+                <dd>{{ \App\Services\CompanyInfo::fax() }}</dd>
+                <dt>E-Mail</dt>
+                <dd><a href="{{ \App\Services\CompanyInfo::mailtoUri($section['email']) }}">{{ $section['email'] }}</a></dd>
+            </dl>
+
+            @foreach(['opening' => 'footer.opening_hours', 'phone' => 'footer.phone_hours'] as $type => $label)
+                <div>
+                    <p class="!mb-1 font-bold">{{ __($label) }}</p>
+                    <dl class="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1">
+                        @foreach(\App\Services\CompanyInfo::hours($type) as $days => $times)
+                            <dt>{{ $days }}</dt>
+                            <dd>{{ $times }}</dd>
+                        @endforeach
+                    </dl>
+                </div>
+            @endforeach
         </div>
     </div>
 
