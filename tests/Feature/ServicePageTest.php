@@ -50,6 +50,15 @@ class ServicePageTest extends TestCase
         $response->assertDontSee('x-html', false);
     }
 
+    public function test_filter_is_hidden_for_short_lists_and_shown_for_long_ones(): void
+    {
+        $this->get('/service')->assertDontSee('x-model="searchterm"', false);
+
+        config(['company.service_filter_min_items' => 3]);
+
+        $this->get('/service')->assertSee('x-model="searchterm"', false);
+    }
+
     public function test_selected_service_renders_description_list_and_downloads(): void
     {
         $response = $this->get('/service?tab=meldezettel');
@@ -135,11 +144,11 @@ class ServicePageTest extends TestCase
         $response = $this->get('/kontakt');
 
         $response->assertSee('href="'.$this->root().'/service?tab=meldezettel"', false);
-        $response->assertSee('Filtern Sie aus 3 Services');
+        $response->assertDontSee('Filtern Sie aus 3 Services');
         $response->assertDontSee(self::FIRST_TEXT);
         $response->assertDontSee(self::SECOND_TEXT);
 
-        $this->get('/en/kontakt')->assertSee('Filter from 3 services');
+        $this->get('/en/kontakt')->assertDontSee('Filter from 3 services');
     }
 
     /**

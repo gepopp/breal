@@ -3,10 +3,12 @@
         <div class="relative  min-h-[400px] w-84">
             <div x-data="menuServiceFilter({{ Js::from(array_map(fn (array $item): array => ['id' => $item['id'], 'name' => $item['name']], $items)) }})"
                  class="absolute inset-0 bg-white -mt-12 p-6 flex flex-col">
-                <flux:input x-model="searchterm" class="border-logo" icon:trailing="funnel"
-                            placeholder="{{ __('service.filter_placeholder', ['count' => count($items)]) }}"/>
+                @if(count($items) >= config('company.service_filter_min_items'))
+                    <flux:input x-model="searchterm" class="border-logo" icon:trailing="funnel"
+                                placeholder="{{ __('service.filter_placeholder', ['count' => count($items)]) }}"/>
+                @endif
 
-                <div class="border-t border-logo mt-4 pt-4 flex-grow relative">
+                <div @class(['flex-grow relative', 'border-t border-logo mt-4 pt-4' => count($items) >= config('company.service_filter_min_items')])>
                     <ul class="absolute inset-0 overflow-y-auto scrollbar scrollbar-thin  !list-none">
                         @foreach($items as $item)
                             <li class="border-b border-logo p-2 !ml-0" x-show="visibleIds.includes({{ $item['id'] }})">

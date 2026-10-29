@@ -33,6 +33,13 @@ return [
         'country' => 'AT',
     ],
 
+    /*
+    | The service lists only offer the search field from this many services on;
+    | below it the filter is hidden (the code stays for a growing list).
+    */
+
+    'service_filter_min_items' => 10,
+
     'phone' => '+43 1 535 36 19',
 
     'fax' => '+43 1 535 64 28',

@@ -279,6 +279,16 @@ p{
     }
 }
 
+.competence-body {
+    h3 {
+        @apply text-xl font-bold leading-tight mt-8 mb-4;
+    }
+
+    ul {
+        @apply list-disc list-outside ml-10 my-4 space-y-3;
+    }
+}
+
 video::-webkit-media-controls {
     display: none;
 }

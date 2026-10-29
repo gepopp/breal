@@ -42,8 +42,10 @@
     <section class="mt-12 flex flex-col md:flex-row space-x-8" x-data="siteServiceFilter({{ Js::from(array_map(fn (array $item): array => ['id' => $item['id'], 'name' => $item['name']], $menu)) }})">
         <div class="relative min-h-[300px] md:min-h-screen w-full md:w-84 shrink-0">
             <div class="inset-0 bg-white flex flex-col">
-                <flux:input x-model="searchterm" class="border-logo" icon:trailing="funnel" placeholder="{{ __('service.filter_placeholder', ['count' => count($menu)]) }}"/>
-                <div class="mt-4 pt-4 relative">
+                @if(count($menu) >= config('company.service_filter_min_items'))
+                    <flux:input x-model="searchterm" class="border-logo" icon:trailing="funnel" placeholder="{{ __('service.filter_placeholder', ['count' => count($menu)]) }}"/>
+                @endif
+                <div @class(['relative', 'mt-4 pt-4' => count($menu) >= config('company.service_filter_min_items')])>
                     <ul class="overflow-y-auto overflow-x-hidden scrollbar scrollbar-thin  !list-none space-y-4">
                         @foreach($menu as $item)
                             <li class="border border-logo rounded-lg !ml-0 relative group cursor-pointer" x-show="visibleIds.includes({{ $item['id'] }})" wire:key="service-menu-{{ $item['id'] }}">

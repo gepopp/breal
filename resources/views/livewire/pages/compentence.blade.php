@@ -23,7 +23,7 @@
                     </svg>
                 </div>
             </div>
-            {!! $competence->body !!}
+            <div class="competence-body">{!! \App\Services\HtmlLists::normalize($competence->body) !!}</div>
         </div>
 
         <div class="mt-12 flex justify-center">
