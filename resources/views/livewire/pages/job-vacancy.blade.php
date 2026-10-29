@@ -2,15 +2,14 @@
 
     <div class="my-12">
 
-        <x-headings level="1">
-            <x-slot name="tag">{{ $jobVacancy->job_title }}</x-slot>
+        <x-headings level="1" class="!text-3xl md:!text-4xl leading-tight">
             {!! $jobVacancy->title !!}
         </x-headings>
 
 
         <div class="flex flex-col md:flex-row mt-12">
-            <div class="w-full md:w-3/4 prose" data-aos="fade-up">
-                {!! $jobVacancy->description !!}
+            <div class="w-full md:w-3/4 job-body" data-aos="fade-up">
+                {!! \App\Services\HtmlLists::normalize($jobVacancy->description) !!}
             </div>
             <div class="w-full mt-12 md:mt-0 md:w-1/4 md:ml-6 md:pl-6 md:border-l-2 md:border-logo">
                 <ul class="md:text-right">

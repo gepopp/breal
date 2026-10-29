@@ -14,6 +14,16 @@ class HtmlListsTest extends TestCase
         $this->assertSame('<p>Intro</p><ul><li>Eins</li><li>Zwei</li><li>Drei</li></ul>', HtmlLists::normalize($html));
     }
 
+    public function test_consecutive_middle_dot_paragraphs_become_one_list(): void
+    {
+        $html = '<p><strong>Profil:</strong></p><p>·&nbsp;&nbsp;&nbsp; Erfahrung</p><p>· Deutsch</p><p></p><p>Danach</p><p>· Neu</p>';
+
+        $this->assertSame(
+            '<h3><strong>Profil:</strong></h3><ul><li>Erfahrung</li><li>Deutsch</li></ul><p>Danach</p><ul><li>Neu</li></ul>',
+            HtmlLists::normalize($html)
+        );
+    }
+
     public function test_bold_only_paragraph_ending_with_colon_becomes_a_heading(): void
     {
         $this->assertSame('<h3><strong>Unsere Leistungen:</strong></h3>', HtmlLists::normalize('<p><strong>Unsere Leistungen:</strong></p>'));

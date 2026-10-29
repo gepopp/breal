@@ -293,6 +293,20 @@ p{
     }
 }
 
+.job-body {
+    h3 {
+        @apply text-xl font-bold leading-tight mt-12 mb-4 first:mt-0;
+    }
+
+    ul {
+        @apply list-disc list-outside ml-10 my-4 space-y-3;
+    }
+
+    li {
+        @apply text-base xl:text-lg font-light;
+    }
+}
+
 video::-webkit-media-controls {
     display: none;
 }
