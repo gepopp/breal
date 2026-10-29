@@ -2,7 +2,6 @@
 
 namespace App\Filament\Schemas\Resources\ReferenceResource\Schemas;
 
-use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -40,10 +39,6 @@ class ReferenceForm
                             ->required(),
                     ])
                     ->columns(2),
-
-                Repeater::make('tags')
-                    ->simple(TextInput::make('tag'))
-                    ->required(),
 
                 Section::make('Kunde')
                     ->schema([

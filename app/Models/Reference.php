@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Services\MediaImage;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -19,23 +18,6 @@ class Reference extends Model implements HasMedia
     use InteractsWithMedia;
 
     public array $translatable = ['title', 'description', 'testimonial'];
-
-    protected $casts = [
-        'tags' => 'array',
-    ];
-
-    /**
-     * The tags are entered as free text, often as "#one #two" in a single entry.
-     *
-     * @return Collection<int, string>
-     */
-    public function hashtags(): Collection
-    {
-        return collect($this->tags)
-            ->flatMap(fn (string $tag): array => preg_split('/[\s#,]+/', $tag, -1, PREG_SPLIT_NO_EMPTY))
-            ->unique()
-            ->values();
-    }
 
     public function registerMediaConversions(?Media $media = null): void
     {

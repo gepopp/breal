@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\Model;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
+ * @extends Factory<Model>
  */
 class ReferenceFactory extends Factory
 {
@@ -17,9 +18,8 @@ class ReferenceFactory extends Factory
     public function definition(): array
     {
         return [
-            'title'       => $this->faker->sentence(),
+            'title' => $this->faker->sentence(),
             'description' => $this->faker->paragraph(3),
-            'tags'        => [$this->faker->word(), $this->faker->word(), $this->faker->word(), $this->faker->word()],
             'client_name' => $this->faker->name(),
             'testimonial' => $this->faker->sentence(),
         ];

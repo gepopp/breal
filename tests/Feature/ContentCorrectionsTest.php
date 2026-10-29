@@ -94,11 +94,14 @@ class ContentCorrectionsTest extends TestCase
         $this->assertSame('Triester Straße', $reference->getTranslation('title', 'en'));
     }
 
-    public function test_hashtags_are_split_and_never_doubled(): void
+    public function test_references_show_no_hashtags(): void
     {
-        $reference = ReferenceFactory::new()->make(['tags' => ['#lovely #farbtupfer', '##restauriert', 'farbtupfer']]);
+        $reference = ReferenceFactory::new()->create(['tags' => json_encode(['#lovely #farbtupfer', 'restauriert'])]);
 
-        $this->assertSame(['lovely', 'farbtupfer', 'restauriert'], $reference->hashtags()->all());
+        $html = view('components.swiper-slide', ['ref' => $reference])->render();
+
+        $this->assertStringNotContainsString('#', $html);
+        $this->assertStringNotContainsString('farbtupfer', $html);
     }
 
     public function test_the_faq_page_shows_the_date_of_the_last_review_only_when_set(): void
