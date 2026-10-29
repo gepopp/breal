@@ -37,13 +37,13 @@
         ]) data-aos="fade" data-aos-delay="{{ $index * 100 }}">
 
                 <div @class([
-        "z-20 w-full aspect-square p-4 flex flex-col justify-between group hover:scale-110 transition-all duration-500",
+        "relative z-20 w-full aspect-square p-4 flex flex-col justify-between group hover:scale-110 transition-all duration-500",
         "bg-logo !text-white" => $index % 2 == 0 || $index == 0,
         "border border-logo" => $index % 2 !== 0 || $index !== 0,
         ])>
                     <h5 class="font-bold">{{ $vacancy->title }}</h5>
 
-                    <a href="{{ route('stellenanzeige', $vacancy) }}" class="flex items-center justify-end">
+                    <a href="{{ route('stellenanzeige', $vacancy) }}" class="flex items-center justify-end after:absolute after:inset-0">
                         <span @class(["group-hover:mr-2"])>{{ __('vacancy.apply_now') }}</span>
                         <svg class="size-4 invisible -translate-x-full group-hover:visible group-hover:translate-x-none group-hover:ml-2 transition-all duration-300"
                              data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"

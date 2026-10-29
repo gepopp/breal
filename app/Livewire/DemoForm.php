@@ -10,10 +10,10 @@ use Livewire\Component;
 class DemoForm extends Component
 {
     #[Rule(rule: ['string', 'required', 'max:255'], as: 'validation.attributes.name')]
-    public string $name = 'Gerhard';
+    public string $name = '';
 
     #[Rule(rule: ['string', 'required', 'email:rfc,dns'], as: 'validation.attributes.email')]
-    public string $email = 'gerhard@weloveinteraction.com';
+    public string $email = '';
 
     public bool $is_sent = false;
 

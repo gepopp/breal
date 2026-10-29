@@ -13,12 +13,24 @@ class CompanyInfo
      * Data of the company the current page belongs to, or of the given one
      * (a name of CompaniesEnum).
      *
-     * @return array{name: string, legal_name: string, email: string, website: string, firmenbuch: string, uid: string, managing_directors: list<string>}
+     * @return array{name: string, founded: int|null, legal_name: string, email: string, website: string, firmenbuch: string, uid: string, managing_directors: list<string>}
      */
     public static function section(?string $company = null): array
     {
         return config('company.sections.'.($company ?? CompaniesEnum::getByRoute()))
             ?? config('company.sections.'.CompaniesEnum::Hausverwaltung->name);
+    }
+
+    /**
+     * Copyright years: "2006–2026", or just the current year if the company
+     * has no (earlier) founding year.
+     */
+    public static function copyrightYears(?string $company = null): string
+    {
+        $current = (int) now()->format('Y');
+        $founded = self::section($company)['founded'] ?? null;
+
+        return $founded !== null && $founded < $current ? $founded.'–'.$current : (string) $current;
     }
 
     /**

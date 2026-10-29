@@ -49,7 +49,7 @@
                         <div class="overflow-hidden">
                             <a href="{{ route('hausverwaltung.leistungen') }}"
                                class="menu-item relative uppercase cursor-pointer text-logo-600">
-                                <div @class(["font-black" => Route::is('hausverwaltung.leistungen')])>
+                                <div @class(["menu-item-active" => Route::is('hausverwaltung.leistungen')])>
                                     <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.services') }}</span>
                                 </div>
                             </a>
@@ -62,7 +62,7 @@
                         <div class="overflow-hidden">
                             <a href="{{ route('hausverwaltung.service') }}"
                                class="menu-item relative uppercase cursor-pointer text-logo-600">
-                                <div @class(["font-black" => Route::is('hausverwaltung.service')])>
+                                <div @class(["menu-item-active" => Route::is('hausverwaltung.service')])>
                                     <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.service') }}</span>
                                 </div>
                             </a>
@@ -76,7 +76,7 @@
                         <div class="overflow-hidden">
                             <a href="{{ route('hausverwaltung.karriere') }}"
                                class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                                <div @class(["font-black" => Route::is('hausverwaltung.karriere')])>
+                                <div @class(["menu-item-active" => Route::is('hausverwaltung.karriere')])>
                                     <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.careers') }}</span>
                                 </div>
                             </a>
@@ -88,7 +88,7 @@
                         <div class="overflow-hidden">
                             <a href="{{ route('hausverwaltung.team') }}"
                                class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                                <div @class(["font-black" => Route::is('hausverwaltung.team')])>
+                                <div @class(["menu-item-active" => Route::is('hausverwaltung.team')])>
                                     <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.team') }}</span>
                                 </div>
                             </a>
@@ -99,7 +99,7 @@
                         <div class="overflow-hidden">
                             <a href="{{ route('hausverwaltung.faq') }}"
                                class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                                <div @class(["font-black" => Route::is('hausverwaltung.faq')])>
+                                <div @class(["menu-item-active" => Route::is('hausverwaltung.faq')])>
                                     <span class="menu-item-text pointer-events-none block relative">FAQ</span>
                                 </div>
                             </a>
@@ -114,7 +114,7 @@
                             <div class="overflow-hidden">
                                 <a href="{{ route('makler.immobiliensuche') }}"
                                    class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                                    <div @class(["font-black" => Route::is('makler.immobiliensuche')])>
+                                    <div @class(["menu-item-active" => Route::is('makler.immobiliensuche')])>
                                         <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.property_search') }}</span>
                                     </div>
                                 </a>
@@ -126,7 +126,7 @@
                     {{--                        <div class="overflow-hidden">--}}
                     {{--                            <a href="{{ route('makler.leistungen') }}" --}}
                     {{--                               class="menu-item relative uppercase cursor-pointer text-logo-600 ">--}}
-                    {{--                                <div @class(["font-black" => Route::is('makler.leistung')])>--}}
+                    {{--                                <div @class(["menu-item-active" => Route::is('makler.leistung')])>--}}
                     {{--                                    <span class="menu-item-text pointer-events-none block relative">Leistungen</span>--}}
                     {{--                                </div>--}}
                     {{--                            </a>--}}
@@ -137,7 +137,7 @@
                         <div class="overflow-hidden">
                             <a href="{{ route('makler.karriere') }}"
                                class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                                <div @class(["font-black" => Route::is('makler.karriere')])>
+                                <div @class(["menu-item-active" => Route::is('makler.karriere')])>
                                     <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.careers') }}</span>
                                 </div>
                             </a>
@@ -149,7 +149,7 @@
                         <div class="overflow-hidden">
                             <a href="{{ route('makler.team') }}"
                                class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                                <div @class(["font-black" => Route::is('makler.team')])>
+                                <div @class(["menu-item-active" => Route::is('makler.team')])>
                                     <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.team') }}</span>
                                 </div>
                             </a>
@@ -165,7 +165,7 @@
                         <div class="overflow-hidden">
                             <a href="{{ route('technik.leistungen') }}"
                                class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                                <div @class(["font-black" => Route::is('technik.leistung')])>
+                                <div @class(["menu-item-active" => Route::is('technik.leistung')])>
                                     <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.services') }}</span>
                                 </div>
                             </a>
@@ -177,7 +177,7 @@
                         <div class="overflow-hidden">
                             <a href="{{ route('technik.karriere') }}"
                                class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                                <div @class(["font-black" => Route::is('technik.karriere')])>
+                                <div @class(["menu-item-active" => Route::is('technik.karriere')])>
                                     <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.careers') }}</span>
                                 </div>
                             </a>
@@ -189,7 +189,7 @@
                         <div class="overflow-hidden">
                             <a href="{{ route('technik.team') }}"
                                class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                                <div @class(["font-black" => Route::is('technik.team')])>
+                                <div @class(["menu-item-active" => Route::is('technik.team')])>
                                     <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.team') }}</span>
                                 </div>
                             </a>

@@ -61,6 +61,15 @@ class CompanyContactDataTest extends TestCase
         $this->assertSame(['Lukas Eybel', 'Tanja Bachschwöller-Eybel'], CompanyInfo::section('Makler')['managing_directors']);
     }
 
+    public function test_copyright_years_start_with_the_founding_year(): void
+    {
+        $this->travelTo(now()->setYear(2026));
+
+        $this->assertSame('2006–2026', CompanyInfo::copyrightYears('Hausverwaltung'));
+        $this->assertSame('2021–2026', CompanyInfo::copyrightYears('Makler'));
+        $this->assertSame('2026', CompanyInfo::copyrightYears('Technik'));
+    }
+
     public function test_opening_and_phone_hours_are_localized(): void
     {
         $this->assertSame(['Mo–Do' => '08:00–16:00', 'Fr' => '08:00–12:00'], CompanyInfo::hours('opening'));
@@ -119,7 +128,9 @@ class CompanyContactDataTest extends TestCase
     {
         $footer = $this->footerOf($this->get($uri)->getContent());
 
-        $this->assertStringContainsString('© '.now()->format('Y').' '.$legalName, $footer);
+        $company = ['be real Immobilienmanagement GmbH' => 'Hausverwaltung', 'be real Immobilienmakler GmbH' => 'Makler', 'be real Baumanagement GmbH' => 'Technik'][$legalName];
+
+        $this->assertStringContainsString('© '.CompanyInfo::copyrightYears($company).' '.$legalName, $footer);
         $this->assertStringContainsString('href="mailto:'.$email.'"', $footer);
         $this->assertStringContainsString('href="tel:+4315353619"', $footer);
         $this->assertStringContainsString('Franz-Josefs-Kai 65/Mezzanin', $footer);

@@ -12,7 +12,7 @@ use Livewire\Component;
 
 class ContactForm extends Component
 {
-    const RECIPIENT = 'office@bereal-immobilien.at'; // 'ronald@ivalu.eu';// ;
+    const RECIPIENT = 'office@bereal-immobilien.at';
 
     public bool $is_sent = false;
 
@@ -42,21 +42,6 @@ class ContactForm extends Component
     public function mount()
     {
         $this->company = CompaniesEnum::getByRoute();
-
-        if (app()->environment('local')) {
-            $this->data = [
-                'subject' => 'Test-Betreff',
-                'firstname' => 'Max',
-                'lastname' => 'Mustermann',
-                'email' => 'gerhard@poppgerhard.at',
-                'phone' => '0676335203',
-                'message' => 'TEXT',
-                'company' => null,
-                'terms' => true,
-                'address' => null,
-            ];
-        }
-
     }
 
     public function getValidationAttributes()

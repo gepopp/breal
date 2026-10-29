@@ -1,6 +1,6 @@
 <x-section>
 
-    <div class="my-12">
+    <div>
 
         <x-headings level="1">
             <x-slot name="tag">{{ $competence->keyword }}</x-slot>

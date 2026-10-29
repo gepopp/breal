@@ -62,7 +62,8 @@ return [
     ],
 
     /*
-    | Per company: "firmenbuchgericht", "gewerbe", "kammer" and
+    | Per company: "founded" (year of foundation, start of the copyright range,
+    | empty = current year only), "firmenbuchgericht", "gewerbe", "kammer" and
     | "aufsichtsbehoerde" are shown in the Impressum as soon as they are filled
     | in (delivery from the client); empty values are not printed.
     */
@@ -75,6 +76,7 @@ return [
             'email' => 'office@bereal-immobilien.at',
             'website' => 'https://www.bereal-immobilien.at',
             'logo' => 'logos/bereal_immobilien.svg',
+            'founded' => 2006,
             'firmenbuch' => 'FN 152672 v',
             'uid' => 'ATU49490402',
             'managing_directors' => ['Lukas Eybel'],
@@ -90,6 +92,7 @@ return [
             'email' => 'office@bereal-makler.at',
             'website' => 'https://www.bereal-makler.at',
             'logo' => 'logos/bereal_makler.svg',
+            'founded' => 2021,
             'firmenbuch' => 'FN 556967 w',
             'uid' => 'ATU76971617',
             'managing_directors' => ['Lukas Eybel', 'Tanja Bachschwöller-Eybel'],
@@ -105,6 +108,7 @@ return [
             'email' => 'office@bereal-technik.at',
             'website' => 'https://www.bereal-technik.at',
             'logo' => 'logos/bereal_technik.svg',
+            'founded' => null,
             'firmenbuch' => 'FN 660246 a',
             'uid' => 'ATU82490109',
             'managing_directors' => ['Thomas Keinrath'],

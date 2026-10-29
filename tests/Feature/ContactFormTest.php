@@ -17,6 +17,15 @@ class ContactFormTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_form_starts_empty(): void
+    {
+        Livewire::test(ContactForm::class)
+            ->assertSet('data.firstname', '')
+            ->assertSet('data.email', '')
+            ->assertSet('data.message', '')
+            ->assertSet('data.terms', false);
+    }
+
     public function test_submission_with_address_creates_contact_request_and_sends_verification_email(): void
     {
         Mail::fake();

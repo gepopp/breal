@@ -153,6 +153,11 @@ p{
 }
 
 
+.menu-item-active span {
+    /* Emphasis without a heavier font weight: bold glyphs are wider and make the neighbouring items jump. */
+    -webkit-text-stroke: 0.6px currentColor;
+}
+
 .menu-item:hover > div:nth-child(1) span {
     transform: translate3d(0, -100%, 0) rotateX(-90deg);
 }
