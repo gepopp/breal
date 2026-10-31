@@ -313,7 +313,6 @@
 
                     <div class="w-2 h-2 bg-white rounded last:hidden"></div>
 
-                    @auth
                         <div>
                             @if(app()->getLocale() == 'de')
                                 <a href="{{ app(\App\Services\LocaleUrls::class)->forLocale('en') }}" class="font-bold uppercase">ENGLISH</a>
@@ -321,7 +320,6 @@
                                 <a href="{{ app(\App\Services\LocaleUrls::class)->forLocale('de') }}" class="font-bold uppercase">DEUTSCH</a>
                             @endif
                         </div>
-                    @endauth
 
                 </div>
             </div>

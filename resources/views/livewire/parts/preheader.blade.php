@@ -9,7 +9,6 @@
     <div class="flex justify-between items-center text-white">
         <div class="flex items-center space-x-2">
 
-            @auth
                 <div>
                     @if(app()->getLocale() == 'de')
                         <a href="{{ app(\App\Services\LocaleUrls::class)->forLocale('en') }}" class="font-bold uppercase">ENGLISH</a>
@@ -19,7 +18,6 @@
                 </div>
 
                 <div class="w-2 h-2 bg-white rounded last:hidden"></div>
-            @endauth
 
 
 

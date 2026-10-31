@@ -104,6 +104,15 @@ class AuditRoundTwoTest extends TestCase
             ->assertSee(__('footer.cookie_settings'));
     }
 
+    public function test_guests_see_the_language_switch_on_german_and_english_pages(): void
+    {
+        $german = $this->get('/kontakt')->assertOk();
+        $german->assertSee('href="'.url('/en/kontakt').'" class="font-bold uppercase">ENGLISH</a>', false);
+
+        $english = $this->get('/en/kontakt')->assertOk();
+        $english->assertSee('href="'.url('/kontakt').'" class="font-bold uppercase">DEUTSCH</a>', false);
+    }
+
     public function test_pages_hand_the_carousel_button_labels_to_the_script(): void
     {
         $this->get('/team')
