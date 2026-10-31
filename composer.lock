@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6c3e7c18e81f57243cea78c227a1edba",
+    "content-hash": "f491c69703a38cd3283261fbffc73818",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -3095,29 +3095,29 @@
         },
         {
             "name": "jdavidbakr/mail-tracker",
-            "version": "7.19",
+            "version": "8.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jdavidbakr/mail-tracker.git",
-                "reference": "3860d76838a0baa4fd3701e13093ab1c7d196baf"
+                "reference": "3680ee648ed6be49280383b3dd7e14a7808a02d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jdavidbakr/mail-tracker/zipball/3860d76838a0baa4fd3701e13093ab1c7d196baf",
-                "reference": "3860d76838a0baa4fd3701e13093ab1c7d196baf",
+                "url": "https://api.github.com/repos/jdavidbakr/mail-tracker/zipball/3680ee648ed6be49280383b3dd7e14a7808a02d2",
+                "reference": "3680ee648ed6be49280383b3dd7e14a7808a02d2",
                 "shasum": ""
             },
             "require": {
                 "aws/aws-php-sns-message-validator": "^1.8",
-                "aws/aws-sdk-php": "^3.258",
-                "guzzlehttp/guzzle": "^7.2",
-                "illuminate/support": "^10.0|^11.0|^12.0",
-                "php": "^8.1"
+                "aws/aws-sdk-php": "^3.372",
+                "guzzlehttp/guzzle": "^7.2|^8.0",
+                "illuminate/support": "^10.0|^11.0|^12.0|^13.0",
+                "php": "^8.2"
             },
             "require-dev": {
                 "mockery/mockery": "^1.4.4",
-                "orchestra/testbench": "^8.0|^9.0|^10.0",
-                "phpunit/phpunit": "^9.5.10|^10.5|^11.5.3"
+                "orchestra/testbench": "^8.0|^9.0|^10.0|^11.0",
+                "phpunit/phpunit": "^9.5.10|^10.5|^11.5.3|^12.5.12"
             },
             "suggest": {
                 "fedeisas/laravel-mail-css-inliner": "Automatically inlines CSS into all outgoing mail."
@@ -3155,9 +3155,9 @@
             ],
             "support": {
                 "issues": "https://github.com/jdavidbakr/mail-tracker/issues",
-                "source": "https://github.com/jdavidbakr/mail-tracker/tree/7.19"
+                "source": "https://github.com/jdavidbakr/mail-tracker/tree/8.4"
             },
-            "time": "2025-04-28T11:30:07+00:00"
+            "time": "2026-09-07T15:25:40+00:00"
         },
         {
             "name": "kirschbaum-development/eloquent-power-joins",
