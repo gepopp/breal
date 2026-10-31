@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "55f0e9d46bb769432805d9997ebe6391",
+    "content-hash": "9a0be199e6e8aff5ee45e79f48ed05f3",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -9327,29 +9327,41 @@
         },
         {
             "name": "spatie/laravel-sluggable",
-            "version": "3.8.1",
+            "version": "4.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-sluggable.git",
-                "reference": "3624a2d7d8c8475d8561c53faf63f1af583ef76c"
+                "reference": "8bdb6cc508459b22328f2743fda18883957da0a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-sluggable/zipball/3624a2d7d8c8475d8561c53faf63f1af583ef76c",
-                "reference": "3624a2d7d8c8475d8561c53faf63f1af583ef76c",
+                "url": "https://api.github.com/repos/spatie/laravel-sluggable/zipball/8bdb6cc508459b22328f2743fda18883957da0a1",
+                "reference": "8bdb6cc508459b22328f2743fda18883957da0a1",
                 "shasum": ""
             },
             "require": {
-                "illuminate/database": "^10.0|^11.0|^12.0|^13.0",
-                "illuminate/support": "^10.0|^11.0|^12.0|^13.0",
-                "php": "^8.2"
+                "illuminate/database": "^12.0|^13.0",
+                "illuminate/support": "^12.0|^13.0",
+                "php": "^8.3"
             },
             "require-dev": {
-                "orchestra/testbench": "^8.0|^9.0|^10.0|^11.0",
-                "pestphp/pest": "^2.0|^3.7|^4.0",
-                "spatie/laravel-translatable": "^5.0|^6.0"
+                "larastan/larastan": "^3.0",
+                "laravel/pint": "^1.24",
+                "orchestra/testbench": "^10.0|^11.0",
+                "pestphp/pest": "^4.0",
+                "spatie/laravel-translatable": "^6.0"
             },
             "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "SelfHealing": "Spatie\\Sluggable\\Facades\\SelfHealing"
+                    },
+                    "providers": [
+                        "Spatie\\Sluggable\\SluggableServiceProvider"
+                    ]
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Spatie\\Sluggable\\": "src"
@@ -9370,11 +9382,18 @@
             "description": "Generate slugs when saving Eloquent models",
             "homepage": "https://github.com/spatie/laravel-sluggable",
             "keywords": [
+                "eloquent",
+                "laravel",
                 "laravel-sluggable",
-                "spatie"
+                "self-healing",
+                "slug",
+                "slugs",
+                "spatie",
+                "translatable"
             ],
             "support": {
-                "source": "https://github.com/spatie/laravel-sluggable/tree/3.8.1"
+                "issues": "https://github.com/spatie/laravel-sluggable/issues",
+                "source": "https://github.com/spatie/laravel-sluggable/tree/4.0.6"
             },
             "funding": [
                 {
@@ -9382,7 +9401,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-03-23T07:42:02+00:00"
+            "time": "2026-10-27T14:24:52+00:00"
         },
         {
             "name": "spatie/laravel-translatable",
