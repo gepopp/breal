@@ -19,9 +19,9 @@
 </script>
 <body class="bg-white dark:bg-logo-950 dark:text-white text-logo-950 min-h-screen">
 
-<div class="overflow-hidden">
+<div class="overflow-hidden flex flex-col min-h-screen">
     <livewire:parts.navbar/>
-    <main class="z-[8888]">
+    <main class="z-[8888] flex-1">
         {{ $slot }}
     </main>
     <livewire:footer/>
