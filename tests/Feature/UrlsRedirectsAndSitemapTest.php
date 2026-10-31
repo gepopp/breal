@@ -181,6 +181,7 @@ class UrlsRedirectsAndSitemapTest extends TestCase
         $locations = array_map('strval', $this->sitemap($this->get('/sitemap.xml')->getContent())->xpath('//s:url/s:loc'));
 
         $this->assertContains($this->root().'/service?tab=sitemap-service', $locations);
+        $this->assertNotContains($this->root().'/service?tab=default-sitemap-service', $locations);
         $this->assertContains($this->root().'/faq/'.QuestionFactoryHelper::slug(), $locations);
         $this->assertContains($this->root().'/stellenanzeige/aktive-stelle-sitemap', $locations);
         $this->assertNotContains($this->root().'/stellenanzeige/abgelaufene-stelle-sitemap', $locations);
@@ -215,6 +216,12 @@ class UrlsRedirectsAndSitemapTest extends TestCase
     {
         CompetenceFactory::new()->create(['company' => CompaniesEnum::Technik, 'name' => 'Bauwerksbuch Sitemap', 'slug' => 'bauwerksbuch-sitemap']);
         CompetenceFactory::new()->create(['company' => CompaniesEnum::Hausverwaltung, 'name' => 'Beratung Sitemap', 'slug' => 'beratung-sitemap']);
+
+        Service::withoutEvents(fn () => Service::create([
+            'slug' => 'default-sitemap-service', 'order' => 0, 'company' => 'Hausverwaltung',
+            'name' => ['de' => 'Standard Service', 'en' => 'Default service'],
+            'description' => ['de' => 'Beschreibung', 'en' => 'Description'], 'links' => [], 'list' => [],
+        ]));
 
         Service::withoutEvents(fn () => Service::create([
             'slug' => 'sitemap-service', 'order' => 1, 'company' => 'Hausverwaltung',

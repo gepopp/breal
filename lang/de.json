@@ -174,9 +174,6 @@
     "legal.media_text": "Medieninhaber und Herausgeber dieser Website ist die :name, :address.",
     "legal.media_owners": "Eigentümer",
     "legal.media_line": "Grundlegende Richtung",
-    "legal.dispute_title": "EU-Streitschlichtung",
-    "legal.dispute_text": "Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:",
-    "legal.dispute_email": "Unsere E-Mail-Adresse finden Sie oben im Impressum.",
     "legal.consumer_title": "Verbraucherstreitbeilegung/Universalschlichtungsstelle",
     "legal.consumer_text": "Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.",
     "legal.accessibility_tag": "accesible",
@@ -356,5 +353,9 @@
     "navigation.menu": "Menü",
     "navigation.skip_to_content": "Zum Inhalt springen",
     "carousel.pause": "Bildwechsel anhalten",
-    "carousel.play": "Bildwechsel fortsetzen"
+    "carousel.play": "Bildwechsel fortsetzen",
+    "vacancy.interval.hour": "pro Stunde",
+    "vacancy.interval.week": "pro Woche",
+    "vacancy.interval.month": "pro Monat",
+    "vacancy.interval.year": "pro Jahr"
 }

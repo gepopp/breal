@@ -83,12 +83,12 @@ class ImprintPageTest extends TestCase
             ->assertSee('Grundlegende Richtung:', false);
     }
 
-    public function test_imprint_has_one_h1_and_links_to_the_eu_platform(): void
+    public function test_imprint_has_one_h1_and_no_longer_mentions_the_discontinued_eu_platform(): void
     {
         $html = $this->get('/impressum')->assertOk()->getContent();
 
         $this->assertSame(1, substr_count($html, '<h1'));
-        $this->assertStringContainsString('href="https://ec.europa.eu/consumers/odr/"', $html);
+        $this->assertStringNotContainsString('ec.europa.eu/consumers/odr', $html);
         $this->assertStringContainsString('href="mailto:office@bereal-technik.at"', $html);
         $this->assertStringContainsString('href="tel:+4315353619"', $html);
     }

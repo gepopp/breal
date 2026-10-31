@@ -13,6 +13,15 @@ class HtmlLists
 
     private const SPACE = '(?:\s|&nbsp;)';
 
+    /**
+     * Imported texts (e.g. from the property feed) bring their own <h1>,
+     * the page template already has one, so they become <h2>.
+     */
+    public static function demoteH1(string $html): string
+    {
+        return preg_replace(['#<h1(?=[\s>])#i', '#</h1>#i'], ['<h2', '</h2>'], $html);
+    }
+
     public static function normalize(string $html): string
     {
         if (! preg_match('/[•·]|<strong>/u', $html)) {

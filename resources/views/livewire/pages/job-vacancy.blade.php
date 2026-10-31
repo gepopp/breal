@@ -19,8 +19,7 @@
                     <li data-aos="fade-up" data-aos-delay="200">{{ $jobVacancy->contract_type }}</li>
                     <li data-aos="fade-up" data-aos-delay="250" class="text-xl font-medium mt-4">{{ __('vacancy.salary_label') }}</li>
                     <li data-aos="fade-up" data-aos-delay="300">
-                        {{ \Illuminate\Support\Number::currency( $jobVacancy->salary, 'EUR') }}
-                         <span class="text-xs"> / {{ $jobVacancy->unit_text }}</span></li>
+                        {{ $jobVacancy->formattedSalary() }}</li>
                     <li data-aos="fade-up" data-aos-delay="350" class="text-xl font-medium mt-4">{{ __('vacancy.applications_to_label') }}</li>
                     <li data-aos="fade-up" data-aos-delay="400">
                         <a href="mailto:{{ $jobVacancy->email }}">

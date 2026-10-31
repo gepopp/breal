@@ -23,7 +23,7 @@
 
 
 
-            <a href="{{ route('hausverwaltung.kontakt') }}" class="font-bold uppercase" target="_blank">{{ __('navigation.contact') }}</a>
+            <a href="{{ route(Route::is('makler.*') ? 'makler.kontakt' : (Route::is('technik.*') ? 'technik.kontakt' : 'hausverwaltung.kontakt')) }}" class="font-bold uppercase" target="_blank">{{ __('navigation.contact') }}</a>
         </div>
 
         <div class="flex items-center">

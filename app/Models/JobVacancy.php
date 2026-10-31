@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Number;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Sitemap\Contracts\Sitemapable;
@@ -25,6 +26,29 @@ class JobVacancy extends Model implements HasMedia, Sitemapable
         'from' => 'datetime',
         'to' => 'datetime',
     ];
+
+    /**
+     * The salary as shown on the vacancy page, e.g. "63.000,00 € pro Jahr".
+     */
+    public function formattedSalary(): ?string
+    {
+        if (blank($this->salary)) {
+            return null;
+        }
+
+        $amount = Number::currency((float) $this->salary, 'EUR', app()->getLocale());
+        $unit = mb_strtolower((string) $this->unit_text);
+
+        $interval = match (true) {
+            str_starts_with($unit, 'stünd') => 'hour',
+            str_starts_with($unit, 'wöch') => 'week',
+            str_starts_with($unit, 'monat') => 'month',
+            str_starts_with($unit, 'jähr') => 'year',
+            default => null,
+        };
+
+        return $interval ? $amount.' '.__('vacancy.interval.'.$interval) : $amount;
+    }
 
     public function getRouteKeyName(): string
     {

@@ -34,7 +34,7 @@
                     </a>
 
                 @else
-                    <a href="{{ route('makler.home') }}">
+                    <a href="{{ route('hausverwaltung.home') }}">
                         <img src="{{ asset('logos/bereal.svg') }}" alt="be real" class="h-6 sm:h-8 md:h-10 dark:hidden"/>
                         <img src="{{ asset('logos/bereal_white.svg') }}" alt="be real"
                              class="h-6 sm:h-8 md:h-10 hidden dark:block"/>

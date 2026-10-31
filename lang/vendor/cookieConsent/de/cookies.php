@@ -24,7 +24,7 @@ return [
     'categories' => [
         'essentials' => [
             'title' => 'Notwendige Cookies',
-            'description' => 'Es gibt einige Cookies, die wir einsetzen müssen, damit bestimmte Webseiten funktionieren. Aus diesem Grund benötigen Sie nicht Ihre Zustimmung.',
+            'description' => 'Es gibt einige Cookies, die wir einsetzen müssen, damit bestimmte Webseiten funktionieren. Aus diesem Grund benötigen wir nicht Ihre Zustimmung.',
         ],
         'analytics' => [
             'title' => 'Analytics Cookies',

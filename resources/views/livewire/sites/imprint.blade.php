@@ -40,13 +40,6 @@
                         @endforeach
                     </p>
 
-                    <h2>{{ __('legal.dispute_title') }}</h2>
-                    <p>
-                        {{ __('legal.dispute_text') }}
-                        <a href="https://ec.europa.eu/consumers/odr/" rel="noopener" target="_blank">https://ec.europa.eu/consumers/odr/</a>.<br>
-                        {{ __('legal.dispute_email') }}
-                    </p>
-
                     <h2>{{ __('legal.consumer_title') }}</h2>
                     <p>{{ __('legal.consumer_text') }}</p>
                 </div>

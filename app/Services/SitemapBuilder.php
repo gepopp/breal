@@ -69,7 +69,8 @@ class SitemapBuilder
             $this->addTranslated($sitemap, route($this->competenceRoute($competence), $competence), $competence->updated_at);
         }
 
-        foreach (Service::all() as $service) {
+        // The first service is the default tab, its canonical address is /service which is already listed.
+        foreach (Service::all()->skip(1) as $service) {
             $this->addGerman($sitemap, $service->link, $service->updated_at);
         }
 

@@ -16,7 +16,7 @@
             @if(array_key_exists('freitexte', $realty->data) && array_key_exists('lage', $realty->data['freitexte']))
                 <div class="prose">
                     <h3>{{ __('realty.location') }}</h3>
-                    {!! $realty['data']['freitexte']['lage'] !!}
+                    {!! \App\Services\HtmlLists::demoteH1($realty['data']['freitexte']['lage']) !!}
                 </div>
             @endif
 
@@ -26,7 +26,7 @@
 
             <div class="prose">
                 <h3>{{ __('realty.description') }}</h3>
-                {!! $realty->beschreibung !!}
+                {!! \App\Services\HtmlLists::demoteH1((string) $realty->beschreibung) !!}
             </div>
         </div>
         <div class="w-full lg:w-1/3 md:mt-8">

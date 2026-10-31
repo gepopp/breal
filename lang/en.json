@@ -73,9 +73,6 @@
     "legal.media_text": "The media owner and publisher of this website is :name, :address.",
     "legal.media_owners": "Owners",
     "legal.media_line": "Editorial line",
-    "legal.dispute_title": "EU dispute resolution",
-    "legal.dispute_text": "The European Commission provides a platform for online dispute resolution (ODR):",
-    "legal.dispute_email": "Our e-mail address can be found above in the legal notice.",
     "legal.consumer_title": "Consumer dispute resolution",
     "legal.consumer_text": "We are neither willing nor obliged to participate in dispute resolution proceedings before a consumer arbitration board.",
     "legal.accessibility_tag": "accessible",
@@ -255,5 +252,9 @@
     "navigation.menu": "Menu",
     "navigation.skip_to_content": "Skip to main content",
     "carousel.pause": "Pause slideshow",
-    "carousel.play": "Resume slideshow"
+    "carousel.play": "Resume slideshow",
+    "vacancy.interval.hour": "per hour",
+    "vacancy.interval.week": "per week",
+    "vacancy.interval.month": "per month",
+    "vacancy.interval.year": "per year"
 }

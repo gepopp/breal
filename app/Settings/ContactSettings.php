@@ -13,9 +13,9 @@ class ContactSettings extends BaseSettings
 
     public string $contact_subheader_en = 'Your Contact to be real immobilien';
 
-    public string $contact_introtext_de = '<p>Am liebsten sprechen wir persönlich mit Ihnen über Ihre Anliegen. Wir freuen uns, von Ihnen zu hören und gemeinsam Großartiges zu schaffen.</p><p><strong>Für die Meldungen von etwaigen Schäden in Liegenschaften verwenden Sie bitte das </strong><a href="https://bereal-immobilien.at/service?tab=schadensformular"><strong>Schadensformular</strong></a><strong>!</strong></p>';
+    public string $contact_introtext_de = '<p>Am liebsten sprechen wir persönlich mit Ihnen über Ihre Anliegen. Wir freuen uns, von Ihnen zu hören und gemeinsam Großartiges zu schaffen.</p><p><strong>Für die Meldungen von etwaigen Schäden in Liegenschaften verwenden Sie bitte das </strong><a href="/service?tab=schadensformular"><strong>Schadensformular</strong></a><strong>!</strong></p>';
 
-    public string $contact_introtext_en = '<p>We prefer to speak with you personally about your concerns. We look forward to hearing from you and creating something great together.</p><p><strong>To report any damage to properties, please use the </strong><a href="https://bereal-immobilien.at/service?tab=schadensformular"><strong>damage report form</strong></a><strong>!</strong></p>';
+    public string $contact_introtext_en = '<p>We prefer to speak with you personally about your concerns. We look forward to hearing from you and creating something great together.</p><p><strong>To report any damage to properties, please use the </strong><a href="/en/service?tab=schadensformular"><strong>damage report form</strong></a><strong>!</strong></p>';
 
     // Contact Form Heading
     public string $contactform_heading_de = 'Sagen Sie uns Hallo!';
