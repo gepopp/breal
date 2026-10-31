@@ -15,11 +15,11 @@ class Immobilie extends Component
         $data = $this->realty->data;
 
         return view('livewire.pages.immobilie', compact('data'))
-            ->title(PageMeta::compose($this->realty->title))
+            ->title(PageMeta::realtyTitle($this->realty))
             ->layout('components.layouts.site')
             ->layoutData([
                 'canonical' => route('makler.immobilie', $this->realty),
-                'description' => PageMeta::excerpt($data['freitexte']['objektbeschreibung'] ?? $this->realty->beschreibung ?? $this->realty->title),
+                'description' => PageMeta::realtyDescription($this->realty, $data['freitexte']['objektbeschreibung'] ?? $this->realty->beschreibung ?? $this->realty->title),
             ]);
     }
 }

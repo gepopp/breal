@@ -3,7 +3,9 @@
 namespace App\Services;
 
 use App\Enums\CompaniesEnum;
+use App\Models\Realty;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Number;
 
 /**
  * Titles and descriptions for the public pages.
@@ -70,6 +72,61 @@ class PageMeta
         $full = $name.' – '.($suffix ?? self::sectionName());
 
         return mb_strlen($full) <= self::TITLE_LIMIT ? $full : self::limit($name, self::TITLE_LIMIT);
+    }
+
+    /**
+     * Title of a property page. Units of one project share their feed title and
+     * the long ones end in "Top 20", so the unit identifier is kept and the
+     * name is shortened instead, otherwise units collide after truncation.
+     */
+    public static function realtyTitle(Realty $realty): string
+    {
+        $name = self::normalizeTitle((string) $realty->title);
+        $identifier = self::unitIdentifier($name, $realty->objektnr_extern);
+
+        if ($identifier === null) {
+            return self::compose($name);
+        }
+
+        $stem = trim(preg_replace('/[\s\-–|]*\btop\s*\d+\w*\s*$/iu', '', $name), " \t-–|");
+        $stem = self::limit($stem, self::TITLE_LIMIT - mb_strlen(' – '.$identifier));
+        $title = $stem.' – '.$identifier;
+        $withSection = $title.' – '.self::sectionName();
+
+        return mb_strlen($withSection) <= self::TITLE_LIMIT ? $withSection : $title;
+    }
+
+    /**
+     * Description of a property page: the unit's own key facts first, so units
+     * with the same project text still get distinct descriptions.
+     */
+    public static function realtyDescription(Realty $realty, ?string $html): string
+    {
+        $facts = array_filter([
+            $realty->zimmer ? Number::format((float) $realty->zimmer, maxPrecision: 1, locale: app()->getLocale()).' '.__('makler.table.rooms') : null,
+            $realty->ort,
+            self::unitIdentifier(self::normalizeTitle((string) $realty->title), $realty->objektnr_extern),
+        ]);
+
+        if ($facts === []) {
+            return self::excerpt($html);
+        }
+
+        $prefix = implode(' · ', $facts).' – ';
+
+        return $prefix.self::excerpt($html, self::DESCRIPTION_LIMIT - mb_strlen($prefix));
+    }
+
+    /**
+     * "Top 20" from the title, else the external object number unless the title already names it.
+     */
+    private static function unitIdentifier(string $title, ?string $externalNumber): ?string
+    {
+        if (preg_match('/\btop\s*(\d+\w*)\s*$/iu', $title, $match)) {
+            return 'Top '.$match[1];
+        }
+
+        return filled($externalNumber) && ! str_contains($title, $externalNumber) ? 'Nr. '.$externalNumber : null;
     }
 
     /**

@@ -39,9 +39,16 @@ class ContactForm extends Component
         'address' => null,
     ];
 
-    public function mount()
+    /**
+     * @param  string  $subject  Prefilled subject, e.g. the FAQ question the inquiry is about.
+     */
+    public function mount(string $subject = '')
     {
         $this->company = CompaniesEnum::getByRoute();
+
+        if ($subject !== '') {
+            $this->data['subject'] = Str::limit($subject, 255, '');
+        }
     }
 
     public function getValidationAttributes()

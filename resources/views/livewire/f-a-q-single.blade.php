@@ -24,5 +24,5 @@
     </div>
 
 
-    <livewire:contact-form/>
+    <livewire:contact-form :subject="$faq->question"/>
 </x-section>
