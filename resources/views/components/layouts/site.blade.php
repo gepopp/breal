@@ -19,9 +19,10 @@
 </script>
 <body class="bg-white dark:bg-logo-950 dark:text-white text-logo-950 min-h-screen">
 
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[10000] focus:bg-white focus:text-logo-950 focus:px-4 focus:py-2 focus:rounded focus:shadow-lg">{{ __('navigation.skip_to_content') }}</a>
 <div class="overflow-hidden flex flex-col min-h-screen">
     <livewire:parts.navbar/>
-    <main class="z-[8888] flex-1">
+    <main id="main" tabindex="-1" class="z-[8888] flex-1 focus:outline-none">
         {{ $slot }}
     </main>
     <livewire:footer/>

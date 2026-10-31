@@ -352,5 +352,9 @@
     "meta.og.image_alt": "Logo :name",
     "footer.opening_hours": "Öffnungszeiten",
     "footer.phone_hours": "Telefonzeiten",
-    "footer.and": "und"
+    "footer.and": "und",
+    "navigation.menu": "Menü",
+    "navigation.skip_to_content": "Zum Inhalt springen",
+    "carousel.pause": "Bildwechsel anhalten",
+    "carousel.play": "Bildwechsel fortsetzen"
 }

@@ -14,6 +14,14 @@
 
 
                 <form wire:submit="save"
+                      x-bind:inert="is_sent"
+                      x-init="setTimeout(() => {
+                          const textbox = $el.querySelector('[contenteditable=true]');
+                          if (textbox) {
+                              textbox.setAttribute('aria-label', @js(__('contact.form.message')));
+                              textbox.setAttribute('aria-required', 'true');
+                          }
+                      }, 500)"
                       class="space-y-4 mt-24 sm:mt-0 grid grid-cols-1 md:grid-cols-2 gap-y-4 md:gap-x-4">
                     <flux:input wire:model="data.firstname" label="{{ __('contact.form.firstname') }}" required badge="{{ __('form.required') }}"/>
                     <flux:input wire:model="data.lastname" label="{{ __('contact.form.lastname') }}" required badge="{{ __('form.required') }}"/>

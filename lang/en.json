@@ -251,5 +251,9 @@
     "meta.og.image_alt": "Logo :name",
     "footer.opening_hours": "Opening hours",
     "footer.phone_hours": "Phone hours",
-    "footer.and": "and"
+    "footer.and": "and",
+    "navigation.menu": "Menu",
+    "navigation.skip_to_content": "Skip to main content",
+    "carousel.pause": "Pause slideshow",
+    "carousel.play": "Resume slideshow"
 }

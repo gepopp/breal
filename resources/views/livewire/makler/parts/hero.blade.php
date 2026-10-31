@@ -1,4 +1,9 @@
 <div x-data="hero" class="w-full relative bg-makler-500">
+    <button type="button" x-on:click="toggleAutoplay()" x-bind:aria-label="playing ? @js(__('carousel.pause')) : @js(__('carousel.play'))"
+            class="absolute top-4 right-4 z-[10000] size-10 rounded-full bg-white/90 text-logo-950 shadow flex items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-logo-500">
+        <svg x-show="playing" aria-hidden="true" class="size-4" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+        <svg x-show="!playing" x-cloak aria-hidden="true" class="size-4" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+    </button>
     <div class="swiper hero-swiper">
         <div class="swiper-wrapper">
             @foreach ($images as $image)
@@ -87,17 +92,25 @@
 <script>
     Alpine.data('hero', () => ({
         heroHeight: 0,
+        playing: true,
+        swiper: null,
+        toggleAutoplay() {
+            this.playing = !this.playing;
+            this.playing ? this.swiper.autoplay.start() : this.swiper.autoplay.stop();
+        },
         init() {
             this.calcHeight();
 
-            var heroswiper = new Swiper('.hero-swiper', {
+            this.playing = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            this.swiper = new Swiper('.hero-swiper', {
                 slidesPerView: 1,
                 effect: 'fade',
-                autoplay: {
-                    delay: 3000,
-                },
+                autoplay: { delay: 3000 },
                 speed: 1500,
             });
+            if (!this.playing) {
+                this.swiper.autoplay.stop();
+            }
 
             window.addEventListener('resize', this.calcHeight);
         },

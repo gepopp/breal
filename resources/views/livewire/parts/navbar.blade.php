@@ -200,7 +200,11 @@
 
 
             <div class="lg:hidden">
-                <svg x-on:click="open = !open" class="size-6 text-logo dark:text-white"
+                <button type="button" x-on:click="open = !open" x-on:keydown.escape.window="open = false"
+                        x-bind:aria-expanded="open.toString()" aria-controls="mobile-menu"
+                        aria-label="{{ __('navigation.menu') }}"
+                        class="rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-logo-500">
+                <svg aria-hidden="true" class="size-6 text-logo dark:text-white"
                      xmlns="http://www.w3.org/2000/svg" width="28" height="15" viewBox="0 0 28 15">
                     <line :class="open ? 'hidden' : ''" class="transition-all duration-300 ease-in-out" x2="20"
                           transform="translate(6.5 1.5)" fill="none" stroke="currentColor" stroke-linecap="round"
@@ -217,9 +221,10 @@
                           transform="translate(8.5 13.5)" fill="none" stroke="currentColor" stroke-linecap="round"
                           stroke-width="3"/>
                 </svg>
+                </button>
             </div>
         </div>
-        <div x-show="open" x-collapse.duration.500ms x-cloak
+        <div id="mobile-menu" x-show="open" x-collapse.duration.500ms x-cloak
              class="absolute top-full w-full shadow-xl lg:hidden bg-white z-[9999]">
             <div @class([
         "border-b-2 shadow lg:max-w-4xl xl:max-w-6xl mx-auto flex justify-between items-center p-4 w-full",
@@ -337,10 +342,12 @@
 
     menuItems.forEach(item => {
         let word = item.children[0].children[0].innerText.split('');
+        item.setAttribute('aria-label', item.children[0].children[0].innerText.trim());
         item.children[0].innerHTML = '';
         word.forEach((letter, idx) => {
             item.children[0].innerHTML += `<span style="--index: ${idx};">${letter}</span>`;
         })
+        item.children[0].setAttribute('aria-hidden', 'true');
         let cloneDiv = item.children[0].cloneNode(true);
         cloneDiv.style.position = "absolute";
         cloneDiv.style.top = "0px";

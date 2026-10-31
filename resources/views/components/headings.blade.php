@@ -16,7 +16,7 @@
         "tagged-heading mb-4",
         "!text-white" => $ondark,
         "text-logo-500" => !Route::is('technik.*', 'makler.*') && !$ondark,
-        "text-technik-500" => Route::is('technik.*') && !$ondark,
+        "text-technik-700 dark:text-technik-500" => Route::is('technik.*') && !$ondark,
         "text-makler-500" => Route::is('makler.*') && !$ondark,
 ])>
     @if($animate)
@@ -24,7 +24,7 @@
         "flex items-center font-logo text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-extrabold rounded tracking-wide lowercase",
         "before:content-['be'] before:h-[32px] before:mb-[6px] before:md:h-[36px] before:lg:h-[42px] before:xl:h-[62px] before:align-baseline before:rounded before:px-2 before:tracking-wide dark:before:bg-white before:bg-logo dark:before:text-logo before:mr-2",
         "text-logo-500" => !Route::is('technik.*', 'makler.*') && !$ondark,
-        "text-technik-500" => Route::is('technik.*') && !$ondark,
+        "text-technik-700 dark:text-technik-500" => Route::is('technik.*') && !$ondark,
         "text-makler-500" => Route::is('makler.*') && !$ondark,
         "before:text-logo-500" => !Route::is('technik.*', 'makler.*') && $ondark,
         "before:text-technik-500" => Route::is('technik.*') && $ondark,
@@ -38,7 +38,7 @@
         "flex items-center font-logo text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-extrabold rounded tracking-wide lowercase",
         "before:content-['be'] before:h-[32px] before:mb-[6px] before:md:h-[36px] before:lg:h-[42px] before:xl:h-[62px] before:align-baseline before:rounded before:px-2 before:tracking-wide dark:before:bg-white before:bg-logo dark:before:text-logo before:mr-2",
         "text-logo-500" => !Route::is('technik.*', 'makler.*') && !$ondark,
-        "text-technik-500" => Route::is('technik.*') && !$ondark,
+        "text-technik-700 dark:text-technik-500" => Route::is('technik.*') && !$ondark,
         "text-makler-500" => Route::is('makler.*') && !$ondark,
         "before:text-logo-500" => !Route::is('technik.*', 'makler.*') && $ondark,
         "before:text-technik-500" => Route::is('technik.*') && $ondark,
