@@ -75,7 +75,7 @@
         </div>
 
         <div class="mt-4 mb-8 flex justify-end items-center gap-4">
-            <p class="!text-xs text-gray-500 cursor-pointer" wire:click="resetFilters()">{{ __('makler.search.reset') }}</p>
+            <button type="button" class="!text-xs text-gray-500 cursor-pointer underline-offset-2 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-logo-500 rounded" wire:click="resetFilters">{{ __('makler.search.reset') }}</button>
             <x-button type="submit" variant="primary">{{ __('makler.search.filter_button') }}</x-button>
         </div>
 
@@ -87,12 +87,12 @@
         <flux:table.columns>
             <flux:table.column>{{ __('makler.table.image') }}</flux:table.column>
             <flux:table.column>{{ __('makler.table.title') }}</flux:table.column>
-            <flux:table.column class="text-right" sortable :sorted="$sortBy === 'zimmer'" :direction="$sortDirection" wire:click="sort('zimmer')">{{ __('makler.table.rooms') }}</flux:table.column>
-            <flux:table.column class="text-right" sortable :sorted="$sortBy === 'wohnflaeche'" :direction="$sortDirection" wire:click="sort('wohnflaeche')">{{ __('makler.table.living_area') }}</flux:table.column>
-            <flux:table.column class="text-right" sortable :sorted="$sortBy === 'preis'" :direction="$sortDirection" wire:click="sort('preis')">{{ __('makler.table.price') }}</flux:table.column>
-            <flux:table.column sortable :sorted="$sortBy === 'nutzungsart'" :direction="$sortDirection" wire:click="sort('nutzungsart')">{{ __('makler.table.usage_type') }}</flux:table.column>
-            <flux:table.column sortable :sorted="$sortBy === 'vermarktungsart'" :direction="$sortDirection" wire:click="sort('vermarktungsart')">{{ __('makler.table.rent_buy') }}</flux:table.column>
-            <flux:table.column sortable :sorted="$sortBy === 'plz'" :direction="$sortDirection" wire:click="sort('plz')">{{ __('makler.table.postal_code') }}</flux:table.column>
+            <flux:table.column class="text-right" sortable :sorted="$sortBy === 'zimmer'" :direction="$sortDirection" :aria-sort="$sortBy === 'zimmer' ? ($sortDirection === 'asc' ? 'ascending' : 'descending') : 'none'" wire:click="sort('zimmer')">{{ __('makler.table.rooms') }}</flux:table.column>
+            <flux:table.column class="text-right" sortable :sorted="$sortBy === 'wohnflaeche'" :direction="$sortDirection" :aria-sort="$sortBy === 'wohnflaeche' ? ($sortDirection === 'asc' ? 'ascending' : 'descending') : 'none'" wire:click="sort('wohnflaeche')">{{ __('makler.table.living_area') }}</flux:table.column>
+            <flux:table.column class="text-right" sortable :sorted="$sortBy === 'preis'" :direction="$sortDirection" :aria-sort="$sortBy === 'preis' ? ($sortDirection === 'asc' ? 'ascending' : 'descending') : 'none'" wire:click="sort('preis')">{{ __('makler.table.price') }}</flux:table.column>
+            <flux:table.column sortable :sorted="$sortBy === 'nutzungsart'" :direction="$sortDirection" :aria-sort="$sortBy === 'nutzungsart' ? ($sortDirection === 'asc' ? 'ascending' : 'descending') : 'none'" wire:click="sort('nutzungsart')">{{ __('makler.table.usage_type') }}</flux:table.column>
+            <flux:table.column sortable :sorted="$sortBy === 'vermarktungsart'" :direction="$sortDirection" :aria-sort="$sortBy === 'vermarktungsart' ? ($sortDirection === 'asc' ? 'ascending' : 'descending') : 'none'" wire:click="sort('vermarktungsart')">{{ __('makler.table.rent_buy') }}</flux:table.column>
+            <flux:table.column sortable :sorted="$sortBy === 'plz'" :direction="$sortDirection" :aria-sort="$sortBy === 'plz' ? ($sortDirection === 'asc' ? 'ascending' : 'descending') : 'none'" wire:click="sort('plz')">{{ __('makler.table.postal_code') }}</flux:table.column>
         </flux:table.columns>
 
         <flux:table.rows>
@@ -107,7 +107,7 @@
                             {{ \Illuminate\Support\Str::words($realty->title, 8, '...') }}
                         </a>
                     </flux:table.cell>
-                    <flux:table.cell class="whitespace-nowrap text-right">{{ $realty->zimmer }}</flux:table.cell>
+                    <flux:table.cell class="whitespace-nowrap text-right">{{ is_null($realty->zimmer) ? '' : \Illuminate\Support\Number::format((float) $realty->zimmer, maxPrecision: 1, locale: app()->getLocale()) }}</flux:table.cell>
 
                     <flux:table.cell class="text-right">{{ is_null($realty->wohnflaeche) ? __('makler.table.on_request') : \Illuminate\Support\Number::format( $realty->wohnflaeche, 2, null, 'de'  ) . ' m²' }}</flux:table.cell>
 

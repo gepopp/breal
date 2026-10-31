@@ -24,7 +24,7 @@
 
                 @elseif($media?->count() > 1)
 
-                    <div x-ref="swiper" class="swiper swiperSecond min-h-full">
+                    <div x-ref="swiper" class="swiper swiperSecond min-h-full" data-pause-control="custom">
                         <button type="button" x-on:click="toggleAutoplay()" x-bind:aria-label="playing ? @js(__('carousel.pause')) : @js(__('carousel.play'))"
             class="absolute bottom-4 left-4 z-[10000] size-10 rounded-full bg-white/90 text-logo-950 shadow flex items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-logo-500">
         <svg x-show="playing" aria-hidden="true" class="size-4" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>

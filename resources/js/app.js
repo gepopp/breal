@@ -68,3 +68,63 @@ document.addEventListener('DOMContentLoaded', function() {
 
 import SimpleParallax from "simple-parallax-js/vanilla";
 window.SimpleParallax = SimpleParallax;
+
+
+/**
+ * Autoplaying carousels need a keyboard-operable pause button (WCAG 2.2.2).
+ * Sliders that bring their own control are marked with data-pause-control.
+ */
+const addCarouselPauseControls = () => {
+    document.querySelectorAll('.swiper').forEach((element) => {
+        const swiper = element.swiper;
+
+        if (!swiper || !swiper.params.autoplay || element.dataset.pauseControl) {
+            return;
+        }
+
+        element.dataset.pauseControl = 'generic';
+
+        const pauseLabel = document.body.dataset.carouselPause;
+        const playLabel = document.body.dataset.carouselPlay;
+        const icons = {
+            pause: '<svg aria-hidden="true" class="size-4" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>',
+            play: '<svg aria-hidden="true" class="size-4" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>',
+        };
+        const button = document.createElement('button');
+
+        button.type = 'button';
+        button.className = 'absolute bottom-4 left-4 z-[10000] size-10 rounded-full bg-white/90 text-logo-950 shadow flex items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-logo-500';
+
+        const render = (playing) => {
+            button.innerHTML = playing ? icons.pause : icons.play;
+            button.setAttribute('aria-label', playing ? pauseLabel : playLabel);
+        };
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            swiper.autoplay.stop();
+        }
+
+        render(swiper.autoplay.running);
+
+        button.addEventListener('click', () => {
+            swiper.autoplay.running ? swiper.autoplay.stop() : swiper.autoplay.start();
+            render(swiper.autoplay.running);
+        });
+
+        element.appendChild(button);
+    });
+};
+
+const scheduleCarouselPauseControls = () => {
+    let attempts = 0;
+    const timer = setInterval(() => {
+        addCarouselPauseControls();
+
+        if (++attempts >= 10) {
+            clearInterval(timer);
+        }
+    }, 500);
+};
+
+document.addEventListener('DOMContentLoaded', scheduleCarouselPauseControls);
+document.addEventListener('livewire:navigated', scheduleCarouselPauseControls);

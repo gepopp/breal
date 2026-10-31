@@ -29,6 +29,9 @@ class Service extends Component
         $selected = $services->firstWhere('slug', $this->tab) ?? $services->first();
         $preparedText = $this->prepareText();
 
+        // The default tab is the page itself, the other tabs are indexed on their own and need their own title.
+        $ownMeta = $selected && $selected->isNot($services->first());
+
         return view('livewire.hausverwaltung.service', [
             'pagesSettings' => $pagesSettings,
             'preparedText' => $preparedText,
@@ -40,11 +43,11 @@ class Service extends Component
             ])->all(),
             'selected' => $selected ? $this->present($selected) : null,
         ])
-            ->title(PageMeta::title('service'))
+            ->title($ownMeta ? PageMeta::compose($selected->translatedFor('name')) : PageMeta::title('service'))
             ->layout('components.layouts.site')
             ->layoutData([
                 'canonical' => $selected && $selected->isNot($services->first()) ? $selected->link : route('hausverwaltung.service'),
-                'description' => PageMeta::description('service'),
+                'description' => $ownMeta && ($excerpt = PageMeta::excerpt($selected->translatedFor('description'))) !== '' ? $excerpt : PageMeta::description('service'),
             ]);
     }
 

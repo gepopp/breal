@@ -357,5 +357,15 @@
     "vacancy.interval.hour": "pro Stunde",
     "vacancy.interval.week": "pro Woche",
     "vacancy.interval.month": "pro Monat",
-    "vacancy.interval.year": "pro Jahr"
+    "vacancy.interval.year": "pro Jahr",
+    "meta.room_singular": "Zimmer",
+    "Showing": "Zeige",
+    "to": "bis",
+    "of": "von",
+    "results": "Ergebnissen",
+    "realty.slider.previous": "Vorheriges Bild",
+    "realty.slider.next": "Nächstes Bild",
+    "realty.slider.first": "Das ist das erste Bild",
+    "realty.slider.last": "Das ist das letzte Bild",
+    "footer.cookie_settings": "Cookie-Einstellungen"
 }

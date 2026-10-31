@@ -59,7 +59,7 @@ class ImportRealtyJob implements ShouldQueue
                 'title'           => $array['freitexte']['objekttitel'] ?? null,
                 'beschreibung'    => $array['freitexte']['objektbeschreibung'] ?? null,
                 'zimmer'          => $array['flaechen']['anzahl_zimmer'] ?? null,
-                'wohnflaeche'     => $array['flaechen']['gesamtflaeche'] ?? null,
+                'wohnflaeche'     => $array['flaechen']['wohnflaeche'] ?? $array['flaechen']['gesamtflaeche'] ?? null,
                 'preis'           => $preis,
                 'vermarktungsart' => $vermarktungsart,
                 'nutzungsart'     => $nutzungsart ?? null,

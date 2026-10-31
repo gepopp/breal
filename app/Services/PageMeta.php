@@ -81,14 +81,14 @@ class PageMeta
      */
     public static function realtyTitle(Realty $realty): string
     {
-        $name = self::normalizeTitle((string) $realty->title);
+        $name = self::stripQuotes(self::normalizeTitle((string) $realty->title));
         $identifier = self::unitIdentifier($name, $realty->objektnr_extern);
 
         if ($identifier === null) {
             return self::compose($name);
         }
 
-        $stem = trim(preg_replace('/[\s\-–|]*\btop\s*\d+\w*\s*$/iu', '', $name), " \t-–|");
+        $stem = preg_replace('/^[\s\-–|]+|[\s\-–|]+$/u', '', preg_replace('/[\s\-–|]*\btop\s*\d+\w*\s*$/iu', '', $name));
         $stem = self::limit($stem, self::TITLE_LIMIT - mb_strlen(' – '.$identifier));
         $title = $stem.' – '.$identifier;
         $withSection = $title.' – '.self::sectionName();
@@ -103,7 +103,7 @@ class PageMeta
     public static function realtyDescription(Realty $realty, ?string $html): string
     {
         $facts = array_filter([
-            $realty->zimmer ? Number::format((float) $realty->zimmer, maxPrecision: 1, locale: app()->getLocale()).' '.__('makler.table.rooms') : null,
+            $realty->zimmer ? Number::format((float) $realty->zimmer, maxPrecision: 1, locale: app()->getLocale()).' '.((float) $realty->zimmer === 1.0 ? __('meta.room_singular') : __('makler.table.rooms')) : null,
             $realty->ort,
             self::unitIdentifier(self::normalizeTitle((string) $realty->title), $realty->objektnr_extern),
         ]);
@@ -153,6 +153,14 @@ class PageMeta
         return $title;
     }
 
+    /**
+     * Feed titles come wrapped in typographic quotes, which look broken once a title is cut.
+     */
+    private static function stripQuotes(string $title): string
+    {
+        return trim(preg_replace('/\s+/u', ' ', preg_replace('/[„“”‚‘’"«»]/u', '', $title)));
+    }
+
     private static function limit(string $text, int $limit): string
     {
         if (mb_strlen($text) <= $limit) {
@@ -166,7 +174,7 @@ class PageMeta
             $cut = mb_substr($cut, 0, $lastSpace);
         }
 
-        return rtrim($cut, ' ,;:–-.').'…';
+        return preg_replace('/[\s,;:–\-.]+$/u', '', $cut).'…';
     }
 
     private static function translate(string $page, string $field): string

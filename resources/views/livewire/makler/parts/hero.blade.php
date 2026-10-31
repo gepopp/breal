@@ -4,7 +4,7 @@
         <svg x-show="playing" aria-hidden="true" class="size-4" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
         <svg x-show="!playing" x-cloak aria-hidden="true" class="size-4" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
     </button>
-    <div class="swiper hero-swiper">
+    <div class="swiper hero-swiper" data-pause-control="custom">
         <div class="swiper-wrapper">
             @foreach ($images as $image)
                 <div class="swiper-slide">

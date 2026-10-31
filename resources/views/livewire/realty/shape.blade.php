@@ -16,7 +16,7 @@
                     <li class="!ml-0 flex justify-between">
                         <span>{{ __('realty.hwb') }}</span>
                         <span class="flex items-center space-x-1">
-                        <span>{{ $data['energiepass']['hwbwert'] }} kWh/m²a</span>
+                        <span>{{ is_numeric($data['energiepass']['hwbwert']) ? \Illuminate\Support\Number::format((float) $data['energiepass']['hwbwert'], maxPrecision: 2, locale: app()->getLocale()) : $data['energiepass']['hwbwert'] }} kWh/m²a</span>
                         {!! \App\Enums\EnergieausweissEnum::{$data['energiepass']['hwbklasse']}->getBadge() !!}
                     </span>
                     </li>
@@ -25,7 +25,7 @@
                     <li class="!ml-0 flex justify-between">
                         <span>fGEE</span>
                         <span class="flex items-center space-x-1">
-                        <span>{{ $data['energiepass']['fgeewert'] }}</span>
+                        <span>{{ is_numeric($data['energiepass']['fgeewert']) ? \Illuminate\Support\Number::format((float) $data['energiepass']['fgeewert'], maxPrecision: 2, locale: app()->getLocale()) : $data['energiepass']['fgeewert'] }}</span>
                         {!! \App\Enums\EnergieausweissEnum::{$data['energiepass']['fgeeklasse']}->getBadge() !!}
                     </span>
                     </li>

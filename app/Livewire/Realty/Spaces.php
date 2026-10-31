@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Realty;
 
+use Illuminate\Support\Number;
 use Livewire\Component;
 
 class Spaces extends Component
@@ -29,8 +30,11 @@ class Spaces extends Component
 
         foreach ($keys as $key => $value) {
             if (array_key_exists($key, $spaces)) {
-                $this->formatted_spaces[$value] =
-                    in_array($key, $suffixes) ? $spaces[$key].' m²' : $spaces[$key] ?? '--';
+                $amount = is_numeric($spaces[$key] ?? null)
+                    ? Number::format((float) $spaces[$key], maxPrecision: 2, locale: app()->getLocale())
+                    : ($spaces[$key] ?? '--');
+
+                $this->formatted_spaces[$value] = in_array($key, $suffixes) ? $amount.' m²' : $amount;
             }
         }
 

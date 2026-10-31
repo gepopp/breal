@@ -99,6 +99,12 @@
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
             },
+            a11y: {
+                prevSlideMessage: @js(__('realty.slider.previous')),
+                nextSlideMessage: @js(__('realty.slider.next')),
+                firstSlideMessage: @js(__('realty.slider.first')),
+                lastSlideMessage: @js(__('realty.slider.last')),
+            },
             thumbs: {
                 swiper: swiper,
             },

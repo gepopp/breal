@@ -256,5 +256,11 @@
     "vacancy.interval.hour": "per hour",
     "vacancy.interval.week": "per week",
     "vacancy.interval.month": "per month",
-    "vacancy.interval.year": "per year"
+    "vacancy.interval.year": "per year",
+    "meta.room_singular": "Room",
+    "realty.slider.previous": "Previous image",
+    "realty.slider.next": "Next image",
+    "realty.slider.first": "This is the first image",
+    "realty.slider.last": "This is the last image",
+    "footer.cookie_settings": "Cookie settings"
 }
