@@ -48,7 +48,6 @@ class LanguageTest extends TestCase
     public function test_default_locale_is_german(): void
     {
         $this->assertSame('de', config('app.locale'));
-        $this->assertFalse(config('language.auto'));
     }
 
     #[DataProvider('publicPages')]

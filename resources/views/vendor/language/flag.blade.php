@@ -1,1 +1,0 @@
-<img src="{{ language()->flagPath($code) }}" alt="{{ $name }}" class="{{ config('language.flags.img_class') }}" width="{{ config('language.flags.width') }}" />
