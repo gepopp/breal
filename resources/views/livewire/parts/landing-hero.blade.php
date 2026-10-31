@@ -27,7 +27,7 @@
 
         @elseif($media?->count() > 1)
 
-            <div x-ref="swiper" class="swiper swiperSolo min-h-full">
+            <div x-ref="swiper" class="swiper swiperSolo min-h-full" data-pause-position="right">
                 <div x-ref="wrapper" class="swiper-wrapper min-h-full flex-1">
                     @foreach($media as $image)
                         <div class="swiper-slide min-h-full">

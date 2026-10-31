@@ -72,7 +72,8 @@ window.SimpleParallax = SimpleParallax;
 
 /**
  * Autoplaying carousels need a keyboard-operable pause button (WCAG 2.2.2).
- * Sliders that bring their own control are marked with data-pause-control.
+ * Sliders that bring their own control are marked with data-pause-control; data-pause-position="right"
+ * moves the button to the right for sliders with a decorative overlay at the bottom left.
  */
 const addCarouselPauseControls = () => {
     document.querySelectorAll('.swiper').forEach((element) => {
@@ -93,7 +94,7 @@ const addCarouselPauseControls = () => {
         const button = document.createElement('button');
 
         button.type = 'button';
-        button.className = 'absolute bottom-4 left-4 z-[10000] size-10 rounded-full bg-white/90 text-logo-950 shadow flex items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-logo-500';
+        button.className = 'absolute bottom-4 ' + (element.dataset.pausePosition === 'right' ? 'right-4' : 'left-4') + ' z-[10000] size-10 rounded-full bg-white/90 text-logo-950 shadow flex items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-logo-500';
 
         const render = (playing) => {
             button.innerHTML = playing ? icons.pause : icons.play;
