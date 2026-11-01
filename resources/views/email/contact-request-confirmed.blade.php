@@ -20,7 +20,6 @@
     <meta name="color-scheme" content="only">
     <title></title>
 
-    <link rel="stylesheet" href="https://use.typekit.net/chs7mgb.css">
 
 
     <style type="text/css">

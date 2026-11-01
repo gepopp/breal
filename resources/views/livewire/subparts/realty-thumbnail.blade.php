@@ -12,6 +12,3 @@
         </div>
     @endif
 </div>
-@assets
-<script src="https://rawcdn.githack.com/nextapps-de/spotlight/0.7.8/dist/spotlight.bundle.js"></script>
-@endassets

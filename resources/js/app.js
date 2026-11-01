@@ -154,3 +154,17 @@ document.addEventListener('click', (event) => {
 
     link.href = target.toString();
 });
+
+
+/**
+ * Image lightbox of the property pages and the property list (Spotlight.js 0.7.8,
+ * Apache-2.0, self-hosted). Loaded as its own chunk, only where a gallery exists.
+ */
+const loadSpotlight = () => {
+    if (!window.Spotlight && document.querySelector('.spotlight')) {
+        import('./spotlight.js');
+    }
+};
+
+document.addEventListener('DOMContentLoaded', loadSpotlight);
+document.addEventListener('livewire:navigated', loadSpotlight);
