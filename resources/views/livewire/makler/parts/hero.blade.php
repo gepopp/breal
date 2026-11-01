@@ -8,7 +8,7 @@
         <div class="swiper-wrapper">
             @foreach ($images as $image)
                 <div class="swiper-slide">
-                    <x-media-image :media="$image" :priority="$loop->first" alt="{{ __('makler.hero_image_alt') }}" class="w-full object-cover" x-bind:style="{ height: `${heroHeight}px` }"/>
+                    <x-media-image :describe="true" :media="$image" :priority="$loop->first" alt="{{ __('makler.hero_image_alt') }}" class="w-full object-cover" x-bind:style="{ height: `${heroHeight}px` }"/>
                 </div>
             @endforeach
         </div>
