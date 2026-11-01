@@ -3,12 +3,12 @@
     $phone = \App\Services\CompanyInfo::phone();
 @endphp
 <div class="w-full sm:w-1/3">
-    <h3 data-aos="fade" data-aos-once="true" @class([
+    <h2 data-aos="fade" data-aos-once="true" @class([
         "text-2xl font-bold mb-8 dark:text-white",
         "text-logo-950" => !Route::is('technik.*', 'makler.*'),
         "text-technik-950" => Route::is('technik.*'),
         "text-makler-950" => Route::is('makler.*'),
-        ])>{{ $pagesSettings->contactform_heading }}</h3>
+        ])>{{ $pagesSettings->contactform_heading }}</h2>
 
     <ul @class([
                  "text-lg font-light space-y-4 dark:text-white",

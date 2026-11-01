@@ -1,8 +1,8 @@
-<aside id="cookies-policy" class="cookies cookies--no-js" data-text="{{ json_encode(__('cookieConsent::cookies.details')) }}">
+<aside id="cookies-policy" aria-labelledby="cookies-title" class="cookies cookies--no-js" data-text="{{ json_encode(__('cookieConsent::cookies.details')) }}">
     <div class="cookies__alert">
         <div class="cookies__container">
             <div class="cookies__wrapper">
-                <h2 class="cookies__title">@lang('cookieConsent::cookies.title')</h2>
+                <p id="cookies-title" class="cookies__title">@lang('cookieConsent::cookies.title')</p>
                 <div class="cookies__intro">
                     <p>@lang('cookieConsent::cookies.intro')</p>
                     @if($policy)

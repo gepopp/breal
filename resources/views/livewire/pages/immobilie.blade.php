@@ -1,10 +1,10 @@
 <x-section>
     <div class="w-2/3">
-        <h5 class="text-opacity-50 mb-4">
+        <p class="text-opacity-50 mb-4">
             {{ $realty->strasse }} {{ $realty->hausnummer }}, {{ $realty->plz }} {{ $realty->ort }}
             | {{ $realty->nutzungsart }}
             | Objektnummer: {{ $realty->objektnr_extern }}
-        </h5>
+        </p>
         <h1 class="text-2xl font-bold">{{ $realty->title }}</h1>
     </div>
 
@@ -15,7 +15,7 @@
 
             @if(array_key_exists('freitexte', $realty->data) && array_key_exists('lage', $realty->data['freitexte']))
                 <div class="prose">
-                    <h3>{{ __('realty.location') }}</h3>
+                    <h2>{{ __('realty.location') }}</h2>
                     {!! \App\Services\HtmlLists::demoteH1($realty['data']['freitexte']['lage']) !!}
                 </div>
             @endif
@@ -25,7 +25,7 @@
             @endif
 
             <div class="prose">
-                <h3>{{ __('realty.description') }}</h3>
+                <h2>{{ __('realty.description') }}</h2>
                 {!! \App\Services\HtmlLists::demoteH1((string) $realty->beschreibung) !!}
             </div>
         </div>
@@ -38,7 +38,7 @@
             @endif
 
             <div class="pt-4 mt-4 border-t border-gray-200">
-                <h3>{{ __('realty.key_data') }}</h3>
+                <h2>{{ __('realty.key_data') }}</h2>
 
                 <livewire:realty.spaces :spaces="$realty->data['flaechen']"/>
 

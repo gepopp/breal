@@ -1,6 +1,6 @@
 <x-section>
     <div @class(['md:max-w-sm lg:max-w-lg' => !is_array($preparedText), 'max-w-screen'])>
-        <x-headings>
+        <x-headings level="2">
             <x-slot name="tag">{{ $settings->timeline_header }}</x-slot>
             {!! $settings->timeline_subheader !!}
         </x-headings>

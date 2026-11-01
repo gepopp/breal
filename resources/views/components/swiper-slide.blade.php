@@ -7,7 +7,7 @@
     </div>
     <div class="flex flex-col h-full">
         <div class="mt-6">
-            <h5 class="text-xl font-bold text-white h-[56px] line-clamp-2">{{ $ref->title }}</h5>
+            <h3 class="text-xl font-bold text-white h-[56px] line-clamp-2">{{ $ref->title }}</h3>
             <p class="text-white line-clamp-5 h-[140px]">{{ $ref->description }}</p>
         </div>
 {{--        <div class="flex space-x-4 mt-auto mb-12">--}}
@@ -17,9 +17,9 @@
 {{--                     alt="{{ $ref->client_name }}"/>--}}
 {{--            </div>--}}
 {{--            <div class="text-white">--}}
-{{--                <h5 class="font-semibold !text-base">--}}
+{{--                <h3 class="font-semibold !text-base">--}}
 {{--                    {{ $ref->client_name }}--}}
-{{--                </h5>--}}
+{{--                </h3>--}}
 {{--                <p class="!text-sm !text-light">{{ $ref->testimonial }}</p>--}}
 {{--            </div>--}}
 {{--        </div>--}}

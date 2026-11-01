@@ -72,6 +72,7 @@
         <div class="w-full md:w-auto mt-10 md:mt-0">
             @if($selected)
                 <div wire:key="service-content-{{ $selected['slug'] }}">
+                    <h2 class="sr-only">{{ $selected['name'] }}</h2>
                     <div class="md:p-4 pt-0 prose grow">{!! $selected['description'] !!}</div>
 
                     @if($selected['form'] === 'form')

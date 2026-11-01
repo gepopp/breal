@@ -53,7 +53,7 @@
                     </div>
                     <div class="h-px w-full bg-logo mt-8"></div>
                     <div class="prose bg-logo p-4 text-white flex flex-col items-center justify-center">
-                        <h5 class="!text-lg !font-bold !text-white">{{ __('faq.questions_cta') }}</h5>
+                        <h2 class="!text-lg !font-bold !text-white">{{ __('faq.questions_cta') }}</h2>
                         <div class="max-w-xs mt-4">
                             <x-button href="{{ $faq['link'] }}" :ondark="true">{{ __('faq.contact_us') }}</x-button>
                         </div>

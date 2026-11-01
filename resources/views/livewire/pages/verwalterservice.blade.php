@@ -158,7 +158,7 @@
                 <div data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
                     <div class="flex items-center gap-3 mb-2">
                         @svg('heroicon-o-' . $card->icon, 'size-6 text-logo-300 shrink-0')
-                        <h4 class="font-bold">{{ $card->name }}</h4>
+                        <h3 class="font-bold">{{ $card->name }}</h3>
                     </div>
                     <p class="text-sm font-light text-white/70">{{ $card->text }}</p>
                 </div>
@@ -201,7 +201,7 @@
                             <div class="size-12 rounded-full bg-logo-500 dark:bg-logo-300 text-white dark:text-logo-950 flex items-center justify-center font-logo text-xl font-bold">1</div>
                         </div>
                         <div>
-                            <h4 class="font-bold text-lg">{{ $settings->step_1_title }}</h4>
+                            <h3 class="font-bold text-lg">{{ $settings->step_1_title }}</h3>
                             <p class="text-sm font-light mt-1">{{ $settings->step_1_text }}</p>
                         </div>
                     </div>
@@ -211,7 +211,7 @@
                             <div class="size-12 rounded-full bg-logo-500 dark:bg-logo-300 text-white dark:text-logo-950 flex items-center justify-center font-logo text-xl font-bold">2</div>
                         </div>
                         <div>
-                            <h4 class="font-bold text-lg">{{ $settings->step_2_title }}</h4>
+                            <h3 class="font-bold text-lg">{{ $settings->step_2_title }}</h3>
                             <p class="text-sm font-light mt-1">{{ $settings->step_2_text }}</p>
                         </div>
                     </div>
@@ -221,7 +221,7 @@
                             <div class="size-12 rounded-full bg-logo-500 dark:bg-logo-300 text-white dark:text-logo-950 flex items-center justify-center font-logo text-xl font-bold">3</div>
                         </div>
                         <div>
-                            <h4 class="font-bold text-lg">{{ $settings->step_3_title }}</h4>
+                            <h3 class="font-bold text-lg">{{ $settings->step_3_title }}</h3>
                             <p class="text-sm font-light mt-1">{{ $settings->step_3_text }}</p>
                         </div>
                     </div>

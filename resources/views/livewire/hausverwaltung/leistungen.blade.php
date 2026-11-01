@@ -52,7 +52,7 @@
                 </div>
 
                 <div @class(["z-20"])>
-                    <h5 class="font-bold line-clamp-1">{{ $competence->name }}</h5>
+                    <h2 class="font-bold line-clamp-1">{{ $competence->name }}</h2>
                     <p class="!text-sm line-clamp-5">{{ $competence->description }}</p>
 
 

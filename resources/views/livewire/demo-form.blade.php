@@ -29,7 +29,7 @@
             </div>
             <div class="bg-logo text-white p-4 flex flex-col justify-center items-center">
                 <div class="max-w-xs text-center">
-                    <h5 class="text-2xl font-bold">{{ __('form.thank_you') }}</h5>
+                    <h2 class="text-2xl font-bold">{{ __('form.thank_you') }}</h2>
                     <p class="!text-sm font-thin">
                         {{ __('form.check_inbox') }}
                     </p>

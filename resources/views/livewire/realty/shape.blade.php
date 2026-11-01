@@ -10,7 +10,7 @@
     @if(array_key_exists('energiepass', $data))
         <div class="pt-4 mt-4 border-t border-gray-200">
 
-            <h3>{{ __('realty.energy_certificate') }}</h3>
+            <h2>{{ __('realty.energy_certificate') }}</h2>
             <ul>
                 @if(array_key_exists('hwbwert', $data['energiepass']) && array_key_exists('hwbklasse', $data['energiepass']))
                     <li class="!ml-0 flex justify-between">

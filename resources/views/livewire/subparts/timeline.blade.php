@@ -37,7 +37,7 @@
                                     </div>
                                     <div class="w-2/3 lg:w-1/2 flex flex-col justify-center ml-4 mt-6">
                                         <div class="relative">
-                                            <h5 class="font-bold text-sm md:text-xl text-logo dark:text-white">{{ $entry->title }}</h5>
+                                            <h3 class="font-bold text-sm md:text-xl text-logo dark:text-white">{{ $entry->title }}</h3>
                                             <div class="hidden sm:block absolute top-0 -mt-6 left-0 -ml-20 w-36 h-[3px] bg-logo dark:bg-white text-right">
                                                 <span class="ml-auto pt-1">{{ $entry->year }}</span>
                                             </div>

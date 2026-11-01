@@ -1,6 +1,6 @@
 <x-section>
     <div @class(['md:max-w-sm lg:max-w-lg'])>
-        <x-headings>
+        <x-headings level="2">
             <x-slot name="tag">{{ $settings->contact_header }}</x-slot>
             {!! $settings->contact_subheader !!}
         </x-headings>

@@ -1,7 +1,7 @@
 <x-section class="bg-logo-500/3 dark:bg-logo-500/3">
     <div x-data="parallax" class="py-24 lg:px-0 lg:max-w-4xl xl:max-w-6xl mx-auto">
         <div @class(['md:max-w-sm lg:max-w-lg' => !is_array($preparedText), 'max-w-full'])>
-            <x-headings>
+            <x-headings level="2">
                 <x-slot name="tag">{{ $settings->service_heading }}</x-slot>
                 {!! $settings->service_subheading !!}
             </x-headings>

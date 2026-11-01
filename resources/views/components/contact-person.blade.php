@@ -1,4 +1,4 @@
-@props(['contactperson'])
+@props(['contactperson', 'tag' => 'h3'])
 <div class="fade flex space-x-4 items-start">
     <div class="w-24 aspect-square shrink-0">
         <div class="rounded-full bg-logo/15 w-full aspect-square overflow-hidden">
@@ -14,12 +14,12 @@
         </div>
     </div>
     <div>
-        <h5 @class([
+        <{{ $tag }} @class([
         "text-xl dark:text-white font-semibold",
         "text-logo-950" => !Route::is('technik.*', 'makler.*'),
         "text-technik-950" => Route::is('technik.*'),
         "text-makler-950" => Route::is('makler.*'),
-])>{{ $contactperson->name }}</h5>
+])>{{ $contactperson->name }}</{{ $tag }}>
         <p @class([ "!text-base" ])>
             {{ $contactperson->position }}
         </p>

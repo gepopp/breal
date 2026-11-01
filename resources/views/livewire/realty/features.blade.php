@@ -1,5 +1,5 @@
 <div class="pt-4 mt-4 border-t border-gray-200">
-    <h3>{{ __('realty.equipment') }}</h3>
+    <h2>{{ __('realty.equipment') }}</h2>
     <ul>
         @if(array_key_exists('boden', $ausstattung))
             <li class="!ml-0 flex justify-between">

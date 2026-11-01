@@ -41,7 +41,7 @@
         "bg-logo !text-white" => $index % 2 == 0 || $index == 0,
         "border border-logo" => $index % 2 !== 0 || $index !== 0,
         ])>
-                    <h5 class="font-bold">{{ $vacancy->title }}</h5>
+                    <h2 class="font-bold">{{ $vacancy->title }}</h2>
 
                     <a href="{{ route('stellenanzeige', $vacancy) }}" class="flex items-center justify-end after:absolute after:inset-0">
                         <span @class(["group-hover:mr-2"])>{{ __('vacancy.apply_now') }}</span>

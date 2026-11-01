@@ -1,6 +1,6 @@
 <x-section>
     <div @class([ 'max-w-screen w-full', 'md:max-w-sm lg:max-w-lg' => !is_array($preparedText)])>
-        <x-headings>
+        <x-headings level="2">
             <x-slot name="tag">{{ $settings->competence_header }}</x-slot>
             {!! $settings->competence_subheader !!}
         </x-headings>
@@ -41,7 +41,7 @@
                 </div>
 
                 <div @class(["z-20"])>
-                    <h5 class="font-bold line-clamp-1">{{ $competence->name }}</h5>
+                    <h3 class="font-bold line-clamp-1">{{ $competence->name }}</h3>
                     <p class="!text-sm line-clamp-5">{{ $competence->description }}</p>
 
                     <a href="{{ route( strtolower($company . '.leistung'), ['competence' => $competence ] ) }}" class="mt-4 text-right w-full block">{{ __('common.read_more') }}</a>

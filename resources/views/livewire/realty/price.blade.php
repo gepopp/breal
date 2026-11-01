@@ -1,5 +1,5 @@
 <div class="pt-4 mt-4 border-t border-gray-200">
-    <h3>{{ __('realty.price_information') }}</h3>
+    <h2>{{ __('realty.price_information') }}</h2>
     @if($realty->vermarktungsart == 'miete')
         <ul>
             @if(array_key_exists('gesamtmietebrutto', $prices))
