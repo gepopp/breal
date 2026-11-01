@@ -39,8 +39,8 @@ class EnglishContentTest extends TestCase
 
     public function test_service_page_headings_and_intro_follow_the_language(): void
     {
-        $this->get('/en/service')->assertOk()->assertSee('Our Promise')->assertSee('Often things need to be quick and easy')->assertDontSee('Unser Versprechen');
-        $this->get('/service')->assertOk()->assertSee('Unser Versprechen')->assertDontSee('Our Promise');
+        $this->get('/en/service')->assertOk()->assertSee('Service and forms for owners and residents')->assertSee('Often things need to be quick and easy')->assertDontSee('Service und Formulare');
+        $this->get('/service')->assertOk()->assertSee('Service und Formulare für Eigentümer:innen und Bewohner:innen')->assertDontSee('Service and forms for owners');
     }
 
     public function test_contact_headings_follow_the_language(): void

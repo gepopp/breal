@@ -5,11 +5,20 @@
     'level' => null,
     'tag' => 'real',
     'ondark' => false,
-    'animate' => true
+    'animate' => true,
+    'tagIsHeading' => false,
 ])
 
 @php
     $classes = 'text-xl font-bold dark:text-white';
+
+    // The big tagged line ("be welcome") is the page heading itself; the text below it is only a lead paragraph.
+    $tagElement = $tagIsHeading ? 'h1' : 'div';
+    $level = $tagIsHeading ? null : $level;
+
+    // As the h1 the line carries a real, hidden "be " for search engines and screen readers; the drawn "be" is then
+    // marked as decorative (empty alternative text) so that it is not read twice.
+    $beContent = $tagIsHeading ? "before:content-['be'_/_'']" : "before:content-['be']";
 @endphp
 
 <div @class([
@@ -20,9 +29,9 @@
         "text-makler-500" => Route::is('makler.*') && !$ondark,
 ])>
     @if($animate)
-        <div @class([
+        <{{ $tagElement }} @class([
         "flex items-center font-logo text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-extrabold rounded tracking-wide lowercase",
-        "before:content-['be'] before:h-[32px] before:mb-[6px] before:md:h-[36px] before:lg:h-[42px] before:xl:h-[62px] before:align-baseline before:rounded before:px-2 before:tracking-wide dark:before:bg-white before:bg-logo dark:before:text-logo before:mr-2",
+        $beContent.' before:h-[32px] before:mb-[6px] before:md:h-[36px] before:lg:h-[42px] before:xl:h-[62px] before:align-baseline before:rounded before:px-2 before:tracking-wide dark:before:bg-white before:bg-logo dark:before:text-logo before:mr-2',
         "text-logo-500" => !Route::is('technik.*', 'makler.*') && !$ondark,
         "text-technik-700 dark:text-technik-500" => Route::is('technik.*') && !$ondark,
         "text-makler-500" => Route::is('makler.*') && !$ondark,
@@ -34,9 +43,9 @@
         ])
              data-aos="fade" data-aos-once="true">
             @else
-                <div @class([
+                <{{ $tagElement }} @class([
         "flex items-center font-logo text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-extrabold rounded tracking-wide lowercase",
-        "before:content-['be'] before:h-[32px] before:mb-[6px] before:md:h-[36px] before:lg:h-[42px] before:xl:h-[62px] before:align-baseline before:rounded before:px-2 before:tracking-wide dark:before:bg-white before:bg-logo dark:before:text-logo before:mr-2",
+        $beContent.' before:h-[32px] before:mb-[6px] before:md:h-[36px] before:lg:h-[42px] before:xl:h-[62px] before:align-baseline before:rounded before:px-2 before:tracking-wide dark:before:bg-white before:bg-logo dark:before:text-logo before:mr-2',
         "text-logo-500" => !Route::is('technik.*', 'makler.*') && !$ondark,
         "text-technik-700 dark:text-technik-500" => Route::is('technik.*') && !$ondark,
         "text-makler-500" => Route::is('makler.*') && !$ondark,
@@ -47,8 +56,9 @@
         "before:text-white before:bg-logo" => !$ondark
         ])>
                     @endif
+                    @if($tagIsHeading)<span class="sr-only">be </span>@endif
                     <span class="font-logo dark:text-white">{{$tag}}</span>
-                </div>
+                </{{ $tagElement }}>
                 <?php switch ((int)$level): case(1): ?>
                 <h1 data-aos="fade" data-aos-once="true" data-aos-delay="750" {{ $attributes->class($classes) }}>{{ $slot }}</h1>
 

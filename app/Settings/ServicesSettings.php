@@ -9,9 +9,9 @@ class ServicesSettings extends BaseSettings
 
     public string $services_header_en = 'secure';
 
-    public string $services_subheader_de = 'Unser Versprechen';
+    public string $services_subheader_de = 'Service und Formulare für Eigentümer:innen und Bewohner:innen';
 
-    public string $services_subheader_en = 'Our Promise';
+    public string $services_subheader_en = 'Service and forms for owners and residents';
 
     public string $services_introtext_de = '<p>Oft muss es schnell und einfach gehen - hier finden Sie alle wichtigen Unterlagen sowie nützliche Tipps für einen reibungslosen und effizienten Betrieb Ihres Gebäudes.</p>';
 
