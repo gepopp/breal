@@ -92,6 +92,17 @@ class SelfHostedAssetsTest extends TestCase
         }
     }
 
+    public function test_slider_scripts_wait_for_the_bundled_swiper(): void
+    {
+        $this->get('/team')->assertSee('window.onSwiper = function', false);
+
+        foreach (['parts/landing-hero', 'parts/references', 'parts/technik-hero', 'parts/technik-text-image', 'parts/image-text', 'subparts/realty-slider'] as $view) {
+            $template = file_get_contents(resource_path("views/livewire/{$view}.blade.php"));
+
+            $this->assertStringContainsString('onSwiper(() => {', $template, $view);
+        }
+    }
+
     public function test_spotlight_is_part_of_the_build_and_loaded_on_demand(): void
     {
         $app = file_get_contents(resource_path('js/app.js'));

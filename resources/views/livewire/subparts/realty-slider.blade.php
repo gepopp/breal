@@ -87,6 +87,7 @@
 
 
     <script>
+    onSwiper(() => {
         var swiper = new Swiper(".mySwiper", {
             spaceBetween: 10,
             slidesPerView: 4,
@@ -109,5 +110,6 @@
                 swiper: swiper,
             },
         });
-    </script>
+    });
+</script>
 </div>

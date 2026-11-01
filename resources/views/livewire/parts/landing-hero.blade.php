@@ -37,6 +37,7 @@
                 </div>
             </div>
             <script>
+    onSwiper(() => {
                 const swiperSolo = new Swiper('.swiperSolo', {
                     // Optional parameters
                     loop: true,
@@ -46,7 +47,8 @@
                         delay: {{ $settings->hero_speed }}
                     }
                 });
-            </script>
+    });
+</script>
         @endif
 
         <div class="absolute bottom-0 left-0 w-[20%] h-full hidden md:block">

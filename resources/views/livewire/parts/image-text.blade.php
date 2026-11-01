@@ -40,6 +40,7 @@
                         </div>
                     </div>
                     <script>
+    onSwiper(() => {
                         const swiperSecond = new Swiper('.swiperSecond', {
                             // Optional parameters
                             loop: true,
@@ -52,7 +53,8 @@
                         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
                             swiperSecond.autoplay.stop();
                         }
-                    </script>
+    });
+</script>
                 @endif
 
                 <div class="absolute top-0 right-0 h-full hidden md:block flex justify-end">

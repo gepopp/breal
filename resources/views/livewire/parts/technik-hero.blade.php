@@ -35,6 +35,7 @@
                 </div>
             </div>
             <script>
+    onSwiper(() => {
                 const swiperSolo = new Swiper('.swiperSolo', {
                     // Optional parameters
                     loop: true,
@@ -44,7 +45,8 @@
                         delay: 2500
                     }
                 });
-            </script>
+    });
+</script>
         @endif
 
         <div class="absolute bottom-0 right-0 w-ful h-full hidden md:block flex justify-end">

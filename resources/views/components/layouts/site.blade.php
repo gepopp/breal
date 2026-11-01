@@ -17,6 +17,17 @@
         });
     }
 </script>
+<script>
+    // Swiper comes with the bundled app script, which runs after the page has been parsed:
+    // slider scripts in the page wait for it.
+    window.onSwiper = function (callback) {
+        if (window.Swiper) {
+            callback();
+        } else {
+            document.addEventListener('DOMContentLoaded', callback, { once: true });
+        }
+    };
+</script>
 <body class="bg-white dark:bg-logo-950 dark:text-white text-logo-950 min-h-screen" data-carousel-pause="{{ __('carousel.pause') }}" data-carousel-play="{{ __('carousel.play') }}">
 
 <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[10000] focus:bg-white focus:text-logo-950 focus:px-4 focus:py-2 focus:rounded focus:shadow-lg">{{ __('navigation.skip_to_content') }}</a>

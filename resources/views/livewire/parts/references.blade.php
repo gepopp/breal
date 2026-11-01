@@ -40,6 +40,7 @@
                 </div>
             </div>
             <script>
+    onSwiper(() => {
                 const swiperXl = new Swiper('.swiperXl', {
                     // Optional parameters
                     loop: true,
@@ -72,7 +73,8 @@
                         disableOnInteraction: true,
                     }
                 });
-            </script>
+    });
+</script>
         </div>
     </div>
 </x-section>
