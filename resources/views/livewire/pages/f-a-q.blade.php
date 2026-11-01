@@ -55,6 +55,9 @@
                     <div class="prose">
                         {!! $faq['answer'] !!}
                     </div>
+                    @if($faq['stand'])
+                        <p class="mt-4 text-sm text-gray-500 dark:text-gray-400">{{ __('faq.as_of', ['date' => $faq['stand']]) }}</p>
+                    @endif
                     <div class="h-px w-full bg-logo mt-8"></div>
                     <div class="prose bg-logo p-4 text-white flex flex-col items-center justify-center">
                         <h2 class="!text-lg !font-bold !text-white">{{ __('faq.questions_cta') }}</h2>

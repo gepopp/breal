@@ -33,6 +33,7 @@ class FAQ extends Component
                 'question' => $this->translated($question, 'question'),
                 'answer' => $this->translated($question, 'answer'),
                 'link' => $question->link,
+                'stand' => $question->stand?->format('d.m.Y'),
             ])
             ->all();
 

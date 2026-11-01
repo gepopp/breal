@@ -113,6 +113,17 @@ class ContentCorrectionsTest extends TestCase
         $this->get(route('faq.single', $without->slug))->assertOk()->assertDontSee('Stand:');
     }
 
+    public function test_the_faq_list_shows_the_date_of_the_last_review_only_when_set(): void
+    {
+        QuestionFactory::new()->create(['question' => ['de' => 'Mit Stand?', 'en' => ''], 'stand' => '2026-10-01']);
+
+        $this->get('/faq')->assertOk()->assertSee('Stand: 01.10.2026');
+
+        Question::query()->update(['stand' => null]);
+
+        $this->get('/faq')->assertOk()->assertDontSee('Stand:');
+    }
+
     public function test_logos_have_alt_text(): void
     {
         $html = view('livewire.parts.preheader')->render();
