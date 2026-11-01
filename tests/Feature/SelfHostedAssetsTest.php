@@ -35,6 +35,21 @@ class SelfHostedAssetsTest extends TestCase
         }
     }
 
+    public function test_swiper_comes_from_the_bundle_not_from_a_cdn(): void
+    {
+        foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(resource_path('views'), \FilesystemIterator::SKIP_DOTS)) as $file) {
+            $this->assertStringNotContainsString('jsdelivr', (string) file_get_contents($file->getPathname()), $file->getPathname());
+        }
+
+        $this->assertStringContainsString("import 'swiper/css/bundle'", file_get_contents(resource_path('js/app.js')));
+
+        $css = collect(glob(public_path('build/assets/app-*.css')))->map(fn (string $file): string => file_get_contents($file))->implode('');
+        $this->assertStringContainsString('.swiper-wrapper', $css, 'run npm run build');
+
+        $policy = $this->get('/team')->headers->get('Content-Security-Policy-Report-Only');
+        $this->assertStringNotContainsString('jsdelivr', $policy);
+    }
+
     public function test_spotlight_is_part_of_the_build_and_loaded_on_demand(): void
     {
         $app = file_get_contents(resource_path('js/app.js'));

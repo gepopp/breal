@@ -6,6 +6,7 @@ window.loader = new Loader({
 });
 
 import Swiper from 'swiper/bundle';
+import 'swiper/css/bundle';
 window.Swiper = Swiper;
 
 import Fuse from 'fuse.js';
