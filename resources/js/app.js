@@ -129,3 +129,28 @@ const scheduleCarouselPauseControls = () => {
 
 document.addEventListener('DOMContentLoaded', scheduleCarouselPauseControls);
 document.addEventListener('livewire:navigated', scheduleCarouselPauseControls);
+
+
+/**
+ * The service page switches its tab without a page load, so the language links
+ * rendered with the page would point to an outdated tab: take it from the address bar.
+ */
+document.addEventListener('click', (event) => {
+    const link = event.target.closest('a[data-locale-switch]');
+
+    if (!link) {
+        return;
+    }
+
+    const tab = new URLSearchParams(window.location.search).get('tab');
+    const onServicePage = window.location.pathname.replace(/^\/en(?=\/|$)/, '') === '/service';
+    const target = new URL(link.href);
+
+    if (onServicePage && tab && /^[a-z0-9-]+$/.test(tab)) {
+        target.searchParams.set('tab', tab);
+    } else {
+        target.searchParams.delete('tab');
+    }
+
+    link.href = target.toString();
+});

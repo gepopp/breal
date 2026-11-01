@@ -262,5 +262,10 @@
     "realty.slider.next": "Next image",
     "realty.slider.first": "This is the first image",
     "realty.slider.last": "This is the last image",
-    "footer.cookie_settings": "Cookie settings"
+    "footer.cookie_settings": "Cookie settings",
+    "vacancy.contract.vollzeit": "Full-time",
+    "vacancy.contract.teilzeit": "Part-time",
+    "vacancy.contract.geringfügig": "Marginal employment",
+    "vacancy.contract.freiberuflich": "Freelance",
+    "service.german_document": "German"
 }

@@ -62,7 +62,27 @@ class Service extends Component
             'description' => $service->translatedFor('description'),
             'form' => $service->form,
             'list' => $service->list ?? [],
-            'links' => collect($service->links ?? [])->where('lang', app()->getLocale())->values()->all(),
+            'links' => $this->documentLinks($service),
         ];
+    }
+
+    /**
+     * Documents in the page language; where only a German document exists, the English page offers that one, labelled as German.
+     *
+     * @return array<int, array<string, mixed>>
+     */
+    protected function documentLinks(ServiceModel $service): array
+    {
+        $links = collect($service->links ?? []);
+        $localized = $links->where('lang', app()->getLocale())->values();
+
+        if ($localized->isNotEmpty() || app()->getLocale() === 'de') {
+            return $localized->all();
+        }
+
+        return $links->where('lang', 'de')
+            ->map(fn (array $link): array => ['name' => $link['name'].' ('.__('service.german_document').')'] + $link)
+            ->values()
+            ->all();
     }
 }

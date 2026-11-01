@@ -11,9 +11,9 @@
 
                 <div>
                     @if(app()->getLocale() == 'de')
-                        <a href="{{ app(\App\Services\LocaleUrls::class)->forLocale('en') }}" class="font-bold uppercase">ENGLISH</a>
+                        <a href="{{ app(\App\Services\LocaleUrls::class)->forLocale('en') }}" class="font-bold uppercase" data-locale-switch>ENGLISH</a>
                     @else
-                        <a href="{{ app(\App\Services\LocaleUrls::class)->forLocale('de') }}" class="font-bold uppercase">DEUTSCH</a>
+                        <a href="{{ app(\App\Services\LocaleUrls::class)->forLocale('de') }}" class="font-bold uppercase" data-locale-switch>DEUTSCH</a>
                     @endif
                 </div>
 

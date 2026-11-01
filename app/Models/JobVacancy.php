@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Number;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -48,6 +49,17 @@ class JobVacancy extends Model implements HasMedia, Sitemapable
         };
 
         return $interval ? $amount.' '.__('vacancy.interval.'.$interval) : $amount;
+    }
+
+    /**
+     * The contract type in the page language, the stored (German) value when it is not a known one.
+     */
+    public function contractTypeLabel(): ?string
+    {
+        $contractType = trim((string) $this->contract_type);
+        $key = 'vacancy.contract.'.mb_strtolower($contractType);
+
+        return $contractType === '' ? null : (Lang::has($key) ? __($key) : $contractType);
     }
 
     public function getRouteKeyName(): string

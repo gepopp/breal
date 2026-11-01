@@ -40,12 +40,35 @@ class LocaleUrls
      */
     public function forLocale(string $locale): string
     {
-        return rtrim($this->request->getSchemeAndHttpHost().self::prefixPath($this->pagePath(), $locale), '/');
+        $path = $this->pagePath();
+
+        return rtrim($this->request->getSchemeAndHttpHost().self::prefixPath($path, $locale), '/').$this->selectedServiceQuery($path);
     }
 
     public function current(): string
     {
         return $this->forLocale(app()->getLocale());
+    }
+
+    /**
+     * The service page shows one service per tab, the other language keeps that tab.
+     */
+    private function selectedServiceQuery(string $path): string
+    {
+        if ($path !== '/service') {
+            return '';
+        }
+
+        $referer = $this->request->headers->get('referer');
+
+        if ($this->request->headers->has('X-Livewire') && $referer !== null) {
+            parse_str((string) parse_url($referer, PHP_URL_QUERY), $query);
+            $tab = $query['tab'] ?? null;
+        } else {
+            $tab = $this->request->query('tab');
+        }
+
+        return is_string($tab) && preg_match('/^[a-z0-9-]+$/', $tab) === 1 ? '?tab='.$tab : '';
     }
 
     /**

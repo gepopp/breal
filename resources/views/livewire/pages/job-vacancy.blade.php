@@ -16,7 +16,7 @@
                     <li data-aos="fade-up" data-aos-delay="50" class="text-xl font-medium">{{ __('vacancy.job_title_label') }}</li>
                     <li data-aos="fade-up" data-aos-delay="100">{{ $jobVacancy->job_title }}</li>
                     <li data-aos="fade-up" data-aos-delay="150" class="text-xl font-medium mt-4">{{ __('vacancy.contract_type_label') }}</li>
-                    <li data-aos="fade-up" data-aos-delay="200">{{ $jobVacancy->contract_type }}</li>
+                    <li data-aos="fade-up" data-aos-delay="200">{{ $jobVacancy->contractTypeLabel() }}</li>
                     <li data-aos="fade-up" data-aos-delay="250" class="text-xl font-medium mt-4">{{ __('vacancy.salary_label') }}</li>
                     <li data-aos="fade-up" data-aos-delay="300">
                         {{ $jobVacancy->formattedSalary() }}</li>
