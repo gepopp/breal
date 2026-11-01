@@ -83,6 +83,55 @@
 
     <div class="mb-8 border-b-2 border-logo"></div>
 
+    <div class="md:hidden">
+        <div class="mb-4 flex items-center gap-3">
+            <label for="realty-sort" class="text-sm font-medium">{{ __('makler.sort.label') }}</label>
+            <select id="realty-sort" wire:change="sortByOption($event.target.value)" class="flex-1 rounded border border-zinc-300 bg-white px-2 py-2 text-sm text-logo-950 dark:bg-logo-950 dark:text-white">
+                @foreach (['date:desc' => 'newest', 'preis:asc' => 'price_asc', 'preis:desc' => 'price_desc', 'wohnflaeche:desc' => 'area_desc', 'zimmer:asc' => 'rooms_asc', 'plz:asc' => 'postal_code'] as $value => $key)
+                    <option value="{{ $value }}" @selected($sortBy.':'.$sortDirection === $value)>{{ __('makler.sort.'.$key) }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <ul class="divide-y divide-zinc-200 border-y border-zinc-200">
+            @forelse ($this->realties as $realty)
+                @php
+                    $usageLabel = match(strtoupper($realty->nutzungsart)) {
+                        'WOHNEN' => __('makler.usage_type.wohnen'),
+                        'GEWERBE' => __('makler.usage_type.gewerbe'),
+                        default => ucfirst(strtolower($realty->nutzungsart))
+                    };
+                    $typeLabel = match(strtolower($realty->vermarktungsart)) {
+                        'miete' => __('makler.marketing_type.miete'),
+                        'kauf' => __('makler.marketing_type.kauf'),
+                        default => ucfirst($realty->vermarktungsart)
+                    };
+                @endphp
+                <li wire:key="card_{{ $realty->id }}" class="py-4">
+                    <a href="{{ route('makler.immobilie', $realty) }}" wire:navigate class="block font-bold hover:underline" @if(app()->getLocale() !== 'de') lang="de" @endif>
+                        {{ \Illuminate\Support\Str::words($realty->title, 12, '...') }}
+                    </a>
+                    <p class="mt-1 text-sm text-zinc-600 dark:text-zinc-300">{{ $realty->plz }} {{ $realty->ort }} · {{ $usageLabel }} · {{ $typeLabel }}</p>
+                    <p class="mt-2 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                        <span class="text-sm">
+                            @if(! is_null($realty->zimmer)){{ \Illuminate\Support\Number::format((float) $realty->zimmer, maxPrecision: 1, locale: app()->getLocale()) }} {{ __('makler.table.rooms') }}@endif
+                            @if(! is_null($realty->zimmer) && ! is_null($realty->wohnflaeche)) · @endif
+                            @if(! is_null($realty->wohnflaeche)){{ \Illuminate\Support\Number::format($realty->wohnflaeche, 2, null, 'de') }} m²@endif
+                        </span>
+                        <span class="font-bold">{{ is_null($realty->preis) ? __('makler.table.on_request') : Number::currency($realty->preis, 'EUR', 'de') }}</span>
+                    </p>
+                </li>
+            @empty
+                <li class="py-8 text-center">{{ __('makler.search.no_results') }}</li>
+            @endforelse
+        </ul>
+
+        <div class="mt-4">
+            <flux:pagination :paginator="$this->realties" />
+        </div>
+    </div>
+
+    <div class="hidden md:block">
     <flux:table :paginate="$this->realties">
         <flux:table.columns>
             <flux:table.column>{{ __('makler.table.image') }}</flux:table.column>
@@ -146,4 +195,5 @@
             @endforelse
         </flux:table.rows>
     </flux:table>
+    </div>
 </x-section>

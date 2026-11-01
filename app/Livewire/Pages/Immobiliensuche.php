@@ -108,6 +108,22 @@ class Immobiliensuche extends Component
         }
     }
 
+    /**
+     * Sorting for the card list on small screens (the table headers are not shown there).
+     */
+    public function sortByOption(string $option): void
+    {
+        [$column, $direction] = array_pad(explode(':', $option, 2), 2, 'asc');
+
+        if (! in_array($column, ['date', 'zimmer', 'wohnflaeche', 'preis', 'plz'], true) || ! in_array($direction, ['asc', 'desc'], true)) {
+            return;
+        }
+
+        $this->resetPage();
+        $this->sortBy = $column;
+        $this->sortDirection = $direction;
+    }
+
     public function updatedFilters()
     {
         $this->resetPage();
