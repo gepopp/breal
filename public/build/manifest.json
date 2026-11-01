@@ -1,6 +1,118 @@
 {
+  "node_modules/@fontsource/poppins/files/poppins-latin-100-normal.woff": {
+    "file": "assets/poppins-latin-100-normal-PssVh1UL.woff",
+    "src": "node_modules/@fontsource/poppins/files/poppins-latin-100-normal.woff"
+  },
+  "node_modules/@fontsource/poppins/files/poppins-latin-100-normal.woff2": {
+    "file": "assets/poppins-latin-100-normal-CY-M_i9k.woff2",
+    "src": "node_modules/@fontsource/poppins/files/poppins-latin-100-normal.woff2"
+  },
+  "node_modules/@fontsource/poppins/files/poppins-latin-300-normal.woff": {
+    "file": "assets/poppins-latin-300-normal-DCNuMXUj.woff",
+    "src": "node_modules/@fontsource/poppins/files/poppins-latin-300-normal.woff"
+  },
+  "node_modules/@fontsource/poppins/files/poppins-latin-300-normal.woff2": {
+    "file": "assets/poppins-latin-300-normal-Dku2WoCh.woff2",
+    "src": "node_modules/@fontsource/poppins/files/poppins-latin-300-normal.woff2"
+  },
+  "node_modules/@fontsource/poppins/files/poppins-latin-400-italic.woff": {
+    "file": "assets/poppins-latin-400-italic-BPejoDS-.woff",
+    "src": "node_modules/@fontsource/poppins/files/poppins-latin-400-italic.woff"
+  },
+  "node_modules/@fontsource/poppins/files/poppins-latin-400-italic.woff2": {
+    "file": "assets/poppins-latin-400-italic-B4GYq972.woff2",
+    "src": "node_modules/@fontsource/poppins/files/poppins-latin-400-italic.woff2"
+  },
+  "node_modules/@fontsource/poppins/files/poppins-latin-400-normal.woff": {
+    "file": "assets/poppins-latin-400-normal-BOb3E3N0.woff",
+    "src": "node_modules/@fontsource/poppins/files/poppins-latin-400-normal.woff"
+  },
+  "node_modules/@fontsource/poppins/files/poppins-latin-400-normal.woff2": {
+    "file": "assets/poppins-latin-400-normal-cpxAROuN.woff2",
+    "src": "node_modules/@fontsource/poppins/files/poppins-latin-400-normal.woff2"
+  },
+  "node_modules/@fontsource/poppins/files/poppins-latin-500-normal.woff": {
+    "file": "assets/poppins-latin-500-normal-DGXqpDMm.woff",
+    "src": "node_modules/@fontsource/poppins/files/poppins-latin-500-normal.woff"
+  },
+  "node_modules/@fontsource/poppins/files/poppins-latin-500-normal.woff2": {
+    "file": "assets/poppins-latin-500-normal-C8OXljZJ.woff2",
+    "src": "node_modules/@fontsource/poppins/files/poppins-latin-500-normal.woff2"
+  },
+  "node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff": {
+    "file": "assets/poppins-latin-600-normal-BJdTmd5m.woff",
+    "src": "node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff"
+  },
+  "node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2": {
+    "file": "assets/poppins-latin-600-normal-zEkxB9Mr.woff2",
+    "src": "node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2"
+  },
+  "node_modules/@fontsource/poppins/files/poppins-latin-700-italic.woff": {
+    "file": "assets/poppins-latin-700-italic-CW91C-LJ.woff",
+    "src": "node_modules/@fontsource/poppins/files/poppins-latin-700-italic.woff"
+  },
+  "node_modules/@fontsource/poppins/files/poppins-latin-700-italic.woff2": {
+    "file": "assets/poppins-latin-700-italic-RKf6esGj.woff2",
+    "src": "node_modules/@fontsource/poppins/files/poppins-latin-700-italic.woff2"
+  },
+  "node_modules/@fontsource/poppins/files/poppins-latin-700-normal.woff": {
+    "file": "assets/poppins-latin-700-normal-BVuQR_eA.woff",
+    "src": "node_modules/@fontsource/poppins/files/poppins-latin-700-normal.woff"
+  },
+  "node_modules/@fontsource/poppins/files/poppins-latin-700-normal.woff2": {
+    "file": "assets/poppins-latin-700-normal-Qrb0O0WB.woff2",
+    "src": "node_modules/@fontsource/poppins/files/poppins-latin-700-normal.woff2"
+  },
+  "node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff": {
+    "file": "assets/poppins-latin-800-normal-YoItoZZV.woff",
+    "src": "node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff"
+  },
+  "node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2": {
+    "file": "assets/poppins-latin-800-normal-Bd8-pIP1.woff2",
+    "src": "node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2"
+  },
+  "node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff": {
+    "file": "assets/poppins-latin-900-normal-By5LX1Cr.woff",
+    "src": "node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff"
+  },
+  "node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2": {
+    "file": "assets/poppins-latin-900-normal-BmL1zqjw.woff2",
+    "src": "node_modules/@fontsource/poppins/files/poppins-latin-900-normal.woff2"
+  },
+  "node_modules/@fontsource/poppins/files/poppins-latin-ext-400-normal.woff": {
+    "file": "assets/poppins-latin-ext-400-normal-DaBSavcJ.woff",
+    "src": "node_modules/@fontsource/poppins/files/poppins-latin-ext-400-normal.woff"
+  },
+  "node_modules/@fontsource/poppins/files/poppins-latin-ext-400-normal.woff2": {
+    "file": "assets/poppins-latin-ext-400-normal-by3JarPu.woff2",
+    "src": "node_modules/@fontsource/poppins/files/poppins-latin-ext-400-normal.woff2"
+  },
+  "node_modules/@fontsource/poppins/files/poppins-latin-ext-500-normal.woff": {
+    "file": "assets/poppins-latin-ext-500-normal-CgAe2rWW.woff",
+    "src": "node_modules/@fontsource/poppins/files/poppins-latin-ext-500-normal.woff"
+  },
+  "node_modules/@fontsource/poppins/files/poppins-latin-ext-500-normal.woff2": {
+    "file": "assets/poppins-latin-ext-500-normal-CK-6C4Hw.woff2",
+    "src": "node_modules/@fontsource/poppins/files/poppins-latin-ext-500-normal.woff2"
+  },
+  "node_modules/@fontsource/poppins/files/poppins-latin-ext-600-normal.woff": {
+    "file": "assets/poppins-latin-ext-600-normal-Df5ffKXP.woff",
+    "src": "node_modules/@fontsource/poppins/files/poppins-latin-ext-600-normal.woff"
+  },
+  "node_modules/@fontsource/poppins/files/poppins-latin-ext-600-normal.woff2": {
+    "file": "assets/poppins-latin-ext-600-normal-CAhIAdZj.woff2",
+    "src": "node_modules/@fontsource/poppins/files/poppins-latin-ext-600-normal.woff2"
+  },
+  "node_modules/@fontsource/poppins/files/poppins-latin-ext-700-normal.woff": {
+    "file": "assets/poppins-latin-ext-700-normal-DctTR6Tg.woff",
+    "src": "node_modules/@fontsource/poppins/files/poppins-latin-ext-700-normal.woff"
+  },
+  "node_modules/@fontsource/poppins/files/poppins-latin-ext-700-normal.woff2": {
+    "file": "assets/poppins-latin-ext-700-normal-cby-RkWa.woff2",
+    "src": "node_modules/@fontsource/poppins/files/poppins-latin-ext-700-normal.woff2"
+  },
   "resources/css/app.css": {
-    "file": "assets/app-1WZH16aM.css",
+    "file": "assets/app-B-2jRUqp.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },

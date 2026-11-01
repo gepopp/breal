@@ -26,6 +26,7 @@
         "lightningcss-linux-x64-gnu": "^1.29.1"
     },
     "devDependencies": {
+        "@fontsource/poppins": "^5.3.0",
         "@tailwindcss/vite": "^4.1.18",
         "tailwind-scrollbar": "^4.0.2",
         "tailwindcss": "^4.1.18"

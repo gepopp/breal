@@ -61,9 +61,8 @@ return [
             ],
             'style-src' => [
                 "'self'", "'unsafe-inline'",
-                'https://fonts.googleapis.com',
             ],
-            'font-src' => ["'self'", 'data:', 'https://fonts.gstatic.com'],
+            'font-src' => ["'self'", 'data:'],
             'img-src' => ["'self'", 'data:', 'blob:', 'https:'],
             'media-src' => ["'self'", 'blob:', 'https:'],
             'frame-src' => ["'self'", 'https://player.vimeo.com', 'https://www.google.com'],

@@ -52,6 +52,19 @@ class SelfHostedAssetsTest extends TestCase
         $this->assertStringNotContainsString('unpkg', $policy);
     }
 
+    public function test_poppins_is_served_from_the_build_and_not_from_google(): void
+    {
+        $css = collect(glob(public_path('build/assets/app-*.css')))->map(fn (string $file): string => file_get_contents($file))->implode('');
+
+        $this->assertStringNotContainsString('fonts.googleapis.com', $css);
+        $this->assertStringNotContainsString('fonts.gstatic.com', $css);
+        $this->assertStringContainsString('font-family:Poppins', str_replace(' ', '', $css), 'run npm run build');
+        $this->assertNotEmpty(glob(public_path('build/assets/poppins-latin-400-normal-*.woff2')));
+
+        $policy = $this->get('/team')->headers->get('Content-Security-Policy-Report-Only');
+        $this->assertStringNotContainsString('fonts.g', $policy);
+    }
+
     public function test_spotlight_is_part_of_the_build_and_loaded_on_demand(): void
     {
         $app = file_get_contents(resource_path('js/app.js'));
