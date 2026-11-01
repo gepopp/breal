@@ -145,7 +145,7 @@ class UrlsRedirectsAndSitemapTest extends TestCase
         $this->assertSame(array_unique($locations), $locations, 'Duplicate addresses in the sitemap.');
         $this->assertCount(count($locations), $xml->xpath('//s:url/s:lastmod'), 'Every address needs a lastmod.');
 
-        foreach (['/', '/en', '/kontakt', '/en/kontakt', '/makler/start', '/en/makler/start', '/technik/leistungen', '/datenschutz', '/unternehmensservice'] as $path) {
+        foreach (['/', '/en', '/kontakt', '/en/kontakt', '/makler', '/en/makler', '/technik/leistungen', '/datenschutz', '/unternehmensservice'] as $path) {
             $this->assertContains($this->root().($path === '/' ? '' : $path), $locations, $path);
         }
 
@@ -205,6 +205,23 @@ class UrlsRedirectsAndSitemapTest extends TestCase
             'en' => $this->root().'/en/kontakt',
             'x-default' => $this->root().'/kontakt',
         ], $alternates);
+    }
+
+    public function test_section_start_pages_live_without_the_start_suffix_and_the_old_addresses_redirect(): void
+    {
+        $this->assertSame($this->root().'/makler', route('makler.home'));
+        $this->assertSame($this->root().'/technik', route('technik.home'));
+
+        $this->get('/makler')->assertOk();
+        $this->get('/technik')->assertOk();
+        $this->get('/en/makler')->assertOk();
+        $this->get('/en/technik')->assertOk();
+
+        $this->get('/makler/start')->assertStatus(301)->assertRedirect($this->root().'/makler');
+        $this->get('/technik/start')->assertStatus(301)->assertRedirect($this->root().'/technik');
+        $this->get('/makler/start/')->assertStatus(301)->assertRedirect($this->root().'/makler');
+        $this->get('/en/makler/start')->assertStatus(301)->assertRedirect($this->root().'/en/makler');
+        $this->get('/en/technik/start')->assertStatus(301)->assertRedirect($this->root().'/en/technik');
     }
 
     public function test_old_resident_service_page_of_the_bontus_eybel_site_redirects_to_the_service_page(): void

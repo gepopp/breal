@@ -41,7 +41,7 @@ Route::group(['as' => 'hausverwaltung.', 'localized' => true], function () {
 });
 
 Route::group(['prefix' => 'makler', 'as' => 'makler.', 'localized' => true], function () {
-    Route::get('/start', RealEstate::class)->name('home');
+    Route::get('/', RealEstate::class)->name('home');
     Route::get('/immobiliensuche', Immobiliensuche::class)->name('immobiliensuche');
     Route::get('/ueber-uns', Ueber::class)->name('ueber-uns');
     Route::get('/karriere', Vacancies::class)->name('karriere');
@@ -55,7 +55,7 @@ Route::group(['prefix' => 'makler', 'as' => 'makler.', 'localized' => true], fun
 });
 
 Route::group(['prefix' => 'technik', 'as' => 'technik.', 'localized' => true], function () {
-    Route::get('/start', Technik::class)->name('home');
+    Route::get('/', Technik::class)->name('home');
     Route::get('/karriere', Vacancies::class)->name('karriere');
     Route::get('/kontakt', Contact::class)->name('kontakt');
     Route::get('/team', Team::class)->name('team');

@@ -17,8 +17,8 @@ class LanguageTest extends TestCase
     {
         return [
             'start' => ['/'],
-            'makler' => ['/makler/start'],
-            'technik' => ['/technik/start'],
+            'makler' => ['/makler'],
+            'technik' => ['/technik'],
             'kontakt' => ['/kontakt'],
             'faq' => ['/faq'],
             'impressum' => ['/impressum'],

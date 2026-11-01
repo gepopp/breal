@@ -46,8 +46,8 @@ class QuickFixesAuditTest extends TestCase
 
     public function test_contact_link_in_the_top_bar_stays_in_the_current_section(): void
     {
-        $this->get('/makler/start')->assertSee('href="'.route('makler.kontakt').'" class="font-bold uppercase"', false);
-        $this->get('/technik/start')->assertSee('href="'.route('technik.kontakt').'" class="font-bold uppercase"', false);
+        $this->get('/makler')->assertSee('href="'.route('makler.kontakt').'" class="font-bold uppercase"', false);
+        $this->get('/technik')->assertSee('href="'.route('technik.kontakt').'" class="font-bold uppercase"', false);
         $this->get('/team')->assertSee('href="'.route('hausverwaltung.kontakt').'" class="font-bold uppercase"', false);
     }
 

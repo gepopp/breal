@@ -8,8 +8,8 @@ Die Website ist auf Deutsch (Österreich). Eine englische Fassung ist unter http
 ## Gesellschaften
 
 - [be real Verwaltung](https://www.bereal-immobilien.at/): Hausverwaltung für Miethäuser und Wohnungseigentum, betrieben von der be real Immobilienmanagement GmbH (FN 152672 v, UID ATU49490402, Geschäftsführung Lukas Eybel), im Firmenbuch seit 1996.
-- [be real Makler](https://www.bereal-immobilien.at/makler/start): Vermittlung von Kauf und Miete in Wien, betrieben von der be real Immobilienmakler GmbH (FN 556967 w, UID ATU76971617, Geschäftsführung Lukas Eybel und Tanja Bachschwöller-Eybel). Eigene Adresse: https://www.bereal-makler.at
-- [be real Technik](https://www.bereal-immobilien.at/technik/start): Baumanagement und technische Gebäudeverwaltung, betrieben von der be real Baumanagement GmbH (FN 660246 a, UID ATU82490109, Geschäftsführung Thomas Keinrath). Eigene Adresse: https://www.bereal-technik.at
+- [be real Makler](https://www.bereal-immobilien.at/makler): Vermittlung von Kauf und Miete in Wien, betrieben von der be real Immobilienmakler GmbH (FN 556967 w, UID ATU76971617, Geschäftsführung Lukas Eybel und Tanja Bachschwöller-Eybel). Eigene Adresse: https://www.bereal-makler.at
+- [be real Technik](https://www.bereal-immobilien.at/technik): Baumanagement und technische Gebäudeverwaltung, betrieben von der be real Baumanagement GmbH (FN 660246 a, UID ATU82490109, Geschäftsführung Thomas Keinrath). Eigene Adresse: https://www.bereal-technik.at
 
 ## Leistungen
 

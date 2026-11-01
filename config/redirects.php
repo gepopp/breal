@@ -19,6 +19,10 @@ return [
         // The company story ("Why be real?", "Our Story") is on the start page.
         '/ueber-uns' => '/',
 
+        // The section start pages lost their "/start" suffix.
+        '/makler/start' => '/makler',
+        '/technik/start' => '/technik',
+
         // Old Bontus Eybel website (bontus-eybel.at): the resident service page, indexed by Google, is now the service page.
         '/bewohnerservice' => '/service',
 

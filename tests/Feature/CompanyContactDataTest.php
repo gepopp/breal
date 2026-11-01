@@ -190,7 +190,7 @@ class CompanyContactDataTest extends TestCase
     public function test_no_page_links_with_a_wrong_mail_or_tel_scheme(): void
     {
         $paths = ['/', '/leistungen', '/service', '/karriere', '/kontakt', '/team', '/faq', '/unternehmensservice',
-            '/makler/start', '/makler/kontakt', '/makler/team', '/technik/start', '/technik/kontakt', '/technik/team',
+            '/makler', '/makler/kontakt', '/makler/team', '/technik', '/technik/kontakt', '/technik/team',
             '/impressum', '/barrierefreiheit', '/datenschutz', '/en', '/en/makler/kontakt', '/en/technik/kontakt'];
 
         foreach ($paths as $path) {

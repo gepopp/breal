@@ -37,18 +37,18 @@ class EnglishPrefixTest extends TestCase
     {
         $response = $this->get('/en/kontakt');
 
-        $response->assertSee('href="'.$this->root().'/en/makler/start"', false);
-        $response->assertSee('href="'.$this->root().'/en/technik/start"', false);
+        $response->assertSee('href="'.$this->root().'/en/makler"', false);
+        $response->assertSee('href="'.$this->root().'/en/technik"', false);
         $response->assertSee('href="'.$this->root().'/en/impressum"', false);
-        $response->assertDontSee('href="'.$this->root().'/makler/start"', false);
+        $response->assertDontSee('href="'.$this->root().'/makler"', false);
     }
 
     public function test_links_on_german_pages_have_no_prefix(): void
     {
         $response = $this->get('/kontakt');
 
-        $response->assertSee('href="'.$this->root().'/makler/start"', false);
-        $response->assertDontSee('href="'.$this->root().'/en/makler/start"', false);
+        $response->assertSee('href="'.$this->root().'/makler"', false);
+        $response->assertDontSee('href="'.$this->root().'/en/makler"', false);
     }
 
     public function test_german_pages_declare_hreflang_alternates_and_a_self_canonical(): void
@@ -99,7 +99,7 @@ class EnglishPrefixTest extends TestCase
     {
         $this->get('/en/kontakt');
 
-        $this->assertSame($this->root().'/en/makler/start', route('makler.home'));
+        $this->assertSame($this->root().'/en/makler', route('makler.home'));
         $this->assertSame($this->root().'/en', route('hausverwaltung.home'));
         $this->assertSame($this->root().'/en/leistung/x', route('hausverwaltung.leistung', 'x'));
         $this->assertStringNotContainsString('/en/', route('solve', ['request' => 1, 'token' => 'abc']));
@@ -140,7 +140,7 @@ class EnglishPrefixTest extends TestCase
 
         $update->assertOk();
         $update->assertSee('Phone');
-        $update->assertSee($this->jsonRoot().'\/en\/makler\/start', false);
+        $update->assertSee($this->jsonRoot().'\/en\/makler', false);
     }
 
     private function root(): string

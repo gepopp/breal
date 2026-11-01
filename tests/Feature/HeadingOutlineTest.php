@@ -86,7 +86,7 @@ class HeadingOutlineTest extends TestCase
 
     public function test_other_pages_do_not_skip_heading_levels(): void
     {
-        foreach (['/service', '/kontakt', '/faq', '/impressum', '/makler/start', '/technik/start', '/technik/leistungen', '/en', '/unternehmensservice', '/makler/ueber-uns', '/makler/karriere', '/makler/team', '/makler/kontakt', '/technik/team', '/datenschutz', '/barrierefreiheit'] as $uri) {
+        foreach (['/service', '/kontakt', '/faq', '/impressum', '/makler', '/technik', '/technik/leistungen', '/en', '/unternehmensservice', '/makler/ueber-uns', '/makler/karriere', '/makler/team', '/makler/kontakt', '/technik/team', '/datenschutz', '/barrierefreiheit'] as $uri) {
             $this->assertNoSkippedLevels($uri);
         }
     }

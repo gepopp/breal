@@ -37,7 +37,7 @@ class StructuredDataTest extends TestCase
 
     public function test_section_home_pages_carry_the_organization_graph(): void
     {
-        foreach (['/', '/makler/start', '/technik/start'] as $path) {
+        foreach (['/', '/makler', '/technik'] as $path) {
             $nodes = $this->nodesOf($path);
 
             $this->assertCount(1, $nodes, $path);

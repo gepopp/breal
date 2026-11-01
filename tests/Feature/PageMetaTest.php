@@ -25,8 +25,8 @@ class PageMetaTest extends TestCase
     {
         return [
             '/', '/leistungen', '/service', '/karriere', '/kontakt', '/team', '/faq', '/unternehmensservice',
-            '/makler/start', '/makler/ueber-uns', '/makler/immobiliensuche', '/makler/karriere', '/makler/kontakt', '/makler/team', '/makler/faq',
-            '/technik/start', '/technik/karriere', '/technik/kontakt', '/technik/team', '/technik/faq', '/technik/leistungen',
+            '/makler', '/makler/ueber-uns', '/makler/immobiliensuche', '/makler/karriere', '/makler/kontakt', '/makler/team', '/makler/faq',
+            '/technik', '/technik/karriere', '/technik/kontakt', '/technik/team', '/technik/faq', '/technik/leistungen',
             '/impressum', '/barrierefreiheit', '/datenschutz',
         ];
     }
@@ -96,8 +96,8 @@ class PageMetaTest extends TestCase
         $this->assertSame('Team – be real Immobilien', $this->metaOf($this->get('/team'))['title']);
         $this->assertSame('Team – be real Makler', $this->metaOf($this->get('/makler/team'))['title']);
         $this->assertSame('Team – be real Technik', $this->metaOf($this->get('/technik/team'))['title']);
-        $this->assertSame('be real Makler – Immobilien kaufen, verkaufen und mieten', $this->metaOf($this->get('/makler/start'))['title']);
-        $this->assertSame('be real Technik – Baumanagement in Wien', $this->metaOf($this->get('/technik/start'))['title']);
+        $this->assertSame('be real Makler – Immobilien kaufen, verkaufen und mieten', $this->metaOf($this->get('/makler'))['title']);
+        $this->assertSame('be real Technik – Baumanagement in Wien', $this->metaOf($this->get('/technik'))['title']);
         $this->assertSame('Team – be real Makler', $this->metaOf($this->get('/en/makler/team'))['title']);
     }
 
