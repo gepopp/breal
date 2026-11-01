@@ -53,7 +53,7 @@ class EnglishContentTest extends TestCase
     {
         $this->get('/en/datenschutz')->assertOk()->assertSee('Data Protection at a Glance')->assertDontSee('Datenschutz auf einen Blick');
         $this->get('/datenschutz')->assertOk()->assertSee('Datenschutz auf einen Blick')->assertDontSee('Data Protection at a Glance');
-        $this->get('/en/barrierefreiheit')->assertOk()->assertSee('strives to make its website');
+        $this->get('/en/barrierefreiheit')->assertOk()->assertSee('partially conforms to WCAG 2.1');
     }
 
     public function test_faq_list_uses_english_texts_and_falls_back_to_german_where_missing(): void
