@@ -120,6 +120,18 @@ class AuditRoundTwoTest extends TestCase
             ->assertSee('data-carousel-play="'.__('carousel.play').'"', false);
     }
 
+    public function test_carousel_accessible_names_follow_the_page_language(): void
+    {
+        $german = $this->get('/team')->assertOk()->getContent();
+        $this->assertStringContainsString('Nächste Folie', $german);
+        $this->assertStringContainsString('Zu Folie {{index}} wechseln', $german);
+        $this->assertStringNotContainsString('Next slide', $german);
+
+        $english = $this->get('/en/team')->assertOk()->getContent();
+        $this->assertStringContainsString('Next slide', $english);
+        $this->assertStringContainsString('Go to slide {{index}}', $english);
+    }
+
     public function test_service_tabs_other_than_the_default_get_their_own_title_and_description(): void
     {
         foreach ([['sepa-mandat', 1, 'SEPA-Mandat', 'Einzugsermächtigung für die Miete.'], ['meldezettel', 2, 'Meldezettel', 'Anmeldung innerhalb von 3 Tagen.']] as [$slug, $order, $name, $text]) {

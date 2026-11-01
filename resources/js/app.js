@@ -9,6 +9,13 @@ import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
 window.Swiper = Swiper;
 
+// Swiper's built-in accessible names are English; take them from the page language.
+try {
+    Swiper.extendDefaults({a11y: JSON.parse(document.body.dataset.carouselA11y || '{}')});
+} catch (error) {
+    // keep Swiper's defaults
+}
+
 import Fuse from 'fuse.js';
 window.Fuse = Fuse;
 

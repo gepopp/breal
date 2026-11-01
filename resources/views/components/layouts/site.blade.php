@@ -28,7 +28,7 @@
         }
     };
 </script>
-<body class="bg-white dark:bg-logo-950 dark:text-white text-logo-950 min-h-screen" data-carousel-pause="{{ __('carousel.pause') }}" data-carousel-play="{{ __('carousel.play') }}">
+<body class="bg-white dark:bg-logo-950 dark:text-white text-logo-950 min-h-screen" data-carousel-pause="{{ __('carousel.pause') }}" data-carousel-play="{{ __('carousel.play') }}" data-carousel-a11y="{{ json_encode(['prevSlideMessage' => __('carousel.previous'), 'nextSlideMessage' => __('carousel.next'), 'firstSlideMessage' => __('carousel.first'), 'lastSlideMessage' => __('carousel.last'), 'paginationBulletMessage' => __('carousel.bullet'), 'slideLabelMessage' => __('carousel.slide_label')], JSON_UNESCAPED_UNICODE) }}">
 
 <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[10000] focus:bg-white focus:text-logo-950 focus:px-4 focus:py-2 focus:rounded focus:shadow-lg">{{ __('navigation.skip_to_content') }}</a>
 <div class="overflow-hidden flex flex-col min-h-screen">
