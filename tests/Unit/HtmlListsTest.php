@@ -36,4 +36,10 @@ class HtmlListsTest extends TestCase
 
         $this->assertSame($html, HtmlLists::normalize($html));
     }
+
+    public function test_a_hand_written_h3_without_any_h2_becomes_an_h2(): void
+    {
+        $this->assertSame('<p>Text</p><h2>Leistungen</h2><ul><li>Eins</li></ul>', HtmlLists::normalize('<p>Text</p><h3>Leistungen</h3><ul><li>Eins</li></ul>'));
+        $this->assertSame('<h2>A</h2><h3>B</h3>', HtmlLists::normalize('<h2>A</h2><h3>B</h3>'));
+    }
 }

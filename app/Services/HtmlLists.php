@@ -25,6 +25,10 @@ class HtmlLists
 
     public static function normalize(string $html): string
     {
+        if (! preg_match('/<h2[\s>]/i', $html)) {
+            $html = preg_replace(['#<h3(?=[\s>])#i', '#</h3>#i'], ['<h2', '</h2>'], $html);
+        }
+
         if (! preg_match('/[•·]|<strong>/u', $html)) {
             return $html;
         }
