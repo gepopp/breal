@@ -22,8 +22,11 @@ return new class extends Migration
             DB::table('settings')
                 ->where('group', 'translatable_legal')
                 ->where('name', $name)
-                ->where('payload', 'like', '%'.$oldClaim.'%')
-                ->update(['payload' => json_encode($text, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)]);
+                ->get(['id', 'payload'])
+                ->filter(fn (object $row): bool => str_contains((string) json_decode($row->payload), $oldClaim))
+                ->each(fn (object $row) => DB::table('settings')->where('id', $row->id)->update([
+                    'payload' => json_encode($text, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                ]));
         }
     }
 

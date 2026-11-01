@@ -18,7 +18,7 @@ class AccessibilityStatementTest extends TestCase
     private function store(string $name, string $text): void
     {
         DB::table('settings')->where('group', 'translatable_legal')->where('name', $name)
-            ->update(['payload' => json_encode($text, JSON_UNESCAPED_UNICODE)]);
+            ->update(['payload' => json_encode($text)]);
     }
 
     public function test_the_old_claim_of_full_conformity_is_replaced_in_both_languages(): void
