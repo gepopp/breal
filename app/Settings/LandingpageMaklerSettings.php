@@ -24,13 +24,13 @@ class LandingpageMaklerSettings extends BaseSettings
 
     public ?string $cta_video_embed_code = '';
 
-    public string $about_heading = 'Geschäftsführerin und Eigentümerin Tanja Bachschwöller, BA';
+    public string $about_heading = 'Geschäftsführerin und Eigentümerin Tanja Bachschwöller-Eybel, BA';
 
-    public string $about_text = '<p>Im Frühjahr 2021 gründete Tanja Bachschwöller mit ihrem Lebensgefährten Lukas Eybel die Immobilienvermittlung BE Real Immobilien. Jahrelange Berufserfahrung, Aneignung von fundiertem Wissen, sowie das facheinschlägige Studium „Real Estate Management“ an einer renommierten Universität in Österreich spiegeln sich in der maßgeschneiderten Beratung und dem charmanten Umgang mit Kunden wider. Aufgrund der hervorragenden Vernetzung in der Branche sowie der Zusammenarbeit mit mehreren Kooperationspartnern bietet sie jedem Immobiliensuchenden eine einwandfreie Abwicklung bei der Anmietung oder beim Kauf einer Immobilie.</p>';
+    public string $about_text = '<p>Im Frühjahr 2021 gründete Tanja Bachschwöller-Eybel mit ihrem Lebensgefährten Lukas Eybel die Immobilienvermittlung BE Real Immobilien. Jahrelange Berufserfahrung, Aneignung von fundiertem Wissen, sowie das facheinschlägige Studium „Real Estate Management“ an einer renommierten Universität in Österreich spiegeln sich in der maßgeschneiderten Beratung und dem charmanten Umgang mit Kunden wider. Aufgrund der hervorragenden Vernetzung in der Branche sowie der Zusammenarbeit mit mehreren Kooperationspartnern bietet sie jedem Immobiliensuchenden eine einwandfreie Abwicklung bei der Anmietung oder beim Kauf einer Immobilie.</p>';
 
     public array|int|null $about_image = 0;
 
-    public string $about_image_alt = 'Geschäftsführerin und Eigentümerin Tanja Bachschwöller, BA';
+    public string $about_image_alt = 'Geschäftsführerin und Eigentümerin Tanja Bachschwöller-Eybel, BA';
 
     public static function group(): string
     {

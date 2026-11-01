@@ -31,16 +31,16 @@ class MaklerLandingpageSettings extends BaseSettings
 
     public ?string $cta_video_embed_code = '';
 
-    public string $about_heading_de = 'Geschäftsführerin und Eigentümerin Tanja Bachschwöller, BA';
-    public string $about_heading_en = 'Managing Director and Owner Tanja Bachschwöller, BA';
+    public string $about_heading_de = 'Geschäftsführerin und Eigentümerin Tanja Bachschwöller-Eybel, BA';
+    public string $about_heading_en = 'Managing Director and Owner Tanja Bachschwöller-Eybel, BA';
 
-    public string $about_text_de = '<p>Im Frühjahr 2021 gründete Tanja Bachschwöller mit ihrem Lebensgefährten Lukas Eybel die Immobilienvermittlung be real Makler. Jahrelange Berufserfahrung, Aneignung von fundiertem Wissen, sowie das facheinschlägige Studium „Real Estate Management" an einer renommierten Universität in Österreich spiegeln sich in der maßgeschneiderten Beratung und dem charmanten Umgang mit Kunden wider. Aufgrund der hervorragenden Vernetzung in der Branche sowie der Zusammenarbeit mit mehreren Kooperationspartnern bietet sie jedem Immobiliensuchenden eine einwandfreie Abwicklung bei der Anmietung oder beim Kauf einer Immobilie.</p>';
-    public string $about_text_en = '<p>In spring 2021, Tanja Bachschwöller founded the real estate brokerage be real Makler together with her partner Lukas Eybel. Years of professional experience, acquisition of sound knowledge, as well as the relevant study "Real Estate Management" at a renowned university in Austria are reflected in the tailor-made advice and charming interaction with customers. Due to the excellent networking in the industry as well as the cooperation with several cooperation partners, she offers every property seeker a flawless transaction when renting or buying a property.</p>';
+    public string $about_text_de = '<p>Im Frühjahr 2021 gründete Tanja Bachschwöller-Eybel mit ihrem Lebensgefährten Lukas Eybel die Immobilienvermittlung be real Makler. Jahrelange Berufserfahrung, Aneignung von fundiertem Wissen, sowie das facheinschlägige Studium „Real Estate Management" an einer renommierten Universität in Österreich spiegeln sich in der maßgeschneiderten Beratung und dem charmanten Umgang mit Kunden wider. Aufgrund der hervorragenden Vernetzung in der Branche sowie der Zusammenarbeit mit mehreren Kooperationspartnern bietet sie jedem Immobiliensuchenden eine einwandfreie Abwicklung bei der Anmietung oder beim Kauf einer Immobilie.</p>';
+    public string $about_text_en = '<p>In spring 2021, Tanja Bachschwöller-Eybel founded the real estate brokerage be real Makler together with her partner Lukas Eybel. Years of professional experience, acquisition of sound knowledge, as well as the relevant study "Real Estate Management" at a renowned university in Austria are reflected in the tailor-made advice and charming interaction with customers. Due to the excellent networking in the industry as well as the cooperation with several cooperation partners, she offers every property seeker a flawless transaction when renting or buying a property.</p>';
 
     public array|int|null $about_image = 0;
 
-    public string $about_image_alt_de = 'Geschäftsführerin und Eigentümerin Tanja Bachschwöller, BA';
-    public string $about_image_alt_en = 'Managing Director and Owner Tanja Bachschwöller, BA';
+    public string $about_image_alt_de = 'Geschäftsführerin und Eigentümerin Tanja Bachschwöller-Eybel, BA';
+    public string $about_image_alt_en = 'Managing Director and Owner Tanja Bachschwöller-Eybel, BA';
 
     public static function group(): string
     {
