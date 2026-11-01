@@ -1,13 +1,12 @@
 <section aria-labelledby="provider-inventory">
-    <h2 id="provider-inventory">5. Eingesetzte Dienste und Empfänger im Überblick</h2>
+    <h2 id="provider-inventory">4. Eingesetzte Dienste und Empfänger im Überblick</h2>
     <p>
         Diese Übersicht beschreibt, welche Dienste auf dieser Website tatsächlich eingebunden sind, wann sie geladen werden
-        und an wen Daten übermittelt werden. Soweit frühere Abschnitte dieser Erklärung Borlabs Cookie, Google Forms oder
-        Google Web Fonts erwähnen, werden diese Dienste auf dieser Website nicht eingesetzt. Schriftarten, Skripte und
-        Bibliotheken (z. B. für Bildergalerien und Animationen) werden von unserem eigenen Server ausgeliefert.
+        und an wen Daten übermittelt werden. Schriftarten, Skripte und Bibliotheken (z. B. für Bildergalerien und Animationen)
+        werden von unserem eigenen Server ausgeliefert.
     </p>
 
-    <h3>5.1 Dienste, die Ihr Browser aufruft</h3>
+    <h3>4.1 Dienste, die Ihr Browser aufruft</h3>
     <div class="overflow-x-auto">
         <table class="w-full text-left text-sm border-collapse">
             <thead>
@@ -52,11 +51,12 @@
         </table>
     </div>
 
-    <h3>5.2 Verarbeitung auf unserem Server und bei Dienstleistern</h3>
+    <h3>4.2 Verarbeitung auf unserem Server und bei Dienstleistern</h3>
     <ul>
         <li>
-            <strong>Hosting und Server-Log-Dateien:</strong> Die Website wird bei einem Hosting-Anbieter betrieben
-            ([Name und Sitz des Hosting-Anbieters ergänzen]). Dabei werden technisch notwendig IP-Adresse, Datum und Uhrzeit,
+            <strong>Hosting und Server-Log-Dateien:</strong> Die Website wird auf einem Server betrieben, den NINC
+            [vollständiger Firmenname und Sitz ergänzen] für uns verwaltet. Die Server-Infrastruktur (angemieteter Server) stellt die
+            netcup GmbH, Karlsruhe, Deutschland, bereit. Dabei werden technisch notwendig IP-Adresse, Datum und Uhrzeit,
             aufgerufene Seite, Browser und Betriebssystem sowie die Referrer-URL verarbeitet. Fehlerprotokolle unserer
             Anwendung (mit URL, IP-Adresse, Browserkennung und Referrer) werden 14 Tage aufbewahrt.
         </li>
@@ -86,7 +86,7 @@
         </li>
     </ul>
 
-    <h3>5.3 Cookies und lokaler Speicher</h3>
+    <h3>4.3 Cookies und lokaler Speicher</h3>
     <div class="overflow-x-auto">
         <table class="w-full text-left text-sm border-collapse">
             <thead>

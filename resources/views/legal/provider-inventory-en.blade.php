@@ -1,13 +1,12 @@
 <section aria-labelledby="provider-inventory">
-    <h2 id="provider-inventory">5. Services and recipients at a glance</h2>
+    <h2 id="provider-inventory">4. Services and recipients at a glance</h2>
     <p>
         This overview describes which services are actually used on this website, when they are loaded and to whom data is
-        transmitted. Where earlier sections of this privacy policy mention Borlabs Cookie, Google Forms or Google Web Fonts,
-        these services are not used on this website. Fonts, scripts and libraries (for example for image galleries and
-        animations) are delivered from our own server.
+        transmitted. Fonts, scripts and libraries (for example for image galleries and animations) are delivered from our own
+        server.
     </p>
 
-    <h3>5.1 Services your browser connects to</h3>
+    <h3>4.1 Services your browser connects to</h3>
     <div class="overflow-x-auto">
         <table class="w-full text-left text-sm border-collapse">
             <thead>
@@ -52,11 +51,12 @@
         </table>
     </div>
 
-    <h3>5.2 Processing on our server and by service providers</h3>
+    <h3>4.2 Processing on our server and by service providers</h3>
     <ul>
         <li>
-            <strong>Hosting and server log files:</strong> The website is operated by a hosting provider
-            ([name and registered office of the hosting provider to be added]). IP address, date and time, page requested,
+            <strong>Hosting and server log files:</strong> The website runs on a server that NINC
+            [full company name and registered office to be added] administers for us. The server infrastructure (a rented server)
+            is provided by netcup GmbH, Karlsruhe, Germany. IP address, date and time, page requested,
             browser and operating system and the referrer URL are processed as technically necessary. Error logs of our
             application (with URL, IP address, browser identifier and referrer) are kept for 14 days.
         </li>
@@ -85,7 +85,7 @@
         </li>
     </ul>
 
-    <h3>5.3 Cookies and local storage</h3>
+    <h3>4.3 Cookies and local storage</h3>
     <div class="overflow-x-auto">
         <table class="w-full text-left text-sm border-collapse">
             <thead>
