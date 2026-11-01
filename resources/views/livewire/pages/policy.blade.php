@@ -12,6 +12,8 @@
             <div>
                 <div class="prose">
                     {!! $pagesSettings->dpgr_text !!}
+
+                    @include('legal.provider-inventory-'.(app()->getLocale() === 'de' ? 'de' : 'en'))
                 </div>
             </div>
         </div>

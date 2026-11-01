@@ -64,7 +64,7 @@ return [
             'font-src' => ["'self'", 'data:'],
             'img-src' => ["'self'", 'data:', 'blob:', 'https:'],
             'media-src' => ["'self'", 'blob:', 'https:'],
-            'frame-src' => ["'self'", 'https://player.vimeo.com', 'https://www.google.com'],
+            'frame-src' => ["'self'", 'https://player.vimeo.com'],
             'connect-src' => [
                 "'self'", 'https:', 'wss:',
             ],
