@@ -104,17 +104,17 @@ class AuditRoundThreeTest extends TestCase
         $this->assertSame('Texteditor', __('Rich text editor'));
     }
 
-    public function test_second_translation_run_translates_a_german_copy_that_differs_in_whitespace(): void
+    public function test_second_translation_run_translates_an_older_german_version_stored_as_english(): void
     {
         $job = JobVacancyFactory::new()->create(['id' => 23, 'company' => CompaniesEnum::Hausverwaltung]);
         $german = '<p><strong>Ihre zukünftigen Tätigkeiten:</strong></p><p>·         Leitung eines Teams</p>';
         DB::table('job_vacancies')->where('id', $job->id)->update([
             'title' => json_encode(['de' => 'Immobilienverwalter:in (m/w/d) WEG mit Teamleitung ', 'en' => 'Immobilienverwalter:in (m/w/d) WEG mit Teamleitung ']),
             'job_title' => json_encode(['de' => 'Immobilienverwalter:in (m/w/d) WEG mit Teamleitung ', 'en' => 'Immobilienverwalter:in (m/w/d) WEG mit Teamleitung ']),
-            'description' => json_encode(['de' => $german, 'en' => 'Ihre zukünftigen Tätigkeiten:·         Leitung eines Teams'], JSON_UNESCAPED_UNICODE),
+            'description' => json_encode(['de' => $german, 'en' => '<p><strong>Ihre zukünftigen Tätigkeiten:</strong></p><p>·         Leitung eines Teams von 1 – 2 Mitarbeiter:innen</p>'], JSON_UNESCAPED_UNICODE),
         ]);
 
-        (require database_path('migrations/2026_11_01_120000_refill_english_job_translations.php'))->up();
+        (require database_path('migrations/2026_11_01_130000_refill_english_job_translations.php'))->up();
 
         $description = json_decode(DB::table('job_vacancies')->where('id', 23)->value('description'), true);
         $this->assertStringContainsString('Your future responsibilities', $description['en']);

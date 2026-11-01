@@ -159,7 +159,7 @@ return new class extends Migration
 
                     $current = $this->plain($values['en'] ?? '');
 
-                    if ($current === '' || $this->squash($current) === $this->squash($this->plain($values['de']))) {
+                    if ($current === '' || $this->squash($current) === $this->squash($this->plain($values['de'])) || $this->isGermanJobText($current)) {
                         $values['en'] = $english;
                         $update[$field] = json_encode($values, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
                     }
@@ -175,6 +175,14 @@ return new class extends Migration
     public function down(): void
     {
         // Added translations are content, nothing to restore.
+    }
+
+    /**
+     * The WEG job ad kept an older German version of its text as the English one.
+     */
+    private function isGermanJobText(string $text): bool
+    {
+        return str_contains($text, 'Ihre zukünftigen Tätigkeiten');
     }
 
     /**

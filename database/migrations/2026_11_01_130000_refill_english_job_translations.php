@@ -4,8 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 
 /**
  * The first run of fill_missing_english_translations skipped the WEG job ad:
- * its English text was a copy of the German one that differed in whitespace only.
- * The comparison ignores whitespace now, running it again is harmless.
+ * its "English" description was an older German version of the text, neither
+ * empty nor identical to the current German one. The translation migration
+ * recognises that text now, running it again is harmless.
  */
 return new class extends Migration
 {
