@@ -57,7 +57,6 @@ return [
             'script-src' => [
                 "'self'", "'unsafe-inline'", "'unsafe-eval'",
                 'https://www.googletagmanager.com', 'https://maps.googleapis.com',
-                'https://player.vimeo.com',
             ],
             'style-src' => [
                 "'self'", "'unsafe-inline'",

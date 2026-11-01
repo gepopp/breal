@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Realty;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Blade;
 use Tests\TestCase;
 
 class SelfHostedAssetsTest extends TestCase
@@ -63,6 +64,32 @@ class SelfHostedAssetsTest extends TestCase
 
         $policy = $this->get('/team')->headers->get('Content-Security-Policy-Report-Only');
         $this->assertStringNotContainsString('fonts.g', $policy);
+    }
+
+    public function test_video_embed_is_not_part_of_the_page_until_the_modal_is_opened(): void
+    {
+        $code = '<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1?badge=0" allowfullscreen></iframe></div>'
+            .'<script src="https://player.vimeo.com/api/player.js"></script>';
+
+        $html = Blade::render('<x-click-to-load-embed modal="video" :code="$code"/>', ['code' => $code]);
+
+        $this->assertStringNotContainsString('<iframe', $html);
+        $this->assertStringNotContainsString('<script', $html);
+        $this->assertStringNotContainsString('player.js', $html, 'the provider script must be stripped');
+        $this->assertStringContainsString('x-on:modal-show.document', $html);
+        $this->assertStringContainsString('x-on:modal-close.document', $html);
+        $this->assertStringContainsString('<template x-if="loaded">', $html);
+        $this->assertStringContainsString('player.vimeo.com\/video\/1', $html, 'the embed itself is kept for loading on demand');
+    }
+
+    public function test_the_three_video_modals_use_the_click_to_load_component(): void
+    {
+        foreach (['about', 'technik-about', 'makler-c-t-a'] as $view) {
+            $template = file_get_contents(resource_path("views/livewire/parts/{$view}.blade.php"));
+
+            $this->assertStringContainsString('<x-click-to-load-embed modal="video"', $template);
+            $this->assertStringNotContainsString('video_embed_code !!}', $template);
+        }
     }
 
     public function test_spotlight_is_part_of_the_build_and_loaded_on_demand(): void

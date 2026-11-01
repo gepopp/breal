@@ -33,7 +33,7 @@
 
                     <flux:modal name="video" class="!p-0 !border-logo-950 !w-[1080px] !max-w-full !overflow-hidden !bg-logo-950">
                         <div class="aspect-video w-[1080px] max-w-full object-cover overflow-hidden z-[9999]">
-                            {!! $settings->about_video_embed_code !!}
+                            <x-click-to-load-embed modal="video" :code="$settings->about_video_embed_code"/>
                         </div>
                     </flux:modal>
 
