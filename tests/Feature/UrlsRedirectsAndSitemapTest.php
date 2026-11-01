@@ -207,6 +207,21 @@ class UrlsRedirectsAndSitemapTest extends TestCase
         ], $alternates);
     }
 
+    public function test_old_resident_service_page_of_the_bontus_eybel_site_redirects_to_the_service_page(): void
+    {
+        $this->get('/bewohnerservice')->assertStatus(301)->assertRedirect($this->root().'/service');
+        $this->get('/bewohnerservice/')->assertStatus(301)->assertRedirect($this->root().'/service');
+        $this->get('/en/bewohnerservice')->assertStatus(301)->assertRedirect($this->root().'/en/service');
+        $this->get('/bewohnerservice-xyz')->assertNotFound();
+    }
+
+    public function test_the_other_indexed_pages_of_the_old_site_exist_under_the_same_path(): void
+    {
+        foreach (['/impressum', '/team'] as $path) {
+            $this->get($path)->assertOk();
+        }
+    }
+
     public function test_the_old_sitemap_generator_address_is_gone(): void
     {
         $this->get('/sitemap')->assertNotFound();
