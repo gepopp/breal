@@ -43,6 +43,10 @@ return [
     | blocks them and "off" sends no policy. Alpine and Livewire need inline
     | and eval scripts, so the script policy is a first step, not a lockdown.
     |
+    | TODO: every host listed below needs a review (why is it used, is it still
+    | needed, is it named in the privacy statement?), see the section "Third-party
+    | hosts to review" in AUDIT-2026-10-31.md.
+    |
     */
 
     'csp' => [
