@@ -46,4 +46,33 @@ class ExternalPropertyTextLanguageTest extends TestCase
         $this->assertDoesNotMatchRegularExpression('/<h1[^>]*lang="de"/', $html);
         $this->assertDoesNotMatchRegularExpression('/<div\s+lang="de"\s*>/', $html);
     }
+
+    public function test_german_detail_values_are_marked_and_site_labels_stay_in_the_page_language(): void
+    {
+        Realty::create([
+            'title' => 'Wohnung mit Details', 'slug' => 'wohnung-details', 'objektnr_extern' => '9/9',
+            'beschreibung' => '<p>Text</p>', 'nutzungsart' => 'WOHNEN', 'vermarktungsart' => 'kauf',
+            'data' => [
+                'flaechen' => [], 'geo' => [], 'verwaltung_techn' => [], 'verwaltung_objekt' => [], 'objektkategorie' => [], 'freitexte' => [],
+                'preise' => ['kaufpreisbrutto' => '100000', 'aussen_courtage' => '3% des Kaufpreises zzgl. 20% USt.'],
+                'zustand_angaben' => ['baujahr' => '1990'],
+                'ausstattung' => ['boden' => ['@attributes' => ['FLIESEN' => 1, 'PARKETT' => 0]], 'bad' => ['@attributes' => ['DUSCHE' => 1]]],
+                'anhaenge' => ['anhang' => []], 'kontaktperson' => ['vorname' => 'Tanja', 'name' => 'Test', 'email_direkt' => 'vertrieb@bereal-makler.at'],
+            ],
+        ]);
+
+        $english = $this->get('/en/makler/immobilie/wohnung-details')->assertOk()->getContent();
+
+        $this->assertMatchesRegularExpression('/<span\s+lang="de"\s*>3% des Kaufpreises zzgl\. 20% USt\.<\/span>/', $english);
+        $this->assertMatchesRegularExpression('/<span\s+lang="de"\s*>Fliesen<\/span>/', $english);
+        $this->assertMatchesRegularExpression('/<span\s+lang="de"\s*>Dusche<\/span>/', $english);
+        $this->assertStringContainsString('Property number: 9/9', $english);
+        $this->assertStringContainsString('Residential', $english);
+        $this->assertStringNotContainsString('Objektnummer', $english);
+
+        $german = $this->get('/makler/immobilie/wohnung-details')->assertOk()->getContent();
+
+        $this->assertStringContainsString('Objektnummer: 9/9', $german);
+        $this->assertDoesNotMatchRegularExpression('/<span\s+lang="de"/', $german);
+    }
 }

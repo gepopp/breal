@@ -1,9 +1,9 @@
 <x-section>
     <div class="w-2/3">
         <p class="text-opacity-50 mb-4">
-            {{ $realty->strasse }} {{ $realty->hausnummer }}, {{ $realty->plz }} {{ $realty->ort }}
-            | {{ $realty->nutzungsart }}
-            | Objektnummer: {{ $realty->objektnr_extern }}
+            <span {!! \App\Services\ExternalText::langAttribute() !!}>{{ $realty->strasse }} {{ $realty->hausnummer }}, {{ $realty->plz }} {{ $realty->ort }}</span>
+            | {{ \App\Services\ExternalText::usageLabel($realty->nutzungsart) }}
+            | {{ __('realty.object_number') }}: {{ $realty->objektnr_extern }}
         </p>
         <h1 class="text-2xl font-bold" @if(app()->getLocale() !== 'de') lang="de" @endif>{{ $realty->title }}</h1>
     </div>
@@ -50,7 +50,7 @@
                 <ul class="!mt-8">
                     <li class="!ml-0 flex justify-between">
                         <span>{{ __('realty.usage_type') }}</span>
-                        <span>{{ ucfirst(strtolower( $realty->nutzungsart)) }}</span>
+                        <span>{{ \App\Services\ExternalText::usageLabel($realty->nutzungsart) }}</span>
                     </li>
                     @if($realty->vermarktungsart == 'miete')
                         @if(array_key_exists('verfuegbar_ab', $data['verwaltung_objekt']))
@@ -62,7 +62,7 @@
                         @if(array_key_exists('max_mietdauer', $data['verwaltung_objekt']))
                             <li class="!ml-0 flex justify-between">
                                 <span>{{ __('realty.rental_duration') }}</span>
-                                <span>{{
+                                <span @if(! is_numeric($data['verwaltung_objekt']['max_mietdauer'])) {!! \App\Services\ExternalText::langAttribute() !!} @endif>{{
                                         is_numeric( $data['verwaltung_objekt']['max_mietdauer'] )
                                         ? $data['verwaltung_objekt']['max_mietdauer'] . ' ' . __('realty.years')
                                         : $data['verwaltung_objekt']['max_mietdauer']

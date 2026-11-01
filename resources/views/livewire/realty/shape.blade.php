@@ -35,7 +35,7 @@
                 @if(array_key_exists('heizungsart', $ausstattung))
                     <li class="!ml-0 flex justify-between">
                         <span>{{ __('realty.heating') }}</span>
-                        <span>
+                        <span {!! \App\Services\ExternalText::langAttribute() !!}>
                                 @foreach($ausstattung['heizungsart']['@attributes'] as $key => $heizung)
                                 @if($heizung == 1)
                                     {{  ucfirst( strtolower( $key )) }}
@@ -47,7 +47,7 @@
                 @if(array_key_exists('befeuerung', $ausstattung))
                     <li class="!ml-0 flex justify-between">
                         <span>{{ __('realty.fuel_type') }}</span>
-                        <span>
+                        <span {!! \App\Services\ExternalText::langAttribute() !!}>
                                 @foreach($ausstattung['befeuerung']['@attributes'] as $key => $heizung)
                                 @if($heizung == 1)
                                     {{  ucfirst( strtolower( $key )) }}

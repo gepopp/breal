@@ -1,3 +1,11 @@
+# Vite writes a content hash into every file name in /build/assets, so a file never changes
+# under the same URL and browsers may keep it for a year.
+<IfModule mod_headers.c>
+    <If "%{REQUEST_URI} =~ m#^/build/assets/#">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </If>
+</IfModule>
+
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes

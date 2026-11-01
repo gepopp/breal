@@ -1,5 +1,5 @@
 <x-section class="bg-logo">
-    <div @class(['flex items-center mt-12 md:mt-0 max-w-full'])>
+    <div @class(['flex items-center mt-6 md:mt-0 max-w-full'])>
         <div @class(['md:max-w-sm lg:max-w-lg' => !is_array($preparedText), 'max-w-full'])>
             <x-headings level="2" :ondark="true">
                 <x-slot name="tag">{{ $header }}</x-slot>
@@ -18,8 +18,8 @@
             </div>
         </div>
     </div>
-    <div class="lg:max-w-4xl xl:max-w-6xl max-w-full mx-auto mt-12 md:mt-24">
-        <div class="min-h-[60vh] box-border relative left-0 w-screen lg:w-[calc(100vw-(50vw-28rem))] xl:w-[calc(100vw-(50vw-36rem))] sm:pl-8 lg:pl-0 lg:pr-6">
+    <div class="lg:max-w-4xl xl:max-w-6xl max-w-full mx-auto mt-8 md:mt-12">
+        <div class="box-border relative left-0 w-screen lg:w-[calc(100vw-(50vw-28rem))] xl:w-[calc(100vw-(50vw-36rem))] sm:pl-8 lg:pl-0 lg:pr-6">
             <div class="swiper swiperXl">
                 <div class="swiper-wrapper">
                     @foreach($references as $ref)

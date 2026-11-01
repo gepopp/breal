@@ -19,13 +19,14 @@ Die Website ist auf Deutsch (Österreich). Eine englische Fassung ist unter http
 - [Hauseigentum und Zinshaus](https://www.bereal-immobilien.at/leistung/hauseigentum-zinshaus)
 - [Verwaltung einzelner Wohnungen oder Wohnungseigentumspakete](https://www.bereal-immobilien.at/leistung/verwaltung-einzelner-wohnungen-oder-wohnungseigentumspakete)
 - [Gewerbeimmobilienverwaltung](https://www.bereal-immobilien.at/leistung/gewerbeimmobilienverwaltung)
-- [Objektbegehungen](https://www.bereal-immobilien.at/leistung/objektbegehungen)
-- [Bauwerksbuch](https://www.bereal-immobilien.at/leistung/bauwerksbuch)
-- [Energieausweis](https://www.bereal-immobilien.at/leistung/energieausweis)
-- [Sanierungskonzepte](https://www.bereal-immobilien.at/leistung/sanierungskonzepte)
-- [Fördermanagement](https://www.bereal-immobilien.at/leistung/fordermanagement)
-- [ÖNORM B 1300 / B 1301](https://www.bereal-immobilien.at/leistung/onorm-b-1300-b-1301)
+- [Bauverwaltung](https://www.bereal-immobilien.at/leistung/bauverwaltung)
 - [Leistungen von be real Technik](https://www.bereal-immobilien.at/technik/leistungen): Baumanagement und technische Gebäudeverwaltung
+- [Bauwerksbuch](https://www.bereal-immobilien.at/technik/leistung/bauwerksbuch)
+- [ÖNORM B 1300 / B 1301](https://www.bereal-immobilien.at/technik/leistung/onorm-b-1300-b-1301)
+- [Objektbegehungen](https://www.bereal-immobilien.at/technik/leistung/objektbegehungen)
+- [Energieausweis](https://www.bereal-immobilien.at/technik/leistung/energieausweis)
+- [Fördermanagement](https://www.bereal-immobilien.at/technik/leistung/fordermanagement)
+- [Sanierungskonzepte](https://www.bereal-immobilien.at/technik/leistung/sanierungskonzepte)
 - [Immobiliensuche](https://www.bereal-immobilien.at/makler/immobiliensuche): Aktuelle Objekte von be real Makler
 - [Über be real Makler](https://www.bereal-immobilien.at/makler/ueber-uns): Geschäftsführerin und Eigentümerin Tanja Bachschwöller-Eybel
 

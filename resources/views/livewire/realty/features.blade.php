@@ -13,7 +13,7 @@
                         $boden = rtrim($boden, ', ');
                 @endphp
                 <span>{{ __('realty.floor') }}</span>
-                <span>{{ $boden }}</span>
+                <span {!! \App\Services\ExternalText::langAttribute() !!}>{{ $boden }}</span>
             </li>
         @endif
             @if(array_key_exists('bad', $ausstattung))
@@ -28,7 +28,7 @@
                             $boden = rtrim($boden, ', ');
                     @endphp
                     <span>{{ __('realty.bathroom') }}</span>
-                    <span>{{ $boden }}</span>
+                    <span {!! \App\Services\ExternalText::langAttribute() !!}>{{ $boden }}</span>
                 </li>
             @endif
             @if(array_key_exists('kueche', $ausstattung))
@@ -43,7 +43,7 @@
                             $boden = rtrim($boden, ', ');
                     @endphp
                     <span>{{ __('realty.kitchen') }}</span>
-                    <span>{{ $boden }}</span>
+                    <span {!! \App\Services\ExternalText::langAttribute() !!}>{{ $boden }}</span>
                 </li>
             @endif
             @if(array_key_exists('klimatisiert', $ausstattung) && $ausstattung['klimatisiert'] == 1)
@@ -70,7 +70,7 @@
                             $boden = rtrim($boden, ', ');
                     @endphp
                     <span>{{ __('realty.parking_space') }}</span>
-                    <span>{{ $boden }}</span>
+                    <span {!! \App\Services\ExternalText::langAttribute() !!}>{{ $boden }}</span>
                 </li>
             @endif
             @if(array_key_exists('gartennutzung', $ausstattung))
@@ -106,7 +106,7 @@
             @if(array_key_exists('unterkellert', $ausstattung))
                 <li class="!ml-0 flex justify-between">
                     <span>{{ __('realty.basement') }}</span>
-                    <span>{{ $ausstattung['unterkellert']['keller'] }}</span>
+                    <span {!! \App\Services\ExternalText::langAttribute() !!}>{{ $ausstattung['unterkellert']['keller'] }}</span>
                 </li>
             @endif
     </ul>

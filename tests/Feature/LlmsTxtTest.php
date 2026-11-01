@@ -87,4 +87,16 @@ class LlmsTxtTest extends TestCase
 
         return file_get_contents(public_path('llms.txt'));
     }
+
+    public function test_technik_services_are_linked_directly_and_not_through_a_redirect(): void
+    {
+        $text = $this->llmsTxt();
+
+        foreach (['bauwerksbuch', 'onorm-b-1300-b-1301', 'objektbegehungen', 'energieausweis', 'fordermanagement', 'sanierungskonzepte'] as $slug) {
+            $this->assertStringContainsString("/technik/leistung/{$slug})", $text);
+            $this->assertStringNotContainsString("bereal-immobilien.at/leistung/{$slug})", $text);
+        }
+
+        $this->assertStringContainsString('/leistung/bauverwaltung)', $text);
+    }
 }

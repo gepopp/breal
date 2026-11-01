@@ -26,13 +26,13 @@
             @if(array_key_exists('kaution_text', $prices))
                 <li class="flex justify-between !ml-0 mt-8">
                     <span>{{ __('realty.deposit') }}</span>
-                    <span>{{ $prices['kaution_text'] }}</span>
+                    <span {!! \App\Services\ExternalText::langAttribute() !!}>{{ $prices['kaution_text'] }}</span>
                 </li>
             @endif
 
             @if(array_key_exists('aussen_courtage', $prices))
                 <li class="flex justify-between !ml-0 mt-8">
-                    <span>{{ $prices['aussen_courtage'] }}</span>
+                    <span {!! \App\Services\ExternalText::langAttribute() !!}>{{ $prices['aussen_courtage'] }}</span>
                 </li>
             @endif
 
@@ -65,7 +65,7 @@
 
             @if(array_key_exists('aussen_courtage', $prices))
                 <li class="flex justify-between !ml-0 mt-8">
-                    <span>{{ $prices['aussen_courtage'] }}</span>
+                    <span {!! \App\Services\ExternalText::langAttribute() !!}>{{ $prices['aussen_courtage'] }}</span>
                 </li>
             @endif
 

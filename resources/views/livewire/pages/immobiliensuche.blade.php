@@ -114,7 +114,7 @@
                     <p class="mt-1 text-sm text-zinc-600 dark:text-zinc-300">{{ $realty->plz }} {{ $realty->ort }} · {{ $usageLabel }} · {{ $typeLabel }}</p>
                     <p class="mt-2 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                         <span class="text-sm">
-                            @if(! is_null($realty->zimmer)){{ \Illuminate\Support\Number::format((float) $realty->zimmer, maxPrecision: 1, locale: app()->getLocale()) }} {{ __('makler.table.rooms') }}@endif
+                            @if(! is_null($realty->zimmer)){{ \Illuminate\Support\Number::format((float) $realty->zimmer, maxPrecision: 1, locale: app()->getLocale()) }} {{ (float) $realty->zimmer === 1.0 ? __('meta.room_singular') : __('makler.table.rooms') }}@endif
                             @if(! is_null($realty->zimmer) && ! is_null($realty->wohnflaeche)) · @endif
                             @if(! is_null($realty->wohnflaeche)){{ \Illuminate\Support\Number::format($realty->wohnflaeche, 2, null, 'de') }} m²@endif
                         </span>

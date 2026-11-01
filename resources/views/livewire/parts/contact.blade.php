@@ -5,7 +5,7 @@
             {!! $settings->contact_subheader !!}
         </x-headings>
         <div data-aos="fade" data-aos-delay="600" class="prose">
-            {!! $settings->contact_introtext !!}
+            {!! $introtext !!}
         </div>
     </div>
 
