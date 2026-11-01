@@ -39,6 +39,7 @@ class SelfHostedAssetsTest extends TestCase
     {
         foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(resource_path('views'), \FilesystemIterator::SKIP_DOTS)) as $file) {
             $this->assertStringNotContainsString('jsdelivr', (string) file_get_contents($file->getPathname()), $file->getPathname());
+            $this->assertStringNotContainsString('unpkg.com', (string) file_get_contents($file->getPathname()), $file->getPathname());
         }
 
         $this->assertStringContainsString("import 'swiper/css/bundle'", file_get_contents(resource_path('js/app.js')));
@@ -48,6 +49,7 @@ class SelfHostedAssetsTest extends TestCase
 
         $policy = $this->get('/team')->headers->get('Content-Security-Policy-Report-Only');
         $this->assertStringNotContainsString('jsdelivr', $policy);
+        $this->assertStringNotContainsString('unpkg', $policy);
     }
 
     public function test_spotlight_is_part_of_the_build_and_loaded_on_demand(): void

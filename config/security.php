@@ -56,7 +56,6 @@ return [
             'default-src' => ["'self'"],
             'script-src' => [
                 "'self'", "'unsafe-inline'", "'unsafe-eval'",
-                'https://unpkg.com',
                 'https://www.googletagmanager.com', 'https://maps.googleapis.com',
                 'https://player.vimeo.com',
             ],

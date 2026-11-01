@@ -156,15 +156,3 @@
     {{-- Contact - Same as original --}}
     <livewire:parts.contact/>
 </div>
-
-@assets
-<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-    AOS.init({
-        duration: 1000,
-        once: true,
-        offset: 100
-    });
-</script>
-@endassets
