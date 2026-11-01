@@ -5,7 +5,7 @@
             | {{ $realty->nutzungsart }}
             | Objektnummer: {{ $realty->objektnr_extern }}
         </p>
-        <h1 class="text-2xl font-bold">{{ $realty->title }}</h1>
+        <h1 class="text-2xl font-bold" @if(app()->getLocale() !== 'de') lang="de" @endif>{{ $realty->title }}</h1>
     </div>
 
     <div class="flex flex-col lg:flex-row lg:space-x-8">
@@ -16,7 +16,9 @@
             @if(array_key_exists('freitexte', $realty->data) && array_key_exists('lage', $realty->data['freitexte']))
                 <div class="prose">
                     <h2>{{ __('realty.location') }}</h2>
-                    {!! \App\Services\HtmlLists::demoteH1($realty['data']['freitexte']['lage']) !!}
+                    <div @if(app()->getLocale() !== 'de') lang="de" @endif>
+                        {!! \App\Services\HtmlLists::demoteH1($realty['data']['freitexte']['lage']) !!}
+                    </div>
                 </div>
             @endif
 
@@ -26,7 +28,9 @@
 
             <div class="prose">
                 <h2>{{ __('realty.description') }}</h2>
-                {!! \App\Services\HtmlLists::demoteH1((string) $realty->beschreibung) !!}
+                <div @if(app()->getLocale() !== 'de') lang="de" @endif>
+                    {!! \App\Services\HtmlLists::demoteH1((string) $realty->beschreibung) !!}
+                </div>
             </div>
         </div>
         <div class="w-full lg:w-1/3 md:mt-8">

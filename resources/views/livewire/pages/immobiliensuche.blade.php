@@ -103,7 +103,7 @@
                     </flux:table.cell>
 
                     <flux:table.cell class="w-1/3 whitespace-normal">
-                        <a href="{{ route('makler.immobilie', $realty) }}" wire:navigate class="hover:underline">
+                        <a href="{{ route('makler.immobilie', $realty) }}" wire:navigate class="hover:underline" @if(app()->getLocale() !== 'de') lang="de" @endif>
                             {{ \Illuminate\Support\Str::words($realty->title, 8, '...') }}
                         </a>
                     </flux:table.cell>
