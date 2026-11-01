@@ -32,9 +32,12 @@
     <section x-data="{ current: 0 }" class="mt-12">
         @foreach($faqs as $index => $faq)
             <div class="py-4 border-b border-logo">
-                <p class="!text-lg !font-bold flex justify-between items-center cursor-pointer !text-logo !dark:text-white" x-on:click="current = {{ $index }}">
+                <h2 class="!text-lg !font-bold !text-logo !dark:text-white">
+                <button type="button" class="flex w-full justify-between items-center gap-4 text-left cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-logo-500"
+                        x-on:click="current = current == {{ $index }} ? -1 : {{ $index }}"
+                        x-bind:aria-expanded="(current == {{ $index }}).toString()" aria-controls="faq-answer-{{ $index }}">
                 <span class="dark:text-white">{{ $faq['question'] }}</span>
-                    <span>
+                    <span aria-hidden="true" class="shrink-0">
                         <template x-if="current != {{ $index }}">
                              <svg class="size-8" data-slot="icon" fill="none" stroke-width="4" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
@@ -46,8 +49,9 @@
                              </svg>
                         </template>
                     </span>
-                </p>
-                <div x-show="current == {{ $index }}" x-collapse>
+                </button>
+                </h2>
+                <div id="faq-answer-{{ $index }}" x-show="current == {{ $index }}" x-collapse>
                     <div class="prose">
                         {!! $faq['answer'] !!}
                     </div>

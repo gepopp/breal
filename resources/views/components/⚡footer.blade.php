@@ -38,7 +38,7 @@ new class extends Component
 
 
         <div class="flex md:justify-center">
-            <nav class="font-semibold text-white flex flex-col space-y-6">
+            <nav aria-label="{{ __('navigation.footer') }}" class="font-semibold text-white flex flex-col space-y-6">
                 <a href="{{ route('hausverwaltung.home') }}" wire:navigate class="lowercase cursor-pointer font-extrabold overflow-hidden text-2xl hover:tracking-wider transition-all duration-300">
                     {{ __('navigation.real_estate_short') }}
                 </a>

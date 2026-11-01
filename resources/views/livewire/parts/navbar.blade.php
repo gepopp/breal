@@ -1,7 +1,7 @@
 @php
     use Illuminate\Support\Facades\Route;
 @endphp
-<div class="relative z-50" id="navbar">
+<header class="relative z-50" id="navbar">
     <livewire:parts.preheader/>
     <div x-data="navControl">
         <div @class([
@@ -43,7 +43,7 @@
             </div>
 
 
-            <nav class="hidden lg:flex mb-px space-x-12 justify-between items-center font-bold text-logo-500 dark:text-white">
+            <nav aria-label="{{ __('navigation.main') }}" class="hidden lg:flex mb-px space-x-12 justify-between items-center font-bold text-logo-500 dark:text-white">
                 @if( !Route::is('makler.*', 'technik.*') )
                     <div x-data="{ show:false }" x-on:mouseenter="show = true" x-on:mouseleave="show = false" class="relative group">
                         <div class="overflow-hidden">
@@ -326,7 +326,7 @@
 
         </div>
     </div>
-</div>
+</header>
 @script
 <script>
     Alpine.data('navControl', () => {
