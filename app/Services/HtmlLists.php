@@ -5,7 +5,8 @@ namespace App\Services;
 /**
  * Turns the hand-typed "• item<br>• item" or one-paragraph-per-"· item" texts
  * and bold-only "Heading:" paragraphs of admin texts into real lists and
- * headings.
+ * headings. The texts sit directly below the page's <h1>, so those headings
+ * are <h2> (no skipped level).
  */
 class HtmlLists
 {
@@ -52,6 +53,6 @@ class HtmlLists
 
         $html = preg_replace('#<p>'.self::SPACE.'*</p>#u', '', $html);
 
-        return preg_replace('#<p>\s*<strong>([^<]+:)\s*</strong>\s*</p>#u', '<h3><strong>$1</strong></h3>', $html);
+        return preg_replace('#<p>\s*<strong>([^<]+:)\s*</strong>\s*</p>#u', '<h2><strong>$1</strong></h2>', $html);
     }
 }
