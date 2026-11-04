@@ -1,10 +1,12 @@
-<div class="absolute bg-white top-full left-0 min-w-full">
-    <div class="relative bg-white min-w-full w-full shadow z-[9999] p-4">
-        <ul class="w-84">
+{{-- The top padding (header padding 16px + border 2px + 1px) lets the white box start below the header border and keeps the hover area connected to the menu item. --}}
+<div class="absolute top-full left-0 min-w-full pt-[19px]">
+    {{-- Same box, list and hover styling as menu-service-dropdown.blade.php. --}}
+    <div class="relative bg-white w-84 shadow z-[9999] p-6">
+        <ul class="!list-none">
             @foreach($competences as $competence)
-                <li class="border-b border-logo p-2 !ml-0">
-                    <a href="{{ route( strtolower($company . '.leistung' ), $competence) }}" wire:navigate class="block text-sm text-gray-700 hover:bg-gray-100 px-2">
-                        <p class="line-clamp-1 !font-bold !text-base">{{ $competence->name }}</p>
+                <li class="border-b border-logo !ml-0">
+                    <a href="{{ route( strtolower($company . '.leistung' ), $competence) }}" wire:navigate class="block p-2 hover:bg-gray-100">
+                        <p class="!font-bold !mb-0 !text-logo !text-sm">{{ $competence->name }}</p>
                     </a>
                 </li>
             @endforeach

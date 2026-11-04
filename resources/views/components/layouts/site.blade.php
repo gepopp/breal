@@ -33,7 +33,8 @@
 <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[10000] focus:bg-white focus:text-logo-950 focus:px-4 focus:py-2 focus:rounded focus:shadow-lg">{{ __('navigation.skip_to_content') }}</a>
 <div class="overflow-hidden flex flex-col min-h-screen">
     <livewire:parts.navbar/>
-    <main id="main" tabindex="-1" class="z-[8888] flex-1 focus:outline-none">
+    {{-- z-0 keeps the page content (decorative z-[9999] shapes) in its own stacking context below the header (z-50), so the menu dropdowns are never covered. --}}
+    <main id="main" tabindex="-1" class="z-0 flex-1 focus:outline-none">
         {{ $slot }}
     </main>
     <livewire:footer/>
