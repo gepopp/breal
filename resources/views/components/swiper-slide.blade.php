@@ -3,7 +3,7 @@
 ])
 <div class="swiper-slide max-w-full">
     <div>
-        <x-media-image :media="$ref->getFirstMedia('titleimage')" sizes="(min-width: 768px) 33vw, 100vw" alt="{{ $ref->title }}"/>
+        <x-media-image :media="$ref->getFirstMedia('titleimage')" sizes="(min-width: 768px) 33vw, 100vw" :describe="true" alt="{{ $ref->title }}"/>
     </div>
     <div class="flex flex-col h-full">
         <div class="mt-6">
