@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Facade;
 use Symfony\Component\HttpFoundation\Cookie;
@@ -36,6 +37,11 @@ class CookieConsentPersistenceTest extends TestCase
         Facade::clearResolvedInstances();
         $this->app->forgetInstance(CookiesManager::class);
         $this->app->forgetInstance(CookiesRegistrar::class);
+    }
+
+    public function test_consent_cookie_name_from_the_config_is_excluded_from_encryption(): void
+    {
+        $this->assertTrue(app(EncryptCookies::class)->isDisabled(config('cookieconsent.cookie.name')));
     }
 
     public function test_banner_is_shown_without_consent(): void

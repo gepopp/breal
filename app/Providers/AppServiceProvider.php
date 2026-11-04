@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\User;
 use App\Services\LocaleUrls;
+use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Queue\Events\JobFailed;
@@ -31,6 +32,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Model::unguard();
+
+        // The cookie consent routes run without the web middleware and set the consent cookie unencrypted;
+        // if the pages tried to decrypt it, it would be dropped and the banner would return on every page.
+        // Read from the config (not env()), so it also works with a cached configuration.
+        EncryptCookies::except(config('cookieconsent.cookie.name'));
 
         URL::formatPathUsing(function (string $path, ?Route $route): string {
             return LocaleUrls::isLocalizedRoute($route)

@@ -9,7 +9,6 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Str;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -35,12 +34,6 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->web(append: [
             SetLocale::class,
-        ]);
-
-        // The cookie consent routes run without the web middleware and set the consent cookie unencrypted;
-        // if the pages tried to decrypt it, it would be dropped and the banner would return on every page.
-        $middleware->encryptCookies(except: [
-            Str::slug(env('APP_NAME', 'laravel'), '_').'_cookie_consent',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
