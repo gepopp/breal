@@ -32,7 +32,9 @@ class Team extends Component
             ->title(PageMeta::title('team'))
             ->layout('components.layouts.site')
             ->layoutData([
-                'canonical' => route($this->company === CompaniesEnum::Hausverwaltung->name ? 'hausverwaltung.team' : ($this->company === CompaniesEnum::Makler->name ? 'makler.team' : 'technik.team')),
+                // All three team pages show the same team, so they share one canonical.
+                // TODO: if the pages ever show different content per company, restore a canonical per page.
+                'canonical' => route('hausverwaltung.team'),
                 'description' => PageMeta::description('team'),
             ]);
     }
