@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\HtmlTrailingSpace;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
@@ -38,6 +39,14 @@ class Question extends Model implements HasMedia
 
     protected static function booted(): void
     {
+        static::saving(function (Question $question): void {
+            foreach ($question->getTranslations('answer') as $locale => $answer) {
+                if (is_string($answer) && ($trimmed = HtmlTrailingSpace::trim($answer)) !== $answer) {
+                    $question->setTranslation('answer', $locale, $trimmed);
+                }
+            }
+        });
+
         static::addGlobalScope('order', function (Builder $builder) {
             $builder->orderBy('order');
         });
