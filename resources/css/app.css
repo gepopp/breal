@@ -294,12 +294,16 @@ p{
 }
 
 .competence-body {
+    h2 {
+        @apply text-xl font-bold leading-tight mt-10 mb-4;
+    }
+
     h3 {
         @apply text-xl font-bold leading-tight mt-8 mb-4;
     }
 
     ul {
-        @apply list-disc list-outside ml-10 my-4 space-y-3;
+        @apply list-disc list-outside ml-10 my-4 space-y-2;
     }
 
     li {
