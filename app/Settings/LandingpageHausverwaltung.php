@@ -8,7 +8,7 @@ class LandingpageHausverwaltung extends BaseSettings
 
     public int $hero_speed = 4000;
 
-    public string $hero_image_alt = 'Bontus Eybel Intro Bild';
+    public string $hero_image_alt = 'be real Verwaltung: Hausverwaltung und Immobilienmanagement';
 
     public string $hero_header = 'welcome';
 
@@ -26,7 +26,7 @@ class LandingpageHausverwaltung extends BaseSettings
 
     public array|int|null $text_image = 0;
 
-    public string $text_image_alt = 'Bontus Eybel Intro Bild';
+    public string $text_image_alt = 'be real Verwaltung: Hausverwaltung und Immobilienmanagement';
 
     public string $about_header = 'with us';
 
@@ -36,7 +36,7 @@ class LandingpageHausverwaltung extends BaseSettings
 
     public array|int|null $about_image = 0;
 
-    public string $about_image_alt = 'Bontus Eybel Intro Bild';
+    public string $about_image_alt = 'be real Verwaltung: Hausverwaltung und Immobilienmanagement';
 
     public ?string $about_video_embed_code = '';
 

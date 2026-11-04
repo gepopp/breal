@@ -6,13 +6,13 @@ class PagesSettings extends BaseSettings
 {
     public string $contact_header = 'together';
 
-    public string $contact_subheader = 'Ihr Kontakt zu Bontus Eybel';
+    public string $contact_subheader = 'Ihr Kontakt zu be real Immobilien';
 
     public string $contact_introtext = '';
 
     public string $team_header = 'team';
 
-    public string $team_subheader = 'Das Team von Bontus Eybel';
+    public string $team_subheader = 'Das Team von be real Immobilien';
 
     public string $team_introtext = '<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>';
 

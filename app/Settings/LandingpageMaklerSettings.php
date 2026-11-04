@@ -20,7 +20,7 @@ class LandingpageMaklerSettings extends BaseSettings
 
     public array|int|null $cta_image = 0;
 
-    public string $cta_image_alt = 'Bontus Eybel Intro Bild';
+    public string $cta_image_alt = 'be real Makler: Beratung zu Kauf, Verkauf und Vermietung';
 
     public ?string $cta_video_embed_code = '';
 
