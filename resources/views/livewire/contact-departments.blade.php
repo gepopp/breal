@@ -7,9 +7,9 @@
 <div class="mt-8">
 
     @if($withIntro)
-        <div @class("pb-24 border-b border-gray-200")>
+        <div @class("pb-12 border-b border-gray-200")>
             <h2 @class([
-        "font-bold text-3xl sm:text-5xl lg:text-7xl",
+        "font-bold text-3xl sm:text-4xl lg:text-5xl mb-4",
         "text-logo-950" => !Route::is('technik.*', 'makler.*'),
         "text-technik-950" => Route::is('technik.*'),
         "text-makler-950" => Route::is('makler.*'),
@@ -20,7 +20,7 @@
         </div>
     @endif
 
-    <div @class(["mt-24" => $withIntro])>
+    <div @class(["mt-12" => $withIntro])>
         @foreach($departments as $department)
             @continue($department->department?->count())
             <div @class(['mb-12']) data-aos="fade">
@@ -32,11 +32,13 @@
                 ])>{{ $department->name }}</{{ $departmentTag }}>
 
 
-                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-12 my-12">
-                    @foreach($department->contacts as $contact)
-                        <x-contact-person :contactperson="$contact" :tag="$memberTag"/>
-                    @endforeach
-                </div>
+                @if($department->contacts->isNotEmpty())
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-12 my-12">
+                        @foreach($department->contacts as $contact)
+                            <x-contact-person :contactperson="$contact" :tag="$memberTag"/>
+                        @endforeach
+                    </div>
+                @endif
 
                 @foreach($department->sub as $sub)
                     <div @class(["my-8"])  data-aos="fade">
