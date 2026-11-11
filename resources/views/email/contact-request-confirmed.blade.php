@@ -624,7 +624,7 @@
                         <tr>
                             <td align="center"
                                 style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:16px;line-height:28px;font-weight:400;font-style:normal;color:#002641;text-decoration:none;letter-spacing:0px;">
-                                <a href="{{ $upload->getTemporaryUrl(now()->addDays(7)) }}"
+                                <a href="{{ $upload->getTemporaryUrl(\App\Models\ContactRequest::uploadLinkExpiresAt()) }}"
                                    style="color:#002641;text-decoration:underline;">{{ $upload->file_name }}</a>
                             </td>
                         </tr>

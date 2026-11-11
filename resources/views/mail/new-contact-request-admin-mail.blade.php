@@ -24,7 +24,7 @@
 **Anhänge:**
 
 @foreach($uploads as $upload)
-- [{{ $upload->file_name }}]({{ $upload->getTemporaryUrl(now()->addDays(7)) }})
+- [{{ $upload->file_name }}]({{ $upload->getTemporaryUrl(\App\Models\ContactRequest::uploadLinkExpiresAt()) }})
 @endforeach
 @endif
 
