@@ -6,6 +6,9 @@
     @fluxAppearance
     @cookieconsentscripts
     @include('partials.head')
+    {{-- Livewire only injects its assets into responses with status 200; included here so the 404 page
+         (served with status 404) also gets Alpine and the x-cloak style, otherwise the open menus show. --}}
+    @livewireStyles
 </head>
 <!-- Event snippet for Seitenaufruf conversion page -->
 <script>
@@ -43,5 +46,6 @@
 @fluxScripts
 @include('components.dev-switsher')
 @cookieconsentview
+@livewireScripts
 </body>
 </html>

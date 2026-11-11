@@ -35,6 +35,23 @@ class UrlsRedirectsAndSitemapTest extends TestCase
             ->assertSee('<title>Page Not Found – be real Immobilien</title>', false);
     }
 
+    public function test_404_page_loads_the_livewire_assets_so_the_menu_dropdowns_stay_closed(): void
+    {
+        $response = $this->get('/diese-seite-gibt-es-nicht')->assertNotFound();
+        $html = $response->getContent();
+
+        $this->assertSame(1, substr_count($html, 'data-update-uri'), 'Livewire script missing or duplicated on the 404 page');
+        $this->assertSame(1, substr_count($html, '[x-cloak="x-cloak"]'), 'Livewire styles (x-cloak) missing or duplicated on the 404 page');
+    }
+
+    public function test_normal_page_loads_the_livewire_assets_exactly_once(): void
+    {
+        $html = $this->get('/')->assertOk()->getContent();
+
+        $this->assertSame(1, substr_count($html, 'data-update-uri'));
+        $this->assertSame(1, substr_count($html, '[x-cloak="x-cloak"]'));
+    }
+
     /**
      * @return array<string, array{0: string}>
      */
