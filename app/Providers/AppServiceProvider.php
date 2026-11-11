@@ -3,12 +3,15 @@
 namespace App\Providers;
 
 use App\Models\User;
+use App\Services\EditorStyles;
 use App\Services\LocaleUrls;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Http\Events\RequestHandled;
 use Illuminate\Http\Request;
 use Illuminate\Queue\Events\JobFailed;
 use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Queue;
@@ -36,6 +39,9 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             self::raiseMemoryLimit((string) config('queue.worker_memory_limit'));
         }
+
+        // Registered after Livewire's own listener, so the editor stylesheet it inserts is already in the page.
+        Event::listen(RequestHandled::class, [EditorStyles::class, 'defer']);
 
         // The cookie consent routes run without the web middleware and set the consent cookie unencrypted;
         // if the pages tried to decrypt it, it would be dropped and the banner would return on every page.
