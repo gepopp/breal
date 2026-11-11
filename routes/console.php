@@ -1,5 +1,6 @@
 <?php
 
+use App\Justimmo\Importer;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 
@@ -9,9 +10,5 @@ Artisan::command('inspire', function () {
 
 // Import Justimmo real estate data from uploaded zip files
 Schedule::call(function () {
-    \App\Justimmo\Importer::import();
+    Importer::import();
 })->hourly();
-
-Schedule::call(function () {
-    (new \App\Http\Controllers\SitemapController())->generate();
-})->daily();

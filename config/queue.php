@@ -17,6 +17,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Memory Limit for Console Processes
+    |--------------------------------------------------------------------------
+    |
+    | The PHP CLI of the server runs with the global 128M, which is too small
+    | for the image conversions of the queue worker. Console processes raise
+    | their limit to at least this value (see AppServiceProvider).
+    |
+    */
+
+    'worker_memory_limit' => env('QUEUE_WORKER_MEMORY_LIMIT', '768M'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Queue Connections
     |--------------------------------------------------------------------------
     |

@@ -33,6 +33,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Model::unguard();
 
+        if ($this->app->runningInConsole()) {
+            self::raiseMemoryLimit((string) config('queue.worker_memory_limit'));
+        }
+
         // The cookie consent routes run without the web middleware and set the consent cookie unencrypted;
         // if the pages tried to decrypt it, it would be dropped and the banner would return on every page.
         // Read from the config (not env()), so it also works with a cached configuration.
@@ -74,5 +78,43 @@ class AppServiceProvider extends ServiceProvider
                 'exception_class' => $event->exception::class,
             ]);
         });
+    }
+
+    /**
+     * Raises the PHP memory limit for console processes (queue worker, scheduler, artisan) to at least $wanted.
+     * The CLI uses the global php.ini (128M on the server), which is too small for converting the 6000 px originals;
+     * a higher limit is never lowered.
+     */
+    public static function raiseMemoryLimit(string $wanted): void
+    {
+        $wantedBytes = self::bytesFromIni($wanted);
+        $currentBytes = self::bytesFromIni((string) ini_get('memory_limit'));
+
+        if ($wantedBytes > 0 && $currentBytes >= 0 && $currentBytes < $wantedBytes) {
+            ini_set('memory_limit', $wanted);
+        }
+    }
+
+    /**
+     * Converts a php.ini size such as "128M" or "1G" to bytes; "-1" (unlimited) stays -1, empty or invalid gives 0.
+     */
+    private static function bytesFromIni(string $value): int
+    {
+        $value = trim($value);
+
+        if ($value === '-1') {
+            return -1;
+        }
+
+        if (! preg_match('/^(\d+)\s*([KMG]?)$/i', $value, $matches)) {
+            return 0;
+        }
+
+        return (int) $matches[1] * match (strtoupper($matches[2])) {
+            'K' => 1024,
+            'M' => 1024 ** 2,
+            'G' => 1024 ** 3,
+            default => 1,
+        };
     }
 }
