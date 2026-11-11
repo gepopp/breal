@@ -547,7 +547,7 @@
                                     <![endif]-->
                                     <singleline>
                                         <a href="{{ $verificationLink ?? '#' }}" mc:edit data-button data-text-style="Intro Button"
-                                           style="font-family:'Poppins',Arial,Helvetica,sans-serif;text-transform:lowercase;font-size:18px;line-height:28px;font-weight:700;font-style:normal;color:#ffffff;text-decoration:none;letter-spacing:0px;padding: 16px 38px 16px 38px;display: inline-block;"><span>{{ __('mail.verification.button') }}</span></a>
+                                           style="font-family:'Poppins',Arial,Helvetica,sans-serif;text-transform:none;font-size:18px;line-height:28px;font-weight:700;font-style:normal;color:#ffffff;text-decoration:none;letter-spacing:0px;padding: 16px 38px 16px 38px;display: inline-block;"><span>{{ __('mail.verification.button') }}</span></a>
                                     </singleline>
                                     <!--[if (gte mso 9)|(IE)]>
                                     </td>
