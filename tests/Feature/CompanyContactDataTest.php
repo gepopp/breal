@@ -160,6 +160,23 @@ class CompanyContactDataTest extends TestCase
     }
 
     #[DataProvider('sectionPages')]
+    public function test_footer_shows_the_fax_number_in_every_section(string $uri, string $legalName, string $email): void
+    {
+        $footer = preg_replace('/\s+/u', ' ', strip_tags($this->footerOf($this->get($uri)->getContent())));
+
+        $this->assertStringContainsString('Fax '.CompanyInfo::fax(), $footer);
+    }
+
+    public function test_imprint_shows_the_fax_number_in_german_and_english(): void
+    {
+        $german = preg_replace('/\s+/u', ' ', strip_tags($this->get('/impressum')->getContent()));
+        $english = preg_replace('/\s+/u', ' ', strip_tags($this->get('/en/impressum')->getContent()));
+
+        $this->assertStringContainsString('Telefax: '.CompanyInfo::fax(), $german);
+        $this->assertStringContainsString('Fax: '.CompanyInfo::fax(), $english);
+    }
+
+    #[DataProvider('sectionPages')]
     public function test_contact_area_shows_the_section_email_as_link_and_the_full_address(string $teamUri, string $legalName, string $email): void
     {
         $uri = str_replace('/team', '/kontakt', $teamUri);
