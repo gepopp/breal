@@ -8,7 +8,9 @@ use App\Models\Service;
 use Database\Factories\CompetenceFactory;
 use Database\Factories\JobVacancyFactory;
 use Database\Factories\QuestionFactory;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Route;
 use PHPUnit\Framework\Attributes\DataProvider;
 use SimpleXMLElement;
 use Tests\TestCase;
@@ -42,6 +44,24 @@ class UrlsRedirectsAndSitemapTest extends TestCase
 
         $this->assertSame(1, substr_count($html, 'data-update-uri'), 'Livewire script missing or duplicated on the 404 page');
         $this->assertSame(1, substr_count($html, '[x-cloak="x-cloak"]'), 'Livewire styles (x-cloak) missing or duplicated on the 404 page');
+    }
+
+    public function test_the_public_import_endpoint_is_gone(): void
+    {
+        $this->get('/import')->assertNotFound();
+
+        $this->assertFalse(
+            collect(Route::getRoutes()->getRoutes())->contains(fn ($route): bool => $route->uri() === 'import'),
+            'The import must only run from the scheduler and the admin button, never from a public URL.'
+        );
+    }
+
+    public function test_the_hourly_import_stays_scheduled(): void
+    {
+        $events = app(Schedule::class)->events();
+
+        $this->assertCount(1, $events);
+        $this->assertSame('0 * * * *', $events[0]->expression);
     }
 
     public function test_404_page_shows_a_still_image_instead_of_the_autoplaying_video(): void

@@ -3,7 +3,6 @@
 use App\Http\Controllers\ContactRequestController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Middleware\RedirectCompetenceToItsSection;
-use App\Justimmo\Importer;
 use App\Livewire\FAQSingle;
 use App\Livewire\Hausverwaltung\Leistungen;
 use App\Livewire\Hausverwaltung\Service;
@@ -81,9 +80,5 @@ Route::view('/confirm-test', 'confirmed')->name('confirm-test');
 
 Route::get('confirmation/{id?}/{token?}', [ContactRequestController::class, 'confirmation'])->name('confirm');
 Route::get('solve/{request}/{token}', [ContactRequestController::class, 'solve'])->name('solve');
-
-Route::get('import', function () {
-    Importer::import();
-});
 
 Route::get('sitemap.xml', SitemapController::class)->name('sitemap');

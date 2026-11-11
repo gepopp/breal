@@ -21,7 +21,7 @@ Note (2026-11-11): the status lines dated 2026-10-28 below that say "not committ
 - **Soft 404:** `Route::fallback(...)` in `routes/web.php` returns `view('404')` with HTTP 200, so old URLs like `/ueber-uns` stay in Google.
 - **Non-www redirect** (`bereal-immobilien.at` to `www`) already returns 301 on production, including paths. Briefing item 2 is partly done on the server.
 - **Production `robots.txt`** exists (`Allow: /`) but has no `Sitemap:` line. `public/sitemap.xml` is a generated file but is committed to git (local copy contains `breal.test` URLs).
-- **Security (not in briefing):** `GET /import` is public and runs `Importer::import()`. Should be protected or removed. Decision needed.
+- **Security (not in briefing):** `GET /import` was public and ran `Importer::import()`. Removed on 2026-11-11 (the HTTPS access logs of the last four weeks show no request to it; the import runs hourly from the Laravel scheduler in `routes/console.php`, driven by the `schedule:run` cron, and from the "import" button in the admin Realties table; the `/justimmo-test/*` routes exist only locally); `UrlsRedirectsAndSitemapTest` guards it.
 - **Test suite baseline (at the start):** 25 pass, 17 fail; the failures were leftover starter-kit tests, since removed (see WP4). Suite now 169 tests, all passing.
 - **Known production log errors** (Livewire `WithFileUploads` trait missing on navbar/footer components, locked property `rules`, `livewire-dropzone` errors) are not explained yet. Reproduce locally later.
 
@@ -188,7 +188,7 @@ Common: Franz-Josefs-Kai 65/Mezzanin, 1010 Wien, Tel. +43 1 535 36 19 (`tel:+431
 ## 5. Open decisions and inputs
 
 - ~~English version~~: decided, `/en` prefix, see WP1. Open: expose the language switcher publicly, and who delivers missing English content.
-- `GET /import` public route: protect or remove?
+- `GET /import` public route: removed on 2026-11-11 (see section 2).
 - Domain redirects (`bereal-makler.at`, `bereal-technik.at`) and production writes: how do we get write access, and who deploys? Answered 2026-11-11: production deploys from GitHub `master` through Plesk Git ("Pull Updates" or "Deploy now" in Plesk runs the deploy script); SSH writes were allowed by Markus for the release.
 - Production PHP: switched from 8.3 to 8.5 in Plesk by Markus on 2026-10-31 and checked (site answers with PHP 8.5.12, extensions and php.ini identical to 8.3, cron job points to the 8.5 binary, domain limits now 16M upload / 18M post / 60 s). The code now needs PHP 8.4 or higher (`composer.json`).
 - Local images load from the production S3 bucket via public URLs only (dummy keys). Admin login at `/admin` is e-mail and password plus a required authenticator app (two-factor); it works locally once a local admin user exists (`herd php artisan make:filament-user`, then set `admin` to true). The LinkedIn settings are only for the LinkedIn wall and the profile URL, not for logging in.
