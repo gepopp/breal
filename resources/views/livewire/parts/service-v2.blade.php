@@ -9,7 +9,8 @@
                  class="my-8 md:max-w-1/2">{!! is_array($preparedText) ? $preparedText['firstHalf'] : html_entity_decode($preparedText) !!}</div>
 
             <div data-aos="fade" class="relative ml-[calc(-50vw+50%)] mr-0 w-[calc(50vw+50%)]">
-                <img x-ref="image" src="{{ asset('team-parallax.jpg') }}" alt=""
+                <img x-ref="image" src="{{ asset('team-parallax.webp') }}" alt="" width="2000" height="1000"
+                     loading="lazy" decoding="async"
                      class="object-cover aspect-[4/2] w-full h-[50vh]">
             </div>
 

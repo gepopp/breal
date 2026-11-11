@@ -9,7 +9,7 @@
                 <x-slot name="tag">{{ $settings->hero_header }}</x-slot>
                 {!! $settings->hero_subheader !!}
             </x-headings>
-            <div data-aos="fade" data-aos-delay="600" class="prose">
+            <div class="prose">
                 {!! $settings->hero_introtext !!}
             </div>
         </div>
@@ -20,8 +20,7 @@
             @php
                 $media = $media->first();
             @endphp
-            <x-media-image :describe="true" :media="$media" sizes="(min-width: 768px) 50vw, 100vw" :priority="true" alt="{{ $settings->hero_image_alt }}" data-aos="fade"
-                 data-aos-delay="600" class="h-full w-auto object-cover"/>
+            <x-media-image :describe="true" :media="$media" sizes="(min-width: 768px) 50vw, 100vw" :priority="true" alt="{{ $settings->hero_image_alt }}" class="h-full w-auto object-cover"/>
 
         @elseif($media?->count() > 1)
 
