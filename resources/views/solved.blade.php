@@ -1,4 +1,4 @@
-<x-layouts.site xmlns:flus="http://www.w3.org/1999/html">
+<x-layouts.site xmlns:flus="http://www.w3.org/1999/html" :noindex="true">
     <div class="grid grid-cols-1 lg:grid-cols-2 w-full">
         <div class="flex justify-center items-center min-h-[70vh]">
             <div class="max-w-md">
@@ -36,10 +36,8 @@
         </div>
         <div class="relative order-first lg:order-last">
 
-            <video class="h-full min-w-full w-auto object-cover" muted autoplay loop>
-                <source src="{{ asset('404-man.webm') }}" type="video/webm"/>
-            </video>
-            {{--                <img src="{{ asset('404-bg.jpg') }}" class="h-full min-w-full w-auto object-cover"/>--}}
+            <img src="{{ asset('404-man.webp') }}" alt="" width="1600" height="900" decoding="async"
+                 class="h-full min-w-full w-auto object-cover"/>
 
             <div class="absolute top-0 left-0 h-full">
                 <svg fill="currentColor" class="text-white h-full" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 97.7 500">

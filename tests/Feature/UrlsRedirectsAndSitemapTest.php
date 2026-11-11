@@ -44,6 +44,17 @@ class UrlsRedirectsAndSitemapTest extends TestCase
         $this->assertSame(1, substr_count($html, '[x-cloak="x-cloak"]'), 'Livewire styles (x-cloak) missing or duplicated on the 404 page');
     }
 
+    public function test_404_page_shows_a_still_image_instead_of_the_autoplaying_video(): void
+    {
+        $this->get('/diese-seite-gibt-es-nicht')
+            ->assertNotFound()
+            ->assertSee('404-man.webp', false)
+            ->assertDontSee('<video', false)
+            ->assertDontSee('404-man.webm', false);
+
+        $this->assertFileExists(public_path('404-man.webp'));
+    }
+
     public function test_normal_page_loads_the_livewire_assets_exactly_once(): void
     {
         $html = $this->get('/')->assertOk()->getContent();
