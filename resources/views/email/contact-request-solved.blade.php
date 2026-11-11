@@ -633,7 +633,7 @@
                                             <td align="center" height="60" style="height:60px;">
                                     <![endif]-->
                                         <a href="{{ $link ?? '#' }}" mc:edit data-button data-text-style="Intro Button"
-                                           style="font-family:'Poppins',Arial,Helvetica,sans-serif;text-transform:lowercase;font-size:18px;line-height:28px;font-weight:700;font-style:normal;color:#ffffff;text-decoration:none;letter-spacing:0px;padding: 16px 38px 16px 38px;display: inline-block;"><span>Anfrage als gelöst markieren</span></a>
+                                           style="font-family:'Poppins',Arial,Helvetica,sans-serif;text-transform:none;font-size:18px;line-height:28px;font-weight:700;font-style:normal;color:#ffffff;text-decoration:none;letter-spacing:0px;padding: 16px 38px 16px 38px;display: inline-block;"><span>Anfrage als gelöst markieren</span></a>
                                     <!--[if (gte mso 9)|(IE)]>
                                     </td>
                                     <td align="center" width="38"></td>
