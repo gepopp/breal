@@ -118,6 +118,40 @@ class StructuredDataTest extends TestCase
         $this->assertSame('YEAR', $posting['baseSalary']['value']['unitText']);
     }
 
+    public function test_companies_carry_an_image_and_the_address_a_region(): void
+    {
+        $graph = $this->graphById($this->nodesOf('/')[0]);
+
+        foreach (['hausverwaltung' => 'og-image.png', 'makler' => 'og-makler.png', 'technik' => 'og-technik.png'] as $section => $image) {
+            $company = collect($graph)->first(fn (array $node): bool => ($node['@type'] ?? '') !== 'Organization'
+                && str_ends_with($node['image'] ?? '', '/'.$image));
+
+            $this->assertNotNull($company, $section);
+            $this->assertSame('Wien', $company['address']['addressRegion']);
+        }
+
+        $this->assertSame('Wien', $graph['https://www.bereal-immobilien.at/#group']['address']['addressRegion']);
+    }
+
+    public function test_price_range_is_only_output_once_it_is_configured(): void
+    {
+        $withoutPriceRange = collect($this->graphById($this->nodesOf('/')[0]))->filter(fn (array $node): bool => isset($node['priceRange']));
+        $this->assertCount(0, $withoutPriceRange);
+
+        config(['company.price_range' => '€€']);
+
+        $companies = collect($this->graphById($this->nodesOf('/')[0]))->filter(fn (array $node): bool => ($node['@type'] ?? '') !== 'Organization');
+        $this->assertCount(3, $companies);
+        $companies->each(fn (array $node) => $this->assertSame('€€', $node['priceRange']));
+    }
+
+    public function test_job_posting_location_has_a_region(): void
+    {
+        $job = JobVacancyFactory::new()->create(['from' => now()->subDay(), 'to' => now()->addMonth()]);
+
+        $this->assertSame('Wien', StructuredData::jobPosting($job)['jobLocation']['address']['addressRegion']);
+    }
+
     public function test_job_posting_leaves_out_unknown_employment_type_and_salary(): void
     {
         $job = JobVacancyFactory::new()->create([

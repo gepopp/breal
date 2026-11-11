@@ -30,8 +30,16 @@ return [
         'street' => 'Franz-Josefs-Kai 65/Mezzanin',
         'postal_code' => '1010',
         'city' => 'Wien',
+        'region' => 'Wien',
         'country' => 'AT',
     ],
+
+    /*
+    | Price level for the structured data "priceRange" of the companies (for
+    | example "€€"). Empty until the client names one; empty values are not output.
+    */
+
+    'price_range' => null,
 
     /*
     | The service lists only offer the search field from this many services on;
@@ -83,6 +91,7 @@ return [
             'email' => 'office@bereal-immobilien.at',
             'website' => 'https://www.bereal-immobilien.at',
             'logo' => 'logos/bereal_immobilien.svg',
+            'image' => 'og-image.png',
             'founded' => 2006,
             'firmenbuch' => 'FN 152672 v',
             'uid' => 'ATU49490402',
@@ -99,6 +108,7 @@ return [
             'email' => 'office@bereal-makler.at',
             'website' => 'https://www.bereal-makler.at',
             'logo' => 'logos/bereal_makler.svg',
+            'image' => 'og-makler.png',
             'founded' => 2021,
             'firmenbuch' => 'FN 556967 w',
             'uid' => 'ATU76971617',
@@ -115,6 +125,7 @@ return [
             'email' => 'office@bereal-technik.at',
             'website' => 'https://www.bereal-technik.at',
             'logo' => 'logos/bereal_technik.svg',
+            'image' => 'og-technik.png',
             'founded' => null,
             'firmenbuch' => 'FN 660246 a',
             'uid' => 'ATU82490109',

@@ -174,9 +174,11 @@ class StructuredData
             'legalName' => $section['legal_name'],
             'url' => $section['website'],
             'logo' => asset($section['logo']),
+            'image' => asset($section['image']),
             'email' => $section['email'],
             'telephone' => CompanyInfo::phone(),
             'faxNumber' => CompanyInfo::fax(),
+            'priceRange' => config('company.price_range'),
             'vatID' => $section['uid'],
             'address' => self::address(),
             'openingHoursSpecification' => self::openingHours(),
@@ -199,6 +201,7 @@ class StructuredData
             'streetAddress' => config('company.address.street'),
             'postalCode' => config('company.address.postal_code'),
             'addressLocality' => config('company.address.city'),
+            'addressRegion' => config('company.address.region'),
             'addressCountry' => config('company.address.country'),
         ];
     }
