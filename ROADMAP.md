@@ -241,4 +241,5 @@ Production deploys from GitHub `master` through Plesk Git: the push alone does n
 - [x] Sessions and cache keys: the `SESSION_*` and cache settings in the production `.env` are unchanged by the deploy (compared with the backup copy); checked 2026-11-11.
 - [x] Rich Results Test run on 2026-11-11 (only `priceRange` left, see above).
 - [ ] After the deploy: submit the sitemap in Search Console and Bing (and check that the noindex pages stay out of the index). PageSpeed Insights is done (see WP8).
+- [x] Dependabot (checked 2026-11-12 after pushing the security updates): 0 open alerts, 147 closed.
 - [ ] Secrets hygiene: `auth.json` (Flux Pro credentials) is tracked in git history, and the Hetzner S3 credentials were printed in a working session on 2026-10-28; rotate both.
