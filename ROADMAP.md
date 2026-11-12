@@ -42,9 +42,9 @@ Briefing: "Sprache, ganze Website", "Platzhalter", "Cookie-Hinweis", "Kleinigkei
   - Generated links get `/en` back via `URL::formatPathUsing` (`AppServiceProvider`), only for routes in the `localized` route groups (the 30 public page routes in `routes/web.php`). Email token routes (`confirmation`, `solve`), admin, assets and Livewire's update URL stay unprefixed; Livewire restores the locale from the component snapshot, so updates on English pages stay English with prefixed links (covered by a test).
   - `SetLocale` now only reads that locale (default `de`). The package middleware `language` was removed from the public routes, so `?lang=en`, the session and `Accept-Language` no longer switch the public site. (Filament panel routes never ran `SetLocale`; the admin has always been German.)
   - Every public page has `rel="canonical"` (self) and `hreflang` alternates `de-AT`, `en`, `x-default` (`App\Services\LocaleUrls`, `partials/head.blade.php`).
-  - The ENGLISH/DEUTSCH switcher in navbar and preheader still shows for logged-in users only and now links to the other language's URL. Showing it to everyone is a product decision, since English content may be incomplete.
+  - The ENGLISH/DEUTSCH switcher in navbar and preheader links to the other language's URL. It is shown to everyone (decided by Markus on 2026-11-12, confirmed live: two `data-locale-switch` links on every page for guests; guarded by `AuditRoundTwoTest::test_guests_see_the_language_switch_on_german_and_english_pages`).
   - Tests: `tests/Feature/EnglishPrefixTest.php`. Also verified with `route:cache`.
-- [x] Follow-ups for `/en` (checked on production 2026-11-12): the English URLs are in the sitemap, unknown `/en/...` paths answer 404 (guarded by `UrlsRedirectsAndSitemapTest`; the soft 404 is gone). Still open: check English texts/settings (`*_en` settings and translatable models) for gaps, decide whether to expose the language switcher publicly.
+- [x] Follow-ups for `/en` (checked on production 2026-11-12): the English URLs are in the sitemap, unknown `/en/...` paths answer 404 (guarded by `UrlsRedirectsAndSitemapTest`; the soft 404 is gone). The language switcher is public (decided 2026-11-12). Still open: the English content gaps (see WP10).
 - [x] Makler landing page (`/makler/start`) returned 500 when its settings were empty (`Makler\Parts\Hero` called `whereIn('id', null)`, the about image was null). Fixed during WP2; the page is back in the `LanguageTest` list and covered by `PageMetaTest`. The property search crashed on an empty realties table too (fixed).
 - Verified locally (Herd, production DB copy): no `Accept-Language` gives German titles, `lang="de-AT"`, no raw keys; English header still gives German.
 - Done when (verify on production after deploy): `curl` without `Accept-Language` returns German text, no `word.word` placeholders, correct `lang`. Note production `.env` has `APP_FALLBACK_LOCALE=en`; harmless now but should be set to `de`.
@@ -187,7 +187,7 @@ Common: Franz-Josefs-Kai 65/Mezzanin, 1010 Wien, Tel. +43 1 535 36 19 (`tel:+431
 
 ## 5. Open decisions and inputs
 
-- ~~English version~~: decided, `/en` prefix, see WP1. Open: expose the language switcher publicly, and who delivers missing English content.
+- ~~English version~~: decided, `/en` prefix, see WP1. The language switcher is public (decided 2026-11-12). Open: who delivers missing English content.
 - `GET /import` public route: removed on 2026-11-11 (see section 2).
 - Domain redirects (`bereal-makler.at`, `bereal-technik.at`) and production writes: how do we get write access, and who deploys? Answered 2026-11-11: production deploys from GitHub `master` through Plesk Git ("Pull Updates" or "Deploy now" in Plesk runs the deploy script); SSH writes were allowed by Markus for the release.
 - Production PHP: switched from 8.3 to 8.5 in Plesk by Markus on 2026-10-31 and checked (site answers with PHP 8.5.12, extensions and php.ini identical to 8.3, cron job points to the 8.5 binary, domain limits now 16M upload / 18M post / 60 s). The code now needs PHP 8.4 or higher (`composer.json`).
@@ -205,7 +205,7 @@ Not ours, but they block or finish parts above. This list is the basis for the "
 | English texts: 18 of 19 FAQ questions and answers, 3 services, 4 job ads (and the Datenschutz/Impressum/Barrierefreiheit pages if an English version is wanted) | WP10 | English falls back to German |
 | FAQ updates (Wertsicherung, Kurzzeitvermietung, Stromanbieter) and "Stand" dates | WP9 | Outdated texts still online |
 | Team content for Makler and Technik (persons, departments), content for `/makler/ueber-uns`; decision whether to hide these pages until then | WP6, WP9 | Pages exist, show no persons or no content |
-| Decisions: expose the language switcher publicly, domain redirects/access for `bereal-makler.at` and `bereal-technik.at`, Search Console/Bing access | WP1, WP8 | Open |
+| Decisions: Search Console/Bing access (the language switcher is public, the domain redirects are done) | WP1, WP8 | Search Console/Bing open |
 
 ## 6. Deployments
 
@@ -243,4 +243,4 @@ Production deploys from GitHub `master` through Plesk Git: the push alone does n
 - [x] Rich Results Test run on 2026-11-11 (only `priceRange` left, see above).
 - [ ] After the deploy: submit the sitemap in Search Console and Bing (and check that the noindex pages stay out of the index). PageSpeed Insights is done (see WP8).
 - [x] Dependabot (checked 2026-11-12 after pushing the security updates): 0 open alerts, 147 closed.
-- [ ] Secrets hygiene: `auth.json` (Flux Pro credentials) is tracked in git history, and the Hetzner S3 credentials were printed in a working session on 2026-10-28; rotate both.
+- [~] Secrets hygiene: `auth.json` (Flux Pro credentials) is tracked in git history, and the Hetzner S3 credentials were printed in a working session on 2026-10-28. Rotation is not possible for now (decided 2026-11-12): we have no access to the Flux Pro account or to the Hetzner S3 storage. Revisit if the client or whoever owns the accounts can rotate them; until then keep the repository private.
