@@ -48,9 +48,7 @@ AOS.init({
 
 });
 
-import lottieWeb from "lottie-web";
 import elements from "aos/src/js/helpers/elements.js";
-window.lottie = lottieWeb;
 
 document.addEventListener('DOMContentLoaded', function() {
     const buttons = document.querySelectorAll('.button-hover');

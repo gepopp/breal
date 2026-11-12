@@ -112,7 +112,7 @@
     "src": "node_modules/@fontsource/poppins/files/poppins-latin-ext-700-normal.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-BlQbLqSS.css",
+    "file": "assets/app-DhWn0l6G.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -138,7 +138,7 @@
     "src": "resources/fonts/EmBauhaus-W00-Bold.woff2"
   },
   "resources/js/app.js": {
-    "file": "assets/app-DXp_HbTx.js",
+    "file": "assets/app-DdOUvLEH.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
