@@ -90,9 +90,9 @@ new class extends Component
     </div>
 
     <div class="border-t border-white py-4 w-full mt-16 flex justify-center">
-        <div class="lg:max-w-4xl xl:max-w-6xl w-full flex flex-col md:flex-row justify-between text-sm">
-            <p class="!text-sm">&copy; {{ \App\Services\CompanyInfo::copyrightYears($company) }} {{ $section['legal_name'] }}</p>
-            <div class="flex flex-col md:flex-row md:divide-x divide-white justify-between shrink-0 order-first md:order-last mb-4">
+        <div class="lg:max-w-4xl xl:max-w-6xl w-full flex flex-col md:flex-row md:items-center justify-between text-sm">
+            <p class="!text-sm !mb-0">&copy; {{ \App\Services\CompanyInfo::copyrightYears($company) }} {{ $section['legal_name'] }}</p>
+            <div class="flex flex-col md:flex-row md:divide-x divide-white justify-between shrink-0 order-first md:order-last mb-4 md:mb-0">
                 <a @class(['md:px-4 py-1.5 whitespace-nowrap']) href="{{ route('datenschutz') }}" wire:navigate @class([ 'font-bold' => request()->is('datenschutz') ])>{{ __('footer.privacy') }}</a>
                 <a @class(['md:px-4 py-1.5 whitespace-nowrap']) href="{{ route('barrierefreiheit') }}">{{ __('footer.accessibility') }}</a>
                 <form method="post" action="{{ route('cookieconsent.reset') }}" data-cookie-action="reset" class="cookiereset md:px-4">
