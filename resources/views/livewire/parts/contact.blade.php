@@ -10,6 +10,6 @@
     </div>
 
     <div class="py-12">
-        <livewire:contact-form/>
+        <livewire:contact-form lazy="on-load" :company="\App\Enums\CompaniesEnum::getByRoute()"/>
     </div>
 </x-section>

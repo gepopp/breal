@@ -44,7 +44,11 @@ class ContactForm extends Component
      */
     public function mount(string $subject = '')
     {
-        $this->company = CompaniesEnum::getByRoute();
+        // A form that is loaded lazily is mounted in a later request (the Livewire update route), where the
+        // route no longer tells the area; the page passes it in then.
+        if ($this->company === '') {
+            $this->company = CompaniesEnum::getByRoute();
+        }
 
         if ($subject !== '') {
             $this->data['subject'] = Str::limit($subject, 255, '');
@@ -120,6 +124,14 @@ class ContactForm extends Component
         $this->reset();
 
         $this->is_sent = true;
+    }
+
+    /**
+     * Shown while the form is loaded lazily; keeps the room the form needs so that nothing below it jumps.
+     */
+    public function placeholder(): string
+    {
+        return '<div class="min-h-[52rem]" aria-busy="true"></div>';
     }
 
     public function render(PagesSettings $pagesSettings)

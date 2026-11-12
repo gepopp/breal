@@ -6,6 +6,9 @@
     @fluxAppearance
     @cookieconsentscripts
     @include('partials.head')
+    @foreach(app(\App\Services\PreloadedImages::class)->all() as $image)
+        <link rel="preload" as="image" href="{{ $image['src'] }}" @if($image['srcset']) imagesrcset="{{ $image['srcset'] }}" imagesizes="{{ $image['sizes'] }}" @endif fetchpriority="high">
+    @endforeach
     {{-- Livewire only injects its assets into responses with status 200; included here so the 404 page
          (served with status 404) also gets Alpine and the x-cloak style, otherwise the open menus show. --}}
     @livewireStyles

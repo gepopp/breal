@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\User;
 use App\Services\EditorStyles;
 use App\Services\LocaleUrls;
+use App\Services\PreloadedImages;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Http\Events\RequestHandled;
@@ -26,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->scoped(PreloadedImages::class);
     }
 
     /**

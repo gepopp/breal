@@ -7,6 +7,9 @@
 @if($media)
     @php($image = \App\Services\MediaImage::attributes($media))
     @php($mediaAlt = $describe ? $media->getCustomProperty('alt_'.app()->getLocale()) : null)
+    @if($priority)
+        @php(app(\App\Services\PreloadedImages::class)->add($image['src'], $image['srcset'], $image['srcset'] ? $sizes : null))
+    @endif
     <img src="{{ $image['src'] }}"
          @if($image['srcset']) srcset="{{ $image['srcset'] }}" sizes="{{ $sizes }}" @endif
          @if($image['width']) width="{{ $image['width'] }}" height="{{ $image['height'] }}" @endif
