@@ -210,8 +210,8 @@ class EnglishContentTest extends TestCase
     {
         $english = json_decode(File::get(lang_path('en.json')), true, flags: JSON_THROW_ON_ERROR);
 
-        // Views of the leftover Laravel starter kit are not part of the public site.
-        $starterKit = ['settings/', 'layouts/app/', 'errors/', 'dashboard.blade', 'app-logo', 'settings-heading', 'action-message', 'vendor/mail', 'livewire-dropzone'];
+        // Error pages and vendor views are not part of the public site translations.
+        $starterKit = ['errors/', 'vendor/mail', 'livewire-dropzone'];
 
         $missing = [];
 
