@@ -282,7 +282,8 @@ p{
     }
 
     a{
-        @apply text-logo-300;
+        /* logo-300 on white has a contrast of 2.7:1 (needs 4.5:1), logo-400 reaches 9:1 */
+        @apply text-logo-400 dark:text-logo-300 underline;
     }
 
     p{

@@ -4,7 +4,7 @@
             <x-slot name="tag">{{ $settings->contact_header }}</x-slot>
             {!! $settings->contact_subheader !!}
         </x-headings>
-        <div data-aos="fade" data-aos-delay="600" class="prose">
+        <div class="prose">
             {!! $introtext !!}
         </div>
     </div>

@@ -11,7 +11,7 @@
                 {{ $pagesSettings->contact_subheader }}
             </x-headings>
         </div>
-        <div data-aos="fade" data-aos-delay="600" class="prose max-w-full">
+        <div class="prose max-w-full">
 
             @if(!is_array($preparedText))
                 {!! html_entity_decode( $preparedText ) !!}

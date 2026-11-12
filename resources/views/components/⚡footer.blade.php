@@ -92,14 +92,14 @@ new class extends Component
     <div class="border-t border-white py-4 w-full mt-16 flex justify-center">
         <div class="lg:max-w-4xl xl:max-w-6xl w-full flex flex-col md:flex-row justify-between text-sm">
             <p class="!text-sm">&copy; {{ \App\Services\CompanyInfo::copyrightYears($company) }} {{ $section['legal_name'] }}</p>
-            <div class="flex flex-col md:flex-row md:divide-x divide-white justify-between order-first md:order-last mb-4">
-                <a @class(['md:px-4']) href="{{ route('datenschutz') }}" wire:navigate @class([ 'font-bold' => request()->is('datenschutz') ])>{{ __('footer.privacy') }}</a>
-                <a @class(['md:px-4']) href="{{ route('barrierefreiheit') }}">{{ __('footer.accessibility') }}</a>
+            <div class="flex flex-col md:flex-row md:divide-x divide-white justify-between shrink-0 order-first md:order-last mb-4">
+                <a @class(['md:px-4 py-1.5 whitespace-nowrap']) href="{{ route('datenschutz') }}" wire:navigate @class([ 'font-bold' => request()->is('datenschutz') ])>{{ __('footer.privacy') }}</a>
+                <a @class(['md:px-4 py-1.5 whitespace-nowrap']) href="{{ route('barrierefreiheit') }}">{{ __('footer.accessibility') }}</a>
                 <form method="post" action="{{ route('cookieconsent.reset') }}" data-cookie-action="reset" class="cookiereset md:px-4">
                     @csrf
-                    <button type="submit" class="cursor-pointer text-left hover:underline">{{ __('footer.cookie_settings') }}</button>
+                    <button type="submit" class="cursor-pointer text-left hover:underline py-1.5 whitespace-nowrap">{{ __('footer.cookie_settings') }}</button>
                 </form>
-                <a @class(['md:px-4']) href="{{ route('impressum') }}"
+                <a @class(['md:px-4 py-1.5 whitespace-nowrap']) href="{{ route('impressum') }}"
                    @class([ 'md:pl-4', 'font-bold' => request()->is('impressum') ])
                    wire:navigate>{{ __('footer.imprint') }}</a>
             </div>

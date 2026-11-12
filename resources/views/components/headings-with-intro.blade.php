@@ -11,7 +11,7 @@
 ])>
     <x-tagline>{{ $header }}</x-tagline>
     <x-subheading>{{ $subheader }}</x-subheading>
-    <div data-aos="fade" data-aos-delay="600" class="prose">
+    <div class="prose">
         {!! $slot !!}
     </div>
 </div>

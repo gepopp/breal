@@ -8,7 +8,7 @@
         </x-headings>
 
 
-        <div class="w-full" data-aos="fade-up">
+        <div class="w-full">
             <p class="!font-medium">{!! $competence->description !!}</p>
         </div>
 
