@@ -67,7 +67,7 @@ class ManagingDirectorNameTest extends TestCase
 
     public function test_default_texts_and_llms_file_use_the_full_name(): void
     {
-        foreach (['app/Settings/LandingpageMaklerSettings.php', 'app/Settings/MaklerLandingpageSettings.php', 'app/Settings/HausverwaltungLandingpageSettings.php', 'public/llms.txt'] as $file) {
+        foreach (['app/Settings/MaklerLandingpageSettings.php', 'app/Settings/HausverwaltungLandingpageSettings.php', 'public/llms.txt'] as $file) {
             $this->assertSame(0, preg_match('/Tanja Bachschwöller(?!-Eybel)/u', file_get_contents(base_path($file))), $file);
         }
     }

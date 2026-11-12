@@ -8,9 +8,6 @@ return [
      */
     'settings' => [
         \App\Settings\PagesSettings::class,
-        \App\Settings\LandingpageHausverwaltung::class,
-        \App\Settings\LandingpageMaklerSettings::class,
-        \App\Settings\LandingpageTechnikSettings::class,
     ],
 
     /*

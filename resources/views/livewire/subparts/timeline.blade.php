@@ -96,7 +96,7 @@
                 speed: 800,
                 spaceBetween: 30,
                 autoplay: {
-                    delay: {{ app( \App\Settings\LandingpageHausverwaltung::class )->timeline_speed }},
+                    delay: {{ app( \App\Settings\HausverwaltungLandingpageSettings::class )->timeline_speed }},
                     disableOnInteraction: false,
                     pauseOnMouseEnter: true,
                 },
