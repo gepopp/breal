@@ -14,7 +14,14 @@
             </div>
         </div>
     </div>
-    <div @class(['order-first relative overflow-hidden font-logo'])>
+    @php
+        // On a phone the image sits above the text: reserve its height in advance, otherwise the text jumps down
+        // when the (still loading) image arrives.
+        $firstImage = $media instanceof \Illuminate\Support\Collection ? $media->first() : $media;
+        $firstSize = $firstImage ? \App\Services\MediaImage::attributes($firstImage) : null;
+    @endphp
+    <div @class(['order-first relative overflow-hidden font-logo', 'max-md:[aspect-ratio:var(--hero-ratio)]' => $firstSize && $firstSize['width']])
+         @if($firstSize && $firstSize['width']) style="--hero-ratio: {{ $firstSize['width'] }} / {{ $firstSize['height'] }}" @endif>
 
         @if($media?->count() == 1)
             @php
