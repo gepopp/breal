@@ -37,6 +37,12 @@ class UrlsRedirectsAndSitemapTest extends TestCase
             ->assertSee('<title>Page Not Found – be real Immobilien</title>', false);
     }
 
+    public function test_unknown_english_paths_answer_404_like_german_ones(): void
+    {
+        $this->get('/en/diese-seite-gibt-es-nicht')->assertNotFound();
+        $this->get('/en/makler/diese-seite-gibt-es-nicht')->assertNotFound();
+    }
+
     public function test_404_page_loads_the_livewire_assets_so_the_menu_dropdowns_stay_closed(): void
     {
         $response = $this->get('/diese-seite-gibt-es-nicht')->assertNotFound();
