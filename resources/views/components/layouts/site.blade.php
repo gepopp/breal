@@ -2,6 +2,15 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() === 'de' ? 'de-AT' : str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    {{-- First thing in the head: the first-screen image comes from another host (the bucket), so open that
+         connection right away and let the browser start the download before it handles scripts and styles. --}}
+    @php($preloadedImages = app(\App\Services\PreloadedImages::class)->all())
+    @foreach(collect($preloadedImages)->map(fn ($image) => parse_url($image['src'], PHP_URL_SCHEME).'://'.parse_url($image['src'], PHP_URL_HOST))->filter(fn ($origin) => $origin !== parse_url(config('app.url'), PHP_URL_SCHEME).'://'.parse_url(config('app.url'), PHP_URL_HOST))->unique() as $origin)
+        <link rel="preconnect" href="{{ $origin }}" crossorigin>
+    @endforeach
+    @foreach($preloadedImages as $image)
+        <link rel="preload" as="image" href="{{ $image['src'] }}" @if($image['srcset']) imagesrcset="{{ $image['srcset'] }}" imagesizes="{{ $image['sizes'] }}" @endif fetchpriority="high">
+    @endforeach
     @vite(['resources/js/app.js', 'resources/css/app.css'])
     @fluxAppearance
     @cookieconsentscripts
@@ -10,9 +19,6 @@
          instead of only after it has read the stylesheet. --}}
     @foreach(['resources/fonts/EmBauhaus-W00-Bold.woff2', 'node_modules/@fontsource/poppins/files/poppins-latin-400-normal.woff2'] as $font)
         <link rel="preload" as="font" type="font/woff2" href="{{ \Illuminate\Support\Facades\Vite::asset($font) }}" crossorigin>
-    @endforeach
-    @foreach(app(\App\Services\PreloadedImages::class)->all() as $image)
-        <link rel="preload" as="image" href="{{ $image['src'] }}" @if($image['srcset']) imagesrcset="{{ $image['srcset'] }}" imagesizes="{{ $image['sizes'] }}" @endif fetchpriority="high">
     @endforeach
     {{-- Livewire only injects its assets into responses with status 200; included here so the 404 page
          (served with status 404) also gets Alpine and the x-cloak style, otherwise the open menus show. --}}

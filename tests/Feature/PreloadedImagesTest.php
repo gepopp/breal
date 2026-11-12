@@ -57,6 +57,30 @@ class PreloadedImagesTest extends TestCase
         $this->assertStringContainsString('fetchpriority="high"', $head);
     }
 
+    public function test_the_image_host_is_connected_and_the_image_requested_before_the_scripts_and_styles(): void
+    {
+        app(PreloadedImages::class)->add('https://cdn.test/hero.webp');
+
+        $html = (string) $this->blade('<x-layouts.site>Inhalt</x-layouts.site>');
+
+        $preconnect = strpos($html, '<link rel="preconnect" href="https://cdn.test" crossorigin>');
+        $preload = strpos($html, '<link rel="preload" as="image" href="https://cdn.test/hero.webp"');
+
+        $this->assertNotFalse($preconnect);
+        $this->assertLessThan($preload, $preconnect);
+        $this->assertLessThan(strpos($html, '<link rel="stylesheet"'), $preload);
+        $this->assertSame(1, substr_count($html, 'rel="preconnect"'));
+    }
+
+    public function test_no_connection_is_opened_for_an_image_on_the_own_host(): void
+    {
+        app(PreloadedImages::class)->add(rtrim(config('app.url'), '/').'/storage/hero.webp');
+
+        $html = (string) $this->blade('<x-layouts.site>Inhalt</x-layouts.site>');
+
+        $this->assertStringNotContainsString('rel="preconnect"', $html);
+    }
+
     public function test_nothing_is_preloaded_when_the_page_has_no_priority_image(): void
     {
         $html = (string) $this->blade('<x-layouts.site>Inhalt</x-layouts.site>');
