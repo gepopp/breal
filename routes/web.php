@@ -21,9 +21,19 @@ use App\Livewire\Pages\Policy;
 use App\Livewire\Pages\Team;
 use App\Livewire\Pages\Vacancies;
 use App\Livewire\Sites\Imprint;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
-Route::fallback(function () {
+Route::fallback(function (Request $request) {
+    // An address in other letter case (/Makler) goes to its lowercase twin, if there is a page for it.
+    $path = $request->getPathInfo();
+    $lowercase = Str::lower($path);
+
+    if ($path !== $lowercase && ! Route::getRoutes()->match(Request::create($lowercase, 'GET'))->isFallback) {
+        return redirect()->to($request->getSchemeAndHttpHost().$lowercase.($request->getQueryString() ? '?'.$request->getQueryString() : ''), 301);
+    }
+
     return response()->view('404', [], 404);
 });
 

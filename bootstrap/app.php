@@ -4,6 +4,7 @@ use App\Http\Middleware\ApplyLocalePrefix;
 use App\Http\Middleware\RedirectLegacyUrls;
 use App\Http\Middleware\SecurityHeaders;
 use App\Http\Middleware\SetLocale;
+use App\Services\GonePages;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -42,7 +43,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 return null;
             }
 
-            return response()->view('404', [], 404);
+            return response()->view('404', [], GonePages::isGone($e, $request) ? 410 : 404);
         });
 
         $exceptions->context(function () {

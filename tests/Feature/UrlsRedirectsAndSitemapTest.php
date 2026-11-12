@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Enums\CompaniesEnum;
 use App\Models\Realty;
 use App\Models\Service;
+use App\Services\GonePages;
 use Database\Factories\CompetenceFactory;
 use Database\Factories\JobVacancyFactory;
 use Database\Factories\QuestionFactory;
@@ -41,6 +42,25 @@ class UrlsRedirectsAndSitemapTest extends TestCase
     {
         $this->get('/en/diese-seite-gibt-es-nicht')->assertNotFound();
         $this->get('/en/makler/diese-seite-gibt-es-nicht')->assertNotFound();
+    }
+
+    public function test_addresses_in_other_letter_case_go_to_their_lowercase_page(): void
+    {
+        $this->get('/Makler')->assertRedirect(url('/makler'))->assertStatus(301);
+        $this->get('/Makler/Team?x=1')->assertRedirect(url('/makler/team').'?x=1')->assertStatus(301);
+        $this->get('/Diese-Seite-Gibt-Es-Nicht')->assertNotFound();
+    }
+
+    public function test_removed_placeholder_services_and_missing_properties_answer_410_but_other_unknown_pages_404(): void
+    {
+        foreach (GonePages::COMPETENCE_SLUGS as $slug) {
+            $this->get('/leistung/'.$slug)->assertStatus(410);
+        }
+
+        $this->get('/makler/immobilie/diese-immobilie-gibt-es-nicht-mehr')->assertStatus(410)->assertSee(self::NOT_FOUND_TITLE, false);
+        $this->get('/en/makler/immobilie/diese-immobilie-gibt-es-nicht-mehr')->assertStatus(410);
+        $this->get('/leistung/diese-leistung-gab-es-nie')->assertNotFound();
+        $this->get('/faq/diese-frage-gab-es-nie')->assertNotFound();
     }
 
     public function test_404_page_loads_the_livewire_assets_so_the_menu_dropdowns_stay_closed(): void
@@ -99,7 +119,6 @@ class UrlsRedirectsAndSitemapTest extends TestCase
             'makler competence' => ['/makler/leistung/gibt-es-nicht'],
             'faq' => ['/faq/gibt-es-nicht'],
             'job' => ['/stellenanzeige/gibt-es-nicht'],
-            'property' => ['/makler/immobilie/gibt-es-nicht'],
         ];
     }
 
