@@ -36,8 +36,6 @@
     "spatie/laravel-sitemap": "^8.0",
     "spatie/laravel-sluggable": "^4.0",
     "spatie/laravel-translatable": "^6.12",
-    "symfony/http-client": "^8.0",
-    "symfony/mailgun-mailer": "^8.0",
     "whitecube/laravel-cookie-consent": "^1.3"
   },
   "require-dev": {
