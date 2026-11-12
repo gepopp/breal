@@ -6,6 +6,11 @@
     @fluxAppearance
     @cookieconsentscripts
     @include('partials.head')
+    {{-- The two fonts of the first screen (logo font of the headings, body text): found by the browser from the head
+         instead of only after it has read the stylesheet. --}}
+    @foreach(['resources/fonts/EmBauhaus-W00-Bold.woff2', 'node_modules/@fontsource/poppins/files/poppins-latin-400-normal.woff2'] as $font)
+        <link rel="preload" as="font" type="font/woff2" href="{{ \Illuminate\Support\Facades\Vite::asset($font) }}" crossorigin>
+    @endforeach
     @foreach(app(\App\Services\PreloadedImages::class)->all() as $image)
         <link rel="preload" as="image" href="{{ $image['src'] }}" @if($image['srcset']) imagesrcset="{{ $image['srcset'] }}" imagesizes="{{ $image['sizes'] }}" @endif fetchpriority="high">
     @endforeach

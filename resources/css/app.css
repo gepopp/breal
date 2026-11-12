@@ -22,8 +22,9 @@
 
 @font-face {
     font-family: "EmBauhaus W00 Bold";
-    src: url("@/fonts/EmBauhaus-W00-Bold.ttf")format("ttf"),
-    url("@/fonts/EmBauhaus-W00-Bold.woff2")format("woff2"),
+    /* swap: text stays visible in the fallback font until the file has arrived (it was invisible before) */
+    font-display: swap;
+    src: url("@/fonts/EmBauhaus-W00-Bold.woff2")format("woff2"),
     url("@/fonts/EmBauhaus-W00-Bold.woff")format("woff");
 }
 
