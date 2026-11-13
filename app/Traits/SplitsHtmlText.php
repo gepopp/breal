@@ -3,13 +3,13 @@
 namespace App\Traits;
 
 use DOMDocument;
-use DOMXPath;
 use DOMElement;
-use DragonCode\Support\Facades\Helpers\Str;
+use DOMXPath;
+use Illuminate\Support\Str;
 
 trait SplitsHtmlText
 {
-    public function prepareText(string|null $text = null): string|array
+    public function prepareText(?string $text = null): string|array
     {
         $text = html_entity_decode($text ?? $this->text);
         $plain_text = strip_tags($text);
@@ -18,6 +18,7 @@ trait SplitsHtmlText
 
         if ($count > 250) {
             $split = $this->splitHtmlContentInHalf($text);
+
             return $split;
         }
 
@@ -25,18 +26,17 @@ trait SplitsHtmlText
 
     }
 
-
     /**
      * Teilt HTML-Inhalt in zwei möglichst gleiche Hälften unter Beibehaltung der Absatzstruktur
      * Mit spezieller Behandlung für den Fall eines einzelnen Absatzes
      *
-     * @param string $htmlContent Der zu teilende HTML-Inhalt
+     * @param  string  $htmlContent  Der zu teilende HTML-Inhalt
      * @return array Ein Array mit den Schlüsseln 'firstHalf' und 'secondHalf'
      */
-    function splitHtmlContentInHalf(string $htmlContent): array
+    public function splitHtmlContentInHalf(string $htmlContent): array
     {
         // Erstelle DOM-Dokument
-        $dom = new DOMDocument();
+        $dom = new DOMDocument;
         // Unterdrücke Warnungen bei ungültigem HTML
         libxml_use_internal_errors(true);
         $dom->loadHTML(mb_convert_encoding($htmlContent, 'HTML-ENTITIES', 'UTF-8'));
@@ -50,7 +50,7 @@ trait SplitsHtmlText
         if ($blockElements->length === 0) {
             return [
                 'firstHalf' => '',
-                'secondHalf' => ''
+                'secondHalf' => '',
             ];
         }
 
@@ -87,8 +87,8 @@ trait SplitsHtmlText
 
         $splitIndex = $halfwayDiffBefore < $halfwayDiffAfter ? $splitIndex : $splitIndex + 1;
 
-        $firstHalfDom = new DOMDocument();
-        $secondHalfDom = new DOMDocument();
+        $firstHalfDom = new DOMDocument;
+        $secondHalfDom = new DOMDocument;
 
         $firstHalfBody = $firstHalfDom->createElement('body');
         $secondHalfBody = $secondHalfDom->createElement('body');
@@ -121,25 +121,25 @@ trait SplitsHtmlText
 
         return [
             'firstHalf' => $firstHalfHtml,
-            'secondHalf' => $secondHalfHtml
+            'secondHalf' => $secondHalfHtml,
         ];
     }
 
     /**
      * Hilfsfunktion zur Aufteilung eines einzelnen Elements
      *
-     * @param DOMElement $element Das aufzuteilende Element
-     * @param DOMDocument $originalDom Das ursprüngliche DOM-Dokument
+     * @param  DOMElement  $element  Das aufzuteilende Element
+     * @param  DOMDocument  $originalDom  Das ursprüngliche DOM-Dokument
      * @return array Ein Array mit den Schlüsseln 'firstHalf' und 'secondHalf'
      */
-    function splitSingleElement(DOMElement $element, DOMDocument $originalDom): array
+    public function splitSingleElement(DOMElement $element, DOMDocument $originalDom): array
     {
         // Text des Elements extrahieren
         $text = $element->textContent;
         $textLength = strlen($text);
 
         // Bestimme den Teilungspunkt (bei 50% der Textlänge)
-        $splitPoint = (int)($textLength / 2);
+        $splitPoint = (int) ($textLength / 2);
 
         // Finde einen geeigneten Teilungspunkt (z.B. nächstes Leerzeichen)
         // Suche vorwärts und rückwärts nach einem Leerzeichen in der Nähe des Mittelpunkts
@@ -161,8 +161,8 @@ trait SplitsHtmlText
         $secondHalfText = substr($text, $splitPoint);
 
         // Erstelle zwei neue DOM-Dokumente für die Hälften
-        $firstHalfDom = new DOMDocument();
-        $secondHalfDom = new DOMDocument();
+        $firstHalfDom = new DOMDocument;
+        $secondHalfDom = new DOMDocument;
 
         // Kopiere das Element und setze den Inhalt
         $firstElement = $firstHalfDom->importNode($element, false); // Ohne Kinder importieren
@@ -178,7 +178,7 @@ trait SplitsHtmlText
         // HTML zurückgeben
         return [
             'firstHalf' => $firstHalfDom->saveHTML($firstElement),
-            'secondHalf' => $secondHalfDom->saveHTML($secondElement)
+            'secondHalf' => $secondHalfDom->saveHTML($secondElement),
         ];
     }
 }
