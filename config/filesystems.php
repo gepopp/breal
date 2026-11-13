@@ -68,6 +68,12 @@ return [
             'use_path_style_endpoint' => true,
             'throw' => false,
             'visibility' => 'private',
+            // The contact form waits for this disk while the visitor looks at a spinner: fail fast when the storage
+            // is degraded instead of hanging until the web server gives up with a 504 (Hetzner outage 2026-11-13).
+            'http' => [
+                'connect_timeout' => (float) env('AWS_PRIVATE_CONNECT_TIMEOUT', 5),
+                'timeout' => (float) env('AWS_PRIVATE_TIMEOUT', 20),
+            ],
         ],
         'hetzner' => [
             'driver' => 's3',

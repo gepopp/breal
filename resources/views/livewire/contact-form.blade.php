@@ -53,6 +53,10 @@
                     </div>
 
 
+                    @error('save')
+                        <p class="mb-4 text-red-600" role="alert">{{ $message }}</p>
+                    @enderror
+
                     <div x-data="{ isLoading: false }"
                          x-on:upload.window="isLoading = $event.detail"
                          wire:ignore

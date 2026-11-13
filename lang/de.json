@@ -257,6 +257,7 @@
     "contact.form.upload_label": "Bis zu 5 Dateien à 5 MB hochladen",
     "contact.form.terms_label": "Ich bin mit der Verarbeitung und Speicherung meiner Daten, sowie mit der Kontaktaufnahme via E-Mail oder Telefon im Zuge der Bearbeitung meiner Anfrage einverstanden.",
     "contact.form.submit": "absenden",
+    "contact.form.send_failed": "Ihre Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es in einigen Minuten erneut oder senden Sie uns eine E-Mail.",
     "contact.form.damage_heading": "Melden Sie einen Schaden?",
     "contact.form.damage_description": "Im Falle eine Schadensmeldung geben Sie bitte Ihre Adresse ein.",
     "contact.form.no_damage": "Keine Schadensmeldung",

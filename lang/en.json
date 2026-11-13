@@ -156,6 +156,7 @@
     "contact.form.upload_label": "Upload up to 5 files à 5 MB",
     "contact.form.terms_label": "I agree to the processing and storage of my data, as well as to being contacted via email or phone in the course of processing my request.",
     "contact.form.submit": "submit",
+    "contact.form.send_failed": "Your request could not be sent right now. Please try again in a few minutes or send us an email.",
     "contact.form.damage_heading": "Are you reporting damage?",
     "contact.form.damage_description": "In case of damage reporting, please enter your address.",
     "contact.form.no_damage": "No damage report",

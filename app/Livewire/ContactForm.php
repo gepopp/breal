@@ -7,8 +7,11 @@ use App\Mail\VerificationEmail;
 use App\Models\ContactRequest;
 use App\Settings\PagesSettings;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Component;
+use RuntimeException;
+use Throwable;
 
 class ContactForm extends Component
 {
@@ -112,18 +115,44 @@ class ContactForm extends Component
 
         $request = ContactRequest::create($data['data']);
 
-        foreach ($data['uploads'] as $upload) {
-            $request->addMedia($upload['path'])
-                ->usingName($upload['name'])
-                ->toMediaCollection('uploads', 's3_private');
-        }
+        try {
+            foreach ($data['uploads'] as $upload) {
+                $media = $request->addMedia($upload['path'])
+                    ->usingName($upload['name'])
+                    ->toMediaCollection('uploads', 's3_private');
 
-        $address = $data['data']['email'];
-        Mail::to($address)->send(new VerificationEmail($request));
+                // The private disk does not throw, so a failed write would go unnoticed.
+                if (! Storage::disk('s3_private')->exists($media->getPathRelativeToRoot())) {
+                    throw new RuntimeException("Upload {$upload['name']} was not stored on the private disk.");
+                }
+            }
+
+            $address = $data['data']['email'];
+            Mail::to($address)->send(new VerificationEmail($request));
+        } catch (Throwable $exception) {
+            report($exception);
+
+            $this->discard($request);
+            $this->addError('save', __('contact.form.send_failed'));
+
+            return;
+        }
 
         $this->reset();
 
         $this->is_sent = true;
+    }
+
+    /**
+     * Removes a request that could not be completed, so that no half saved request stays behind.
+     */
+    private function discard(ContactRequest $request): void
+    {
+        try {
+            $request->forceDelete();
+        } catch (Throwable $exception) {
+            report($exception);
+        }
     }
 
     /**
