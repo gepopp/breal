@@ -2,9 +2,9 @@
 
 namespace App\Livewire\Parts;
 
-use Exception;
 use App\Models\User;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
@@ -18,7 +18,10 @@ class LinkeInWall extends Component
         $users = User::whereNotNull('linkedin')->get();
 
         foreach ($users as $user) {
-            if (Carbon::make($user->linkedin['expiresIn'])->isFuture()) {
+            // The admin profile form stores only the profile URL (`linkedin.url`); a connection needs a token that has not expired.
+            $expiresIn = data_get($user->linkedin, 'expiresIn');
+
+            if (filled(data_get($user->linkedin, 'token')) && filled($expiresIn) && Carbon::make($expiresIn)?->isFuture()) {
                 $this->user = $user;
                 break;
             }
