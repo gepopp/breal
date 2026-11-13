@@ -23,4 +23,17 @@ class EditProfile extends BaseEditProfile
                 $this->getCurrentPasswordFormComponent(),
             ]);
     }
+
+    /**
+     * The form only knows `linkedin.url`; keep the stored LinkedIn connection (token, expiresIn, ...) when it is saved.
+     *
+     * @param  array<string, mixed>  $data
+     * @return array<string, mixed>
+     */
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['linkedin'] = array_merge($this->getUser()->linkedin ?? [], $data['linkedin'] ?? []);
+
+        return parent::mutateFormDataBeforeSave($data);
+    }
 }
