@@ -26,16 +26,29 @@
 
         @elseif($media?->count() > 1)
 
-            <div x-ref="swiper" class="swiper swiperSolo min-h-full" data-pause-position="right">
+            <div x-ref="swiper" class="swiper swiperSolo min-h-full aspect-[3/2] md:aspect-auto" data-pause-position="right">
                 <div x-ref="wrapper" class="swiper-wrapper min-h-full flex-1">
                     @foreach($media as $image)
                         <div class="swiper-slide min-h-full">
-                            <x-media-image :describe="true" :media="$image" sizes="(min-width: 768px) 50vw, 100vw" :priority="$loop->first" alt="{{ $settings->hero_image_alt }}" class="h-full w-auto object-cover"/>
+                            <x-media-image :describe="true" :media="$image" sizes="(min-width: 768px) 50vw, 100vw" :priority="$loop->first" :deferred="! $loop->first" alt="{{ $settings->hero_image_alt }}" class="h-full w-auto object-cover"/>
                         </div>
                     @endforeach
                 </div>
             </div>
             <script>
+    const loadDeferredSlides = () => document.querySelectorAll('.swiperSolo img[data-deferred-src]').forEach((img) => {
+                    if (img.dataset.deferredSrcset) {
+                        img.srcset = img.dataset.deferredSrcset;
+                    }
+                    img.src = img.dataset.deferredSrc;
+                    img.removeAttribute('data-deferred-src');
+                    img.removeAttribute('data-deferred-srcset');
+                });
+                if (document.readyState === 'complete') {
+                    loadDeferredSlides();
+                } else {
+                    window.addEventListener('load', loadDeferredSlides, { once: true });
+                }
     onSwiper(() => {
                 const swiperSolo = new Swiper('.swiperSolo', {
                     // Optional parameters
