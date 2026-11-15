@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ContactRequestController;
 use App\Http\Controllers\LegacyObjectController;
+use App\Http\Controllers\MediaProxyController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Middleware\RedirectCompetenceToItsSection;
 use App\Livewire\FAQSingle;
@@ -94,3 +95,5 @@ Route::get('confirmation/{id?}/{token?}', [ContactRequestController::class, 'con
 Route::get('solve/{request}/{token}', [ContactRequestController::class, 'solve'])->name('solve');
 
 Route::get('sitemap.xml', SitemapController::class)->name('sitemap');
+
+Route::get('media/{path}', MediaProxyController::class)->where('path', '.*')->name('media');

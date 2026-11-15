@@ -55,6 +55,8 @@ return [
             'bucket' => env('AWS_BUCKET'),
             'endpoint' => env('AWS_ENDPOINT'),
             'use_path_style_endpoint' => true,
+            // Own-domain address of the files (MediaProxyController), empty: straight from the bucket.
+            'url' => env('MEDIA_URL'),
             'throw' => false,
             'visibility' => 'public',
         ],
