@@ -76,6 +76,8 @@ return [
                 'connect_timeout' => (float) env('AWS_PRIVATE_CONNECT_TIMEOUT', 5),
                 'timeout' => (float) env('AWS_PRIVATE_TIMEOUT', 20),
             ],
+            // The SDK default is 3 retries, which multiplies the timeout above beyond nginx's limit (504 on 2026-11-15).
+            'retries' => (int) env('AWS_PRIVATE_RETRIES', 0),
         ],
         'hetzner' => [
             'driver' => 's3',
