@@ -174,7 +174,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 items-center">
             <div class="relative order-last md:order-first" data-aos="fade-up">
                 <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
-                    <img src="{{ asset('verwalterservice2.jpg') }}" alt="So funktioniert der Verwalterservice" class="w-full h-full object-cover"/>
+                    <img src="{{ asset('verwalterservice2.jpg') }}" alt="{{ __('verwalterservice.how_it_works_image_alt') }}" class="w-full h-full object-cover"/>
                 </div>
                 <div class="absolute -bottom-6 -right-6 bg-logo-500 text-white rounded-2xl p-6 shadow-lg hidden md:block" data-aos="fade-up" data-aos-delay="400">
                     <div class="flex items-center gap-3">

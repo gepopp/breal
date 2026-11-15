@@ -5,9 +5,9 @@
     @else
         <div class="max-w-[60%] flex flex-col items-center justify-center space-y-3">
             <p class="text-sm text-center">
-                Zum anzeigen von Google Maps akzeptieren Sie bitte opitionale Cookies.
+                {{ __('map.cookie_notice') }}
             </p>
-            <x-button wire:click="acceptCookie">akzeptieren</x-button>
+            <x-button wire:click="acceptCookie">{{ __('map.accept') }}</x-button>
         </div>
 
     @endif
