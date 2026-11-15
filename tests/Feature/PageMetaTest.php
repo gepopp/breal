@@ -57,7 +57,8 @@ class PageMetaTest extends TestCase
 
         $this->assertNotSame('', $meta['title']);
         $this->assertLessThanOrEqual(65, mb_strlen($meta['title']), "Title too long on {$path}: {$meta['title']}");
-        $this->assertGreaterThanOrEqual(10, mb_strlen($meta['title']));
+        // Bing Webmaster Tools reports titles under 30 characters as too short.
+        $this->assertGreaterThanOrEqual(30, mb_strlen($meta['title']), "Title too short on {$path}: {$meta['title']}");
         $this->assertNotSame('bereal', $meta['title']);
         $this->assertSame(1, $meta['descriptionTags'], "Exactly one description tag expected on {$path}.");
         $this->assertGreaterThanOrEqual(50, mb_strlen($meta['description']), "Description too short on {$path}.");
@@ -93,12 +94,12 @@ class PageMetaTest extends TestCase
 
     public function test_section_pages_use_their_own_section_texts(): void
     {
-        $this->assertSame('Team – be real Immobilien', $this->metaOf($this->get('/team'))['title']);
-        $this->assertSame('Team – be real Makler', $this->metaOf($this->get('/makler/team'))['title']);
-        $this->assertSame('Team – be real Technik', $this->metaOf($this->get('/technik/team'))['title']);
+        $this->assertSame('Unser Team – Hausverwaltung, Makler und Technik', $this->metaOf($this->get('/team'))['title']);
+        $this->assertSame('Unser Team – be real Makler in Wien', $this->metaOf($this->get('/makler/team'))['title']);
+        $this->assertSame('Unser Team – be real Technik in Wien', $this->metaOf($this->get('/technik/team'))['title']);
         $this->assertSame('be real Makler – Immobilien kaufen, verkaufen und mieten', $this->metaOf($this->get('/makler'))['title']);
         $this->assertSame('be real Technik – Baumanagement in Wien', $this->metaOf($this->get('/technik'))['title']);
-        $this->assertSame('Team – be real Makler', $this->metaOf($this->get('/en/makler/team'))['title']);
+        $this->assertSame('Our team – be real Makler in Vienna', $this->metaOf($this->get('/en/makler/team'))['title']);
     }
 
     public function test_home_page_uses_the_proposed_title_and_description(): void
