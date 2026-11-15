@@ -46,7 +46,7 @@ class ContactSettings extends BaseSettings
     // Contact Form Terms
     public string $contactform_terms_de = 'Ich bin mit der Verarbeitung und Speicherung meiner Daten, sowie mit der Kontaktaufnahme via E-Mail oder Telefon im Zuge der Bearbeitung meiner Anfrage einverstanden.';
 
-    public string $contactform_terms_en = 'I agree to the processing and storage of my data, as well as to being contacted via email or telephone in the course of processing my inquiry.';
+    public string $contactform_terms_en = 'I agree to the processing and storage of my data, as well as to being contacted via email or phone in the course of processing my request.';
 
     // Contact Persons
     public string $contactpersons_heading_de = 'Ihre Ansprechpartner!';
