@@ -118,7 +118,6 @@ class UrlsRedirectsAndSitemapTest extends TestCase
             'competence' => ['/leistung/gibt-es-nicht'],
             'makler competence' => ['/makler/leistung/gibt-es-nicht'],
             'faq' => ['/faq/gibt-es-nicht'],
-            'job' => ['/stellenanzeige/gibt-es-nicht'],
         ];
     }
 
@@ -128,15 +127,35 @@ class UrlsRedirectsAndSitemapTest extends TestCase
         $this->get($path)->assertNotFound()->assertSee(self::NOT_FOUND_TITLE, false);
     }
 
-    public function test_expired_and_future_job_ads_are_not_found_and_active_ones_are_served(): void
+    public function test_expired_job_ads_are_gone_future_ones_not_found_and_active_ones_are_served(): void
     {
         $expired = JobVacancyFactory::new()->create(['from' => now()->subMonths(3), 'to' => now()->subMonth()]);
         $future = JobVacancyFactory::new()->create(['from' => now()->addMonth(), 'to' => now()->addMonths(3)]);
         $active = JobVacancyFactory::new()->create(['from' => now()->subDay(), 'to' => now()->addMonth()]);
 
-        $this->get(route('stellenanzeige', $expired, false))->assertNotFound();
+        $this->get(route('stellenanzeige', $expired, false))->assertStatus(410)->assertSee(self::NOT_FOUND_TITLE, false);
         $this->get(route('stellenanzeige', $future, false))->assertNotFound();
         $this->get(route('stellenanzeige', $active, false))->assertOk();
+    }
+
+    public function test_unknown_and_removed_job_ads_answer_410(): void
+    {
+        $this->get('/stellenanzeige/gibt-es-nicht-mehr')->assertStatus(410)->assertSee(self::NOT_FOUND_TITLE, false);
+        $this->get('/en/stellenanzeige/gibt-es-nicht-mehr')->assertStatus(410);
+
+        $removed = JobVacancyFactory::new()->create(['from' => now()->subDay(), 'to' => now()->addMonth()]);
+        $removed->delete();
+        $this->get(route('stellenanzeige', $removed, false))->assertStatus(410);
+    }
+
+    public function test_old_object_addresses_redirect_to_the_property_or_answer_410(): void
+    {
+        $realty = Realty::create(['title' => 'Wohnung Objekt', 'slug' => 'wohnung-objekt', 'objektnr_intern' => '17241397', 'data' => []]);
+
+        $this->get('/objekt/17241397?from=787391&p=2')->assertStatus(301)->assertRedirect(route('makler.immobilie', $realty));
+        $this->get('/objekt/9177616?from=787256')->assertStatus(410)->assertSee(self::NOT_FOUND_TITLE, false);
+        $this->get('/en/objekt/9177616')->assertStatus(410);
+        $this->get('/objekt/abc')->assertNotFound();
     }
 
     public function test_old_addresses_are_redirected_permanently(): void

@@ -5,6 +5,7 @@ namespace App\Livewire\Pages;
 use App\Services\PageMeta;
 use App\Services\StructuredData;
 use Livewire\Component;
+use Symfony\Component\HttpKernel\Exception\GoneHttpException;
 
 class JobVacancy extends Component
 {
@@ -15,8 +16,13 @@ class JobVacancy extends Component
 
         $this->jobVacancy = $JobVacancy;
 
-        if ($this->jobVacancy->from > now() || $this->jobVacancy->to < now()) {
+        if ($this->jobVacancy->from > now()) {
             abort(404);
+        }
+
+        // Expired for good: 410 tells job portals and search engines to drop the ad.
+        if ($this->jobVacancy->to < now()) {
+            throw new GoneHttpException;
         }
 
     }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactRequestController;
+use App\Http\Controllers\LegacyObjectController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Middleware\RedirectCompetenceToItsSection;
 use App\Livewire\FAQSingle;
@@ -77,6 +78,7 @@ Route::group(['localized' => true], function () {
 
     Route::get('/faq/{slug}', FAQSingle::class)->name('faq.single');
     Route::get('/stellenanzeige/{JobVacancy}', JobVacancy::class)->name('stellenanzeige');
+    Route::get('/objekt/{number}', LegacyObjectController::class)->whereNumber('number')->name('objekt');
 
     Route::get('impressum', Imprint::class)->name('impressum');
     Route::get('barrierefreiheit', AccessabilityDeclaration::class)->name('barrierefreiheit');

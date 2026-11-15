@@ -3,9 +3,11 @@
 namespace App\Services;
 
 use App\Models\Competence;
+use App\Models\JobVacancy;
 use App\Models\Realty;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\GoneHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -27,8 +29,12 @@ class GonePages
         'sed-facere-pariatur-hic-tenetur-optio-error-eos',
     ];
 
-    public static function isGone(NotFoundHttpException $exception, Request $request): bool
+    public static function isGone(NotFoundHttpException|GoneHttpException $exception, Request $request): bool
     {
+        if ($exception instanceof GoneHttpException) {
+            return true;
+        }
+
         $previous = $exception->getPrevious();
 
         if (! $previous instanceof ModelNotFoundException) {
@@ -36,7 +42,7 @@ class GonePages
         }
 
         return match ($previous->getModel()) {
-            Realty::class => true,
+            Realty::class, JobVacancy::class => true,
             Competence::class => in_array($request->route('competence'), self::COMPETENCE_SLUGS, true),
             default => false,
         };
