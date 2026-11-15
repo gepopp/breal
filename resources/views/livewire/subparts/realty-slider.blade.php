@@ -1,78 +1,15 @@
-<div class="my-8">
-    <style wire:ignore>
-        .swiper {
-            width: 100%;
-            height: 100%;
-        }
-
-        .swiper-slide {
-            text-align: center;
-            font-size: 18px;
-            background: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .swiper-slide img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .swiper {
-            width: 100%;
-            height: 300px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .swiper-slide {
-            background-size: cover;
-            background-position: center;
-        }
-
-        .mySwiper2 {
-            height: 80%;
-            width: 100%;
-        }
-
-        .mySwiper {
-            height: 20%;
-            box-sizing: border-box;
-            padding: 10px 0;
-        }
-
-        .mySwiper .swiper-slide {
-            width: 25%;
-            height: 100%;
-            opacity: 0.4;
-        }
-
-        .mySwiper .swiper-slide-thumb-active {
-            opacity: 1;
-        }
-
-        .swiper-slide img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    </style>
-
-    <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
+<div class="realty-gallery my-8" id="realty-gallery-{{ $this->getId() }}">
+    <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper realty-gallery-main">
         <div class="swiper-wrapper">
-            @foreach($this->realtyImages as $image_url)
+            @foreach($this->realtyImages as $image)
                 <div class="swiper-slide bg-technik-500/50 aspect-[4/3] flex items-center justify-center">
-                    <div data-src="{{ $image_url }}" class="spotlight aspect-[4/3]" data-spotlight-title="{{ $realty->title }}">
-                        @php($slideSrcset = \App\Services\RealtyImage::srcset($image_url, [480, 800, 1280]))
-                        <img src="{{ \App\Services\RealtyImage::url($image_url, 800) ?? $image_url }}"
+                    <div data-src="{{ $image['url'] }}" class="spotlight aspect-[4/3]" data-spotlight-title="{{ $realty->title }}">
+                        @php($slideSrcset = \App\Services\RealtyImage::srcset($image['url'], [480, 800, 1280]))
+                        <img src="{{ \App\Services\RealtyImage::url($image['url'], 800) ?? $image['url'] }}"
                              @if($slideSrcset) srcset="{{ $slideSrcset }}" sizes="(min-width: 1024px) 700px, 100vw" @endif
                              width="1280" height="720"
                              loading="{{ $loop->first ? 'eager' : 'lazy' }}" @if($loop->first) fetchpriority="high" @endif decoding="async"
-                             alt="{{ $realty->title }}" class="object-cover w-auto h-full select-none"/>
+                             alt="{{ $image['title'] ?? __('realty.slider.photo', ['index' => $loop->iteration, 'count' => $loop->count]) }}" class="object-cover w-auto h-full select-none"/>
                     </div>
                 </div>
             @endforeach
@@ -80,15 +17,16 @@
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
     </div>
-    <div thumbsSlider="" class="swiper mySwiper">
+    {{-- The thumbnails repeat the photos above and cannot be reached by keyboard, so they stay out of the accessibility tree. --}}
+    <div thumbsSlider="" class="swiper realty-gallery-thumbs" aria-hidden="true">
         <div class="swiper-wrapper">
-            @foreach($this->realtyImages as $image_url)
+            @foreach($this->realtyImages as $image)
                 <div class="swiper-slide">
-                    @php($thumbSrcset = \App\Services\RealtyImage::srcset($image_url, [160, 320]))
-                    <img src="{{ \App\Services\RealtyImage::url($image_url, 160) ?? $image_url }}"
+                    @php($thumbSrcset = \App\Services\RealtyImage::srcset($image['url'], [160, 320]))
+                    <img src="{{ \App\Services\RealtyImage::url($image['url'], 160) ?? $image['url'] }}"
                          @if($thumbSrcset) srcset="{{ $thumbSrcset }}" sizes="160px" @endif
                          width="160" height="160" loading="lazy" decoding="async"
-                         alt="{{ $realty->title }}" class="object-cover aspect-square select-none"/>
+                         alt="" class="object-cover aspect-square select-none"/>
                 </div>
             @endforeach
         </div>
@@ -97,17 +35,18 @@
 
     <script>
     onSwiper(() => {
-        var swiper = new Swiper(".mySwiper", {
+        var gallery = document.getElementById(@js('realty-gallery-'.$this->getId()));
+        var swiper = new Swiper(gallery.querySelector(".realty-gallery-thumbs"), {
             spaceBetween: 10,
             slidesPerView: 4,
             freeMode: true,
             watchSlidesProgress: true,
         });
-        var swiper2 = new Swiper(".mySwiper2", {
+        var swiper2 = new Swiper(gallery.querySelector(".realty-gallery-main"), {
             spaceBetween: 10,
             navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
+                nextEl: gallery.querySelector(".swiper-button-next"),
+                prevEl: gallery.querySelector(".swiper-button-prev"),
             },
             a11y: {
                 prevSlideMessage: @js(__('realty.slider.previous')),

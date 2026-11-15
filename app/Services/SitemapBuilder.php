@@ -26,7 +26,8 @@ class SitemapBuilder
 {
     /**
      * Static pages with the settings groups and models whose last change
-     * decides their lastmod.
+     * decides their lastmod. The team pages of the makler and technik sections
+     * are left out on purpose: they share the canonical address of /team.
      *
      * @var array<string, array{groups: list<string>, models: list<class-string>}>
      */
@@ -44,13 +45,11 @@ class SitemapBuilder
         'makler.immobiliensuche' => ['groups' => ['translatable_search'], 'models' => [Realty::class]],
         'makler.karriere' => ['groups' => ['translatable_vacancies'], 'models' => [JobVacancy::class]],
         'makler.kontakt' => ['groups' => ['translatable_contact', 'pages'], 'models' => [Department::class, Contactperson::class]],
-        'makler.team' => ['groups' => ['translatable_team'], 'models' => [Department::class, Contactperson::class]],
         'makler.faq' => ['groups' => ['translatable_faq'], 'models' => [Question::class]],
         'technik.home' => ['groups' => ['translatable_technik'], 'models' => [Competence::class]],
         'technik.leistungen' => ['groups' => ['translatable_leistungen'], 'models' => [Competence::class]],
         'technik.karriere' => ['groups' => ['translatable_vacancies'], 'models' => [JobVacancy::class]],
         'technik.kontakt' => ['groups' => ['translatable_contact', 'pages'], 'models' => [Department::class, Contactperson::class]],
-        'technik.team' => ['groups' => ['translatable_team'], 'models' => [Department::class, Contactperson::class]],
         'technik.faq' => ['groups' => ['translatable_faq'], 'models' => [Question::class]],
         'impressum' => ['groups' => ['translatable_legal', 'pages'], 'models' => []],
         'barrierefreiheit' => ['groups' => ['translatable_legal', 'pages'], 'models' => []],

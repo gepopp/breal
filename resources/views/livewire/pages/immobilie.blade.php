@@ -6,6 +6,9 @@
             | {{ __('realty.object_number') }}: {{ $realty->objektnr_extern }}
         </p>
         <h1 class="text-2xl font-bold" @if(app()->getLocale() !== 'de') lang="de" @endif>{{ $realty->title }}</h1>
+        @if(app()->getLocale() !== 'de')
+            <p class="mt-2 text-sm" data-german-text-note>{{ __('realty.german_text_note') }}</p>
+        @endif
     </div>
 
     <div class="flex flex-col lg:flex-row lg:space-x-8">
@@ -29,7 +32,7 @@
             <div class="prose">
                 <h2>{{ __('realty.description') }}</h2>
                 <div @if(app()->getLocale() !== 'de') lang="de" @endif>
-                    {!! \App\Services\HtmlLists::demoteH1((string) $realty->beschreibung) !!}
+                    {!! \App\Services\HtmlLists::labelBookingLinks(\App\Services\HtmlLists::demoteH1((string) $realty->beschreibung), __('realty.book_viewing')) !!}
                 </div>
             </div>
         </div>

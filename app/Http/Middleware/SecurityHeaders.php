@@ -12,6 +12,10 @@ class SecurityHeaders
     {
         $response = $next($request);
 
+        // PHP announces its version in X-Powered-By (expose_php); nothing needs it.
+        header_remove('X-Powered-By');
+        $response->headers->remove('X-Powered-By');
+
         foreach (config('security.headers') as $name => $value) {
             $response->headers->set($name, $value);
         }

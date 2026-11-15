@@ -10,18 +10,29 @@ class RealtySlider extends Component
 {
     public Realty $realty;
 
-
+    /**
+     * The photos with the caption the feed gives them, if any.
+     *
+     * @return list<array{url: string, title: ?string}>
+     */
     #[Computed]
-    public function realtyImages(){
+    public function realtyImages(): array
+    {
         $files = $this->realty->data['anhaenge']['anhang'];
-        $images = array_filter($files, fn($file) => in_array($file['format'], ['jpeg', 'png', 'jpg']));
-        $urls = [];
-        foreach($images as $image){
-            $urls[] = $image['daten']['pfad'];
-        }
-        return $urls;
-    }
+        $images = array_filter($files, fn ($file) => in_array($file['format'], ['jpeg', 'png', 'jpg']));
+        $photos = [];
 
+        foreach ($images as $image) {
+            $title = $image['anhangtitel'] ?? null;
+
+            $photos[] = [
+                'url' => $image['daten']['pfad'],
+                'title' => is_string($title) && trim($title) !== '' ? trim($title) : null,
+            ];
+        }
+
+        return $photos;
+    }
 
     public function render()
     {

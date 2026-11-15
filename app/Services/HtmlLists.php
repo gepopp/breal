@@ -23,6 +23,21 @@ class HtmlLists
         return preg_replace(['#<h1(?=[\s>])#i', '#</h1>#i'], ['<h2', '</h2>'], $html);
     }
 
+    /**
+     * Property texts often link a booking page with the bare web address as link text. Such a link gets a
+     * descriptive label instead; links that already have a readable text are left alone.
+     */
+    public static function labelBookingLinks(string $html, string $label): string
+    {
+        return preg_replace_callback(
+            '#(<a\b[^>]*\bhref=["\']https?://(?:[a-z0-9-]+\.)*calendly\.com[/"\'][^>]*>)(.*?)</a>#is',
+            fn (array $link): string => preg_match('#^\s*(?:https?://|www\.)#i', html_entity_decode(strip_tags($link[2])))
+                ? $link[1].e($label).'</a>'
+                : $link[0],
+            $html
+        );
+    }
+
     public static function normalize(string $html): string
     {
         if (! preg_match('/<h2[\s>]/i', $html)) {

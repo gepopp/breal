@@ -121,6 +121,52 @@
     }
 }
 
+/* Property gallery (realty-slider): scoped so the rules cannot reach the other Swiper sliders. */
+.realty-gallery .swiper {
+    width: 100%;
+    height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.realty-gallery .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    font-size: 18px;
+}
+
+.realty-gallery .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.realty-gallery .realty-gallery-main {
+    height: 80%;
+}
+
+.realty-gallery .realty-gallery-thumbs {
+    height: 20%;
+    box-sizing: border-box;
+    padding: 10px 0;
+}
+
+.realty-gallery .realty-gallery-thumbs .swiper-slide {
+    width: 25%;
+    height: 100%;
+    opacity: 0.4;
+}
+
+.realty-gallery .realty-gallery-thumbs .swiper-slide-thumb-active {
+    opacity: 1;
+}
+
 [data-flux-field] {
     @apply grid gap-2;
 }
