@@ -8,7 +8,7 @@
         </x-headings>
 
         @if($faq->hasMedia('*'))
-            <x-media-image :media="$faq->getFirstMedia('*')" alt="{{ strip_tags($faq->question) }}"/>
+            <x-media-image :media="$faq->getFirstMedia('*')" :priority="true" alt="{{ strip_tags($faq->question) }}"/>
         @endif
 
 
