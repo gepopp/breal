@@ -26,7 +26,7 @@ class Compentence extends Component
             ->layout('components.layouts.site')
             ->layoutData([
                 'canonical' => route($this->company === 'Hausverwaltung' ? 'hausverwaltung.leistung' : ($this->company === 'Makler' ? 'makler.leistung' : 'technik.leistung'), $this->competence),
-                'description' => PageMeta::excerpt($this->competence->description),
+                'description' => $this->competence->metaDescription(),
             ]);
     }
 }

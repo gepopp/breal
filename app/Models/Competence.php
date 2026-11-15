@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\CompaniesEnum;
+use App\Services\PageMeta;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
@@ -20,7 +21,7 @@ class Competence extends Model implements HasMedia, Sitemapable
     use HasTranslations;
     use InteractsWithMedia;
 
-    public array $translatable = ['name', 'description', 'body'];
+    public array $translatable = ['name', 'description', 'body', 'meta_description'];
 
     protected $casts = [
         'company' => CompaniesEnum::class,
@@ -46,6 +47,18 @@ class Competence extends Model implements HasMedia, Sitemapable
             ->width(1152)
             ->height((1152 / 16) * 9)
             ->sharpen(10);
+    }
+
+    /**
+     * Text for the search result: the meta description entered for the current language, else the intro text.
+     * An English page never shows the German meta description.
+     */
+    public function metaDescription(): string
+    {
+        $text = $this->getTranslation('meta_description', app()->getLocale(), false);
+
+        // An entered text is shown as written (the form allows 200 characters); the intro text is cut like before.
+        return filled($text) ? PageMeta::excerpt($text, 200) : PageMeta::excerpt($this->description);
     }
 
     public function getRouteKeyName(): string

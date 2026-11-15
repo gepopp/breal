@@ -147,6 +147,47 @@ class PageMetaTest extends TestCase
         $this->assertSame(1, $meta['h1']);
     }
 
+    public function test_competence_page_uses_its_meta_description_when_one_is_entered(): void
+    {
+        $text = 'Fördermanagement von be real Technik: Wir finden passende Förderungen für Ihre Sanierung und begleiten Sie von der Antragstellung bis zum Fördernachweis.';
+
+        $competence = CompetenceFactory::new()->create([
+            'company' => CompaniesEnum::Technik,
+            'name' => 'Fördermanagement',
+            'description' => ['de' => 'Wer richtig investiert, sollte auch richtig gefördert werden.', 'en' => 'Wise investors deserve appropriate funding.'],
+            'meta_description' => ['de' => $text, 'en' => ''],
+        ]);
+
+        $german = $this->metaOf($this->get(route('technik.leistung', $competence, false)));
+
+        $this->assertSame($text, $german['description']);
+    }
+
+    public function test_competence_page_without_a_meta_description_keeps_using_the_intro_text(): void
+    {
+        $competence = CompetenceFactory::new()->create([
+            'company' => CompaniesEnum::Technik,
+            'description' => ['de' => 'Erhalten, verbessern, zukunftssicher machen.', 'en' => 'Preserve, improve, future-proof.'],
+        ]);
+
+        $meta = $this->metaOf($this->get(route('technik.leistung', $competence, false)));
+
+        $this->assertSame('Erhalten, verbessern, zukunftssicher machen.', $meta['description']);
+    }
+
+    public function test_english_competence_page_never_shows_the_german_meta_description(): void
+    {
+        $competence = CompetenceFactory::new()->create([
+            'company' => CompaniesEnum::Technik,
+            'description' => ['de' => 'Deutscher Introtext.', 'en' => 'English intro text.'],
+            'meta_description' => ['de' => 'Deutsche Meta-Beschreibung.', 'en' => ''],
+        ]);
+
+        $meta = $this->metaOf($this->get('/en'.route('technik.leistung', $competence, false)));
+
+        $this->assertSame('English intro text.', $meta['description']);
+    }
+
     public function test_faq_detail_page_builds_title_and_description_from_the_question(): void
     {
         $question = QuestionFactory::new()->create([

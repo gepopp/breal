@@ -53,6 +53,17 @@ class CompetenceForm
                             ->required()
                             ->columnSpanFull(),
 
+                        Textarea::make('meta_description.de')
+                            ->label('Meta-Beschreibung Deutsch (Suchergebnis)')
+                            ->helperText('Optional. Erscheint in Google und Bing unter dem Titel. Leer: der Introtext wird verwendet. Empfohlen: 70 bis 160 Zeichen.')
+                            ->maxLength(200)
+                            ->columnSpanFull(),
+                        Textarea::make('meta_description.en')
+                            ->label('Meta-Beschreibung Englisch (Suchergebnis)')
+                            ->helperText('Optional. Leer: der englische Introtext wird verwendet. Empfohlen: 70 bis 160 Zeichen.')
+                            ->maxLength(200)
+                            ->columnSpanFull(),
+
                         RichEditor::make('body.de')
                             ->label('Langtext Deutsch')
                             ->required(),
@@ -60,11 +71,6 @@ class CompetenceForm
                             ->label('Langtext Englisch')
                             ->required(),
                     ])->columns(2),
-
-
-
-
-
 
                 Toggle::make('on_landing')->label('Auf der Landingpage anzeigen'),
                 Toggle::make('on_dropdown')->label('Im Dropdown Menü anzeigen'),
