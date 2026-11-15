@@ -48,7 +48,7 @@ class NewContactRequestAdminMail extends Mailable
     public function attachments(): array
     {
         return $this->contactRequest->getMedia('uploads')
-            ->map(fn ($media) => Attachment::fromStorageDisk('s3_private', $media->getPathRelativeToRoot())
+            ->map(fn ($media) => Attachment::fromStorageDisk($media->disk, $media->getPathRelativeToRoot())
                 ->as($media->file_name)
                 ->withMime($media->mime_type))
             ->all();

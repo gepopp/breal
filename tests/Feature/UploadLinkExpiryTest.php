@@ -114,6 +114,36 @@ class UploadLinkExpiryTest extends TestCase
         $this->assertLessThan(7 * 24 * 3600, (int) $matches[1]);
     }
 
+    public function test_the_mail_links_to_an_upload_on_the_local_disk_with_a_signed_url(): void
+    {
+        $root = sys_get_temp_dir().DIRECTORY_SEPARATOR.'private-'.uniqid();
+        config(['filesystems.disks.'.ContactRequest::UPLOAD_DISK => [
+            'driver' => 'local',
+            'root' => $root,
+            'url' => 'http://localhost/private-uploads',
+            'serve' => true,
+        ]]);
+
+        $contactRequest = ContactRequest::create([
+            'subject' => 'Anfrage',
+            'firstname' => 'Max',
+            'lastname' => 'Mustermann',
+            'email' => 'max@gmail.com',
+            'phone' => '+43 123 456789',
+            'message' => 'Hallo',
+            'token' => 'the-token',
+            'verified_at' => now(),
+        ]);
+
+        $path = tempnam(sys_get_temp_dir(), 'upload');
+        file_put_contents($path, 'content');
+        $contactRequest->addMedia($path)->toMediaCollection('uploads', ContactRequest::UPLOAD_DISK);
+
+        $html = (new NewContactRequestAdminMail($contactRequest->fresh()))->render();
+
+        $this->assertMatchesRegularExpression('#/private-uploads/[^"\s)]+signature=#', $html);
+    }
+
     public function test_s3_refuses_links_that_are_valid_for_more_than_a_week(): void
     {
         $this->expectException(InvalidArgumentException::class);

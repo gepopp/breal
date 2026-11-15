@@ -60,6 +60,17 @@ return [
             'throw' => false,
             'visibility' => 'public',
         ],
+        // Uploads of the contact form since 2026-11-15: local, so a degraded object storage cannot make the form hang.
+        // `serve` answers the signed download links in the mails; the folder is not reachable without a signature.
+        'private_uploads' => [
+            'driver' => 'local',
+            'root' => env('PRIVATE_UPLOADS_ROOT', storage_path('app/private/uploads')),
+            'url' => rtrim((string) env('APP_URL', 'http://localhost'), '/').'/private-uploads',
+            'serve' => true,
+            'throw' => false,
+            'report' => false,
+            'visibility' => 'private',
+        ],
         's3_private' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

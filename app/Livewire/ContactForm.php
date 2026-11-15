@@ -119,10 +119,10 @@ class ContactForm extends Component
             foreach ($data['uploads'] as $upload) {
                 $media = $request->addMedia($upload['path'])
                     ->usingName($upload['name'])
-                    ->toMediaCollection('uploads', 's3_private');
+                    ->toMediaCollection('uploads', ContactRequest::UPLOAD_DISK);
 
                 // The private disk does not throw, so a failed write would go unnoticed.
-                if (! Storage::disk('s3_private')->exists($media->getPathRelativeToRoot())) {
+                if (! Storage::disk(ContactRequest::UPLOAD_DISK)->exists($media->getPathRelativeToRoot())) {
                     throw new RuntimeException("Upload {$upload['name']} was not stored on the private disk.");
                 }
             }

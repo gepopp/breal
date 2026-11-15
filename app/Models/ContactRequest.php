@@ -19,6 +19,12 @@ class ContactRequest extends Model implements HasMedia
     ];
 
     /**
+     * Disk for new uploads of the contact form. Uploads sent before 2026-11-15 still live on the `s3_private` disk,
+     * every media record keeps the disk it was stored on.
+     */
+    public const UPLOAD_DISK = 'private_uploads';
+
+    /**
      * When the download links of the uploads in the mails stop working. S3 presigned URLs (signature version 4)
      * must expire in less than one week; exactly seven days is refused now and then, which made the mail fail.
      */

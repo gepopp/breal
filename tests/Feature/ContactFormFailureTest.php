@@ -36,7 +36,7 @@ class ContactFormFailureTest extends TestCase
 
     private function useLocalPrivateDisk(string $root): void
     {
-        config(['filesystems.disks.s3_private' => ['driver' => 'local', 'root' => $root, 'throw' => false]]);
+        config(['filesystems.disks.'.ContactRequest::UPLOAD_DISK => ['driver' => 'local', 'root' => $root, 'throw' => false]]);
     }
 
     private function upload(): array
