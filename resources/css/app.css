@@ -129,6 +129,21 @@
     @apply !mb-0 !leading-tight;
 }
 
+/* Field boundaries need 3:1 contrast against the page (WCAG 1.4.11); Flux's default zinc-200 border has about 1.3:1. */
+input[data-flux-control]:not([type='checkbox'], [type='radio'], [data-invalid], .border-logo),
+textarea[data-flux-control]:not([data-invalid], .border-logo),
+select[data-flux-control]:not([data-invalid], .border-logo),
+ui-editor[data-flux-control]:not(.border-red-500, .border-logo) {
+    border-color: #858585;
+}
+
+.dark input[data-flux-control]:not([type='checkbox'], [type='radio'], [data-invalid], .border-logo),
+.dark textarea[data-flux-control]:not([data-invalid], .border-logo),
+.dark select[data-flux-control]:not([data-invalid], .border-logo),
+.dark ui-editor[data-flux-control]:not(.border-red-500, .border-logo) {
+    border-color: rgb(255 255 255 / 0.5);
+}
+
 input:focus[data-flux-control],
 textarea:focus[data-flux-control],
 select:focus[data-flux-control] {

@@ -3,6 +3,7 @@
 /public/hot
 /public/storage
 /public/media
+/public/realty-image
 /storage/*.key
 /storage/pail
 /vendor

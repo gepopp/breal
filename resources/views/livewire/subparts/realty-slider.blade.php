@@ -67,7 +67,12 @@
             @foreach($this->realtyImages as $image_url)
                 <div class="swiper-slide bg-technik-500/50 aspect-[4/3] flex items-center justify-center">
                     <div data-src="{{ $image_url }}" class="spotlight aspect-[4/3]" data-spotlight-title="{{ $realty->title }}">
-                        <img src="{{ $image_url }}" alt="{{ $realty->title }}" class="object-cover w-auto h-full select-none"/>
+                        @php($slideSrcset = \App\Services\RealtyImage::srcset($image_url, [480, 800, 1280]))
+                        <img src="{{ \App\Services\RealtyImage::url($image_url, 800) ?? $image_url }}"
+                             @if($slideSrcset) srcset="{{ $slideSrcset }}" sizes="(min-width: 1024px) 700px, 100vw" @endif
+                             width="1280" height="720"
+                             loading="{{ $loop->first ? 'eager' : 'lazy' }}" @if($loop->first) fetchpriority="high" @endif decoding="async"
+                             alt="{{ $realty->title }}" class="object-cover w-auto h-full select-none"/>
                     </div>
                 </div>
             @endforeach
@@ -79,7 +84,11 @@
         <div class="swiper-wrapper">
             @foreach($this->realtyImages as $image_url)
                 <div class="swiper-slide">
-                    <img src="{{ $image_url }}" alt="{{ $realty->title }}" class="object-cover aspect-square select-none"/>
+                    @php($thumbSrcset = \App\Services\RealtyImage::srcset($image_url, [160, 320]))
+                    <img src="{{ \App\Services\RealtyImage::url($image_url, 160) ?? $image_url }}"
+                         @if($thumbSrcset) srcset="{{ $thumbSrcset }}" sizes="160px" @endif
+                         width="160" height="160" loading="lazy" decoding="async"
+                         alt="{{ $realty->title }}" class="object-cover aspect-square select-none"/>
                 </div>
             @endforeach
         </div>

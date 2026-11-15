@@ -23,10 +23,10 @@
                           }
                       }, 500)"
                       class="space-y-4 mt-24 sm:mt-0 grid grid-cols-1 md:grid-cols-2 gap-y-4 md:gap-x-4">
-                    <flux:input wire:model="data.firstname" label="{{ __('contact.form.firstname') }}" required badge="{{ __('form.required') }}"/>
-                    <flux:input wire:model="data.lastname" label="{{ __('contact.form.lastname') }}" required badge="{{ __('form.required') }}"/>
-                    <flux:input wire:model="data.email" label="{{ __('form.email') }}" type="email" required badge="{{ __('form.required') }}"/>
-                    <flux:input wire:model="data.phone" label="{{ __('contact.form.phone') }}" type="tel" required badge="{{ __('form.required') }}"/>
+                    <flux:input wire:model="data.firstname" label="{{ __('contact.form.firstname') }}" autocomplete="given-name" required badge="{{ __('form.required') }}"/>
+                    <flux:input wire:model="data.lastname" label="{{ __('contact.form.lastname') }}" autocomplete="family-name" required badge="{{ __('form.required') }}"/>
+                    <flux:input wire:model="data.email" label="{{ __('form.email') }}" type="email" autocomplete="email" required badge="{{ __('form.required') }}"/>
+                    <flux:input wire:model="data.phone" label="{{ __('contact.form.phone') }}" type="tel" autocomplete="tel" required badge="{{ __('form.required') }}"/>
 
                     <div class="md:col-span-2 space-y-4">
                         @if($address)

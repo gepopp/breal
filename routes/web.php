@@ -3,6 +3,7 @@
 use App\Http\Controllers\ContactRequestController;
 use App\Http\Controllers\LegacyObjectController;
 use App\Http\Controllers\MediaProxyController;
+use App\Http\Controllers\RealtyImageController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Middleware\RedirectCompetenceToItsSection;
 use App\Livewire\FAQSingle;
@@ -97,3 +98,7 @@ Route::get('solve/{request}/{token}', [ContactRequestController::class, 'solve']
 Route::get('sitemap.xml', SitemapController::class)->name('sitemap');
 
 Route::get('media/{path}', MediaProxyController::class)->where('path', '.*')->name('media');
+
+Route::get('realty-image/{width}/{key}', RealtyImageController::class)
+    ->where(['width' => '[0-9]+', 'key' => '[A-Za-z0-9_-]+\.webp'])
+    ->name('realty-image');

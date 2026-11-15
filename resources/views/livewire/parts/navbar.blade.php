@@ -43,159 +43,36 @@
             </div>
 
 
+            @php($navigation = \App\Services\MainNavigation::forCurrentPage())
             <nav aria-label="{{ __('navigation.main') }}" class="hidden lg:flex mb-px space-x-12 justify-between items-center font-bold text-logo-500 dark:text-white">
-                @if( !Route::is('makler.*', 'technik.*') )
-                    <div x-data="{ show:false }" x-on:mouseenter="show = true" x-on:mouseleave="show = false" class="relative group">
-                        <div class="overflow-hidden">
-                            <a href="{{ route('hausverwaltung.leistungen') }}"
-                               class="menu-item relative uppercase cursor-pointer text-logo-600">
-                                <div @class(["menu-item-active" => Route::is('hausverwaltung.leistungen')])>
-                                    <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.services') }}</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div x-show="show" x-cloak x-transition x-on:mouseleave="show ? show = false : null" class="transition-all duration-500">
-                            <livewire:parts.competence-dropdown/>
-                        </div>
-                    </div>
-                    <div class="relative" x-data="{ show:false }" x-on:mouseenter="show = true" x-on:mouseleave="show = false">
-                        <div class="overflow-hidden">
-                            <a href="{{ route('hausverwaltung.service') }}"
-                               class="menu-item relative uppercase cursor-pointer text-logo-600">
-                                <div @class(["menu-item-active" => Route::is('hausverwaltung.service')])>
-                                    <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.service') }}</span>
-                                </div>
-                            </a>
-                            <div x-show="show" x-cloak x-transition x-on:mouseleave="show ? show = false : null" class="transition-all duration-300">
-                                <livewire:parts.menu-service-dropdown/>
+                @foreach(collect($navigation['items'])->where('desktop') as $item)
+                    @if($item['dropdown'])
+                        <div x-data="{ show:false }" x-on:mouseenter="show = true" x-on:mouseleave="show = false" class="relative">
+                            <div class="overflow-hidden">
+                                <a href="{{ route($item['route']) }}"
+                                   class="menu-item relative uppercase cursor-pointer text-logo-600">
+                                    <div @class(["menu-item-active" => Route::is($item['active'])])>
+                                        <span class="menu-item-text pointer-events-none block relative">{{ $item['label'] }}</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div x-show="show" x-cloak x-transition x-on:mouseleave="show ? show = false : null" class="transition-all duration-500">
+                                @livewire($item['dropdown'])
                             </div>
                         </div>
-                    </div>
-
-                    <div class="relative">
-                        <div class="overflow-hidden">
-                            <a href="{{ route('hausverwaltung.karriere') }}"
-                               class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                                <div @class(["menu-item-active" => Route::is('hausverwaltung.karriere')])>
-                                    <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.careers') }}</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-
-                    <div class="relative">
-                        <div class="overflow-hidden">
-                            <a href="{{ route('hausverwaltung.team') }}"
-                               class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                                <div @class(["menu-item-active" => Route::is('hausverwaltung.team')])>
-                                    <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.team') }}</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="relative">
-                        <div class="overflow-hidden">
-                            <a href="{{ route('hausverwaltung.faq') }}"
-                               class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                                <div @class(["menu-item-active" => Route::is('hausverwaltung.faq')])>
-                                    <span class="menu-item-text pointer-events-none block relative">FAQ</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                @endif
-
-                @if( Route::is('makler.*') )
-
-                    @if(\App\Models\Realty::count())
+                    @else
                         <div class="relative">
                             <div class="overflow-hidden">
-                                <a href="{{ route('makler.immobiliensuche') }}"
+                                <a href="{{ route($item['route']) }}"
                                    class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                                    <div @class(["menu-item-active" => Route::is('makler.immobiliensuche')])>
-                                        <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.property_search') }}</span>
+                                    <div @class(["menu-item-active" => Route::is($item['active'])])>
+                                        <span class="menu-item-text pointer-events-none block relative">{{ $item['label'] }}</span>
                                     </div>
                                 </a>
                             </div>
                         </div>
                     @endif
-
-                    {{--                    <div class="relative">--}}
-                    {{--                        <div class="overflow-hidden">--}}
-                    {{--                            <a href="{{ route('makler.leistungen') }}" --}}
-                    {{--                               class="menu-item relative uppercase cursor-pointer text-logo-600 ">--}}
-                    {{--                                <div @class(["menu-item-active" => Route::is('makler.leistung')])>--}}
-                    {{--                                    <span class="menu-item-text pointer-events-none block relative">Leistungen</span>--}}
-                    {{--                                </div>--}}
-                    {{--                            </a>--}}
-                    {{--                        </div>--}}
-                    {{--                    </div>--}}
-
-                    <div class="relative">
-                        <div class="overflow-hidden">
-                            <a href="{{ route('makler.karriere') }}"
-                               class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                                <div @class(["menu-item-active" => Route::is('makler.karriere')])>
-                                    <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.careers') }}</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-
-                    <div class="relative">
-                        <div class="overflow-hidden">
-                            <a href="{{ route('makler.team') }}"
-                               class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                                <div @class(["menu-item-active" => Route::is('makler.team')])>
-                                    <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.team') }}</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-                @endif
-
-
-                @if( Route::is('technik.*') )
-
-                    <div class="relative">
-                        <div class="overflow-hidden">
-                            <a href="{{ route('technik.leistungen') }}"
-                               class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                                <div @class(["menu-item-active" => Route::is('technik.leistung')])>
-                                    <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.services') }}</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-
-                    <div class="relative">
-                        <div class="overflow-hidden">
-                            <a href="{{ route('technik.karriere') }}"
-                               class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                                <div @class(["menu-item-active" => Route::is('technik.karriere')])>
-                                    <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.careers') }}</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-
-                    <div class="relative">
-                        <div class="overflow-hidden">
-                            <a href="{{ route('technik.team') }}"
-                               class="menu-item relative uppercase cursor-pointer text-logo-600 ">
-                                <div @class(["menu-item-active" => Route::is('technik.team')])>
-                                    <span class="menu-item-text pointer-events-none block relative">{{ __('navigation.team') }}</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                @endif
+                @endforeach
             </nav>
 
 
@@ -233,30 +110,10 @@
         "bg-white dark:bg-makler-950 border-makler-900 dark:border-makler-50 text-makler-950 dark:text-makler-50 dark:border-makler-50" => Route::is('makler.*'),
 ])>
                 <ul class="flex flex-col space-y-8 text-lg font-bold uppercase">
-                    @if( Route::is('hausverwaltung.*') || Route::is('verwalterservice'))
-                        <a href="{{ route('hausverwaltung.leistungen') }}">{{ __('navigation.services') }}</a>
-                        <a href="{{ route('hausverwaltung.service') }}">{{ __('navigation.service') }}</a>
-                        <a href="{{ route('hausverwaltung.karriere') }}">{{ __('navigation.careers') }}</a>
-                        <a href="{{ route('hausverwaltung.kontakt') }}">{{ __('navigation.contact') }}</a>
-                        <a href="{{ route('hausverwaltung.team') }}">{{ __('navigation.team') }}</a>
-                        <a href="{{ route('verwalterservice') }}">{{ __('Corporate Service') }}</a>
-
-                    @endif
-
-                    @if( Route::is('makler.*') )
-                        @if(\App\Models\Realty::count())
-                            <a href="{{ route('makler.immobiliensuche') }}">{{ __('navigation.property_search') }}</a>
-                        @endif
-                        <a href="{{ route('makler.karriere') }}">{{ __('navigation.careers') }}</a>
-                        <a href="{{ route('makler.kontakt') }}">{{ __('navigation.contact') }}</a>
-                        <a href="{{ route('makler.team') }}">{{ __('navigation.team') }}</a>
-                    @endif
-
-
-                    @if( Route::is('technik.*') )
-                        <a href="{{ route('technik.karriere') }}">{{ __('navigation.careers') }}</a>
-                        <a href="{{ route('technik.kontakt') }}">{{ __('navigation.contact') }}</a>
-                        <a href="{{ route('technik.team') }}">{{ __('navigation.team') }}</a>
+                    @if( Route::is('hausverwaltung.*', 'verwalterservice', 'makler.*', 'technik.*') )
+                        @foreach(collect($navigation['items'])->where('mobile') as $item)
+                            <a href="{{ route($item['route']) }}">{{ $item['label'] }}</a>
+                        @endforeach
                     @endif
                 </ul>
             </div>
