@@ -52,11 +52,18 @@ return [
     'csp' => [
         'mode' => env('SECURITY_CSP_MODE', 'report-only'),
 
+        /*
+        | Browsers post violations here (App\Http\Controllers\CspReportController writes them to the "csp" log
+        | channel). Set to null to send no reporting directives.
+        */
+        'report_path' => '/csp-report',
+        'report_group' => 'csp-endpoint',
+
         'directives' => [
             'default-src' => ["'self'"],
             'script-src' => [
                 "'self'", "'unsafe-inline'", "'unsafe-eval'",
-                'https://www.googletagmanager.com', 'https://maps.googleapis.com',
+                'https://www.googletagmanager.com', 'https://maps.googleapis.com', 'https://player.vimeo.com',
             ],
             'style-src' => [
                 "'self'", "'unsafe-inline'",
@@ -65,8 +72,14 @@ return [
             'img-src' => ["'self'", 'data:', 'blob:', 'https:'],
             'media-src' => ["'self'", 'blob:', 'https:'],
             'frame-src' => ["'self'", 'https://player.vimeo.com'],
+            // Only what the pages really contact: Livewire (self), Google Analytics 4 and Ads conversion
+            // measurement (after consent) and the Google Maps script. Refine with the collected reports.
             'connect-src' => [
-                "'self'", 'https:', 'wss:',
+                "'self'",
+                'https://*.google-analytics.com', 'https://*.analytics.google.com', 'https://*.googletagmanager.com',
+                'https://www.google.com', 'https://www.googleadservices.com',
+                'https://googleads.g.doubleclick.net', 'https://stats.g.doubleclick.net',
+                'https://maps.googleapis.com',
             ],
             'object-src' => ["'none'"],
             'base-uri' => ["'self'"],

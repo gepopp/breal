@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactRequestController;
+use App\Http\Controllers\CspReportController;
 use App\Http\Controllers\LegacyObjectController;
 use App\Http\Controllers\MediaProxyController;
 use App\Http\Controllers\RealtyImageController;
@@ -24,9 +25,13 @@ use App\Livewire\Pages\Policy;
 use App\Livewire\Pages\Team;
 use App\Livewire\Pages\Vacancies;
 use App\Livewire\Sites\Imprint;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Http\Request;
+use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 Route::fallback(function (Request $request) {
     // An address in other letter case (/Makler) goes to its lowercase twin, if there is a page for it.
@@ -98,6 +103,12 @@ Route::get('solve/{request}/{token}', [ContactRequestController::class, 'solve']
 Route::get('sitemap.xml', SitemapController::class)->name('sitemap');
 
 Route::get('media/{path}', MediaProxyController::class)->where('path', '.*')->name('media');
+
+// Browsers post policy violations here without a session, cookie or CSRF token.
+Route::post('csp-report', CspReportController::class)
+    ->middleware('throttle:60,1')
+    ->withoutMiddleware([PreventRequestForgery::class, StartSession::class, ShareErrorsFromSession::class, AddQueuedCookiesToResponse::class])
+    ->name('csp-report');
 
 Route::get('realty-image/{width}/{key}', RealtyImageController::class)
     ->where(['width' => '[0-9]+', 'key' => '[A-Za-z0-9_-]+\.webp'])

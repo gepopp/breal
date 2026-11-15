@@ -26,6 +26,10 @@ class SecurityHeaders
 
         if ($policy = $this->contentSecurityPolicy()) {
             $response->headers->set($policy['header'], $policy['value']);
+
+            if ($reportPath = config('security.csp.report_path')) {
+                $response->headers->set('Reporting-Endpoints', config('security.csp.report_group').'="'.url($reportPath).'"');
+            }
         }
 
         return $response;
@@ -52,6 +56,11 @@ class SecurityHeaders
         $value = collect(config('security.csp.directives'))
             ->map(fn (array $sources, string $directive): string => $directive.' '.implode(' ', $sources))
             ->implode('; ');
+
+        // report-uri for Firefox and Safari, report-to (see the Reporting-Endpoints header) for Chromium.
+        if ($reportPath = config('security.csp.report_path')) {
+            $value .= '; report-uri '.$reportPath.'; report-to '.config('security.csp.report_group');
+        }
 
         return [
             'header' => $mode === 'enforce' ? 'Content-Security-Policy' : 'Content-Security-Policy-Report-Only',

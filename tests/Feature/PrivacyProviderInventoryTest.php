@@ -165,7 +165,18 @@ class PrivacyProviderInventoryTest extends TestCase
         $hosts = collect($policy)->flatten()->filter(fn (string $source): bool => str_starts_with($source, 'https://') && ! in_array($source, ['https:']))->values();
 
         $overview = file_get_contents(resource_path('views/legal/provider-inventory-de.blade.php'));
-        $names = ['www.googletagmanager.com' => 'Google Analytics 4', 'maps.googleapis.com' => 'Google Maps', 'player.vimeo.com' => 'Vimeo'];
+        $names = [
+            'www.googletagmanager.com' => 'Google Analytics 4',
+            '*.googletagmanager.com' => 'Google Analytics 4',
+            '*.google-analytics.com' => 'Google Analytics 4',
+            '*.analytics.google.com' => 'Google Analytics 4',
+            'www.google.com' => 'Google Ads',
+            'www.googleadservices.com' => 'Google Ads',
+            'googleads.g.doubleclick.net' => 'Google Ads',
+            'stats.g.doubleclick.net' => 'Google Ads',
+            'maps.googleapis.com' => 'Google Maps',
+            'player.vimeo.com' => 'Vimeo',
+        ];
 
         foreach ($hosts as $source) {
             $host = parse_url($source, PHP_URL_HOST);
