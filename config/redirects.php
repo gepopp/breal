@@ -34,8 +34,13 @@ return [
         '/ueber_uns' => '/',
         '/ueber_uns/team' => '/team',
 
-        // Placeholder slugs from the seed data; renamed by a migration.
+        // Damage report of the old website; the form is a service now (Google Search Console, 2026-11-15).
+        '/schadensmeldung' => '/service?tab=schadensformular',
+
+        // Placeholder slugs from the seed data; renamed by a migration. Google still knows the address under every section.
         '/leistung/alias-qui-vel-ea-repellendus' => '/leistung/bauverwaltung',
+        '/makler/leistung/alias-qui-vel-ea-repellendus' => '/leistung/bauverwaltung',
+        '/technik/leistung/alias-qui-vel-ea-repellendus' => '/leistung/bauverwaltung',
         '/service?tab=aliquam-repudiandae-expedita-rerum' => '/service?tab=sepa-mandat',
 
     ],
