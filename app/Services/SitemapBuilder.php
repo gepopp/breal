@@ -89,7 +89,59 @@ class SitemapBuilder
         return $sitemap;
     }
 
-    private function competenceRoute(Competence $competence): string
+    /**
+     * German and English addresses of the static pages that show content of a settings group.
+     *
+     * @return list<string>
+     */
+    public static function pageUrlsForGroup(string $group): array
+    {
+        return self::pageUrls(fn (array $sources): bool => in_array($group, $sources['groups'], true));
+    }
+
+    /**
+     * German and English addresses of the static pages that show records of a model.
+     *
+     * @param  class-string  $model
+     * @return list<string>
+     */
+    public static function pageUrlsForModel(string $model): array
+    {
+        return self::pageUrls(fn (array $sources): bool => in_array($model, $sources['models'], true));
+    }
+
+    /**
+     * @param  callable(array{groups: list<string>, models: list<class-string>}): bool  $matches
+     * @return list<string>
+     */
+    private static function pageUrls(callable $matches): array
+    {
+        $urls = [];
+
+        foreach (self::STATIC_PAGES as $route => $sources) {
+            if ($matches($sources)) {
+                array_push($urls, ...self::withEnglishUrl(route($route)));
+            }
+        }
+
+        return $urls;
+    }
+
+    /**
+     * The German address followed by its English twin.
+     *
+     * @return list<string>
+     */
+    public static function withEnglishUrl(string $germanUrl): array
+    {
+        $parts = parse_url($germanUrl);
+
+        return [$germanUrl, $parts['scheme'].'://'.$parts['host'].(isset($parts['port']) ? ':'.$parts['port'] : '')
+            .LocaleUrls::prefixPath($parts['path'] ?? '/', 'en')
+            .(isset($parts['query']) ? '?'.$parts['query'] : '')];
+    }
+
+    public static function competenceRoute(Competence $competence): string
     {
         return match ($competence->company) {
             CompaniesEnum::Makler => 'makler.leistung',
@@ -132,11 +184,7 @@ class SitemapBuilder
 
     private function englishUrl(string $germanUrl): string
     {
-        $parts = parse_url($germanUrl);
-
-        return $parts['scheme'].'://'.$parts['host'].(isset($parts['port']) ? ':'.$parts['port'] : '')
-            .LocaleUrls::prefixPath($parts['path'] ?? '/', 'en')
-            .(isset($parts['query']) ? '?'.$parts['query'] : '');
+        return self::withEnglishUrl($germanUrl)[1];
     }
 
     /**
