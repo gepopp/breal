@@ -20,10 +20,17 @@
             </thead>
             <tbody>
                 <tr class="border-b border-gray-200">
-                    <th scope="row" class="py-2 pr-4 align-top font-semibold">Google Analytics 4 (via Google Tag Manager)<br>Google Ireland Limited, Ireland; Google LLC, USA</th>
+                    <th scope="row" class="py-2 pr-4 align-top font-semibold">Google Analytics 4<br>Google Ireland Limited, Ireland; Google LLC, USA</th>
                     <td class="py-2 pr-4 align-top">Audience measurement and analysis of how this website is used</td>
-                    <td class="py-2 pr-4 align-top">Only after you consent to the “Analytics” category</td>
-                    <td class="py-2 pr-4 align-top">Shortened IP address, browser and device information, pages viewed, cookies _ga, _ga_&lt;ID&gt; and _gid</td>
+                    <td class="py-2 pr-4 align-top">Only after you consent to the “Analytics and advertising” category</td>
+                    <td class="py-2 pr-4 align-top">Shortened IP address, browser and device information, pages viewed, cookies _ga and _ga_&lt;ID&gt;</td>
+                    <td class="py-2 align-top">Consent, Art. 6(1)(a) GDPR, Section 165(3) of the Austrian Telecommunications Act 2021</td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                    <th scope="row" class="py-2 pr-4 align-top font-semibold">Google Ads (conversion measurement)<br>Google Ireland Limited, Ireland; Google LLC, USA</th>
+                    <td class="py-2 pr-4 align-top">Measuring the success of our Google ads: page views are recorded as conversions and may be linked to a previous ad click</td>
+                    <td class="py-2 pr-4 align-top">Only after you consent to the “Analytics and advertising” category</td>
+                    <td class="py-2 pr-4 align-top">IP address, browser and device information, page viewed, ad click identifier, cookie _gcl_au; Google may use this data for its own purposes in accordance with its privacy policy</td>
                     <td class="py-2 align-top">Consent, Art. 6(1)(a) GDPR, Section 165(3) of the Austrian Telecommunications Act 2021</td>
                 </tr>
                 <tr class="border-b border-gray-200">
@@ -54,8 +61,8 @@
     <h3>4.2 Processing on our server and by service providers</h3>
     <ul>
         <li>
-            <strong>Hosting and server log files:</strong> The website runs on a server that NINC
-            [full company name and registered office to be added] administers for us. The server infrastructure (a rented server)
+            <strong>Hosting and server log files:</strong> The website runs on a server that NINC Media e.U.,
+            Grinzinger Straße 68/5, 1190 Vienna, Austria, administers for us. The server infrastructure (a rented server)
             is provided by netcup GmbH, Karlsruhe, Germany. IP address, date and time, page requested,
             browser and operating system and the referrer URL are processed as technically necessary. Error logs of our
             application (with URL, IP address, browser identifier and referrer) are kept for 14 days.
@@ -116,10 +123,16 @@
                     <td class="py-2 align-top">Not required</td>
                 </tr>
                 <tr class="border-b border-gray-200">
-                    <th scope="row" class="py-2 pr-4 align-top font-semibold">_ga, _ga_&lt;ID&gt;, _gid</th>
+                    <th scope="row" class="py-2 pr-4 align-top font-semibold">_ga, _ga_&lt;ID&gt;</th>
                     <td class="py-2 pr-4 align-top">Google Analytics: recognition and statistics</td>
-                    <td class="py-2 pr-4 align-top">2 years or 24 hours (_gid)</td>
-                    <td class="py-2 align-top">Required (“Analytics” category)</td>
+                    <td class="py-2 pr-4 align-top">2 years</td>
+                    <td class="py-2 align-top">Required (“Analytics and advertising” category)</td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                    <th scope="row" class="py-2 pr-4 align-top font-semibold">_gcl_au</th>
+                    <td class="py-2 pr-4 align-top">Google Ads: measures conversions after an ad click</td>
+                    <td class="py-2 pr-4 align-top">90 days</td>
+                    <td class="py-2 align-top">Required (category “Analytics and advertising”)</td>
                 </tr>
                 <tr class="border-b border-gray-200">
                     <th scope="row" class="py-2 pr-4 align-top font-semibold">google_maps</th>

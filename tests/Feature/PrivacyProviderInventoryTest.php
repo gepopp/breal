@@ -16,7 +16,7 @@ class PrivacyProviderInventoryTest extends TestCase
 
         $response->assertSee('4. Eingesetzte Dienste und Empfänger im Überblick');
 
-        foreach (['Google Analytics 4', 'Google Maps', 'Vimeo', 'Hetzner Online GmbH', 'Resend, Inc.', 'LinkedIn', 'Kundenportal', '_ga', '_gid', 'google_maps', 'XSRF-TOKEN', '_cookie_consent', '14 Tage', '360 Tage'] as $term) {
+        foreach (['Google Analytics 4', 'Google Ads', 'Google Maps', 'Vimeo', 'Hetzner Online GmbH', 'Resend, Inc.', 'LinkedIn', 'Kundenportal', '_ga', '_gcl_au', 'google_maps', 'XSRF-TOKEN', '_cookie_consent', '14 Tage', '360 Tage'] as $term) {
             $response->assertSee($term, false);
         }
 
@@ -31,7 +31,7 @@ class PrivacyProviderInventoryTest extends TestCase
 
         $response->assertSee('4. Services and recipients at a glance');
 
-        foreach (['Google Analytics 4', 'Google Maps', 'Vimeo', 'Hetzner Online GmbH', 'Resend, Inc.', 'LinkedIn', '_ga', 'google_maps', '14 days', '360 days'] as $term) {
+        foreach (['Google Analytics 4', 'Google Ads', 'Google Maps', 'Vimeo', 'Hetzner Online GmbH', 'Resend, Inc.', 'LinkedIn', '_ga', '_gcl_au', 'google_maps', '14 days', '360 days'] as $term) {
             $response->assertSee($term, false);
         }
 
@@ -89,8 +89,64 @@ class PrivacyProviderInventoryTest extends TestCase
 
     public function test_hosting_is_described_with_ninc_and_netcup(): void
     {
-        $this->get('/datenschutz')->assertSee('NINC')->assertSee('netcup GmbH, Karlsruhe, Deutschland');
-        $this->get('/en/datenschutz')->assertSee('NINC')->assertSee('netcup GmbH, Karlsruhe, Germany');
+        $this->get('/datenschutz')
+            ->assertSee('NINC Media e.U.')
+            ->assertSee('Grinzinger Straße 68/5, 1190 Wien')
+            ->assertSee('netcup GmbH, Karlsruhe, Deutschland')
+            ->assertDontSee('ergänzen');
+        $this->get('/en/datenschutz')
+            ->assertSee('NINC Media e.U.')
+            ->assertSee('Grinzinger Straße 68/5, 1190 Vienna')
+            ->assertSee('netcup GmbH, Karlsruhe, Germany')
+            ->assertDontSee('to be added');
+    }
+
+    public function test_declared_cookies_are_the_ones_the_site_sets(): void
+    {
+        $page = $this->get('/datenschutz')->getContent();
+
+        $this->assertStringNotContainsString('_gid', $page);
+        $this->assertStringContainsString('_gcl_au', $page);
+    }
+
+    public function test_privacy_text_uses_austrian_law_and_names_the_supervisory_authority(): void
+    {
+        $this->storePolicyText('dpgr_text_de', 'Weitere Verarbeitung zusätzlich auf Grundlage von § 25 Abs. 1 TTDSG. Cookies (z. B. die Warenkorbfunktion oder die Anzeige von Videos). Des Weiteren steht Ihnen ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu. Unbeschadet verwaltungsrechtlicher oder gerichtlicher Rechtsbehelfe.</p>');
+        $this->storePolicyText('dpgr_text_en', '<h2>2. Notes</h2><p>Text</p><h2>3. Data collection on this website</h2><h3>Cookies</h3>');
+
+        $migration = require database_path('migrations/2026_11_15_120000_use_austrian_law_in_privacy_policy.php');
+        $migration->up();
+        $german = $this->policyText('dpgr_text_de');
+        $english = $this->policyText('dpgr_text_en');
+        $migration->up();
+
+        $this->assertStringNotContainsString('TTDSG', $german);
+        $this->assertStringNotContainsString('Warenkorb', $german);
+        $this->assertStringContainsString('§ 165 Abs. 3 TKG 2021', $german);
+        $this->assertStringContainsString('In Österreich ist dies die Datenschutzbehörde.', $german);
+        $this->assertStringContainsString('dsb@dsb.gv.at', $german);
+        $this->assertStringContainsString('Datenschutzbehörde (Austrian Data Protection Authority)', $english);
+        $this->assertStringContainsString('<h2>3. Data collection on this website</h2>', $english);
+        $this->assertSame($german, $this->policyText('dpgr_text_de'));
+        $this->assertSame($english, $this->policyText('dpgr_text_en'));
+    }
+
+    public function test_migrated_privacy_page_cites_austrian_law(): void
+    {
+        $this->get('/datenschutz')
+            ->assertDontSee('TTDSG')
+            ->assertDontSee('Warenkorb')
+            ->assertSee('TKG 2021')
+            ->assertSee('Barichgasse 40–42');
+    }
+
+    public function test_default_privacy_texts_do_not_cite_german_law(): void
+    {
+        $defaults = file_get_contents(base_path('app/Settings/LegalSettings.php'));
+
+        $this->assertStringNotContainsString('TTDSG', $defaults);
+        $this->assertStringNotContainsString('Warenkorbfunktion', $defaults);
+        $this->assertStringContainsString('dsb@dsb.gv.at', $defaults);
     }
 
     public function test_overview_names_no_service_that_the_site_does_not_load(): void
@@ -109,7 +165,7 @@ class PrivacyProviderInventoryTest extends TestCase
         $hosts = collect($policy)->flatten()->filter(fn (string $source): bool => str_starts_with($source, 'https://') && ! in_array($source, ['https:']))->values();
 
         $overview = file_get_contents(resource_path('views/legal/provider-inventory-de.blade.php'));
-        $names = ['www.googletagmanager.com' => 'Google Tag Manager', 'maps.googleapis.com' => 'Google Maps', 'player.vimeo.com' => 'Vimeo'];
+        $names = ['www.googletagmanager.com' => 'Google Analytics 4', 'maps.googleapis.com' => 'Google Maps', 'player.vimeo.com' => 'Vimeo'];
 
         foreach ($hosts as $source) {
             $host = parse_url($source, PHP_URL_HOST);

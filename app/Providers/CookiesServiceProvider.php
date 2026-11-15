@@ -64,9 +64,9 @@ class CookiesServiceProvider extends ServiceProvider
                     ->duration(2 * 365 * 24 * 60)
                     ->description(__('cookieConsent::cookies.defaults._ga_ID'))
                 )
-                ->cookie(fn (Cookie $cookie) => $cookie->name('_gid')
-                    ->duration(24 * 60)
-                    ->description(__('cookieConsent::cookies.defaults._gid'))
+                ->cookie(fn (Cookie $cookie) => $cookie->name('_gcl_au')
+                    ->duration(90 * 24 * 60)
+                    ->description(__('cookies.gcl_au'))
                 )
                 ->accepted(fn (Consent $consent) => $consent
                     ->script('<script async src="https://www.googletagmanager.com/gtag/js?id='.$id.'"></script>')

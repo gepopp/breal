@@ -27,7 +27,7 @@ return [
             'description' => 'Es gibt einige Cookies, die wir einsetzen müssen, damit bestimmte Webseiten funktionieren. Aus diesem Grund benötigen wir nicht Ihre Zustimmung.',
         ],
         'analytics' => [
-            'title' => 'Analytics Cookies',
+            'title' => 'Analyse- und Werbe-Cookies',
             'description' => 'Wir verwenden diese Cookies für interne Forschungszwecke, um herauszufinden, wie wir den Service für alle unsere Nutzer verbessern können. Diese Cookies bewerten, wie Sie mit unserer Website interagieren.',
         ],
         'optional' => [

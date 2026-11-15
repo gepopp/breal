@@ -20,10 +20,17 @@
             </thead>
             <tbody>
                 <tr class="border-b border-gray-200">
-                    <th scope="row" class="py-2 pr-4 align-top font-semibold">Google Analytics 4 (über Google Tag Manager)<br>Google Ireland Limited, Irland; Google LLC, USA</th>
+                    <th scope="row" class="py-2 pr-4 align-top font-semibold">Google Analytics 4<br>Google Ireland Limited, Irland; Google LLC, USA</th>
                     <td class="py-2 pr-4 align-top">Reichweitenmessung und Analyse der Nutzung dieser Website</td>
-                    <td class="py-2 pr-4 align-top">Nur nach Ihrer Einwilligung in die Kategorie „Analyse“</td>
-                    <td class="py-2 pr-4 align-top">Gekürzte IP-Adresse, Browser- und Geräteinformationen, aufgerufene Seiten, Cookies _ga, _ga_&lt;ID&gt; und _gid</td>
+                    <td class="py-2 pr-4 align-top">Nur nach Ihrer Einwilligung in die Kategorie „Analyse und Werbung“</td>
+                    <td class="py-2 pr-4 align-top">Gekürzte IP-Adresse, Browser- und Geräteinformationen, aufgerufene Seiten, Cookies _ga und _ga_&lt;ID&gt;</td>
+                    <td class="py-2 align-top">Einwilligung, Art. 6 Abs. 1 lit. a DSGVO, § 165 Abs. 3 TKG 2021</td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                    <th scope="row" class="py-2 pr-4 align-top font-semibold">Google Ads (Conversion-Messung)<br>Google Ireland Limited, Irland; Google LLC, USA</th>
+                    <td class="py-2 pr-4 align-top">Erfolgsmessung unserer Google-Anzeigen: Seitenaufrufe werden als Conversion erfasst und können einem vorherigen Anzeigenklick zugeordnet werden</td>
+                    <td class="py-2 pr-4 align-top">Nur nach Ihrer Einwilligung in die Kategorie „Analyse und Werbung“</td>
+                    <td class="py-2 pr-4 align-top">IP-Adresse, Browser- und Geräteinformationen, aufgerufene Seite, Anzeigenklick-Kennung, Cookie _gcl_au; Google kann diese Daten nach Maßgabe der eigenen Datenschutzerklärung auch für eigene Zwecke verwenden</td>
                     <td class="py-2 align-top">Einwilligung, Art. 6 Abs. 1 lit. a DSGVO, § 165 Abs. 3 TKG 2021</td>
                 </tr>
                 <tr class="border-b border-gray-200">
@@ -54,8 +61,8 @@
     <h3>4.2 Verarbeitung auf unserem Server und bei Dienstleistern</h3>
     <ul>
         <li>
-            <strong>Hosting und Server-Log-Dateien:</strong> Die Website wird auf einem Server betrieben, den NINC
-            [vollständiger Firmenname und Sitz ergänzen] für uns verwaltet. Die Server-Infrastruktur (angemieteter Server) stellt die
+            <strong>Hosting und Server-Log-Dateien:</strong> Die Website wird auf einem Server betrieben, den NINC Media e.U.,
+            Grinzinger Straße 68/5, 1190 Wien, Österreich, für uns verwaltet. Die Server-Infrastruktur (angemieteter Server) stellt die
             netcup GmbH, Karlsruhe, Deutschland, bereit. Dabei werden technisch notwendig IP-Adresse, Datum und Uhrzeit,
             aufgerufene Seite, Browser und Betriebssystem sowie die Referrer-URL verarbeitet. Fehlerprotokolle unserer
             Anwendung (mit URL, IP-Adresse, Browserkennung und Referrer) werden 14 Tage aufbewahrt.
@@ -117,10 +124,16 @@
                     <td class="py-2 align-top">Nicht erforderlich</td>
                 </tr>
                 <tr class="border-b border-gray-200">
-                    <th scope="row" class="py-2 pr-4 align-top font-semibold">_ga, _ga_&lt;ID&gt;, _gid</th>
+                    <th scope="row" class="py-2 pr-4 align-top font-semibold">_ga, _ga_&lt;ID&gt;</th>
                     <td class="py-2 pr-4 align-top">Google Analytics: Wiedererkennung und Statistik</td>
-                    <td class="py-2 pr-4 align-top">2 Jahre bzw. 24 Stunden (_gid)</td>
-                    <td class="py-2 align-top">Erforderlich (Kategorie „Analyse“)</td>
+                    <td class="py-2 pr-4 align-top">2 Jahre</td>
+                    <td class="py-2 align-top">Erforderlich (Kategorie „Analyse und Werbung“)</td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                    <th scope="row" class="py-2 pr-4 align-top font-semibold">_gcl_au</th>
+                    <td class="py-2 pr-4 align-top">Google Ads: Messung von Conversions nach einem Anzeigenklick</td>
+                    <td class="py-2 pr-4 align-top">90 Tage</td>
+                    <td class="py-2 align-top">Erforderlich (Kategorie „Analyse und Werbung“)</td>
                 </tr>
                 <tr class="border-b border-gray-200">
                     <th scope="row" class="py-2 pr-4 align-top font-semibold">google_maps</th>
