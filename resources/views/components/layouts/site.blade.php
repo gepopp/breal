@@ -8,8 +8,11 @@
     @foreach(collect($preloadedImages)->map(fn ($image) => parse_url($image['src'], PHP_URL_SCHEME).'://'.parse_url($image['src'], PHP_URL_HOST))->filter(fn ($origin) => $origin !== parse_url(config('app.url'), PHP_URL_SCHEME).'://'.parse_url(config('app.url'), PHP_URL_HOST))->unique() as $origin)
         <link rel="preconnect" href="{{ $origin }}" crossorigin>
     @endforeach
-    @foreach($preloadedImages as $image)
-        <link rel="preload" as="image" href="{{ $image['src'] }}" @if($image['srcset']) imagesrcset="{{ $image['srcset'] }}" imagesizes="{{ $image['sizes'] }}" @endif fetchpriority="high">
+    {{-- Only images without srcset are preloaded: with imagesrcset Lighthouse (mobile) fetched a second, larger candidate
+         next to the one the img picks (FAQ article, 2026-11-15: LCP 7.0 s with, 5.0 s without the preload). A responsive
+         image is found in the body early enough, its img carries fetchpriority="high". --}}
+    @foreach(collect($preloadedImages)->reject(fn ($image) => $image['srcset']) as $image)
+        <link rel="preload" as="image" href="{{ $image['src'] }}" fetchpriority="high">
     @endforeach
     @vite(['resources/js/app.js', 'resources/css/app.css'])
     @fluxAppearance

@@ -44,17 +44,26 @@ class PreloadedImagesTest extends TestCase
         $this->assertCount(1, app(PreloadedImages::class)->all());
     }
 
-    public function test_the_layout_puts_a_preload_with_the_responsive_candidates_into_the_head(): void
+    public function test_a_responsive_image_is_not_preloaded_but_its_host_is_still_connected(): void
     {
         app(PreloadedImages::class)->add('https://cdn.test/hero.webp', 'https://cdn.test/hero-600.webp 600w, https://cdn.test/hero-900.webp 900w', '(min-width: 768px) 50vw, 100vw');
 
         $html = (string) $this->blade('<x-layouts.site>Inhalt</x-layouts.site>');
         $head = substr($html, 0, strpos($html, '</head>'));
 
-        $this->assertStringContainsString('<link rel="preload" as="image" href="https://cdn.test/hero.webp"', $head);
-        $this->assertStringContainsString('imagesrcset="https://cdn.test/hero-600.webp 600w, https://cdn.test/hero-900.webp 900w"', $head);
-        $this->assertStringContainsString('imagesizes="(min-width: 768px) 50vw, 100vw"', $head);
-        $this->assertStringContainsString('fetchpriority="high"', $head);
+        $this->assertStringNotContainsString('rel="preload" as="image"', $head);
+        $this->assertStringNotContainsString('imagesrcset', $head);
+        $this->assertStringContainsString('<link rel="preconnect" href="https://cdn.test" crossorigin>', $head);
+    }
+
+    public function test_an_image_without_srcset_is_preloaded_with_high_priority(): void
+    {
+        app(PreloadedImages::class)->add('https://cdn.test/hero.webp');
+
+        $html = (string) $this->blade('<x-layouts.site>Inhalt</x-layouts.site>');
+        $head = substr($html, 0, strpos($html, '</head>'));
+
+        $this->assertStringContainsString('<link rel="preload" as="image" href="https://cdn.test/hero.webp" fetchpriority="high">', $head);
     }
 
     public function test_the_image_host_is_connected_and_the_image_requested_before_the_scripts_and_styles(): void
