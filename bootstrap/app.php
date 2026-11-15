@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\ApplyLocalePrefix;
+use App\Http\Middleware\RedirectIndexPhp;
 use App\Http\Middleware\RedirectLegacyUrls;
 use App\Http\Middleware\SecurityHeaders;
 use App\Http\Middleware\SetLocale;
@@ -26,6 +27,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->prepend([
+            RedirectIndexPhp::class,
             ApplyLocalePrefix::class,
             RedirectLegacyUrls::class,
         ]);

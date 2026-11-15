@@ -26,6 +26,14 @@ return [
         // Old Bontus Eybel website (bontus-eybel.at): the resident service page, indexed by Google, is now the service page.
         '/bewohnerservice' => '/service',
 
+        // Addresses of the website before the relaunch that Bing still lists (Webmaster Tools, 2026-11-12).
+        '/immobilien' => '/makler/immobiliensuche',
+        '/immobilien/start' => '/makler',
+        '/miete' => '/makler/immobiliensuche',
+        '/verwalterservice' => '/unternehmensservice',
+        '/ueber_uns' => '/',
+        '/ueber_uns/team' => '/team',
+
         // Placeholder slugs from the seed data; renamed by a migration.
         '/leistung/alias-qui-vel-ea-repellendus' => '/leistung/bauverwaltung',
         '/service?tab=aliquam-repudiandae-expedita-rerum' => '/service?tab=sepa-mandat',
