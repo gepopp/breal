@@ -5,6 +5,7 @@ namespace App\Filament\Tables\Resources\UserResource\Schemas;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -45,6 +46,7 @@ class UserTable
             ])
             ->recordActions([
                 ViewAction::make(),
+                EditAction::make(),
                 DeleteAction::make(),
             ])
             ->toolbarActions([

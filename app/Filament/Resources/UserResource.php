@@ -2,11 +2,10 @@
 
 namespace App\Filament\Resources;
 
-use UnitEnum;
-use App\Filament\Resources\UserResource\Pages\ListUsers;
 use App\Filament\Resources\UserResource\Pages\CreateUser;
+use App\Filament\Resources\UserResource\Pages\EditUser;
+use App\Filament\Resources\UserResource\Pages\ListUsers;
 use App\Filament\Resources\UserResource\Pages\ViewUser;
-use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Schemas\Resources\UserResource\Schemas\UserForm;
 use App\Filament\Tables\Resources\UserResource\Schemas\UserTable;
 use App\Models\User;
@@ -14,12 +13,13 @@ use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-users';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-users';
 
     protected static ?string $navigationLabel = 'Nutzer';
 
@@ -27,7 +27,7 @@ class UserResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Nutzer';
 
-    protected static string | UnitEnum | null $navigationGroup = 'Sonstiges';
+    protected static string|UnitEnum|null $navigationGroup = 'Sonstiges';
 
     public static function form(Schema $schema): Schema
     {
@@ -52,6 +52,7 @@ class UserResource extends Resource
             'index' => ListUsers::route('/'),
             'create' => CreateUser::route('/create'),
             'view' => ViewUser::route('/{record}'),
+            'edit' => EditUser::route('/{record}/edit'),
         ];
     }
 }
