@@ -3,22 +3,25 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Auth\EditProfile;
+use Filament;
 use Filament\Auth\MultiFactor\App\AppAuthentication;
+// use Statikbe\FilamentChainedTranslationManager\ChainedTranslationManagerPlugin;
 use Filament\Http\Middleware\Authenticate;
-//use Statikbe\FilamentChainedTranslationManager\ChainedTranslationManagerPlugin;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament;
-use Filament\PanelProvider;
 use Filament\Panel;
+use Filament\PanelProvider;
+use Filament\View\PanelsRenderHook;
+use Illuminate\Contracts\View\View;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-//use Statikbe\FilamentTranslationManager\FilamentChainedTranslationManagerPlugin;
+
+// use Statikbe\FilamentTranslationManager\FilamentChainedTranslationManagerPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -77,8 +80,9 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
+            ->renderHook(PanelsRenderHook::HEAD_START, fn (): View => view('filament.hooks.sidebar-storage-guard'))
             ->databaseNotifications()
             ->profile(EditProfile::class);
-//            ->plugin(FilamentChainedTranslationManagerPlugin::make());
+        //            ->plugin(FilamentChainedTranslationManagerPlugin::make());
     }
 }
