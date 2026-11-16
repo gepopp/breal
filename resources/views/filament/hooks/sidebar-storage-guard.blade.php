@@ -1,6 +1,7 @@
 {{--
     The sidebar parses its stored state without error handling: an invalid value stops its script and leaves the admin
-    unusable. Remove such a value before that script runs; the sidebar then rebuilds it.
+    unusable. Replace such a value (including `null`) with an empty list before that script runs. A missing entry is
+    left alone, the sidebar creates it with its defaults.
     Two keys are in use: Filament's own, and `collapsedGroups` of the older copy of the sidebar view in
     resources/views/vendor/filament-panels/livewire/sidebar.blade.php.
 --}}
@@ -21,9 +22,9 @@
                 parsed = undefined
             }
 
-            // `null` is handled by the sidebar itself.
-            if (parsed !== null && ! (Array.isArray(parsed) && parsed.every((group) => typeof group === 'string'))) {
-                localStorage.removeItem(key)
+            // The sidebar needs a list; `null` and anything invalid becomes an empty list (no collapsed groups).
+            if (! (Array.isArray(parsed) && parsed.every((group) => typeof group === 'string'))) {
+                localStorage.setItem(key, '[]')
             }
         } catch (error) {
             // Storage can be unavailable; nothing to repair then.

@@ -16,7 +16,7 @@ class AdminSidebarStorageGuardTest extends TestCase
     {
         $html = $this->get('/admin/login')->assertOk()->getContent();
 
-        $guard = strpos($html, 'localStorage.removeItem(key)');
+        $guard = strpos($html, "localStorage.setItem(key, '[]')");
 
         $this->assertNotFalse($guard, 'The repair script is missing in the admin pages');
         $this->assertStringContainsString('filament:sidebar:collapsed_groups', $html);
