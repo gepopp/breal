@@ -20,5 +20,6 @@ class AdminSidebarStorageGuardTest extends TestCase
 
         $this->assertNotFalse($guard, 'The repair script is missing in the admin pages');
         $this->assertStringContainsString('filament:sidebar:collapsed_groups', $html);
+        $this->assertStringContainsString("'collapsedGroups'", $html);
     }
 }
